@@ -51,8 +51,6 @@
 
         props : ['parent', 'index', 'model'],
 
-        mixins : [mixin],
-
         data() {
             return {
                 fixWidthIcon    : 'fa fa-object-group',

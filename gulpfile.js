@@ -100,7 +100,17 @@ gulp.task('webpack', function (callback) {
         })
     );
 
-    webpack(buildConfig, function(err, stats){
+    webpack(buildConfig, function (err, stats) {
+        callback();
+    })
+});
+
+gulp.task('webpack:dev', function (callback) {
+
+    let devConfig     = Object.create(webpackConfig);
+    devConfig.devtool = '#eval-source-map';
+    devConfig.watch   = true;
+    webpack(devConfig, function (err, stats) {
         callback();
     })
 });
@@ -113,14 +123,15 @@ gulp.task("webpack-dev-server", function () {
 
     // Start a webpack-dev-server
     new WebpackDevServer(webpack(devConfig), {
-        //publicPath: "/" + devConfig.output.publicPath,
+        //publicPath : devConfig.output.publicPath,
         hot    : true,
         inline : true,
+        //open       : true,
         stats  : {
             colors : true
         }
     })
-    //.listen(8080, "localhost", function(err) {});
+    //.listen(80, "localhost", function (err) {});
 });
 
 const browserSyncOptions = {
@@ -172,7 +183,7 @@ gulp.task('translate', () => {
 gulp.task('build', ['translate', 'webpack', 'styles', 'scripts'], function () {});
 
 // npm run dev
-gulp.task('dev', ['webpack-dev-server', 'styles', 'scripts'], function () {
+gulp.task('dev', ['webpack:dev', 'styles', 'scripts'], function () {
     gulp.watch('./**/*.php'); // Reload on PHP file changes.
     gulp.watch(`${dirs.dest}/scss/*.scss`, ['styles']); // Reload on SCSS file changes.
     gulp.watch(`${dirs.src}/js/*.js`, ['scripts']); // Reload on customJS file changes.

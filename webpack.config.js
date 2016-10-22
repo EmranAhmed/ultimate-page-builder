@@ -4,9 +4,9 @@ var webpack = require('webpack')
 module.exports = {
     entry         : './src/main.js',
     output        : {
-        path     : path.resolve(__dirname, './assets/js'),
-        //publicPath : '/assets/js/',
-        filename : 'upb-customizer-preview.min.js'
+        path       : path.resolve(__dirname, './assets/js'),
+        publicPath : '/wp-content/plugins/ultimate-page-builder/assets/js/',
+        filename   : 'upb-elements-customizer-preview.min.js'
     },
     resolveLoader : {
         root : path.join(__dirname, 'node_modules'),

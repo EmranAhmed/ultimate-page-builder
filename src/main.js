@@ -1,19 +1,22 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-(function (api, wp, $) {
+( function ($, _, wp, api, data) {
 
-    alert('I AM HERE');
+    console.log(data);
 
-    new Vue({
-        el     : '#app',
-        data   : {
-            id          : null,
-            short_codes : [],
-            drag_from   : {},
-            drag_id     : null
-        },
-        render : h => h(App)
-    })
+    if (data) {
+        new Vue({
+            el     : '#app',
+            data   : {
+                id          : null,
+                short_codes : [],
+                drag_from   : {},
+                drag_id     : null
+            },
+            render : h => h(App)
+        })
+    }
 
-})(wp.customize, wp, jQuery);
+}(window.jQuery, window._, window.wp, window.wp.customize, window._UPB_Preview_Data || null) );
+

@@ -23,14 +23,14 @@
 
 
 				add_action( 'customize_controls_enqueue_scripts', array( $this, 'load_customize_scripts' ) );
-				//add_action( 'customize_register', array( $this, 'customize_register_types' ), 99 ); // Needs to run after core Navigation section is set up.
-				//add_action( 'customize_register', array( $this, 'customize_register' ), 99 ); // Needs to run after core Navigation section is set up.
+				add_action( 'customize_register', array( $this, 'customize_register_types' ), 99 ); // Needs to run after core Navigation section is set up.
+				add_action( 'customize_register', array( $this, 'customize_register' ), 99 ); // Needs to run after core Navigation section is set up.
 				// add_action( 'customize_controls_print_footer_scripts', array( $this, 'print_templates' ) );
 				// add_action( 'customize_controls_print_footer_scripts', array( $this, 'available_items_template' ) );
 
 
 				// Preview
-				//add_action( 'customize_preview_init', array( $this, 'customize_preview_init' ) );
+				add_action( 'customize_preview_init', array( $this, 'customize_preview_init' ) );
 				// add_action( 'customize_update_page_builder_settings', array( $this, 'update_page_builder_settings' ), 20, 2 );
 
 			}
@@ -47,6 +47,36 @@
 				wp_scripts()->add_data( 'upb-customizer', 'data', $data );
 			}
 
+			public function load_customize_preview_scripts() {
+
+				wp_enqueue_style( 'upb-customizer-preview' );
+
+				wp_enqueue_script( 'upb-customizer-preview' );
+				wp_enqueue_script( 'upb-elements-customizer-preview' );
+
+
+				$data = sprintf( 'var _UPB_Preview_Data = %s;', json_encode( $this->current_data() ) );
+				wp_scripts()->add_data( 'upb-customizer-preview', 'data', $data );
+				
+				//add_action( 'wp_print_footer_scripts', array( $this, 'current_data' ) );
+			}
+
+			function current_data() {
+				// Why not wp_localize_script? Because we're not localizing, and it forces values into strings.
+				$data = array(
+					'id' => get_the_ID(),
+					//'options'  => array(),
+					//'contents' => '[row]contents[/row]',
+				);
+
+				if ( ! empty( $_SERVER[ 'REQUEST_URI' ] ) ) {
+					$data[ 'requestUri' ] = esc_url_raw( home_url( wp_unslash( $_SERVER[ 'REQUEST_URI' ] ) ) );
+				}
+
+				return $data;
+				//printf( '<script>var _UPB_Preview_Data = %s;</script>', wp_json_encode( $data ) );
+			}
+
 			public function customize_register_types() {
 
 			}
@@ -55,8 +85,9 @@
 
 			}
 
-			public function customize_preview_init() {
 
+			public function customize_preview_init() {
+				add_action( 'wp_enqueue_scripts', array( $this, 'load_customize_preview_scripts' ) );
 			}
 
 
@@ -99,28 +130,11 @@
 				wp_register_script( $handle, $src, array( 'customize-preview', 'wp-util' ), '', TRUE );
 
 
-				$handle = 'upb-vue-customizer-preview';
-				$src    = trailingslashit( $assets_path ) . "upb-customizer-preview.min.js";
-				wp_register_script( $handle, $src, array( 'customizer-preview' ), '', TRUE );
+				$handle = 'upb-elements-customizer-preview';
+				$src    = trailingslashit( $assets_path ) . "upb-elements-customizer-preview.min.js";
+				wp_register_script( $handle, $src, array( 'upb-customizer-preview' ), '', TRUE );
 
 
-			}
-
-
-			function add_panel( $wp_customize ) {
-				$wp_customize->add_panel( 'upb_panel', array(
-					'title'       => 'Page Builder',
-					'description' => 'This is a description of this panel',
-					'priority'    => 10,
-				) );
-			}
-
-			function add_elements_section( $wp_customize ) {
-				$wp_customize->add_section( "upb_elements", array(
-					"title"    => "Elements",
-					"priority" => 30,
-					"panel"    => 'upb_panel',
-				) );
 			}
 
 
