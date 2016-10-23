@@ -1,19 +1,19 @@
-wp.customize.UltimatePageBuilderPreview = ( function ($, _, wp, api) {
+'use strict';
 
-    const self = {};
+wp.customize.UltimatePageBuilderPreview = function ($, _, wp, api) {
+
+    var self = {};
 
     /**
      * Initialize preview.
      */
-    self.init = () => {
-        api.preview.bind('active', () => {
+    self.init = function () {
+        api.preview.bind('active', function () {
             api.preview.send('page_builder_data', _wp_Customize_Preview_Page_Builder_Page_Data);
-
         });
-
     };
 
-    api.bind('preview-ready', (data) => {
+    api.bind('preview-ready', function (data) {
 
         if (api.settings.activePanels['ultimate-page-builder-panel']) {
             // $.extend(self.data, _wpCustomizePageBuilderPreview);
@@ -22,5 +22,4 @@ wp.customize.UltimatePageBuilderPreview = ( function ($, _, wp, api) {
     });
 
     return self;
-
-}(jQuery, _, wp, wp.customize) );
+}(jQuery, _, wp, wp.customize);

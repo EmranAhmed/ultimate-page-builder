@@ -20,7 +20,7 @@ const concat           = require('gulp-concat');
 const uglify           = require('gulp-uglify');
 const babel            = require('gulp-babel');
 const webpack          = require("webpack");
-const WebpackDevServer = require("webpack-dev-server");
+const webpackDevServer = require("webpack-dev-server");
 const webpackConfig    = require("./webpack.config.js");
 
 const autoprefixerOptions = [
@@ -40,10 +40,37 @@ const autoprefixerOptions = [
 const dirs = {
     src  : './src',
     dest : './assets',
-    node : './node_modules',
+    node : './node_modules'
 };
 
-gulp.task('scripts', function () {
+const browserSyncOptions = {
+    proxy  : "wp-starter.dev",
+    notify : false
+};
+
+const wpPotOptions = {
+    'domain'         : 'ultimate-page-builder',
+    'destFile'       : 'ultimate-page-builder.pot',
+    'package'        : 'ultimate-page-builder',
+    'bugReport'      : 'https://themehippo.com/contact/',
+    'lastTranslator' : 'ThemeHippo <themehippo@gmail.com>',
+    'team'           : 'ThemeHippo <themehippo@gmail.com>',
+    'translatePath'  : './languages'
+};
+
+// Scripts
+
+gulp.task('scripts:dev', () => {
+    return gulp.src(`${dirs.src}/js/*.js`)
+        .pipe(plumber())
+        .pipe(babel({
+            presets : ['es2015']
+        }).on('error', console.error.bind(console)))
+        .pipe(plumber.stop())
+        .pipe(gulp.dest(`${dirs.dest}/js`));
+});
+
+gulp.task('scripts:build', () => {
     return gulp.src(`${dirs.src}/js/*.js`)
         .pipe(plumber())
         .pipe(babel({
@@ -58,7 +85,25 @@ gulp.task('scripts', function () {
         .pipe(gulp.dest(`${dirs.dest}/js`));
 });
 
-gulp.task('styles', () => {
+// Styles
+
+gulp.task('styles:dev', () => {
+    return gulp.src(`${dirs.dest}/scss/*.scss`)
+        .pipe(sourcemaps.init())
+        .pipe(sass({
+            errLogToConsole : true,
+            // outputStyle     : 'compact',
+            //outputStyle     : 'compressed',
+            // outputStyle: 'nested',
+            outputStyle     : 'expanded',
+            precision       : 10
+        })).on('error', console.error.bind(console))
+        .pipe(autoprefixer(autoprefixerOptions))
+        .pipe(sourcemaps.write({includeContent : false}))
+        .pipe(gulp.dest(`${dirs.dest}/css`))
+});
+
+gulp.task('styles:build', () => {
     return gulp.src(`${dirs.dest}/scss/*.scss`)
         .pipe(sourcemaps.init())
         .pipe(sass({
@@ -81,11 +126,14 @@ gulp.task('styles', () => {
         .pipe(gulp.dest(`${dirs.dest}/css`))
 });
 
-gulp.task('webpack', function (callback) {
+// Webpack
 
-    let buildConfig     = Object.create(webpackConfig);
-    buildConfig.devtool = '#source-map';
-    buildConfig.plugins = (buildConfig.plugins || []).concat(
+gulp.task('webpack:build', (callback) => {
+
+    let buildConfig             = Object.create(webpackConfig);
+    buildConfig.devtool         = '#source-map';
+    buildConfig.output.filename = 'upb-elements-customizer-preview.min.js';
+    buildConfig.plugins         = (buildConfig.plugins || []).concat(
         new webpack.DefinePlugin({
             "process.env" : {
                 // This has effect on the react lib size
@@ -105,39 +153,60 @@ gulp.task('webpack', function (callback) {
     })
 });
 
-gulp.task('webpack:dev', function (callback) {
+gulp.task('webpack:dev', (callback) => {
 
-    let devConfig     = Object.create(webpackConfig);
-    devConfig.devtool = '#eval-source-map';
-    devConfig.watch   = true;
+    let devConfig             = Object.create(webpackConfig);
+    devConfig.devtool         = '#eval-source-map';
+    devConfig.watch           = true;
+    devConfig.output.filename = 'upb-elements-customizer-preview.js';
     webpack(devConfig, function (err, stats) {
         callback();
     })
 });
 
-gulp.task("webpack-dev-server", function () {
+gulp.task("webpack-dev-server", () => {
     // modify some webpack config options
     let devConfig     = Object.create(webpackConfig);
     devConfig.devtool = '#eval-source-map';
     devConfig.debug   = true;
 
     // Start a webpack-dev-server
-    new WebpackDevServer(webpack(devConfig), {
-        //publicPath : devConfig.output.publicPath,
-        hot    : true,
-        inline : true,
+    new webpackDevServer(webpack(devConfig), {
+        publicPath         : devConfig.output.publicPath || './assets/js/',
+        hot                : true,
+        inline             : true,
+        historyApiFallback : true,
         //open       : true,
-        stats  : {
+        stats              : {
             colors : true
         }
     })
     //.listen(80, "localhost", function (err) {});
+
+    /* new webpackDevServer(webpack(devConfig), {
+     quiet  : false,
+     hot    : true,
+     inline : true,
+     stats  : {
+     colors : true
+     },
+     proxy  : {
+     "/wp-content/plugins/ultimate-page-builder" : {
+     "target"     : {
+     "host"     : "wp-starter.dev",
+     "protocol" : 'http:',
+     "port"     : 80
+     },
+     ignorePath   : true,
+     changeOrigin : true,
+     secure       : false
+     }
+     }
+     }).listen(8080);*/
+
 });
 
-const browserSyncOptions = {
-    proxy  : "wp-starter.dev",
-    notify : false
-};
+// browser-sync
 
 gulp.task('browser-sync', () => {
     browserSync.init({
@@ -162,15 +231,7 @@ gulp.task('browser-sync', () => {
     });
 });
 
-const wpPotOptions = {
-    'domain'         : 'ultimate-page-builder',
-    'destFile'       : 'ultimate-page-builder.pot',
-    'package'        : 'ultimate-page-builder',
-    'bugReport'      : 'https://themehippo.com/contact/',
-    'lastTranslator' : 'ThemeHippo <themehippo@gmail.com>',
-    'team'           : 'ThemeHippo <themehippo@gmail.com>',
-    'translatePath'  : './languages'
-};
+// translate
 
 gulp.task('translate', () => {
     return gulp.src(`./**/*.php`)
@@ -180,11 +241,11 @@ gulp.task('translate', () => {
 });
 
 // npm run build
-gulp.task('build', ['translate', 'webpack', 'styles', 'scripts'], function () {});
+gulp.task('build', ['translate', 'webpack:build', 'styles:build', 'scripts:build']);
 
 // npm run dev
-gulp.task('dev', ['webpack:dev', 'styles', 'scripts'], function () {
+gulp.task('dev', ['webpack:dev', 'styles:dev', 'scripts:dev'], () => {
     gulp.watch('./**/*.php'); // Reload on PHP file changes.
-    gulp.watch(`${dirs.dest}/scss/*.scss`, ['styles']); // Reload on SCSS file changes.
-    gulp.watch(`${dirs.src}/js/*.js`, ['scripts']); // Reload on customJS file changes.
+    gulp.watch(`${dirs.dest}/scss/*.scss`, ['styles:dev']); // Reload on SCSS file changes.
+    gulp.watch(`${dirs.src}/js/*.js`, ['scripts:dev']); // Reload on customJS file changes.
 });

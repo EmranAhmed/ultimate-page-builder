@@ -57,7 +57,7 @@
 
 				$data = sprintf( 'var _UPB_Preview_Data = %s;', json_encode( $this->current_data() ) );
 				wp_scripts()->add_data( 'upb-customizer-preview', 'data', $data );
-				
+
 				//add_action( 'wp_print_footer_scripts', array( $this, 'current_data' ) );
 			}
 
@@ -98,12 +98,12 @@
 				$suffix = SCRIPT_DEBUG ? '' : '.min';
 
 				$handle = 'upb-customizer';
-				$src    = trailingslashit( $assets_path ) . "customizer.min.css";
+				$src    = trailingslashit( $assets_path ) . "customizer$suffix.css";
 				wp_register_style( $handle, $src );
 				// $handle, $src, $deps = array(), $ver = false, $media = 'all'
 
 				$handle = 'upb-customizer-preview';
-				$src    = trailingslashit( $assets_path ) . "customizer-preview.min.css";
+				$src    = trailingslashit( $assets_path ) . "customizer-preview$suffix.css";
 				wp_register_style( $handle, $src );
 			}
 
@@ -119,19 +119,19 @@
 				//wp_register_script( $handle, $src, array(), '', TRUE );
 
 				$handle = 'upb-customizer';
-				$src    = trailingslashit( $assets_path ) . "customizer.min.js";
+				$src    = trailingslashit( $assets_path ) . "customizer$suffix.js";
 				wp_register_script( $handle, $src, array( 'jquery', 'wp-backbone', 'customize-controls' ), '', TRUE );
 				// $handle, $src, $deps = array(), $ver = false, $in_footer = false
 
 
 				// Preview Scripts
 				$handle = 'upb-customizer-preview';
-				$src    = trailingslashit( $assets_path ) . "customizer-preview.min.js";
+				$src    = trailingslashit( $assets_path ) . "customizer-preview$suffix.js";
 				wp_register_script( $handle, $src, array( 'customize-preview', 'wp-util' ), '', TRUE );
 
 
 				$handle = 'upb-elements-customizer-preview';
-				$src    = trailingslashit( $assets_path ) . "upb-elements-customizer-preview.min.js";
+				$src    = trailingslashit( $assets_path ) . "upb-elements-customizer-preview$suffix.js";
 				wp_register_script( $handle, $src, array( 'upb-customizer-preview' ), '', TRUE );
 
 

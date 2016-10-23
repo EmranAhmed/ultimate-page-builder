@@ -1,18 +1,20 @@
+'use strict';
+
 (function (api, wp, $) {
 
-    api.UltimatePageBuilder      = api.UltimatePageBuilder || {};
-    api.UltimatePageBuilder.data = {id : '', options : {}, contents : ''};
+    api.UltimatePageBuilder = api.UltimatePageBuilder || {};
+    api.UltimatePageBuilder.data = { id: '', options: {}, contents: '' };
 
     api.UltimatePageBuilder.Panel = api.Panel.extend({
-        attachEvents : function () {
+        attachEvents: function attachEvents() {
 
             api.Panel.prototype.attachEvents.call(this);
 
-            let options   = $('#page-builder-options-wrap'),
+            var options = $('#page-builder-options-wrap'),
                 panelMeta = this.container.find('.panel-meta'),
-                button    = panelMeta.find('.customize-page-builder-options-toggle');
+                button = panelMeta.find('.customize-page-builder-options-toggle');
 
-            button.on('click keydown', (event) => {
+            button.on('click keydown', function (event) {
 
                 if (api.utils.isKeydownButNotEnterEvent(event)) {
                     return;
@@ -25,8 +27,7 @@
                     panelMeta.removeClass('open');
                     panelMeta.removeClass('active-page-builder-options');
                     options.slideUp('fast');
-                }
-                else {
+                } else {
                     button.attr('aria-expanded', 'true');
                     panelMeta.addClass('open');
                     panelMeta.addClass('active-page-builder-options');
@@ -34,45 +35,44 @@
                 }
 
                 return false;
-
             });
-
         },
 
-        ready : function () {
+        ready: function ready() {
             api.Panel.prototype.ready.call(this);
 
             this.container.find('#enable-page-builder').on('click', function () {
-                api('enable_page_builder', (setting) => {
-                    if ($(this).prop('checked')) {
-                        setting.set($(this).val());
-                    }
-                    else {
+                var _this = this;
+
+                api('enable_page_builder', function (setting) {
+                    if ($(_this).prop('checked')) {
+                        setting.set($(_this).val());
+                    } else {
                         setting.set('');
                     }
-
                 });
             });
-        },
+        }
     });
 
     /**
      * Extends wp.customize.panelConstructor with section constructor for page_builder_panel.
      */
     $.extend(api.panelConstructor, {
-        page_builder_panel : api.PageBuilder.Panel
+        page_builder_panel: api.PageBuilder.Panel
     });
 
     api.UltimatePageBuilder.Preview = {
-        init : function () {
+        init: function init() {
+            var _this2 = this;
 
             this.preview = api.previewer;
 
-            this.preview.bind('page_builder_data', (data) => {
+            this.preview.bind('page_builder_data', function (data) {
 
-                this.setState(data);
-                this.setVue();
-                this.setIframeVue();
+                _this2.setState(data);
+                _this2.setVue();
+                _this2.setIframeVue();
 
                 ////
 
@@ -81,13 +81,12 @@
                  //ACTION ON DROP HERE
                  }
                  });
-
-                 $('.customize-control, .preview-desktop').draggable({
+                  $('.customize-control, .preview-desktop').draggable({
                  iframeFix: true,    //Core jquery ui params needs for fix iframe bug
                  iframeScroll: true  //This param needs for activate iframeScroll
                  });*/
 
-                var x    = $(api.previewer.container).find('iframe')[0].contentWindow.window.document;
+                var x = $(api.previewer.container).find('iframe')[0].contentWindow.window.document;
                 var drag = $('.customize-control').prop('draggable', true);
                 var drop = api.PageBuilder.iframe.getElementById("#starter-app");
                 //drag.draggable = true;
@@ -112,24 +111,21 @@
 
                 ///
             });
-
         },
 
-        setState : function (data) {
+        setState: function setState(data) {
             api.UltimatePageBuilder.data = $.extend(api.PageBuilder.data, data);
         },
-        getState : function () {
+        getState: function getState() {
             return api.UltimatePageBuilder.data;
         },
 
-        setIframeVue : function () {
+        setIframeVue: function setIframeVue() {
             api.UltimatePageBuilder.iframe = $(api.previewer.container).find('iframe')[0].contentWindow.window.document;
-
         }
     };
 
-    api.bind('ready', () => {
-
+    api.bind('ready', function () {
 
         // init vue state here
 
@@ -142,9 +138,7 @@
 
         //api.PageBuilder.Preview.preview = api.previewer;
         api.UltimatePageBuilder.Preview.init();
-
     });
 
     // wp.customize.previewer.refresh();
-
 })(wp.customize, wp, jQuery);
