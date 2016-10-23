@@ -1,23 +1,12 @@
 'use strict';
 
-wp.customize.UltimatePageBuilderPreview = function ($, _, wp, api) {
-
-    var self = {};
-
-    /**
-     * Initialize preview.
-     */
-    self.init = function () {
-        api.preview.bind('active', function () {
-            api.preview.send('page_builder_data', _wp_Customize_Preview_Page_Builder_Page_Data);
-        });
-    };
+wp.customize.UltimatePageBuilder_Preview = function ($, _, wp, api) {
 
     api.bind('preview-ready', function (data) {
-
-        if (api.settings.activePanels['ultimate-page-builder-panel']) {
-            // $.extend(self.data, _wpCustomizePageBuilderPreview);
-            self.init();
+        if (api.settings.activePanels['upb-panel']) {
+            api.preview.bind('active', function () {
+                api.preview.send('_upb_page_data', _UPB_Page_Data);
+            });
         }
     });
 

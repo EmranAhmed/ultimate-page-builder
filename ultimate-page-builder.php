@@ -13,6 +13,7 @@
 	defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
 	if ( ! class_exists( 'Ultimate_Page_Builder' ) ):
+
 		class Ultimate_Page_Builder {
 
 			protected static $_instance = NULL;
@@ -24,7 +25,6 @@
 
 				return self::$_instance;
 			}
-
 
 			public function __construct() {
 
@@ -45,7 +45,6 @@
 				define( 'UPB_PLUGIN_FILE', __FILE__ );
 			}
 
-
 			public function includes() {
 				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-elements.php";
 				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-elements-props.php";
@@ -54,19 +53,28 @@
 
 			public function hooks() {
 				add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
-				add_action( 'customize_register', array( $this, 'customize_register' ) );
+				add_filter( 'customize_loaded_components', array( $this, 'add_upb_to_loaded_components' ), 0, 1 );
+				add_filter( 'customize_loaded_components', array( $this, 'customize_loaded_components' ), 100, 2 );
 			}
 
 			public function load_plugin_textdomain() {
 				load_plugin_textdomain( 'ultimate-page-builder', FALSE, trailingslashit( UPB_PLUGIN_DIRNAME ) . 'languages' );
 			}
 
-			public function customize_register( $wp_customize ) {
-				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-customizer.php";
-				$wp_customize->ultimate_page_builder = new UPB_Customizer( $wp_customize );
+			public function add_upb_to_loaded_components( $components ) {
+				array_push( $components, 'ultimate-page-builder' );
+
+				return $components;
 			}
 
+			public function customize_loaded_components( $components, $wp_customize ) {
+				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-customizer.php";
+				if ( in_array( 'ultimate-page-builder', $components, TRUE ) ) {
+					$wp_customize->ultimate_page_builder = new UPB_Customizer( $wp_customize );
+				}
 
+				return $components;
+			}
 		}
 
 

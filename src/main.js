@@ -3,8 +3,6 @@ import App from './App.vue'
 
 ( function ($, _, wp, api, data) {
 
-    console.log(data);
-
     if (data) {
         new Vue({
             el     : '#app',
@@ -18,5 +16,5 @@ import App from './App.vue'
         })
     }
 
-}(window.jQuery, window._, window.wp, window.wp.customize, window._UPB_Preview_Data || null) );
+}(window.jQuery, window._, window.wp, window.wp.customize, window._UPB_Page_Data || null) );
 
