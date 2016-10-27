@@ -62,11 +62,13 @@ const wpPotOptions = {
 
 gulp.task('scripts:dev', () => {
     return gulp.src(`${dirs.src}/js/*.js`)
+        .pipe(sourcemaps.init())
         .pipe(plumber())
         .pipe(babel({
-            presets : ['es2015']
+            presets : ["stage-2"]
         }).on('error', console.error.bind(console)))
         .pipe(plumber.stop())
+        .pipe(sourcemaps.write({includeContent : false}))
         .pipe(gulp.dest(`${dirs.dest}/js`));
 });
 
@@ -74,7 +76,7 @@ gulp.task('scripts:build', () => {
     return gulp.src(`${dirs.src}/js/*.js`)
         .pipe(plumber())
         .pipe(babel({
-            presets : ['es2015']
+            presets : ["stage-2"]
         }).on('error', console.error.bind(console)))
         //.pipe(gulp.dest(`${dirs.builder_dist}`))
         .pipe(uglify())
@@ -105,7 +107,7 @@ gulp.task('styles:dev', () => {
 
 gulp.task('styles:build', () => {
     return gulp.src(`${dirs.dest}/scss/*.scss`)
-        .pipe(sourcemaps.init())
+        //.pipe(sourcemaps.init())
         .pipe(sass({
             errLogToConsole : true,
             //outputStyle     : 'compact',
@@ -119,7 +121,7 @@ gulp.task('styles:build', () => {
             "maxLineLen"   : 80,
             "uglyComments" : true
         }))
-        .pipe(sourcemaps.write({includeContent : false}))
+        //.pipe(sourcemaps.write({includeContent : false}))
         .pipe(rename({
             suffix : ".min"
         }))

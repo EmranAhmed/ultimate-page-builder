@@ -22,7 +22,6 @@
 				return self::$instance;
 			}
 
-
 			public function register( $short_code ) {
 
 				if ( ! isset( $short_code[ 'icon' ] ) ) {

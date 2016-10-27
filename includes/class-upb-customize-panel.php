@@ -2,15 +2,15 @@
 
 	defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
+	if ( ! class_exists( 'UPB_Customize_Panel' ) ):
 
-	if ( ! class_exists( 'UPB_Customizer_Panel' ) ):
-
-		class UPB_Customizer_Panel extends WP_Customize_Panel {
+		class UPB_Customize_Panel extends WP_Customize_Panel {
 
 			public $type = 'upb_panel';
 
 			public function active_callback() {
-				return is_page();
+				//return is_page();
+				return TRUE;
 			}
 
 			public function content_template() { ?>
@@ -37,7 +37,7 @@
 						<# } #>
 
 							<div id="page-builder-options-wrap" class="hidden" tabindex="-1">
-								<?php $this->options(); ?>
+								<?php //$this->options(); ?>
 							</div>
 				</li>
 				<?php

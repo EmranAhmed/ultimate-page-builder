@@ -28,14 +28,14 @@
 
 			public function __construct() {
 
-				$this->define_constants();
+				$this->constants();
 				$this->includes();
 				$this->hooks();
 
 				do_action( 'ultimate_page_builder_loaded', $this );
 			}
 
-			public function define_constants() {
+			public function constants() {
 				define( 'UPB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 				define( 'UPB_PLUGIN_ASSETS_URL', trailingslashit( plugin_dir_url( __FILE__ ) . 'assets' ) );
 				define( 'UPB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
@@ -68,9 +68,9 @@
 			}
 
 			public function customize_loaded_components( $components, $wp_customize ) {
-				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-customizer.php";
+				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-customize.php";
 				if ( in_array( 'ultimate-page-builder', $components, TRUE ) ) {
-					$wp_customize->ultimate_page_builder = new UPB_Customizer( $wp_customize );
+					$wp_customize->ultimate_page_builder = new UPB_Customize( $wp_customize );
 				}
 
 				return $components;
