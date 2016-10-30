@@ -134,7 +134,7 @@ gulp.task('webpack:build', (callback) => {
 
     let buildConfig             = Object.create(webpackConfig);
     buildConfig.devtool         = '#source-map';
-    buildConfig.output.filename = 'upb-elements-customizer-preview.min.js';
+    buildConfig.output.filename = 'upb-build.min.js';
     buildConfig.plugins         = (buildConfig.plugins || []).concat(
         new webpack.DefinePlugin({
             "process.env" : {
@@ -160,7 +160,7 @@ gulp.task('webpack:dev', (callback) => {
     let devConfig             = Object.create(webpackConfig);
     devConfig.devtool         = '#eval-source-map';
     devConfig.watch           = true;
-    devConfig.output.filename = 'upb-elements-customizer-preview.js';
+    devConfig.output.filename = 'upb-build.js';
     webpack(devConfig, function (err, stats) {
         callback();
     })

@@ -14,3 +14,8 @@
 			return $classes;
 		} );
 	} );
+
+
+	add_action( 'wp_footer', function () {
+		// JS Layouts
+	}, 20 );

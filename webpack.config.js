@@ -6,7 +6,7 @@ module.exports = {
     output        : {
         path       : path.resolve(__dirname, './assets/js'),
         publicPath : '/assets/js/',
-        filename   : 'upb-elements-customizer-preview.js'
+        filename   : 'upb-build.js'
     },
     resolveLoader : {
         root : path.join(__dirname, 'node_modules'),

@@ -1,0 +1,65 @@
+.customize-page-builder-options-toggle {
+  background: none;
+  border: none;
+  color: #555555;
+  cursor: pointer;
+  margin: 0;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  top: 30px;
+}
+
+.customize-page-builder-options-toggle:hover, .customize-page-builder-options-toggle:active, .customize-page-builder-options-toggle:focus {
+  color: #0073AA;
+}
+
+.customize-page-builder-options-toggle:focus {
+  outline: none;
+}
+
+.customize-page-builder-options-toggle:focus:before {
+  border-radius: 100%;
+}
+
+.customize-page-builder-options-toggle:before {
+  -moz-osx-font-smoothing: grayscale;
+  border: none;
+  content: "\f111";
+  display: block;
+  font: 18px/1 dashicons;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none !important;
+  text-indent: 0;
+  left: 6px;
+  position: absolute;
+  top: 6px;
+}
+
+#customize-controls .customize-info .customize-help-toggle {
+  padding: 20px;
+}
+
+#customize-controls .customize-info .customize-help-toggle:before {
+  padding: 4px;
+}
+
+#customize-controls .control-section-page-builder-hidden {
+  display: none;
+}
+
+.wp-customizer #page-builder-options-wrap {
+  display: none;
+  background: #FFFFFF;
+  border-top: 1px solid #DDDDDD;
+  padding: 4px 15px 15px;
+}
+
+.wp-customizer .metabox-prefs label {
+  display: block;
+  padding-right: 0;
+  line-height: 30px;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInVwYi1ib2lsZXJwbGF0ZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsaUJBQWtCO0VBQ2xCLGFBQWtCO0VBQ2xCLGVBQXFCO0VBQ3JCLGdCQUFxQjtFQUNyQixVQUFlO0VBQ2YsY0FBa0I7RUFDbEIsbUJBQXNCO0VBQ3RCLFNBQWU7RUFDZixVQUFrQjtDQTZCakI7O0FBdENIO0VBY0ksZUFBZ0I7Q0FDZjs7QUFmTDtFQWlCSSxjQUFlO0NBQ2Q7O0FBbEJMO0VBcUJNLG9CQUFxQjtDQUNwQjs7QUF0QlA7RUF5QkksbUNBQW9DO0VBQ3BDLGFBQStCO0VBQy9CLGlCQUFrQztFQUNsQyxlQUFnQztFQUNoQyx1QkFBMkM7RUFDM0MsYUFBOEI7RUFDOUIsbUJBQWlDO0VBQ2pDLGlDQUEwQztFQUMxQyxlQUE0QjtFQUM1QixVQUE4QjtFQUM5QixtQkFBbUM7RUFDbkMsU0FBOEI7Q0FDN0I7O0FBR0w7RUFHTSxjQUFlO0NBSWQ7O0FBUFA7RUFLUSxhQUFjO0NBQ2I7O0FBTlQ7RUFXSSxjQUFlO0NBQ2Q7O0FBR0w7RUFFSSxjQUFrQjtFQUNsQixvQkFBcUI7RUFDckIsOEJBQStCO0VBQy9CLHVCQUEyQjtDQUMxQjs7QUFOTDtFQVNJLGVBQXNCO0VBQ3RCLGlCQUFrQjtFQUNsQixrQkFBcUI7Q0FDcEIiLCJmaWxlIjoidXBiLWJvaWxlcnBsYXRlLmNzcyJ9 */

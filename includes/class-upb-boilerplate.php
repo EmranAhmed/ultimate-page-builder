@@ -15,6 +15,7 @@
 			}
 
 			public function __construct() {
+
 				$this->includes();
 				$this->hooks();
 

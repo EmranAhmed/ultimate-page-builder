@@ -22,6 +22,33 @@
 
 	// Load CSS :)
 	add_action( 'upb_boilerplate_print_styles', function () {
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		wp_enqueue_style( 'upb-boilerplate-bootstrap', UPB_PLUGIN_ASSETS_URL . 'css/bootstrap.min.css' );
 		wp_enqueue_style( 'upb-boilerplate-font-awesome', UPB_PLUGIN_ASSETS_URL . 'css/font-awesome.min.css' );
 	} );
+
+	add_action( 'upb_boilerplate_print_scripts', function () {
+		//$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+	} );
+
+
+	add_action( 'upb_boilerplate_enqueue_scripts', function () {
+
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+		wp_enqueue_script( 'upb-boilerplate-script', UPB_PLUGIN_ASSETS_URL . "js/upb-boilerplate-script$suffix.js", array( 'jquery' ), '', TRUE );
+		wp_enqueue_script( 'upb-script', UPB_PLUGIN_ASSETS_URL . "js/upb-build$suffix.js", array(), '', TRUE );
+
+
+		$tabs = upb_tabs()->getAll();
+		$data = sprintf( 'var _upb_store = %s;', wp_json_encode( $tabs ) );
+		wp_scripts()->add_data( 'upb-script', 'data', $data );
+
+	} );
+
+	add_action( 'upb_boilerplate_print_scripts', function () {
+		//$tabs = upb_tabs()->getAll();
+		//printf( '<script>var _upb_tabs = %s;</script>', wp_json_encode( $tabs ) );
+	} );
+
+

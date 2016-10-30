@@ -1,0 +1,2 @@
+jQuery(function ($) {});
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInVwYi1ib2lsZXJwbGF0ZS1zY3JpcHQuanMiXSwibmFtZXMiOlsialF1ZXJ5IiwiJCJdLCJtYXBwaW5ncyI6IkFBQUFBLE9BQU8sVUFBVUMsQ0FBVixFQUFhLENBSW5CLENBSkQiLCJmaWxlIjoidXBiLWJvaWxlcnBsYXRlLXNjcmlwdC5qcyJ9

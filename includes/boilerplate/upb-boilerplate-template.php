@@ -47,7 +47,7 @@ wp_user_settings();
 <body class="<?php upb_boilerplate_body_class() ?>">
 <div id="upb-wrapper" class="expanded"> <!-- collapsed preview-lg preview-md preview-sm preview-xs -->
 
-	<div id="upb-pre-loader"><?php esc_html( 'Loading...' ) ?></div>
+	<div id="upb-pre-loader"><?php esc_html_e( 'Loading...' ) ?></div>
 
 	<div id="upb-sidebar">
 		<div id="upb-sidebar-header">
