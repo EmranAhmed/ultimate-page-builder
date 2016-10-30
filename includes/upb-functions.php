@@ -2,12 +2,41 @@
 
 	defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
-	function UPB_Elements() {
+	function upb_is_ios() {
+		return wp_is_mobile() && preg_match( '/iPad|iPod|iPhone/', $_SERVER[ 'HTTP_USER_AGENT' ] );
+	}
+
+	function upb_is_ie() {
+		global $is_IE;
+
+		return wp_is_mobile() && $is_IE;
+	}
+
+	function upb_elements() {
 		return UPB_Elements::getInstance();
 	}
 
-	function upb_elements_register_action() {
-		do_action( 'upb_register_element', UPB_Elements() );
+	function upb_tabs() {
+		return UPB_Tabs::getInstance();
 	}
 
-	add_action( 'wp_loaded', 'upb_elements_register_action' );
+	function upb_is_preview() {
+
+		if ( apply_filters( 'upb_has_access', TRUE ) && is_page() && isset( $_GET[ 'upb-preview' ] ) && $_GET[ 'upb-preview' ] == '1' && is_user_logged_in() ) {
+			return TRUE;
+		}
+
+		return FALSE;
+
+	}
+
+	function upb_is_boilerplate() {
+
+		if ( apply_filters( 'upb_has_access', TRUE ) && is_page() && isset( $_GET[ 'upb' ] ) && $_GET[ 'upb' ] == '1' && is_user_logged_in() ) {
+			return TRUE;
+		}
+
+		return FALSE;
+
+	}
+

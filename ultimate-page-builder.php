@@ -18,7 +18,7 @@
 
 			protected static $_instance = NULL;
 
-			public static function instance() {
+			public static function init() {
 				if ( is_null( self::$_instance ) ) {
 					self::$_instance = new self();
 				}
@@ -46,48 +46,35 @@
 			}
 
 			public function includes() {
+
+				// Common
+				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-hooks.php";
+				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-functions.php";
+
+				// Tabs
+				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-tabs.php";
+
+				// Elements
 				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-elements.php";
 				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-elements-props.php";
-				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-functions.php";
+
+				// Boilerplate
+				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-boilerplate.php";
+
+				// Preview
+				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-preview.php";
+
 			}
 
 			public function hooks() {
-				add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
-				add_filter( 'customize_loaded_components', array( $this, 'add_upb_to_loaded_components' ), 0, 1 );
-				add_filter( 'customize_loaded_components', array( $this, 'customize_loaded_components' ), 100, 2 );
+				add_action( 'init', array( $this, 'language' ) );
 			}
 
-			public function load_plugin_textdomain() {
+			public function language() {
 				load_plugin_textdomain( 'ultimate-page-builder', FALSE, trailingslashit( UPB_PLUGIN_DIRNAME ) . 'languages' );
 			}
 
-			public function add_upb_to_loaded_components( $components ) {
-				array_push( $components, 'ultimate-page-builder' );
-
-				return $components;
-			}
-
-			public function customize_loaded_components( $components, $wp_customize ) {
-				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-customize.php";
-				if ( in_array( 'ultimate-page-builder', $components, TRUE ) ) {
-					$wp_customize->ultimate_page_builder = new UPB_Customize( $wp_customize );
-				}
-
-				return $components;
-			}
 		}
 
-
-		Ultimate_Page_Builder::instance();
+		Ultimate_Page_Builder::init();
 	endif;
-
-
-
-
-
-
-
-
-
-
-
