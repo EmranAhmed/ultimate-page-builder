@@ -1,0 +1,61 @@
+@import "../../assets/scss/variables";
+
+#upb-sidebar-header {
+  position         : relative;
+  background-color : $upb-sidebar-tab-background-color;
+
+  ul {
+    display    : block;
+    list-style : none;
+    }
+
+  li {
+    padding : 5px;
+    height  : 50px;
+    width   : 50px;
+
+    &.active {
+      a {
+        color            : $upb-sidebar-tab-active-color;
+        background-color : $upb-sidebar-tab-active-background-color;
+        border-radius    : 50%;
+        }
+      }
+    }
+
+  .tab-wrapper {
+    li {
+      display : inline-block;
+      }
+    text-align : center;
+    }
+
+  .btn-close {
+    position     : absolute;
+    left         : 0;
+    top          : 0;
+    border-right : 1px solid $upb-sidebar-tab-button-separator-color;
+    }
+
+  .btn-save {
+    position    : absolute;
+    right       : 0;
+    top         : 0;
+    border-left : 1px solid $upb-sidebar-tab-button-separator-color;
+    &.active {
+      a {
+        background-color : $upb-sidebar-tab-save-active-background-color;
+        color            : $upb-sidebar-tab-save-active-color;
+        }
+      }
+    }
+
+  a {
+    display   : block;
+    font-size : 18px;
+    padding   : 10px;
+    color     : $upb-sidebar-tab-color;
+    }
+
+  }
+
