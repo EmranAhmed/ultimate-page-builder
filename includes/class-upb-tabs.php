@@ -26,20 +26,33 @@
 
 				// id, active, settings, contents, title, icon, class, callback
 
-				if ( ! isset( $tab[ 'action' ] ) ) {
-					$tab[ 'action' ] = 'upb_tab_' . $id . '_action';
-				}
+				if ( isset( $this->tabs[ $id ] ) && is_array( $this->tabs[ $id ] ) ) {
+					throw new Exception( sprintf( 'Ultimate Page builder tab "%s" already registered.', $tab[ 'title' ] ) );
+				} else {
 
-				if ( $active ) {
-					$tab[ 'active' ] = $active;
-				}
+					if ( ! isset( $tab[ 'action' ] ) ) {
+						$tab[ 'action' ] = 'upb_tab_' . $id;
+					}
 
-				$this->tabs[ $id ] = $tab;
+					if ( $active ) {
+						$tab[ 'active' ] = TRUE;
+					} else {
+						$tab[ 'active' ] = FALSE;
+					}
+
+					$tab[ 'id' ] = $id;
+
+					$this->tabs[] = $tab;
+				}
 
 			}
 
 			public function getAll() {
 				return $this->tabs;
+			}
+
+			public function getJSON() {
+				return wp_json_encode( $this->tabs );
 			}
 		}
 

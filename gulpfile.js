@@ -91,6 +91,7 @@ gulp.task('scripts:build', () => {
 
 gulp.task('styles:dev', () => {
     return gulp.src(`${dirs.dest}/scss/*.scss`)
+        .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(sass({
             errLogToConsole : true,
@@ -102,6 +103,7 @@ gulp.task('styles:dev', () => {
         })).on('error', console.error.bind(console))
         .pipe(autoprefixer(autoprefixerOptions))
         .pipe(sourcemaps.write({includeContent : false}))
+        .pipe(plumber.stop())
         .pipe(gulp.dest(`${dirs.dest}/css`))
 });
 
@@ -155,11 +157,25 @@ gulp.task('webpack:build', (callback) => {
     })
 });
 
+/*let devConfig             = Object.create(webpackConfig);
+ devConfig.devtool         = '#eval-source-map';
+ devConfig.debug           = true;
+ devConfig.watch           = true;
+ devConfig.output.filename = 'upb-build.js';
+ let devPack               = webpack(devConfig)*/
+
 gulp.task('webpack:dev', (callback) => {
+
+
+    // run webpack
+    /*devPack.run(function (err, stats) {
+     callback();
+     });*/
 
     let devConfig             = Object.create(webpackConfig);
     devConfig.devtool         = '#eval-source-map';
-    devConfig.watch           = true;
+    devConfig.debug           = true;
+    //devConfig.watch           = true;
     devConfig.output.filename = 'upb-build.js';
     webpack(devConfig, function (err, stats) {
         callback();
@@ -250,4 +266,5 @@ gulp.task('dev', ['webpack:dev', 'styles:dev', 'scripts:dev'], () => {
     gulp.watch('./**/*.php'); // Reload on PHP file changes.
     gulp.watch(`${dirs.dest}/scss/*.scss`, ['styles:dev']); // Reload on SCSS file changes.
     gulp.watch(`${dirs.src}/js/*.js`, ['scripts:dev']); // Reload on customJS file changes.
+    gulp.watch(`${dirs.src}/**/*`, ['webpack:dev']); // Reload on customJS file changes.
 });

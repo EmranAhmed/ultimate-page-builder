@@ -1,69 +1,96 @@
-.customize-page-builder-options-toggle {
-  background : none;
-  border     : none;
-  color      : #555555;
-  cursor     : pointer;
-  margin     : 0;
-  padding    : 20px;
-  position   : absolute;
-  right      : 0;
-  top        : 30px;
+@import "variables";
+// Vendors Files
+@import "./node_modules/mdi/scss/materialdesignicons";
 
-  &:hover,
-  &:active,
-  &:focus {
-    color : #0073AA;
-    }
-  &:focus {
-    outline : none;
-    }
-  &:focus {
-    &:before {
-      border-radius : 100%;
-      }
-    }
-  &:before {
-    -moz-osx-font-smoothing : grayscale;
-    border                  : none;
-    content                 : "\f111";
-    display                 : block;
-    font                    : 18px/1 dashicons;
-    padding                 : 5px;
-    text-align              : center;
-    text-decoration         : none !important;
-    text-indent             : 0;
-    left                    : 6px;
-    position                : absolute;
-    top                     : 6px;
-    }
+* {
+  margin     : 0;
+  padding    : 0;
+  box-sizing : border-box;
   }
 
-#customize-controls {
-  .customize-info {
-    .customize-help-toggle {
-      padding : 20px;
-      &:before {
-        padding : 4px;
-        }
-      }
+#upb-pre-loader {
+  position   : fixed;
+  z-index    : 9;
+  top        : 0;
+  left       : 0;
+  background : $upb-pre-loader-background-color;
+  width      : 100%;
+  height     : 100%;
+  > div {
+    position : relative;
+    top      : 50%;
+    left     : 50%;
+    color    : white;
+    width    : auto;
     }
-
-  .control-section-page-builder-hidden {
+  &.loaded {
     display : none;
     }
   }
 
-.wp-customizer {
-  #page-builder-options-wrap {
-    display    : none;
-    background : #FFFFFF;
-    border-top : 1px solid #DDDDDD;
-    padding    : 4px 15px 15px;
+#upb-wrapper {
+  position : fixed;
+  top      : 0;
+  left     : 0;
+  right    : 0;
+  bottom   : 0;
+  z-index  : 500000;
+  overflow : visible;
+  height   : 100%;
+
+  &.expanded {
+    margin-left : 300px;
     }
 
-  .metabox-prefs label {
-    display       : block;
-    padding-right : 0;
-    line-height   : 30px;
+  &.collapsed {
+    margin-left : -300px;
     }
   }
+
+#upb-sidebar {
+  overflow         : visible;
+  position         : fixed;
+  width            : 300px;
+  height           : 100%;
+  top              : 0;
+  bottom           : 0;
+  left             : 0;
+  padding          : 0;
+  margin           : 0;
+  z-index          : 10;
+  border-right     : 1px solid $upb-sidebar-border-color;
+  background-color : $upb-sidebar-background-color;
+  }
+
+#upb-skeleton-wrapper {
+  position : absolute;
+  top      : 0;
+  left     : 0;
+  right    : 0;
+  bottom   : 0;
+  opacity  : 0;
+  z-index  : 8;
+  }
+
+#upb-preview-wrapper {
+  position  : absolute;
+  top       : 0;
+  left      : 0;
+  right     : 0;
+  width     : 100%;
+  max-width : 100%;
+  height    : 100%;
+  margin    : 0 auto;
+  z-index   : 9;
+  iframe {
+    width    : 100%;
+    height   : 100%;
+    position : absolute;
+    border   : 0;
+    }
+  }
+
+
+
+
+

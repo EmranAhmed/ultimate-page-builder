@@ -54,6 +54,9 @@
 				// Tabs
 				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-tabs.php";
 
+				// Options
+				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-options.php";
+
 				// Elements
 				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-elements.php";
 				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-elements-props.php";

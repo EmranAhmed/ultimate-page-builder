@@ -12,7 +12,10 @@ if ( ! current_user_can( 'customize' ) ) {
 	);
 }
 
-
+// Load Styles and Scripts
+add_action( 'upb_boilerplate_print_scripts', 'print_head_scripts', 20 );
+add_action( 'upb_boilerplate_print_footer_scripts', '_wp_footer_scripts' );
+add_action( 'upb_boilerplate_print_styles', 'print_admin_styles', 20 );
 
 do_action( 'upb_boilerplate_init' );
 
@@ -45,50 +48,42 @@ wp_user_settings();
 	?>
 </head>
 <body class="<?php upb_boilerplate_body_class() ?>">
+<div id="upb-pre-loader">
+	<div>
+		<?php esc_html_e( 'Loading...' ) ?>
+	</div>
+</div>
 <div id="upb-wrapper" class="expanded"> <!-- collapsed preview-lg preview-md preview-sm preview-xs -->
-
-	<div id="upb-pre-loader"><?php esc_html_e( 'Loading...' ) ?></div>
 
 	<div id="upb-sidebar">
 		<div id="upb-sidebar-header">
-			<ul>
-				<li><a href="#">Layout</a></li>
-				<li><a href="#">Elements</a></li>
-				<li><a href="#">Settings</a></li>
-				<li><a href="#">Save Button</a></li>
-			</ul>
+			Loading...
 		</div>
 		<div id="upb-sidebar-contents">
-			Panel Contents
+			Loading...
 		</div>
 		<div id="upb-sidebar-footer">
-			Panel Footer
+			Loading...
 		</div>
 
-		<?php
-			do_action( 'upb_boilerplate_sidebar' );
-		?>
 	</div>
 
-	<div id="upb-contents">
-		<div id="upb-skeleton-wrapper">Structure</div>
 
-		<div id="upb-preview-wrapper">
-			<iframe
-				src="<?php echo add_query_arg( 'upb-preview', TRUE, get_preview_post_link( get_the_ID() ) ) ?>"
-				frameborder="0"
-				height="100%"
-				width="100%"
-				name="upb-preview-frame"
-				seamless="seamless"
-				style="display:block; width:100%; height:100vh;"
-				id="upb-preview-frame"></iframe>
-		</div>
+	<div id="upb-skeleton-wrapper">Structure</div>
 
-		<?php
-			do_action( 'upb_boilerplate_contents' );
-		?>
+	<div id="upb-preview-wrapper">
+		<iframe
+			src="<?php echo add_query_arg( 'upb-preview', TRUE, get_preview_post_link( get_the_ID() ) ) ?>"
+			frameborder="0"
+			name="upb-preview-frame"
+			seamless="seamless"
+			id="upb-preview-frame"></iframe>
 	</div>
+
+	<?php
+		do_action( 'upb_boilerplate_contents' );
+	?>
+
 
 	<?php do_action( 'upb_boilerplate_print_footer_scripts' ); ?>
 </div>

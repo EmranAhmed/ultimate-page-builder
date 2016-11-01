@@ -20,6 +20,10 @@
 		return UPB_Tabs::getInstance();
 	}
 
+	function upb_options() {
+		return UPB_Options::getInstance();
+	}
+
 	function upb_is_preview() {
 
 		if ( apply_filters( 'upb_has_access', TRUE ) && is_page() && isset( $_GET[ 'upb-preview' ] ) && $_GET[ 'upb-preview' ] == '1' && is_user_logged_in() ) {
