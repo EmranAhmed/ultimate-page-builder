@@ -18,7 +18,7 @@
 			'title'    => 'Elements',
 			'help'     => '<h2>Just Getting Starting?</h2><p>Add a section</p>',
 			'settings' => apply_filters( 'upb_tab_elements_settings', array() ), // add section | load section | layouts
-			'icon'     => 'mdi mdi-puzzle',
+			'icon'     => 'mdi mdi-shape-plus',
 			'contents' => apply_filters( 'upb_tab_elements_contents', array() ),
 		);
 		$tab->register( 'elements', $data, FALSE );
@@ -60,7 +60,7 @@
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		wp_enqueue_script( 'upb-script', UPB_PLUGIN_ASSETS_URL . "js/upb-build$suffix.js", array(), '', TRUE );
-		wp_enqueue_script( 'upb-boilerplate-script', UPB_PLUGIN_ASSETS_URL . "js/upb-boilerplate-script$suffix.js", array( 'jquery', 'upb-script' ), '', TRUE );
+		// wp_enqueue_script( 'upb-boilerplate-script', UPB_PLUGIN_ASSETS_URL . "js/upb-boilerplate-script$suffix.js", array( 'jquery', 'upb-script' ), '', TRUE );
 
 
 		$data = sprintf( "var _upb_states = %s;\n", upb_tabs()->getJSON() );
@@ -68,8 +68,20 @@
 
 		//$data .= sprintf( "var _upb_options = %s;", upb_options()->getJSON() );
 
-
 		wp_script_add_data( 'upb-script', 'data', $data );
+
+		wp_localize_script( 'upb-script', '_upb_l10n', array(
+			'save'           => esc_attr__( 'Save' ),
+			'close'          => esc_attr__( 'Close' ),
+			'breadcrumbRoot' => esc_attr__( 'You are building' ),
+			'skeleton'       => esc_attr__( 'Skeleton preview' ),
+			'collapse'       => esc_attr__( 'Collapse' ),
+			'expand'         => esc_attr__( 'Expand' ),
+			'large'          => esc_attr__( 'Large device preview' ),
+			'medium'         => esc_attr__( 'Medium device preview' ),
+			'small'          => esc_attr__( 'Small device preview' ),
+			'xSmall'         => esc_attr__( 'Extra small preview' ),
+		) );
 	} );
 
 	add_action( 'upb_boilerplate_print_scripts', function () {

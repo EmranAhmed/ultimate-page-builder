@@ -1,11 +1,11 @@
 <template>
     <div id="upb-sidebar-header">
         <ul>
-            <li class="btn-close"><a href="#" title="Close"><i class="mdi mdi-window-close"></i></a></li>
+            <li class="btn-close"><a href="#" :title="l10n.close"><i class="mdi mdi-window-close"></i></a></li>
             <ul class="tab-wrapper">
-                <upb-sidebar-header-item v-for="item in model" :model="item"></upb-sidebar-header-item>
+                <upb-sidebar-header-item v-for="item in model" @changedActive="removeActive()" :model="item"></upb-sidebar-header-item>
             </ul>
-            <li :class="{ active: isSaved(), 'btn-save':true }"><a href="#" title="Save"><i class="mdi mdi-content-save-all"></i></a></li>
+            <li :class="[{ active: isSaved() }, 'btn-save']"><a href="#" :title="l10n.save"><i class="mdi mdi-content-save-all"></i></a></li>
         </ul>
     </div>
 </template>
@@ -21,33 +21,24 @@
     export default {
         name  : 'upb-sidebar-header',
         props : ['index', 'model'],
+
         data(){
             return {
-                changes : !store.status.saved
-            }
-        },
-        watch : {
-            title(value){
-                store.changeStatus();
-                console.log('title....');
-                return value
+                l10n : store.l10n
             }
         },
 
         methods : {
 
-            isSaved(){
-                return !store.isSaved();
+            removeActive(){
+                this.model.map(function (item) {
+                    item.active = false
+                });
             },
 
-            changeIt(){
-                store.changeStatus();
-                store.changeBaz();
-            },
-            changeFoo(){
-                //store.changeStatus();
-                store.changeBaz();
-            },
+            isSaved(){
+                return !store.isSaved();
+            }
         }
     }
 </script>

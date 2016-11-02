@@ -53,7 +53,7 @@ wp_user_settings();
 		<?php esc_html_e( 'Loading...' ) ?>
 	</div>
 </div>
-<div id="upb-wrapper" class="expanded"> <!-- collapsed preview-lg preview-md preview-sm preview-xs -->
+<div id="upb-wrapper" class="expanded preview-lg preview-default"> <!-- collapsed preview-lg preview-md preview-sm preview-xs -->
 
 	<div id="upb-sidebar">
 		<div id="upb-sidebar-header">
@@ -83,7 +83,6 @@ wp_user_settings();
 	<?php
 		do_action( 'upb_boilerplate_contents' );
 	?>
-
 
 	<?php do_action( 'upb_boilerplate_print_footer_scripts' ); ?>
 </div>

@@ -1,12 +1,8 @@
 <template>
     <div id="upb-sidebar">
         <upb-sidebar-header :model="store.states"></upb-sidebar-header>
-        <div id="upb-sidebar-contents">
-            Panel Contents
-        </div>
-        <div id="upb-sidebar-footer">
-            Panel Footer
-        </div>
+        <upb-sidebar-contents :model="store.states"></upb-sidebar-contents>
+        <upb-sidebar-footer :model="store.states"></upb-sidebar-footer>
     </div>
 </template>
 <style src="./scss/upb-sidebar.scss" lang="sass"></style>

@@ -1,0 +1,46 @@
+@import "../../assets/scss/variables";
+
+#upb-sidebar-footer {
+  position         : absolute;
+  left             : 0;
+  right            : 0;
+  bottom           : 0;
+  height           : 40px;
+  background-color : $upb-sidebar-footer-background-color;
+  border-top       : 1px solid $upb-sidebar-footer-border-color;
+  a {
+    float     : left;
+    padding   : 10px;
+    font-size : 18px;
+    height    : 40px;
+    color     : $upb-sidebar-footer-color;
+    &:hover {
+      color : darken($upb-sidebar-footer-color, 40%)
+      }
+    &.active {
+      color : $upb-sidebar-footer-activate-color
+      }
+    }
+
+  .previews {
+    float   : right;
+    padding : 0 5px;
+    }
+
+  .btn-collapse,
+  .btn-expand {
+    display : none;
+    }
+
+  .btn-collapse.current {
+    display : block;
+    }
+  .btn-expand.current {
+    display       : block;
+    position      : fixed;
+    bottom        : 0;
+    left          : 0;
+    color         : $upb-sidebar-tab-active-background-color;
+    border-radius : 50%;
+    }
+  }

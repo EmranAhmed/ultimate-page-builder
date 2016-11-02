@@ -40,10 +40,16 @@
 
   &.expanded {
     margin-left : 300px;
+    #upb-sidebar {
+      margin-left : 0;
+      }
     }
 
   &.collapsed {
-    margin-left : -300px;
+    margin-left : 0;
+    #upb-sidebar {
+      margin-left : -300px;
+      }
     }
   }
 
