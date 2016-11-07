@@ -65,9 +65,7 @@ wp_user_settings();
 		<div id="upb-sidebar-footer">
 			Loading...
 		</div>
-
 	</div>
-
 
 	<div id="upb-skeleton-wrapper">Structure</div>
 

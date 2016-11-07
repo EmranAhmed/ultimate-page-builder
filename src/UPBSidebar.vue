@@ -1,7 +1,7 @@
 <template>
     <div id="upb-sidebar">
         <upb-sidebar-header :model="store.states"></upb-sidebar-header>
-        <upb-sidebar-contents :model="store.states"></upb-sidebar-contents>
+        <upb-sidebar-content :model="store.states"></upb-sidebar-content>
         <upb-sidebar-footer :model="store.states"></upb-sidebar-footer>
     </div>
 </template>
@@ -10,11 +10,11 @@
     import Vue from 'vue';
 
     import UPBSidebarHeader from './components/UPBSidebarHeader.vue';
-    import UPBSidebarContents from './components/UPBSidebarContents.vue';
+    import UPBSidebarContent from './components/UPBSidebarContent.vue';
     import UPBSidebarFooter from './components/UPBSidebarFooter.vue';
 
     Vue.component('upb-sidebar-header', UPBSidebarHeader);
-    Vue.component('upb-sidebar-contents', UPBSidebarContents);
+    Vue.component('upb-sidebar-content', UPBSidebarContent);
     Vue.component('upb-sidebar-footer', UPBSidebarFooter);
 
     export default {

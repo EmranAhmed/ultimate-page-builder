@@ -3,9 +3,10 @@
         <a href="#" @click.prevent="activeTab()" :title="model.title"><i :class="model.icon"></i></a>
     </li>
 </template>
-<style src="../scss/upb-sidebar-header-item.scss" lang="sass"></style>
+<style lang="sass">
+    @import "../../assets/scss/variables"
+</style>
 <script>
-
 
     import store from '../store'
 
@@ -14,19 +15,19 @@
         props : ['index', 'model'],
         data(){
             return {
-                changes : !store.status.saved
+                changes : store.isDirty()
             }
         },
 
         methods : {
 
             activeTab(){
-                this.$emit('changedActive', event.target.value)
+                this.$emit('changedActive', event.target.value);
                 this.model.active = true
             },
 
-            isSaved(){
-                return !store.isSaved();
+            isDirty(){
+                return store.isDirty();
             }
         }
     }

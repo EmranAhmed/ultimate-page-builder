@@ -8,9 +8,18 @@
   box-sizing : border-box;
   }
 
+html, body {
+  width  : 100%;
+  height : 100%;
+  }
+
+.upb-boilerplate {
+  position : relative;
+  }
+
 #upb-pre-loader {
   position   : fixed;
-  z-index    : 9;
+  z-index    : 999;
   top        : 0;
   left       : 0;
   background : $upb-pre-loader-background-color;
@@ -34,7 +43,7 @@
   left     : 0;
   right    : 0;
   bottom   : 0;
-  z-index  : 500000;
+  z-index  : 99;
   overflow : visible;
   height   : 100%;
 

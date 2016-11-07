@@ -20,7 +20,7 @@ const concat           = require('gulp-concat');
 const uglify           = require('gulp-uglify');
 const babel            = require('gulp-babel');
 const webpack          = require("webpack");
-const webpackDevServer = require("webpack-dev-server");
+// const webpackDevServer = require("webpack-dev-server");
 const webpackConfig    = require("./webpack.config.js");
 
 const autoprefixerOptions = [
@@ -65,7 +65,7 @@ gulp.task('scripts:dev', () => {
         .pipe(sourcemaps.init())
         .pipe(plumber())
         .pipe(babel({
-            presets : ["stage-2"]
+            presets : ["es2015"]
         }).on('error', console.error.bind(console)))
         .pipe(plumber.stop())
         .pipe(sourcemaps.write({includeContent : false}))
@@ -76,7 +76,7 @@ gulp.task('scripts:build', () => {
     return gulp.src(`${dirs.src}/js/*.js`)
         .pipe(plumber())
         .pipe(babel({
-            presets : ["stage-2"]
+            presets : ["es2015"]
         }).on('error', console.error.bind(console)))
         //.pipe(gulp.dest(`${dirs.builder_dist}`))
         .pipe(uglify())

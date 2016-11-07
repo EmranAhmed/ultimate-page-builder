@@ -5,12 +5,12 @@ class store {
         this.status     = window._upb_status;
         this.l10n       = window._upb_l10n;
         this.breadcrumb = [];
-        this.preview    = 'upb-preview-frame';
+        // this.preview    = 'upb-preview-frame';
     }
 
-    reloadPreview() {
-        window.frames[this.preview].window.location.reload();
-    }
+    // reloadPreview() {
+    //    window.frames[this.preview].window.location.reload();
+    // }
 
     getState() {
         return this.states;
@@ -20,14 +20,33 @@ class store {
         return this.status;
     }
 
-    isSaved() {
-        return this.status.saved;
+    isDirty() {
+        return this.status.dirty;
     }
 
     changeStatus() {
-        this.status.saved = !this.status.saved
+        this.status.dirty = !this.status.dirty
     }
 
+    stateChanged() {
+        this.status.dirty = true
+    }
+
+    stateSaved() {
+        this.status.dirty = false
+    }
+
+    saveState(success, error) {
+        wp.ajax.send("upb_save", {
+            success : success,
+            error   : error,
+            data    : {
+                nonce  : this.status._nonce,
+                id     : this.status._id,
+                states : this.states
+            }
+        });
+    }
 }
 
 export default new store();

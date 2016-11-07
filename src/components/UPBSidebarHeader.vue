@@ -5,7 +5,7 @@
             <ul class="tab-wrapper">
                 <upb-sidebar-header-item v-for="item in model" @changedActive="removeActive()" :model="item"></upb-sidebar-header-item>
             </ul>
-            <li :class="[{ active: isSaved() }, 'btn-save']"><a href="#" :title="l10n.save"><i class="mdi mdi-content-save-all"></i></a></li>
+            <li :class="[{ active: isDirty() }, 'btn-save']"><a @click.prevent="save()" href="#" :title="l10n.save"><i class="mdi mdi-content-save-all"></i></a></li>
         </ul>
     </div>
 </template>
@@ -36,8 +36,14 @@
                 });
             },
 
-            isSaved(){
-                return !store.isSaved();
+            save(){
+                if (this.isDirty()) {
+                    store.saveState();
+                }
+            },
+
+            isDirty(){
+                return store.isDirty();
             }
         }
     }
