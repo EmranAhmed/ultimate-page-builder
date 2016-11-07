@@ -140,15 +140,16 @@ gulp.task('webpack:build', (callback) => {
     buildConfig.plugins         = (buildConfig.plugins || []).concat(
         new webpack.DefinePlugin({
             "process.env" : {
-                // This has effect on the react lib size
                 "NODE_ENV" : JSON.stringify("production")
             }
         }),
-        new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress : {
                 warnings : false
             }
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true
         })
     );
 
@@ -174,55 +175,22 @@ gulp.task('webpack:dev', (callback) => {
 
     let devConfig             = Object.create(webpackConfig);
     devConfig.devtool         = '#eval-source-map';
-    devConfig.debug           = true;
-    //devConfig.watch           = true;
+    // devConfig.debug           = true;
+    // devConfig.watch           = true;
     devConfig.output.filename = 'upb-build.js';
+
+    devConfig.plugins         = (devConfig.plugins || []).concat(
+        new webpack.LoaderOptionsPlugin({
+            minimize: false,
+            debug: true
+        })
+    );
+
     webpack(devConfig, function (err, stats) {
         callback();
     })
 });
 
-gulp.task("webpack-dev-server", () => {
-    // modify some webpack config options
-    let devConfig     = Object.create(webpackConfig);
-    devConfig.devtool = '#eval-source-map';
-    devConfig.debug   = true;
-
-    // Start a webpack-dev-server
-    new webpackDevServer(webpack(devConfig), {
-        publicPath         : devConfig.output.publicPath || './assets/js/',
-        hot                : true,
-        inline             : true,
-        historyApiFallback : true,
-        //open       : true,
-        stats              : {
-            colors : true
-        }
-    })
-    //.listen(80, "localhost", function (err) {});
-
-    /* new webpackDevServer(webpack(devConfig), {
-     quiet  : false,
-     hot    : true,
-     inline : true,
-     stats  : {
-     colors : true
-     },
-     proxy  : {
-     "/wp-content/plugins/ultimate-page-builder" : {
-     "target"     : {
-     "host"     : "wp-starter.dev",
-     "protocol" : 'http:',
-     "port"     : 80
-     },
-     ignorePath   : true,
-     changeOrigin : true,
-     secure       : false
-     }
-     }
-     }).listen(8080);*/
-
-});
 
 // browser-sync
 
