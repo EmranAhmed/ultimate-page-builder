@@ -1,27 +1,23 @@
 'use strict';
 
-//const fs           = require('fs-extra');
-//const download     = require('download');
-const gulp             = require('gulp');
-//const extract      = require('extract-zip');
-const plumber          = require('gulp-plumber');
-const sass             = require('gulp-sass');
-const sourcemaps       = require('gulp-sourcemaps');
-const autoprefixer     = require('gulp-autoprefixer');
+const gulp          = require('gulp');
+const plumber       = require('gulp-plumber');
+const sass          = require('gulp-sass');
+const sourcemaps    = require('gulp-sourcemaps');
+const autoprefixer  = require('gulp-autoprefixer');
 //const lineec       = require('gulp-line-ending-corrector');
-const rename           = require('gulp-rename');
-const browserSync      = require('browser-sync').create();
+const rename        = require('gulp-rename');
+const browserSync   = require('browser-sync').create();
 //const imagemin     = require('gulp-imagemin');
-const wpPot            = require('gulp-wp-pot');
+const wpPot         = require('gulp-wp-pot');
 //const mmq          = require('gulp-merge-media-queries');
-const minifycss        = require('gulp-uglifycss'); // Minifies CSS files.
-const sort             = require('gulp-sort'); // Recommended to prevent unnecessary changes in pot-file.
-const concat           = require('gulp-concat');
-const uglify           = require('gulp-uglify');
-const babel            = require('gulp-babel');
-const webpack          = require("webpack");
-// const webpackDevServer = require("webpack-dev-server");
-const webpackConfig    = require("./webpack.config.js");
+const minifycss     = require('gulp-uglifycss'); // Minifies CSS files.
+const sort          = require('gulp-sort'); // Recommended to prevent unnecessary changes in pot-file.
+const concat        = require('gulp-concat');
+const uglify        = require('gulp-uglify');
+const babel         = require('gulp-babel');
+const webpack       = require("webpack");
+const webpackConfig = require("./webpack.config.js");
 
 const autoprefixerOptions = [
     'last 2 version',
@@ -149,7 +145,7 @@ gulp.task('webpack:build', (callback) => {
             }
         }),
         new webpack.LoaderOptionsPlugin({
-            minimize: true
+            minimize : true
         })
     );
 
@@ -173,16 +169,16 @@ gulp.task('webpack:dev', (callback) => {
      callback();
      });*/
 
-    let devConfig             = Object.create(webpackConfig);
-    devConfig.devtool         = '#eval-source-map';
+    let devConfig     = Object.create(webpackConfig);
+    devConfig.devtool = '#eval-source-map';
     // devConfig.debug           = true;
     // devConfig.watch           = true;
     devConfig.output.filename = 'upb-build.js';
 
-    devConfig.plugins         = (devConfig.plugins || []).concat(
+    devConfig.plugins = (devConfig.plugins || []).concat(
         new webpack.LoaderOptionsPlugin({
-            minimize: false,
-            debug: true
+            minimize : false,
+            debug    : true
         })
     );
 
@@ -190,7 +186,6 @@ gulp.task('webpack:dev', (callback) => {
         callback();
     })
 });
-
 
 // browser-sync
 
