@@ -3,8 +3,6 @@ import UPBSidebar from './UPBSidebar.vue'
 import UPBPreview from './UPBPreview.vue'
 import store from './store'
 
-
-
 //const states = window._upb_states;
 
 //const status = window._upb_status;
@@ -32,7 +30,8 @@ const preview = new Vue({
 });
 
 window.frames['upb-preview-frame'].window.onload = () => {
-    preview.$mount(window.frames['upb-preview-frame'].window.document.getElementById('upb-preview'))
+    //preview.$mount(window.frames['upb-preview-frame'].window.document.getElementById('upb-preview'))
+    preview.$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById('upb-preview'))
 }
 
 

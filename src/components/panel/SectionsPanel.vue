@@ -104,10 +104,8 @@
         methods : {
 
             onUpdate(e, values){
-
-                console.log(values);
-
                 this.model.contents.splice(values.newIndex, 0, this.model.contents.splice(values.oldIndex, 1)[0]);
+                store.stateChanged();
             },
 
             itemComponent(id){
@@ -129,7 +127,6 @@
             toggleFilter(){
                 this.showHelp   = false;
                 this.showSearch = !this.showSearch;
-                console.log(this.$el);
             },
 
             callToolsAction(event, action, tool){
