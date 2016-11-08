@@ -3,25 +3,49 @@
 #upb-sidebar-header {
   position         : relative;
   background-color : $upb-sidebar-tab-background-color;
+  height           : 50px;
 
   ul {
     display    : block;
     list-style : none;
     }
 
-  li {
-    padding : 5px;
-    height  : 50px;
-    width   : 50px;
+    ul.tab-wrapper {
+      li {
+        padding: 10px 3px;
 
-    &.active {
-      a {
-        color            : $upb-sidebar-tab-active-color;
-        background-color : $upb-sidebar-tab-active-background-color;
-        border-radius    : 50%;
+        i::before{
+          margin-left: 1px;
+          }
+        a {
+          border-radius : 50%;
+          width         : 30px;
+          height        : 30px;
+          line-height   : 30px;
+          display       : block;
+          }
+
+        &.active {
+          position: relative;
+          a {
+            font-size     : 16px;
+            color            : $upb-sidebar-tab-active-color;
+            background-color : $upb-sidebar-tab-active-background-color;
+            }
+
+          &::after{
+            content: "";
+            position: absolute;
+            margin-left: -4px;
+            bottom: 0;
+            border-width: 4px;
+            border-style: solid;
+            border-color: transparent transparent $upb-sidebar-tab-active-background-color;
+            }
+          }
         }
       }
-    }
+
 
   .tab-wrapper {
     li {
@@ -30,17 +54,26 @@
     text-align : center;
     }
 
+  .btn-close,
+  .btn-save {
+    position    : absolute;
+    top         : 0;
+    width       : 50px;
+    height      : 50px;
+    text-align  : center;
+    line-height : 50px;
+    }
+
   .btn-close {
-    position     : absolute;
     left         : 0;
-    top          : 0;
     border-right : 1px solid $upb-sidebar-tab-button-separator-color;
+    a:hover{
+      background: $upb-sidebar-tab-button-separator-color;
+      }
     }
 
   .btn-save {
-    position    : absolute;
     right       : 0;
-    top         : 0;
     border-left : 1px solid $upb-sidebar-tab-button-separator-color;
     &.active {
       a {
@@ -52,10 +85,8 @@
 
   a {
     display   : block;
-    font-size : 18px;
-    padding   : 10px;
+    font-size : 20px;
     color     : $upb-sidebar-tab-color;
     }
-
   }
 

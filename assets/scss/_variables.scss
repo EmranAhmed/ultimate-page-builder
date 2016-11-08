@@ -1,7 +1,10 @@
 $mdi-font-path : "../fonts/mdi" !default;
 
 // Pre Loader
-$upb-pre-loader-background-color : #03A9F4 !default;
+$upb-pre-loader-background-color : #1e67ed !default;
+
+
+//
 
 // Sidebar
 $upb-sidebar-border-color : #E2E2E2 !default;
@@ -12,25 +15,28 @@ $upb-sidebar-background-color : #F9F9F9 !default;
 $upb-sidebar-tab-background-color : #FFFFFF !default;
 $upb-sidebar-tab-color : #A2A2A2 !default;
 $upb-sidebar-tab-active-color : #FFFFFF !default;
-$upb-sidebar-tab-active-background-color : #2373F0 !default;
+$upb-sidebar-tab-active-background-color : #1e67ed !default;
 $upb-sidebar-tab-save-active-background-color : transparent !default;
 $upb-sidebar-tab-save-active-color : #000000 !default;
-$upb-sidebar-tab-button-separator-color : #E8E8E8 !default;
+$upb-sidebar-tab-button-separator-color : #EBEBEB !default;
 
 // Tab Panel
-$upb-sidebar-tab-panel-background-color : #2272EF !default;
+$upb-sidebar-tab-panel-background-color : #1e67ed !default;
 $upb-sidebar-tab-panel-color : #FFFFFF !default;
-$upb-sidebar-tab-panel-icon-background-color : #1E67D8 !default;
-$upb-sidebar-tab-panel-breadcrumb-color : #ABC2F6 !default;
+$upb-sidebar-tab-panel-icon-background-color : #000000 !default;
+
+// Sidebar Help panel
+$upb-sidebar-help-background : #202020;
+$upb-sidebar-help-color : #fff;
 
 // Tab Panel toolbar
-
 $upb-sidebar-tab-panel-toolbar-background-color : #FFFFFF !default;
 $upb-sidebar-tab-panel-toolbar-separator-color : #EBEBEB !default;
-$upb-sidebar-tab-panel-toolbar-color : #C3C3C3 !default;
+$upb-sidebar-tab-panel-toolbar-icon-color : #C3C3C3 !default;
+$upb-sidebar-tab-panel-toolbar-text-color : #000000 !default;
+
 
 // Sidebar Footer
-
 $upb-sidebar-footer-background-color : #FFFFFF !default;
 $upb-sidebar-footer-border-color : #EAEAEA !default;
 $upb-sidebar-footer-color : #A2A2A2 !default;

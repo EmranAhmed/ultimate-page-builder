@@ -1,1 +1,217 @@
 @import "../../assets/scss/variables";
+
+
+
+#upb-sidebar-contents{
+
+  ul{
+    list-style: none;
+    }
+
+ /* ---------------------
+  * Content Header */
+
+  #upb-panel-header{
+    padding: 15px;
+    background: $upb-sidebar-tab-panel-background-color;
+    color: $upb-sidebar-tab-panel-color;
+    position: relative;
+
+    .panel-heading{
+      > span{
+        font-size: 10px;
+        font-weight: 600;
+        display: block;
+        text-transform: uppercase;
+        line-height: 1;
+        color: rgba($upb-sidebar-tab-panel-color,.5);
+        margin-bottom: 15px;
+        }
+      .panel-title{
+        font-size: 18px;
+        text-transform: uppercase;
+        font-weight: 500;
+        }
+      }
+
+    button{
+      position: absolute;
+      right: 15px;
+      font-size: 14px;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      text-align: center;
+      border-radius: 100%;
+      border:none;
+      color: $upb-sidebar-tab-panel-color;
+      background: rgba($upb-sidebar-tab-panel-icon-background-color,.1);
+
+      &.active{
+        background: rgba($upb-sidebar-tab-panel-icon-background-color,.5);
+
+        }
+
+      &:hover{
+        cursor: pointer;
+        }
+
+      &.upb-content-help-toggle{
+        top:15px
+        }
+
+      &.upb-content-search-toggle{
+        bottom: 15px;
+        }
+
+      }
+    }
+
+ /* ---------------------
+  * Content Header */
+
+  #upb-panel-meta > div{
+    padding: 15px;
+    background: $upb-sidebar-help-background;
+    font-size: 13px;
+    color: rgba($upb-sidebar-help-color,.6);
+    font-weight: 100;
+    text-align: center;
+
+    h2{
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      color: $upb-sidebar-help-color;
+      }
+
+    input[type="search"]{
+      padding: 10px;
+      display: block;
+      width: 100%;
+      border: 0;
+      }
+    }
+
+  /* ---------------------
+   * panel Tools */
+
+  #upb-panel-tools{
+    background: $upb-sidebar-tab-panel-toolbar-background-color;
+    ul{
+      position: relative;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: flex;
+      margin: 0 auto;
+      padding: 0;
+      list-style: none;
+      -ms-box-orient: horizontal;
+      -ms-box-pack: center;
+      -webkit-flex-flow: row wrap;
+      -moz-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+      -webkit-justify-content: center;
+      -moz-justify-content: center;
+      -ms-justify-content: center;
+      justify-content: center;
+
+      li{
+        border-right: 1px solid $upb-sidebar-tab-panel-toolbar-separator-color;
+        position: relative;
+        z-index: 1;
+        display: block;
+        margin: 0;
+        text-align: center;
+        -webkit-flex: 1;
+        -moz-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+
+        &:last-child{
+          border: 0;
+          }
+
+        a{
+          display: block;
+          height: 100%;
+          padding: 15px 10px;
+          text-decoration: none;
+
+          i{
+            font-size: 20px;
+            color: $upb-sidebar-tab-panel-toolbar-icon-color;
+            }
+          div{
+            display: block;
+            font-size: 9px;
+            color: $upb-sidebar-tab-panel-toolbar-text-color;
+            text-transform: uppercase;
+            margin-top: 5px;
+            }
+
+          &:hover{
+            background: $upb-sidebar-tab-panel-toolbar-separator-color;
+            }
+          }
+        }
+      }
+    }
+
+
+  /* ---------------------
+   * panel Contents */
+
+  #upb-panel-contents{
+    &::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+      }
+    &::-webkit-scrollbar-thumb {
+      background: #bbb;
+      border-radius: 1px;
+      border: 1px solid $upb-sidebar-background-color;
+      }
+    &::-webkit-scrollbar-thumb:hover {
+      background: #333;
+      }
+    &::-webkit-scrollbar-thumb:active {
+      background: #333;
+      }
+    &::-webkit-scrollbar-track {
+      background: $upb-sidebar-background-color;
+      }
+    &::-webkit-scrollbar-corner {
+      background: transparent;
+      }
+    }
+
+
+
+
+  }
+
+
+
+// Input Reset
+
+input[type="search"]{
+  -webkit-appearance: textfield;
+  }
+
+input[type="search"]::-webkit-search-decoration {
+  display: none;
+  }
+
+
+input:focus,
+button:focus{
+  outline: none;
+  }
+
+
+
+
