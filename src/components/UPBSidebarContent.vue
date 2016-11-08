@@ -1,8 +1,6 @@
 <template>
-    <div id="upb-sidebar-tab-content">
-        <ul>
-            <component v-for="item in model" v-if="item.active" :model="item" :is="getPanel(item.id)"></component>
-        </ul>
+    <div id="upb-sidebar-contents">
+        <component v-for="item in model" v-if="item.active" :model="item" :is="getPanel(item.id)"></component>
     </div>
 </template>
 <style src="../scss/upb-sidebar-content.scss" lang="sass"></style>

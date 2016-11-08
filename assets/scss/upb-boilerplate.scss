@@ -49,20 +49,20 @@ html, body {
 
   &.expanded {
     margin-left : 300px;
-    #upb-sidebar {
+    #upb-sidebar-wrapper {
       margin-left : 0;
       }
     }
 
   &.collapsed {
     margin-left : 0;
-    #upb-sidebar {
+    #upb-sidebar-wrapper {
       margin-left : -300px;
       }
     }
   }
 
-#upb-sidebar {
+#upb-sidebar-wrapper {
   overflow         : visible;
   position         : fixed;
   width            : 300px;

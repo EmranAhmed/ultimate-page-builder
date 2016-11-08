@@ -1,10 +1,6 @@
 @import "../../assets/scss/variables";
 
 #upb-sidebar-footer {
-  position         : absolute;
-  left             : 0;
-  right            : 0;
-  bottom           : 0;
   height           : 40px;
   background-color : $upb-sidebar-footer-background-color;
   border-top       : 1px solid $upb-sidebar-footer-border-color;

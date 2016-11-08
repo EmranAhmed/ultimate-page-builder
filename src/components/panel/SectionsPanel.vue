@@ -1,8 +1,8 @@
 <template>
 
-    <li :id="panelId" class="upb-panel-wrapper">
+    <ul :id="panelId" class="upb-panel-wrapper">
 
-        <div class="upb-panel-header">
+        <li class="upb-panel-header">
             <span class="panel-heading">
 
                 <span class="upb-breadcrumb" v-if="breadcrumb.length > 0">
@@ -22,17 +22,17 @@
                 <i class="mdi mdi-magnify"></i>
             </button>
 
-        </div>
+        </li>
 
-        <div class="upb-panel-meta">
+        <li class="upb-panel-meta">
             <div v-if="showHelp" v-html="model.help"></div>
 
             <div v-if="showSearch">
                 <input results="5" autosave="upb-section-search" :placeholder="model.search" type="search">
             </div>
-        </div>
+        </li>
 
-        <div class="upb-panel-tools">
+        <li class="upb-panel-tools">
             <ul>
                 <li v-for="tool in model.tools">
                     <a @click.prevent="callToolsAction($event, tool.action, tool)" href="#">
@@ -41,14 +41,14 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </li>
 
-        <div class="upb-panel-contents">
+        <li class="upb-panel-contents">
             <ul class="upb-panel-contents-items">
                 <component v-for="item in model.contents" :model="item" :is="itemComponent(item.id)"></component>
             </ul>
-        </div>
-    </li>
+        </li>
+    </ul>
 
 
     <!-- wrap with ul.sub-panel > li

@@ -55,18 +55,19 @@ wp_user_settings();
 </div>
 <div id="upb-wrapper" class="expanded preview-lg preview-default"> <!-- collapsed preview-lg preview-md preview-sm preview-xs -->
 
-	<div id="upb-sidebar">
-		<div id="upb-sidebar-header">
-			Loading...
-		</div>
-		<div id="upb-sidebar-contents">
-			Loading...
-		</div>
-		<div id="upb-sidebar-footer">
-			Loading...
+	<div id="upb-sidebar-wrapper">
+		<div id="upb-sidebar">
+			<div id="upb-sidebar-header">
+				Loading...
+			</div>
+			<div id="upb-sidebar-contents">
+				Loading...
+			</div>
+			<div id="upb-sidebar-footer">
+				Loading...
+			</div>
 		</div>
 	</div>
-
 	<div id="upb-skeleton-wrapper">Structure</div>
 
 	<div id="upb-preview-wrapper">

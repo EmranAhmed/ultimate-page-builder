@@ -7061,7 +7061,7 @@ html, body {
   margin-left: 300px;
 }
 
-#upb-wrapper.expanded #upb-sidebar {
+#upb-wrapper.expanded #upb-sidebar-wrapper {
   margin-left: 0;
 }
 
@@ -7069,11 +7069,11 @@ html, body {
   margin-left: 0;
 }
 
-#upb-wrapper.collapsed #upb-sidebar {
+#upb-wrapper.collapsed #upb-sidebar-wrapper {
   margin-left: -300px;
 }
 
-#upb-sidebar {
+#upb-sidebar-wrapper {
   overflow: visible;
   position: fixed;
   width: 300px;
