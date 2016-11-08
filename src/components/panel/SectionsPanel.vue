@@ -44,7 +44,7 @@
         </li>
 
         <li id="upb-panel-contents">
-            <ul class="upb-panel-contents-items">
+            <ul class="upb-panel-contents-items" v-sortable="sortable">
                 <component v-for="item in model.contents" :model="item" :is="itemComponent(item.id)"></component>
             </ul>
         </li>
@@ -61,6 +61,9 @@
 
     import Vue from 'vue';
     import store from '../../store'
+
+    import Sortable from '../../js/vue-sortable'
+    Vue.use(Sortable);
 
     // Section
     import Section from '../section/SectionItem.vue'
@@ -83,7 +86,12 @@
                 l10n       : store.l10n,
                 breadcrumb : store.breadcrumb,
                 showHelp   : false,
-                showSearch : false
+                showSearch : false,
+                sortable   : {
+                    handle      : '.tools > .handle',
+                    placeholder : "upb-sort-placeholder",
+                    axis        : 'y'
+                }
             }
         },
 
@@ -94,6 +102,13 @@
         },
 
         methods : {
+
+            onUpdate(e, values){
+
+                console.log(values);
+
+                this.model.contents.splice(values.newIndex, 0, this.model.contents.splice(values.oldIndex, 1)[0]);
+            },
 
             itemComponent(id){
                 return `${id}-item`;
@@ -125,6 +140,7 @@
 
             addNewSection(e, data){
                 let section = window.jQuery.extend(true, {}, data);
+                //console.log(section);
                 this.model.contents.push(section);
                 store.stateChanged();
             }

@@ -1,39 +1,39 @@
 {
-  "name" : "ultimate-page-builder",
-  "description" : "Ultimate Page Builder",
-  "author" : "Emran Ahmed <emran.bd.08@gmail.com>",
-  "private" : true,
-  "scripts" : {
-    "dev" : "gulp dev",
-    "build" : "gulp build"
+  "name": "ultimate-page-builder",
+  "description": "Ultimate Page Builder",
+  "author": "Emran Ahmed <emran.bd.08@gmail.com>",
+  "private": true,
+  "scripts": {
+    "dev": "gulp dev",
+    "build": "gulp build"
   },
-  "dependencies" : {
-    "vue" : "^2.0.1"
+  "dependencies": {
+    "vue": "^2.0.1"
   },
-  "devDependencies" : {
-    "babel-core" : "^6.0.0",
-    "babel-loader" : "^6.0.0",
-    "babel-preset-es2015" : "^6.0.0",
-    "browser-sync" : "^2.17.5",
-    "cross-env" : "^3.0.0",
-    "css-loader" : "^0.25.0",
-    "file-loader" : "^0.9.0",
-    "gulp" : "^3.9.1",
-    "gulp-autoprefixer" : "^3.1.1",
-    "gulp-babel" : "^6.1.2",
-    "gulp-concat" : "^2.6.0",
-    "gulp-plumber" : "^1.1.0",
-    "gulp-rename" : "^1.2.2",
-    "gulp-sass" : "^2.3.2",
-    "gulp-sort" : "^2.0.0",
-    "gulp-sourcemaps" : "^2.2.0",
-    "gulp-uglify" : "^2.0.0",
-    "gulp-uglifycss" : "^1.0.6",
-    "gulp-wp-pot" : "^1.3.2",
-    "mdi" : "^1.7.22",
-    "node-sass" : "^3.11.2",
-    "sass-loader" : "^4.0.2",
-    "vue-loader" : "^9.7.0",
-    "webpack" : "^2.1.0-beta.25"
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-preset-es2015": "^6.0.0",
+    "browser-sync": "^2.17.5",
+    "cross-env": "^3.0.0",
+    "css-loader": "^0.25.0",
+    "file-loader": "^0.9.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sort": "^2.0.0",
+    "gulp-sourcemaps": "^2.2.0",
+    "gulp-uglify": "^2.0.0",
+    "gulp-uglifycss": "^1.0.6",
+    "gulp-wp-pot": "^1.3.2",
+    "mdi": "^1.7.22",
+    "node-sass": "^3.11.2",
+    "sass-loader": "^4.0.2",
+    "vue-loader": "^9.7.0",
+    "webpack": "^2.1.0-beta.25"
   }
 }

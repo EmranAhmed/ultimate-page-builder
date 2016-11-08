@@ -17,6 +17,7 @@
 					'action' => 'addNewSection',
 					'data'   => apply_filters( 'upb_section_data', array(
 						'id'       => 'section',
+						'id'       => 'section',
 						'title'    => 'New Section',
 						'tools'    => array(), // toolbar buttons
 						'settings' => array(), // will open setting panel
@@ -87,7 +88,7 @@
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-		wp_enqueue_script( 'upb-script', UPB_PLUGIN_ASSETS_URL . "js/upb-build$suffix.js", array( 'wp-util' ), '', TRUE );
+		wp_enqueue_script( 'upb-script', UPB_PLUGIN_ASSETS_URL . "js/upb-build$suffix.js", array( 'jquery-ui-sortable', 'wp-util' ), '', TRUE );
 		wp_enqueue_script( 'upb-boilerplate-script', UPB_PLUGIN_ASSETS_URL . "js/upb-boilerplate-script$suffix.js", array( 'jquery', 'upb-script' ), '', TRUE );
 
 
