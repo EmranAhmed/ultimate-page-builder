@@ -1,8 +1,8 @@
 <template>
 
-    <ul :id="panelId" class="upb-panel-wrapper">
+    <ul :class="panelClass" id="upb-panel-wrapper">
 
-        <li class="upb-panel-header">
+        <li id="upb-panel-header">
             <span class="panel-heading">
 
                 <span class="upb-breadcrumb" v-if="breadcrumb.length > 0">
@@ -24,7 +24,7 @@
 
         </li>
 
-        <li class="upb-panel-meta">
+        <li id="upb-panel-meta">
             <div v-if="showHelp" v-html="model.help"></div>
 
             <div v-if="showSearch">
@@ -32,7 +32,7 @@
             </div>
         </li>
 
-        <li class="upb-panel-tools">
+        <li id="upb-panel-tools">
             <ul>
                 <li v-for="tool in model.tools">
                     <a @click.prevent="callToolsAction($event, tool.action, tool)" href="#">
@@ -43,7 +43,7 @@
             </ul>
         </li>
 
-        <li class="upb-panel-contents">
+        <li id="upb-panel-contents">
             <ul class="upb-panel-contents-items">
                 <component v-for="item in model.contents" :model="item" :is="itemComponent(item.id)"></component>
             </ul>
@@ -88,8 +88,8 @@
         },
 
         computed : {
-            panelId(){
-                return `upb-panel-${this.model.id}-wrapper`;
+            panelClass(){
+                return `upb-${this.model.id}-panel`;
             }
         },
 
