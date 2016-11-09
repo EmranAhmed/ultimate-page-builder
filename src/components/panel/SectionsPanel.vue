@@ -28,7 +28,7 @@
             <div v-if="showHelp" v-html="model.help"></div>
 
             <div v-if="showSearch">
-                <input results="5" autosave="upb-section-search" :placeholder="model.search" type="search">
+                <input v-model="searchQuery" :placeholder="model.search" type="search">
             </div>
         </li>
 
@@ -45,15 +45,10 @@
 
         <li id="upb-panel-contents">
             <ul class="upb-panel-contents-items" v-sortable="sortable">
-                <component v-for="(item, index) in model.contents" @deleteSection="deleteSection(index)" :model="item" :is="itemComponent(item.id)"></component>
+                <component v-for="(item, index) in contents" @deleteSection="deleteSection(index)" :model="item" :is="itemComponent(item.id)"></component>
             </ul>
         </li>
     </ul>
-
-
-    <!-- wrap with ul.sub-panel > li
-                               <component v-for="item in model.contents" :model="item" :is="getPanel(item.id)"></component>
-               -->
 
 </template>
 <style lang="sass"></style>
@@ -85,21 +80,31 @@
 
         data(){
             return {
-                l10n       : store.l10n,
-                breadcrumb : store.breadcrumb,
-                showHelp   : false,
-                showSearch : false,
-                sortable   : {
+                l10n        : store.l10n,
+                breadcrumb  : store.breadcrumb,
+                showHelp    : false,
+                showSearch  : false,
+                sortable    : {
                     handle      : '.tools > .handle',
                     placeholder : "upb-sort-placeholder",
                     axis        : 'y'
-                }
+                },
+                searchQuery : ''
             }
         },
 
         computed : {
             panelClass(){
                 return `upb-${this.model.id}-panel`;
+            },
+
+            contents(){
+                let query = this.searchQuery.toLowerCase().trim();
+                if( query ){
+                    return this.model.contents.filter( (data) => new RegExp(query, 'gui').test(data.title.toLowerCase().trim()) );
+                }else{
+                   return this.model.contents;
+                }
             }
         },
 
@@ -113,21 +118,24 @@
             onUpdate(e, values){
 
 
-                // Tried But Failed :(
-                // this.model.contents.splice(values.newIndex, 0, this.model.contents.splice(values.oldIndex, 1).pop());
+                 //###
+                 //this.contents.splice(values.newIndex, 0, this.contents.splice(values.oldIndex, 1).pop());
+                 store.stateChanged();
 
-                //
+
+
+                //### If you Need to modify this.model.contents then you should use this code :)
                 let list = extend(true, [], this.model.contents);
 
                 list.splice(values.newIndex, 0, list.splice(values.oldIndex, 1).pop());
 
                 Vue.delete(this.model, 'contents');
 
-                this.$nextTick(function () {
+                this.$nextTick( function() {
                     Vue.set(this.model, 'contents', extend(true, [], list));
                 });
 
-                store.stateChanged();
+               // store.stateChanged();
             },
 
             itemComponent(id){
@@ -165,4 +173,20 @@
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>

@@ -1,4 +1,6 @@
-;(function ($) {
+import { util } from 'vue';
+
+(function ($) {
 
     const vSortable = {};
 
@@ -38,7 +40,9 @@
                     values.newIndex = ui.item.index();
 
                     if (!vnode.context.onUpdate) {
-                        throw new Error('require onUpdate method');
+
+                        util.warn('You need to implement the `onUpdate` method', vnode.context)
+                        //throw new Error('require onUpdate method');
                     }
 
                     vnode.context.onUpdate(event, $.extend(true, {}, values));
