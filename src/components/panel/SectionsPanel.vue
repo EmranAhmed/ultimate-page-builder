@@ -1,5 +1,7 @@
 <template>
 
+    <!-- sections > section > row > column -->
+
     <ul :class="panelClass" id="upb-panel-wrapper">
 
         <li id="upb-panel-header">
@@ -48,6 +50,7 @@
                 <component v-for="(item, index) in contents" @deleteSection="deleteSection(index)" :model="item" :is="itemComponent(item.id)"></component>
             </ul>
         </li>
+
     </ul>
 
 </template>

@@ -4,8 +4,6 @@
             <li v-for="(tool, id) in model.tools" @click="clickActions(id, tool)" v-if="enabled(id)" :title="tool.title" :class="toolsClass(id, tool)">
                 <i :class="tool.icon"></i>
             </li>
-
-
         </ul>
         <div v-text="model.title"></div>
 
@@ -76,4 +74,5 @@
             }
         }
     }
+
 </script>
