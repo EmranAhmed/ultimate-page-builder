@@ -263,6 +263,11 @@ button:focus{
         background: transparent;
         box-shadow:none;
         }
+
+      // Item Disable
+      &.item-disabled{
+        opacity:.5;
+        }
       }
     }
   }
