@@ -5,7 +5,7 @@ import { util } from 'vue';
     const vSortable = {};
 
     if (!$().sortable) {
-        throw new Error('jQuery UI Sortable not found');
+        util.warn('jQueryUI Sortable not installed or found globally to use `vue-sortable` directive..', this);
     }
 
     vSortable.install = function (Vue, options) {
@@ -33,6 +33,10 @@ import { util } from 'vue';
 
                 $(el).sortable("option", "start", (event, ui) => {
                     values.oldIndex = ui.item.index();
+
+                    if (vnode.context.onStart) {
+                        vnode.context.onStart(event);
+                    }
                 });
 
                 $(el).sortable("option", "update", (event, ui) => {
@@ -40,9 +44,7 @@ import { util } from 'vue';
                     values.newIndex = ui.item.index();
 
                     if (!vnode.context.onUpdate) {
-
-                        util.warn('You need to implement the `onUpdate` method', vnode.context)
-                        //throw new Error('require onUpdate method');
+                        util.warn('You need to implement the `onUpdate` method', vnode.context);
                     }
 
                     vnode.context.onUpdate(event, $.extend(true, {}, values));
