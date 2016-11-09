@@ -15,13 +15,13 @@
 					'title'  => 'Add Section',
 					'icon'   => 'mdi mdi-package-variant',
 					'action' => 'addNewSection',
-					'data'   => apply_filters( 'upb_section_data', array(
-						'id'       => 'section',
+					'data'   => apply_filters( 'upb_new_section_data', array(
 						'id'       => 'section',
 						'title'    => 'New Section',
-						'tools'    => array(), // toolbar buttons
-						'settings' => array(), // will open setting panel
-						'contents' => array()  // show rows
+						'enable'   => TRUE,
+						'tools'    => apply_filters( 'upb_new_section_tools', array() ), // toolbar buttons
+						'settings' => apply_filters( 'upb_new_section_settings', array() ), // will open setting panel
+						'contents' => apply_filters( 'upb_new_section_contents', array() )  // show rows
 					) )
 				),
 				array(
@@ -73,6 +73,45 @@
 	} );
 
 
+	add_filter( 'upb_new_section_tools', function ( $tools ) {
+		$tools[ 'move' ] = array(
+			'icon'  => 'mdi mdi-cursor-move',
+			'class' => 'handle',
+			'title' => 'Sort',
+		);
+
+		$tools[ 'delete' ] = array(
+			'icon'  => 'mdi mdi-delete',
+			'title' => 'Delete',
+		);
+
+		$tools[ 'enable' ]   = array(
+			'icon'  => 'mdi mdi-eye',
+			'title' => 'Enabled',
+		);
+		$tools[ 'disable' ]  = array(
+			'icon'  => 'mdi mdi-eye-off',
+			'title' => 'Disabled',
+		);
+		$tools[ 'contents' ] = array(
+			'icon'  => 'mdi mdi-file-tree',
+			'class' => 'show-contents',
+			'title' => 'Contents',
+		);
+		$tools[ 'settings' ] = array(
+			'icon'  => 'mdi mdi-settings',
+			'class' => 'show-settings',
+			'title' => 'Settings',
+		);
+		$tools[ 'clone' ]    = array(
+			'icon'  => 'mdi mdi-content-copy',
+			'title' => 'Clone',
+		);
+
+		return $tools;
+	} );
+
+
 	// Load CSS :)
 	add_action( 'upb_boilerplate_print_styles', function () {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
@@ -103,6 +142,7 @@
 		                    apply_filters( '_upb_l10n_strings',
 		                                   array(
 			                                   'save'           => esc_attr__( 'Save' ),
+			                                   'delete'         => esc_attr__( 'Are you sure to delete %s?' ),
 			                                   'close'          => esc_attr__( 'Close' ),
 			                                   'help'           => esc_attr__( 'Help' ),
 			                                   'search'         => esc_attr__( 'Search' ),

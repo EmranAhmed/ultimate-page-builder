@@ -45,7 +45,7 @@
 
         <li id="upb-panel-contents">
             <ul class="upb-panel-contents-items" v-sortable="sortable">
-                <component v-for="item in model.contents" :model="item" :is="itemComponent(item.id)"></component>
+                <component v-for="(item, index) in model.contents" @deleteSection="deleteSection(index)" :model="item" :is="itemComponent(item.id)"></component>
             </ul>
         </li>
     </ul>
@@ -77,6 +77,8 @@
     //import SectionSettings from '../section/SectionSettings.vue'
     //Vue.component('section-settings', SectionSettings);
 
+    import extend from 'extend';
+
     export default {
         name  : 'sections-panel',
         props : ['index', 'model'],
@@ -103,8 +105,28 @@
 
         methods : {
 
+            deleteSection(index){
+                this.model.contents.splice(index, 1);
+                store.stateChanged();
+            },
+
             onUpdate(e, values){
-                this.model.contents.splice(values.newIndex, 0, this.model.contents.splice(values.oldIndex, 1)[0]);
+
+
+                // Tried But Failed :(
+                // this.model.contents.splice(values.newIndex, 0, this.model.contents.splice(values.oldIndex, 1).pop());
+
+                //
+                let list = extend(true, [], this.model.contents);
+
+                list.splice(values.newIndex, 0, list.splice(values.oldIndex, 1).pop());
+
+                Vue.delete(this.model, 'contents');
+
+                this.$nextTick(function () {
+                    Vue.set(this.model, 'contents', extend(true, [], list));
+                });
+
                 store.stateChanged();
             },
 
@@ -136,8 +158,8 @@
             },
 
             addNewSection(e, data){
-                let section = window.jQuery.extend(true, {}, data);
-                //console.log(section);
+                let section = extend(true, {}, data);
+                section.title += ' - ' + (this.model.contents.length + 1);
                 this.model.contents.push(section);
                 store.stateChanged();
             }

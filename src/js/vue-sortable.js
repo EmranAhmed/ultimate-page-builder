@@ -21,20 +21,19 @@
                 $(el).sortable("destroy");
             },
 
+            componentUpdated : function () {},
+
             inserted : function (el, binding, vnode) {
 
-                const values = {oldIndex : null, newIndex : null};
+                const values = {oldIndex : 0, newIndex : 0};
 
                 $(el).sortable(binding.value || {});
-                $(el).disableSelection();
 
                 $(el).sortable("option", "start", (event, ui) => {
-                    "use strict";
                     values.oldIndex = ui.item.index();
                 });
 
                 $(el).sortable("option", "update", (event, ui) => {
-                    "use strict";
 
                     values.newIndex = ui.item.index();
 
@@ -45,9 +44,11 @@
                     vnode.context.onUpdate(event, $.extend(true, {}, values));
 
                     // reset :)
-                    values.oldIndex = null;
-                    values.newIndex = null;
+                    values.oldIndex = 0;
+                    values.newIndex = 0;
                 });
+
+                $(el).disableSelection();
             }
         });
     };
