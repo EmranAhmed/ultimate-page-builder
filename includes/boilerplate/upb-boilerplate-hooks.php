@@ -14,14 +14,21 @@
 					'id'     => 'add-new-section',
 					'title'  => 'Add Section',
 					'icon'   => 'mdi mdi-package-variant',
-					'action' => 'addNewSection',
+					'action' => 'addNew',
 					'data'   => apply_filters( 'upb_new_section_data', array(
 						'id'       => 'section',
-						'title'    => 'New Section',
+						'title'    => 'New Section %s',
+						'help'     => '<h2>Want to add content?</h2><p>Choose a section and drag elements</p>',
+						'search'   => 'Search Rows',
 						'enable'   => TRUE,
-						'tools'    => apply_filters( 'upb_new_section_tools', array() ), // toolbar buttons
-						'settings' => apply_filters( 'upb_new_section_settings', array() ), // will open setting panel
-						'contents' => apply_filters( 'upb_new_section_contents', array() )  // show rows
+						'focus'    => FALSE, // always false
+						'tools'    => array(
+							'list'     => apply_filters( 'upb_section_list_tools', array() ),
+							'contents' => apply_filters( 'upb_section_contents_tools', array() ),
+							'settings' => apply_filters( 'upb_section_settings_tools', array() ),
+						), // toolbar buttons
+						'settings' => apply_filters( 'upb_section_settings', array() ), // will open setting panel
+						'contents' => apply_filters( 'upb_section_contents', array() )  // show rows
 					) )
 				),
 				array(
@@ -73,7 +80,7 @@
 	} );
 
 
-	add_filter( 'upb_new_section_tools', function ( $tools ) {
+	add_filter( 'upb_section_list_tools', function ( $tools ) {
 		$tools[ 'move' ] = array(
 			'icon'  => 'mdi mdi-cursor-move',
 			'class' => 'handle',
@@ -104,7 +111,85 @@
 			'title' => 'Settings',
 		);
 		$tools[ 'clone' ]    = array(
-			'icon'  => 'mdi mdi-content-copy',
+			'icon'  => 'mdi mdi-content-duplicate',
+			'title' => 'Clone',
+		);
+
+		return $tools;
+	} );
+
+	add_filter( 'upb_section_contents_tools', function () {
+		return array(
+			array(
+				'id'     => 'add-new-row',
+				'title'  => 'Add Row',
+				'icon'   => 'mdi mdi-table-row-plus-after',
+				'action' => 'addNew',
+				'data'   => apply_filters( 'upb_new_row_data', array(
+					'id'       => 'row',
+					'title'    => 'New Row %s',
+					'help'     => '<h2>Want to add content?</h2><p>Choose a section and drag elements</p>',
+					'search'   => 'Search Rows',
+					'enable'   => TRUE,
+					'focus'    => FALSE, // always false
+					'tools'    =>
+						array(
+							'list'     => apply_filters( 'upb_row_list_tools', array() ),
+							'contents' => apply_filters( 'upb_row_contents_tools', array() ),
+							'settings' => apply_filters( 'upb_row_settings_tools', array() ),
+						), // toolbar buttons
+					'settings' => apply_filters( 'upb_section_settings', array() ), // will open setting panel
+					'contents' => apply_filters( 'upb_section_contents', array() )  // show rows
+				) )
+			),
+			array(
+				'id'     => 'section-setting',
+				'title'  => 'Settings',
+				'icon'   => 'mdi mdi-settings',
+				'action' => 'showSettingsPanel'
+			),
+			array(
+				'id'     => 'save-section',
+				'title'  => 'Save Section',
+				'icon'   => 'mdi mdi-cube-send',
+				'action' => 'saveSectionLayout'
+			),
+		);
+	} );
+
+
+	add_filter( 'upb_row_list_tools', function ( $tools ) {
+		$tools[ 'move' ] = array(
+			'icon'  => 'mdi mdi-cursor-move',
+			'class' => 'handle',
+			'title' => 'Sort',
+		);
+
+		$tools[ 'delete' ] = array(
+			'icon'  => 'mdi mdi-delete',
+			'title' => 'Delete',
+		);
+
+		$tools[ 'enable' ]   = array(
+			'icon'  => 'mdi mdi-eye',
+			'title' => 'Enabled',
+		);
+		$tools[ 'disable' ]  = array(
+			'icon'  => 'mdi mdi-eye-off',
+			'title' => 'Disabled',
+		);
+		$tools[ 'contents' ] = array(
+			'icon'  => 'mdi mdi-file-tree',
+			'class' => 'show-contents',
+			'title' => 'Contents',
+		);
+		$tools[ 'settings' ] = array(
+			'icon'  => 'mdi mdi-settings',
+			'class' => 'show-settings',
+			'title' => 'Settings',
+		);
+		$tools[ 'clone' ]    = array(
+			'icon'  => 'mdi mdi-content-duplicate',
 			'title' => 'Clone',
 		);
 

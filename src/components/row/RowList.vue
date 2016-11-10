@@ -1,7 +1,6 @@
 <template>
     <li :class="itemClass()">
 
-
         <ul class="tools">
             <li v-for="(tool, id) in model.tools.list" @click="clickActions(id, tool)" v-if="enabled(id)" :title="tool.title" :class="toolsClass(id, tool)">
                 <i :class="tool.icon"></i>
@@ -23,15 +22,15 @@
     import {sprintf} from 'sprintf-js'
 
     // Section Contents
-    import SectionContentsPanel from '../section/SectionContentsPanel.vue'
-    Vue.component('section-contents-panel', SectionContentsPanel);
+    // import SectionContentsPanel from '../section/SectionContentsPanel.vue'
+    // Vue.component('section-contents-panel', SectionContentsPanel);
 
     // Section Settings
-    import SectionSettingsPanel from '../section/SectionSettingsPanel.vue'
-    Vue.component('section-settings-panel', SectionSettingsPanel);
+    // import SectionSettingsPanel from '../section/SectionSettingsPanel.vue'
+    // Vue.component('section-settings-panel', SectionSettingsPanel);
 
     export default {
-        name     : 'section-list',
+        name     : 'row-list',
         props    : ['index', 'model'],
         data(){
             return {
@@ -47,11 +46,17 @@
         methods  : {
 
             contentsAction(id, tool){
-                this.$emit('showContentPanel');
+
+                this.$emit('showContentsPanel')
+
+                // console.log('OPEN CONTENTS PANEL')
+                //this.breadcrumb.push(`${this.model.id}`)
             },
 
             settingsAction(id, tool){
-                this.$emit('showSettingsPanel');
+                this.$emit('showSettingsPanel')
+
+                // console.log('OPEN SETTINGS PANEL')
             },
 
             deleteAction(id, tool){

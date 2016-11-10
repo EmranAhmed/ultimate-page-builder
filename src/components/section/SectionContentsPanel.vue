@@ -41,26 +41,22 @@
 
                 <li class="upb-panel-tools">
                     <ul>
-                        <li>
-                            <a href="#">
-                                <i class="mdi mdi-table-row-plus-after"></i>
-                                <div>Add Row</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a @click.prevent="showSettingsPanel()" href="#">
-                                <i class="mdi mdi-settings"></i>
-                                <div>Settings</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="mdi mdi-cube-send"></i>
-                                <div>Save Section</div>
+                        <li v-for="tool in model.tools.contents">
+                            <a @click.prevent="callToolsAction($event, tool.action, tool)" href="#">
+                                <i :class="tool.icon"></i>
+                                <div v-text="tool.title"></div>
                             </a>
                         </li>
                     </ul>
                 </li>
+
+            </ul>
+        </li>
+
+        <li v-if="!showChild" class="upb-panel-contents">
+            <ul class="upb-panel-contents-items" v-sortable="sortable">
+                <component v-for="(item, index) in contents" @showSettingsPanel="openSettingsPanel(index)" @showContentsPanel="openContentPanel(index)" @deleteItem="deleteItem(index)"
+                           :model="item" @cloneItem="cloneItem(index, item)" :is="listPanel(item.id)"></component>
             </ul>
         </li>
     </ul>
@@ -68,21 +64,22 @@
 <style lang="sass"></style>
 <script>
 
-    import Vue from 'vue';
+    import Vue, { util } from 'vue';
+
     import store from '../../store'
 
     import Sortable from '../../js/vue-sortable'
     import extend from 'extend';
+    import {sprintf} from 'sprintf-js';
+    import RowList from '../row/RowList.vue';
+
     Vue.use(Sortable);
 
-    // Row
-    // import Row from '../row/Row.vue'
-    // Vue.component('row', Row);
-
-    //import extend from 'extend';
+    // Row List
+    Vue.component('row-list', RowList);
 
     export default {
-        name  : 'section-panel',
+        name  : 'section-contents-panel',
         props : ['index', 'model'],
 
         data(){
@@ -105,12 +102,14 @@
         },
 
         computed : {
+
             panelClass(){
+                //return [`upb-${this.model.id}-panel`, this.currentPanel ? 'current' : ''].join(' ');
                 return [`upb-${this.model.id}-panel`, `upb-panel-wrapper`].join(' ');
             },
 
             currentPanel(){
-                return this.breadcrumb[this.breadcrumb.length - 1] == this.model.id;
+                // return this.breadcrumb[this.breadcrumb.length - 1] == this.model.id;
             },
 
             contents(){
@@ -136,12 +135,58 @@
                 this.$emit('onBack')
             },
 
-            itemPanel(id){
-                return `${this.model.id}-item`
+            backed(){
+                this.breadcrumb.pop();
+                this.showChild      = false;
+                this.childId        = null;
+                this.childComponent = '';
             },
 
-            deleteSection(index){
+            clearPanel(){
+                this.breadcrumb.pop();
+                this.childComponent = '';
+                //this.showChild      = false;
+            },
+
+            openContentsPanel(index){
+
+                this.clearPanel();
+
+                this.showChild      = true;
+                this.childId        = index;
+                this.childComponent = 'row-contents-panel';
+                this.breadcrumb.push(this.model.title);
+            },
+
+            openSettingsPanel(index){
+
+                this.clearPanel();
+
+                this.showChild      = true;
+                this.childId        = index;
+                this.childComponent = 'row-settings-panel';
+                this.breadcrumb.push(this.model.title);
+            },
+
+            singleModel(){
+                return this.model.contents[this.childId];
+            },
+
+            listPanel(id){
+                return `${id}-list`
+            },
+
+            deleteItem(index){
                 this.model.contents.splice(index, 1);
+                store.stateChanged();
+            },
+
+            cloneItem(index, item){
+                let cloned = extend(true, {}, item);
+
+                cloned.title = `Clone of ${cloned.title}`
+
+                this.model.contents.splice(index + 1, 0, cloned);
                 store.stateChanged();
             },
 
@@ -187,13 +232,21 @@
             },
 
             callToolsAction(event, action, tool){
+
                 let data = tool.data ? tool.data : false;
-                this[action](event, data)
+
+                if (!this[action]) {
+                    util.warn(`You need to implement ${action} method.`, this);
+                }
+                else {
+                    this[action](event, data);
+                }
             },
 
-            addNewRow(e, data){
-                let section = extend(true, {}, data);
-                section.title += ' ' + (this.model.contents.length + 1);
+            addNew(e, data){
+                let section   = extend(true, {}, data);
+                section.title = sprintf(section.title, (this.model.contents.length + 1));
+
                 this.model.contents.push(section);
                 store.stateChanged();
             }

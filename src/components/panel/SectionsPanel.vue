@@ -51,15 +51,14 @@
             </ul>
         </li>
 
-        <li v-if="!showChild" :key="1" class="upb-panel-contents">
+        <li v-if="!showChild" :key="0" class="upb-panel-contents">
             <ul class="upb-panel-contents-items" v-sortable="sortable">
-                <component v-for="(item, index) in contents" @showSettingsPanel="showSettingsPanel(index)" @showContentPanel="showContentPanel(index)" @deleteSection="deleteSection(index)"
-                           :model="item" :is="listPanel(item.id)"></component>
+                <component v-for="(item, index) in contents" @showSettingsPanel="showSettingsPanel(index)" @showContentPanel="showContentPanel(index)" @deleteItem="deleteItem(index)"
+                           :model="item" @cloneItem="cloneItem(index, item)" :is="listPanel(item.id)"></component>
             </ul>
         </li>
 
-
-        <li v-if="showChild">
+        <li v-if="showChild" class="upb-sub-panel">
             <component :index="childId" @showSettingsPanel="showSettingsPanel(childId)" @showContentPanel="showContentPanel(childId)" :model="singleModel()" @onBack="backed()"
                        :is="childComponent"></component>
         </li>
@@ -68,51 +67,20 @@
 </template>
 <style lang="sass">
 
-    .slideOut-enter-active {
-        transition : all .3s ease;
-        }
-
-    .slideOut-leave-active {
-        transition : all .3s ease;
-        }
-
-    .slideOut-enter, .slideOut-leave-active {
-        margin-left : -300px;
-        opacity     : 0;
-        width       : 100%;
-        }
-
-    .slideIn-enter-active {
-        transition       : all .3s ease;
-        transition-delay : .3s;
-        }
-
-    .slideIn-leave-active {
-        transition       : all .3s ease;
-        transition-delay : .3s;
-        }
-
-    .slideIn-enter, .slideIn-leave-active {
-        position : absolute;
-        top      : 0;
-        left     : 300px;
-        opacity  : 0;
-        width    : 100%;
-        overflow : hidden;
-        }
 </style>
 <script>
 
-    import Vue from 'vue';
+    import Vue, { util } from 'vue';
     import store from '../../store'
 
     import Sortable from '../../js/vue-sortable'
     import extend from 'extend';
+    import {sprintf} from 'sprintf-js';
+    import SectionList from '../section/SectionList.vue';
 
     Vue.use(Sortable);
 
-    // Section
-    import SectionList from '../section/SectionList.vue'
+    // Section List
     Vue.component('section-list', SectionList);
 
     export default {
@@ -183,7 +151,7 @@
 
                 this.showChild      = true;
                 this.childId        = index;
-                this.childComponent = 'section-panel';
+                this.childComponent = 'section-contents-panel';
                 this.breadcrumb.push(this.model.title);
             },
 
@@ -205,8 +173,17 @@
                 return `${id}-list`
             },
 
-            deleteSection(index){
+            deleteItem(index){
                 this.model.contents.splice(index, 1);
+                store.stateChanged();
+            },
+
+            cloneItem(index, item){
+                let cloned = extend(true, {}, item);
+
+                cloned.title = `Clone of ${cloned.title}`
+
+                this.model.contents.splice(index + 1, 0, cloned);
                 store.stateChanged();
             },
 
@@ -252,13 +229,20 @@
             },
 
             callToolsAction(event, action, tool){
+
                 let data = tool.data ? tool.data : false;
-                this[action](event, data)
+
+                if (!this[action]) {
+                    util.warn(`You need to implement '${action}' method.`, this);
+                }
+                else {
+                    this[action](event, data);
+                }
             },
 
-            addNewSection(e, data){
-                let section = extend(true, {}, data);
-                section.title += ' ' + (this.model.contents.length + 1);
+            addNew(e, data){
+                let section   = extend(true, {}, data);
+                section.title = sprintf(section.title, (this.model.contents.length + 1));
 
                 this.model.contents.push(section);
                 store.stateChanged();
