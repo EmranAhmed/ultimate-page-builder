@@ -29,58 +29,81 @@ button:focus {
    * Content Header */
 
   .upb-panel-header {
-    padding    : 15px;
     background : $upb-sidebar-tab-panel-background-color;
     color      : $upb-sidebar-tab-panel-color;
     position   : relative;
+    display    : table;
+    width      : 100%;
 
-    .panel-heading {
-      > span {
-        font-size      : 10px;
-        font-weight    : 600;
-        display        : block;
-        text-transform : uppercase;
-        line-height    : 1;
-        color          : rgba($upb-sidebar-tab-panel-color, .5);
-        margin-bottom  : 15px;
-        }
-      .panel-title {
-        font-size      : 18px;
-        text-transform : uppercase;
-        font-weight    : 500;
+    .back {
+      font-size      : 24px;
+      color          : $upb-sidebar-tab-panel-color;
+      width          : 50px;
+      height         : 100%;
+      vertical-align : middle;
+      text-align     : center;
+      border-right   : 1px solid rgba(0, 0, 0, .1);
+
+      &:hover{
+        background: rgba(0, 0, 0, .1);
         }
       }
 
-    button {
-      position      : absolute;
-      right         : 15px;
-      font-size     : 14px;
-      width         : 20px;
-      height        : 20px;
-      line-height   : 20px;
-      text-align    : center;
-      border-radius : 100%;
-      border        : none;
-      color         : $upb-sidebar-tab-panel-color;
-      background    : rgba($upb-sidebar-tab-panel-icon-background-color, .1);
+    .back,
+    .panel-heading-wrapper {
+      display : table-cell;
+      }
 
-      &.active {
-        background : rgba($upb-sidebar-tab-panel-icon-background-color, .5);
-
+    .panel-heading-wrapper {
+      padding : 15px;
+      .panel-heading {
+        .upb-breadcrumb {
+          font-size      : 10px;
+          font-weight    : 600;
+          display        : block;
+          text-transform : uppercase;
+          line-height    : 1;
+          color          : rgba($upb-sidebar-tab-panel-color, .5);
+          margin-bottom  : 15px;
+          }
+        .panel-title {
+          font-size      : 18px;
+          text-transform : uppercase;
+          font-weight    : 500;
+          }
         }
 
-      &:hover {
-        cursor : pointer;
-        }
+      button {
+        position      : absolute;
+        right         : 15px;
+        font-size     : 14px;
+        width         : 20px;
+        height        : 20px;
+        line-height   : 20px;
+        text-align    : center;
+        border-radius : 100%;
+        border        : none;
+        color         : $upb-sidebar-tab-panel-color;
+        background    : rgba($upb-sidebar-tab-panel-icon-background-color, .1);
 
-      &.upb-content-help-toggle {
-        top : 15px
-        }
+        &.active {
+          background : rgba($upb-sidebar-tab-panel-icon-background-color, .5);
 
-      &.upb-content-search-toggle {
-        bottom : 15px;
-        }
+          }
 
+        &:hover {
+          cursor : pointer;
+          }
+
+        &.upb-content-help-toggle {
+          top : 15px
+          }
+
+        &.upb-content-search-toggle {
+          bottom : 15px;
+          }
+
+        }
       }
     }
 
