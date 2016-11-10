@@ -8,6 +8,8 @@
     "build": "gulp build"
   },
   "dependencies": {
+    "extend": "^3.0.0",
+    "mdi": "^1.7.22",
     "vue": "^2.0.1"
   },
   "devDependencies": {
@@ -17,6 +19,7 @@
     "browser-sync": "^2.17.5",
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
+    "extend": "^3.0.0",
     "file-loader": "^0.9.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",

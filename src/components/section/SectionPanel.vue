@@ -5,15 +5,17 @@
             <ul>
                 <li class="upb-panel-header">
 
+                    <a href="" class="back" @click.prevent="back()">
+                        <i class="mdi mdi-chevron-left"></i>
+                    </a>
+
                     <div class="panel-heading-wrapper">
                         <div class="panel-heading">
-
                             <div class="upb-breadcrumb">
-
                                 <ul>
-                                    <li class="no-breadcrumb">{{ l10n.breadcrumbRoot }}</li>
+                                    <li class="breadcrumb" v-if="breadcrumb.length > 0" v-for="b in breadcrumb">{{ b }}</li>
+                                    <li class="no-breadcrumb" v-else>{{ l10n.breadcrumbRoot }}</li>
                                 </ul>
-
                             </div>
 
                             <div class="panel-title">{{ model.title }}</div>
@@ -27,7 +29,6 @@
                             <i class="mdi mdi-magnify"></i>
                         </button>
                     </div>
-
                 </li>
 
                 <li class="upb-panel-meta">
@@ -40,29 +41,28 @@
 
                 <li class="upb-panel-tools">
                     <ul>
-                        <li v-for="tool in model.tools">
-                            <a @click.prevent="callToolsAction($event, tool.action, tool)" href="#">
-                                <i :class="tool.icon"></i>
-                                <div v-text="tool.title"></div>
+                        <li>
+                            <a href="#">
+                                <i class="mdi mdi-table-row-plus-after"></i>
+                                <div>Add Row</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a @click.prevent="showSettingsPanel()" href="#">
+                                <i class="mdi mdi-settings"></i>
+                                <div>Settings</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="mdi mdi-cube-send"></i>
+                                <div>Save Section</div>
                             </a>
                         </li>
                     </ul>
                 </li>
             </ul>
         </li>
-
-        <li v-if="!showChild" class="upb-panel-contents">
-            <ul class="upb-panel-contents-items" v-sortable="sortable">
-                <component v-for="(item, index) in contents" @showSettingsPanel="showSettingsPanel(index)" @showContentPanel="showContentPanel(index)" @deleteSection="deleteSection(index)"
-                           :model="item" :is="listPanel(item.id)"></component>
-            </ul>
-        </li>
-
-        <li v-if="showChild">
-            <component :index="childId" @showSettingsPanel="showSettingsPanel(childId)" @showContentPanel="showContentPanel(childId)" :model="singleModel()" @onBack="backed()"
-                       :is="childComponent"></component>
-        </li>
-
     </ul>
 </template>
 <style lang="sass"></style>
@@ -73,15 +73,16 @@
 
     import Sortable from '../../js/vue-sortable'
     import extend from 'extend';
-
     Vue.use(Sortable);
 
-    // Section
-    import SectionList from '../section/SectionList.vue'
-    Vue.component('section-list', SectionList);
+    // Row
+    // import Row from '../row/Row.vue'
+    // Vue.component('row', Row);
+
+    //import extend from 'extend';
 
     export default {
-        name  : 'sections-panel',
+        name  : 'section-panel',
         props : ['index', 'model'],
 
         data(){
@@ -104,14 +105,12 @@
         },
 
         computed : {
-
             panelClass(){
-                //return [`upb-${this.model.id}-panel`, this.currentPanel ? 'current' : ''].join(' ');
                 return [`upb-${this.model.id}-panel`, `upb-panel-wrapper`].join(' ');
             },
 
             currentPanel(){
-                // return this.breadcrumb[this.breadcrumb.length - 1] == this.model.id;
+                return this.breadcrumb[this.breadcrumb.length - 1] == this.model.id;
             },
 
             contents(){
@@ -129,45 +128,16 @@
 
         methods : {
 
-            backed(){
-                this.breadcrumb.pop();
-                this.showChild      = false;
-                this.childId        = null;
-                this.childComponent = '';
+            showSettingsPanel(){
+                this.$emit('showSettingsPanel')
             },
 
-            clearPanel(){
-                this.breadcrumb.pop();
-                this.childComponent = '';
-                //this.showChild      = false;
+            back(){
+                this.$emit('onBack')
             },
 
-            showContentPanel(index){
-
-                this.clearPanel();
-
-                this.showChild      = true;
-                this.childId        = index;
-                this.childComponent = 'section-panel';
-                this.breadcrumb.push(this.model.title);
-            },
-
-            showSettingsPanel(index){
-
-                this.clearPanel();
-
-                this.showChild      = true;
-                this.childId        = index;
-                this.childComponent = 'section-settings-panel';
-                this.breadcrumb.push(this.model.title);
-            },
-
-            singleModel(){
-                return this.model.contents[this.childId];
-            },
-
-            listPanel(id){
-                return `${id}-list`
+            itemPanel(id){
+                return `${this.model.id}-item`
             },
 
             deleteSection(index){
@@ -221,10 +191,9 @@
                 this[action](event, data)
             },
 
-            addNewSection(e, data){
+            addNewRow(e, data){
                 let section = extend(true, {}, data);
                 section.title += ' ' + (this.model.contents.length + 1);
-
                 this.model.contents.push(section);
                 store.stateChanged();
             }

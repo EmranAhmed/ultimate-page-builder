@@ -28,7 +28,7 @@ button:focus {
   /* ---------------------
    * Content Header */
 
-  #upb-panel-header {
+  .upb-panel-header {
     padding    : 15px;
     background : $upb-sidebar-tab-panel-background-color;
     color      : $upb-sidebar-tab-panel-color;
@@ -87,7 +87,7 @@ button:focus {
   /* ---------------------
    * Content Header */
 
-  #upb-panel-meta > div {
+  .upb-panel-meta > div {
     padding     : 15px;
     background  : $upb-sidebar-help-background;
     font-size   : 13px;
@@ -113,8 +113,8 @@ button:focus {
   /* ---------------------
    * panel Tools */
 
-  #upb-panel-tools {
-    background    : $upb-sidebar-tab-panel-toolbar-background-color;
+  .upb-panel-tools {
+    background : $upb-sidebar-tab-panel-toolbar-background-color;
 
     ul {
       position        : relative;
@@ -124,7 +124,7 @@ button:focus {
       list-style      : none;
       flex-flow       : row wrap;
       justify-content : center;
-      box-shadow: 0 2px 1px rgba(0,0,0,.05);
+      box-shadow      : 0 2px 1px rgba(0, 0, 0, .05);
 
       li {
         border-right : 1px solid $upb-sidebar-tab-panel-toolbar-separator-color;
@@ -168,21 +168,21 @@ button:focus {
   /* ---------------------
    * panel Contents */
 
-  #upb-panel-contents {
+  .upb-panel-contents {
     &::-webkit-scrollbar {
       width  : 5px;
       height : 5px;
       }
     &::-webkit-scrollbar-thumb {
-      background    : #bbb;
+      background    : #BBBBBB;
       border-radius : 1px;
       border        : 1px solid $upb-sidebar-background-color;
       }
     &::-webkit-scrollbar-thumb:hover {
-      background : #333;
+      background : #333333;
       }
     &::-webkit-scrollbar-thumb:active {
-      background : #333;
+      background : #333333;
       }
     &::-webkit-scrollbar-track {
       background : $upb-sidebar-background-color;
@@ -195,7 +195,7 @@ button:focus {
   /* ---------------------
    * Panel Contents */
 
-  #upb-panel-contents {
+  .upb-panel-contents {
     padding : 15px;
     .upb-panel-contents-items > li {
       border           : 1px solid $upb-sidebar-panel-content-item-border;

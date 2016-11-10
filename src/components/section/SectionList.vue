@@ -1,11 +1,15 @@
 <template>
     <li :class="itemClass()">
+
+
         <ul class="tools">
             <li v-for="(tool, id) in model.tools" @click="clickActions(id, tool)" v-if="enabled(id)" :title="tool.title" :class="toolsClass(id, tool)">
                 <i :class="tool.icon"></i>
             </li>
         </ul>
+
         <div v-text="model.title"></div>
+
 
     </li>
 </template>
@@ -19,15 +23,43 @@
 
     import {sprintf} from 'sprintf-js'
 
+    // Section Contents
+    import SectionContents from '../section/SectionPanel.vue'
+    Vue.component('section-panel', SectionContents);
+
+    // Section Settings
+    import SectionSettingsPanel from '../section/SectionSettingsPanel.vue'
+    Vue.component('section-settings-panel', SectionSettingsPanel);
+
     export default {
-        name    : 'section-item',
-        props   : ['index', 'model'],
+        name     : 'section-list',
+        props    : ['index', 'model'],
         data(){
             return {
-                l10n : store.l10n
+                l10n       : store.l10n,
+                breadcrumb : store.breadcrumb,
             }
         },
-        methods : {
+        computed : {
+            parentShowChild(){
+                return this.$parent.$data.showChild;
+            }
+        },
+        methods  : {
+
+            contentsAction(id, tool){
+
+                this.$emit('showContentPanel')
+
+                console.log('OPEN CONTENTS PANEL')
+                //this.breadcrumb.push(`${this.model.id}`)
+            },
+
+            settingsAction(id, tool){
+                this.$emit('showSettingsPanel')
+
+                console.log('OPEN SETTINGS PANEL')
+            },
 
             deleteAction(id, tool){
                 if (confirm(sprintf(this.l10n.delete, this.model.title))) {
@@ -69,10 +101,12 @@
                 return this.model.enable ? 'item-enabled' : 'item-disabled';
             },
 
-            getPanel(id){
+            getContentPanel(id){
                 return `${id}-panel`;
+            },
+            getSettingPanel(id){
+                return `${id}-settings-panel`;
             }
         }
     }
-
 </script>

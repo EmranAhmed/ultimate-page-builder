@@ -21,7 +21,7 @@
   align-content   : stretch; /* Extra space in Cross Axis */
   }
 
-#upb-panel-wrapper {
+.upb-panel-wrapper {
   flex            : 1;
   display         : flex;
   flex-direction  : column;
@@ -31,7 +31,7 @@
   align-content   : stretch; /* Extra space in Cross Axis */
   }
 
-#upb-panel-contents {
+.upb-panel-contents {
   flex     : 1;
   overflow : auto;
   }
