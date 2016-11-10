@@ -1,7 +1,7 @@
 <template>
     <ul :class="panelClass">
 
-        <li v-if="!showChild" class="upb-panel-header-wrapper">
+        <li v-if="!showChild" :key="0" class="upb-panel-header-wrapper">
             <ul>
                 <li class="upb-panel-header">
 
@@ -51,12 +51,13 @@
             </ul>
         </li>
 
-        <li v-if="!showChild" class="upb-panel-contents">
+        <li v-if="!showChild" :key="1" class="upb-panel-contents">
             <ul class="upb-panel-contents-items" v-sortable="sortable">
                 <component v-for="(item, index) in contents" @showSettingsPanel="showSettingsPanel(index)" @showContentPanel="showContentPanel(index)" @deleteSection="deleteSection(index)"
                            :model="item" :is="listPanel(item.id)"></component>
             </ul>
         </li>
+
 
         <li v-if="showChild">
             <component :index="childId" @showSettingsPanel="showSettingsPanel(childId)" @showContentPanel="showContentPanel(childId)" :model="singleModel()" @onBack="backed()"
@@ -65,7 +66,41 @@
 
     </ul>
 </template>
-<style lang="sass"></style>
+<style lang="sass">
+
+    .slideOut-enter-active {
+        transition : all .3s ease;
+        }
+
+    .slideOut-leave-active {
+        transition : all .3s ease;
+        }
+
+    .slideOut-enter, .slideOut-leave-active {
+        margin-left : -300px;
+        opacity     : 0;
+        width       : 100%;
+        }
+
+    .slideIn-enter-active {
+        transition       : all .3s ease;
+        transition-delay : .3s;
+        }
+
+    .slideIn-leave-active {
+        transition       : all .3s ease;
+        transition-delay : .3s;
+        }
+
+    .slideIn-enter, .slideIn-leave-active {
+        position : absolute;
+        top      : 0;
+        left     : 300px;
+        opacity  : 0;
+        width    : 100%;
+        overflow : hidden;
+        }
+</style>
 <script>
 
     import Vue from 'vue';
