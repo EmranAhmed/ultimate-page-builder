@@ -1,21 +1,18 @@
 <template>
-    <li :class="itemClass()">
-
+    <li :class="itemClass()" v-if="model._upb_options" @mouseover="activeFocus()" @mouseout="removeFocus()">
         <ul class="tools">
-            <li v-for="(tool, id) in model.tools.list" @click="clickActions(id, tool)" v-if="enabled(id)" :title="tool.title" :class="toolsClass(id, tool)">
+            <li v-for="(tool, id) in model._upb_options.tools.list" @click="clickActions(id, tool)" v-if="enabled(id)" :title="tool.title" :class="toolsClass(id, tool)">
                 <i :class="tool.icon"></i>
             </li>
         </ul>
 
-        <div v-text="model.title"></div>
-
+        <div v-text="model.attributes.title"></div>
     </li>
 </template>
 <style lang="sass">
 
 </style>
 <script>
-
     import Vue, { util } from 'vue';
     import store from '../../store'
 
@@ -30,20 +27,32 @@
     // Vue.component('section-settings-panel', SectionSettingsPanel);
 
     export default {
-        name     : 'row-list',
-        props    : ['index', 'model'],
+
+        name : 'row-list',
+
+        props : ['index', 'model'],
+
         data(){
             return {
                 l10n       : store.l10n,
                 breadcrumb : store.breadcrumb,
             }
         },
+
         computed : {
             parentShowChild(){
                 return this.$parent.$data.showChild;
             }
         },
-        methods  : {
+
+        methods : {
+
+            activeFocus(){
+                this.model._upb_options.focus = true;
+            },
+            removeFocus(){
+                this.model._upb_options.focus = false;
+            },
 
             contentsAction(id, tool){
 
@@ -60,7 +69,7 @@
             },
 
             deleteAction(id, tool){
-                if (confirm(sprintf(this.l10n.delete, this.model.title))) {
+                if (confirm(sprintf(this.l10n.delete, this.model.attributes.title))) {
                     this.$emit('deleteItem')
                 }
             },
@@ -70,10 +79,11 @@
             },
 
             enableAction(id, tool){
-                this.model.enable = false;
+                this.model.attributes.enable = false;
             },
+
             disableAction(id, tool){
-                this.model.enable = true;
+                this.model.attributes.enable = true;
             },
 
             clickActions(id, tool){
@@ -88,11 +98,11 @@
             enabled(id){
 
                 if (id == 'enable') {
-                    return this.model.enable;
+                    return this.model.attributes.enable;
                 }
 
                 if (id == 'disable') {
-                    return !this.model.enable;
+                    return !this.model.attributes.enable;
                 }
 
                 return true;
@@ -103,12 +113,13 @@
             },
 
             itemClass(){
-                return this.model.enable ? 'item-enabled' : 'item-disabled';
+                return this.model.attributes.enable ? 'item-enabled' : 'item-disabled';
             },
 
             getContentPanel(id){
                 return `${id}-contents-panel`;
             },
+
             getSettingPanel(id){
                 return `${id}-settings-panel`;
             }

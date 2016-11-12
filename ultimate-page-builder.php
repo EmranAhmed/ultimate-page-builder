@@ -50,12 +50,13 @@
 				// Common
 				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-hooks.php";
 				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-functions.php";
+				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-elements.php";
 
 				// Tabs
 				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-tabs.php";
 
-				// Options
-				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-options.php";
+				// PostType Settings
+				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-settings.php";
 
 				// Elements
 				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-elements.php";

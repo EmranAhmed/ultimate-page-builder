@@ -131,21 +131,13 @@ gulp.task('styles:build', () => {
 gulp.task('webpack:build', (callback) => {
 
     let buildConfig             = Object.create(webpackConfig);
-    buildConfig.devtool         = '#source-map';
+    buildConfig.devtool         = 'source-map';
     buildConfig.output.filename = 'upb-build.min.js';
     buildConfig.plugins         = (buildConfig.plugins || []).concat(
         new webpack.DefinePlugin({
             "process.env" : {
                 "NODE_ENV" : JSON.stringify("production")
             }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress : {
-                warnings : false
-            }
-        }),
-        new webpack.LoaderOptionsPlugin({
-            minimize : true
         })
     );
 
@@ -153,13 +145,6 @@ gulp.task('webpack:build', (callback) => {
         callback();
     })
 });
-
-/*let devConfig             = Object.create(webpackConfig);
- devConfig.devtool         = '#eval-source-map';
- devConfig.debug           = true;
- devConfig.watch           = true;
- devConfig.output.filename = 'upb-build.js';
- let devPack               = webpack(devConfig)*/
 
 gulp.task('webpack:dev', (callback) => {
 
@@ -170,17 +155,17 @@ gulp.task('webpack:dev', (callback) => {
      });*/
 
     let devConfig     = Object.create(webpackConfig);
-    devConfig.devtool = '#eval-source-map';
+    devConfig.devtool = 'inline-source-map';
     // devConfig.debug           = true;
     // devConfig.watch           = true;
     devConfig.output.filename = 'upb-build.js';
 
-    devConfig.plugins = (devConfig.plugins || []).concat(
-        new webpack.LoaderOptionsPlugin({
-            minimize : false,
-            debug    : true
-        })
-    );
+    /*devConfig.plugins = (devConfig.plugins || []).concat(
+     new webpack.LoaderOptionsPlugin({
+     minimize : false,
+     debug    : true
+     })
+     );*/
 
     webpack(devConfig, function (err, stats) {
         callback();

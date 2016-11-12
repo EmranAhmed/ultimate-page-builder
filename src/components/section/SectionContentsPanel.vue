@@ -5,12 +5,13 @@
             <ul>
                 <li class="upb-panel-header">
 
-                    <a href="" class="back" @click.prevent="back()">
+                    <a :title="l10n.back" href="" class="back" @click.prevent="back()">
                         <i class="mdi mdi-chevron-left"></i>
                     </a>
 
                     <div class="panel-heading-wrapper">
                         <div class="panel-heading">
+
                             <div class="upb-breadcrumb">
                                 <ul>
                                     <li class="breadcrumb" v-if="breadcrumb.length > 0" v-for="b in breadcrumb">{{ b }}</li>
@@ -18,30 +19,30 @@
                                 </ul>
                             </div>
 
-                            <div class="panel-title">{{ model.title }}</div>
+                            <div class="panel-title">{{ model.attributes.title }}</div>
                         </div>
 
-                        <button @click.prevent="toggleHelp()" :class="[{ active: showHelp }, 'upb-content-help-toggle']" tabindex="0">
+                        <button v-if="model._upb_options.help" @click.prevent="toggleHelp()" :class="[{ active: showHelp }, 'upb-content-help-toggle']" tabindex="0">
                             <i class="mdi mdi-help-circle-outline"></i>
                         </button>
 
-                        <button @click.prevent="toggleFilter()" :class="[{ active: showSearch }, 'upb-content-search-toggle']" tabindex="0">
+                        <button v-if="model._upb_options.search" @click.prevent="toggleFilter()" :class="[{ active: showSearch }, 'upb-content-search-toggle']" tabindex="0">
                             <i class="mdi mdi-magnify"></i>
                         </button>
                     </div>
                 </li>
 
                 <li class="upb-panel-meta">
-                    <div v-if="showHelp" v-html="model.help"></div>
+                    <div v-if="showHelp" v-html="model._upb_options.help"></div>
 
                     <div v-if="showSearch">
-                        <input v-model="searchQuery" :placeholder="model.search" type="search">
+                        <input v-model="searchQuery" :placeholder="model._upb_options.search" type="search">
                     </div>
                 </li>
 
                 <li class="upb-panel-tools">
                     <ul>
-                        <li v-for="tool in model.tools.contents">
+                        <li v-for="tool in model._upb_options.tools.contents">
                             <a @click.prevent="callToolsAction($event, tool.action, tool)" href="#">
                                 <i :class="tool.icon"></i>
                                 <div v-text="tool.title"></div>
@@ -56,7 +57,7 @@
         <li v-if="!showChild" class="upb-panel-contents">
             <ul class="upb-panel-contents-items" v-sortable="sortable">
                 <component v-for="(item, index) in contents" @showSettingsPanel="openSettingsPanel(index)" @showContentsPanel="openContentPanel(index)" @deleteItem="deleteItem(index)"
-                           :model="item" @cloneItem="cloneItem(index, item)" :is="listPanel(item.id)"></component>
+                           :model="item" @cloneItem="cloneItem(index, item)" :is="listPanel(item.tag)"></component>
             </ul>
         </li>
     </ul>
@@ -105,7 +106,7 @@
 
             panelClass(){
                 //return [`upb-${this.model.id}-panel`, this.currentPanel ? 'current' : ''].join(' ');
-                return [`upb-${this.model.id}-panel`, `upb-panel-wrapper`].join(' ');
+                return [`upb-${this.model.tag}-panel`, `upb-panel-wrapper`].join(' ');
             },
 
             currentPanel(){
@@ -113,10 +114,12 @@
             },
 
             contents(){
+
                 let query = this.searchQuery.toLowerCase().trim();
+
                 if (query) {
                     return this.model.contents.filter(function (data) {
-                        return new RegExp(query, 'gui').test(data.title.toLowerCase().trim())
+                        return new RegExp(query, 'gui').test(data.attributes.title.toLowerCase().trim())
                     })
                 }
                 else {
@@ -125,7 +128,28 @@
             }
         },
 
+        created(){
+            this.loadContents()
+        },
+
         methods : {
+
+            loadContents(){
+                if (this.model.contents.length > 0) {
+                    this.$progressbar.show();
+                    store.upbElementOptions(this.model.contents, function (data) {
+
+                        this.$nextTick(function () {
+                            Vue.set(this.model, 'contents', extend(true, [], data));
+                        });
+
+                        this.$progressbar.hide();
+                    }.bind(this), function (data) {
+                        console.log(data);
+                        this.$progressbar.hide();
+                    }.bind(this));
+                }
+            },
 
             showSettingsPanel(){
                 this.$emit('showSettingsPanel')
@@ -182,10 +206,8 @@
             },
 
             cloneItem(index, item){
-                let cloned = extend(true, {}, item);
-
-                cloned.title = `Clone of ${cloned.title}`
-
+                let cloned              = extend(true, {}, item);
+                cloned.attributes.title = `Clone of ${cloned.attributes.title}`
                 this.model.contents.splice(index + 1, 0, cloned);
                 store.stateChanged();
             },
@@ -244,8 +266,9 @@
             },
 
             addNew(e, data){
-                let section   = extend(true, {}, data);
-                section.title = sprintf(section.title, (this.model.contents.length + 1));
+                let section = extend(true, {}, data);
+
+                section.attributes.title = sprintf(section.attributes.title, (this.model.contents.length + 1));
 
                 this.model.contents.push(section);
                 store.stateChanged();

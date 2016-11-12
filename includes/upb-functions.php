@@ -20,8 +20,8 @@
 		return UPB_Tabs::getInstance();
 	}
 
-	function upb_options() {
-		return UPB_Options::getInstance();
+	function upb_settings() {
+		return UPB_Settings::getInstance();
 	}
 
 	function upb_is_preview() {

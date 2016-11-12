@@ -1,7 +1,8 @@
 <template>
     <ul :class="panelClass">
 
-        <li v-if="!showChild" :key="0" class="upb-panel-header-wrapper">
+
+        <li v-if="!showChild" class="upb-panel-header-wrapper">
             <ul>
                 <li class="upb-panel-header">
 
@@ -19,11 +20,11 @@
                             <div class="panel-title">{{ model.title }}</div>
                         </div>
 
-                        <button @click.prevent="toggleHelp()" :class="[{ active: showHelp }, 'upb-content-help-toggle']" tabindex="0">
+                        <button v-if="model.help" @click.prevent="toggleHelp()" :class="[{ active: showHelp }, 'upb-content-help-toggle']" tabindex="0">
                             <i class="mdi mdi-help-circle-outline"></i>
                         </button>
 
-                        <button @click.prevent="toggleFilter()" :class="[{ active: showSearch }, 'upb-content-search-toggle']" tabindex="0">
+                        <button v-if="model.search" @click.prevent="toggleFilter()" :class="[{ active: showSearch }, 'upb-content-search-toggle']" tabindex="0">
                             <i class="mdi mdi-magnify"></i>
                         </button>
                     </div>
@@ -51,15 +52,16 @@
             </ul>
         </li>
 
-        <li v-if="!showChild" :key="0" class="upb-panel-contents">
+        <li v-if="!showChild" class="upb-panel-contents">
+
             <ul class="upb-panel-contents-items" v-sortable="sortable">
                 <component v-for="(item, index) in contents" @showSettingsPanel="showSettingsPanel(index)" @showContentPanel="showContentPanel(index)" @deleteItem="deleteItem(index)"
-                           :model="item" @cloneItem="cloneItem(index, item)" :is="listPanel(item.id)"></component>
+                           :model="item" @cloneItem="cloneItem(index, item)" :is="listPanel(item.tag)"></component>
             </ul>
         </li>
 
         <li v-if="showChild" class="upb-sub-panel">
-            <component :index="childId" @showSettingsPanel="showSettingsPanel(childId)" @showContentPanel="showContentPanel(childId)" :model="singleModel()" @onBack="backed()"
+            <component @showSettingsPanel="showSettingsPanel(childId)" @showContentPanel="showContentPanel(childId)" :model="singleModel()" @onBack="backed()"
                        :is="childComponent"></component>
         </li>
 
@@ -118,10 +120,11 @@
             },
 
             contents(){
+
                 let query = this.searchQuery.toLowerCase().trim();
                 if (query) {
                     return this.model.contents.filter(function (data) {
-                        return new RegExp(query, 'gui').test(data.title.toLowerCase().trim())
+                        return new RegExp(query, 'gui').test(data.attributes.title.toLowerCase().trim())
                     })
                 }
                 else {
@@ -181,7 +184,7 @@
             cloneItem(index, item){
                 let cloned = extend(true, {}, item);
 
-                cloned.title = `Clone of ${cloned.title}`
+                cloned.attributes.title = `Clone of ${cloned.attributes.title}`;
 
                 this.model.contents.splice(index + 1, 0, cloned);
                 store.stateChanged();
@@ -241,8 +244,9 @@
             },
 
             addNew(e, data){
-                let section   = extend(true, {}, data);
-                section.title = sprintf(section.title, (this.model.contents.length + 1));
+
+                let section              = extend(true, {}, data);
+                section.attributes.title = sprintf(section.attributes.title, (this.model.contents.length + 1));
 
                 this.model.contents.push(section);
                 store.stateChanged();

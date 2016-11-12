@@ -3,6 +3,10 @@ import UPBSidebar from './UPBSidebar.vue'
 import UPBPreview from './UPBPreview.vue'
 import store from './store'
 
+import VueNProgress from './js/vue-nprogress'
+
+Vue.use(VueNProgress);
+
 //const states = window._upb_states;
 
 //const status = window._upb_status;

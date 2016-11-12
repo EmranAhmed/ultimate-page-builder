@@ -22,30 +22,89 @@
 				return self::$instance;
 			}
 
-			public function register( $short_code ) {
+			public function register( $tag, $attributes = array(), $contents = FALSE, $_upb_options = array() ) {
 
-				if ( ! isset( $short_code[ 'icon' ] ) ) {
-					$short_code[ 'icon' ] = 'fa fa-globe';
-				}
-				if ( ! isset( $short_code[ 'description' ] ) ) {
-					$short_code[ 'description' ] = '';
-				}
-				if ( ! isset( $short_code[ 'type' ] ) ) {
-					$short_code[ 'type' ] = 'single'; // single, closed
-				}
-				if ( isset( $short_code[ 'default' ] ) && ! empty( $short_code[ 'default' ] ) ) {
-					$short_code[ 'type' ] = 'single'; // single, closed
+
+				if ( $this->has_element( $tag ) ) {
+					throw new Exception( sprintf( 'Ultimate page builder element "%s" already registered.', $tag ) );
 				}
 
-				$this->short_code_elements[ $short_code[ 'id' ] ] = $short_code;
+				$_upb_options[ 'focus' ] = FALSE;
 
+				// @TODO: Already registered alert
+				$this->short_code_elements[ $tag ] = array(
+					'tag'           => $tag,
+					'contents'      => $contents,
+					'attributes'    => ( empty( $attributes ) ? FALSE : $this->to_attributes( $attributes ) ),
+					'_upb_settings' => ( empty( $attributes ) ? FALSE : $attributes ),
+					'_upb_options'  => $_upb_options
+				);
 			}
 
 			public function get_elements() {
 				return $this->short_code_elements;
 			}
+
+			public function get_element( $tag, $key = FALSE ) {
+
+				if ( ! $this->has_element( $tag ) ) {
+					return FALSE;
+				}
+
+				if ( $key ) {
+					return $this->short_code_elements[ $tag ][ $key ];
+				} else {
+					return $this->short_code_elements[ $tag ];
+				}
+			}
+
+			public function has_element( $tag ) {
+				return isset( $this->short_code_elements[ $tag ] );
+			}
+
+			public function to_attributes( $attributes ) {
+
+				$new_attributes = array();
+				foreach ( $attributes as $index => $attribute ) {
+					$new_attributes[ $index ] = isset( $attribute[ 'value' ] ) ? $attribute[ 'value' ] : '';
+				}
+
+				return $new_attributes;
+			}
+
+			public function to_settings( $tag, $attributes ) {
+
+				$settings = $this->get_element( $tag, '_upb_settings' );
+
+				// Keeps Old Attribute
+				/*foreach ( $attributes as $key => $value ) {
+					$settings[ $key ][ 'value' ] = $value;
+				}*/
+
+				// Always new attribute
+				foreach ( $settings as $key => $value ) {
+					if ( isset( $attributes[ $key ] ) ) {
+						$settings[ $key ][ 'value' ] = $attributes[ $key ];
+					}
+				}
+
+				return $settings;
+			}
+
+			public function set_upb_options( $contents ) {
+
+				foreach ( $contents as $index => $content ) {
+
+					if ( isset( $contents[ $index ][ '_upb_settings' ] ) or isset( $contents[ $index ][ '_upb_options' ] ) ) {
+						continue;
+					}
+
+					$contents[ $index ][ '_upb_settings' ] = $this->to_settings( $content[ 'tag' ], $content[ 'attributes' ] );
+					$contents[ $index ][ '_upb_options' ]  = $this->get_element( $content[ 'tag' ], '_upb_options' );
+				}
+
+				return $contents;
+			}
 		}
 
 	endif;
-
-

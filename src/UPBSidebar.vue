@@ -1,8 +1,9 @@
 <template>
     <div id="upb-sidebar">
-        <upb-sidebar-header :model="store.states"></upb-sidebar-header>
-        <upb-sidebar-content :model="store.states"></upb-sidebar-content>
-        <upb-sidebar-footer :model="store.states"></upb-sidebar-footer>
+        <div id="progress-bar"></div>
+        <upb-sidebar-header :model="store.tabs"></upb-sidebar-header>
+        <upb-sidebar-content :model="store.tabs"></upb-sidebar-content>
+        <upb-sidebar-footer :model="store.tabs"></upb-sidebar-footer>
     </div>
 </template>
 <style src="./scss/upb-sidebar.scss" lang="sass"></style>

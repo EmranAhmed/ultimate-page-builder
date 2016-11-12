@@ -2,9 +2,9 @@
 
 	defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
-	if ( ! class_exists( 'UPB_Options' ) ):
+	if ( ! class_exists( 'UPB_Settings' ) ):
 
-		class UPB_Options {
+		class UPB_Settings {
 
 			private static $instance = NULL;
 
@@ -29,7 +29,6 @@
 			public function getID() {
 				return get_the_ID();
 			}
-
 
 			public function getJSON() {
 

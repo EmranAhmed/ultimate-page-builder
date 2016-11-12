@@ -1,7 +1,7 @@
 class store {
 
     constructor() {
-        this.states     = window._upb_states;
+        this.tabs       = window._upb_tabs;
         this.status     = window._upb_status;
         this.l10n       = window._upb_l10n;
         this.breadcrumb = [];
@@ -12,8 +12,8 @@ class store {
     //    window.frames[this.preview].window.location.reload();
     // }
 
-    getState() {
-        return this.states;
+    getTabs() {
+        return this.tabs;
     }
 
     getStatus() {
@@ -36,14 +36,44 @@ class store {
         this.status.dirty = false
     }
 
+    cleanup(contents) {
+        return contents.map((content) => {
+            delete content['_upb_settings'];
+            delete content['_upb_options'];
+
+            if (content['contents']) {
+                this.cleanup(content['contents']);
+            }
+            return content;
+        });
+    }
+
     saveState(success, error) {
-        wp.ajax.send("upb_save", {
+
+        const state = {};
+
+        this.tabs.map((data) => {
+            state[data['id']] = this.cleanup(data.contents);
+        });
+
+        wp.ajax.send("_upb_save", {
             success : success,
             error   : error,
             data    : {
-                nonce  : this.status._nonce,
+                _nonce : this.status._nonce,
                 id     : this.status._id,
-                states : this.states
+                states : state
+            }
+        });
+    }
+
+    upbElementOptions(contents, success, error) {
+        wp.ajax.send("_get_upb_element_options", {
+            success : success,
+            error   : error,
+            data    : {
+                _nonce   : this.status._nonce,
+                contents : contents
             }
         });
     }

@@ -5,17 +5,15 @@
             <ul>
                 <li class="upb-panel-header">
 
-                    <a :title="l10n.back" href="" class="back" @click.prevent="back()">
-                        <i class="mdi mdi-chevron-left"></i>
-                    </a>
-
                     <div class="panel-heading-wrapper">
                         <div class="panel-heading">
+
                             <div class="upb-breadcrumb">
+
                                 <ul>
-                                    <li class="breadcrumb" v-if="breadcrumb.length > 0" v-for="b in breadcrumb">{{ b }}</li>
-                                    <li class="no-breadcrumb" v-else>{{ l10n.breadcrumbRoot }}</li>
+                                    <li class="no-breadcrumb">{{ l10n.breadcrumbRoot }}</li>
                                 </ul>
+
                             </div>
 
                             <div class="panel-title">{{ model.title }}</div>
@@ -29,6 +27,7 @@
                             <i class="mdi mdi-magnify"></i>
                         </button>
                     </div>
+
                 </li>
 
                 <li class="upb-panel-meta">
@@ -39,10 +38,9 @@
                     </div>
                 </li>
 
-
                 <li class="upb-panel-tools">
                     <ul>
-                        <li v-for="tool in model.tools.settings">
+                        <li v-for="tool in model.tools">
                             <a @click.prevent="callToolsAction($event, tool.action, tool)" href="#">
                                 <i :class="tool.icon"></i>
                                 <div v-text="tool.title"></div>
@@ -50,30 +48,43 @@
                         </li>
                     </ul>
                 </li>
-
-
             </ul>
         </li>
+
+        <li v-if="!showChild" class="upb-panel-contents">
+            <ul class="upb-panel-contents-items" v-sortable="sortable">
+                <component v-for="(item, index) in contents" @showSettingsPanel="showSettingsPanel(index)" @showContentPanel="showContentPanel(index)" @deleteItem="deleteItem(index)"
+                           :model="item" @cloneItem="cloneItem(index, item)" :is="listPanel(item.id)"></component>
+            </ul>
+        </li>
+
+        <li v-if="showChild" class="upb-sub-panel">
+            <component :index="childId" @showSettingsPanel="showSettingsPanel(childId)" @showContentPanel="showContentPanel(childId)" :model="singleModel()" @onBack="backed()"
+                       :is="childComponent"></component>
+        </li>
+
     </ul>
 </template>
-<style lang="sass"></style>
+<style lang="sass">
+
+</style>
 <script>
 
-    import Vue from 'vue';
+    import Vue, { util } from 'vue';
     import store from '../../store'
 
     import Sortable from '../../js/vue-sortable'
     import extend from 'extend';
+    import {sprintf} from 'sprintf-js';
+    import SectionList from '../section/SectionList.vue';
+
     Vue.use(Sortable);
 
-    // Row
-    // import Row from '../row/Row.vue'
-    // Vue.component('row', Row);
-
-    //import extend from 'extend';
+    // Section List
+    Vue.component('section-list', SectionList);
 
     export default {
-        name  : 'section-settings-panel',
+        name  : 'sections-panel',
         props : ['index', 'model'],
 
         data(){
@@ -96,12 +107,14 @@
         },
 
         computed : {
+
             panelClass(){
+                //return [`upb-${this.model.id}-panel`, this.currentPanel ? 'current' : ''].join(' ');
                 return [`upb-${this.model.id}-panel`, `upb-panel-wrapper`].join(' ');
             },
 
             currentPanel(){
-                return this.breadcrumb[this.breadcrumb.length - 1] == this.model.id;
+                // return this.breadcrumb[this.breadcrumb.length - 1] == this.model.id;
             },
 
             contents(){
@@ -119,20 +132,58 @@
 
         methods : {
 
-            back(){
-                this.$emit('onBack')
+            backed(){
+                this.breadcrumb.pop();
+                this.showChild      = false;
+                this.childId        = null;
+                this.childComponent = '';
             },
 
-            showContentPanel(){
-                this.$emit('showContentPanel')
+            clearPanel(){
+                this.breadcrumb.pop();
+                this.childComponent = '';
+                //this.showChild      = false;
             },
 
-            itemPanel(id){
-                return `${this.model.id}-item`
+            showContentPanel(index){
+
+                this.clearPanel();
+
+                this.showChild      = true;
+                this.childId        = index;
+                this.childComponent = 'section-contents-panel';
+                this.breadcrumb.push(this.model.title);
             },
 
-            deleteSection(index){
+            showSettingsPanel(index){
+
+                this.clearPanel();
+
+                this.showChild      = true;
+                this.childId        = index;
+                this.childComponent = 'section-settings-panel';
+                this.breadcrumb.push(this.model.title);
+            },
+
+            singleModel(){
+                return this.model.contents[this.childId];
+            },
+
+            listPanel(id){
+                return `${id}-list`
+            },
+
+            deleteItem(index){
                 this.model.contents.splice(index, 1);
+                store.stateChanged();
+            },
+
+            cloneItem(index, item){
+                let cloned = extend(true, {}, item);
+
+                cloned.title = `Clone of ${cloned.title}`;
+
+                this.model.contents.splice(index + 1, 0, cloned);
                 store.stateChanged();
             },
 
@@ -178,13 +229,21 @@
             },
 
             callToolsAction(event, action, tool){
+
                 let data = tool.data ? tool.data : false;
-                this[action](event, data)
+
+                if (!this[action]) {
+                    util.warn(`You need to implement '${action}' method.`, this);
+                }
+                else {
+                    this[action](event, data);
+                }
             },
 
-            addNewRow(e, data){
-                let section = extend(true, {}, data);
-                section.title += ' ' + (this.model.contents.length + 1);
+            addNew(e, data){
+                let section   = extend(true, {}, data);
+                section.title = sprintf(section.title, (this.model.contents.length + 1));
+
                 this.model.contents.push(section);
                 store.stateChanged();
             }
