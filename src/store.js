@@ -1,3 +1,5 @@
+import extend from 'extend';
+
 class store {
 
     constructor() {
@@ -53,7 +55,8 @@ class store {
         const state = {};
 
         this.tabs.map((data) => {
-            state[data['id']] = this.cleanup(data.contents);
+            let newdata       = extend(true, {}, data);
+            state[data['id']] = this.cleanup(newdata.contents);
         });
 
         wp.ajax.send("_upb_save", {
