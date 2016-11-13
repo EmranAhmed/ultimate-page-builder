@@ -30,7 +30,7 @@
 
         name : 'row-list',
 
-        props : ['index', 'model'],
+        props : ['index', 'model', 'selected'],
 
         data(){
             return {
@@ -113,7 +113,12 @@
             },
 
             itemClass(){
-                return this.model.attributes.enable ? 'item-enabled' : 'item-disabled';
+
+                return [
+                    this.model.attributes.enable ? 'item-enabled' : 'item-disabled',
+                    this.model._upb_options.focus ? 'item-focused' : 'item-unfocused',
+                    (this.selected == this.index) ? 'item-selected' : '']
+                        .join(' ');
             },
 
             getContentPanel(id){

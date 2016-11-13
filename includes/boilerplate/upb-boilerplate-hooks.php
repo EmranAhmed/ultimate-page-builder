@@ -25,7 +25,7 @@
 			'title' => 'Disabled',
 		);
 		$tools[ 'contents' ] = array(
-			'icon'  => 'mdi mdi-file-tree',
+			'icon'  => 'mdi mdi-table-edit',
 			'class' => 'show-contents',
 			'title' => 'Contents',
 		);
@@ -107,6 +107,65 @@
 	} );
 
 
+	// device previews
+
+	add_filter( 'upb_preview_devices', function () {
+		return array(
+			array(
+				'id'     => 'lg',
+				'title'  => 'Large',
+				'icon'   => 'mdi mdi-desktop-mac',
+				'active' => TRUE
+			),
+			array(
+				'id'     => 'md',
+				'title'  => 'Medium',
+				'icon'   => 'mdi mdi-laptop-mac',
+				'active' => FALSE
+			),
+			array(
+				'id'     => 'sm',
+				'title'  => 'Small',
+				'icon'   => 'mdi mdi-tablet-ipad',
+				'active' => FALSE
+			),
+			array(
+				'id'     => 'xs',
+				'title'  => 'Extra Small',
+				'icon'   => 'mdi mdi-cellphone-iphone',
+				'active' => FALSE
+			),
+		);
+	} );
+
+	// grid system
+
+	add_filter( 'upb_grid_system', function () {
+		return array(
+			array(
+				'name'            => 'Bootstrap',
+				'prefixClass'     => 'col',
+				'separator'       => '-', // col-
+				'groupClass'      => 'row',
+				'groupWrapper'    => array(
+					array(
+						'name'  => 'Full Width',
+						'class' => 'container-fluid'
+					),
+					array(
+						'name'  => 'Fixed Width',
+						'class' => 'container'
+					),
+				),
+				'defaultDeviceId' => 'xs',
+				'devices'         => apply_filters( 'upb_preview_devices', array() ),
+				'totalGrid'       => 12,
+				'allowOnly'       => array( 1, 2, 3, 4, 6, 12 )
+			)
+		);
+	} );
+
+
 	// Row
 	add_filter( 'upb_row_list_toolbar', function ( $tools ) {
 		$tools[ 'move' ] = array(
@@ -129,9 +188,9 @@
 			'title' => 'Disabled',
 		);
 		$tools[ 'contents' ] = array(
-			'icon'  => 'mdi mdi-file-tree',
+			'icon'  => 'mdi mdi-view-column',
 			'class' => 'show-contents',
-			'title' => 'Contents',
+			'title' => 'Column',
 		);
 		$tools[ 'settings' ] = array(
 			'icon'  => 'mdi mdi-settings',
@@ -235,10 +294,14 @@
 
 
 		$data = sprintf( "var _upb_tabs = %s;\n", upb_tabs()->getJSON() );
+
 		$data .= sprintf( "var _upb_status = %s;\n", wp_json_encode( array( 'dirty' => FALSE, '_nonce' => wp_create_nonce( '_upb' ), '_id' => get_the_ID() ) ) );
 
-
 		$data .= sprintf( "var _upb_settings = %s;", upb_settings()->getJSON() );
+
+		$data .= sprintf( "var _upb_preview_devices = %s;", wp_json_encode( apply_filters( 'upb_preview_devices', array() ) ) );
+
+		$data .= sprintf( "var _upb_grid_system = %s;", wp_json_encode( apply_filters( 'upb_grid_system', array() ) ) );
 
 		wp_script_add_data( 'upb-script', 'data', $data );
 
@@ -247,6 +310,8 @@
 		                                   array(
 			                                   'save'           => esc_attr__( 'Save' ),
 			                                   'delete'         => esc_attr__( 'Are you sure to delete %s?' ),
+			                                   'column_layout'  => esc_attr__( 'Column Layout of - %s' ),
+			                                   'column_sort'    => esc_attr__( 'Column Sort - %s' ),
 			                                   'close'          => esc_attr__( 'Close' ),
 			                                   'help'           => esc_attr__( 'Help' ),
 			                                   'search'         => esc_attr__( 'Search' ),
@@ -255,10 +320,10 @@
 			                                   'skeleton'       => esc_attr__( 'Skeleton preview' ),
 			                                   'collapse'       => esc_attr__( 'Collapse' ),
 			                                   'expand'         => esc_attr__( 'Expand' ),
-			                                   'large'          => esc_attr__( 'Large device preview' ),
-			                                   'medium'         => esc_attr__( 'Medium device preview' ),
-			                                   'small'          => esc_attr__( 'Small device preview' ),
-			                                   'xSmall'         => esc_attr__( 'Extra small preview' ),
+			                                   //'large'          => esc_attr__( 'Large device preview' ),
+			                                   //'medium'         => esc_attr__( 'Medium device preview' ),
+			                                   //'small'          => esc_attr__( 'Small device preview' ),
+			                                   //'xSmall'         => esc_attr__( 'Extra small preview' ),
 		                                   )
 		                    )
 		);

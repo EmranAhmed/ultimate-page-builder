@@ -7,6 +7,8 @@ class store {
         this.status     = window._upb_status;
         this.l10n       = window._upb_l10n;
         this.breadcrumb = [];
+        this.devices    = window._upb_preview_devices;
+        this.grid       = window._upb_grid_system;
         // this.preview    = 'upb-preview-frame';
     }
 

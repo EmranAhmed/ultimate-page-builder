@@ -2,6 +2,33 @@
 
 	defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
+	// Column
+	add_action( 'upb_register_element', function ( $element ) {
+
+		$attributes = array(
+			'title'      => array( 'type' => 'text', 'value' => 'Column' ),
+			'class'      => array( 'type' => 'text', 'value' => 'col-md-12' ),
+			'enable'     => array( 'type' => 'toggle', 'value' => TRUE ),
+			'background' => array( 'type' => 'color', 'value' => '#fff' ),
+		);
+
+		$contents = array();
+
+		$_upb_options = array(
+			//'help'   => '<h2>What to do?</h2><p>Add row and start</p>',
+			//'search' => 'Search Columns',
+			'tools' => array(
+				'list'     => apply_filters( 'upb_column_list_toolbar', array() ),
+				//'contents' => apply_filters( 'upb_column_contents_panel_toolbar', array() ),
+				'settings' => apply_filters( 'upb_column_settings_panel_toolbar', array() ),
+			)
+		);
+
+		$element->register( 'column', $attributes, $contents, $_upb_options );
+
+	} );
+
+
 	// Row ( Section have row dependency that's why we should reg row before section )
 	add_action( 'upb_register_element', function ( $element ) {
 

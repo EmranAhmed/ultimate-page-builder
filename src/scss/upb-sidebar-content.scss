@@ -44,8 +44,8 @@ button:focus {
       text-align     : center;
       border-right   : 1px solid rgba(0, 0, 0, .1);
 
-      &:hover{
-        background: rgba(0, 0, 0, .1);
+      &:hover {
+        background : rgba(0, 0, 0, .1);
         }
       }
 
@@ -290,6 +290,13 @@ button:focus {
       // Item Disable
       &.item-disabled {
         opacity : .5;
+        }
+
+      &.item-focused {
+        border : 1px solid $upb-sidebar-panel-content-item-focused-border;
+        }
+      &.item-selected {
+        border : 1px solid $upb-sidebar-panel-content-item-selected-border;
         }
       }
     }

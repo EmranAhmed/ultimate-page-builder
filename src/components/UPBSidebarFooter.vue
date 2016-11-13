@@ -4,10 +4,10 @@
         <a :class="[{ current: !sidebarExpand }, 'btn-expand']" :title="l10n.expand" @click.prevent="expandSidebar()" href="#"><i class="mdi mdi-arrow-right-drop-circle"></i></a>
         <div class="previews">
             <a :class="{ active: skeletonPreview }" :title="l10n.skeleton" @click.prevent="toggleSkeletonPreview()" href="#"><i class="mdi mdi-group"></i></a>
-            <a :class="{ active: currentDevice('lg') }" :title="l10n.large" @click.prevent="toggleResponsivePreview('lg')" href="#"><i class="mdi mdi-desktop-mac"></i></a>
-            <a :class="{ active: currentDevice('md') }" :title="l10n.medium" @click.prevent="toggleResponsivePreview('md')" href="#"><i class="mdi mdi-laptop-mac"></i></a>
-            <a :class="{ active: currentDevice('sm') }" :title="l10n.small" @click.prevent="toggleResponsivePreview('sm')" href="#"><i class="mdi mdi-tablet-ipad"></i></a>
-            <a :class="{ active: currentDevice('xs') }" :title="l10n.xSmall" @click.prevent="toggleResponsivePreview('xs')" href="#"><i class="mdi mdi-cellphone-iphone"></i></a>
+
+            <a v-for="device in devices" :class="{ active: currentDevice(device.id) }" :title="device.title" @click.prevent="toggleResponsivePreview(device.id)" href="#"><i
+                    :class="device.icon"></i></a>
+
         </div>
     </div>
 </template>
@@ -22,9 +22,19 @@
         data(){
             return {
                 l10n            : store.l10n,
+                devices         : store.devices,
                 sidebarExpand   : true,
-                skeletonPreview : false,
-                devicePreview   : 'lg'
+                skeletonPreview : false
+            }
+        },
+
+        computed : {
+            devicePreview(){
+                return this.devices.map(function (device) {
+                    if (device.active) {
+                        return device.id
+                    }
+                }).join('');
             }
         },
 
@@ -59,15 +69,13 @@
                 }
             },
 
-            toggleResponsivePreview(device){
-                this.devicePreview = device;
+            toggleResponsivePreview(id){
 
-                ['lg', 'md', 'sm', 'xs'].map(function (device) {
-                    document.getElementById('upb-wrapper').classList.remove(`preview-${device}`);
+                this.devices.map(function (device) {
+                    device.active = (device.id == id) ? true : false;
+                    document.getElementById('upb-wrapper').classList.remove(`preview-${device.id}`);
                 });
-
-                document.getElementById('upb-wrapper').classList.add(`preview-${device}`);
-
+                document.getElementById('upb-wrapper').classList.add(`preview-${id}`);
             }
         }
     }
