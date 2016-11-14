@@ -1,7 +1,6 @@
 <template>
     <ul :class="panelClass">
 
-
         <li v-if="!showChild" class="upb-panel-header-wrapper">
             <ul>
                 <li class="upb-panel-header">

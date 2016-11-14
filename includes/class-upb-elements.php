@@ -58,6 +58,59 @@
 				}
 			}
 
+			public function generate_element( $tag, $contents = array(), $attributes = array() ) {
+
+				if ( ! $this->has_element( $tag ) ) {
+					throw new Exception( sprintf( 'Ultimate page builder element "%s" is not registered.', $tag ) );
+				}
+
+				$el = $this->get_element( $tag );
+
+				if ( ! empty( $contents ) ) {
+
+					if ( isset( $contents[ 0 ] ) ) {
+						foreach ( $contents as $content ) {
+							array_push( $el[ 'contents' ], $content );
+						}
+					} else {
+						array_push( $el[ 'contents' ], $contents );
+					}
+				}
+
+				if ( ! empty( $attributes ) ) {
+					$el[ 'attributes' ]    = array_merge( $el[ 'attributes' ], $this->to_attributes( $attributes ) );
+					$el[ '_upb_settings' ] = array_merge( $el[ '_upb_settings' ], $el[ 'attributes' ] );
+				}
+
+				return $el;
+			}
+
+			public function demo_data( $tag, $contents = array(), $attributes = array() ) {
+
+				if ( ! $this->has_element( $tag ) ) {
+					throw new Exception( sprintf( 'Ultimate page builder element "%s" is not registered.', $tag ) );
+				}
+
+				$el = $this->get_element( $tag );
+
+				if ( ! empty( $contents ) ) {
+
+					if ( isset( $contents[ 0 ] ) ) {
+						foreach ( $contents as $content ) {
+							array_push( $el[ 'contents' ], $content );
+						}
+					} else {
+						array_push( $el[ 'contents' ], $contents );
+					}
+				}
+
+				if ( ! empty( $attributes ) ) {
+					$el[ 'attributes' ] = array_merge( $el[ 'attributes' ], $this->to_attributes( $attributes ) );
+				}
+
+				return $el;
+			}
+
 			public function has_element( $tag ) {
 				return isset( $this->short_code_elements[ $tag ] );
 			}
@@ -97,6 +150,11 @@
 
 					if ( isset( $contents[ $index ][ '_upb_settings' ] ) or isset( $contents[ $index ][ '_upb_options' ] ) ) {
 						continue;
+					}
+
+
+					if ( ! isset( $content[ 'contents' ] ) and is_array( $this->get_element( $content[ 'tag' ], 'contents' ) ) ) {
+						$contents[ $index ][ 'contents' ] = $this->get_element( $content[ 'tag' ], 'contents' );
 					}
 
 					$contents[ $index ][ '_upb_settings' ] = $this->to_settings( $content[ 'tag' ], $content[ 'attributes' ] );

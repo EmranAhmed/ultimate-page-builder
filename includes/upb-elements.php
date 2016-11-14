@@ -7,7 +7,10 @@
 
 		$attributes = array(
 			'title'      => array( 'type' => 'text', 'value' => 'Column' ),
-			'class'      => array( 'type' => 'text', 'value' => 'col-md-12' ),
+			'lg'         => array( 'type' => 'text', 'value' => '' ),
+			'md'         => array( 'type' => 'text', 'value' => '' ),
+			'sm'         => array( 'type' => 'text', 'value' => '' ),
+			'xs'         => array( 'type' => 'text', 'value' => '1:1' ),
 			'enable'     => array( 'type' => 'toggle', 'value' => TRUE ),
 			'background' => array( 'type' => 'color', 'value' => '#fff' ),
 		);

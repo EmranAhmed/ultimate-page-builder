@@ -1,8 +1,30 @@
 <template>
     <ul class="row-contents-layout">
+
+
         <li>
             {{ layoutTitle }}
         </li>
+
+        <li class="row-grid-layouts-wrapper">
+
+            <a v-for="layout in defaultLayouts" @click.prevent="" :class="columnLayoutClass(layout)" href="#">
+                <span v-for="item in miniColumns(layout.value)" :class="miniColumnItemClass(item)" v-text="item"></span>
+            </a>
+
+            <a class="manual" @click.prevent="" href="#">
+                <span class="manual" v-text="l10n.column_manual"></span>
+            </a>
+
+        </li>
+
+        <li class="row-grid-column">
+            <div id="row-grid-column-input">
+                <input v-model="activeColumnLayout" :value="activeColumnLayout" type="text"><input type="button" :value="l10n.create">
+            </div>
+        </li>
+
+
     </ul>
 </template>
 <style lang="sass"></style>
@@ -33,6 +55,7 @@
                 childComponent : '',
 
                 l10n        : store.l10n,
+                grid        : store.grid,
                 breadcrumb  : store.breadcrumb,
                 showHelp    : false,
                 showSearch  : false,
@@ -41,7 +64,9 @@
                     placeholder : "upb-sort-placeholder",
                     axis        : 'y'
                 },
-                searchQuery : ''
+                searchQuery : '',
+
+                activeColumnLayout : ''
             }
         },
 
@@ -55,13 +80,49 @@
                 return sprintf(this.l10n.column_sort, this.model.attributes.title);
             },
 
+            defaultLayouts(){
+                return this.model._upb_options.tools.contents.map(function (layout, index) {
+
+                    //if( this.grid.defaultDeviceId )
+                    // layout['active'] = (index == 0) ? true : false;
+                    layout['active'] = false;
+                    return layout;
+                });
+            },
+
             panelClass(){
                 //return [`upb-${this.model.id}-panel`, this.currentPanel ? 'current' : ''].join(' ');
                 return [`upb-${this.model.tag}-panel`, `upb-panel-wrapper`].join(' ');
+            },
+
+            activeColumnLayout(){
+                return this.model.contents.map(function (column) {
+                    return column.attributes[this.grid.defaultDeviceId].trim();
+                }.bind(this)).join(' + ');
             }
         },
 
         methods : {
+
+            miniColumns(columns){
+                return columns.split('+').map(function (i) {
+                    return i.trim();
+                });
+            },
+            miniColumnItem(item){
+                return item.split(':')[0].trim();
+            },
+            miniColumnItemClass(item){
+                let i = item.split(':')[0].trim();
+                return `grid-item-${i}`;
+            },
+
+            columnLayoutClass(layout){
+                return [
+                    (layout.value == this.activeColumnLayout) ? 'active' : '',
+                    layout.class
+                ].join(' ');
+            },
 
             loadContents(){
                 if (this.model.contents.length > 0) {

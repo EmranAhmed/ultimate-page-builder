@@ -49,7 +49,7 @@
 				'title'  => 'Add Row',
 				'icon'   => 'mdi mdi-table-row-plus-after',
 				'action' => 'addNew',
-				'data'   => apply_filters( 'upb_new_row_data', upb_elements()->get_element( 'row' ) )
+				'data'   => apply_filters( 'upb_new_row_data', upb_elements()->generate_element( 'row', upb_elements()->get_element( 'column' ) ) )
 			),
 			array(
 				'id'     => 'section-setting',
@@ -79,17 +79,27 @@
 
 	add_filter( 'upb_sections_panel_contents', function () {
 
+
 		return upb_elements()->set_upb_options(
 			array(
 				array(
 					'tag'        => 'section',
 					'contents'   => array(
-
-
 						array(
 							'tag'        => 'row',
-							'contents'   => array(),
-							'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'ROW 1' )
+							'contents'   => array(
+								array(
+									'tag'        => 'column',
+									'contents'   => array(),
+									'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL', 'lg' => '', 'md' => '', 'sm' => '', 'xs' => '1:2' )
+								),
+								array(
+									'tag'        => 'column',
+									'contents'   => array(),
+									'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL', 'lg' => '', 'md' => '', 'sm' => '', 'xs' => '1:2' )
+								),
+							),
+							'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'ROW GEN' )
 						)
 
 					),
@@ -102,6 +112,14 @@
 				)
 			)
 		);
+
+		/*return upb_elements()->set_upb_options(
+			array(
+				upb_elements()->demo_data( 'section', upb_elements()->demo_data( 'row', upb_elements()->demo_data( 'column' ) ) ),
+				upb_elements()->demo_data( 'section', upb_elements()->demo_data( 'row', upb_elements()->demo_data( 'column' ) ) ),
+				upb_elements()->demo_data( 'section', upb_elements()->demo_data( 'row', upb_elements()->demo_data( 'column' ) ) )
+			)
+		);*/
 
 		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
 	} );
@@ -142,26 +160,24 @@
 
 	add_filter( 'upb_grid_system', function () {
 		return array(
-			array(
-				'name'            => 'Bootstrap',
-				'prefixClass'     => 'col',
-				'separator'       => '-', // col-
-				'groupClass'      => 'row',
-				'groupWrapper'    => array(
-					array(
-						'name'  => 'Full Width',
-						'class' => 'container-fluid'
-					),
-					array(
-						'name'  => 'Fixed Width',
-						'class' => 'container'
-					),
+			'name'            => 'Bootstrap',
+			'prefixClass'     => 'col',
+			'separator'       => '-', // col-
+			'groupClass'      => 'row',
+			'groupWrapper'    => array(
+				array(
+					'name'  => 'Full Width',
+					'class' => 'container-fluid'
 				),
-				'defaultDeviceId' => 'xs',
-				'devices'         => apply_filters( 'upb_preview_devices', array() ),
-				'totalGrid'       => 12,
-				'allowOnly'       => array( 1, 2, 3, 4, 6, 12 )
-			)
+				array(
+					'name'  => 'Fixed Width',
+					'class' => 'container'
+				),
+			),
+			'defaultDeviceId' => 'xs',
+			'devices'         => apply_filters( 'upb_preview_devices', array() ),
+			'totalGrid'       => 12,
+			'allowOnly'       => array( 1, 2, 3, 4, 6, 12 )
 		);
 	} );
 
@@ -206,6 +222,39 @@
 	} );
 
 
+	add_filter( 'upb_row_contents_panel_toolbar', function ( $tools ) {
+		$tools[] = array(
+			'class' => 'grid-1-1',
+			'value' => '1:1',
+		);
+		$tools[] = array(
+			'class' => 'grid-1-2',
+			'value' => '1:2 + 1:2',
+		);
+		$tools[] = array(
+			'class' => 'grid-1-3__2-3',
+			'value' => '1:3 + 2:3',
+		);
+		$tools[] = array(
+			'class' => 'grid-2-3__1-3',
+			'value' => '2:3 + 1:3',
+		);
+		$tools[] = array(
+			'class' => 'grid-1-3__1-3__1-3',
+			'value' => '1:3 + 1:3 + 1:3',
+		);
+		$tools[] = array(
+			'class' => 'grid-1-4__2-4__1-4',
+			'value' => '1:4 + 2:4 + 1:4',
+		);
+		$tools[] = array(
+			'class' => 'grid-1-4__1-4__1-4__1-4',
+			'value' => '1:4 + 1:4 + 1:4 + 1:4',
+		);
+
+		return $tools;
+	} );
+
 	// Register Tabs
 	add_action( 'upb_register_tab', function ( $tab ) {
 
@@ -215,26 +264,33 @@
 			'help'     => '<h2>Just Getting Starting?</h2><p>Add a section then click on it to manage column layouts or drag it to reorder.</p>',
 			'search'   => 'Search Sections',
 			'tools'    => apply_filters( 'upb_tab_sections_tools', array(
-				array(
-					'id'     => 'add-new-section',
-					'title'  => 'Add Section',
-					'icon'   => 'mdi mdi-package-variant',
-					'action' => 'addNew',
-					'data'   => apply_filters( 'upb_new_section_data', upb_elements()->get_element( 'section' ) )
-				),
-				array(
-					'id'     => 'load-sections',
-					'title'  => 'Load Section',
-					'icon'   => 'mdi mdi-cube-outline',
-					'action' => 'openSavedSectionPanel'
-				),
-				array(
-					'id'     => 'saved-layouts',
-					'title'  => 'Layouts',
-					'icon'   => 'mdi mdi-view-quilt',
-					'action' => 'openSavedLayoutPanel'
-				),
-			) ), // add section | load section | layouts
+				                                                     array(
+					                                                     'id'     => 'add-new-section',
+					                                                     'title'  => 'Add Section',
+					                                                     'icon'   => 'mdi mdi-package-variant',
+					                                                     'action' => 'addNew',
+					                                                     'data'   => apply_filters( 'upb_new_section_data',
+					                                                                                upb_elements()->generate_element( 'section', upb_elements()->generate_element( 'row', upb_elements()->get_element( 'column' ), array(
+						                                                                                'title' => array(
+							                                                                                'type'  => 'text',
+							                                                                                'value' => 'New Row 1'
+						                                                                                )
+					                                                                                ) ) ) )
+				                                                     ),
+				                                                     array(
+					                                                     'id'     => 'load-sections',
+					                                                     'title'  => 'Load Section',
+					                                                     'icon'   => 'mdi mdi-cube-outline',
+					                                                     'action' => 'openSavedSectionPanel'
+				                                                     ),
+				                                                     array(
+					                                                     'id'     => 'saved-layouts',
+					                                                     'title'  => 'Layouts',
+					                                                     'icon'   => 'mdi mdi-view-quilt',
+					                                                     'action' => 'openSavedLayoutPanel'
+				                                                     ),
+			                                                     )
+			), // add section | load section | layouts
 			'icon'     => 'mdi mdi-package-variant',
 			'contents' => apply_filters( 'upb_sections_panel_contents', array() ), // load from get_post_meta
 		);
@@ -309,7 +365,9 @@
 		                    apply_filters( '_upb_l10n_strings',
 		                                   array(
 			                                   'save'           => esc_attr__( 'Save' ),
+			                                   'create'         => esc_attr__( 'Create' ),
 			                                   'delete'         => esc_attr__( 'Are you sure to delete %s?' ),
+			                                   'column_manual'  => esc_attr__( 'Manual' ),
 			                                   'column_layout'  => esc_attr__( 'Column Layout of - %s' ),
 			                                   'column_sort'    => esc_attr__( 'Column Sort - %s' ),
 			                                   'close'          => esc_attr__( 'Close' ),
