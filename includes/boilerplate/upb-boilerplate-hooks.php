@@ -160,11 +160,12 @@
 
 	add_filter( 'upb_grid_system', function () {
 		return array(
-			'name'            => 'Bootstrap',
-			'prefixClass'     => 'col',
-			'separator'       => '-', // col-
-			'groupClass'      => 'row',
-			'groupWrapper'    => array(
+			'name'              => 'Bootstrap 3',
+			'simplifiedRatio'   => 'Its recommended to use simplified form of your grid ratio like: %s',
+			'prefixClass'       => 'col',
+			'separator'         => '-', // col- deviceId - grid class
+			'groupClass'        => 'row',
+			'groupWrapper'      => array(
 				array(
 					'name'  => 'Full Width',
 					'class' => 'container-fluid'
@@ -174,10 +175,12 @@
 					'class' => 'container'
 				),
 			),
-			'defaultDeviceId' => 'xs',
-			'devices'         => apply_filters( 'upb_preview_devices', array() ),
-			'totalGrid'       => 12,
-			'allowOnly'       => array( 1, 2, 3, 4, 6, 12 )
+			'defaultDeviceId'   => 'xs',
+			'deviceSizeTitle'   => 'Screen Sizes',
+			'devices'           => apply_filters( 'upb_preview_devices', array() ),
+			'totalGrid'         => 12,
+			'allowedGrid'       => array( 1, 2, 3, 4, 6, 12 ),
+			'nonAllowedMessage' => "Sorry, Bootstrap 3 doesn't support %s grid column."
 		);
 	} );
 

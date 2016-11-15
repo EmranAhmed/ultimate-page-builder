@@ -61,8 +61,7 @@
                            :model="item" @cloneItem="cloneItem(index, item)" :is="listPanel(item.tag)"></component>
             </ul>
 
-
-            <component v-if="showChild" :model="singleModel()" :is="childComponent"></component>
+            <component v-for="(item, index) in contents" v-show="isCurrentRow(index)" :index="index" :model="item" :is="childComponent"></component>
 
         </li>
 
@@ -107,7 +106,7 @@
                     placeholder : "upb-sort-placeholder",
                     axis        : 'y'
                 },
-                searchQuery : ''
+                searchQuery : '',
             }
         },
 
@@ -138,6 +137,10 @@
         },
 
         methods : {
+
+            isCurrentRow(index){
+                return this.childId == index;
+            },
 
             loadContents(){
                 if (this.model.contents.length > 0) {

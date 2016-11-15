@@ -1,26 +1,35 @@
 <template>
     <ul class="row-contents-layout">
 
+        <li class="row-grid-screen-sizes-title" v-text="grid.deviceSizeTitle"></li>
 
-        <li>
-            {{ layoutTitle }}
+        <li class="row-grid-screen-sizes">
+            <ul>
+                <li v-for="device in devices" :class="[{'active-device':device.active, current:device.current}]" @click.prevent="currentDevice(device)" @dblclick.prevent="toggleDevice(device)"
+                    :title="device.title">
+                    <i :class="device.icon"></i>
+                </li>
+            </ul>
         </li>
+
+        <li class="row-grid-title" v-text="layoutTitle"></li>
 
         <li class="row-grid-layouts-wrapper">
 
-            <a v-for="layout in defaultLayouts" @click.prevent="" :class="columnLayoutClass(layout)" href="#">
+            <a v-for="layout in columnLayouts()" @click.prevent="changeColumnLayout(layout)" :class="columnLayoutClass(layout)" href="#">
                 <span v-for="item in miniColumns(layout.value)" :class="miniColumnItemClass(item)" v-text="item"></span>
             </a>
 
-            <a class="manual" @click.prevent="" href="#">
+            <a class="manual" @click.prevent="openManualInput()" href="#">
                 <span class="manual" v-text="l10n.column_manual"></span>
             </a>
 
         </li>
 
-        <li class="row-grid-column">
-            <div id="row-grid-column-input">
-                <input v-model="activeColumnLayout" :value="activeColumnLayout" type="text"><input type="button" :value="l10n.create">
+        <li v-show="showManualInput" class="row-grid-column">
+            <div class="row-grid-column-input">
+                <input v-model.lazy="selectedColumnLayout" type="text">
+                <div v-if="showRatioSuggestion" class="suggestionMessage" v-text="ratioSuggestionMessage"></div>
             </div>
         </li>
 
@@ -37,6 +46,7 @@
     import Sortable from '../../js/vue-sortable'
     import extend from 'extend';
     import {sprintf} from 'sprintf-js';
+    import math from 'mathjs';
     // import RowList from '../row/RowList.vue';
 
     Vue.use(Sortable);
@@ -50,23 +60,28 @@
 
         data(){
             return {
+
                 showChild      : false,
                 childId        : null,
                 childComponent : '',
 
-                l10n        : store.l10n,
-                grid        : store.grid,
-                breadcrumb  : store.breadcrumb,
-                showHelp    : false,
-                showSearch  : false,
-                sortable    : {
+                l10n : store.l10n,
+                grid : store.grid,
+
+                breadcrumb             : store.breadcrumb,
+                showHelp               : false,
+                showSearch             : false,
+                sortable               : {
                     handle      : '> .tools > .handle',
                     placeholder : "upb-sort-placeholder",
                     axis        : 'y'
                 },
-                searchQuery : '',
-
-                activeColumnLayout : ''
+                searchQuery            : '',
+                selectedColumnLayout   : null,
+                showManualInput        : false,
+                showRatioSuggestion    : false,
+                ratioSuggestionMessage : '',
+                devices                : []
             }
         },
 
@@ -80,38 +95,168 @@
                 return sprintf(this.l10n.column_sort, this.model.attributes.title);
             },
 
-            defaultLayouts(){
-                return this.model._upb_options.tools.contents.map(function (layout, index) {
+            panelClass(){
+                return [`upb-${this.model.tag}-panel`, `upb-panel-wrapper`].join(' ');
+            },
 
-                    //if( this.grid.defaultDeviceId )
-                    // layout['active'] = (index == 0) ? true : false;
+        },
+
+        updated(){
+            //console.log('updated');
+        },
+        created(){
+            this.setSelectedColumnLayout();
+            this.devices = this.getDevices();
+        },
+
+        watch : {
+            selectedColumnLayout(newValue){
+                this.showRatioSuggestion = false;
+                this.validateColumnInput(newValue);
+            }
+        },
+
+        methods : {
+
+            getDevices(){
+                let grid = extend(true, {}, this.grid);
+                return grid.devices.map(function (d) {
+
+                    // array like because of active doesn't exists? then what?
+                    d['active']  = (d.id == grid.defaultDeviceId) ? true : false;
+                    d['current'] = (d.id == grid.defaultDeviceId) ? true : false;
+
+                    return d;
+                });
+            },
+
+            toggleDevice(device){
+                device.active = !device.active;
+            },
+
+            currentDevice(device){
+
+                this.devices.map(function (d) {
+                    d.current = false;
+                });
+
+                device.current = true;
+            },
+
+            validateColumnInput(newValue){
+                try {
+
+                    // I know that ES6 have arrow function but my IDE in .vue extension does not support it :(
+
+                    let totalGrid = newValue.split('+').map(function (i) {return i.trim()});
+
+                    let gridArray = totalGrid.map(function (i) {
+                        return parseInt(i.split(':')[0].trim());
+                    });
+
+                    let gridValueCount = totalGrid.reduce(function (old, i) {
+                        let col = i.split(':')[0].trim();
+                        return old + parseInt(col);
+                    }, 0);
+
+                    let totalGridValue = totalGrid.reduce(function (old, i) {
+                        let ratio = i.split(':')[1].trim();
+                        return old + parseInt(ratio);
+                    }, 0);
+
+                    let grid = totalGridValue / totalGrid.length;
+
+                    if (grid == gridValueCount) {
+
+                        // suggession msg
+
+                        this.ratioSuggestion(grid, gridArray, gridValueCount);
+
+                    }
+                    else {
+                        // errors
+                    }
+
+                    //console.log(ratio);
+                    //console.log(items);
+
+                } catch (e) {
+
+                }
+            },
+
+            ratioSuggestion(grid, gridArray, gridValueCount){
+                // I know that ES6 have spread operator but my IDE in .vue extension does not support
+                // es6 features :(
+                // math.gcd(...itemArray)
+
+                //  A ratio can be simplified by dividing both sides of the ratio by the Highest Common Factor (HCF). I mean greatest common divisor :D
+
+                let itemArray = gridArray.slice(0, gridArray.length);
+
+                itemArray.push(gridValueCount);
+
+                // console.log(itemArray);
+
+                let common = math['gcd'].apply(this, itemArray);
+                if (common > 1) {
+
+                    itemArray.pop();
+
+                    let simplifiedRatio = gridValueCount / common;
+
+                    let simplifiedGrid = itemArray.map(function (i) {
+                        return (i / common) + ":" + simplifiedRatio;
+                    });
+
+                    this.ratioSuggestionMessage = sprintf(this.grid.simplifiedRatio, simplifiedGrid.join(' + '))
+
+                    this.showRatioSuggestion = true;
+                }
+            },
+
+            openManualInput(){
+                this.showManualInput = !this.showManualInput;
+            },
+
+            columnLayouts(){
+                return this.model._upb_options.tools.contents.map(function (layout, index) {
                     layout['active'] = false;
                     return layout;
                 });
             },
 
-            panelClass(){
-                //return [`upb-${this.model.id}-panel`, this.currentPanel ? 'current' : ''].join(' ');
-                return [`upb-${this.model.tag}-panel`, `upb-panel-wrapper`].join(' ');
-            },
-
-            activeColumnLayout(){
-                return this.model.contents.map(function (column) {
+            setSelectedColumnLayout(){
+                this.selectedColumnLayout = this.model.contents.map(function (column) {
                     return column.attributes[this.grid.defaultDeviceId].trim();
                 }.bind(this)).join(' + ');
-            }
-        },
+            },
 
-        methods : {
+            changeColumnLayout(layout){
+
+                this.model._upb_options.tools.contents.map(function (layout, index) {
+                    layout['active'] = false;
+                    return layout;
+                });
+
+                layout.active = true;
+
+                this.selectedColumnLayout = layout.value;
+                //console.log(layout.value);
+                //console.log(this.activeColumnLayout);
+
+            },
 
             miniColumns(columns){
                 return columns.split('+').map(function (i) {
                     return i.trim();
                 });
             },
+
             miniColumnItem(item){
                 return item.split(':')[0].trim();
             },
+
             miniColumnItemClass(item){
                 let i = item.split(':')[0].trim();
                 return `grid-item-${i}`;
@@ -119,7 +264,7 @@
 
             columnLayoutClass(layout){
                 return [
-                    (layout.value == this.activeColumnLayout) ? 'active' : '',
+                    (layout.value == this.selectedColumnLayout) ? 'active' : '',
                     layout.class
                 ].join(' ');
             },
@@ -172,8 +317,6 @@
             openContentsPanel(index){
 
                 this.clearPanel();
-
-                console.log(index);
 
                 //this.showChild      = true;
                 this.childId        = index;

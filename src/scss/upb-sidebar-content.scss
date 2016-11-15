@@ -299,6 +299,21 @@ button:focus {
         border : 1px solid $upb-sidebar-panel-content-item-selected-border;
         }
       }
+
+    .row-grid-layouts-wrapper a {
+      position   : relative;
+      display    : inline-block;
+      width      : 60px;
+      height     : 20px;
+      padding    : 5px;
+      background : #FFFFFF;
+      margin     : 3px;
+      overflow   : hidden;
+      &.active {
+        background : #EAFFF6;
+        }
+      }
+
     }
   }
 
