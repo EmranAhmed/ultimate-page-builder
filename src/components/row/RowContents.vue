@@ -17,7 +17,7 @@
         <li class="row-grid-layouts-wrapper">
 
             <a v-for="layout in columnLayouts()" @click.prevent="changeColumnLayout(layout)" :class="columnLayoutClass(layout)" href="#">
-                <span v-for="item in miniColumns(layout.value)" :class="miniColumnItemClass(item)" v-text="item"></span>
+                <span v-for="item in miniColumns(layout.value)" :class="miniColumnItemClass(item)"></span>
             </a>
 
             <a class="manual" @click.prevent="openManualInput()" href="#">
