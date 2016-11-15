@@ -137,7 +137,7 @@
                 this.$watch(`selectedColumnLayout.${device.id}`, function (value) {
 
                     console.log(device.id, value);
-
+                    
                 }, {deep : true})
 
             }.bind(this));

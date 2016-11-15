@@ -18,15 +18,15 @@ module.exports = {
                 options : {
                     // vue-loader options go here
                     loaders : {
-                        scss : ExtractTextPlugin.extract({
-                            loader : 'css?sourceMap!sass?sourceMap'
-                        }),
-                        sass : ExtractTextPlugin.extract({
-                            loader : 'css?sourceMap!sass?sourceMap'
-                        }),
-                        css  : ExtractTextPlugin.extract({
-                            loader : 'css?sourceMap'
-                        }),
+                       // scss : ExtractTextPlugin.extract({
+                       //     loader : 'css?sourceMap!sass?sourceMap'
+                       // }),
+                       // sass : ExtractTextPlugin.extract({
+                       //     loader : 'css?sourceMap!sass?sourceMap'
+                       // }),
+                       // css  : ExtractTextPlugin.extract({
+                       //     loader : 'css?sourceMap'
+                       // }),
 
                     }
                 }
@@ -91,7 +91,7 @@ if (process.env.NODE_ENV === 'production') {
                 })]
             }
         }),
-        new ExtractTextPlugin("../css/upb-style.min.css")
+        //new ExtractTextPlugin("../css/upb-style.min.css")
     ])
 }
 else {
@@ -118,6 +118,6 @@ else {
                 })]
             }
         }),
-        new ExtractTextPlugin("../css/upb-style.css")
+        //new ExtractTextPlugin("../css/upb-style.css")
     ]
 }
