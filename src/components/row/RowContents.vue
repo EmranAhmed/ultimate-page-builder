@@ -5,7 +5,8 @@
 
         <li class="row-grid-screen-sizes">
             <ul>
-                <li v-for="device in devices" :class="[{'active-device':device.active, current:device.current}]" @click.prevent="currentDevice(device)" @dblclick.prevent="toggleDevice(device)"
+                <li v-for="device in devices" :class="[{'active-device':device.active, current:device.current}]" @click.prevent="currentDevice(device)"
+                    @dblclick.prevent="toggleDevice(device)"
                     :title="device.title">
                     <i :class="device.icon"></i>
                 </li>
@@ -14,25 +15,46 @@
 
         <li class="row-grid-title" v-text="layoutTitle"></li>
 
+
         <li class="row-grid-layouts-wrapper">
 
-            <a v-for="layout in columnLayouts()" @click.prevent="changeColumnLayout(layout)" :class="columnLayoutClass(layout)" href="#">
-                <span v-for="item in miniColumns(layout.value)" :class="miniColumnItemClass(item)"></span>
-            </a>
 
-            <a class="manual" @click.prevent="openManualInput()" href="#">
-                <span class="manual" v-text="l10n.column_manual"></span>
-            </a>
+            <ul>
+                <li v-for="device in devices" v-show="device.current" v-if="device.active" :class="[{'active-device':device.active, current:device.current}]" :title="device.title">
 
+
+                    <ul>
+
+                        <li class="row-grid-structure-wrapper">
+
+                            <a v-for="layout in columnLayouts(device)" @click.prevent="changeColumnLayout(layout, device.id)" :class="columnLayoutClass(layout, device.id)" href="#">
+                                <span v-for="item in miniColumns(layout.value)" :class="miniColumnItemClass(item)" v-text="item"></span>
+                            </a>
+
+                            <a class="manual" @click.prevent="openManualInput(device.id)" href="#">
+                                <span class="manual" v-text="l10n.column_manual"></span>
+                            </a>
+
+                        </li>
+
+                        <li v-show="showManualInput[device.id]" class="row-grid-column">
+                            <div class="row-grid-column-input">
+                                <input v-model.lazy="selectedColumnLayout[device.id]" type="text">
+                                <!--
+                                                                <div v-if="showRatioSuggestion" class="suggestionMessage" v-text="ratioSuggestionMessage"></div>
+                                -->
+                            </div>
+                        </li>
+                    </ul>
+
+
+                </li>
+            </ul>
         </li>
 
-        <li v-show="showManualInput" class="row-grid-column">
-            <div class="row-grid-column-input">
-                <input v-model.lazy="selectedColumnLayout" type="text">
-                <div v-if="showRatioSuggestion" class="suggestionMessage" v-text="ratioSuggestionMessage"></div>
-            </div>
-        </li>
 
+        <!--<li>{{ model._upb_options.tools }}</li>
+        <li>{{ model.contents }}</li>-->
 
     </ul>
 </template>
@@ -46,7 +68,8 @@
     import Sortable from '../../js/vue-sortable'
     import extend from 'extend';
     import {sprintf} from 'sprintf-js';
-    import math from 'mathjs';
+
+    // import math from 'mathjs';
     // import RowList from '../row/RowList.vue';
 
     Vue.use(Sortable);
@@ -68,20 +91,20 @@
                 l10n : store.l10n,
                 grid : store.grid,
 
-                breadcrumb             : store.breadcrumb,
-                showHelp               : false,
-                showSearch             : false,
-                sortable               : {
+                breadcrumb           : store.breadcrumb,
+                showHelp             : false,
+                showSearch           : false,
+                sortable             : {
                     handle      : '> .tools > .handle',
                     placeholder : "upb-sort-placeholder",
                     axis        : 'y'
                 },
-                searchQuery            : '',
-                selectedColumnLayout   : null,
-                showManualInput        : false,
-                showRatioSuggestion    : false,
-                ratioSuggestionMessage : '',
-                devices                : []
+                searchQuery          : '',
+                selectedColumnLayout : {},
+                showManualInput      : {},
+                //showRatioSuggestion    : false,
+                //ratioSuggestionMessage : '',
+                devices              : []
             }
         },
 
@@ -102,19 +125,36 @@
         },
 
         updated(){
-            //console.log('updated');
+            // console.log('updated');
         },
         created(){
-            this.setSelectedColumnLayout();
             this.devices = this.getDevices();
+            this.setToolsForDevices();
+            this.setSelectedColumnLayout();
+
+            this.devices.map(function (device) {
+
+                this.$watch(`selectedColumnLayout.${device.id}`, function (value) {
+
+                    console.log(device.id, value);
+
+                }, {deep : true})
+
+            }.bind(this));
+
         },
 
-        watch : {
-            selectedColumnLayout(newValue){
-                this.showRatioSuggestion = false;
-                this.validateColumnInput(newValue);
-            }
-        },
+        /*watch : {
+         selectedColumnLayout(newValue){
+
+         console.log(newValue);
+
+         console.log(this.devices);
+
+         this.showRatioSuggestion = false;
+         this.validateColumnInput(newValue);
+         }
+         },*/
 
         methods : {
 
@@ -128,6 +168,15 @@
 
                     return d;
                 });
+            },
+
+            setToolsForDevices(){
+                this.devices.map(function (device) {
+                    this.model._upb_options.tools[device.id] = extend(true, [], this.model._upb_options.tools.contents);
+
+                    return device;
+                }.bind(this));
+
             },
 
             toggleDevice(device){
@@ -215,36 +264,30 @@
                 }
             },
 
-            openManualInput(){
-                this.showManualInput = !this.showManualInput;
+            openManualInput(deviceId){
+                this.showManualInput[deviceId] = !this.showManualInput[deviceId];
             },
 
-            columnLayouts(){
-                return this.model._upb_options.tools.contents.map(function (layout, index) {
-                    layout['active'] = false;
-                    return layout;
-                });
+            columnLayouts(device){
+                return this.model._upb_options.tools[device.id];
             },
 
             setSelectedColumnLayout(){
-                this.selectedColumnLayout = this.model.contents.map(function (column) {
+
+                this.devices.map(function (device) {
+                    Vue.set(this.selectedColumnLayout, device.id, '');
+                    Vue.set(this.showManualInput, device.id, false);
+                }.bind(this));
+
+                let selected = this.model.contents.map(function (column) {
                     return column.attributes[this.grid.defaultDeviceId].trim();
                 }.bind(this)).join(' + ');
+
+                Vue.set(this.selectedColumnLayout, this.grid.defaultDeviceId, selected);
             },
 
-            changeColumnLayout(layout){
-
-                this.model._upb_options.tools.contents.map(function (layout, index) {
-                    layout['active'] = false;
-                    return layout;
-                });
-
-                layout.active = true;
-
-                this.selectedColumnLayout = layout.value;
-                //console.log(layout.value);
-                //console.log(this.activeColumnLayout);
-
+            changeColumnLayout(layout, deviceId){
+                this.selectedColumnLayout[deviceId] = layout.value.trim();
             },
 
             miniColumns(columns){
@@ -262,9 +305,12 @@
                 return `grid-item-${i}`;
             },
 
-            columnLayoutClass(layout){
+            columnLayoutClass(layout, deviceId){
+
+                //console.log(layout.value, this.selectedColumnLayout[deviceId]);
+
                 return [
-                    (layout.value == this.selectedColumnLayout) ? 'active' : '',
+                    (layout.value == this.selectedColumnLayout[deviceId]) ? 'active' : '',
                     layout.class
                 ].join(' ');
             },
