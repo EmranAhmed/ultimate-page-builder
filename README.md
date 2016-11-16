@@ -4,10 +4,7 @@
 
 - `npm i`
 - `npm run dev`
-
-## Install Missing Packages
-
-- `npm update`
+- `define( 'SCRIPT_DEBUG', TRUE );` on `wp-config.php` file on development mode.
 
 ## Build
 

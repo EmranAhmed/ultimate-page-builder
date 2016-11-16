@@ -2,7 +2,6 @@ let path              = require('path');
 let webpack           = require('webpack');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-
 const autoprefixerOptions = [
     'last 3 versions',
     '> 1%',
@@ -16,7 +15,6 @@ const autoprefixerOptions = [
     'android >= 4',
     'bb >= 10'
 ];
-
 
 const vueLoaderConfig = {
     postcss : [
@@ -94,6 +92,11 @@ if (process.env.NODE_ENV === 'production') {
     module.exports.devtool = '#source-map';
     // http://vue-loader.vuejs.org/en/workflow/production.html
     module.exports.plugins = (module.exports.plugins || []).concat([
+        new webpack.ProvidePlugin({
+            'Vue'        : 'vue',
+            'window.Vue' : 'vue',
+        }),
+        //new webpack.optimize.CommonsChunkPlugin({name : 'vue', filename : 'js/vue.min.js'}),
         new webpack.DefinePlugin({
             'process.env' : {
                 NODE_ENV : '"production"'
@@ -113,6 +116,11 @@ if (process.env.NODE_ENV === 'production') {
 }
 else {
     module.exports.plugins = [
+        new webpack.ProvidePlugin({
+            'Vue'        : 'vue',
+            'window.Vue' : 'vue',
+        }),
+        //new webpack.optimize.CommonsChunkPlugin({name : 'vue', filename : 'js/vue.js'}),
         new webpack.LoaderOptionsPlugin({
             minimize : false,
             debug    : true,
