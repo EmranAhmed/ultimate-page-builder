@@ -62,7 +62,7 @@
     import Vue from 'vue';
     import store from '../../store'
 
-    import Sortable from '../../js/vue-sortable'
+    import Sortable from '../../plugins/vue-sortable'
     import extend from 'extend';
     Vue.use(Sortable);
 

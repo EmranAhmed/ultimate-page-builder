@@ -3,7 +3,7 @@ import UPBSidebar from './UPBSidebar.vue'
 import UPBPreview from './UPBPreview.vue'
 import store from './store'
 
-import VueNProgress from './js/vue-nprogress'
+import VueNProgress from './plugins/vue-nprogress'
 
 Vue.use(VueNProgress);
 

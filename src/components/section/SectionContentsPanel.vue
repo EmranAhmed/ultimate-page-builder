@@ -75,7 +75,7 @@
 
     import store from '../../store'
 
-    import Sortable from '../../js/vue-sortable'
+    import Sortable from '../../plugins/vue-sortable'
     import extend from 'extend';
     import {sprintf} from 'sprintf-js';
     import RowList from '../row/RowList.vue';

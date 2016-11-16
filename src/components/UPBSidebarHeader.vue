@@ -3,7 +3,7 @@
         <ul>
             <li class="btn-close"><a href="#" :title="l10n.close"><i class="mdi mdi-window-close"></i></a></li>
             <ul class="tab-wrapper">
-                <upb-sidebar-header-item v-for="item in model" @changedActive="removeActive()" :model="item"></upb-sidebar-header-item>
+                <component v-for="item in model" @changedActive="removeActive()" :model="item" is="upb-sidebar-header-item"></component>
             </ul>
             <li :class="[{ active: isDirty() }, 'btn-save']"><a @click.prevent="save()" href="#" :title="l10n.save"><i class="mdi mdi-content-save-all"></i></a></li>
         </ul>
@@ -13,9 +13,9 @@
 <script>
 
     import Vue from 'vue';
-    import UPBSidebarHeaderItem from './UPBSidebarHeaderItem.vue'
     import store from '../store'
 
+    import UPBSidebarHeaderItem from './UPBSidebarHeaderItem.vue'
     Vue.component('upb-sidebar-header-item', UPBSidebarHeaderItem);
 
     export default {

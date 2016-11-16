@@ -335,7 +335,11 @@
 	// Load CSS :)
 	add_action( 'upb_boilerplate_print_styles', function () {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		//wp_enqueue_style( 'upb-styles', UPB_PLUGIN_ASSETS_URL . "css/upb-style$suffix.css" );
+
+		if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
+			// In Production Mode :)
+			wp_enqueue_style( 'upb-styles', UPB_PLUGIN_ASSETS_URL . "css/upb-style.min.css" );
+		}
 		wp_enqueue_style( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URL . "css/upb-boilerplate$suffix.css" );
 	} );
 

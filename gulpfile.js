@@ -1,26 +1,27 @@
 'use strict';
 
-const gulp          = require('gulp');
-const plumber       = require('gulp-plumber');
-const sass          = require('gulp-sass');
-const sourcemaps    = require('gulp-sourcemaps');
-const autoprefixer  = require('gulp-autoprefixer');
+const gulp              = require('gulp');
+const plumber           = require('gulp-plumber');
+const sass              = require('gulp-sass');
+const sourcemaps        = require('gulp-sourcemaps');
+const autoprefixer      = require('gulp-autoprefixer');
 //const lineec       = require('gulp-line-ending-corrector');
-const rename        = require('gulp-rename');
-const browserSync   = require('browser-sync').create();
+const rename            = require('gulp-rename');
+const browserSync       = require('browser-sync').create();
 //const imagemin     = require('gulp-imagemin');
-const wpPot         = require('gulp-wp-pot');
+const wpPot             = require('gulp-wp-pot');
 //const mmq          = require('gulp-merge-media-queries');
-const minifycss     = require('gulp-uglifycss'); // Minifies CSS files.
-const sort          = require('gulp-sort'); // Recommended to prevent unnecessary changes in pot-file.
-const concat        = require('gulp-concat');
-const uglify        = require('gulp-uglify');
-const babel         = require('gulp-babel');
-const webpack       = require("webpack");
-const webpackConfig = require("./webpack.config.js");
+const minifycss         = require('gulp-uglifycss'); // Minifies CSS files.
+const sort              = require('gulp-sort'); // Recommended to prevent unnecessary changes in pot-file.
+const concat            = require('gulp-concat');
+const uglify            = require('gulp-uglify');
+const babel             = require('gulp-babel');
+const webpack           = require("webpack");
+const webpackConfig     = require("./webpack.config.js");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const autoprefixerOptions = [
-    'last 2 version',
+    'last 3 versions',
     '> 1%',
     'ie >= 9',
     'ie_mob >= 10',
@@ -48,7 +49,7 @@ const wpPotOptions = {
     'domain'         : 'ultimate-page-builder',
     'destFile'       : 'ultimate-page-builder.pot',
     'package'        : 'ultimate-page-builder',
-    'bugReport'      : 'https://themehippo.com/contact/',
+    'bugReport'      : 'https://github.com/EmranAhmed/ultimate-page-builder/issues',
     'lastTranslator' : 'ThemeHippo <themehippo@gmail.com>',
     'team'           : 'ThemeHippo <themehippo@gmail.com>',
     'translatePath'  : './languages'
@@ -130,43 +131,14 @@ gulp.task('styles:build', () => {
 
 gulp.task('webpack:build', (callback) => {
 
-    let buildConfig             = Object.create(webpackConfig);
-    buildConfig.devtool         = 'source-map';
-    buildConfig.output.filename = 'upb-build.min.js';
-    buildConfig.plugins         = (buildConfig.plugins || []).concat(
-        new webpack.DefinePlugin({
-            "process.env" : {
-                "NODE_ENV" : JSON.stringify("production")
-            }
-        })
-    );
-
-    webpack(buildConfig, function (err, stats) {
-        callback();
-    })
+    /*let buildConfig = Object.create(webpackConfig);
+     webpack(buildConfig, function (err, stats) {
+     callback();
+     })*/
 });
 
 gulp.task('webpack:dev', (callback) => {
-
-
-    // run webpack
-    /*devPack.run(function (err, stats) {
-     callback();
-     });*/
-
-    let devConfig     = Object.create(webpackConfig);
-    devConfig.devtool = 'inline-source-map';
-    // devConfig.debug           = true;
-    // devConfig.watch           = true;
-    devConfig.output.filename = 'upb-build.js';
-
-    /*devConfig.plugins = (devConfig.plugins || []).concat(
-     new webpack.LoaderOptionsPlugin({
-     minimize : false,
-     debug    : true
-     })
-     );*/
-
+    let devConfig = Object.create(webpackConfig);
     webpack(devConfig, function (err, stats) {
         callback();
     })
