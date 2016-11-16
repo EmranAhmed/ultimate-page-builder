@@ -1,6 +1,7 @@
-let path              = require('path');
-let webpack           = require('webpack');
-let ExtractTextPlugin = require("extract-text-webpack-plugin");
+let path                 = require('path');
+let webpack              = require('webpack');
+let ExtractTextPlugin    = require("extract-text-webpack-plugin");
+let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const autoprefixerOptions = [
     'last 3 versions',
@@ -49,11 +50,13 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
     devtool : '#eval-source-map',
-    entry   : './src/main.js',
+    entry   : {
+        builder : path.resolve(__dirname, './src/builder.js'),
+    },
     output  : {
         path       : path.resolve(__dirname, './assets'),
         publicPath : '/assets/',
-        filename   : 'js/upb-build.js'
+        filename   : 'js/upb-[name].js'
     },
     module  : {
         rules : [
@@ -87,7 +90,7 @@ module.exports = {
 
 if (process.env.NODE_ENV === 'production') {
 
-    module.exports.output.filename = 'js/upb-build.min.js';
+    module.exports.output.filename = 'js/upb-[name].min.js';
 
     module.exports.devtool = '#source-map';
     // http://vue-loader.vuejs.org/en/workflow/production.html
@@ -111,7 +114,7 @@ if (process.env.NODE_ENV === 'production') {
         new webpack.LoaderOptionsPlugin({
             minimize : true
         }),
-        new ExtractTextPlugin("css/upb-style.min.css")
+        new ExtractTextPlugin("css/upb-style.min.css"),
     ])
 }
 else {
@@ -125,6 +128,7 @@ else {
             minimize : false,
             debug    : true,
         }),
+        // new BundleAnalyzerPlugin(), // to see state
         // new ExtractTextPlugin("css/upb-style.css")
     ]
 }

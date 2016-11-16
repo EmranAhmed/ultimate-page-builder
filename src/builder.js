@@ -5,6 +5,7 @@ import store from './store'
 
 import VueNProgress from './plugins/vue-nprogress'
 
+
 Vue.use(VueNProgress);
 
 //const states = window._upb_states;

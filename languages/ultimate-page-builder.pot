@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ultimate-page-builder\n"
-"Report-Msgid-Bugs-To: https://themehippo.com/contact/\n"
+"Report-Msgid-Bugs-To: https://github.com/EmranAhmed/ultimate-page-builder/issues\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
