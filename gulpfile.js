@@ -1,24 +1,23 @@
 'use strict';
 
-const gulp              = require('gulp');
-const plumber           = require('gulp-plumber');
-const sass              = require('gulp-sass');
-const sourcemaps        = require('gulp-sourcemaps');
-const autoprefixer      = require('gulp-autoprefixer');
+const gulp          = require('gulp');
+const plumber       = require('gulp-plumber');
+const sass          = require('gulp-sass');
+const sourcemaps    = require('gulp-sourcemaps');
+const autoprefixer  = require('gulp-autoprefixer');
 //const lineec       = require('gulp-line-ending-corrector');
-const rename            = require('gulp-rename');
-const browserSync       = require('browser-sync').create();
+const rename        = require('gulp-rename');
+const browserSync   = require('browser-sync').create();
 //const imagemin     = require('gulp-imagemin');
-const wpPot             = require('gulp-wp-pot');
+const wpPot         = require('gulp-wp-pot');
 //const mmq          = require('gulp-merge-media-queries');
-const minifycss         = require('gulp-uglifycss'); // Minifies CSS files.
-const sort              = require('gulp-sort'); // Recommended to prevent unnecessary changes in pot-file.
-const concat            = require('gulp-concat');
-const uglify            = require('gulp-uglify');
-const babel             = require('gulp-babel');
-const webpack           = require("webpack");
-const webpackConfig     = require("./webpack.config.js");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const minifycss     = require('gulp-uglifycss'); // Minifies CSS files.
+const sort          = require('gulp-sort'); // Recommended to prevent unnecessary changes in pot-file.
+const concat        = require('gulp-concat');
+const uglify        = require('gulp-uglify');
+const babel         = require('gulp-babel');
+const webpack       = require("webpack");
+const webpackConfig = require("./webpack.config.js");
 
 const autoprefixerOptions = [
     'last 3 versions',

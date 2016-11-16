@@ -5,14 +5,15 @@ import store from './store'
 
 import VueNProgress from './plugins/vue-nprogress'
 
-
 Vue.use(VueNProgress);
 
 //const states = window._upb_states;
 
 //const status = window._upb_status;
 
-new Vue({
+
+// window.upbBuilder
+const upbBuilder = new Vue({
     el   : '#upb-sidebar',
     data : {
         store
@@ -27,7 +28,7 @@ new Vue({
     render : h => h(UPBSidebar)
 });
 
-const preview = new Vue({
+const upbPreview = new Vue({
     data   : {
         store
     },
@@ -35,8 +36,8 @@ const preview = new Vue({
 });
 
 window.frames['upb-preview-frame'].window.onload = () => {
-    //preview.$mount(window.frames['upb-preview-frame'].window.document.getElementById('upb-preview'))
-    preview.$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById('upb-preview'))
+    //upbPreview.$mount(window.frames['upb-preview-frame'].window.document.getElementById('upb-preview'))
+    upbPreview.$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById('upb-preview'))
 }
 
 

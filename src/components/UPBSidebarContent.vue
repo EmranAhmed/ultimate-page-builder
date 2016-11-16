@@ -18,20 +18,17 @@
     //import SectionsPane from './pane/SectionsPane.vue'
     //Vue.component('sections-pane', SectionsPane);
 
-    // Elements Pane
+    // Elements Panel
 
-    // Settings Pane
+    // Settings Panel
 
-    // Logical Pane
+    // Logical Panel
 
     export default {
         name    : 'upb-sidebar-contents',
         props   : ['index', 'model'],
         methods : {
             getPane(id){
-
-                // console.log(`${id}-pane`)
-
                 return `${id}-panel`;
             }
         }
