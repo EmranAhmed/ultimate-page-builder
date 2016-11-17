@@ -300,20 +300,99 @@ button:focus {
         }
       }
 
-    .row-grid-layouts-wrapper a {
-      position   : relative;
-      display    : inline-block;
-      width      : 60px;
-      height     : 20px;
-      padding    : 5px;
-      background : #FFFFFF;
-      margin     : 3px;
-      overflow   : hidden;
-      &.active {
-        background : #EAFFF6;
+    .row-contents-layout{
+      margin: 30px 0;
+      .row-grid-screen-sizes-title,
+      .row-grid-title{
+        font-size:12px;
+        margin-bottom: 10px;
         }
-      }
 
+      .row-grid-screen-sizes ul{
+        margin: 10px 0 30px;
+        li{
+          display: inline-block;
+          margin: 0 10px;
+          }
+        }
+
+
+      .row-grid-structure-wrapper {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+
+        a{
+          position   : relative;
+          height     : 40px;
+          width: 63px;
+          padding    : 0;
+          font-size: 12px;
+          text-decoration: none;
+          box-sizing: border-box;
+          margin-top: 5px;
+          text-align: center;
+          border-radius: 2px;
+          border:1px solid #dddddd;
+          background: #fff;
+
+          &.active {
+            background : #EAFFF6;
+            border-color: #03a9f4;
+            }
+
+          &.manual>.manual{
+            line-height: 38px;
+            height: 100%;
+            }
+
+          &:hover{
+            border-color: #03a9f4;
+
+            .grid-item-1{
+              background: #03a9f4;
+              }
+
+            }
+          }
+
+
+        .grid-item-1,
+        .grid-item-2{
+          height: 100%;
+          position: absolute;
+          width: 1px;
+          background: #ddd;
+          text-indent: 100%;
+          }
+
+        .grid-1-1 .grid-item-1{
+          display: none;
+          }
+
+        .grid-1-2 .grid-item-1{
+          left: 50%;
+          }
+
+        .grid-1-3__2-3 {
+          .grid-item-1{
+            left: 20px;
+            }
+
+          .grid-item-2{
+            right: 20px;
+            }
+          }
+
+
+
+
+        }
+
+      }
     }
   }
 
