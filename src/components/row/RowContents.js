@@ -88,7 +88,7 @@ export default {
     watch: {
         devices: {
             handler: function (val, oldVal) {
-                console.log(val, oldVal);
+               // console.log(val, oldVal);
             },
             deep: true
         }

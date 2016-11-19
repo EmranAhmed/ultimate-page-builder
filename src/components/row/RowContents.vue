@@ -13,6 +13,7 @@
                     <div @click.prevent="toggleDevice(device)" :class="{'active-device':device.active, 'device-acitivity':true}">
                         <span class="active" v-if="device.active">&check;</span>
                         <span class="inactive" v-else>&times;</span>
+                        <span class="re-config">&excl;</span>
                     </div>
                 </li>
             </ul>
