@@ -342,6 +342,10 @@ button:focus {
           &.active {
             background : #EAFFF6;
             border-color: #03a9f4;
+            .grid-item-1,
+            .grid-item-2{
+              background: #03a9f4;
+              }
             }
 
           &.manual>.manual{
@@ -352,10 +356,10 @@ button:focus {
           &:hover{
             border-color: #03a9f4;
 
-            .grid-item-1{
+            .grid-item-1,
+            .grid-item-2{
               background: #03a9f4;
               }
-
             }
           }
 
@@ -367,6 +371,7 @@ button:focus {
           width: 1px;
           background: #ddd;
           text-indent: 100%;
+          overflow: hidden;
           }
 
         .grid-1-1 .grid-item-1{
@@ -383,7 +388,67 @@ button:focus {
             }
 
           .grid-item-2{
+            display: none;
+            }
+          }
+
+        .grid-2-3__1-3 {
+          .grid-item-1{
             right: 20px;
+            }
+
+          .grid-item-2{
+            display: none;
+            }
+          }
+
+        .grid-1-3__1-3__1-3 {
+          .grid-item-1{
+            &:first-child{
+              left: 20px;
+              }
+
+            &:nth-child(2){
+              left: 41px;
+              }
+
+            &:nth-child(3){
+              display: none;
+              }
+            }
+          }
+
+        .grid-1-4__2-4__1-4 {
+          .grid-item-1{
+            &:first-child{
+              left: 15px;
+              }
+
+            &:last-child{
+              right: 15px;
+              }
+            }
+          .grid-item-2{
+            display: none;
+            }
+          }
+
+        .grid-1-4__1-4__1-4__1-4 {
+          .grid-item-1{
+            &:first-child{
+              left: 15px;
+              }
+
+            &:nth-child(2){
+              left: 50%;
+              }
+
+            &:nth-child(3){
+              right: 15px;
+              }
+            &:nth-child(4){
+              display: none;
+              }
             }
           }
 
