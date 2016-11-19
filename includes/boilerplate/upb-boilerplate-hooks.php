@@ -77,6 +77,7 @@
 		);
 	} );
 
+	// Will Comes From DB
 	add_filter( 'upb_sections_panel_contents', function () {
 
 
@@ -91,12 +92,12 @@
 								array(
 									'tag'        => 'column',
 									'contents'   => array(),
-									'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL', 'lg' => '', 'md' => '', 'sm' => '', 'xs' => '1:2' )
+									'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL 1', 'lg' => '1:2', 'md' => '1:2', 'sm' => '', 'xs' => '' )
 								),
 								array(
 									'tag'        => 'column',
 									'contents'   => array(),
-									'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL', 'lg' => '', 'md' => '', 'sm' => '', 'xs' => '1:2' )
+									'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL 2', 'lg' => '1:2', 'md' => '1:2', 'sm' => '', 'xs' => '' )
 								),
 							),
 							'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'ROW GEN' )
@@ -175,7 +176,7 @@
 					'class' => 'container'
 				),
 			),
-			'defaultDeviceId'   => 'xs',
+			'defaultDeviceId'   => 'xs', // We should set default column element attributes as like defaultDeviceId, If xs then [column xs='...']
 			'deviceSizeTitle'   => 'Screen Sizes',
 			'devices'           => apply_filters( 'upb_preview_devices', array() ),
 			'totalGrid'         => 12,
@@ -226,36 +227,39 @@
 
 
 	add_filter( 'upb_row_contents_panel_toolbar', function ( $tools ) {
-		$tools[] = array(
-			'class' => 'grid-1-1',
-			'value' => '1:1',
+		return array(
+			'new'     => apply_filters( 'upb_new_column_data', upb_elements()->get_element( 'column' ) ),
+			'layouts' => array(
+				array(
+					'class' => 'grid-1-1',
+					'value' => '1:1',
+				),
+				array(
+					'class' => 'grid-1-2',
+					'value' => '1:2 + 1:2',
+				),
+				array(
+					'class' => 'grid-1-3__2-3',
+					'value' => '1:3 + 2:3',
+				),
+				array(
+					'class' => 'grid-2-3__1-3',
+					'value' => '2:3 + 1:3',
+				),
+				array(
+					'class' => 'grid-1-3__1-3__1-3',
+					'value' => '1:3 + 1:3 + 1:3',
+				),
+				array(
+					'class' => 'grid-1-4__2-4__1-4',
+					'value' => '1:4 + 2:4 + 1:4',
+				),
+				array(
+					'class' => 'grid-1-4__1-4__1-4__1-4',
+					'value' => '1:4 + 1:4 + 1:4 + 1:4',
+				)
+			)
 		);
-		$tools[] = array(
-			'class' => 'grid-1-2',
-			'value' => '1:2 + 1:2',
-		);
-		$tools[] = array(
-			'class' => 'grid-1-3__2-3',
-			'value' => '1:3 + 2:3',
-		);
-		$tools[] = array(
-			'class' => 'grid-2-3__1-3',
-			'value' => '2:3 + 1:3',
-		);
-		$tools[] = array(
-			'class' => 'grid-1-3__1-3__1-3',
-			'value' => '1:3 + 1:3 + 1:3',
-		);
-		$tools[] = array(
-			'class' => 'grid-1-4__2-4__1-4',
-			'value' => '1:4 + 2:4 + 1:4',
-		);
-		$tools[] = array(
-			'class' => 'grid-1-4__1-4__1-4__1-4',
-			'value' => '1:4 + 1:4 + 1:4 + 1:4',
-		);
-
-		return $tools;
 	} );
 
 	// Register Tabs
@@ -375,20 +379,21 @@
 		wp_localize_script( 'upb-builder', '_upb_l10n',
 		                    apply_filters( '_upb_l10n_strings',
 		                                   array(
-			                                   'save'           => esc_attr__( 'Save' ),
-			                                   'create'         => esc_attr__( 'Create' ),
-			                                   'delete'         => esc_attr__( 'Are you sure to delete %s?' ),
-			                                   'column_manual'  => esc_attr__( 'Manual' ),
-			                                   'column_layout'  => esc_attr__( 'Column Layout of - %s' ),
-			                                   'column_sort'    => esc_attr__( 'Column Sort - %s' ),
-			                                   'close'          => esc_attr__( 'Close' ),
-			                                   'help'           => esc_attr__( 'Help' ),
-			                                   'search'         => esc_attr__( 'Search' ),
-			                                   'back'           => esc_attr__( 'Back' ),
-			                                   'breadcrumbRoot' => esc_attr__( 'You are building' ),
-			                                   'skeleton'       => esc_attr__( 'Skeleton preview' ),
-			                                   'collapse'       => esc_attr__( 'Collapse' ),
-			                                   'expand'         => esc_attr__( 'Expand' ),
+			                                   'save'             => esc_attr__( 'Save' ),
+			                                   'create'           => esc_attr__( 'Create' ),
+			                                   'delete'           => esc_attr__( 'Are you sure to delete %s?' ),
+			                                   'column_manual'    => esc_attr__( 'Manual' ),
+			                                   'column_layout_of' => esc_attr__( 'Columns Layout of - %s' ),
+			                                   'column_order'     => esc_attr__( 'Column Order' ),
+			                                   'column_layout'    => esc_attr__( 'Column Layout' ),
+			                                   'close'            => esc_attr__( 'Close' ),
+			                                   'help'             => esc_attr__( 'Help' ),
+			                                   'search'           => esc_attr__( 'Search' ),
+			                                   'back'             => esc_attr__( 'Back' ),
+			                                   'breadcrumbRoot'   => esc_attr__( 'You are building' ),
+			                                   'skeleton'         => esc_attr__( 'Skeleton preview' ),
+			                                   'collapse'         => esc_attr__( 'Collapse' ),
+			                                   'expand'           => esc_attr__( 'Expand' ),
 			                                   //'large'          => esc_attr__( 'Large device preview' ),
 			                                   //'medium'         => esc_attr__( 'Medium device preview' ),
 			                                   //'small'          => esc_attr__( 'Small device preview' ),

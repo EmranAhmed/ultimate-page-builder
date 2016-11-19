@@ -1,3 +1,6 @@
+<!--<template src="./template.html"></template>
+<style src="./style.css"></style>
+<script src="./script.js"></script>-->
 <template>
     <div id="upb-sidebar">
         <div id="progress-bar"></div>

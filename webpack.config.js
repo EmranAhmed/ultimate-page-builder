@@ -51,12 +51,12 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
     devtool : '#eval-source-map',
     entry   : {
-        builder : path.resolve(__dirname, './src/builder.js'),
+        builder     : path.resolve(__dirname, './src/builder.js'),
     },
     output  : {
         path       : path.resolve(__dirname, './assets'),
         publicPath : '/assets/',
-        filename   : 'js/upb-[name].js'
+        filename : 'js/upb-[name].js'
     },
     module  : {
         rules : [

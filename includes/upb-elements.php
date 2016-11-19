@@ -22,7 +22,7 @@
 			//'search' => 'Search Columns',
 			'tools' => array(
 				'list'     => apply_filters( 'upb_column_list_toolbar', array() ),
-				//'contents' => apply_filters( 'upb_column_contents_panel_toolbar', array() ),
+				'contents' => apply_filters( 'upb_column_contents_panel_toolbar', array() ),
 				'settings' => apply_filters( 'upb_column_settings_panel_toolbar', array() ),
 			)
 		);

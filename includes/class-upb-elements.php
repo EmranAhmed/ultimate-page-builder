@@ -31,6 +31,8 @@
 
 				$_upb_options[ 'focus' ] = FALSE;
 
+				$attributes = apply_filters( "upb_element_{$tag}_attributes", $attributes );
+
 				// @TODO: Already registered alert
 				$this->short_code_elements[ $tag ] = array(
 					'tag'           => $tag,
