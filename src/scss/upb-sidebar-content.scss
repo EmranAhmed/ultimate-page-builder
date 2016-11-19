@@ -309,10 +309,33 @@ button:focus {
         }
 
       .row-grid-screen-sizes ul{
-        margin: 10px 0 30px;
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 30px;
+        background: #fff;
+        border:1px solid #dddddd;
+        border-radius: 2px;
+
         li{
-          display: inline-block;
-          margin: 0 10px;
+          flex: 1;
+          padding: 0;
+          border-right:1px solid #dddddd;
+          text-align: center;
+
+          &:last-child{
+            border: 0;
+            }
+
+          i{
+            font-size: 20px;
+            padding: 10px;
+            display: block;
+            }
+
+          .device-acitivity{
+            
+
+            }
           }
         }
 
@@ -455,6 +478,15 @@ button:focus {
 
 
 
+        }
+
+      .row-grid-column input{
+          display: block;
+          width: 99%;
+          padding: 7px;
+          text-align: center;
+          margin: 10px 2px;
+          box-sizing: border-box;
         }
 
       }
