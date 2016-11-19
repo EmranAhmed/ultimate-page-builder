@@ -8,12 +8,12 @@
 
         <li class="row-grid-screen-sizes">
             <ul>
-                <li v-for="device in devices" :class="{current:device.current}" @click.prevent="currentDevice(device)" :title="device.title">
+                <li v-for="device in devices" :class="deviceClass(device)" @click.prevent="currentDevice(device)" :title="device.title">
                     <i :class="device.icon"></i>
-                    <div @click.prevent="toggleDevice(device)" :class="{'active-device':device.active, 'device-acitivity':true}">
+                    <span v-show="device.reconfig" class="re-config-icon">&excl;</span>
+                    <div @click.prevent="toggleDevice(device)" class="device-activity">
                         <span class="active" v-if="device.active">&check;</span>
                         <span class="inactive" v-else>&times;</span>
-                        <span class="re-config">&excl;</span>
                     </div>
                 </li>
             </ul>

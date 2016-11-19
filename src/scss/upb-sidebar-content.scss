@@ -300,193 +300,187 @@ button:focus {
         }
       }
 
-    .row-contents-layout{
-      margin: 30px 0;
+    .row-contents-layout {
+      margin : 30px 0;
       .row-grid-screen-sizes-title,
-      .row-grid-title{
-        font-size:12px;
-        margin-bottom: 10px;
+      .row-grid-title {
+        font-size     : 12px;
+        margin-bottom : 10px;
         }
 
-      .row-grid-screen-sizes ul{
-        display: flex;
-        justify-content: space-around;
-        margin-bottom: 30px;
-        background: #fff;
-        border:1px solid #dddddd;
-        border-radius: 2px;
+      .row-grid-screen-sizes ul {
+        display         : flex;
+        justify-content : space-around;
+        margin-bottom   : 30px;
+        background      : #FFFFFF;
+        border          : 1px solid #DDDDDD;
+        border-radius   : 2px;
 
-        li{
-          flex: 1;
-          padding: 0;
-          border-right:1px solid #dddddd;
-          text-align: center;
+        li {
+          flex         : 1;
+          padding      : 0;
+          border-right : 1px solid #DDDDDD;
+          text-align   : center;
 
-          &:last-child{
-            border: 0;
+          &:last-child {
+            border : 0;
             }
 
-          i{
-            font-size: 20px;
-            padding: 10px;
-            display: block;
+          i {
+            font-size : 20px;
+            padding   : 10px;
+            display   : block;
             }
 
-          .device-acitivity{
-            
+          .device-activity {
 
             }
           }
         }
-
 
       .row-grid-structure-wrapper {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-around;
+        padding         : 0;
+        margin          : 0;
+        list-style      : none;
+        display         : flex;
+        flex-flow       : row wrap;
+        justify-content : space-around;
 
-        a{
-          position   : relative;
-          height     : 40px;
-          width: 63px;
-          padding    : 0;
-          font-size: 12px;
-          text-decoration: none;
-          box-sizing: border-box;
-          margin-top: 5px;
-          text-align: center;
-          border-radius: 2px;
-          border:1px solid #dddddd;
-          background: #fff;
+        a {
+          position        : relative;
+          height          : 40px;
+          width           : 63px;
+          padding         : 0;
+          font-size       : 12px;
+          text-decoration : none;
+          box-sizing      : border-box;
+          margin-top      : 5px;
+          text-align      : center;
+          border-radius   : 2px;
+          border          : 1px solid #DDDDDD;
+          background      : #FFFFFF;
 
           &.active {
-            background : #EAFFF6;
-            border-color: #03a9f4;
+            background   : #EAFFF6;
+            border-color : #03A9F4;
             .grid-item-1,
-            .grid-item-2{
-              background: #03a9f4;
+            .grid-item-2 {
+              background : #03A9F4;
               }
             }
 
-          &.manual>.manual{
-            line-height: 38px;
-            height: 100%;
+          &.manual > .manual {
+            line-height : 38px;
+            height      : 100%;
             }
 
-          &:hover{
-            border-color: #03a9f4;
+          &:hover {
+            border-color : #03A9F4;
 
             .grid-item-1,
-            .grid-item-2{
-              background: #03a9f4;
+            .grid-item-2 {
+              background : #03A9F4;
               }
             }
           }
-
 
         .grid-item-1,
-        .grid-item-2{
-          height: 100%;
-          position: absolute;
-          width: 1px;
-          background: #ddd;
-          text-indent: 100%;
-          overflow: hidden;
+        .grid-item-2 {
+          height      : 100%;
+          position    : absolute;
+          width       : 1px;
+          background  : #DDDDDD;
+          text-indent : 100%;
+          overflow    : hidden;
           }
 
-        .grid-1-1 .grid-item-1{
-          display: none;
+        .grid-1-1 .grid-item-1 {
+          display : none;
           }
 
-        .grid-1-2 .grid-item-1{
-          left: 50%;
+        .grid-1-2 .grid-item-1 {
+          left : 50%;
           }
 
         .grid-1-3__2-3 {
-          .grid-item-1{
-            left: 20px;
+          .grid-item-1 {
+            left : 20px;
             }
 
-          .grid-item-2{
-            display: none;
+          .grid-item-2 {
+            display : none;
             }
           }
 
         .grid-2-3__1-3 {
-          .grid-item-1{
-            right: 20px;
+          .grid-item-1 {
+            right : 20px;
             }
 
-          .grid-item-2{
-            display: none;
+          .grid-item-2 {
+            display : none;
             }
           }
 
         .grid-1-3__1-3__1-3 {
-          .grid-item-1{
-            &:first-child{
-              left: 20px;
+          .grid-item-1 {
+            &:first-child {
+              left : 20px;
               }
 
-            &:nth-child(2){
-              left: 41px;
+            &:nth-child(2) {
+              left : 41px;
               }
 
-            &:nth-child(3){
-              display: none;
+            &:nth-child(3) {
+              display : none;
               }
             }
           }
 
         .grid-1-4__2-4__1-4 {
-          .grid-item-1{
-            &:first-child{
-              left: 15px;
+          .grid-item-1 {
+            &:first-child {
+              left : 15px;
               }
 
-            &:last-child{
-              right: 15px;
+            &:last-child {
+              right : 15px;
               }
             }
-          .grid-item-2{
-            display: none;
+          .grid-item-2 {
+            display : none;
             }
           }
 
         .grid-1-4__1-4__1-4__1-4 {
-          .grid-item-1{
-            &:first-child{
-              left: 15px;
+          .grid-item-1 {
+            &:first-child {
+              left : 15px;
               }
 
-            &:nth-child(2){
-              left: 50%;
+            &:nth-child(2) {
+              left : 50%;
               }
 
-            &:nth-child(3){
-              right: 15px;
+            &:nth-child(3) {
+              right : 15px;
               }
-            &:nth-child(4){
-              display: none;
+            &:nth-child(4) {
+              display : none;
               }
             }
           }
 
-
-
-
         }
 
-      .row-grid-column input{
-          display: block;
-          width: 99%;
-          padding: 7px;
-          text-align: center;
-          margin: 10px 2px;
-          box-sizing: border-box;
+      .row-grid-column input {
+        display    : block;
+        width      : 99%;
+        padding    : 7px;
+        text-align : center;
+        margin     : 10px 2px;
+        box-sizing : border-box;
         }
 
       }
