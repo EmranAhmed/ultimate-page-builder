@@ -64,7 +64,7 @@
 
 
         <!--<li>{{ model._upb_options.tools }}</li>-->
-        <li></li>
+        <li>{{ model.contents }}</li>
 
     </ul>
 </template>

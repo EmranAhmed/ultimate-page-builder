@@ -6,7 +6,7 @@
 	add_action( 'upb_register_element', function ( $element ) {
 
 		$attributes = array(
-			'title'      => array( 'type' => 'text', 'value' => 'Column' ),
+			'title'      => array( 'type' => 'text', 'value' => 'Column %s' ),
 			'lg'         => array( 'type' => 'text', 'value' => '' ),
 			'md'         => array( 'type' => 'text', 'value' => '' ),
 			'sm'         => array( 'type' => 'text', 'value' => '' ),

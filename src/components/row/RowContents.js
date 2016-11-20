@@ -65,6 +65,7 @@ export default {
     },
     created(){
 
+        // this.loadContents();
         this.devices = this.getDevices();
         this.setToolsForDevices();
         this.setSelectedColumnLayout();
@@ -100,56 +101,77 @@ export default {
 
             //let activeDevices = this.devices.filter((d)=> !!d.active);
 
-            this.$watch(`selectedColumnLayout`, (value) => {
+            this.devices.map((device)=> {
 
-                let activeDevices = this.devices.filter((d)=> !!d.active);
+                this.$watch(`selectedColumnLayout.${device.id}`, (value) => {
 
-                let totalColumns = activeDevices.map((device)=> value[device.id]).join(' + ').split('+');
+                    let activeDevices    = this.devices.filter((d)=> !!d.active);
+                    let totalColumns     = _.compact(activeDevices.map((d)=> this.selectedColumnLayout[d.id])).join(' + ').split('+');
+                    let currentColLength = value.split('+').length;
 
-                //console.log('Active devices', activeDevices);
-                //console.log('total Columns', totalColumns);
+                    if (activeDevices.length == 1) {
+                        //
 
-                let shouldAddNewColumn = Math.round(totalColumns.length / activeDevices.length) > this.model.contents.length;
-                let shouldRemoveColumn = Math.round(totalColumns.length / activeDevices.length) < this.model.contents.length;
+                        console.log('Only One Device Using')
+                    }
 
-                if (totalColumns.length == 1) {
-                    // this.columnOperation(shouldAddNewColumn, shouldRemoveColumn);
-                }
+                    this.devices.map((d)=> {
 
-                activeDevices.map((device)=> {
+                        let colLength = this.selectedColumnLayout[d.id].split('+').length;
 
-                    //console.log(device.id, value[device.id]);
+                        d.reconfig = false;
 
-                    let columns = value[device.id].split('+');
+                        if (device.active && d.active && activeDevices.length > 1 && d.id != device.id && currentColLength !== colLength) {
 
-                    // if( totalColumns.length >  )
-
-                    console.log(device.id, columns.length)
-                    //console.log(totalColumns.length)
-
-                    columns.map((col, i)=> {
-
-                        //colArray.push({`${device.id}`:col.trim()});
-                        if (this.model.contents[i]) {
-                            this.model.contents[i].attributes[device.id] = col.trim()
+                            d.reconfig = true;
                         }
-
-                        //console.log(i, `${device.id}`, col.trim())
 
                     });
 
-                    //return value[device.id]
+                    this.selectedColumnOperation(totalColumns, activeDevices, device, value);
 
-                });
+                    //  console.log(totalColumns.length, activeDevices.length);
 
-            }, {deep : true});
+                }, {deep : true});
+
+            })
 
             // device specific watch
 
             //this.$watch(`selectedColumnLayout`)
         },
 
-        columnOperation(add, remove, device){
+        selectedColumnOperation(totalColumns, activeDevices, device, value){
+
+            let shouldAddNewColumn = Math.round(totalColumns.length / activeDevices.length) > this.model.contents.length;
+            let shouldRemoveColumn = Math.round(totalColumns.length / activeDevices.length) < this.model.contents.length;
+            let columnNeeded       = Math.round(totalColumns.length / activeDevices.length);
+
+            console.log('Add Column', shouldAddNewColumn, 'Remove column', shouldRemoveColumn);
+
+            console.log('total col', totalColumns.length, 'current', this.model.contents.length, 'need', columnNeeded)
+
+            console.log('x', Math.round(totalColumns.length / activeDevices.length));
+
+            if (shouldAddNewColumn && (totalColumns.length % activeDevices.length === 0)) {
+
+                //for()
+                this.addNew('', this.model._upb_options.tools.contents.new)
+
+                //this.model.contents.push(extend(true, {}, this.model._upb_options.tools.contents.new));
+                //this.model.contents
+            }
+            if (shouldRemoveColumn) {
+
+
+                //this.deleteItem();
+
+                //this.model.contents
+            }
+
+            this.changeDeviceColumnLayout(device);
+
+            // this.model.contents
 
             // extend(true, {}, this.model._upb_options.tools.contents.new)
         },
@@ -201,72 +223,63 @@ export default {
 
         toggleDevice(device){
             device.active = !device.active;
-            this.reConfigColumnAfterDeviceActive(device)
+            this.reConfigColumnNotice(device)
         },
 
-        reConfigColumnAfterDeviceActive(device){
+        reConfigColumnNotice(device){
 
-            let columns = this.selectedColumnLayout[device.id];
+            let columns = this.selectedColumnLayout[device.id].trim();
 
             let activeDevices = this.devices.filter((d)=> !!d.active);
 
-            let totalColumns = activeDevices.map((device)=> this.selectedColumnLayout[device.id]).join(' + ').split('+');
+            let totalColumns = _.compact(activeDevices.map((device)=> this.selectedColumnLayout[device.id])).join(' + ').split(' + ');
 
-            if (device.active) {
+            this.selectedColumnLayout[device.id] = columns;
 
-                // Need to re-config this device, this device have no columns yet
-                if (!columns.trim()) {
-                    device.reconfig                      = true;
-                    // watch again :)
-                    this.selectedColumnLayout[device.id] = '+';
-                }
-                else {
-                    // watch again :)
-                    this.selectedColumnLayout[device.id] = '';
+            this.changeDeviceColumnLayout(device);
 
-                    // Need to re-config other active devices
-                    if (totalColumns.length % activeDevices.length !== 0) {
-                        this.devices.map((d)=> {
-                            if (d.active && d.id != device.id) {
-                                d.reconfig = true;
-                            }
-                        });
-                    }
-                    else {
-                        this.devices.map((d)=> {
-                            if (!d.active) {
-                                d.reconfig = false;
-                            }
-                        });
-                    }
-                }
+            // no column layout selected.
+            // so we should show re-config based on active / inactive.
+            if (!columns) {
+                device.reconfig = device.active ? true : false;
             }
             else {
 
-                // watch again :)
-                this.selectedColumnLayout[device.id] = '';
+                let currentColLength = columns.split('+').length;
 
-                // Every device have same column length wow :)
-                if (totalColumns.length % activeDevices.length == 0) {
-                    this.devices.map((d)=> {
-                        d.reconfig = false;
-                    });
-                }
-                else {
-                    this.devices.map((d)=> {
-                        if (!d.active) {
-                            d.reconfig = false;
-                        }
-                    });
-                }
+                this.devices.map((d)=> {
+
+                    let colLength = this.selectedColumnLayout[d.id].split('+').length;
+
+                    d.reconfig = false;
+
+                    if (device.active && d.active && activeDevices.length > 1 && d.id != device.id && currentColLength !== colLength) {
+                        d.reconfig = true;
+                    }
+
+                });
+
             }
 
-            // after dom updated
-            this.$nextTick(_=> {
-                console.log(columns);
+        },
 
-                this.selectedColumnLayout[device.id] = columns;
-            });
+        changeDeviceColumnLayout(device){
+            let columns = this.selectedColumnLayout[device.id].trim();
+
+            if (columns) {
+                columns.split('+').map((col, i)=> {
+
+                    if (this.model.contents[i]) {
+
+                        if (device.active) {
+                            this.model.contents[i].attributes[device.id] = col.trim();
+                        }
+                        else {
+                            this.model.contents[i].attributes[device.id] = '';
+                        }
+                    }
+                })
+            }
 
         },
 
@@ -549,12 +562,13 @@ export default {
             }
         },
 
-        addNew(e, data){
-            let section = extend(true, {}, data);
+        addNew(e, contents){
+            let data = extend(true, {}, contents);
 
-            section.attributes.title = sprintf(section.attributes.title, (this.model.contents.length + 1));
-
-            this.model.contents.push(section);
+            if (data.attributes.title) {
+                data.attributes.title = sprintf(data.attributes.title, (this.model.contents.length + 1));
+            }
+            this.model.contents.push(data);
             store.stateChanged();
         }
     }
