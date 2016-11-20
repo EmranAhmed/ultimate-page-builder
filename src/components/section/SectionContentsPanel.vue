@@ -62,7 +62,7 @@
             </ul>
 
 
-            <component v-for="(item, index) in contents" v-if="isCurrentRow(index)" :index="index" :model="item" :is="childComponent"></component>
+            <component v-for="(item, index) in contents" v-show="showChild" v-if="isCurrentRow(index)" :index="index" :model="item" :is="childComponent"></component>
 
         </li>
 

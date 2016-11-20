@@ -46,14 +46,18 @@
                         <li v-show="showManualInput[device.id]" class="row-grid-column">
                             <div class="row-grid-column-input">
                                 <input v-model.lazy="selectedColumnLayout[device.id]" type="text">
-                                <!--
-                                                                <div v-if="showRatioSuggestion" class="suggestionMessage" v-text="ratioSuggestionMessage"></div>
-                                -->
+                                <div v-if="device.ratioSuggestion" class="suggestionMessage" v-text="device.ratioSuggestionMsg"></div>
                             </div>
                         </li>
 
                         <li class="row-grid-order-title" v-text="l10n.column_order + ' - ' + device.title"></li>
 
+
+                        <li class="row-grid-order-wrapper">
+                            <ul class="row-grid-order">
+                                <li></li>
+                            </ul>
+                        </li>
 
                     </ul>
 
@@ -64,7 +68,7 @@
 
 
         <!--<li>{{ model._upb_options.tools }}</li>-->
-        <li>{{ model.contents }}</li>
+        <li></li>
 
     </ul>
 </template>

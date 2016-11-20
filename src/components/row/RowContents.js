@@ -8,8 +8,6 @@ import extend from 'extend'
 
 import {sprintf} from 'sprintf-js'
 
-// import math from 'mathjs';
-
 // import RowList from '../row/RowList.vue';
 
 Vue.use(Sortable);
@@ -42,8 +40,6 @@ export default {
             searchQuery          : '',
             selectedColumnLayout : {},
             showManualInput      : {},
-            //showRatioSuggestion    : false,
-            //ratioSuggestionMessage : '',
             devices              : []
         }
     },
@@ -111,8 +107,7 @@ export default {
 
                     if (activeDevices.length == 1) {
                         //
-
-                        console.log('Only One Device Using')
+                        // console.log('Only One Device Using')
                     }
 
                     this.devices.map((d)=> {
@@ -122,15 +117,11 @@ export default {
                         d.reconfig = false;
 
                         if (device.active && d.active && activeDevices.length > 1 && d.id != device.id && currentColLength !== colLength) {
-
                             d.reconfig = true;
                         }
-
                     });
 
-                    this.selectedColumnOperation(totalColumns, activeDevices, device, value);
-
-                    //  console.log(totalColumns.length, activeDevices.length);
+                    this.selectedColumnOperation(device, value);
 
                 }, {deep : true});
 
@@ -141,32 +132,30 @@ export default {
             //this.$watch(`selectedColumnLayout`)
         },
 
-        selectedColumnOperation(totalColumns, activeDevices, device, value){
+        selectedColumnOperation(device, value){
+
+            let runOperation  = !this.devices.some((d)=> {
+                return d.reconfig == true;
+            });
+            let activeDevices = this.devices.filter((d)=> !!d.active);
+            let totalColumns  = _.compact(activeDevices.map((d)=> this.selectedColumnLayout[d.id])).join(' + ').split('+');
 
             let shouldAddNewColumn = Math.round(totalColumns.length / activeDevices.length) > this.model.contents.length;
             let shouldRemoveColumn = Math.round(totalColumns.length / activeDevices.length) < this.model.contents.length;
-            let columnNeeded       = Math.round(totalColumns.length / activeDevices.length);
 
-            console.log('Add Column', shouldAddNewColumn, 'Remove column', shouldRemoveColumn);
+            this.validateColumnInput(device, value);
 
-            console.log('total col', totalColumns.length, 'current', this.model.contents.length, 'need', columnNeeded)
+            if (runOperation && shouldAddNewColumn && (totalColumns.length % activeDevices.length === 0)) {
 
-            console.log('x', Math.round(totalColumns.length / activeDevices.length));
-
-            if (shouldAddNewColumn && (totalColumns.length % activeDevices.length === 0)) {
-
-                //for()
-                this.addNew('', this.model._upb_options.tools.contents.new)
-
-                //this.model.contents.push(extend(true, {}, this.model._upb_options.tools.contents.new));
-                //this.model.contents
+                let columnNeedToAdd = Math.round(totalColumns.length / activeDevices.length) - this.model.contents.length;
+                for (let i = 1; i <= columnNeedToAdd; i++) {
+                    this.addNew('', this.model._upb_options.tools.contents.new);
+                }
             }
-            if (shouldRemoveColumn) {
-
-
-                //this.deleteItem();
-
-                //this.model.contents
+            if (runOperation && shouldRemoveColumn) {
+                let columnNeedToRemove = this.model.contents.length - Math.round(totalColumns.length / activeDevices.length);
+                let start              = Math.round(totalColumns.length / activeDevices.length);
+                this.deleteItem(start, columnNeedToRemove);
             }
 
             this.changeDeviceColumnLayout(device);
@@ -183,9 +172,11 @@ export default {
 
             let devices = grid.devices.map((device, index) => {
 
-                device['active']   = false;
-                device['current']  = false;
-                device['reconfig'] = false;
+                device['active']             = false;
+                device['current']            = false;
+                device['reconfig']           = false;
+                device['ratioSuggestion']    = false;
+                device['ratioSuggestionMsg'] = '';
 
                 this.model.contents.map((column) => {
                     let selected = column.attributes[device.id].trim();
@@ -238,6 +229,8 @@ export default {
 
             this.changeDeviceColumnLayout(device);
 
+            store.stateChanged();
+
             // no column layout selected.
             // so we should show re-config based on active / inactive.
             if (!columns) {
@@ -266,6 +259,8 @@ export default {
         changeDeviceColumnLayout(device){
             let columns = this.selectedColumnLayout[device.id].trim();
 
+            store.stateChanged();
+
             if (columns) {
                 columns.split('+').map((col, i)=> {
 
@@ -292,10 +287,16 @@ export default {
             device.current = true;
         },
 
-        validateColumnInput(newValue){
+        validateColumnInput(device, value){
+
+            //console.log(device, value);
+
             try {
 
-                let totalGrid = newValue.split('+').map((i) => i.trim());
+                device.ratioSuggestion    = false;
+                device.ratioSuggestionMsg = '';
+
+                let totalGrid = value.split('+').map((i) => i.trim());
 
                 let gridArray = totalGrid.map((i) => parseInt(i.split(':')[0].trim()));
 
@@ -315,7 +316,7 @@ export default {
 
                     // suggession msg
 
-                    this.ratioSuggestion(grid, gridArray, gridValueCount);
+                    this.ratioSuggestion(device, gridArray, gridValueCount);
 
                 }
                 else {
@@ -326,14 +327,40 @@ export default {
                 //console.log(items);
 
             } catch (e) {
-
+                console.log(e);
             }
         },
 
-        ratioSuggestion(grid, gridArray, gridValueCount){
-            // I know that ES6 have spread operator but my IDE in .vue extension does not support
-            // es6 features :(
-            // math.gcd(...itemArray)
+        gcd(input) {
+            if (toString.call(input) !== "[object Array]")
+                return false;
+            var len, a, b;
+            len = input.length;
+            if (!len) {
+                return null;
+            }
+            a = input[0];
+            for (var i = 1; i < len; i++) {
+                b = input[i];
+                a = this.gcd_two(a, b);
+            }
+            return a;
+        },
+
+        gcd_two(x, y) {
+            if ((typeof x !== 'number') || (typeof y !== 'number'))
+                return false;
+            x = Math.abs(x);
+            y = Math.abs(y);
+            while (y) {
+                var t = y;
+                y     = x % y;
+                x     = t;
+            }
+            return x;
+        },
+
+        ratioSuggestion(device, gridArray, gridValueCount){
 
             //  A ratio can be simplified by dividing both sides of the ratio by the Highest Common Factor (HCF). I mean greatest common divisor :D
 
@@ -341,9 +368,9 @@ export default {
 
             itemArray.push(gridValueCount);
 
-            // console.log(itemArray);
+            console.log(itemArray);
 
-            let common = math.gcd(...itemArray);
+            let common = this.gcd(itemArray);
             if (common > 1) {
 
                 itemArray.pop();
@@ -352,9 +379,9 @@ export default {
 
                 let simplifiedGrid = itemArray.map((i) => (i / common) + ":" + simplifiedRatio);
 
-                this.ratioSuggestionMessage = sprintf(this.grid.simplifiedRatio, simplifiedGrid.join(' + '));
+                device.ratioSuggestionMsg = sprintf(this.grid.simplifiedRatio, simplifiedGrid.join(' + '));
 
-                this.showRatioSuggestion = true;
+                device.ratioSuggestion = true;
             }
         },
 
@@ -497,8 +524,8 @@ export default {
             return `${id}-list`;
         },
 
-        deleteItem(index){
-            this.model.contents.splice(index, 1);
+        deleteItem(start, end = 1){
+            this.model.contents.splice(start, end);
             store.stateChanged();
         },
 
@@ -531,6 +558,7 @@ export default {
         },
 
         onStart(e){
+            console.log('sort start');
             this.searchQuery = ''
         },
 
