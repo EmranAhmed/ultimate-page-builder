@@ -15,28 +15,28 @@
                             <div class="upb-breadcrumb">
                                 <ul>
                                     <li class="breadcrumb" v-if="breadcrumb.length > 0" v-for="b in breadcrumb">{{ b }}</li>
-                                    <li class="no-breadcrumb" v-else>{{ l10n.breadcrumbRoot }}</li>
+                                    <li class="no-breadcrumb" v-else v-text="l10n.breadcrumbRoot"></li>
                                 </ul>
                             </div>
 
-                            <div class="panel-title">{{ model.attributes.title }}</div>
+                            <div class="panel-title" v-text="panelTitle"></div>
                         </div>
 
-                        <button v-if="model._upb_options.help" @click.prevent="toggleHelp()" :class="[{ active: showHelp }, 'upb-content-help-toggle']" tabindex="0">
+                        <button v-if="model._upb_options.meta.contents.help" @click.prevent="toggleHelp()" :class="[{ active: showHelp }, 'upb-content-help-toggle']" tabindex="0">
                             <i class="mdi mdi-help-circle-outline"></i>
                         </button>
 
-                        <button v-if="model._upb_options.search" @click.prevent="toggleFilter()" :class="[{ active: showSearch }, 'upb-content-search-toggle']" tabindex="0">
+                        <button v-if="model._upb_options.meta.contents.search" @click.prevent="toggleFilter()" :class="[{ active: showSearch }, 'upb-content-search-toggle']" tabindex="0">
                             <i class="mdi mdi-magnify"></i>
                         </button>
                     </div>
                 </li>
 
                 <li class="upb-panel-meta">
-                    <div v-if="showHelp" v-html="model._upb_options.help"></div>
+                    <div v-if="showHelp" v-html="model._upb_options.meta.contents.help"></div>
 
                     <div v-if="showSearch">
-                        <input v-model="searchQuery" :placeholder="model._upb_options.search" type="search">
+                        <input v-model="searchQuery" :placeholder="model._upb_options.meta.contents.search" type="search">
                     </div>
                 </li>
 

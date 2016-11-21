@@ -55,7 +55,7 @@
 
                         <li class="row-grid-order-wrapper">
                             <ul class="row-grid-order">
-                                <li></li>
+                                <li v-for="contents in model.contents">{{ contents }}</li>
                             </ul>
                         </li>
 

@@ -11,7 +11,6 @@ Vue.use(VueNProgress);
 
 //const status = window._upb_status;
 
-
 // window.upbBuilder
 const upbBuilder = new Vue({
     el   : '#upb-sidebar',

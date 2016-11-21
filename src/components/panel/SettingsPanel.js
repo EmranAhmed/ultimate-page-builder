@@ -1,21 +1,19 @@
-import Vue, { util } from 'vue';
 
+import Vue, { util } from 'vue';
 import store from '../../store'
 
 import Sortable from '../../plugins/vue-sortable'
 import extend from 'extend';
 import {sprintf} from 'sprintf-js';
-import RowList from '../row/RowList.vue';
-import RowContents from '../row/RowContents.vue';
+import SectionList from '../section/SectionList.vue';
 
 Vue.use(Sortable);
 
-// Row List
-Vue.component('row-list', RowList);
-Vue.component('row-contents', RowContents);
+// Section List
+Vue.component('section-list', SectionList);
 
 export default {
-    name  : 'section-contents-panel',
+    name  : 'settings-panel',
     props : ['index', 'model'],
 
     data(){
@@ -33,27 +31,27 @@ export default {
                 placeholder : "upb-sort-placeholder",
                 axis        : 'y'
             },
-            searchQuery : '',
+            searchQuery : ''
         }
     },
 
     computed : {
 
-        panelTitle(){
-            return sprintf(this.model._upb_options.meta.contents.title, this.model.attributes.title)
-        },
-
         panelClass(){
             //return [`upb-${this.model.id}-panel`, this.currentPanel ? 'current' : ''].join(' ');
-            return [`upb-${this.model.tag}-panel`, `upb-panel-wrapper`].join(' ');
+            return [`upb-${this.model.id}-panel`, `upb-panel-wrapper`].join(' ');
+        },
+
+        currentPanel(){
+            // return this.breadcrumb[this.breadcrumb.length - 1] == this.model.id;
         },
 
         contents(){
-
             let query = this.searchQuery.toLowerCase().trim();
-
             if (query) {
-                return this.model.contents.filter((data) => new RegExp(query, 'gui').test(data.attributes.title.toLowerCase().trim()))
+                return this.model.contents.filter(function (data) {
+                    return new RegExp(query, 'gui').test(data.title.toLowerCase().trim())
+                })
             }
             else {
                 return this.model.contents;
@@ -61,60 +59,7 @@ export default {
         }
     },
 
-    watch : {
-        searchQuery(search){
-            if (search.trim()) {
-                this.showChild = false;
-            }
-        }
-    },
-
-    created(){
-        this.loadContents()
-    },
-
     methods : {
-
-        isCurrentRow(index){
-            return this.childId == index;
-        },
-
-        loadContents(){
-            if (this.model.contents.length > 0) {
-                this.$progressbar.show();
-                store.upbElementOptions(this.model.contents, (data) => {
-                    this.$nextTick(function () {
-                        Vue.set(this.model, 'contents', extend(true, [], data));
-                        this.afterContentLoaded();
-                    });
-
-                    this.$progressbar.hide();
-                }, (data) => {
-                    console.log(data);
-                    this.$progressbar.hide();
-                });
-            }
-        },
-
-        afterContentLoaded(){
-            if (this.model.contents.length > 0) {
-                this.childId = 0;
-                this.openContentsPanel(this.childId);
-            }
-        },
-
-        afterSort(values){
-            this.childId   = values.newIndex;
-            this.showChild = true;
-        },
-
-        showSettingsPanel(){
-            this.$emit('showSettingsPanel')
-        },
-
-        back(){
-            this.$emit('onBack')
-        },
 
         backed(){
             this.breadcrumb.pop();
@@ -129,23 +74,23 @@ export default {
             //this.showChild      = false;
         },
 
-        openContentsPanel(index){
-
-            //this.clearPanel();
-
-            this.showChild      = true;
-            this.childId        = index;
-            this.childComponent = 'row-contents';
-            //this.breadcrumb.push(this.model.title);
-        },
-
-        openSettingsPanel(index){
+        showContentPanel(index){
 
             this.clearPanel();
 
             this.showChild      = true;
             this.childId        = index;
-            this.childComponent = 'row-settings-panel';
+            this.childComponent = 'section-contents-panel';
+            this.breadcrumb.push(this.model.title);
+        },
+
+        showSettingsPanel(index){
+
+            this.clearPanel();
+
+            this.showChild      = true;
+            this.childId        = index;
+            this.childComponent = 'section-settings-panel';
             this.breadcrumb.push(this.model.title);
         },
 
@@ -163,8 +108,10 @@ export default {
         },
 
         cloneItem(index, item){
-            let cloned              = extend(true, {}, item);
-            cloned.attributes.title = `Clone of ${cloned.attributes.title}`
+            let cloned = extend(true, {}, item);
+
+            cloned.title = `Clone of ${cloned.title}`;
+
             this.model.contents.splice(index + 1, 0, cloned);
             store.stateChanged();
         },
@@ -183,17 +130,15 @@ export default {
 
             Vue.delete(this.model, 'contents');
 
-            this.$nextTick(() => {
+            this.$nextTick(function () {
                 Vue.set(this.model, 'contents', extend(true, [], list));
-                this.afterSort(values);
             });
 
             // store.stateChanged();
         },
 
         onStart(e){
-            this.searchQuery = '';
-            this.showChild   = false;
+            this.searchQuery = ''
         },
 
         toggleHelp(){
@@ -205,7 +150,7 @@ export default {
             this.showHelp   = false;
             this.showSearch = !this.showSearch;
 
-            this.$nextTick(() => {
+            this.$nextTick(function () {
                 if (this.showSearch) {
                     this.$el.querySelector('input[type="search"]').focus()
                 }
@@ -217,7 +162,7 @@ export default {
             let data = tool.data ? tool.data : false;
 
             if (!this[action]) {
-                util.warn(`You need to implement ${action} method.`, this);
+                util.warn(`You need to implement '${action}' method.`, this);
             }
             else {
                 this[action](event, data);
@@ -225,9 +170,8 @@ export default {
         },
 
         addNew(e, data){
-            let section = extend(true, {}, data);
-
-            section.attributes.title = sprintf(section.attributes.title, (this.model.contents.length + 1));
+            let section   = extend(true, {}, data);
+            section.title = sprintf(section.title, (this.model.contents.length + 1));
 
             this.model.contents.push(section);
             store.stateChanged();

@@ -18,8 +18,6 @@
 		$contents = array();
 
 		$_upb_options = array(
-			//'help'   => '<h2>What to do?</h2><p>Add row and start</p>',
-			//'search' => 'Search Columns',
 			'tools' => array(
 				'list'     => apply_filters( 'upb_column_list_toolbar', array() ),
 				'contents' => apply_filters( 'upb_column_contents_panel_toolbar', array() ),
@@ -69,13 +67,24 @@
 		$contents = array();
 
 		$_upb_options = array(
-			'help'   => '<h2>Want to add contents?</h2><p>Choose a section and drag elements</p>',
-			'search' => 'Search Rows',
-			'tools'  => array(
+			'tools' => array(
 				'list'     => apply_filters( 'upb_section_list_toolbar', array() ),
 				'contents' => apply_filters( 'upb_section_contents_panel_toolbar', array() ),
 				'settings' => apply_filters( 'upb_section_settings_panel_toolbar', array() ),
-			)
+			),
+			'meta'  => array(
+				'contents' => apply_filters( 'upb_section_contents_panel_meta', array(
+					'help'   => '<h2>Want to add contents?</h2><p>Choose a section and drag elements</p>',
+					'search' => 'Search Rows',
+					'title'  => '%s'
+				) ),
+				'settings' => apply_filters( 'upb_section_settings_panel_meta', array(
+					'help'   => '<h2>Section Settings?</h2><p>section settings</p>',
+					'search' => '',
+					'title'  => '%s Settings'
+				) ),
+			),
+
 		);
 
 		$element->register( 'section', $attributes, $contents, $_upb_options );

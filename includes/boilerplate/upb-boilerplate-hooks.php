@@ -78,10 +78,12 @@
 	} );
 
 	// Will Comes From DB
-	add_filter( 'upb_sections_panel_contents', function () {
+	add_filter( '_____upb_sections_panel_contents', function () {
 
 
-		return upb_elements()->set_upb_options(
+		return array();
+
+		/*return upb_elements()->set_upb_options(
 			array(
 				array(
 					'tag'        => 'section',
@@ -112,7 +114,7 @@
 					'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'Section B' )
 				)
 			)
-		);
+		);*/
 
 		/*return upb_elements()->set_upb_options(
 			array(
@@ -299,19 +301,20 @@
 			                                                     )
 			), // add section | load section | layouts
 			'icon'     => 'mdi mdi-package-variant',
-			'contents' => apply_filters( 'upb_sections_panel_contents', array() ), // load from get_post_meta
+			'contents' => apply_filters( 'upb_sections_panel_contents', array() ),
+			// load from get_post_meta, if you load data then ajax data will not run
 		);
 		$tab->register( 'sections', $data, TRUE );
 
 
-		/*$data = array(
+		$data = array(
 			'title'    => 'Elements',
 			'help'     => '<h2>Just Getting Starting?</h2><p>Add a section</p>',
 			'tools'    => apply_filters( 'upb_tab_elements_tools', array() ), // add section | load section | layouts
 			'icon'     => 'mdi mdi-shape-plus',
 			'contents' => apply_filters( 'upb_tab_elements_contents', array() ),
 		);
-		$tab->register( 'elements', $data, FALSE );*/
+		$tab->register( 'elements', $data, FALSE );
 
 
 		/*$data = array(
@@ -365,6 +368,7 @@
 
 
 		$data = sprintf( "var _upb_tabs = %s;\n", upb_tabs()->getJSON() );
+		//$data = sprintf( "var _upb_tabs = %s;\n", wp_json_encode( array() ) );
 
 		$data .= sprintf( "var _upb_status = %s;\n", wp_json_encode( array( 'dirty' => FALSE, '_nonce' => wp_create_nonce( '_upb' ), '_id' => get_the_ID() ) ) );
 
@@ -387,6 +391,7 @@
 			                                   'column_order'     => esc_attr__( 'Column Order' ),
 			                                   'column_layout'    => esc_attr__( 'Column Layout' ),
 			                                   'close'            => esc_attr__( 'Close' ),
+			                                   'clone'            => esc_attr__( 'Clone of %s' ),
 			                                   'help'             => esc_attr__( 'Help' ),
 			                                   'search'           => esc_attr__( 'Search' ),
 			                                   'back'             => esc_attr__( 'Back' ),

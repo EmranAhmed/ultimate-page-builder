@@ -13,9 +13,9 @@
 <script>
     import Vue from 'vue';
 
-    import UPBSidebarHeader from './components/UPBSidebarHeader.vue';
-    import UPBSidebarContent from './components/UPBSidebarContent.vue';
-    import UPBSidebarFooter from './components/UPBSidebarFooter.vue';
+    import UPBSidebarHeader from './components/sidebar/UPBSidebarHeader.vue';
+    import UPBSidebarContent from './components/sidebar/UPBSidebarContent.vue';
+    import UPBSidebarFooter from './components/sidebar/UPBSidebarFooter.vue';
 
     Vue.component('upb-sidebar-header', UPBSidebarHeader);
     Vue.component('upb-sidebar-content', UPBSidebarContent);

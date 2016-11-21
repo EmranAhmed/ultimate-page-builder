@@ -72,6 +72,18 @@ class store {
         });
     }
 
+    getPanelContents(panel_hook, success, error) {
+
+        wp.ajax.send(panel_hook, {
+            success : success,
+            error   : error,
+            data    : {
+                _nonce : this.status._nonce,
+                id     : this.status._id
+            }
+        });
+    }
+
     upbElementOptions(contents, success, error) {
         wp.ajax.send("_get_upb_element_options", {
             success : success,
