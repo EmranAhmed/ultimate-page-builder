@@ -24,7 +24,7 @@
 
 
             <ul>
-                <li v-for="device in devices" v-show="device.current" :class="[{'active-device':device.active, current:device.current}]" :title="device.title">
+                <li v-for="device in devices" v-if="device.current" :class="[{'active-device':device.active, current:device.current}]" :title="device.title">
 
 
                     <ul>
@@ -37,7 +37,7 @@
                                 <span v-for="item in miniColumns(layout.value)" :class="miniColumnItemClass(item)"></span>
                             </a>
 
-                            <a class="manual" :title="l10n.column_manual" @click.prevent="openManualInput(device.id)" href="#">
+                            <a :class="manualLayoutClass(device.id)" :title="l10n.column_manual" @click.prevent="openManualInput(device.id)" href="#">
                                 <span class="manual" v-text="l10n.column_manual"></span>
                             </a>
 
@@ -50,18 +50,15 @@
                             </div>
                         </li>
 
-                        <li class="row-grid-order-title" v-text="l10n.column_order + ' - ' + device.title"></li>
+                        <li class="row-grid-order-title" v-if="device.active" v-text="l10n.column_order + ' - ' + device.title"></li>
 
 
                         <li class="row-grid-order-wrapper">
-                            <ul class="row-grid-order">
-                                <li xvxfor="contents in model.contents">{{ model.contents }}</li>
+                            <ul class="row-grid-order" v-sortable="sortable">
+                                <li v-for="content in contents" v-if="device.active" :class="sortOrderClass(content, device)" v-text="columnLayoutTitle(content, device)"></li>
                             </ul>
                         </li>
-
                     </ul>
-
-
                 </li>
             </ul>
         </li>

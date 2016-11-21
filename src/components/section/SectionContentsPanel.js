@@ -233,7 +233,9 @@ export default {
         cleanup(model) {
 
             model.contents = model.contents.map((data, index) => {
+
                 data.attributes.title = sprintf(data.attributes.title, (data.contents.length + 1));
+
                 return data;
             });
 

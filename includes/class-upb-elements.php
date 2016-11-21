@@ -154,13 +154,13 @@
 						$contents[ $index ][ 'contents' ] = $this->get_element( $content[ 'tag' ], 'contents' );
 					}
 
-					if ( ! isset( $contents[ $index ][ '_upb_settings' ] ) ) {
+					//if ( ! isset( $contents[ $index ][ '_upb_settings' ] ) ) {
 						$contents[ $index ][ '_upb_settings' ] = $this->to_settings( $content[ 'tag' ], $content[ 'attributes' ] );
-					}
+					//}
 
-					if ( ! isset( $contents[ $index ][ '_upb_options' ] ) ) {
+					//if ( ! isset( $contents[ $index ][ '_upb_options' ] ) ) {
 						$contents[ $index ][ '_upb_options' ] = $this->get_element( $content[ 'tag' ], '_upb_options' );
-					}
+					//}
 				}
 
 				return $contents;

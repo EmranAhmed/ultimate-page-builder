@@ -65,12 +65,17 @@
 								array(
 									'tag'        => 'column',
 									'contents'   => array(),
-									'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL 1', 'lg' => '1:2', 'md' => '1:2', 'sm' => '', 'xs' => '' )
+									'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL 1', 'lg' => '1:3', 'md' => '2:4', 'sm' => '', 'xs' => '' )
 								),
 								array(
 									'tag'        => 'column',
 									'contents'   => array(),
-									'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL 2', 'lg' => '1:2', 'md' => '1:2', 'sm' => '', 'xs' => '' )
+									'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL 2', 'lg' => '1:3', 'md' => '1:4', 'sm' => '', 'xs' => '' )
+								),
+								array(
+									'tag'        => 'column',
+									'contents'   => array(),
+									'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL 3', 'lg' => '1:3', 'md' => '1:4', 'sm' => '', 'xs' => '' )
 								),
 							),
 							'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'ROW GEN' )

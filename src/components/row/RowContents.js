@@ -33,13 +33,14 @@ export default {
             showHelp             : false,
             showSearch           : false,
             sortable             : {
-                handle      : '> .tools > .handle',
+                //handle      : '> .tools > .handle',
                 placeholder : "upb-sort-placeholder",
-                axis        : 'y'
+                //axis        : 'y'
             },
             searchQuery          : '',
             selectedColumnLayout : {},
             showManualInput      : {},
+            manualLayout         : {},
             devices              : []
         }
     },
@@ -50,15 +51,12 @@ export default {
             return sprintf(this.l10n.column_layout_of, this.model.attributes.title);
         },
 
-        panelClass(){
-            return [`upb-${this.model.tag}-panel`, `upb-panel-wrapper`].join(' ');
-        },
+        contents(){
+            return this.model.contents
 
+        }
     },
 
-    updated(){
-        // console.log('updated');
-    },
     created(){
 
         this.loadContents();
@@ -68,19 +66,6 @@ export default {
         this.onSelectedColumnLayoutChange();
 
     },
-
-    /*watch : {
-     selectedColumnLayout(newValue){
-
-     console.log(newValue);
-
-     console.log(this.devices);
-
-     this.showRatioSuggestion = false;
-     this.validateColumnInput(newValue);
-     }
-     },*/
-
 
     watch : {
         devices : {
@@ -93,10 +78,20 @@ export default {
 
     methods : {
 
+        panelClass(){
+            return [`upb-${this.model.tag}-panel`, `upb-panel-wrapper`].join(' ');
+        },
+
+        sortOrderClass(content, device){
+            let layout = content.attributes[device.id].replace(':', '-');
+            return `column-${layout}`;
+        },
+
+        columnLayoutTitle(content, device){
+            return content.attributes[device.id]
+        },
+
         onSelectedColumnLayoutChange(){
-
-            //let activeDevices = this.devices.filter((d)=> !!d.active);
-
             this.devices.map((device)=> {
 
                 this.$watch(`selectedColumnLayout.${device.id}`, (value) => {
@@ -123,13 +118,27 @@ export default {
 
                     this.selectedColumnOperation(device, value);
 
+                    //return this.model._upb_options.tools[deviceId];
+
+                    this.isManualLayout(device, value);
+
                 }, {deep : true});
 
             })
+        },
 
-            // device specific watch
+        isManualLayout(device, value = false){
 
-            //this.$watch(`selectedColumnLayout`)
+            if (!value) {
+                value = this.selectedColumnLayout[device.id];
+            }
+
+            let isPredefined = this.model._upb_options.tools[device.id].filter((predefined) => {
+                return predefined.value.trim() == value.trim()
+            });
+
+            return this.manualLayout[device.id] = (isPredefined.length <= 0) ? true : false;
+            //
         },
 
         selectedColumnOperation(device, value){
@@ -152,6 +161,7 @@ export default {
                     this.addNew(this.model._upb_options.tools.contents.new);
                 }
             }
+
             if (runOperation && shouldRemoveColumn) {
                 let columnNeedToRemove = this.model.contents.length - Math.round(totalColumns.length / activeDevices.length);
                 let start              = Math.round(totalColumns.length / activeDevices.length);
@@ -227,10 +237,6 @@ export default {
 
             this.selectedColumnLayout[device.id] = columns;
 
-            this.changeDeviceColumnLayout(device);
-
-            store.stateChanged();
-
             // no column layout selected.
             // so we should show re-config based on active / inactive.
             if (!columns) {
@@ -254,28 +260,28 @@ export default {
 
             }
 
+            this.changeDeviceColumnLayout(device);
+
         },
 
         changeDeviceColumnLayout(device){
-            let columns = this.selectedColumnLayout[device.id].trim();
+
+            this.devices.map((d)=> {
+                if (d.active) {
+                    let columns = this.selectedColumnLayout[d.id].trim();
+
+                    //console.log(d.id, columns);
+
+                    columns.split('+').map((col, i)=> {
+                        if (this.model.contents[i]) {
+                            this.model.contents[i].attributes[d.id] = col.trim();
+                        }
+
+                    })
+                }
+            });
 
             store.stateChanged();
-
-            if (columns) {
-                columns.split('+').map((col, i)=> {
-
-                    if (this.model.contents[i]) {
-
-                        if (device.active) {
-                            this.model.contents[i].attributes[device.id] = col.trim();
-                        }
-                        else {
-                            this.model.contents[i].attributes[device.id] = '';
-                        }
-                    }
-                })
-            }
-
         },
 
         currentDevice(device){
@@ -368,7 +374,7 @@ export default {
 
             itemArray.push(gridValueCount);
 
-            console.log(itemArray);
+            //console.log(itemArray);
 
             let common = this.gcd(itemArray);
             if (common > 1) {
@@ -409,6 +415,7 @@ export default {
 
                 Vue.set(this.selectedColumnLayout, device.id, '');
                 Vue.set(this.showManualInput, device.id, false);
+                Vue.set(this.manualLayout, device.id, false);
 
                 let selected = this.model.contents.map((column) => {
 
@@ -420,11 +427,13 @@ export default {
 
                 Vue.set(this.selectedColumnLayout, device.id, _.compact(selected).join(' + '));
 
+                this.isManualLayout(device);
             });
         },
 
         changeColumnLayout(layout, deviceId){
             this.selectedColumnLayout[deviceId] = layout.value.trim();
+
         },
 
         miniColumns(columns){
@@ -441,31 +450,33 @@ export default {
         },
 
         columnLayoutClass(layout, deviceId){
-
-            //console.log(layout.value, this.selectedColumnLayout[deviceId]);
-
             return [
                 (layout.value == this.selectedColumnLayout[deviceId]) ? 'active' : '',
                 layout.class
             ].join(' ');
         },
 
+        manualLayoutClass(deviceId){
+            return [
+                (this.manualLayout[deviceId]) ? 'active' : '',
+                'manual'
+            ].join(' ');
+        },
+
         loadContents(){
-            if (this.model.contents.length >= 0) {
-                this.$progressbar.show();
-                store.upbElementOptions(this.model.contents, (data) => {
+            this.$progressbar.show();
+            store.upbElementOptions(this.model.contents, (data) => {
 
-                    this.$nextTick(function () {
-                        Vue.set(this.model, 'contents', extend(true, [], data));
-                        this.afterContentLoaded();
-                    });
-
-                    this.$progressbar.hide();
-                }, function (data) {
-                    console.log(data);
-                    this.$progressbar.hide();
+                this.$nextTick(function () {
+                    Vue.set(this.model, 'contents', extend(true, [], data));
+                    this.afterContentLoaded();
                 });
-            }
+
+                this.$progressbar.hide();
+            }, function (data) {
+                console.log(data);
+                this.$progressbar.hide();
+            });
         },
 
         afterContentLoaded(){
@@ -552,13 +563,44 @@ export default {
 
             this.$nextTick(function () {
                 Vue.set(this.model, 'contents', extend(true, [], list));
+
+                this.updateColumnOrder();
+                // console.log(this.model.contents);
             });
 
             // store.stateChanged();
         },
 
+        updateColumnOrder(){
+
+            let sorted = [];
+
+            this.devices.map((device)=> {
+
+                let value = [];
+                this.model.contents.map((content)=> {
+
+                    if (content.attributes[device.id].trim()) {
+                        value.push(content.attributes[device.id]);
+                    }
+
+                });
+
+                sorted.push({id : device.id, grid : value})
+
+            });
+
+            sorted.map((device)=> {
+
+                if (device.grid.length > 0) {
+                    this.selectedColumnLayout[device.id] = device.grid.join(' + ').trim()
+                }
+
+            })
+
+        },
+
         onStart(e){
-            console.log('sort start');
             this.searchQuery = ''
         },
 
@@ -607,6 +649,7 @@ export default {
                 data.attributes.title = sprintf(data.attributes.title, (this.model.contents.length + 1));
             }
             this.model.contents.push(data);
+
             store.stateChanged();
         }
     }
