@@ -9,7 +9,4 @@
         <div v-text="model.attributes.title"></div>
     </li>
 </template>
-<style lang="sass">
-
-</style>
 <script src="./RowList.js"></script>

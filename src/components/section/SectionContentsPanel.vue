@@ -1,5 +1,5 @@
 <template>
-    <ul :class="panelClass">
+    <ul :class="panelClass()">
 
         <li class="upb-panel-header-wrapper">
             <ul>
@@ -43,7 +43,7 @@
                 <li class="upb-panel-tools">
                     <ul>
                         <li v-for="tool in model._upb_options.tools.contents">
-                            <a @click.prevent="callToolsAction($event, tool.action, tool)" href="#">
+                            <a @click.prevent="toolsAction(tool, $event)" href="#">
                                 <i :class="tool.icon"></i>
                                 <div v-text="tool.title"></div>
                             </a>
@@ -62,10 +62,10 @@
             </ul>
 
 
-            <component v-for="(item, index) in contents" v-show="showChild" v-if="isCurrentRow(index)" :index="index" :model="item" :is="childComponent"></component>
+            <!-- SUB PANEL -->
+            <component v-for="(item, index) in contents" v-if="isCurrentRow(index)" :index="index" :model="item" :is="subPanel()"></component>
 
         </li>
-
 
     </ul>
 </template>

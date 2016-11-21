@@ -55,7 +55,7 @@
 
                         <li class="row-grid-order-wrapper">
                             <ul class="row-grid-order">
-                                <li v-for="contents in model.contents">{{ contents }}</li>
+                                <li xvxfor="contents in model.contents">{{ model.contents }}</li>
                             </ul>
                         </li>
 
@@ -72,5 +72,4 @@
 
     </ul>
 </template>
-<style lang="sass"></style>
 <script src="./RowContents.js"></script>

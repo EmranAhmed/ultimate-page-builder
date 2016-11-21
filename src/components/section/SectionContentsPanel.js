@@ -43,11 +43,6 @@ export default {
             return sprintf(this.model._upb_options.meta.contents.title, this.model.attributes.title)
         },
 
-        panelClass(){
-            //return [`upb-${this.model.id}-panel`, this.currentPanel ? 'current' : ''].join(' ');
-            return [`upb-${this.model.tag}-panel`, `upb-panel-wrapper`].join(' ');
-        },
-
         contents(){
 
             let query = this.searchQuery.toLowerCase().trim();
@@ -75,8 +70,13 @@ export default {
 
     methods : {
 
+        panelClass(){
+            //return [`upb-${this.model.id}-panel`, this.currentPanel ? 'current' : ''].join(' ');
+            return [`upb-${this.model.tag}-panel`, `upb-panel-wrapper`].join(' ');
+        },
+
         isCurrentRow(index){
-            return this.childId == index;
+            return this.childId == index && this.showChild;
         },
 
         loadContents(){
@@ -149,6 +149,12 @@ export default {
             this.breadcrumb.push(this.model.title);
         },
 
+        // Sub Panel
+
+        subPanel(){
+            return this.childComponent;
+        },
+
         singleModel(){
             return this.model.contents[this.childId];
         },
@@ -212,25 +218,37 @@ export default {
             });
         },
 
-        callToolsAction(event, action, tool){
+        toolsAction(tool, event = false){
 
             let data = tool.data ? tool.data : false;
 
-            if (!this[action]) {
-                util.warn(`You need to implement ${action} method.`, this);
+            if (!this[tool.action]) {
+                util.warn(`You need to implement '${tool.action}' method.`, this);
             }
             else {
-                this[action](event, data);
+                this[tool.action](data, event);
             }
         },
 
-        addNew(e, data){
-            let section = extend(true, {}, data);
+        cleanup(model) {
 
-            section.attributes.title = sprintf(section.attributes.title, (this.model.contents.length + 1));
+            model.contents = model.contents.map((data, index) => {
+                data.attributes.title = sprintf(data.attributes.title, (data.contents.length + 1));
+                return data;
+            });
 
-            this.model.contents.push(section);
+            return model;
+        },
+
+        addNew(content, event = false){
+
+            // Only For Column cleanup
+
+            let data              = extend(true, {}, this.cleanup(content));
+            data.attributes.title = sprintf(data.attributes.title, (this.model.contents.length + 1));
+
+            this.model.contents.push(data);
             store.stateChanged();
-        }
+        },
     }
 }

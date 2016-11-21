@@ -61,7 +61,7 @@ export default {
     },
     created(){
 
-        // this.loadContents();
+        this.loadContents();
         this.devices = this.getDevices();
         this.setToolsForDevices();
         this.setSelectedColumnLayout();
@@ -149,7 +149,7 @@ export default {
 
                 let columnNeedToAdd = Math.round(totalColumns.length / activeDevices.length) - this.model.contents.length;
                 for (let i = 1; i <= columnNeedToAdd; i++) {
-                    this.addNew('', this.model._upb_options.tools.contents.new);
+                    this.addNew(this.model._upb_options.tools.contents.new);
                 }
             }
             if (runOperation && shouldRemoveColumn) {
@@ -451,7 +451,7 @@ export default {
         },
 
         loadContents(){
-            if (this.model.contents.length > 0) {
+            if (this.model.contents.length >= 0) {
                 this.$progressbar.show();
                 store.upbElementOptions(this.model.contents, (data) => {
 
@@ -578,20 +578,30 @@ export default {
             });
         },
 
-        callToolsAction(event, action, tool){
+        toolsAction(tool, event = false){
 
             let data = tool.data ? tool.data : false;
 
-            if (!this[action]) {
-                util.warn(`You need to implement ${action} method.`, this);
+            if (!this[tool.action]) {
+                util.warn(`You need to implement '${tool.action}' method.`, this);
             }
             else {
-                this[action](event, data);
+                this[tool.action](data, event);
             }
         },
 
-        addNew(e, contents){
-            let data = extend(true, {}, contents);
+        cleanup(content) {
+            this.devices.map((d)=> {
+                content.attributes[d.id] = '';
+            });
+            return content;
+        },
+
+        addNew(content, event = false){
+
+            // Only For Column cleanup
+
+            let data = extend(true, {}, this.cleanup(content));
 
             if (data.attributes.title) {
                 data.attributes.title = sprintf(data.attributes.title, (this.model.contents.length + 1));
