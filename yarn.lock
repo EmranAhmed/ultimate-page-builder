@@ -1056,10 +1056,6 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
 
-complex.js@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/complex.js/-/complex.js-2.0.1.tgz#ea90c7a05aeceaf3a376d2c0f6a78421727d6879"
-
 component-bind@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/component-bind/-/component-bind-1.0.0.tgz#00c608ab7dcd93897c0009651b1d3a8e1e73bbd1"
@@ -1381,10 +1377,6 @@ debug@0.7.4:
 decamelize@^1.0.0, decamelize@^1.1.1, decamelize@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
-
-decimal.js@5.0.8:
-  version "5.0.8"
-  resolved "https://registry.yarnpkg.com/decimal.js/-/decimal.js-5.0.8.tgz#b48c3fb7d73a2d4d4940e0b38f1cd21db5b367ce"
 
 deep-extend@~0.4.0:
   version "0.4.1"
@@ -1856,10 +1848,6 @@ formidable@1.0.x:
 forwarded@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.0.tgz#19ef9874c4ae1c297bcf078fde63a09b66a84363"
-
-fraction.js@3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-3.3.1.tgz#5d6a31ff07707294f204ccbb6b53791607771083"
 
 fresh@^0.3.0, fresh@0.3.0:
   version "0.3.0"
@@ -3008,16 +2996,6 @@ math-expression-evaluator@^1.2.14:
   resolved "https://registry.yarnpkg.com/math-expression-evaluator/-/math-expression-evaluator-1.2.14.tgz#39511771ed9602405fba9affff17eb4d2a3843ab"
   dependencies:
     lodash.indexof "^4.0.5"
-
-mathjs@^3.7.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-3.8.0.tgz#232af4871e4e8249f5b46a98ede7deae92026634"
-  dependencies:
-    complex.js "2.0.1"
-    decimal.js "5.0.8"
-    fraction.js "3.3.1"
-    tiny-emitter "1.0.2"
-    typed-function "0.10.5"
 
 mdi@^1.7.22:
   version "1.7.22"
@@ -4605,10 +4583,6 @@ timers-browserify@^1.0.1:
   dependencies:
     process "~0.11.0"
 
-tiny-emitter@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-1.0.2.tgz#8e49470d3f55f89e247210368a6bb9fb51aa1601"
-
 to-array@0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/to-array/-/to-array-0.1.4.tgz#17e6c11f73dd4f3d74cda7a4ff3238e9ad9bf890"
@@ -4649,10 +4623,6 @@ type-is@~1.6.13:
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.13"
-
-typed-function@0.10.5:
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/typed-function/-/typed-function-0.10.5.tgz#2e0f18abd065219fab694a446a65c6d1981832c0"
 
 ua-parser-js@0.7.10:
   version "0.7.10"
@@ -4874,6 +4844,10 @@ vue-loader@^9.7.0:
     vue-style-loader "^1.0.0"
     vue-template-compiler "^2.0.5"
     vue-template-es2015-compiler "^1.2.2"
+
+vue-router:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.0.3.tgz#444e246fd42d65a34dea6c3be8fde3315c4ba6f7"
 
 vue-style-loader@^1.0.0:
   version "1.0.0"

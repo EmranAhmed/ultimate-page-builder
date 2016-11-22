@@ -357,7 +357,6 @@
 		//$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 	} );
 
-
 	add_action( 'upb_boilerplate_enqueue_scripts', function () {
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
@@ -366,9 +365,13 @@
 
 		wp_enqueue_script( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URL . "js/upb-boilerplate$suffix.js", array( 'jquery', 'upb-builder' ), '', TRUE );
 
-
 		$data = sprintf( "var _upb_tabs = %s;\n", upb_tabs()->getJSON() );
-		//$data = sprintf( "var _upb_tabs = %s;\n", wp_json_encode( array() ) );
+		// $data = sprintf( "var _upb_tabs = %s;\n", wp_json_encode( array() ) );
+
+		$data .= sprintf( "var _upb_router_config = %s;\n", wp_json_encode( array(
+			                                                                    'base' => esc_url( add_query_arg( 'upb-preview', TRUE, get_preview_post_link( get_the_ID() ) ) ),
+			                                                                    'mode' => 'history'
+		                                                                    ) ) );
 
 		$data .= sprintf( "var _upb_status = %s;\n", wp_json_encode( array( 'dirty' => FALSE, '_nonce' => wp_create_nonce( '_upb' ), '_id' => get_the_ID() ) ) );
 
@@ -380,32 +383,24 @@
 
 		wp_script_add_data( 'upb-builder', 'data', $data );
 
-		wp_localize_script( 'upb-builder', '_upb_l10n',
-		                    apply_filters( '_upb_l10n_strings',
-		                                   array(
-			                                   'save'             => esc_attr__( 'Save' ),
-			                                   'create'           => esc_attr__( 'Create' ),
-			                                   'delete'           => esc_attr__( 'Are you sure to delete %s?' ),
-			                                   'column_manual'    => esc_attr__( 'Manual' ),
-			                                   'column_layout_of' => esc_attr__( 'Columns Layout of - %s' ),
-			                                   'column_order'     => esc_attr__( 'Column Order' ),
-			                                   'column_layout'    => esc_attr__( 'Column Layout' ),
-			                                   'close'            => esc_attr__( 'Close' ),
-			                                   'clone'            => esc_attr__( 'Clone of %s' ),
-			                                   'help'             => esc_attr__( 'Help' ),
-			                                   'search'           => esc_attr__( 'Search' ),
-			                                   'back'             => esc_attr__( 'Back' ),
-			                                   'breadcrumbRoot'   => esc_attr__( 'You are building' ),
-			                                   'skeleton'         => esc_attr__( 'Skeleton preview' ),
-			                                   'collapse'         => esc_attr__( 'Collapse' ),
-			                                   'expand'           => esc_attr__( 'Expand' ),
-			                                   //'large'          => esc_attr__( 'Large device preview' ),
-			                                   //'medium'         => esc_attr__( 'Medium device preview' ),
-			                                   //'small'          => esc_attr__( 'Small device preview' ),
-			                                   //'xSmall'         => esc_attr__( 'Extra small preview' ),
-		                                   )
-		                    )
-		);
+		wp_localize_script( 'upb-builder', '_upb_l10n', apply_filters( '_upb_l10n_strings', array(
+			'save'             => esc_attr__( 'Save' ),
+			'create'           => esc_attr__( 'Create' ),
+			'delete'           => esc_attr__( 'Are you sure to delete %s?' ),
+			'column_manual'    => esc_attr__( 'Manual' ),
+			'column_layout_of' => esc_attr__( 'Columns Layout of - %s' ),
+			'column_order'     => esc_attr__( 'Column Order' ),
+			'column_layout'    => esc_attr__( 'Column Layout' ),
+			'close'            => esc_attr__( 'Close' ),
+			'clone'            => esc_attr__( 'Clone of %s' ),
+			'help'             => esc_attr__( 'Help' ),
+			'search'           => esc_attr__( 'Search' ),
+			'back'             => esc_attr__( 'Back' ),
+			'breadcrumbRoot'   => esc_attr__( 'You are building' ),
+			'skeleton'         => esc_attr__( 'Skeleton preview' ),
+			'collapse'         => esc_attr__( 'Collapse' ),
+			'expand'           => esc_attr__( 'Expand' ),
+		) ) );
 	} );
 
 	add_action( 'upb_boilerplate_print_scripts', function () {

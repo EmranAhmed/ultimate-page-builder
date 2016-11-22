@@ -1,8 +1,6 @@
 <?php
 
-if ( ! defined( 'IFRAME_REQUEST' ) ):
-	define( 'IFRAME_REQUEST', TRUE );
-endif;
+defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
 if ( ! current_user_can( 'customize' ) ) {
 	wp_die(
@@ -68,22 +66,15 @@ wp_user_settings();
 			</div>
 		</div>
 	</div>
+
 	<div id="upb-skeleton-wrapper">Structure</div>
 
 	<div id="upb-preview-wrapper">
-		<iframe
-			src="<?php echo add_query_arg( 'upb-preview', TRUE, get_preview_post_link( get_the_ID() ) ) ?>"
-			frameborder="0"
-			name="upb-preview-frame"
-			seamless="seamless"
-			id="upb-preview-frame"></iframe>
+		<iframe src="<?php echo esc_url( add_query_arg( 'upb-preview', TRUE, get_preview_post_link( get_the_ID() ) ) ) ?>" frameborder="0" name="upb-preview-frame" seamless="seamless" id="upb-preview-frame"></iframe>
 	</div>
 
-	<?php
-		do_action( 'upb_boilerplate_contents' );
-	?>
-
-	<?php do_action( 'upb_boilerplate_print_footer_scripts' ); ?>
+	<?php do_action( 'upb_boilerplate_contents' ); ?>
 </div>
+<?php do_action( 'upb_boilerplate_print_footer_scripts' ); ?>
 </body>
 </html>

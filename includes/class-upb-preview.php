@@ -4,6 +4,7 @@
 	if ( ! class_exists( 'UPB_Preview' ) ):
 
 		class UPB_Preview {
+
 			protected static $_instance = NULL;
 
 			public static function init() {
@@ -27,15 +28,14 @@
 			}
 
 			public function hooks() {
-				add_action( 'wp_loaded', array( $this, 'wp_loaded' ) );
+				add_action( 'wp', array( $this, 'after_wp_setup' ) );
 			}
 
-			public function wp_loaded() {
+			public function after_wp_setup() {
 				if ( upb_is_preview() ):
-					do_action( 'upb_preview_init', $this );
+					do_action( 'upb_preview_loaded', $this );
 				endif;
 			}
-
 
 			public function preview_content( $content ) {
 				if ( upb_is_preview() ):
@@ -51,7 +51,6 @@
 
 				return $content;
 			}
-
 		}
 
 		UPB_Preview::init();
