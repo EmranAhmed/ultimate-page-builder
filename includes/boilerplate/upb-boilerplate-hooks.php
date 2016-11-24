@@ -369,8 +369,8 @@
 		// $data = sprintf( "var _upb_tabs = %s;\n", wp_json_encode( array() ) );
 
 		$data .= sprintf( "var _upb_router_config = %s;\n", wp_json_encode( array(
-			                                                                    'base' => esc_url( add_query_arg( 'upb-preview', TRUE, get_preview_post_link( get_the_ID() ) ) ),
-			                                                                    'mode' => 'history'
+			                                                                    //'base' => esc_url( add_query_arg( 'upb-preview', TRUE, get_preview_post_link( get_the_ID() ) ) ),
+			                                                                    'mode' => 'hash' // abstract, history, hash
 		                                                                    ) ) );
 
 		$data .= sprintf( "var _upb_status = %s;\n", wp_json_encode( array( 'dirty' => FALSE, '_nonce' => wp_create_nonce( '_upb' ), '_id' => get_the_ID() ) ) );

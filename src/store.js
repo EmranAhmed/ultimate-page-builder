@@ -3,12 +3,13 @@ import extend from 'extend';
 class store {
 
     constructor() {
-        this.tabs       = window._upb_tabs;
-        this.status     = window._upb_status;
-        this.l10n       = window._upb_l10n;
-        this.breadcrumb = [];
-        this.devices    = window._upb_preview_devices;
-        this.grid       = window._upb_grid_system;
+        this.tabs          = window._upb_tabs;
+        this.status        = window._upb_status;
+        this.l10n          = window._upb_l10n;
+        this.router_config = window._upb_router_config;
+        this.breadcrumb    = [];
+        this.devices       = window._upb_preview_devices;
+        this.grid          = window._upb_grid_system;
         // this.preview    = 'upb-preview-frame';
     }
 

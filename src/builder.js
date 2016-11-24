@@ -1,5 +1,9 @@
 import Vue from 'vue'
-import UPBSidebar from './UPBSidebar.vue'
+
+//import UPBSidebar from './UPBSidebar.vue'
+
+import App from './App.vue'
+
 import UPBPreview from './UPBPreview.vue'
 import store from './store'
 
@@ -12,7 +16,12 @@ Vue.use(VueNProgress);
 //const status = window._upb_status;
 
 // window.upbBuilder
+
+import router from './router'
+
+
 const upbBuilder = new Vue({
+    router,
     el   : '#upb-sidebar',
     data : {
         store
@@ -24,7 +33,8 @@ const upbBuilder = new Vue({
         })
     },
 
-    render : h => h(UPBSidebar)
+    //render : h => h(UPBSidebar)
+    render : h => h(App)
 });
 
 const upbPreview = new Vue({
