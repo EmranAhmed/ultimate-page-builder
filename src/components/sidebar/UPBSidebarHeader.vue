@@ -3,7 +3,7 @@
         <ul>
             <li class="btn-close"><a href="#" :title="l10n.close"><i class="mdi mdi-window-close"></i></a></li>
             <ul class="tab-wrapper">
-                <component v-for="item in model" @changedActive="removeActive()" :model="item" is="upb-sidebar-header-item"></component>
+                <component v-for="item in model" :model="item" is="upb-sidebar-header-item"></component>
             </ul>
             <li :class="[{ active: isDirty() }, 'btn-save']"><a @click.prevent="save()" href="#" :title="l10n.save"><i class="mdi mdi-content-save-all"></i></a></li>
         </ul>

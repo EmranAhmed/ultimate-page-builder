@@ -3,69 +3,142 @@ import extend from 'extend'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
-import Sections from './components/tabs/Sections.vue'
-import Settings from './components/tabs/Settings.vue'
+import SectionsPanel from './com/panels/SectionsPanel.vue'
+import SettingsPanel from './com/panels/SettingsPanel.vue'
 
-import List from './components/tabs/ListView.vue'
+
+// RowsPanel
+import SectionContents from './com/section/SectionContents.vue'
 import Attributes from './components/tabs/Attributes.vue'
+import List from './components/tabs/ListView.vue'
 
-export default new VueRouter(extend(true, store.router_config, {
-    routes : [
-        {
-            name      : 'sections',
-            path      : '/sections',
-            component : Sections,
-            children  : [
-                {
-                    name      : 'section-contents',
-                    path      : '(\\d+)/:type(contents)',
-                    component : List,
-                    meta      : {sub : true}
-                },
-                {
-                    name      : 'section-settings',
-                    path      : '(\\d+)/:type(settings)',
-                    component : Attributes,
-                    meta      : {sub : true}
-                },
+let config = extend(true, {}, store.router_config);
+let routes = [
+    {
+        path     : '',
+        redirect : '/sections'
+    },
+    {
+        name      : 'sections',
+        path      : '/:tab(sections)',
+        component : SectionsPanel,
+    },
 
-                {
-                    name      : 'row-contents',
-                    path      : '(\\d+)/(\\d+)/:type(contents)',
-                    component : List,
-                    meta      : {sub : true}
-                },
-                {
-                    name      : 'row-settings',
-                    path      : '(\\d+)/(\\d+)/:type(settings)',
-                    component : Attributes,
-                    meta      : {sub : true}
-                },
+    {
+        name      : 'section-contents',
+        path      : '/:tab(sections)/:sectionId(\\d+)/:type(contents)',
+        component : SectionContents, // row list
+        meta      : {subPanel : true}
+    },
+    {
+        name      : 'section-settings',
+        path      : '/:tab(sections)/:sectionId(\\d+)/:type(settings)',
+        component : Attributes, // section setting
+        meta      : {subPanel : true}
+    },
 
-                {
-                    name      : 'column-contents',
-                    path      : '(\\d+)/(\\d+)/(\\d+)/:type(contents)',
-                    component : List,
-                    meta      : {sub : true}
-                },
-                {
-                    name      : 'column-settings',
-                    path      : '(\\d+)/(\\d+)/(\\d+)/:type(settings)',
-                    component : Attributes,
-                    meta      : {sub : true}
-                }
+    {
+        name      : 'row-contents',
+        path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:type(contents)',
+        component : List, // column list
+        meta      : {subPanel : true}
+    },
+    {
+        name      : 'row-settings',
+        path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:type(settings)',
+        component : Attributes,
+        meta      : {subPanel : true}
+    },
 
-            ]
-        },
-        {
-            name      : 'settings',
-            path      : '/settings',
-            component : Settings
-        },
-        {
-            path     : '',
-            redirect : '/sections'
+    {
+        name      : 'column-contents',
+        path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:type(contents)',
+        component : List,
+        meta      : {subPanel : true}
+    },
+    {
+        name      : 'column-settings',
+        path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:type(settings)',
+        component : Attributes,
+        meta      : {subPanel : true}
+    },
+
+    {
+        name      : 'settings',
+        path      : '/:tab(settings)',
+        component : SectionsPanel
+    }
+];
+
+if (store.router.length > 0) {
+    store.router.map((r)=> {
+        if (r['component']) {
+            r.component = window[r.component];
+            routes.push(r);
         }
-    ]
-}));
+    });
+}
+
+export default new VueRouter(Object.assign({}, config, {routes}));
+
+/*
+ export default new VueRouter(extend(true, store.router_config, {
+ routes : [
+ {
+ name      : 'sections',
+ path      : '/:tab(sections)',
+ component : PanelView,
+ },
+
+ {
+ name      : 'section-contents',
+ path      : '/:tab(sections)/(\\d+)/:type(contents)',
+ component : List, // row list
+ meta      : {sub : true}
+ },
+ {
+ name      : 'section-settings',
+ path      : '/:tab(sections)/(\\d+)/:type(settings)',
+ component : Attributes, // section setting
+ meta      : {sub : true}
+ },
+
+ {
+ name      : 'row-contents',
+ path      : '/:tab(sections)/(\\d+)/(\\d+)/:type(contents)',
+ component : List, // column list
+ meta      : {sub : true}
+ },
+ {
+ name      : 'row-settings',
+ path      : '/:tab(sections)/(\\d+)/(\\d+)/:type(settings)',
+ component : Attributes,
+ meta      : {sub : true}
+ },
+
+ {
+ name      : 'column-contents',
+ path      : '/:tab(sections)/(\\d+)/(\\d+)/(\\d+)/:type(contents)',
+ component : List,
+ meta      : {sub : true}
+ },
+ {
+ name      : 'column-settings',
+ path      : '/:tab(sections)/(\\d+)/(\\d+)/(\\d+)/:type(settings)',
+ component : Attributes,
+ meta      : {sub : true}
+ },
+
+ {
+ name      : 'settings',
+ path      : '/:tab(settings)',
+ component : PanelView
+ },
+ {
+ path     : '',
+ redirect : '/sections'
+ }
+ ]
+ }));
+ */
 

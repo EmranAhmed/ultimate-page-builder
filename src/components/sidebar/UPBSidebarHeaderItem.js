@@ -6,9 +6,8 @@ export default {
 
     methods : {
 
-        activeTab(){
-            this.$emit('changedActive', event.target.value);
-            this.model.active = true
+        url(){
+            return `/${this.model.id}`;
         },
 
         isDirty(){

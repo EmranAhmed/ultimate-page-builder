@@ -51,12 +51,12 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
     devtool : '#eval-source-map',
     entry   : {
-        builder     : path.resolve(__dirname, './src/builder.js'),
+        builder : path.resolve(__dirname, './src/builder.js'),
     },
     output  : {
         path       : path.resolve(__dirname, './assets'),
         publicPath : '/assets/',
-        filename : 'js/upb-[name].js'
+        filename   : 'js/upb-[name].js'
     },
     module  : {
         rules : [
@@ -96,7 +96,7 @@ if (process.env.NODE_ENV === 'production') {
     // http://vue-loader.vuejs.org/en/workflow/production.html
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.ProvidePlugin({
-            'Vue'        : 'vue',
+            Vue          : 'vue',
             'window.Vue' : 'vue',
         }),
         //new webpack.optimize.CommonsChunkPlugin({name : 'vue', filename : 'js/vue.min.js'}),
@@ -120,7 +120,7 @@ if (process.env.NODE_ENV === 'production') {
 else {
     module.exports.plugins = [
         new webpack.ProvidePlugin({
-            'Vue'        : 'vue',
+            Vue          : 'vue',
             'window.Vue' : 'vue',
         }),
         //new webpack.optimize.CommonsChunkPlugin({name : 'vue', filename : 'js/vue.js'}),

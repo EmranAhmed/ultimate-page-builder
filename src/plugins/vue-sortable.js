@@ -19,6 +19,7 @@ import { util } from 'vue';
             update : function (newValue, oldValue, vnode) {
 
             },
+
             unbind : function (el) {
                 $(el).sortable("destroy");
             },

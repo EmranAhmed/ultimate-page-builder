@@ -1,6 +1,4 @@
 <template>
-    <li :class="{ active: model.active }">
-        <a href="#" @click.prevent="activeTab()" :title="model.title"><i :class="model.icon"></i></a>
-    </li>
+    <router-link :to="url()" tag="li" active-class="active"><a :title="model.title"><i :class="model.icon"></i></a></router-link>
 </template>
 <script src="./UPBSidebarHeaderItem.js"></script>

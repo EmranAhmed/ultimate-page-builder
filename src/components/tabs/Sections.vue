@@ -2,8 +2,6 @@
     <ul>
 
 
-        Sections: Section List
-
         <router-link to="/sections/0/contents" tag="li" active-class="active"><a>Section 1</a></router-link>
         <router-link to="/sections/0/settings" tag="li" active-class="active"><a>Section 1 Settings</a></router-link>
 
@@ -18,9 +16,12 @@
         <router-link to="/sections/0/0/0/settings" tag="li" active-class="active"><a>Column 1 Settings</a></router-link>
 
 
-        <!--<transition :name="transitionName">-->
-            <router-view :model="model"></router-view>
-        <!--</transition>-->
+        list component
+
+<!--
+        <router-view :model="model"></router-view>
+-->
+
     </ul>
 </template>
 <style>
@@ -59,8 +60,8 @@
 <script>
     import Vue from 'vue';
 
-    import List from './ListView.vue'
-    import Attributes from './Attributes.vue'
+    // import List from './ListView.vue'
+    // import Attributes from './Attributes.vue'
 
     export default {
         name  : 'sections',
@@ -72,16 +73,18 @@
         },
         watch : {
             $route (to, from) {
+
                 const toDepth       = to.path.split('/').length
                 const fromDepth     = from.path.split('/').length
                 this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
 
-                console.log(toDepth, fromDepth)
+                //console.log(toDepth, fromDepth)
             }
         },
-        create() {
+        created() {
 
-            console.log(this.$route)
+            //console.log(this.model)
+            //console.log(this.$route.name)
         },
     }
 </script>

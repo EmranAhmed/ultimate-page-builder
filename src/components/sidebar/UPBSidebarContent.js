@@ -1,11 +1,11 @@
-import Vue from 'vue';
+//import Vue from 'vue';
 
 // import store from '../store'
 
 // Sections Panel
 
-import SectionsPanel from '../panel/SectionsPanel.vue';
-Vue.component('sections-panel', SectionsPanel);
+//import SectionsPanel from '../panel/SectionsPanel.vue';
+//Vue.component('sections-panel', SectionsPanel);
 
 // Elements Panel
 
@@ -16,9 +16,23 @@ Vue.component('sections-panel', SectionsPanel);
 export default {
     name    : 'upb-sidebar-contents',
     props   : ['index', 'model'],
-    methods : {
-        getPane(id){
-            return `${id}-panel`;
+    watch : {
+        $route (to, from) {
+            const toDepth       = to.path.split('/').length
+            const fromDepth     = from.path.split('/').length
+            this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+
+            console.log(this.$route.name);
         }
+    },
+    created() {
+
+        console.log(this.model)
+        console.log(this.$route.name)
+    },
+    methods : {
+        /*getPane(id){
+         return `${id}-panel`;
+         }*/
     }
 }

@@ -309,22 +309,21 @@
 
 		$data = array(
 			'title'    => 'Elements',
-			'help'     => '<h2>Just Getting Starting?</h2><p>Add a section</p>',
+			'help'     => '<h2>Just Getting Starting?</h2><p>Add a Elements</p>',
 			'tools'    => apply_filters( 'upb_tab_elements_tools', array() ), // add section | load section | layouts
 			'icon'     => 'mdi mdi-shape-plus',
 			'contents' => apply_filters( 'upb_tab_elements_contents', array() ),
 		);
 		$tab->register( 'elements', $data, FALSE );
 
-
-		/*$data = array(
+		$data = array(
 			'title'    => 'Settings',
 			'help'     => '<p>Simply enable or disable page builder for this page or set other options.</p>',
 			'tools'    => apply_filters( 'upb_tab_settings_tools', array() ), // add section | load section | layouts
 			'icon'     => 'mdi mdi-settings',
 			'contents' => apply_filters( 'upb_tab_settings_contents', array() ),
 		);
-		$tab->register( 'settings', $data, FALSE );*/
+		$tab->register( 'settings', $data, FALSE );
 
 
 		/*$data = array(
@@ -373,6 +372,15 @@
 			                                                                    'mode' => 'hash' // abstract, history, hash
 		                                                                    ) ) );
 
+		$data .= sprintf( "var _upb_router = %s;\n", wp_json_encode( array(
+			                                                             array(
+				                                                             //'name'      => 'elements',
+				                                                             //'path'      => '/:tab(elements)',
+				                                                             //'component' => 'ChildView',
+			                                                             )
+		                                                             ) ) );
+
+
 		$data .= sprintf( "var _upb_status = %s;\n", wp_json_encode( array( 'dirty' => FALSE, '_nonce' => wp_create_nonce( '_upb' ), '_id' => get_the_ID() ) ) );
 
 		$data .= sprintf( "var _upb_settings = %s;", upb_settings()->getJSON() );
@@ -405,7 +413,18 @@
 
 	add_action( 'upb_boilerplate_print_scripts', function () {
 		//$tabs = upb_tabs()->getAll();
-		//printf( '<script>var _upb_tabs = %s;</script>', wp_json_encode( $tabs ) );
+		//printf( '<script>console.log("HAY")</script>', wp_json_encode( $tabs ) );
+	} );
+	add_action( 'upb_boilerplate_print_scripts', function () {
+		//$tabs = upb_tabs()->getAll();
+		print( "<script>
+
+ChildView = {
+
+  template: '<span> Elements </span>'
+}
+
+</script>" );
 	} );
 
 
