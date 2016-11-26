@@ -1,6 +1,6 @@
 $grid-columns : 12 !default;
 
-$grid-gutter-width : 4px !default;
+$grid-gutter-width : 2px !default;
 
 @mixin clearfix() {
   &:before,
