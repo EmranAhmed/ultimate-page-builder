@@ -3,7 +3,6 @@
 @import "./node_modules/mdi/scss/materialdesignicons";
 @import "./nprogress";
 
-
 * {
   margin     : 0;
   padding    : 0;
@@ -16,94 +15,8 @@ html, body {
   height      : 100%;
   }
 
-.upb-boilerplate {
-  position : relative;
-  }
+@import "./upb-structure";
 
-#upb-pre-loader {
-  position   : fixed;
-  z-index    : 999;
-  top        : 0;
-  left       : 0;
-  background : $upb-pre-loader-background-color;
-  width      : 100%;
-  height     : 100%;
-  > div {
-    position : relative;
-    top      : 50%;
-    left     : 50%;
-    color    : white;
-    width    : auto;
-    }
-  &.loaded {
-    display : none;
-    }
-  }
+@import "./upb-mini-grid";
 
-#upb-wrapper {
-  position : fixed;
-  top      : 0;
-  left     : 0;
-  right    : 0;
-  bottom   : 0;
-  z-index  : 99;
-  overflow : visible;
-  height   : 100%;
 
-  &.expanded {
-    margin-left : 300px;
-    #upb-sidebar-wrapper {
-      margin-left : 0;
-      }
-    }
-
-  &.collapsed {
-    margin-left : 0;
-    #upb-sidebar-wrapper {
-      margin-left : -300px;
-      }
-    }
-  }
-
-#upb-sidebar-wrapper {
-  overflow         : visible;
-  position         : fixed;
-  width            : 300px;
-  height           : 100%;
-  top              : 0;
-  bottom           : 0;
-  left             : 0;
-  padding          : 0;
-  margin           : 0;
-  z-index          : 10;
-  border-right     : 1px transparent $upb-sidebar-border-color;
-  background-color : $upb-sidebar-background-color;
-  }
-
-#upb-skeleton-wrapper {
-  position : absolute;
-  top      : 0;
-  left     : 0;
-  right    : 0;
-  bottom   : 0;
-  opacity  : 0;
-  z-index  : 8;
-  }
-
-#upb-preview-wrapper {
-  position  : absolute;
-  top       : 0;
-  left      : 0;
-  right     : 0;
-  width     : 100%;
-  max-width : 100%;
-  height    : 100%;
-  margin    : 0 auto;
-  z-index   : 9;
-  iframe {
-    width    : 100%;
-    height   : 100%;
-    position : absolute;
-    border   : 0;
-    }
-  }

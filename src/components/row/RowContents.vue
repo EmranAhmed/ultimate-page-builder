@@ -51,10 +51,9 @@
                         </li>
 
                         <li class="row-grid-order-title" v-if="device.active" v-text="l10n.column_order + ' - ' + device.title"></li>
-
-
+                        
                         <li class="row-grid-order-wrapper">
-                            <ul class="row-grid-order" v-sortable="sortable">
+                            <ul class="row-grid-order upb-mini-row" v-sortable="sortable">
                                 <li v-for="content in contents" v-if="device.active" :class="sortOrderClass(content, device)" v-text="columnLayoutTitle(content, device)"></li>
                             </ul>
                         </li>

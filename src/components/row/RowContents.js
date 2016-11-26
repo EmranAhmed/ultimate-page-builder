@@ -104,7 +104,13 @@ export default {
 
         sortOrderClass(content, device){
             let layout = content.attributes[device.id].replace(':', '-');
-            return `column-${layout}`;
+
+            // We Implemented grid 12
+            let upb_total_column = this.contents.length;
+            let upb_split_column = parseInt(layout.split('-')[0]);
+            let column           = Math.round(upb_total_column * upb_split_column);
+
+            return `column-${layout} upb-mini-column upb-mini-column-${column}`;
         },
 
         columnLayoutTitle(content, device){

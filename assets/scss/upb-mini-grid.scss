@@ -1,0 +1,69 @@
+$grid-columns : 12 !default;
+
+$grid-gutter-width : 4px !default;
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content : " "; // 1
+    display : table; // 2
+    }
+  &:after {
+    clear : both;
+    }
+  }
+
+@mixin make-row($gutter: $grid-gutter-width) {
+  margin-left  : ceil(($gutter / -2));
+  margin-right : floor(($gutter / -2));
+  @include clearfix;
+  }
+
+@mixin float-grid-columns($i: 1, $list: ".upb-mini-column-#{$i}") {
+  @for $i from (1 + 1) through $grid-columns {
+    $list : "#{$list}, .upb-mini-column-#{$i}";
+    }
+  #{$list} {
+    float : left;
+    }
+  }
+
+@mixin calc-grid-column($index) {
+  .upb-mini-column-#{$index} {
+    width : percentage(($index / $grid-columns));
+    }
+  }
+
+@mixin loop-grid-columns($columns) {
+  @for $i from 0 through $columns {
+    @include calc-grid-column($i);
+    }
+  }
+
+@mixin make-grid-columns($i: 1, $list: ".upb-mini-column-#{$i}") {
+  @for $i from (1 + 1) through $grid-columns {
+    $list : "#{$list}, .upb-mini-column-#{$i}";
+    }
+  #{$list} {
+    position      : relative;
+    // Prevent columns from collapsing when empty
+    min-height    : 1px;
+    text-align    : center;
+    // Inner gutter via padding
+    padding-left  : ceil(($grid-gutter-width / 2));
+    padding-right : floor(($grid-gutter-width / 2));
+    }
+  }
+
+@mixin make-grid() {
+  @include float-grid-columns();
+  @include loop-grid-columns($grid-columns);
+  }
+
+.upb-mini-row {
+  @include make-row;
+  }
+
+@include make-grid-columns();
+
+@include make-grid();
