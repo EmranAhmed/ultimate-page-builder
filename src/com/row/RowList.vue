@@ -8,7 +8,7 @@
 
         <div v-text="model.attributes.title"></div>
 
-        {{ model.attributes }}
+        <!--{{ model.attributes }}-->
 
     </li>
 </template>

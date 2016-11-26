@@ -52,7 +52,7 @@
 
 		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
 
-		wp_send_json_success( upb_elements()->set_upb_options(
+		wp_send_json_success( upb_elements()->set_upb_options_recursive(
 
 
 			array(

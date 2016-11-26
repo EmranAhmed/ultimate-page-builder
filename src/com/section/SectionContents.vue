@@ -6,18 +6,14 @@
             <ul>
                 <li class="upb-panel-header">
 
-                    <a :title="l10n.back" href="" class="back" @click.prevent="back()">
+                    <a :title="l10n.back" v-if="isSubPanel()" href="#" class="back" @click.prevent="back()">
                         <i class="mdi mdi-chevron-left"></i>
                     </a>
 
                     <div class="panel-heading-wrapper">
                         <div class="panel-heading">
-
                             <div class="upb-breadcrumb">
-                                <ul>
-                                    <li class="breadcrumb" v-if="breadcrumb.length > 0" v-for="b in breadcrumb">{{ b }}</li>
-                                    <li class="no-breadcrumb" v-else v-text="l10n.breadcrumbRoot"></li>
-                                </ul>
+                                <upb-breadcrumb></upb-breadcrumb>
                             </div>
 
                             <div class="panel-title" v-text="panelTitle"></div>

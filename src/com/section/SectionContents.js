@@ -16,6 +16,9 @@ Vue.use(Sortable);
 Vue.component('row-list', RowList);
 //Vue.component('row-contents', RowContents);
 
+import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
+Vue.component('upb-breadcrumb', UPBBreadcrumb);
+
 export default {
     name  : 'section-contents',
     props : ['index', 'model'],
@@ -121,13 +124,14 @@ export default {
         }
     },
 
-    mounted(){
-        if (this.item['contents'] && this.item.contents.length > 0) {
-            this.loadContents()
-        }
-    },
-
     methods : {
+
+        isSubPanel(){
+
+            //console.log(this.$route)
+
+            return (this.$route.meta['subPanel']) ? this.$route.meta.subPanel : false;
+        },
 
         back(){
             this.$router.go(-1);
@@ -147,57 +151,6 @@ export default {
             let type      = (this.$route.params['type'] == 'settings') ? '_upb_settings' : this.$route.params['type'].trim();
             return this.model[type][sectionId];
 
-        },
-
-        loadContents(){
-
-            if (this.item.contents.length > 0) {
-
-                console.log(this.item.contents)
-
-                this.$progressbar.show();
-                store.upbElementOptions(this.item.contents, (data) => {
-
-                    this.$nextTick(() => {
-                        Vue.set(this.item, 'contents', extend(true, [], this.boolAttributes(data)));
-                        this.afterContentLoaded();
-                    });
-
-                    this.$progressbar.hide();
-                }, (data) => {
-                    console.log(data);
-                    this.$progressbar.hide();
-                });
-            }
-        },
-
-        boolAttributes(data){
-
-            return data.map(function (content) {
-
-                if (content['attributes']) {
-                    Object.keys(content.attributes).map(function (key) {
-
-                        if (content.attributes[key] == 'true') {
-                            content.attributes[key] = true;
-                        }
-
-                        if (content.attributes[key] == 'false') {
-                            content.attributes[key] = false;
-                        }
-                    })
-                }
-                
-                return content;
-
-            });
-        },
-
-        afterContentLoaded(){
-            if (this.item.contents.length > 0) {
-                //    this.childId = 0;
-                //    this.openContentsPanel(this.childId);
-            }
         },
 
         afterSort(values){

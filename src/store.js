@@ -65,6 +65,8 @@ class store {
             state[data['id']] = this.cleanup(newdata.contents);
         });
 
+        console.log(state);
+
         wp.ajax.send("_upb_save", {
             success : success,
             error   : error,
