@@ -3,14 +3,6 @@ import store from '../../store'
 
 import {sprintf} from 'sprintf-js'
 
-// Section Contents
-// import SectionContentsPanel from '../section/SectionContentsPanel.vue'
-// Vue.component('section-contents-panel', SectionContentsPanel);
-
-// Section Settings
-// import SectionSettingsPanel from '../section/SectionSettingsPanel.vue'
-// Vue.component('section-settings-panel', SectionSettingsPanel);
-
 export default {
 
     name : 'row-list',
@@ -18,17 +10,10 @@ export default {
     props : ['index', 'model', 'selected'],
 
     data(){
-        return {
-            l10n       : store.l10n,
-            breadcrumb : store.breadcrumb,
-        }
+        return {}
     },
 
-    computed : {
-        parentShowChild(){
-            return this.$parent.$data.showChild;
-        }
-    },
+    computed : {},
 
     methods : {
 
@@ -43,14 +28,26 @@ export default {
 
             this.$emit('showContentsPanel')
 
-            // console.log('OPEN CONTENTS PANEL')
+             console.log('OPEN CONTENTS PANEL')
             //this.breadcrumb.push(`${this.model.id}`)
         },
 
         settingsAction(id, tool){
-            this.$emit('showSettingsPanel')
+            // this.$emit('showSettingsPanel')
 
             // console.log('OPEN SETTINGS PANEL')
+
+            //this.$route.params
+            this.$router.push({
+                name   : `row-${id}`,
+                params : {
+                    //tab       : 'sections',
+                    rowId : this.index,
+                    //sectionId : this.$route.params
+                    type  : id
+                }
+            });
+
         },
 
         deleteAction(id, tool){

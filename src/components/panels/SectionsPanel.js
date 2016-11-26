@@ -65,7 +65,6 @@ export default {
 
                     this.$nextTick(function () {
                         Vue.set(this.model, 'contents', extend(true, [], data));
-                        this.afterContentLoaded();
                     });
 
                     this.$progressbar.hide();
@@ -74,11 +73,6 @@ export default {
                     this.$progressbar.hide();
                 });
             }
-        },
-
-        afterContentLoaded(){
-            "use strict";
-            //console.log(this.model.contents);
         },
 
         // Main Panel

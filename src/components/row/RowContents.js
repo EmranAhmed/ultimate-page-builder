@@ -58,13 +58,11 @@ export default {
     },
 
     created(){
-
-        this.loadContents();
+        this.afterContentLoaded();
         this.devices = this.getDevices();
         this.setToolsForDevices();
         this.setSelectedColumnLayout();
         this.onSelectedColumnLayoutChange();
-
     },
 
     watch : {
@@ -77,6 +75,28 @@ export default {
     },
 
     methods : {
+
+        loadContents(){
+            this.$progressbar.show();
+            store.upbElementOptions(this.model.contents, (data) => {
+
+                this.$nextTick(function () {
+                    Vue.set(this.model, 'contents', extend(true, [], data));
+                    this.afterContentLoaded();
+                });
+
+                this.$progressbar.hide();
+            }, function (data) {
+                console.log(data);
+                this.$progressbar.hide();
+            });
+        },
+
+        afterContentLoaded(){
+            if (this.model.contents.length > 0) {
+                this.childId = 0;
+            }
+        },
 
         panelClass(){
             return [`upb-${this.model.tag}-panel`, `upb-panel-wrapper`].join(' ');
@@ -461,28 +481,6 @@ export default {
                 (this.manualLayout[deviceId]) ? 'active' : '',
                 'manual'
             ].join(' ');
-        },
-
-        loadContents(){
-            this.$progressbar.show();
-            store.upbElementOptions(this.model.contents, (data) => {
-
-                this.$nextTick(function () {
-                    Vue.set(this.model, 'contents', extend(true, [], data));
-                    this.afterContentLoaded();
-                });
-
-                this.$progressbar.hide();
-            }, function (data) {
-                console.log(data);
-                this.$progressbar.hide();
-            });
-        },
-
-        afterContentLoaded(){
-            if (this.model.contents.length > 0) {
-                this.childId = 0;
-            }
         },
 
         showSettingsPanel(){

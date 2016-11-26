@@ -1,14 +1,15 @@
 import Vue, { util } from 'vue';
 import store from '../../store'
+
 import {sprintf} from 'sprintf-js'
 
 // Section Contents
-//import SectionContentsPanel from '../section/SectionContentsPanel.vue'
-//Vue.component('section-contents-panel', SectionContentsPanel);
+import SectionContentsPanel from '../section/SectionContentsPanel.vue'
+Vue.component('section-contents-panel', SectionContentsPanel);
 
 // Section Settings
-//import SectionSettingsPanel from '../section/SectionSettingsPanel.vue'
-//Vue.component('section-settings-panel', SectionSettingsPanel);
+import SectionSettingsPanel from '../section/SectionSettingsPanel.vue'
+Vue.component('section-settings-panel', SectionSettingsPanel);
 
 export default {
     name    : 'section-list',
@@ -29,30 +30,11 @@ export default {
         },
 
         contentsAction(id, tool){
-
-            // console.log(this.$route.params);
-
-            //this.$router.push('/sections/0/contents')
-
-            this.$router.push({
-                name   : `section-${id}`,
-                params : {
-                    //tab       : 'sections',
-                    sectionId : this.index,
-                    type      : id
-                }
-            });
+            this.$emit('showContentPanel');
         },
 
         settingsAction(id, tool){
-            this.$router.push({
-                name   : `section-${id}`,
-                params : {
-                    //tab       : 'sections',
-                    sectionId : this.index,
-                    type      : id
-                }
-            });
+            this.$emit('showSettingsPanel');
         },
 
         deleteAction(id, tool){

@@ -63,10 +63,10 @@
             </ul>
 
 
-            <!-- SUB PANEL -->
-            <!--
-                        <component v-for="(item, index) in contents" v-if="isCurrentRow(index)" :index="index" :model="item" :is="subPanel()"></component>
-            -->
+            <!-- Column List -->
+
+            <component v-for="(item, index) in contents" v-if="isCurrentRow(index)" :index="index" :model="item" :is="subPanel()"></component>
+
 
         </li>
 

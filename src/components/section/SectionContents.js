@@ -8,26 +8,27 @@ import {sprintf} from 'sprintf-js';
 
 import RowList from '../row/RowList.vue';
 
-//import RowContents from '../row/RowContents.vue';
+import RowContents from '../row/RowContents.vue';
 
 Vue.use(Sortable);
 
 // Row List
 Vue.component('row-list', RowList);
-//Vue.component('row-contents', RowContents);
+Vue.component('row-contents', RowContents);
 
 import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
 Vue.component('upb-breadcrumb', UPBBreadcrumb);
 
 export default {
     name  : 'section-contents',
-    props : ['index', 'model'],
+    props : ['index', 'selected', 'model'],
 
     data(){
         return {
-            /*showChild      : false,
-             childId        : null,
-             childComponent : '',*/
+
+            childId        : 0,
+            showChild      : false,
+            childComponent : '',
 
             l10n        : store.l10n,
             breadcrumb  : store.breadcrumb,
@@ -52,6 +53,12 @@ export default {
         }
         else {
             this.item = this.getItem();
+
+            if (this.item.contents.length > 0) {
+                this.childId = 0;
+                this.openContentsPanel(this.childId);
+            }
+
         }
     },
 
@@ -127,9 +134,6 @@ export default {
     methods : {
 
         isSubPanel(){
-
-            //console.log(this.$route)
-
             return (this.$route.meta['subPanel']) ? this.$route.meta.subPanel : false;
         },
 
@@ -174,12 +178,12 @@ export default {
 
         openSettingsPanel(index){
 
-            this.clearPanel();
+            /*this.clearPanel();
 
             this.showChild      = true;
             this.childId        = index;
             this.childComponent = 'row-settings-panel';
-            this.breadcrumb.push(this.model.title);
+            this.breadcrumb.push(this.model.title);*/
         },
 
         // Sub Panel

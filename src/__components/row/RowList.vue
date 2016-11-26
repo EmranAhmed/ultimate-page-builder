@@ -7,9 +7,6 @@
         </ul>
 
         <div v-text="model.attributes.title"></div>
-
-        <!--{{ model.attributes }}-->
-
     </li>
 </template>
 <script src="./RowList.js"></script>

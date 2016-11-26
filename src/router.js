@@ -3,14 +3,14 @@ import extend from 'extend'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
-import SectionsPanel from './com/panels/SectionsPanel.vue'
-import SettingsPanel from './com/panels/SettingsPanel.vue'
-
+import SectionsPanel from './components/panels/SectionsPanel.vue'
+import SettingsPanel from './components/panels/SettingsPanel.vue'
 
 // RowsPanel
-import SectionContents from './com/section/SectionContents.vue'
-import Attributes from './components/tabs/Attributes.vue'
-import List from './components/tabs/ListView.vue'
+import SectionContents from './components/section/SectionContents.vue'
+
+//import Attributes from './components/tabs/Attributes.vue'
+//import List from './components/tabs/ListView.vue'
 
 let config = extend(true, {}, store.router_config);
 let routes = [
@@ -27,40 +27,40 @@ let routes = [
     {
         name      : 'section-contents',
         path      : '/:tab(sections)/:sectionId(\\d+)/:type(contents)',
-        component : SectionContents, // row list
-        meta      : {subPanel : true}
+        component : SectionContents, // row list and column list
+        meta      : {subPanel : true},
     },
     {
-        name      : 'section-settings',
-        path      : '/:tab(sections)/:sectionId(\\d+)/:type(settings)',
-        component : Attributes, // section setting
-        meta      : {subPanel : true}
-    },
-
-    {
-        name      : 'row-contents',
-        path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:type(contents)',
-        component : List, // column list
-        meta      : {subPanel : true}
-    },
-    {
-        name      : 'row-settings',
-        path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:type(settings)',
-        component : Attributes,
-        meta      : {subPanel : true}
+        name : 'section-settings',
+        path : '/:tab(sections)/:sectionId(\\d+)/:type(settings)',
+        //component : Attributes, // section setting
+        meta : {subPanel : true}
     },
 
     {
-        name      : 'column-contents',
-        path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:type(contents)',
-        component : List,
-        meta      : {subPanel : true}
+        name : 'row-contents',
+        path : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:type(contents)',
+        //component : List, // column list
+        meta : {subPanel : true}
     },
     {
-        name      : 'column-settings',
-        path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:type(settings)',
-        component : Attributes,
-        meta      : {subPanel : true}
+        name : 'row-settings',
+        path : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:type(settings)',
+        //component : Attributes,
+        meta : {subPanel : true}
+    },
+
+    {
+        name : 'column-contents',
+        path : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:type(contents)',
+        //component : List,
+        meta : {subPanel : true}
+    },
+    {
+        name : 'column-settings',
+        path : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:type(settings)',
+        //component : Attributes,
+        meta : {subPanel : true}
     },
 
     {
