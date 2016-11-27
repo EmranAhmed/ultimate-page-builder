@@ -11,6 +11,10 @@ Vue.use(Sortable);
 import SectionList from '../section/SectionList.vue';
 Vue.component('section-list', SectionList);
 
+import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
+Vue.component('upb-breadcrumb', UPBBreadcrumb);
+
+
 export default {
     name  : 'sections-panel',
     props : ['index', 'model'],
@@ -28,12 +32,10 @@ export default {
                 handle      : '> .tools > .handle',
                 placeholder : "upb-sort-placeholder",
                 axis        : 'y'
-            }
+            },
+
+            transitionName : 'slide-left'
         }
-    },
-
-    created(){
-
     },
 
     computed : {
@@ -55,10 +57,23 @@ export default {
         this.loadContents();
     },
 
+    watch : {
+        $route (to, from) {
+
+            this.loadContents();
+
+            /*const toDepth       = to.path.split('/').length;
+             const fromDepth     = from.path.split('/').length;
+             this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
+             */
+            //console.log(toDepth, fromDepth)
+        }
+    },
+
     methods : {
 
         loadContents(){
-            // If no contents then load from ajax
+            // load data
             if (this.model.contents.length <= 0) {
                 this.$progressbar.show();
                 store.getPanelContents('_get_upb_sections_panel_contents', (data) => {

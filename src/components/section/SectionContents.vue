@@ -1,7 +1,6 @@
 <template>
     <ul :class="panelClass()">
 
-
         <li class="upb-panel-header-wrapper">
             <ul>
                 <li class="upb-panel-header">
@@ -47,7 +46,6 @@
                         </li>
                     </ul>
                 </li>
-
             </ul>
         </li>
 
@@ -69,8 +67,6 @@
 
 
         </li>
-
     </ul>
 </template>
-<style lang="sass"></style>
 <script src="./SectionContents.js"></script>

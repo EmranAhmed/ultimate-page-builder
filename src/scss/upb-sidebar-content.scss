@@ -65,6 +65,11 @@ button:focus {
           line-height    : 1;
           color          : rgba($upb-sidebar-tab-panel-color, .5);
           margin-bottom  : 15px;
+          a {
+            display         : inline-block;
+            color           : rgba($upb-sidebar-tab-panel-color, .5);
+            text-decoration : none;
+            }
           }
         .panel-title {
           font-size      : 18px;
@@ -344,7 +349,7 @@ button:focus {
             }
 
           &.current {
-            background : #eee;
+            background : #EEEEEE;
             }
 
           .device-activity {
@@ -364,23 +369,23 @@ button:focus {
               }
 
             .active {
-              background : #5aff3d;
-              box-shadow : 0 0 2px #5aff3d;
+              background : #5AFF3D;
+              box-shadow : 0 0 2px #5AFF3D;
               }
             .inactive {
-              background : #607d8b;
+              background : #607D8B;
               }
             }
 
           &.re-config-column .active {
-            background : #f44336 !important;
+            background : #F44336 !important;
             }
 
           .re-config-icon {
             position    : absolute;
             right       : 10px;
             top         : 7px;
-            color       : #f44336;
+            color       : #F44336;
             font-weight : 700;
             }
           }
@@ -530,18 +535,48 @@ button:focus {
         margin        : 10px 2px;
         box-sizing    : border-box;
         border-radius : 2px;
-        border        : 1px solid #ddd;
+        border        : 1px solid #DDDDDD;
         }
 
       }
     }
   }
 
+/**
+* Transition
+*/
 
+.slide-left-enter-active {
+  width      : 300px;
+  transition : margin .3s ease;
+  }
 
+.slide-left-leave-active {
+  transition : margin .3s ease;
+  }
 
+.slide-left-enter, .slide-left-leave-active {
+  margin-left : 350px;
+  width       : 300px;
 
+  position    : absolute;
+  }
 
+.slide-right-enter-active {
+  width      : 300px;
+  transition : margin .3s ease;
+  }
+
+.slide-right-leave-active {
+  transition : margin .3s ease;
+  }
+
+.slide-right-enter, .slide-right-leave-active {
+  margin-left : -350px;
+  width       : 300px;
+
+  position    : absolute;
+  }
 
 
 

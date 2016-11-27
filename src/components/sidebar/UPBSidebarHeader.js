@@ -25,7 +25,11 @@ export default {
 
         save(){
             if (store.isDirty()) {
-                store.saveState();
+                store.saveState(function () {
+                    store.reloadPreview()
+                }, function () {
+                    store.reloadPreview()
+                });
             }
         },
 

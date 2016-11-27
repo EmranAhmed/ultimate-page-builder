@@ -36,8 +36,8 @@ export default {
         sliced.forEach((value, index) => {
 
                 if (index == 0) { // sections, we donot add link on 1st one
-                    //this.breadcrumb.push({title : tab.title, link : `/${tab.id}`})
-                    this.breadcrumb.push({title : tab.title, link : false})
+                    this.breadcrumb.push({title : tab.title, link : `/${tab.id}`})
+                    //this.breadcrumb.push({title : tab.title, link : false})
                 }
                 else {
 

@@ -15,6 +15,11 @@
 
 	add_action( 'wp_loaded', 'upb_tabs_register_action', 90 );
 
+	function upb_settings_register_action() {
+		do_action( 'upb_register_setting', upb_settings() );
+	}
+
+	add_action( 'wp_loaded', 'upb_settings_register_action' );
 
 
 	// AJAX Requests
@@ -93,4 +98,21 @@
 
 
 		) );
+	} );
+
+	add_action( 'wp_ajax__get_upb_settings_panel_contents', function () {
+
+		if ( ! current_user_can( 'customize' ) ) {
+			status_header( 403 );
+			wp_send_json_error( 'upb_not_allowed' );
+		}
+
+		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+			status_header( 400 );
+			wp_send_json_error( 'bad_nonce' );
+		}
+
+		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
+
+		wp_send_json_success( upb_settings()->getAll() );
 	} );

@@ -66,7 +66,7 @@ let routes = [
     {
         name      : 'settings',
         path      : '/:tab(settings)',
-        component : SectionsPanel
+        component : SettingsPanel
     }
 ];
 

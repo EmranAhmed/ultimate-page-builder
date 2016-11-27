@@ -3,22 +3,21 @@ import extend from 'extend';
 class store {
 
     constructor() {
-        this.tabs          = window._upb_tabs;
-        this.status        = window._upb_status;
-        this.router        = window._upb_router || [];
-
+        this.tabs   = window._upb_tabs;
+        this.status = window._upb_status;
+        this.router = window._upb_router || [];
 
         this.l10n          = window._upb_l10n;
         this.router_config = window._upb_router_config;
         this.breadcrumb    = [];
         this.devices       = window._upb_preview_devices;
         this.grid          = window._upb_grid_system;
-        // this.preview    = 'upb-preview-frame';
+        this.preview       = 'upb-preview-frame';
     }
 
-    // reloadPreview() {
-    //    window.frames[this.preview].window.location.reload();
-    // }
+    reloadPreview() {
+        window.frames[this.preview].contentWindow.location.reload();
+    }
 
     getTabs() {
         return this.tabs;
@@ -48,6 +47,8 @@ class store {
         return contents.map((content) => {
             delete content['_upb_settings'];
             delete content['_upb_options'];
+            delete content['_upb_field_attrs'];
+            delete content['_upb_field_type'];
 
             if (content['contents']) {
                 this.cleanup(content['contents']);

@@ -1,12 +1,11 @@
 <template>
     <div id="upb-sidebar-contents">
-
-
-        <router-view :model="item"></router-view>
-
         <!--
-                <component v-for="item in model" v-if="item.active" :model="item" :is="getPane(item.id)"></component>
+        <transition :name="transitionName">
+            <router-view :model="item"></router-view>
+        </transition>
         -->
+        <router-view :model="item"></router-view>
     </div>
 </template>
 <style src="../../scss/upb-sidebar-content.scss" lang="sass"></style>

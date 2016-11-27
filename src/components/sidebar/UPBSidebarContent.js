@@ -18,29 +18,25 @@ export default {
                 handle      : '> .tools > .handle',
                 placeholder : "upb-sort-placeholder",
                 axis        : 'y'
-            }
+            },
+
+            transitionName : 'slide-left'
         }
     },
 
     watch : {
         $route (to, from) {
-            //const toDepth       = to.path.split('/').length
-            //const fromDepth     = from.path.split('/').length
-            //this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-
-            //if (this.$route.params['type']) {
-            //    this.item = this.getItem();
-            //}
-            //else {
-            this.item = this.getTabContent();
-            //}
-
+            const toDepth       = to.path.split('/').length;
+            const fromDepth     = from.path.split('/').length;
+            this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
+            this.item           = this.getTabContent();
         }
     },
 
     created() {
         this.item = this.getTabContent();
     },
+
     methods : {
 
         getItem(){

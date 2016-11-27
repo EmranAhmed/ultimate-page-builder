@@ -337,6 +337,31 @@
 
 	} );
 
+	// Register Settings
+
+	add_action( 'upb_register_setting', function ( $settings ) {
+
+
+		$options = array(
+			'type'  => 'text',
+			'title' => 'Enable'
+		);
+
+
+		$settings->register( 'enable', $options );
+
+		$options = array(
+			'type'  => 'text',
+			'title' => 'Position',
+			'default'=>'content'
+		);
+
+
+		$settings->register( 'position', $options );
+
+
+	} );
+
 
 	// Load CSS :)
 	add_action( 'upb_boilerplate_print_styles', function () {
@@ -404,7 +429,7 @@
 			'help'             => esc_attr__( 'Help' ),
 			'search'           => esc_attr__( 'Search' ),
 			'back'             => esc_attr__( 'Back' ),
-			'breadcrumbRoot'   => esc_attr__( 'You are building' ),
+			'breadcrumbRoot'   => esc_attr__( 'You are on' ),
 			'skeleton'         => esc_attr__( 'Skeleton preview' ),
 			'collapse'         => esc_attr__( 'Collapse' ),
 			'expand'           => esc_attr__( 'Expand' ),
