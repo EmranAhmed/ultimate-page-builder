@@ -25,10 +25,21 @@ export default {
 
         save(){
             if (store.isDirty()) {
-                store.saveState(function () {
-                    store.reloadPreview()
-                }, function () {
-                    store.reloadPreview()
+
+
+                this.$progressbar.show();
+                store.saveState(() => {
+                    store.stateSaved();
+                    store.reloadPreview();
+                    this.$progressbar.hide();
+                }, () => {
+
+
+                    ///////
+                    //store.stateSaved();
+
+                    //store.reloadPreview();
+                    this.$progressbar.hide();
                 });
             }
         },
