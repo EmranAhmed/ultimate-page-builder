@@ -3,7 +3,7 @@
         <div class="form-group">
             <label>
                 <span class="title" v-text="attrs.title"></span>
-                <input v-colorpicker type="text" :data-default-color="attrs.value" :value="attrs.value" :id="attrs.id" :placeholder="attrs.placeholder">
+                <input v-colorpicker  :data-alpha="attrs.alpha" type="text" :data-default-color="attrs.value" :value="attrs.value" :id="attrs.id" :placeholder="attrs.placeholder">
             </label>
 
             <p class="description" v-if="attrs.desc" v-html="attrs.desc"></p>

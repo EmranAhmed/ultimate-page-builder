@@ -34,7 +34,7 @@ export default {
             showSearch           : false,
             sortable             : {
                 //handle      : '> .tools > .handle',
-                placeholder : "upb-sort-placeholder",
+                //placeholder : "upb-sort-placeholder",
                 //axis        : 'y'
             },
             searchQuery          : '',

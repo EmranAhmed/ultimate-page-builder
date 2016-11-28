@@ -80,6 +80,11 @@
 
 				switch ( $options[ 'type' ] ):
 
+					case 'color':
+						$options[ 'alpha' ] = isset( $options[ 'alpha' ] ) ? $options[ 'alpha' ] : FALSE;
+						$options[ 'value' ] = ( $value === FALSE ) ? $options[ 'default' ] : $value;
+						break;
+
 					case 'toggle':
 						$options[ 'value' ] = ( $value === FALSE ) ? $options[ 'default' ] : $value;
 						break;

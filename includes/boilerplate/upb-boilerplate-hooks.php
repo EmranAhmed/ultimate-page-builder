@@ -364,11 +364,35 @@
 		$options = array(
 			'type'    => 'color',
 			'title'   => 'Color',
-			'default' => '#ffccff'
+			'default' => '#ffccff',
+			'alpha'   => TRUE //
 		);
 
 
 		$settings->register( 'color', $options );
+
+
+	} );
+
+
+	// Backend Scripts
+
+	add_action( 'upb_boilerplate_enqueue_scripts', function () {
+
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		// Color
+
+		wp_register_script( 'iris', admin_url( "/js/iris.min.js" ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), FALSE, TRUE );
+		wp_register_script( 'wp-color-picker', admin_url( "/js/color-picker$suffix.js" ), array( 'iris' ), FALSE, TRUE );
+		wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', array(
+			'clear'         => __( 'Clear' ),
+			'defaultString' => __( 'Default' ),
+			'pick'          => __( 'Select Color' ),
+			'current'       => __( 'Current Color' ),
+		) );
+		wp_register_script( 'wp-color-picker', admin_url( "/js/color-picker$suffix.js" ), array( 'iris' ), FALSE, TRUE );
+
+		wp_register_script( 'wp-color-picker-alpha', UPB_PLUGIN_ASSETS_URL . "js/wp-color-picker-alpha$suffix.js", array( 'wp-color-picker' ), FALSE, TRUE );
 
 
 	} );
@@ -398,19 +422,8 @@
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-		// Color
 
-		wp_register_script( 'iris', admin_url( "/js/iris.min.js" ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), FALSE, TRUE );
-		wp_register_script( 'wp-color-picker', admin_url( "/js/color-picker$suffix.js" ), array( 'iris' ), FALSE, TRUE );
-		wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', array(
-			'clear'         => __( 'Clear' ),
-			'defaultString' => __( 'Default' ),
-			'pick'          => __( 'Select Color' ),
-			'current'       => __( 'Current Color' ),
-		) );
-
-
-		wp_enqueue_script( 'wp-color-picker' );
+		wp_enqueue_script( 'wp-color-picker-alpha' );
 
 		wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URL . "js/upb-builder$suffix.js", array( 'jquery-ui-sortable', 'wp-util', 'wp-color-picker' ), '', TRUE );
 
