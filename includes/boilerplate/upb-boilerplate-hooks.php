@@ -343,21 +343,32 @@
 
 
 		$options = array(
-			'type'  => 'text',
-			'title' => 'Enable'
+			'type'    => 'toggle',
+			'title'   => 'Enable',
+			'default' => TRUE
 		);
 
 
 		$settings->register( 'enable', $options );
 
 		$options = array(
-			'type'  => 'text',
-			'title' => 'Position',
-			'default'=>'content'
+			'type'    => 'text',
+			'title'   => 'Position',
+			'default' => 'content'
 		);
 
 
 		$settings->register( 'position', $options );
+
+
+		$options = array(
+			'type'    => 'color',
+			'title'   => 'Color',
+			'default' => '#ffccff'
+		);
+
+
+		$settings->register( 'color', $options );
 
 
 	} );
@@ -372,6 +383,8 @@
 			wp_enqueue_style( 'upb-builder', UPB_PLUGIN_ASSETS_URL . "css/upb-builder$suffix.css" );
 		}
 
+		wp_enqueue_style( 'buttons' );
+		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URL . "css/upb-boilerplate$suffix.css" );
 
 
@@ -385,9 +398,24 @@
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-		wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URL . "js/upb-builder$suffix.js", array( 'jquery-ui-sortable', 'wp-util' ), '', TRUE );
+		// Color
+
+		wp_register_script( 'iris', admin_url( "/js/iris.min.js" ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), FALSE, TRUE );
+		wp_register_script( 'wp-color-picker', admin_url( "/js/color-picker$suffix.js" ), array( 'iris' ), FALSE, TRUE );
+		wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', array(
+			'clear'         => __( 'Clear' ),
+			'defaultString' => __( 'Default' ),
+			'pick'          => __( 'Select Color' ),
+			'current'       => __( 'Current Color' ),
+		) );
+
+
+		wp_enqueue_script( 'wp-color-picker' );
+
+		wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URL . "js/upb-builder$suffix.js", array( 'jquery-ui-sortable', 'wp-util', 'wp-color-picker' ), '', TRUE );
 
 		wp_enqueue_script( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URL . "js/upb-boilerplate$suffix.js", array( 'jquery', 'upb-builder' ), '', TRUE );
+
 
 		$data = sprintf( "var _upb_tabs = %s;\n", upb_tabs()->getJSON() );
 		// $data = sprintf( "var _upb_tabs = %s;\n", wp_json_encode( array() ) );
@@ -408,7 +436,7 @@
 
 		$data .= sprintf( "var _upb_status = %s;\n", wp_json_encode( array( 'dirty' => FALSE, '_nonce' => wp_create_nonce( '_upb' ), '_id' => get_the_ID() ) ) );
 
-		$data .= sprintf( "var _upb_settings = %s;", upb_settings()->getJSON() );
+		/*$data .= sprintf( "var _upb_settings = %s;", upb_settings()->getJSON() );*/
 
 		$data .= sprintf( "var _upb_preview_devices = %s;", wp_json_encode( apply_filters( 'upb_preview_devices', array() ) ) );
 
@@ -444,7 +472,7 @@
 		//$tabs = upb_tabs()->getAll();
 		print( "<script>
 
-ChildView = {
+var ChildView = {
 
   template: '<span> Elements </span>'
 }

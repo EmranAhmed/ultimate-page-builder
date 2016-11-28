@@ -15,9 +15,11 @@ add_action( 'upb_boilerplate_print_scripts', 'print_head_scripts', 20 );
 add_action( 'upb_boilerplate_print_footer_scripts', '_wp_footer_scripts' );
 add_action( 'upb_boilerplate_print_styles', 'print_admin_styles', 20 );
 
+
 do_action( 'upb_boilerplate_init' );
 
 do_action( 'upb_boilerplate_enqueue_scripts' );
+
 
 // Let's roll.
 @header( 'Content-Type: ' . get_option( 'html_type' ) . '; charset=' . get_option( 'blog_charset' ) );

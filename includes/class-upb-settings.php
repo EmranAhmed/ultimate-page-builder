@@ -49,19 +49,48 @@
 
 				$_id = $this->prefix . $id;
 
-				$options[ 'id' ]          = $_id;
-				$options[ '_id' ]         = $id;
-				$options[ 'desc' ]        = isset( $options[ 'desc' ] ) ? $options[ 'desc' ] : FALSE;
-				$options[ 'default' ]     = isset( $options[ 'default' ] ) ? $options[ 'default' ] : '';
-				$options[ 'value' ]       = $this->get_setting( $id );
-				$options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : $options[ 'title' ];
+				$options[ 'id' ]      = $_id;
+				$options[ '_id' ]     = $id;
+				$options[ 'desc' ]    = isset( $options[ 'desc' ] ) ? $options[ 'desc' ] : FALSE;
+				$options[ 'default' ] = isset( $options[ 'default' ] ) ? $options[ 'default' ] : '';
+				// $options[ 'value' ]       = $this->get_setting( $id );
+
+
+				// if no option saved show default else show saved one
+				$options = $this->setValueBasedOnType( $id, $options );
+
+				$options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : $options[ 'value' ];
 
 
 				$setting[ '_upb_field_type' ]  = 'upb-input-' . $options[ 'type' ];
 				$setting[ '_upb_field_attrs' ] = $options;
 				$setting[ $id ]                = $options[ 'value' ];
 
+
+				// var_dump(get_post_meta( get_the_ID(), $_id, TRUE ));
+
+
 				$this->settings[] = $setting;
+
+			}
+
+			private function setValueBasedOnType( $id, $options ) {
+
+				$value = $this->get_setting( $id );
+
+				switch ( $options[ 'type' ] ):
+
+					case 'toggle':
+						$options[ 'value' ] = ( $value === FALSE ) ? $options[ 'default' ] : $value;
+						break;
+
+					default:
+
+						$options[ 'value' ] = ( $value === FALSE ) ? $options[ 'default' ] : $value;
+						break;
+				endswitch;
+
+				return $options;
 
 			}
 

@@ -45,6 +45,15 @@ if (process.env.NODE_ENV === 'production') {
         })
     }
 }
+else {
+    vueLoaderConfig.loaders = {
+        scss    : 'vue-style-loader!css-loader!sass-loader',
+        sass    : 'vue-style-loader!css-loader!sass-loader',
+        css     : 'vue-style-loader!css-loader',
+        stylus  : 'vue-style-loader!css-loader!stylus-loader',
+        exclude : path.resolve(__dirname, 'node_modules')
+    }
+}
 
 // http://webpack.github.io/docs/configuration.html#devtool
 
@@ -82,11 +91,17 @@ module.exports = {
     },
     resolve : {
         alias : {
-            'vue$' : 'vue/dist/vue'
+            'vue$' : 'vue/dist/vue',
+            //styles: path.resolve(__dirname, '../src/path/to/your/styles') // @import styles/variables
         }
     },
 
-}
+    resolveLoader : {
+        alias : {
+            //    'scss-loader' : 'sass-loader' // to use lang="scss" instead of lang="sass" :)
+        }
+    }
+};
 
 if (process.env.NODE_ENV === 'production') {
 

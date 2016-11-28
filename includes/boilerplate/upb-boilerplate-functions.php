@@ -4,7 +4,7 @@
 
 	function upb_boilerplate_body_class( $class = '' ) {
 
-		$classes = array( 'upb-boilerplate' );
+		$classes = array( 'wp-core-ui', 'upb-boilerplate' );
 		if ( wp_is_mobile() ) {
 			array_push( $classes, 'mobile' );
 		}
