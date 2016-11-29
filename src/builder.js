@@ -31,14 +31,41 @@ const upbBuilder = new Vue({
     render : h => h(UPBSidebar)
 });
 
-const upbPreview = new Vue({
-    data   : {
-        store
-    },
-    render : h => h(UPBPreview)
+document.getElementById("upb-preview-frame").addEventListener('load', function () {
+
+    let settings = {};
+
+    store.tabs.filter(function (content) {
+        return content.id == 'settings' ? content : false;
+    }).pop().contents.map(function (data) {
+
+        if (data.metaId == 'enable' || data.metaId == 'position') {
+            settings[data.metaId] = data.metaValue;
+        }
+    });
+
+    // console.log(settings);
+
+    if (settings.enable) {
+        new Vue({
+            data   : {
+                store
+            },
+            render : h => h(UPBPreview)
+        })
+        //.$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById('upb-preview'))
+            .$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById(settings.position))
+    }
 });
 
-window.frames['upb-preview-frame'].window.onload = () => {
-    //upbPreview.$mount(window.frames['upb-preview-frame'].window.document.getElementById('upb-preview'))
-    upbPreview.$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById('upb-preview'))
-};
+/*window.previewWindowLoaded = function (iframe) {
+ upbPreview.$mount(iframe.contentWindow.document.getElementById('upb-preview'));
+ };*/
+
+/*window.frames['upb-preview-frame'].window.onload = function () {
+ ////upbPreview.$mount(window.frames['upb-preview-frame'].window.document.getElementById('upb-preview'))
+ // upbPreview.$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById('upb-preview'))
+
+ console.log('onload')
+ };*/
+

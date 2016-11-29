@@ -29,6 +29,7 @@
 
 			public function hooks() {
 				add_action( 'wp', array( $this, 'after_wp_setup' ) );
+				add_filter( 'the_content', array( $this, 'preview_content' ) );
 			}
 
 			public function after_wp_setup() {

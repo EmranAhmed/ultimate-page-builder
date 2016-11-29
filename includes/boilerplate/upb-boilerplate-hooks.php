@@ -345,16 +345,34 @@
 		$options = array(
 			'type'    => 'toggle',
 			'title'   => 'Enable',
-			'default' => TRUE
+			'default' => FALSE,
+			'reload'  => TRUE
 		);
 
 
 		$settings->register( 'enable', $options );
 
-		$options = array(
+		/*$options = array(
 			'type'    => 'text',
 			'title'   => 'Position',
-			'default' => 'content'
+			'default' => 'content',
+			'reload'  => TRUE
+		);
+
+
+		$settings->register( 'position', $options );*/
+
+
+		$options = array(
+			'type'    => 'select',
+			'title'   => 'Position',
+			'default' => 'upb-after-preview',
+			'reload'  => TRUE,
+			'options' => array(
+				'upb-before-preview' => 'Before Contents',
+				'upb-on-preview'     => 'Instead of Contents',
+				'upb-after-preview'  => 'After Contents',
+			)
 		);
 
 
@@ -424,6 +442,7 @@
 
 
 		wp_enqueue_script( 'wp-color-picker-alpha' );
+		wp_enqueue_media();
 
 		wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URL . "js/upb-builder$suffix.js", array( 'jquery-ui-sortable', 'wp-util', 'wp-color-picker' ), '', TRUE );
 

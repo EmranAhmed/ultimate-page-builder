@@ -16,6 +16,8 @@ $grid-gutter-width : 2px !default;
 @mixin make-row($gutter: $grid-gutter-width) {
   margin-left  : ceil(($gutter / -2));
   margin-right : floor(($gutter / -2));
+  display      : block;
+  position     : relative;
   @include clearfix;
   }
 
@@ -24,7 +26,7 @@ $grid-gutter-width : 2px !default;
     $list : "#{$list}, .upb-mini-column-#{$i}";
     }
   #{$list} {
-    float : left;
+    display : inline-block;
     }
   }
 

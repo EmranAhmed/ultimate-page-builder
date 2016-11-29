@@ -1,0 +1,1 @@
+<div id="upb-on-preview"><?php echo $content ?></div>

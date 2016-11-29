@@ -49,22 +49,25 @@
 
 				$_id = $this->prefix . $id;
 
-				$options[ 'id' ]      = $_id;
-				$options[ '_id' ]     = $id;
+				$options[ 'id' ]      = $id;
+				$options[ '_id' ]     = $_id;
 				$options[ 'desc' ]    = isset( $options[ 'desc' ] ) ? $options[ 'desc' ] : FALSE;
 				$options[ 'default' ] = isset( $options[ 'default' ] ) ? $options[ 'default' ] : '';
-				// $options[ 'value' ]       = $this->get_setting( $id );
-
 
 				// if no option saved show default else show saved one
 				$options = $this->setValueBasedOnType( $id, $options );
 
 				$options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : $options[ 'value' ];
 
-
 				$setting[ '_upb_field_type' ]  = 'upb-input-' . $options[ 'type' ];
 				$setting[ '_upb_field_attrs' ] = $options;
-				$setting[ $id ]                = $options[ 'value' ];
+
+
+				// Saved as
+				$setting[ $id ]         = $options[ 'value' ];
+				$setting[ 'metaId' ]    = $id;
+				$setting[ 'metaKey' ]   = $_id;
+				$setting[ 'metaValue' ] = $options[ 'value' ];
 
 
 				// var_dump(get_post_meta( get_the_ID(), $_id, TRUE ));

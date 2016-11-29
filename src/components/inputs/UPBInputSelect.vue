@@ -3,7 +3,11 @@
         <div class="form-group">
             <label>
                 <span class="title" v-text="attrs.title"></span>
-                <input v-model="model[attrs.id]" class="form-control" :id="attrs._id" :placeholder="attrs.placeholder">
+
+                <select v-model="model[attrs.id]" :id="attrs._id">
+                    <option v-for="(option, value) in attrs.options" :value="value" v-text="option"></option>
+                </select>
+
             </label>
 
             <p class="description" v-if="attrs.desc" v-html="attrs.desc"></p>
@@ -15,7 +19,7 @@
     import common from './common'
 
     export default {
-        name   : 'upb-input-text',
+        name   : 'upb-input-select',
         props  : ['index', 'attrs', 'model'],
         mixins : [common],
     }

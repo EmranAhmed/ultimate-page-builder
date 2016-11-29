@@ -40,6 +40,7 @@
 				define( 'UPB_PLUGIN_ASSETS_URL', trailingslashit( plugin_dir_url( __FILE__ ) . 'assets' ) );
 				define( 'UPB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 				define( 'UPB_PLUGIN_INCLUDE_DIR', trailingslashit( plugin_dir_path( __FILE__ ) . 'includes' ) );
+				define( 'UPB_PLUGIN_TEMPLATES_DIR', trailingslashit( plugin_dir_path( __FILE__ ) . 'templates' ) );
 				define( 'UPB_PLUGIN_DIRNAME', dirname( plugin_basename( __FILE__ ) ) );
 				define( 'UPB_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 				define( 'UPB_PLUGIN_FILE', __FILE__ );

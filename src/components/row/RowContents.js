@@ -35,7 +35,7 @@ export default {
             sortable             : {
                 //handle      : '> .tools > .handle',
                 //placeholder : "upb-sort-placeholder",
-                //axis        : 'y'
+                // axis        : 'y'
             },
             searchQuery          : '',
             selectedColumnLayout : {},

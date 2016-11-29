@@ -1,6 +1,6 @@
 <template>
-    <div id="app">
-
+    <div id="upb-preview" class="upb-wrapper">
+        {{ $data }}
     </div>
 </template>
 <style src="./scss/upb-preview.scss" lang="sass"></style>
