@@ -444,7 +444,7 @@
 		wp_enqueue_script( 'wp-color-picker-alpha' );
 		wp_enqueue_media();
 
-		wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URL . "js/upb-builder$suffix.js", array( 'jquery-ui-sortable', 'wp-util', 'wp-color-picker' ), '', TRUE );
+		wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URL . "js/upb-builder$suffix.js", array( 'jquery-ui-sortable', 'wp-util', 'wp-color-picker', "shortcode" ), '', TRUE );
 
 		wp_enqueue_script( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URL . "js/upb-boilerplate$suffix.js", array( 'jquery', 'upb-builder' ), '', TRUE );
 
@@ -511,6 +511,18 @@ var ChildView = {
 
 </script>" );
 	} );
+
+	add_action( 'upb_boilerplate_print_footer_scripts', function () {
+		//$tabs = upb_tabs()->getAll();
+		echo '<script type="text/x-template" id="hello-world-template">
+
+
+
+  <p>{{ shortcode }}</p>
+</script>';
+	} );
+
+
 
 
 
