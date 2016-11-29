@@ -2,7 +2,7 @@
     <div id="upb-preview" class="upb-wrapper">
 
 
-        <upb-section v-for="contents in model.contents" :model="contents"></upb-section>
+        <upb-section v-for="(contents, index) in model.contents" :index="index" :model="contents"></upb-section>
 
 
     </div>
@@ -16,7 +16,7 @@
     Vue.component('upb-section', {
         //template : '<button>{{ attributes }}</button>',
         template : '#hello-world-template',
-        props    : ['model'],
+        props    : ['index','model'],
         watch    : {
             shortcode(n){
                 console.log(n)
@@ -24,33 +24,43 @@
         },
         computed : {
             shortcode(){
+
+                this.model.attributes['_root'] = this.index
+
                 return wp.shortcode.string({
                     tag     : this.model.tag,
                     attrs   : this.model.attributes,
-                    content : this.shortcodes(this.model.contents),
+                    content : this.shortcodes(this.model.contents, this.index),
                 })
             }
         },
 
         methods : {
-            shortcodes(contents){
+            shortcodes(contents, index){
 
                 if (Array.isArray(contents)) {
 
-                    return contents.map( (c) => {
+                    return contents.map( (c, i) => {
+
+
+                         c.attributes['_root'] = `${index}/${i}`
 
                         return wp.shortcode.string({
                             tag     : c.tag,
                             attrs   : c.attributes,
-                            content : this.shortcodes(c.contents),
+                            content : this.shortcodes(c.contents, c.attributes['_drop']),
                         })
 
-                    })
+                    }).join('')
                 }
                 else{
                     return contents;
                 }
 
+            },
+
+            doIt(){
+                console.log('Ooooooo')
             }
         }
     });

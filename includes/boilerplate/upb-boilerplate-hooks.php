@@ -518,7 +518,7 @@ var ChildView = {
 
 
 
-  <p>{{ shortcode }}</p>
+  <p @click="doIt()">{{ shortcode }}</p>
 </script>';
 	} );
 
