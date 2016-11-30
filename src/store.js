@@ -91,6 +91,19 @@ class store {
         });
     }
 
+    getShortCodePreview(contents, success, error) {
+
+        wp.ajax.send('_get_upb_shortcode_preview', {
+            success : success,
+            error   : error,
+            data    : {
+                _nonce   : this.status._nonce,
+                id       : this.status._id,
+                contents : contents
+            }
+        });
+    }
+
     upbElementOptions(contents, success, error) {
         wp.ajax.send("_get_upb_element_options", {
             success : success,

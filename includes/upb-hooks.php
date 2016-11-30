@@ -116,3 +116,25 @@
 
 		wp_send_json_success( upb_settings()->getAll() );
 	} );
+
+	add_action( 'wp_ajax__get_upb_shortcode_preview', function () {
+
+		if ( ! current_user_can( 'customize' ) ) {
+			status_header( 403 );
+			wp_send_json_error( 'upb_not_allowed' );
+		}
+
+		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+			status_header( 400 );
+			wp_send_json_error( 'bad_nonce' );
+		}
+
+		if ( ! isset( $_POST[ 'contents' ] ) ) {
+			status_header( 400 );
+			wp_send_json_error( 'missing_contents' );
+		}
+
+		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
+
+		wp_send_json_success( do_shortcode( $_POST[ 'contents' ] ) );
+	} );

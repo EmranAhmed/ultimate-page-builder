@@ -28,7 +28,7 @@ const upbBuilder = new Vue({
         })
     },
 
-    render : h => h(UPBSidebar)
+    render : createElement => createElement(UPBSidebar)
 });
 
 document.getElementById("upb-preview-frame").addEventListener('load', function () {
@@ -51,7 +51,7 @@ document.getElementById("upb-preview-frame").addEventListener('load', function (
             data   : {
                 store
             },
-            render : h => h(UPBPreview)
+            render : createElement => createElement(UPBPreview)
         })
         //.$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById('upb-preview'))
             .$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById(settings.position))

@@ -512,14 +512,49 @@ var ChildView = {
 </script>" );
 	} );
 
+
+
+
+	function footag_func( $atts, $content = "" ) {
+		return "<p>SECTION</p>";
+	}
+	add_shortcode( 'section', 'footag_func' );
+
+
 	add_action( 'upb_boilerplate_print_footer_scripts', function () {
 		//$tabs = upb_tabs()->getAll();
-		echo '<script type="text/x-template" id="hello-world-template">
+		echo '<script type="text/x-template" id="upb-section-template">
 
+<p>
 
+{{ shortcode }}
 
-  <p @click="doIt()">{{ shortcode }}</p>
+<slot></slot>
+
+</p>
 </script>';
+
+		echo '<script type="text/x-template" id="upb-row-template">
+
+<p>
+
+{{ shortcode }}
+<slot></slot>
+
+</p>
+</script>';
+
+		echo '<script type="text/x-template" id="upb-column-template">
+
+<p>
+
+{{ shortcode }}
+
+<slot></slot>
+
+</p>
+</script>';
+
 	} );
 
 
