@@ -1,8 +1,8 @@
 <template>
     <div id="upb-preview" class="upb-wrapper">
 
-        {{ preview }}
-        {{ shortcodes }}
+        <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`">
+        </component>
 
     </div>
 </template>
@@ -21,59 +21,66 @@
         template : '#upb-section-template',
         //render: createElement=>createElement(),
         props    : ['index', 'model'],
+
         data(){
             return {
-                shortcode : ''
+                //$router : this.$root.$data.store.panel._router
             }
         },
 
-        created(){
-
-            this.shortcode = this.getShortCode(this.model.tag, this.model.attributes, this.model.contents);
-
-            this.$watch(`model`, function (value) {
-
-                this.shortcode = this.getShortCode(this.model.tag, this.model.attributes, this.model.contents);
-
-                console.log(this.shortcode);
-
-                // https://vuejs.org/v2/api/#vm-watch
-
-            }.bind(this), {deep : true});
-
-            this.$watch(`model.contents`, function (value) {
-
-                this.shortcode = this.getShortCode(this.model.tag, this.model.attributes, this.model.contents);
-
-                console.log(this.shortcode);
-
-                // https://vuejs.org/v2/api/#vm-watch
-
-            }.bind(this));
-
+        computed : {
+            $router(){
+                return this.$root.$data.store.panel._router;
+            },
+            $route(){
+                return this.$root.$data.store.panel._route;
+            },
         },
 
         methods : {
-
-            getShortCode(tag, attrs, contents){
-                return wp.shortcode.string({
-                    tag     : tag,
-                    attrs   : attrs,
-                    content : this.contents(contents)
-                })
+            activeFocus(){
+                this.model._upb_options.focus = true;
+            },
+            removeFocus(){
+                this.model._upb_options.focus = false;
             },
 
-            contents(contents){
+            openContentsPanel(){
 
-                if (Array.isArray(contents)) {
-                    return contents.map(function (c, i) {
-                        return this.getShortCode(c.tag, c.attributes, c.contents);
-                    }.bind(this)).join('')
-                }
-                else {
-                    return contents;
-                }
+                this.$router.replace(`/sections`)
 
+                // Async
+                setTimeout(function () {
+
+                    this.$router.push({
+                        name   : `section-contents`,
+                        params : {
+                            tab       : 'sections',
+                            sectionId : this.index,
+                            type      : 'contents'
+                        }
+                    });
+
+                }.bind(this), 10)
+            },
+
+            openSettingsPanel(){
+
+                this.$router.replace(`/sections`)
+
+                // Async
+                setTimeout(function () {
+
+                    this.$router.push({
+                        name   : `section-settings`,
+                        params : {
+                            tab       : 'sections',
+                            sectionId : this.index,
+                            type      : 'settings'
+                        }
+                    });
+
+                }.bind(this), 10)
             }
         }
     });
@@ -83,158 +90,111 @@
         template : '#upb-row-template',
         //render: createElement=>createElement(),
         props    : ['index', 'model'],
+
         data(){
             return {
-                shortcode : ''
+                //$router : this.$root.$data.store.panel._router
             }
         },
 
-        created(){
-
-            this.shortcode = this.getShortCode(this.model.tag, this.model.attributes, this.model.contents);
-
-            this.$watch(`model.attributes`, function (value) {
-
-                this.shortcode = this.getShortCode(this.model.tag, this.model.attributes, this.model.contents);
-
-                console.log(this.shortcode);
-
-                // https://vuejs.org/v2/api/#vm-watch
-
-            }.bind(this), {deep : true});
-
-            this.$watch(`model.contents`, function (value) {
-
-                this.shortcode = this.getShortCode(this.model.tag, this.model.attributes, this.model.contents);
-
-                console.log(this.shortcode);
-
-                // https://vuejs.org/v2/api/#vm-watch
-
-            }.bind(this));
-
+        computed : {
+            $router(){
+                return this.$root.$data.store.panel._router;
+            },
+            $route(){
+                return this.$root.$data.store.panel._route;
+            },
         },
 
         methods : {
-
-            getShortCode(tag, attrs, contents){
-                return wp.shortcode.string({
-                    tag     : tag,
-                    attrs   : attrs,
-                    content : this.contents(contents)
-                })
+            activeFocus(){
+                this.model._upb_options.focus = true;
+            },
+            removeFocus(){
+                this.model._upb_options.focus = false;
             },
 
-            contents(contents){
+            openContentsPanel(){
 
-                if (Array.isArray(contents)) {
-                    return contents.map(function (c, i) {
-                        return this.getShortCode(c.tag, c.attributes, c.contents);
-                    }.bind(this)).join('')
-                }
-                else {
-                    return contents;
-                }
+                this.$router.replace(`/sections`)
 
+                // Async
+                setTimeout(function () {
+
+                    this.$router.push({
+                        name   : `section-contents`,
+                        params : {
+                            tab       : 'sections',
+                            sectionId : this.index,
+                            type      : 'contents'
+                        }
+                    });
+
+                }.bind(this), 10)
+            },
+
+            openSettingsPanel(){
+
+                this.$router.replace(`/sections`)
+
+                // Async
+                setTimeout(function () {
+
+                    this.$router.push({
+                        name   : `section-settings`,
+                        params : {
+                            tab       : 'sections',
+                            sectionId : this.index,
+                            type      : 'settings'
+                        }
+                    });
+
+                }.bind(this), 10)
             }
         }
     });
 
-    Vue.component('upb-column', {
-        //template : '<button>{{ attributes }}</button>',
-        template : '#upb-column-template',
-        //render: createElement=>createElement(),
-        props    : ['index', 'model'],
-        data(){
-            return {
-                shortcode : ''
-            }
-        },
 
-        created(){
 
-            this.shortcode = this.getShortCode(this.model.tag, this.model.attributes, this.model.contents);
 
-            this.$watch(`model.attributes`, function (value) {
 
-                this.shortcode = this.getShortCode(this.model.tag, this.model.attributes, this.model.contents);
-
-                console.log(this.shortcode);
-
-                // https://vuejs.org/v2/api/#vm-watch
-
-            }.bind(this), {deep : true});
-
-            this.$watch(`model.contents`, function (value) {
-
-                this.shortcode = this.getShortCode(this.model.tag, this.model.attributes, this.model.contents);
-
-                console.log(this.shortcode);
-
-                // https://vuejs.org/v2/api/#vm-watch
-
-            }.bind(this));
-
-        },
-
-        methods : {
-
-            getShortCode(tag, attrs, contents){
-                return wp.shortcode.string({
-                    tag     : tag,
-                    attrs   : attrs,
-                    content : this.contents(contents)
-                })
-            },
-
-            contents(contents){
-
-                if (Array.isArray(contents)) {
-                    return contents.map(function (c, i) {
-                        return this.getShortCode(c.tag, c.attributes, c.contents);
-                    }.bind(this)).join('')
-                }
-                else {
-                    return contents;
-                }
-
-            }
-        }
-    });
 
     import Vue from 'vue';
 
     export default {
         name : 'upb-preview',
         data(){
-            return {
-                sections : this.$root.$data,
-                preview  : ''
-            }
+            /*return {
+             sections : this.$root.$data,
+             preview  : ''
+             }*/
+            return this.$root.$data;
         },
 
         computed : {
             model(){
-                return this.sections.store.tabs.filter(function (data) {
+                return this.$data.store.tabs.filter(function (data) {
                     return data.id == 'sections' ? data : false;
                 })[0]
             },
 
-            shortcodes(){
-                //return this.getPreview();
+            /*  shortcodes(){
+             //return this.getPreview();
 
-                return this.model.contents.map(function (m, i) {
+             return this.model.contents.map(function (m, i) {
 
-                    m.attributes['__index'] = i;
+             console.log(m);
 
-                    return this.getShortCode(m.tag, m.attributes, m.contents);
-                }.bind(this)).join('');
+             m.attributes['__index'] = i;
 
-            }
+             return this.getShortCode(m.tag, m.attributes, m.contents);
+             }.bind(this)).join('');
+
+             }*/
         },
 
         created(){
-            this.getPreview();
+            //this.getPreview();
         },
 
         methods : {

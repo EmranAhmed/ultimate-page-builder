@@ -13,6 +13,7 @@ class store {
         this.devices       = window._upb_preview_devices;
         this.grid          = window._upb_grid_system;
         this.preview       = 'upb-preview-frame';
+        this.panel         = '';
     }
 
     reloadPreview() {

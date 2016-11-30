@@ -513,11 +513,10 @@ var ChildView = {
 	} );
 
 
-
-
 	function footag_func( $atts, $content = "" ) {
 		return "<p>SECTION</p>";
 	}
+
 	add_shortcode( 'section', 'footag_func' );
 
 
@@ -525,30 +524,37 @@ var ChildView = {
 		//$tabs = upb_tabs()->getAll();
 		echo '<script type="text/x-template" id="upb-section-template">
 
-<p>
+<section @mouseover="activeFocus()" @mouseout="removeFocus()" @click="openContentsPanel()">
 
-{{ shortcode }}
 
-<slot></slot>
+{{ model.attributes }}
 
-</p>
+{{ model.attributes.title }}
+
+
+<component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component>
+
+
+</section>
 </script>';
 
 		echo '<script type="text/x-template" id="upb-row-template">
 
-<p>
+<div>
 
-{{ shortcode }}
-<slot></slot>
+{{ model.attributes }}
 
-</p>
+{{ model.attributes.title }}
+
+
+
+
+</div>
 </script>';
 
 		echo '<script type="text/x-template" id="upb-column-template">
 
-<p>
-
-{{ shortcode }}
+<p> COLUMN Preview
 
 <slot></slot>
 

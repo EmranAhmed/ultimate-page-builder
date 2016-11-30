@@ -44,10 +44,13 @@ document.getElementById("upb-preview-frame").addEventListener('load', function (
         }
     });
 
+    store.panel = upbBuilder
+
     // console.log(settings);
 
     if (settings.enable) {
         new Vue({
+            //router,
             data   : {
                 store
             },
