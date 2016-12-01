@@ -15,8 +15,7 @@ export default {
     props   : ['index', 'model'],
     data(){
         return {
-            l10n       : store.l10n,
-            breadcrumb : store.breadcrumb
+            l10n : store.l10n,
         }
     },
     methods : {

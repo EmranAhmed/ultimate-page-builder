@@ -152,8 +152,7 @@ export default {
         getItem(){
 
             let sectionId = this.$route.params['sectionId'];
-            let type      = (this.$route.params['type'] == 'settings') ? '_upb_settings' : this.$route.params['type'].trim();
-            return this.model[type][sectionId];
+            return this.model.contents[sectionId];
 
         },
 
@@ -180,10 +179,10 @@ export default {
 
             /*this.clearPanel();
 
-            this.showChild      = true;
-            this.childId        = index;
-            this.childComponent = 'row-settings-panel';
-            this.breadcrumb.push(this.model.title);*/
+             this.showChild      = true;
+             this.childId        = index;
+             this.childComponent = 'row-settings-panel';
+             this.breadcrumb.push(this.model.title);*/
         },
 
         // Sub Panel

@@ -87,12 +87,12 @@
 						)
 
 					),
-					'attributes' => array( 'enable' => TRUE, 'background' => '#fff', 'title' => 'Section A' )
+					'attributes' => array( 'enable' => TRUE, 'background-color' => '#fff', 'title' => 'Section A' )
 				),
 				array(
 					'tag'        => 'section',
 					'contents'   => array(),
-					'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'Section B' )
+					'attributes' => array( 'enable' => TRUE, 'background-color' => '#ddd', 'title' => 'Section B' )
 				)
 			)
 

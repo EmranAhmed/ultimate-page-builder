@@ -4,7 +4,7 @@ import store from '../../store'
 import extend from 'extend';
 import {sprintf} from 'sprintf-js';
 
-import fieldsComponent from '../inputs/fields';
+import fieldsComponent from '../settings-input/fields';
 
 import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
 Vue.component('upb-breadcrumb', UPBBreadcrumb);

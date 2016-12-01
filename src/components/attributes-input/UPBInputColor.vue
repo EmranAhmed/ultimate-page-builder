@@ -26,6 +26,8 @@
         methods : {
             onColorChange(color){
                 this.model[this.attrs.id] = color;
+                this.attrs.metaValue      = color;
+                this.attrs.value          = color;
             }
         }
     }

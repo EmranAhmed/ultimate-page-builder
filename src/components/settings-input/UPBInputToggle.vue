@@ -5,7 +5,7 @@
         <div class="form-group toggle">
             <span class="title" v-text="attrs.title"></span>
             <label class="switch">
-                <input type="checkbox" :id="attrs._id" v-model="model[attrs.id]">
+                <input type="checkbox" :id="attrs._id" v-model="model.metaValue">
                 <div class="slider round"></div>
             </label>
             <p class="description" v-if="attrs.desc" v-html="attrs.desc"></p>

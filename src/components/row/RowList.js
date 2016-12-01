@@ -10,7 +10,9 @@ export default {
     props : ['index', 'model', 'selected'],
 
     data(){
-        return {}
+        return {
+            l10n : store.l10n
+        }
     },
 
     computed : {},
@@ -28,7 +30,7 @@ export default {
 
             this.$emit('showContentsPanel')
 
-             console.log('OPEN CONTENTS PANEL')
+            // console.log('OPEN CONTENTS PANEL')
             //this.breadcrumb.push(`${this.model.id}`)
         },
 
@@ -69,6 +71,9 @@ export default {
         },
 
         clickActions(id, tool){
+
+            console.log(`${id}Action`);
+
             if (this[`${id}Action`]) {
                 this[`${id}Action`](id, tool)
             }

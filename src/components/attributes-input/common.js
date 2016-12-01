@@ -2,9 +2,9 @@ import store from '../../store'
 
 export default{
     created(){
-        this.$watch(`model.${this.attrs.id}`, (value) => {
+        this.$watch(`model.metaValue`, (value) => {
             this.attrs.value     = value;
-            this.model.metaValue = value;
+            this.attrs.metaValue = value;
 
             store.stateChanged();
 

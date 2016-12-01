@@ -9,6 +9,8 @@ import SettingsPanel from './components/panels/SettingsPanel.vue'
 // RowsPanel
 import SectionContents from './components/section/SectionContents.vue'
 
+import SectionSettings from './components/section/SectionSettings.vue'
+
 //import Attributes from './components/tabs/Attributes.vue'
 //import List from './components/tabs/ListView.vue'
 
@@ -31,10 +33,10 @@ let routes = [
         meta      : {subPanel : true},
     },
     {
-        name : 'section-settings',
-        path : '/:tab(sections)/:sectionId(\\d+)/:type(settings)',
-        //component : Attributes, // section setting
-        meta : {subPanel : true}
+        name      : 'section-settings',
+        path      : '/:tab(sections)/:sectionId(\\d+)/:type(settings)',
+        component : SectionSettings, // section setting
+        meta      : {subPanel : true}
     },
 
     {

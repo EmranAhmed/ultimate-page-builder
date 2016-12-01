@@ -33,6 +33,13 @@
 
 				$attributes = apply_filters( "upb_element_{$tag}_attributes", $attributes );
 
+
+				foreach ( $attributes as $index => $attribute ) {
+					$attributes[ $index ][ 'metaKey' ]   = $attribute[ 'id' ];
+					$attributes[ $index ][ '_id' ]       = $attribute[ 'id' ];
+					$attributes[ $index ][ 'metaValue' ] = $attribute[ 'value' ];
+				}
+
 				// @TODO: Already registered alert
 				$this->short_code_elements[ $tag ] = array(
 					'tag'           => $tag,
@@ -121,7 +128,12 @@
 
 				$new_attributes = array();
 				foreach ( $attributes as $index => $attribute ) {
-					$new_attributes[ $index ] = isset( $attribute[ 'value' ] ) ? $attribute[ 'value' ] : '';
+
+					if ( isset( $attribute[ 'id' ] ) ) {
+						$new_attributes[ $attribute[ 'id' ] ] = isset( $attribute[ 'value' ] ) ? $attribute[ 'value' ] : '';
+					} else {
+						$new_attributes[ $index ] = isset( $attribute[ 'value' ] ) ? $attribute[ 'value' ] : '';
+					}
 				}
 
 				return $new_attributes;
@@ -136,12 +148,24 @@
 					$settings[ $key ][ 'value' ] = $value;
 				}*/
 
+
 				// Always new attribute
 				foreach ( $settings as $key => $value ) {
+
+					// For normal element attr
+					$settings[ $key ][ 'value' ] = $attributes[ $value[ 'id' ] ];
+
+
+					$settings[ $key ][ 'metaKey' ]   = $value[ 'id' ];
+					$settings[ $key ][ 'metaValue' ] = $attributes[ $value[ 'id' ] ];
+
+
 					if ( isset( $attributes[ $key ] ) ) {
-						$settings[ $key ][ 'value' ] = $attributes[ $key ];
+						// For Keywise element attr
+						//$settings[ $key ][ 'value' ] = $attributes[ $key ];
 					}
 				}
+
 
 				return $settings;
 			}

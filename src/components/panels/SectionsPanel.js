@@ -117,6 +117,8 @@ export default {
 
             let data = tool.data ? tool.data : false;
 
+            // console.log(tool.action, data);
+
             if (!this[tool.action]) {
                 util.warn(`You need to implement '${tool.action}' method.`, this);
             }

@@ -37,7 +37,6 @@
 				return wp_json_encode( $this->settings );
 			}
 
-
 			public function register( $id, $options ) {
 
 
@@ -55,29 +54,25 @@
 				$options[ 'default' ] = isset( $options[ 'default' ] ) ? $options[ 'default' ] : '';
 
 				// if no option saved show default else show saved one
-				$options = $this->setValueBasedOnType( $id, $options );
+				$options = $this->setAttrBasedOnType( $id, $options );
 
-				$options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : $options[ 'value' ];
-
+				$options[ 'placeholder' ]      = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : $options[ 'value' ];
 				$setting[ '_upb_field_type' ]  = 'upb-input-' . $options[ 'type' ];
 				$setting[ '_upb_field_attrs' ] = $options;
 
-
 				// Saved as
-				$setting[ $id ]         = $options[ 'value' ];
+
 				$setting[ 'metaId' ]    = $id;
 				$setting[ 'metaKey' ]   = $_id;
 				$setting[ 'metaValue' ] = $options[ 'value' ];
 
 
-				// var_dump(get_post_meta( get_the_ID(), $_id, TRUE ));
-
-
 				$this->settings[] = $setting;
+
 
 			}
 
-			private function setValueBasedOnType( $id, $options ) {
+			private function setAttrBasedOnType( $id, $options ) {
 
 				$value = $this->get_setting( $id );
 

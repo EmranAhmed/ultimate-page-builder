@@ -6,13 +6,13 @@
 	add_action( 'upb_register_element', function ( $element ) {
 
 		$attributes = array(
-			'title'      => array( 'type' => 'text', 'value' => 'Column %s' ),
-			'lg'         => array( 'type' => 'text', 'value' => '' ),
-			'md'         => array( 'type' => 'text', 'value' => '' ),
-			'sm'         => array( 'type' => 'text', 'value' => '' ),
-			'xs'         => array( 'type' => 'text', 'value' => '1:1' ),
-			'enable'     => array( 'type' => 'toggle', 'value' => TRUE ),
-			'background' => array( 'type' => 'color', 'value' => '#fff' ),
+			array( 'id' => 'title', 'type' => 'text', 'value' => 'Column %s' ),
+			array( 'id' => 'lg', 'type' => 'text', 'value' => '' ),
+			array( 'id' => 'md', 'type' => 'text', 'value' => '' ),
+			array( 'id' => 'sm', 'type' => 'text', 'value' => '' ),
+			array( 'id' => 'xs', 'type' => 'text', 'value' => '1:1' ),
+			array( 'id' => 'enable', 'type' => 'toggle', 'value' => TRUE ),
+			array( 'id' => 'background', 'type' => 'color', 'value' => '#fff' ),
 		);
 
 		$contents = array();
@@ -34,9 +34,9 @@
 	add_action( 'upb_register_element', function ( $element ) {
 
 		$attributes = array(
-			'title'      => array( 'type' => 'text', 'value' => 'New Row %s' ),
-			'enable'     => array( 'type' => 'toggle', 'value' => TRUE ),
-			'background' => array( 'type' => 'color', 'value' => '#fff' ),
+			array( 'id' => 'title', 'title' => 'Row title', 'type' => 'text', 'value' => 'New Row %s' ),
+			array( 'id' => 'enable', 'title' => 'Enable', 'type' => 'toggle', 'value' => TRUE ),
+			array( 'id' => 'background', 'title' => 'Background', 'type' => 'color', 'value' => '#fff' ),
 		);
 
 		$contents = array();
@@ -59,9 +59,9 @@
 	add_action( 'upb_register_element', function ( $element ) {
 
 		$attributes = array(
-			'title'            => array( 'type' => 'text', 'value' => 'New Section %s' ),
-			'enable'           => array( 'type' => 'toggle', 'value' => TRUE ),
-			'background-color' => array( 'type' => 'color', 'value' => '#ffccff' ),
+			array( 'id' => 'title', 'title' => 'Section title', 'type' => 'text', 'value' => 'New Section %s' ),
+			array( 'id' => 'enable', 'title' => 'Enable', 'type' => 'toggle', 'value' => TRUE ),
+			array( 'id' => 'background-color', 'title' => 'Background Color', 'type' => 'color', 'value' => '#ffccff' ),
 		);
 
 		$contents = array();
