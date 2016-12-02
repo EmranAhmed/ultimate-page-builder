@@ -124,10 +124,10 @@
 			wp_send_json_error( 'upb_not_allowed' );
 		}
 
-		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+		/*if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
 			status_header( 400 );
 			wp_send_json_error( 'bad_nonce' );
-		}
+		}*/
 
 		if ( ! isset( $_POST[ 'contents' ] ) ) {
 			status_header( 400 );
@@ -136,5 +136,91 @@
 
 		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
 
-		wp_send_json_success( do_shortcode( $_POST[ 'contents' ] ) );
+
+
+		wp_send_json_success( do_shortcode( stripslashes(  $_POST[ 'contents' ] ) ) );
+	} );
+
+
+	add_action( 'wp_ajax__get_upb_shortcode_preview_section', function () {
+
+		if ( ! current_user_can( 'customize' ) ) {
+			status_header( 403 );
+			wp_send_json_error( 'upb_not_allowed' );
+		}
+
+		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+			status_header( 400 );
+			wp_send_json_error( 'bad_nonce' );
+		}
+
+		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
+
+		wp_send_json_success( '<div>
+SECTION
+
+{{ contents }}
+
+
+
+<!--
+        <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`aupb-${content.tag}`"></component>
+-->
+
+
+
+</div>' );
+	} );
+
+	add_action( 'wp_ajax__get_upb_shortcode_preview_row', function () {
+
+		if ( ! current_user_can( 'customize' ) ) {
+			status_header( 403 );
+			wp_send_json_error( 'upb_not_allowed' );
+		}
+
+		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+			status_header( 400 );
+			wp_send_json_error( 'bad_nonce' );
+		}
+
+		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
+
+		wp_send_json_success( '<div>
+
+ROW
+{{ contents }}
+
+<!--
+        <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`aupb-${content.tag}`"></component>
+-->
+
+
+</div>' );
+	} );
+
+
+	add_action( 'wp_ajax__get_upb_shortcode_preview_column', function () {
+
+		if ( ! current_user_can( 'customize' ) ) {
+			status_header( 403 );
+			wp_send_json_error( 'upb_not_allowed' );
+		}
+
+		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+			status_header( 400 );
+			wp_send_json_error( 'bad_nonce' );
+		}
+
+		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
+
+		wp_send_json_success( '<div>
+Column {{ model.attributes }}
+
+<!--
+        <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`aupb-${content.tag}`"></component>
+-->
+
+
+</div>' );
 	} );

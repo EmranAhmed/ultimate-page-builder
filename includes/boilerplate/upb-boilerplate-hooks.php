@@ -514,10 +514,16 @@ var ChildView = {
 
 
 	function footag_func( $atts, $content = "" ) {
-		return "<p>SECTION</p>";
+		return "<div><p>SECTION</p>" . print_r($atts, true). do_shortcode( $content ).'LAST</div>';
 	}
 
 	add_shortcode( 'section', 'footag_func' );
+
+	function footag_func2( $atts, $content = "" ) {
+		return "<div><p>ROW</p>" . print_r($atts, true). do_shortcode( $content ).'</div>';
+	}
+
+	add_shortcode( 'row', 'footag_func2' );
 
 
 	add_action( 'upb_boilerplate_print_footer_scripts', function () {
@@ -532,7 +538,9 @@ var ChildView = {
 {{ model.attributes.title }}
 
 
+<!--
 <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component>
+-->
 
 
 </section>
@@ -541,7 +549,7 @@ var ChildView = {
 		echo '<script type="text/x-template" id="upb-row-template">
 
 <div>
-
+xxxxx
 {{ model.attributes }}
 
 {{ model.attributes.title }}
@@ -556,7 +564,7 @@ var ChildView = {
 
 <p> COLUMN Preview
 
-<slot></slot>
+
 
 </p>
 </script>';

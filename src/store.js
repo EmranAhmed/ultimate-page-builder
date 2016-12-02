@@ -105,6 +105,18 @@ class store {
         });
     }
 
+    getShortCodePreviewTemplate(name = 'default', success, error) {
+
+        wp.ajax.send(`_get_upb_shortcode_preview_${name}`, {
+            success : success,
+            error   : error,
+            data    : {
+                _nonce : this.status._nonce,
+                id     : this.status._id
+            }
+        });
+    }
+
     upbElementOptions(contents, success, error) {
         wp.ajax.send("_get_upb_element_options", {
             success : success,
