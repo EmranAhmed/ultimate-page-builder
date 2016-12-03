@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 
 import SectionsPanel from './components/panels/SectionsPanel.vue'
 import SettingsPanel from './components/panels/SettingsPanel.vue'
+import ElementsPanel from './components/panels/ElementsPanel.vue'
 
 // RowsPanel
 import SectionContents from './components/section/SectionContents.vue'
@@ -63,6 +64,12 @@ let routes = [
         path : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:type(settings)',
         //component : Attributes,
         meta : {subPanel : true}
+    },
+
+    {
+        name      : 'elements',
+        path      : '/:tab(elements)',
+        component : ElementsPanel
     },
 
     {

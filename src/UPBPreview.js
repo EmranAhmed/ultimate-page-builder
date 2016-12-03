@@ -4,11 +4,15 @@ import previewMixins from './previewMixins';
 
 store.getAllUPBElements((elements) => {
 
-    for (let element in elements) {
 
-        let template        = elements[element]._upb_options.preview.template;
-        let component       = `upb-${element}`;
-        let componentMixins = elements[element]._upb_options.preview.mixins;
+
+    elements.map((element)=>{
+        "use strict";
+
+
+        let template        = element._upb_options.preview.template;
+        let component       = `upb-${element.tag}`;
+        let componentMixins = element._upb_options.preview.mixins;
 
         Vue.component(component, function (resolve, reject) {
 
@@ -22,6 +26,13 @@ store.getAllUPBElements((elements) => {
 
             })
         });
+
+
+    });
+
+    for (let element in elements) {
+
+
     }
 
 }, _=> {});

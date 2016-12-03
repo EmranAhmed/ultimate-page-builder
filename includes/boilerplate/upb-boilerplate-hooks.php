@@ -506,7 +506,7 @@
 
 var ChildView = {
 
-  template: '<span> Elements </span>'
+  template: '<span> Others </span>'
 }
 
 </script>" );
@@ -528,47 +528,6 @@ var ChildView = {
 
 	add_action( 'upb_boilerplate_print_footer_scripts', function () {
 		//$tabs = upb_tabs()->getAll();
-		echo '<script type="text/x-template" id="upb-section-template">
-
-<section @mouseover="activeFocus()" @mouseout="removeFocus()" @click="openSettingsPanel()">
-
-
-{{ model.attributes }}
-
-{{ model.attributes.title }}
-
-
-<!--
-<component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component>
--->
-
-
-</section>
-</script>';
-
-		echo '<script type="text/x-template" id="upb-row-template">
-
-<div @mouseover="activeFocus()" @mouseout="removeFocus()" @click="openSettingsPanel()">
-xxxxx
-{{ model.attributes }}
-
-{{ model.attributes.title }}
-
-
-
-
-</div>
-</script>';
-
-		echo '<script type="text/x-template" id="upb-column-template">
-
-<p> COLUMN Preview
-
-
-
-</p>
-</script>';
-
 	} );
 
 

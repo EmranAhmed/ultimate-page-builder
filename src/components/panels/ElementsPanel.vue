@@ -1,7 +1,8 @@
 <template>
+
     <ul :class="panelClass()">
 
-        <li v-if="!showChild" class="upb-panel-header-wrapper">
+        <li class="upb-panel-header-wrapper">
             <ul>
                 <li class="upb-panel-header">
 
@@ -9,11 +10,7 @@
                         <div class="panel-heading">
 
                             <div class="upb-breadcrumb">
-
-                                <ul>
-                                    <li class="no-breadcrumb" v-text="l10n.breadcrumbRoot"></li>
-                                </ul>
-
+                                <upb-breadcrumb></upb-breadcrumb>
                             </div>
 
                             <div class="panel-title" v-text="model.title"></div>
@@ -51,16 +48,13 @@
             </ul>
         </li>
 
-        <li v-if="!showChild" class="upb-panel-contents">
-
-            <ul class="upb-panel-contents-items" v-sortable="sortable">
-                <component v-for="(item, index) in contents" @showSettingsPanel="showSettingsPanel(index)" @showContentPanel="showContentPanel(index)" @deleteItem="deleteItem(index)" :model="item" @cloneItem="cloneItem(index, item)" :is="listPanel(item.tag)"></component>
+        <li class="upb-panel-contents">
+            <ul class="upb-panel-contents-items">
+                <!--
+                                <component v-for="(item, index) in model.contents" :index="index" :model="model.contents[index]" :attrs="item._upb_field_attrs" :is="item._upb_field_type"></component>
+                -->
             </ul>
-        </li>
-
-        <li v-if="showChild" class="upb-sub-panel">
-            <component @showSettingsPanel="showSettingsPanel(childId)" @showContentPanel="showContentPanel(childId)" @onBack="backed()" :model="subPanelContents()" :is="subPanel()"></component>
         </li>
     </ul>
 </template>
-<script src="./SectionsPanel.js"></script>
+<script src="./ElementsPanel.js"></script>

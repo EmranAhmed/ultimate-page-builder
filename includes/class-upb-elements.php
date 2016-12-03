@@ -9,6 +9,8 @@
 			private static $instance            = NULL;
 			private        $short_code_elements = array();
 
+			private $core_elements = array( 'section', 'row', 'column' );
+
 			private function __construct() {
 				$this->props = new UPB_Elements_Props();
 			}
@@ -30,6 +32,12 @@
 				}
 
 				$_upb_options[ 'focus' ] = FALSE;
+
+
+				if ( in_array( $tag, $this->core_elements ) ) {
+					$_upb_options[ 'core' ] = TRUE;
+				}
+
 
 				if ( ! isset( $_upb_options[ 'preview' ] ) ) {
 					$_upb_options[ 'preview' ] = array(
@@ -78,7 +86,16 @@
 			}
 
 			public function getAll() {
-				return $this->short_code_elements;
+
+
+				$short_code_elements = array();
+
+				foreach ( $this->short_code_elements as $element ) {
+					$short_code_elements[] = $element;
+				}
+
+				return $short_code_elements;
+				//return $this->short_code_elements;
 			}
 
 			public function get_element( $tag, $key = FALSE ) {
