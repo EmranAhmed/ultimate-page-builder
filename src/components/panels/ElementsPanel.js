@@ -11,12 +11,17 @@ Vue.component('upb-breadcrumb', UPBBreadcrumb);
 
 // loop and register component
 // Dynamically Import
-Object.keys(fieldsComponent).map((key) => {
+/*
+ Object.keys(fieldsComponent).map((key) => {
 
-    if (typeof fieldsComponent[key] == 'object') {
-        Vue.component(key, fieldsComponent[key])
-    }
-});
+ if (typeof fieldsComponent[key] == 'object') {
+ Vue.component(key, fieldsComponent[key])
+ }
+ });
+ */
+
+import ElementsList from './ElementsList.vue';
+Vue.component('upb-elements-list', ElementsList);
 
 export default {
     name  : 'elements-panel',
@@ -70,8 +75,21 @@ export default {
 
             if (this.model.contents.length <= 0) {
                 this.$progressbar.show();
-                store.getPanelContents('_get_upb_element_list', (data) => {
-                    
+                store.getPanelContents('_get_upb_element_list', (contents) => {
+
+                    console.log(contents);
+
+                    let data = contents.filter(function (content) {
+
+                        if (content._upb_options['core'] && content._upb_options.core) {
+
+                        }
+                        else {
+                            return content;
+                        }
+
+                    });
+
                     this.$nextTick(function () {
                         Vue.set(this.model, 'contents', extend(true, [], data));
                     });

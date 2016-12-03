@@ -29,7 +29,6 @@
 
 	} );
 
-
 	// Row ( Section have row dependency that's why we should reg row before section )
 	add_action( 'upb_register_element', function ( $element ) {
 
@@ -90,5 +89,60 @@
 		$element->register( 'section', $attributes, $contents, $_upb_options );
 
 	} );
+
+
+	//////  NON CORE
+
+	// Text
+	add_action( 'upb_register_element', function ( $element ) {
+
+		$attributes = array(
+			array( 'id' => 'title', 'type' => 'text', 'value' => 'Text Title' ),
+			// array( 'id' => 'title', 'type' => 'textarea', 'value' => 'Text Title' ),
+			array( 'id' => 'enable', 'type' => 'toggle', 'value' => TRUE ),
+			array( 'id' => 'background', 'type' => 'color', 'value' => '#ffccff' ),
+		);
+
+		$contents = '';
+
+		$_upb_options = array(
+
+			'element' => array(
+				'name' => 'Text',
+				'icon' => 'mdi mdi-format-text'
+			),
+
+			'tools' => array(
+				'list'     => apply_filters( 'upb_text_list_toolbar', array(
+					'move' => array(
+						'icon'  => 'mdi mdi-cursor-move',
+						'class' => 'handle',
+						'title' => 'Sort',
+					),
+
+					'delete' => array(
+						'icon'  => 'mdi mdi-delete',
+						'title' => 'Delete',
+					),
+
+					'enable' => array(
+						'icon'  => 'mdi mdi-eye',
+						'title' => 'Enabled',
+					),
+
+					'disable' => array(
+						'icon'  => 'mdi mdi-eye-off',
+						'title' => 'Disabled',
+					)
+				) ),
+				'contents' => apply_filters( 'upb_text_contents_panel_toolbar', array() ),
+				'settings' => apply_filters( 'upb_text_settings_panel_toolbar', array() ),
+			)
+		);
+
+		$element->register( 'text', $attributes, $contents, $_upb_options );
+
+	} );
+
 
 

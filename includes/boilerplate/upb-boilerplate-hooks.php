@@ -412,6 +412,8 @@
 
 		wp_register_script( 'wp-color-picker-alpha', UPB_PLUGIN_ASSETS_URL . "js/wp-color-picker-alpha$suffix.js", array( 'wp-color-picker' ), FALSE, TRUE );
 
+		// wp_register_script( 'jquery-ui-droppable-iframe', UPB_PLUGIN_ASSETS_URL . "js/jquery-ui-droppable-iframe$suffix.js", array(), FALSE, TRUE );
+
 
 	} );
 
@@ -444,7 +446,7 @@
 		wp_enqueue_script( 'wp-color-picker-alpha' );
 		wp_enqueue_media();
 
-		wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URL . "js/upb-builder$suffix.js", array( 'jquery-ui-sortable', 'wp-util', 'wp-color-picker', "shortcode" ), '', TRUE );
+		wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URL . "js/upb-builder$suffix.js", array( 'jquery-ui-sortable', 'jquery-ui-draggable', 'jquery-ui-droppable', 'wp-util', 'wp-color-picker', "shortcode" ), '', TRUE );
 
 		wp_enqueue_script( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URL . "js/upb-boilerplate$suffix.js", array( 'jquery', 'upb-builder' ), '', TRUE );
 
@@ -514,13 +516,13 @@ var ChildView = {
 
 
 	function footag_func( $atts, $content = "" ) {
-		return "<div><p>SECTION</p>" . print_r($atts, true). do_shortcode( $content ).'LAST</div>';
+		return "<div><p>SECTION</p>" . print_r( $atts, TRUE ) . do_shortcode( $content ) . 'LAST</div>';
 	}
 
 	add_shortcode( 'section', 'footag_func' );
 
 	function footag_func2( $atts, $content = "" ) {
-		return "<div><p>ROW</p>" . print_r($atts, true). do_shortcode( $content ).'</div>';
+		return "<div><p>ROW</p>" . print_r( $atts, TRUE ) . do_shortcode( $content ) . '</div>';
 	}
 
 	add_shortcode( 'row', 'footag_func2' );

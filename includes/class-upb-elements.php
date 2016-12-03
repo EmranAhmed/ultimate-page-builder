@@ -71,6 +71,11 @@
 					$attributes[ $index ][ 'metaValue' ] = $attribute[ 'value' ];
 				}
 
+				if ( is_string( $contents ) ) {
+					$attributes[] = array( 'id' => '_contents', 'title' => 'Contents', 'type' => 'contents', 'value' => $contents );
+				}
+
+
 				// @TODO: Already registered alert
 				$this->short_code_elements[ $tag ] = array(
 					'tag'           => $tag,

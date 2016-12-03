@@ -50,9 +50,10 @@
 
         <li class="upb-panel-contents">
             <ul class="upb-panel-contents-items">
-                <!--
-                                <component v-for="(item, index) in model.contents" :index="index" :model="model.contents[index]" :attrs="item._upb_field_attrs" :is="item._upb_field_type"></component>
-                -->
+
+
+                <component v-for="(item, index) in model.contents" :index="index" :model="item" is="upb-elements-list"></component>
+
             </ul>
         </li>
     </ul>

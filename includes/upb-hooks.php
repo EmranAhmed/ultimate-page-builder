@@ -211,9 +211,36 @@ ROW
 
 		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
 
-		wp_send_json_success( '<div>
+		wp_send_json_success( '<div v-droppable class="upb-column-droppable">
 
 Column {{ model.attributes }}
+
+
+        <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component>
+
+
+
+</div>' );
+	} );
+
+
+	add_action( 'wp_ajax__get_upb_shortcode_preview_text', function () {
+
+		if ( ! current_user_can( 'customize' ) ) {
+			status_header( 403 );
+			wp_send_json_error( 'upb_not_allowed' );
+		}
+
+		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+			status_header( 400 );
+			wp_send_json_error( 'bad_nonce' );
+		}
+
+		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
+
+		wp_send_json_success( '<div>
+
+Text {{ model.attributes }}
 
 
         <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component>

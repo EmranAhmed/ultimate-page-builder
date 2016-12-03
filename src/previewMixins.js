@@ -1,4 +1,5 @@
 export default{
+
     props : ['index', 'model'],
 
     computed : {

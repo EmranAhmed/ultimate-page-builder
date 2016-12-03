@@ -1,14 +1,17 @@
+import Vue from 'vue';
+
 import store from './store'
 
 import previewMixins from './previewMixins';
 
+import Droppable from './plugins/vue-droppable'
+
+Vue.use(Droppable);
+
 store.getAllUPBElements((elements) => {
 
-
-
-    elements.map((element)=>{
+    elements.map((element)=> {
         "use strict";
-
 
         let template        = element._upb_options.preview.template;
         let component       = `upb-${element.tag}`;
@@ -27,17 +30,10 @@ store.getAllUPBElements((elements) => {
             })
         });
 
-
     });
-
-    for (let element in elements) {
-
-
-    }
 
 }, _=> {});
 
-import Vue from 'vue';
 export default {
     name     : 'upb-preview',
     data(){

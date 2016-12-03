@@ -40,7 +40,7 @@
 
         <li class="upb-panel-contents">
             <ul class="upb-panel-contents-items">
-                <component v-for="settings in item._upb_settings" :model="item.attributes" :attrs="settings" :is="`upb-input-${settings.type}`"></component>
+                <component v-for="settings in item._upb_settings" :item="item" :model="item.attributes" :key="settings.id" :attrs="settings" :is="`upb-input-${settings.type}`"></component>
             </ul>
         </li>
     </ul>
