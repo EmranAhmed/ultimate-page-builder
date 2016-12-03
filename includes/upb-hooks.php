@@ -137,8 +137,7 @@
 		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
 
 
-
-		wp_send_json_success( do_shortcode( stripslashes(  $_POST[ 'contents' ] ) ) );
+		wp_send_json_success( do_shortcode( stripslashes( $_POST[ 'contents' ] ) ) );
 	} );
 
 
@@ -156,20 +155,16 @@
 
 		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
 
-		wp_send_json_success( '<div>
+		wp_send_json_success( '
+<section @mouseover="activeFocus()" @mouseout="removeFocus()" @click="openContentsPanel()">
+
 SECTION
 
-{{ contents }}
+{{ model.attributes }}
 
+ <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component>
 
-
-<!--
-        <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`aupb-${content.tag}`"></component>
--->
-
-
-
-</div>' );
+</section>' );
 	} );
 
 	add_action( 'wp_ajax__get_upb_shortcode_preview_row', function () {
@@ -189,11 +184,12 @@ SECTION
 		wp_send_json_success( '<div>
 
 ROW
-{{ contents }}
 
-<!--
-        <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`aupb-${content.tag}`"></component>
--->
+{{ model.attributes }}
+
+
+<component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component>
+
 
 
 </div>' );
@@ -215,11 +211,12 @@ ROW
 		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
 
 		wp_send_json_success( '<div>
+
 Column {{ model.attributes }}
 
-<!--
-        <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`aupb-${content.tag}`"></component>
--->
+
+        <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component>
+
 
 
 </div>' );

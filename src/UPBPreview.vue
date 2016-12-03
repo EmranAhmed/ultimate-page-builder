@@ -2,15 +2,7 @@
     <div id="upb-preview" class="upb-wrapper">
 
 
-        <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`aupb-${content.tag}`">
-
-            <component v-for="(content, index) in content.contents" :index="index" :model="content" :is="`aupb-${content.tag}`">
-
-
-            </component>
-
-        </component>
-
+        <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component>
 
     </div>
 </template>
@@ -25,7 +17,8 @@
     // content:''
     // })
     // wp.shortcode.replace('gallery', 'hello [gallery]', function(shortcode){ return 'xxxxx' })
-    Vue.component('aupb-section', function (resolve, reject) {
+
+    Vue.component('upb-section', function (resolve, reject) {
 
         store.getShortCodePreviewTemplate('section', function (data) {
 
@@ -37,6 +30,15 @@
                         shortcode : '',
                         contents  : '',
                     }
+                },
+
+                computed : {
+                    $router(){
+                        return this.$root.$data.store.panel._router;
+                    },
+                    $route(){
+                        return this.$root.$data.store.panel._route;
+                    },
                 },
 
                 created(){
@@ -69,6 +71,45 @@
 
                 methods : {
 
+
+                    activeFocus(){
+                        this.model._upb_options.focus = true;
+                    },
+
+                    removeFocus(){
+                        this.model._upb_options.focus = false;
+                    },
+
+                    openContentsPanel(){
+                        this.$router.replace(`/sections`)
+                        // Async
+                        setTimeout(function () {
+                            this.$router.push({
+                                name   : `section-contents`,
+                                params : {
+                                    tab       : 'sections',
+                                    sectionId : this.index,
+                                    type      : 'contents'
+                                }
+                            });
+                        }.bind(this), 10)
+                    },
+
+                    openSettingsPanel(){
+                        this.$router.replace(`/sections`)
+                        // Async
+                        setTimeout(function () {
+                            this.$router.push({
+                                name   : `section-settings`,
+                                params : {
+                                    tab       : 'sections',
+                                    sectionId : this.index,
+                                    type      : 'settings'
+                                }
+                            });
+                        }.bind(this), 10)
+                    },
+
                     getContents(html){
 
                         console.log(html);
@@ -91,23 +132,24 @@
 
                     getShortCode(){
 
-                        let a = Vue.compile('<div><component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`aupb-${content.tag}`"></component></div>');
 
-                        let x = {
-                            render : a.render,
-                            props  : ['model']
-                        };
+                        // let a = Vue.compile('<div><component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component></div>');
 
-                        console.log(x);
+
+
+                        //console.log(a.render.toString());
+
+                        console.log(this)
 
                         return wp.shortcode.string({
                             tag     : this.model.tag,
                             attrs   : this.model.attributes,
                             content : '%_WE_NEED_TO_SET_COMPONENT_COMPILED_TEMPLATE_%',
-                            // content : '<component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`aupb-${content.tag}`"></component>',
-                            //content : this.$compile('<div><component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`aupb-${content.tag}`"></component></div>')
+                            // content : '<component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component>',
+                            //content : this.$compile('<div><component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component></div>')
                         })
                     },
+
                 }
 
             })
@@ -118,7 +160,7 @@
 
     });
 
-    Vue.component('aupb-row', function (resolve, reject) {
+    Vue.component('upb-row', function (resolve, reject) {
 
         store.getShortCodePreviewTemplate('row', function (data) {
 
@@ -184,7 +226,7 @@
                             attrs   : this.model.attributes,
                             content : '%_WE_NEED_TO_SET_COMPONENT_COMPILED_TEMPLATE_%',
 
-                            //content : this.$compile('<div><component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`aupb-${content.tag}`"></component></div>')
+                            //content : this.$compile('<div><component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component></div>')
                         })
                     },
                 }
@@ -196,7 +238,7 @@
 
     });
 
-    Vue.component('aupb-column', function (resolve, reject) {
+    Vue.component('upb-column', function (resolve, reject) {
 
         store.getShortCodePreviewTemplate('column', function (data) {
 
@@ -211,73 +253,6 @@
 
     });
 
-    Vue.component('upb-row', {
-
-        template : '#upb-row-template',
-        props    : ['index', 'model'],
-        data(){
-            return {
-                shortcode : '',
-                contents  : '',
-            }
-        },
-
-        created(){
-
-            this.shortcode = this.getShortCode();
-
-            console.log(this.shortcode);
-
-            this.getContents(this.shortcode);
-
-            //console.log(Vue)
-
-            this.$watch(`model.attributes`, function (value) {
-
-                console.log(this.$slots.default);
-
-                this.shortcode = this.getShortCode();
-                this.getContents(this.shortcode);
-
-            }.bind(this), {deep : true});
-
-            this.$watch(`model.contents`, function (value) {
-
-                this.shortcode = this.getShortCode();
-                this.getContents(this.shortcode);
-
-            }.bind(this));
-
-        },
-
-        methods : {
-
-            getContents(html){
-
-                store.getShortCodePreview(html, function (data) {
-
-                    //let d = data.replace('%CONTENTS%', this.$slots.default.toString() );
-
-                    this.contents = data;
-
-                }.bind(this), function () {
-
-                });
-
-                // console.log(html);
-            },
-
-            getShortCode(){
-
-                return wp.shortcode.string({
-                    tag     : this.model.tag,
-                    attrs   : this.model.attributes,
-                    content : '%CONTENTS%',
-                    //content : this.$compile('<div><component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`aupb-${content.tag}`"></component></div>')
-                })
-            },
-        }
-    });
 
     import Vue from 'vue';
     export default {
