@@ -31,7 +31,30 @@
 
 				$_upb_options[ 'focus' ] = FALSE;
 
-				$attributes = apply_filters( "upb_element_{$tag}_attributes", $attributes );
+				if ( ! isset( $_upb_options[ 'preview' ] ) ) {
+					$_upb_options[ 'preview' ] = array(
+						//	'component' => 'upb-' . $tag,
+						'template' => $tag,
+						'mixins'   => '{}' // javascript object, like: { methods:{ abcd(){} } } or window.abcdMixins = {}
+
+					);
+				}
+
+				if ( ! isset( $_upb_options[ 'preview' ][ 'component' ] ) ) {
+					//	$_upb_options[ 'preview' ][ 'component' ] = 'upb-' . $tag;
+				}
+
+				if ( ! isset( $_upb_options[ 'preview' ][ 'mixins' ] ) ) {
+					$_upb_options[ 'preview' ][ 'mixins' ] = '{}';
+				}
+
+				if ( ! isset( $_upb_options[ 'preview' ][ 'template' ] ) ) {
+					$_upb_options[ 'preview' ][ 'template' ] = $tag;
+				}
+
+
+				$attributes   = apply_filters( "upb_element_{$tag}_attributes", $attributes );
+				$_upb_options = apply_filters( "upb_element_{$tag}_options", $_upb_options );
 
 
 				foreach ( $attributes as $index => $attribute ) {
@@ -51,6 +74,10 @@
 			}
 
 			public function get_elements() {
+				return $this->short_code_elements;
+			}
+
+			public function getAll() {
 				return $this->short_code_elements;
 			}
 

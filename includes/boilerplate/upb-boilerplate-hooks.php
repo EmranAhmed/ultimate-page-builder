@@ -530,7 +530,7 @@ var ChildView = {
 		//$tabs = upb_tabs()->getAll();
 		echo '<script type="text/x-template" id="upb-section-template">
 
-<section @mouseover="activeFocus()" @mouseout="removeFocus()" @click="openContentsPanel()">
+<section @mouseover="activeFocus()" @mouseout="removeFocus()" @click="openSettingsPanel()">
 
 
 {{ model.attributes }}
@@ -548,7 +548,7 @@ var ChildView = {
 
 		echo '<script type="text/x-template" id="upb-row-template">
 
-<div>
+<div @mouseover="activeFocus()" @mouseout="removeFocus()" @click="openSettingsPanel()">
 xxxxx
 {{ model.attributes }}
 

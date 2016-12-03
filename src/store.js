@@ -117,6 +117,18 @@ class store {
         });
     }
 
+    getAllUPBElements(success, error) {
+
+        wp.ajax.send("_get_upb_element_list", {
+            success : success,
+            error   : error,
+            data    : {
+                _nonce : this.status._nonce
+            }
+        });
+
+    }
+
     upbElementOptions(contents, success, error) {
         wp.ajax.send("_get_upb_element_options", {
             success : success,
