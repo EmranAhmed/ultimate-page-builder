@@ -1,4 +1,5 @@
 import { util } from 'vue';
+import store from '../store';
 
 (function () {
 
@@ -28,6 +29,8 @@ import { util } from 'vue';
 
                 el.addEventListener('drop', function (event) {
                     vnode.context.model.contents.push(JSON.parse(event.dataTransfer.getData("text")));
+
+                    store.stateChanged();
                 });
             }
         });
