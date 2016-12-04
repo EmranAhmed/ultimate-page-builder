@@ -48,9 +48,9 @@
 					);
 				}
 
-				if ( ! isset( $_upb_options[ 'preview' ][ 'component' ] ) ) {
-					//	$_upb_options[ 'preview' ][ 'component' ] = 'upb-' . $tag;
-				}
+				//if ( ! isset( $_upb_options[ 'preview' ][ 'component' ] ) ) {
+				$_upb_options[ 'preview' ][ 'component' ] = 'upb-' . $tag;
+				//}
 
 				if ( ! isset( $_upb_options[ 'preview' ][ 'mixins' ] ) ) {
 					$_upb_options[ 'preview' ][ 'mixins' ] = '{}';
@@ -84,7 +84,25 @@
 					'_upb_settings' => ( empty( $attributes ) ? FALSE : $attributes ),
 					'_upb_options'  => $_upb_options
 				);
+
+
+				$shortcode_fn    = sprintf( 'upb_register_shortcode_%s', $tag );
+				$vue_template_fn = sprintf( 'upb_shortcode_preview_%s', $tag );
+
+				if ( ! is_callable( $shortcode_fn ) ) {
+					trigger_error( sprintf( 'Ultimate page builder shortcode "%s" template function "%s" not found.', $tag, $shortcode_fn ), E_USER_WARNING );
+				} else {
+					add_shortcode( $tag, $shortcode_fn );
+				}
+
+				if ( ! is_callable( $vue_template_fn ) ) {
+					trigger_error( sprintf( 'Ultimate page builder shortcode preview "%s" template function "%s" not found.', $tag, $vue_template_fn ), E_USER_WARNING );
+				} else {
+					add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', $tag ), $vue_template_fn );
+				}
+
 			}
+
 
 			public function get_elements() {
 				return $this->short_code_elements;

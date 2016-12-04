@@ -29,6 +29,7 @@
 
 	} );
 
+
 	// Row ( Section have row dependency that's why we should reg row before section )
 	add_action( 'upb_register_element', function ( $element ) {
 
@@ -53,6 +54,7 @@
 		$element->register( 'row', $attributes, $contents, $_upb_options );
 
 	} );
+
 
 	// Section
 	add_action( 'upb_register_element', function ( $element ) {
@@ -143,6 +145,4 @@
 		$element->register( 'text', $attributes, $contents, $_upb_options );
 
 	} );
-
-
 

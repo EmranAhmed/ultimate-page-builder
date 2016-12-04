@@ -7,13 +7,13 @@
 		do_action( 'upb_register_element', upb_elements() );
 	}
 
-	add_action( 'wp_loaded', 'upb_elements_register_action', 70 );
+	add_action( 'wp_loaded', 'upb_elements_register_action' );
 
 	function upb_tabs_register_action() {
 		do_action( 'upb_register_tab', upb_tabs() );
 	}
 
-	add_action( 'wp_loaded', 'upb_tabs_register_action', 90 );
+	add_action( 'wp_loaded', 'upb_tabs_register_action' );
 
 	function upb_settings_register_action() {
 		do_action( 'upb_register_setting', upb_settings() );
@@ -117,140 +117,6 @@
 		wp_send_json_success( upb_settings()->getAll() );
 	} );
 
-
-	/*add_action( 'wp_ajax__get_upb_shortcode_preview', function () {
-
-		if ( ! current_user_can( 'customize' ) ) {
-			status_header( 403 );
-			wp_send_json_error( 'upb_not_allowed' );
-		}
-
-		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-			status_header( 400 );
-			wp_send_json_error( 'bad_nonce' );
-		}
-
-		if ( ! isset( $_POST[ 'contents' ] ) ) {
-			status_header( 400 );
-			wp_send_json_error( 'missing_contents' );
-		}
-
-		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
-
-
-		wp_send_json_success( do_shortcode( stripslashes( $_POST[ 'contents' ] ) ) );
-	} );*/
-
-
-	add_action( 'wp_ajax__get_upb_shortcode_preview_section', function () {
-
-		if ( ! current_user_can( 'customize' ) ) {
-			status_header( 403 );
-			wp_send_json_error( 'upb_not_allowed' );
-		}
-
-		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-			status_header( 400 );
-			wp_send_json_error( 'bad_nonce' );
-		}
-
-		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
-
-		wp_send_json_success( '
-<section @mouseover.self="activeFocus()" @mouseout.self="removeFocus()" @click.self="openSettingsPanel()">
-
-SECTION
-
-{{ model.attributes }}
-
- <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component>
-
-</section>' );
-	} );
-
-	add_action( 'wp_ajax__get_upb_shortcode_preview_row', function () {
-
-		if ( ! current_user_can( 'customize' ) ) {
-			status_header( 403 );
-			wp_send_json_error( 'upb_not_allowed' );
-		}
-
-		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-			status_header( 400 );
-			wp_send_json_error( 'bad_nonce' );
-		}
-
-		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
-
-		wp_send_json_success( '<div @mouseover="activeFocus()" @mouseout="removeFocus()" @click.self="openSettingsPanel(index)">
-
-ROW
-
-{{ model.attributes }}
-
-
-<component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component>
-
-
-
-</div>' );
-	} );
-
-
-	add_action( 'wp_ajax__get_upb_shortcode_preview_column', function () {
-
-		if ( ! current_user_can( 'customize' ) ) {
-			status_header( 403 );
-			wp_send_json_error( 'upb_not_allowed' );
-		}
-
-		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-			status_header( 400 );
-			wp_send_json_error( 'bad_nonce' );
-		}
-
-		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
-
-		wp_send_json_success( '<div v-droppable class="upb-column-droppable">
-
-Column {{ model.attributes }}
-
-
-        <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component>
-
-
-
-</div>' );
-	} );
-
-
-	add_action( 'wp_ajax__get_upb_shortcode_preview_text', function () {
-
-		if ( ! current_user_can( 'customize' ) ) {
-			status_header( 403 );
-			wp_send_json_error( 'upb_not_allowed' );
-		}
-
-		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-			status_header( 400 );
-			wp_send_json_error( 'bad_nonce' );
-		}
-
-		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
-
-		wp_send_json_success( '<div>
-
-Text {{ model.attributes }}
-
-
-        <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="`upb-${content.tag}`"></component>
-
-
-
-</div>' );
-	} );
-
-
 	add_action( 'wp_ajax__get_upb_element_list', function () {
 
 		if ( ! current_user_can( 'customize' ) ) {
@@ -268,8 +134,3 @@ Text {{ model.attributes }}
 
 		wp_send_json_success( upb_elements()->getAll() );
 	} );
-
-
-
-
-

@@ -461,9 +461,9 @@
 
 		$data .= sprintf( "var _upb_router = %s;\n", wp_json_encode( array(
 			                                                             array(
-				                                                             //'name'      => 'elements',
-				                                                             //'path'      => '/:tab(elements)',
-				                                                             //'component' => 'ChildView',
+				                                                             //'name'      => 'logical',
+				                                                             //'path'      => '/:tab(logical)',
+				                                                             //'component' => 'LogicalPanel',
 			                                                             )
 		                                                             ) ) );
 
@@ -506,26 +506,13 @@
 		//$tabs = upb_tabs()->getAll();
 		print( "<script>
 
-var ChildView = {
-
+var LogicalPanel = {
   template: '<span> Others </span>'
 }
 
 </script>" );
 	} );
 
-
-	function footag_func( $atts, $content = "" ) {
-		return "<div><p>SECTION</p>" . print_r( $atts, TRUE ) . do_shortcode( $content ) . 'LAST</div>';
-	}
-
-	add_shortcode( 'section', 'footag_func' );
-
-	function footag_func2( $atts, $content = "" ) {
-		return "<div><p>ROW</p>" . print_r( $atts, TRUE ) . do_shortcode( $content ) . '</div>';
-	}
-
-	add_shortcode( 'row', 'footag_func2' );
 
 
 	add_action( 'upb_boilerplate_print_footer_scripts', function () {

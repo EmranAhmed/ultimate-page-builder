@@ -14,7 +14,7 @@
 
 	if ( ! class_exists( 'Ultimate_Page_Builder' ) ):
 
-		class Ultimate_Page_Builder {
+		final class Ultimate_Page_Builder {
 
 			protected static $_instance = NULL;
 
@@ -49,6 +49,9 @@
 			public function includes() {
 
 				// Common
+				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-template-functions.php";
+				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-shortcode-functions.php";
+				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-shortcode-preview-functions.php";
 				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-hooks.php";
 				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-functions.php";
 				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-elements.php";
@@ -79,7 +82,33 @@
 				load_plugin_textdomain( 'ultimate-page-builder', FALSE, trailingslashit( UPB_PLUGIN_DIRNAME ) . 'languages' );
 			}
 
+			public function template_path() {
+				return apply_filters( 'upb_template_path', untrailingslashit( $this->plugin_path() ) . '/templates/' );
+			}
+
+			public function plugin_path() {
+				return untrailingslashit( plugin_dir_path( __FILE__ ) );
+			}
+
+			public function plugin_basename() {
+				return plugin_basename( __FILE__ );
+			}
+
+			public function template_dir() {
+				return apply_filters( 'upb_template_dir', 'upb-templates' );
+			}
+
+			public function plugin_url() {
+				return untrailingslashit( plugins_url( '/', __FILE__ ) );
+			}
+
 		}
 
-		Ultimate_Page_Builder::init();
+		function Ultimate_Page_Builder() {
+			return Ultimate_Page_Builder::init();
+		}
+
+		// Global for backwards compatibility.
+		$GLOBALS[ 'ultimate_page_builder' ] = Ultimate_Page_Builder();
+
 	endif;
