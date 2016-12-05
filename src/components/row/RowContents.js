@@ -53,7 +53,6 @@ export default {
 
         contents(){
             return this.model.contents
-
         }
     },
 
@@ -303,8 +302,17 @@ export default {
                         if (this.model.contents[i]) {
                             this.model.contents[i].attributes[d.id] = col.trim();
                         }
-
                     })
+                }
+                else {
+
+                    let columns = this.selectedColumnLayout[d.id].trim();
+                    columns.split('+').map((col, i)=> {
+                        if (this.model.contents[i]) {
+                            this.model.contents[i].attributes[d.id] = '';
+                        }
+                    })
+
                 }
             });
 
