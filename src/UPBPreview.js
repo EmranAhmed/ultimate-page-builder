@@ -53,25 +53,43 @@ export default {
     },
 
     updated(){
-        this.model.contents.map((m, i) => {
-            m.attributes['_keyIndex'] = i;
-            this.addIndexAttribute(m.attributes, m.contents);
-        });
+
+        if (this.model.contents) {
+            this.addKeyIndex();
+        }
+        else {
+            this.$nextTick(function () {
+                this.addKeyIndex();
+            })
+        }
+
     },
 
     created(){
-        this.model.contents.map((m, i) => {
-            m.attributes['_keyIndex'] = i;
-            this.addIndexAttribute(m.attributes, m.contents);
-        });
+        this.addKeyIndex();
     },
 
     methods : {
-        addIndexAttribute(attrs, contents){
+
+        addKeyIndex(){
+
+            this.model.contents.map((m, i) => {
+                //m.attributes['_keyIndex'] = i;
+                m._upb_options['_keyIndex'] = i;
+                this.addIndexAttribute(m, m.attributes, m.contents);
+            });
+
+        },
+
+        addIndexAttribute(model, attrs, contents){
             if (Array.isArray(contents)) {
                 contents.map((m, i) => {
-                    m.attributes['_keyIndex'] = `${attrs._keyIndex}/${i}`;
-                    this.addIndexAttribute(m.attributes, m.contents);
+                    //m.attributes['_keyIndex'] = `${attrs._keyIndex}/${i}`;
+
+                    m._upb_options['_keyIndex'] = `${model._upb_options._keyIndex}/${i}`;
+
+                    //m.attributes['_keyIndex'] = `${attrs._keyIndex}/${i}`;
+                    this.addIndexAttribute(m, m.attributes, m.contents);
                 })
             }
         }

@@ -21,8 +21,8 @@ class store {
     }
 
     /*reloadPreview() {
-        window.frames[this.preview].contentWindow.location.reload();
-    }*/
+     window.frames[this.preview].contentWindow.location.reload();
+     }*/
 
     getTabs() {
         return this.tabs;
@@ -54,6 +54,7 @@ class store {
             delete content['_upb_options'];
             delete content['_upb_field_attrs'];
             delete content['_upb_field_type'];
+            //delete content['_keyIndex'];
 
             if (content['contents']) {
                 this.cleanup(content['contents']);

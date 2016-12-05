@@ -306,6 +306,7 @@ export default {
                 }
                 else {
 
+                    // When Deactive device remove attribute value also :)
                     let columns = this.selectedColumnLayout[d.id].trim();
                     columns.split('+').map((col, i)=> {
                         if (this.model.contents[i]) {
@@ -355,7 +356,7 @@ export default {
 
                 if (grid == gridValueCount) {
 
-                    // suggession msg
+                    // Show Ratio Suggestion
 
                     this.ratioSuggestion(device, gridArray, gridValueCount);
 
