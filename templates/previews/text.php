@@ -1,6 +1,6 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' ); ?>
 
-<div>
+<div v-preview-element>
 
 	Text {{ model.attributes }}
 

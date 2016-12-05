@@ -33,6 +33,8 @@ export default {
 
             //this.$router.push('/sections/0/contents')
 
+            this.removeFocus();
+
             this.$router.push({
                 name   : `section-${id}`,
                 params : {
@@ -44,6 +46,9 @@ export default {
         },
 
         settingsAction(id, tool){
+
+            this.removeFocus();
+
             this.$router.push({
                 name   : `section-${id}`,
                 params : {

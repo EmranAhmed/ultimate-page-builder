@@ -18,7 +18,11 @@
 		$contents = array();
 
 		$_upb_options = array(
-			'tools' => array(
+			'element' => array(
+				'name' => 'Column',
+				//'icon' => 'mdi mdi-format-text'
+			),
+			'tools'   => array(
 				'list'     => apply_filters( 'upb_column_list_toolbar', array() ),
 				'contents' => apply_filters( 'upb_column_contents_panel_toolbar', array() ),
 				'settings' => apply_filters( 'upb_column_settings_panel_toolbar', array() ),
@@ -42,13 +46,17 @@
 		$contents = array();
 
 		$_upb_options = array(
-			'help'   => '<h2>What to do?</h2><p>Add row and start</p>',
-			'search' => 'Search Rows',
-			'tools'  => array(
+			'help'    => '<h2>What to do?</h2><p>Add row and start</p>',
+			'search'  => 'Search Rows',
+			'tools'   => array(
 				'list'     => apply_filters( 'upb_row_list_toolbar', array() ),
 				'contents' => apply_filters( 'upb_row_contents_panel_toolbar', array() ),
 				'settings' => apply_filters( 'upb_row_settings_panel_toolbar', array() ),
-			)
+			),
+			'element' => array(
+				'name' => 'Row',
+				//'icon' => 'mdi mdi-format-text'
+			),
 		);
 
 		$element->register( 'row', $attributes, $contents, $_upb_options );
@@ -68,12 +76,16 @@
 		$contents = array();
 
 		$_upb_options = array(
-			'tools' => array(
+			'element' => array(
+				'name' => 'Section',
+				//'icon' => 'mdi mdi-format-text'
+			),
+			'tools'   => array(
 				'list'     => apply_filters( 'upb_section_list_toolbar', array() ),
 				'contents' => apply_filters( 'upb_section_contents_panel_toolbar', array() ),
 				'settings' => apply_filters( 'upb_section_settings_panel_toolbar', array() ),
 			),
-			'meta'  => array(
+			'meta'    => array(
 				'contents' => apply_filters( 'upb_section_contents_panel_meta', array(
 					'help'   => '<h2>Want to add contents?</h2><p>Choose a section and drag elements</p>',
 					'search' => 'Search Rows',

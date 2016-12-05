@@ -1,0 +1,44 @@
+@import "variables";
+@import "./node_modules/mdi/scss/materialdesignicons";
+
+.upb-preview-element {
+  position : relative;
+
+  .upb-preview-mini-toolbar {
+    position : absolute;
+    height   : 100%;
+    width    : 100%;
+    top      : 0;
+    left     : 0;
+    border   : transparent 2px solid;
+    z-index  : 0;
+
+    > ul {
+      list-style       : none;
+      position         : absolute;
+      left             : 0;
+      top              : 0;
+      margin           : 0;
+      padding          : 0;
+      visibility       : hidden;
+      background-color : $upb-preview-element-highlight-color;
+      color            : $upb-preview-element-toolbar-color;
+      li {
+        display : inline-block;
+        padding : 0 5px;
+        cursor  : pointer;
+        }
+      }
+
+    &:hover {
+      border : $upb-preview-element-highlight-color 2px solid;
+      > ul {
+        visibility : visible;
+        }
+      }
+
+    &.highlight {
+      border : $upb-preview-element-highlight-color 2px solid;
+      }
+    }
+  }

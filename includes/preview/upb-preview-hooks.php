@@ -15,13 +15,31 @@
 	} );
 
 	add_action( 'wp_footer', function () {
-		// JS Layouts
 		if ( upb_is_preview() ) {
-
-
-
+			do_action( 'upb_preview_wp_footer' );
 		}
 	}, 20 );
+
+	add_action( 'after_setup_theme', function () {
+		if ( upb_is_preview() ) {
+			do_action( 'upb_preview_after_setup_theme' );
+		}
+	}, 20 );
+
+
+	add_action( 'wp_enqueue_scripts', function () {
+		if ( upb_is_preview() ) {
+
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+			wp_register_style( 'upb-shortcode-preview-core', UPB_PLUGIN_ASSETS_URL . "css/upb-preview$suffix.css" );
+			wp_enqueue_style( 'upb-shortcode-preview-core' );
+			wp_enqueue_script( 'jquery' );
+
+			do_action( 'upb_preview_wp_enqueue_scripts' );
+		}
+	}, 20 );
+
 
 	add_filter( 'upb_before_preview_content', function () {
 		ob_start();

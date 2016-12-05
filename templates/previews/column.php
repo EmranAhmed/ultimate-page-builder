@@ -1,5 +1,5 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' ); ?>
-<div v-droppable class="upb-column-droppable">
+<div v-preview-element v-droppable class="upb-column-droppable">
 
 	Column {{ model.attributes }}
 

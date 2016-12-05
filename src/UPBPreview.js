@@ -5,8 +5,13 @@ import store from './store'
 import previewMixins from './previewMixins';
 
 import Droppable from './plugins/vue-droppable'
+import PreviewElement from './plugins/vue-preview-element'
+import UPBPreviewMiniToolbar from './components/extra/UPBPreviewMiniToolbar.vue'
+
+Vue.component('upb-preview-mini-toolbar', UPBPreviewMiniToolbar);
 
 Vue.use(Droppable);
+Vue.use(PreviewElement);
 
 store.getAllUPBElements((elements) => {
 
