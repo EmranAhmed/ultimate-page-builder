@@ -57,6 +57,18 @@
 				'name' => 'Row',
 				//'icon' => 'mdi mdi-format-text'
 			),
+			'meta'    => array(
+				'contents' => apply_filters( 'upb_row_contents_panel_meta', array(
+					'help'   => '<h2>Want to add contents?</h2><p>Choose a section and drag elements</p>',
+					'search' => 'Search Column',
+					'title'  => '%s'
+				) ),
+				'settings' => apply_filters( 'upb_row_settings_panel_meta', array(
+					'help'   => '<h2>Row Settings?</h2><p>row settings</p>',
+					'search' => '',
+					'title'  => '%s Settings'
+				) ),
+			),
 		);
 
 		$element->register( 'row', $attributes, $contents, $_upb_options );

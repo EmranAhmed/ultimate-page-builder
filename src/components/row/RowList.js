@@ -28,25 +28,23 @@ export default {
 
         contentsAction(id, tool){
 
-            this.$emit('showContentsPanel')
+            this.$emit('showContentsPanel');
 
-            // console.log('OPEN CONTENTS PANEL')
-            //this.breadcrumb.push(`${this.model.id}`)
+            // console.log('OPEN Row contents PANEL')
+            // this.breadcrumb.push(`${this.model.id}`)
         },
 
         settingsAction(id, tool){
-            // this.$emit('showSettingsPanel')
 
-            // console.log('OPEN SETTINGS PANEL')
+            this.removeFocus();
 
-            //this.$route.params
             this.$router.push({
                 name   : `row-${id}`,
                 params : {
                     //tab       : 'sections',
-                    rowId : this.index,
-                    //sectionId : this.$route.params
-                    type  : id
+                    rowId     : this.index,
+                    sectionId : this.$route.params.sectionId,
+                    type      : id
                 }
             });
 

@@ -162,7 +162,15 @@ export default {
         },
 
         showSettingsPanel(){
-            this.$emit('showSettingsPanel')
+
+            this.$router.push({
+                name   : `section-settings`,
+                params : {
+                    //tab       : 'sections',
+                    sectionId : this.$route.params.sectionId,
+                    type      : 'settings'
+                }
+            });
         },
 
         openContentsPanel(index){
@@ -255,6 +263,8 @@ export default {
         },
 
         toolsAction(tool, event = false){
+
+            console.log(tool.action);
 
             let data = tool.data ? tool.data : false;
 

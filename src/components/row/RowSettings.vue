@@ -58,4 +58,4 @@
     </ul>
 </template>
 
-<script src="./SectionSettings.js"></script>
+<script src="./RowSettings.js"></script>

@@ -24,7 +24,7 @@ Object.keys(fieldsComponent).map((key) => {
 });
 
 export default {
-    name  : 'section-settings',
+    name  : 'row-settings',
     props : ['index', 'model'],
 
     data(){
@@ -39,7 +39,7 @@ export default {
     created(){
 
         if (this.model.contents.length < 1) {
-            this.$router.replace('/sections');
+            this.$router.replace(`/sections`);
         }
         else {
             this.item = this.getItem();
@@ -81,20 +81,20 @@ export default {
 
         contents(){
 
-            if (this.item['_upb_settings']) {
+            //if (this.item['_upb_settings']) {
 
-                console.log(this.item);
+            // console.log(this.item);
 
-                /*return Object.keys(this.item._upb_settings).map((key) => {
+            /*return Object.keys(this.item._upb_settings).map((key) => {
 
-                 console.log(settings);
-                 console.log(index);
+             console.log(settings);
+             console.log(index);
 
-                 });*/
-            }
-            else {
-                return false
-            }
+             });*/
+            //}
+            //else {
+            //    return false
+            //}
 
         }
     },
@@ -127,13 +127,11 @@ export default {
 
         showContentPanel(){
 
-            let params = this.$route.params;
-
             this.$router.push({
                 name   : `section-contents`,
                 params : {
                     //tab       : 'sections',
-                    sectionId : params.sectionId,
+                    sectionId : this.$route.params.sectionId,
                     type      : 'contents'
                 }
             });
@@ -142,7 +140,11 @@ export default {
         getItem(){
 
             let sectionId = this.$route.params['sectionId'];
-            return this.model.contents[sectionId];
+            let rowId     = this.$route.params['rowId'];
+
+            console.log(this.model.contents[sectionId]['contents'][rowId]);
+
+            return this.model.contents[sectionId]['contents'][rowId];
 
         },
 
