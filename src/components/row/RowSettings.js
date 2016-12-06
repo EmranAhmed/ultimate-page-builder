@@ -80,22 +80,7 @@ export default {
         },
 
         contents(){
-
-            //if (this.item['_upb_settings']) {
-
-            // console.log(this.item);
-
-            /*return Object.keys(this.item._upb_settings).map((key) => {
-
-             console.log(settings);
-             console.log(index);
-
-             });*/
-            //}
-            //else {
-            //    return false
-            //}
-
+            return this.item['_upb_settings'] ? this.item : {}
         }
     },
 

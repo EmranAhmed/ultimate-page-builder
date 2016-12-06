@@ -122,10 +122,8 @@ export default {
                 `column-${layout}`,
                 `upb-mini-column`,
                 `upb-mini-column-${column}`,
-                this.model.contents[index]._upb_options.focus ? 'focused' : ''
+                this.model.contents[index]._upb_options.focus ? 'item-focused' : ''
             ].join(' ');
-
-            //return `column-${layout} upb-mini-column upb-mini-column-${column}`;
         },
 
         columnLayoutTitle(content, device){

@@ -3,7 +3,6 @@
 
         <li class="row-grid-title" v-text="layoutOfTitle"></li>
 
-
         <li class="row-grid-screen-sizes-title" v-text="grid.deviceSizeTitle"></li>
 
         <li class="row-grid-screen-sizes">
@@ -21,14 +20,10 @@
 
 
         <li class="row-grid-layouts-wrapper">
-
-
             <ul>
                 <li v-for="device in devices" v-if="device.current" :class="[{'active-device':device.active, current:device.current}]" :title="device.title">
 
-
                     <ul>
-
                         <li class="row-grid-structure-title" v-text="l10n.column_layout + ' - ' + device.title"></li>
 
                         <li class="row-grid-structure-wrapper">
@@ -46,7 +41,7 @@
                         <li v-show="showManualInput[device.id]" class="row-grid-column">
                             <div class="row-grid-column-input">
                                 <input v-model.lazy="selectedColumnLayout[device.id]" type="text">
-                                <div v-if="device.ratioSuggestion" class="suggestionMessage" v-text="device.ratioSuggestionMsg"></div>
+                                <div v-if="device.ratioSuggestion" class="ratio-suggestion-message" v-text="device.ratioSuggestionMsg"></div>
                             </div>
                         </li>
 
