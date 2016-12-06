@@ -109,16 +109,7 @@
 			}
 
 			public function getAll() {
-
-
-				$short_code_elements = array();
-
-				foreach ( $this->short_code_elements as $element ) {
-					$short_code_elements[] = $element;
-				}
-
-				return $short_code_elements;
-				//return $this->short_code_elements;
+				return array_values( $this->short_code_elements );
 			}
 
 			public function get_element( $tag, $key = FALSE ) {

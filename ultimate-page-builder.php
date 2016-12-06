@@ -38,6 +38,7 @@
 			public function constants() {
 				define( 'UPB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 				define( 'UPB_PLUGIN_ASSETS_URL', trailingslashit( plugin_dir_url( __FILE__ ) . 'assets' ) );
+				define( 'UPB_PLUGIN_VENDOR_URL', trailingslashit( plugin_dir_url( __FILE__ ) . 'vendor' ) );
 				define( 'UPB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 				define( 'UPB_PLUGIN_INCLUDE_DIR', trailingslashit( plugin_dir_path( __FILE__ ) . 'includes' ) );
 				define( 'UPB_PLUGIN_TEMPLATES_DIR', trailingslashit( plugin_dir_path( __FILE__ ) . 'templates' ) );

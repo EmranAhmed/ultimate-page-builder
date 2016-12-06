@@ -1,9 +1,12 @@
 export default{
+    props : {
+        index : {
+            type : Number
+        },
 
-    props : ['index', 'model'],
-
-    data(){
-        return {}
+        model : {
+            type : Object
+        }
     },
 
     computed : {
@@ -13,7 +16,5 @@ export default{
         $route(){
             return this.$root.$data.store.panel._route;
         }
-    },
-
-    methods : {}
+    }
 }

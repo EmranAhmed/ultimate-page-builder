@@ -309,6 +309,7 @@
 
 		$data = array(
 			'title'    => 'Elements',
+			'search'   => 'Search Element',
 			'help'     => '<h2>Just Getting Starting?</h2><p>Add a Elements</p>',
 			'tools'    => apply_filters( 'upb_tab_elements_tools', array() ), // add section | load section | layouts
 			'icon'     => 'mdi mdi-shape-plus',
@@ -512,7 +513,6 @@ var LogicalPanel = {
 
 </script>" );
 	} );
-
 
 
 	add_action( 'upb_boilerplate_print_footer_scripts', function () {

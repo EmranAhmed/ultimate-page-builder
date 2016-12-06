@@ -1,16 +1,20 @@
 export default {
     name  : 'upb-preview-mini-toolbar',
     props : {
-        model    : {
+        model      : {
             type : Object
         },
-        contents : {
+        contents   : {
             type    : Boolean,
             default : true
         },
-        settings : {
+        settings   : {
             type    : Boolean,
             default : true
+        },
+        onlyBorder : {
+            type    : Boolean,
+            default : false
         }
     },
     data(){

@@ -29,8 +29,9 @@ export default {
 
     data(){
         return {
-            showHelp   : false,
-            showSearch : false
+            showHelp    : false,
+            showSearch  : false,
+            searchQuery : ''
         }
     },
 
@@ -39,7 +40,7 @@ export default {
             let query = this.searchQuery.toLowerCase().trim();
             if (query) {
                 return this.model.contents.filter(function (data) {
-                    return new RegExp(query, 'gui').test(data.title.toLowerCase().trim())
+                    return new RegExp(query, 'gui').test(data._upb_options.element.name.toLowerCase().trim())
                 })
             }
             else {
@@ -77,17 +78,8 @@ export default {
                 this.$progressbar.show();
                 store.getPanelContents('_get_upb_element_list', (contents) => {
 
-                    console.log(contents);
-
                     let data = contents.filter(function (content) {
-
-                        if (content._upb_options['core'] && content._upb_options.core) {
-
-                        }
-                        else {
-                            return content;
-                        }
-
+                        return !content._upb_options['core']
                     });
 
                     this.$nextTick(function () {

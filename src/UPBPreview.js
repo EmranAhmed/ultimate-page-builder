@@ -2,7 +2,10 @@ import Vue from 'vue';
 
 import store from './store'
 
-import previewMixins from './previewMixins';
+import globalPreviewMixins from './globalPreviewMixins';
+import componentPreviewMixins from './componentPreviewMixins';
+
+//console.log(componentPreviewMixins);
 
 import Droppable from './plugins/vue-droppable'
 import PreviewElement from './plugins/vue-preview-element'
@@ -16,11 +19,11 @@ Vue.use(PreviewElement);
 store.getAllUPBElements((elements) => {
 
     elements.map((element)=> {
-        "use strict";
 
-        let template        = element._upb_options.preview.template;
-        let component       = `upb-${element.tag}`;
-        let componentMixins = element._upb_options.preview.mixins;
+        let template           = element._upb_options.preview.template;
+        let component          = `upb-${element.tag}`;
+        let componentMixins    = element._upb_options.preview.mixins;
+        let upbComponentMixins = _.isEmpty(componentPreviewMixins[element.tag]) ? false : componentPreviewMixins[element.tag];
 
         Vue.component(component, function (resolve, reject) {
 
@@ -29,7 +32,7 @@ store.getAllUPBElements((elements) => {
                 resolve({
                     name     : component,
                     template : templateData,
-                    mixins   : [previewMixins, componentMixins]
+                    mixins   : [globalPreviewMixins, upbComponentMixins, componentMixins]
                 });
 
             })

@@ -1,6 +1,7 @@
 import { util } from 'vue';
 
-(function ($) {
+($ => {
+
     const vPreviewElement = {};
 
     vPreviewElement.install = function (Vue, options) {
@@ -45,4 +46,6 @@ import { util } from 'vue';
         window.vPreviewElement = vPreviewElement;
         Vue.use(vPreviewElement)
     }
+
 })(window.jQuery);
+

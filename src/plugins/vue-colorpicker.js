@@ -1,7 +1,6 @@
 import { util } from 'vue';
 
-(function ($) {
-
+( $ => {
     const vColorPicker = {};
 
     if (!$().wpColorPicker) {

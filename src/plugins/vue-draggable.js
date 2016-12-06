@@ -1,6 +1,6 @@
 import { util } from 'vue';
 
-(function () {
+{
 
     const vDraggable = {};
 
@@ -53,4 +53,4 @@ import { util } from 'vue';
         Vue.use(vDraggable)
     }
 
-})();
+}

@@ -1,7 +1,7 @@
 import { util } from 'vue';
 import store from '../store';
 
-(function () {
+{
 
     const vDroppable = {};
 
@@ -48,4 +48,4 @@ import store from '../store';
         window.vDropable = vDroppable;
         Vue.use(vDroppable)
     }
-})();
+}

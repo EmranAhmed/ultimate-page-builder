@@ -91,6 +91,14 @@ export default {
             });
         },
 
+        columnFocusIn(index){
+            this.model.contents[index]._upb_options.focus = true;
+        },
+
+        columnFocusOut(index){
+            this.model.contents[index]._upb_options.focus = false;
+        },
+
         afterContentLoaded(){
             if (this.model.contents.length > 0) {
                 this.childId = 0;
@@ -101,7 +109,7 @@ export default {
             return [`upb-${this.model.tag}-panel`, `upb-panel-wrapper`].join(' ');
         },
 
-        sortOrderClass(content, device){
+        sortOrderClass(index, content, device){
             let layout = content.attributes[device.id].replace(':', '-');
 
             // We Implemented grid 12
@@ -110,7 +118,14 @@ export default {
 
             let column = Math.round(upb_total_column * upb_split_column);
 
-            return `column-${layout} upb-mini-column upb-mini-column-${column}`;
+            return [
+                `column-${layout}`,
+                `upb-mini-column`,
+                `upb-mini-column-${column}`,
+                this.model.contents[index]._upb_options.focus ? 'focused' : ''
+            ].join(' ');
+
+            //return `column-${layout} upb-mini-column upb-mini-column-${column}`;
         },
 
         columnLayoutTitle(content, device){
