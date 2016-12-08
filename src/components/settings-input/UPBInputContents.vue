@@ -3,11 +3,10 @@
         <div class="form-group">
             <label>
                 <span class="title" v-text="attributes.title"></span>
-                <input v-model="input" :id="attributes._id" :placeholder="attributes.placeholder" class="form-control">
+                <textarea v-model="input" class="form-control" :id="attributes._id" :placeholder="attributes.placeholder"></textarea>
             </label>
 
             <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
-
         </div>
     </li>
 </template>
@@ -16,11 +15,11 @@
     import common from './common'
 
     export default {
-        name   : 'upb-input-text',
-        props  : ['index', 'target', 'model', 'attributes'], // model[target]
+        name   : 'upb-input-contents',
+        props  : ['index', 'target', 'model', 'attributes', 'item'], // watch input and item.content = set :)
         mixins : [common],
         created(){
-            //   console.log(this.model, this.index, this.target, this.attributes)
-        }
+
+        },
     }
 </script>

@@ -2,11 +2,11 @@
     <li :class="typeClass()">
         <div class="form-group">
             <label>
-                <span class="title" v-text="attrs.title"></span>
-                <input v-colorpicker :data-alpha="attrs.alpha" type="text" :data-default-color="attrs.value" :value="attrs.value" :id="attrs._id" :placeholder="attrs.placeholder">
+                <span class="title" v-text="attributes.title"></span>
+                <input v-colorpicker :data-alpha="attributes.alpha" type="text" :data-default-color="attributes.value" :value="attributes.value" :id="attributes._id" :placeholder="attributes.placeholder">
             </label>
 
-            <p class="description" v-if="attrs.desc" v-html="attrs.desc"></p>
+            <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
         </div>
     </li>
 </template>
@@ -21,12 +21,12 @@
 
     export default {
         name    : 'upb-input-color',
-        props   : ['index', 'attrs', 'model'],
+        props   : ['index', 'target', 'model', 'attributes'], // model[target]
         mixins  : [common],
         methods : {
             onColorChange(color){
-                this.model[this.attrs.id] = color;
-                this.model.metaValue = color;
+                this.input = color;
+                //this.attributes.value   = color;
             }
         }
     }

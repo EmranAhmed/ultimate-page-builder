@@ -367,7 +367,7 @@
 		$settings->register( 'text', $options );
 
 
-		/*$options = array(
+		$options = array(
 			'type'    => 'toggle',
 			'title'   => 'Enable',
 			'default' => FALSE,
@@ -402,7 +402,7 @@
 		);
 
 
-		$settings->register( 'color', $options );*/
+		$settings->register( 'color', $options );
 
 
 	} );

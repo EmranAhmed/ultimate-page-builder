@@ -6,7 +6,7 @@ export default{
 
     column : {
         created(){
-            console.log(this.model.attributes)
+
         }
     }
 }

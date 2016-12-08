@@ -3,7 +3,7 @@ import store from '../../store'
 import {sprintf} from 'sprintf-js';
 import extend from 'extend';
 
-import fieldsComponent from '../attributes-input/fields';
+import fieldsComponent from '../settings-input/fields';
 
 // Row
 // import Row from '../row/Row.vue'

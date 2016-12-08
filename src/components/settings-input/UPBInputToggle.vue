@@ -1,14 +1,13 @@
 <template>
     <li :class="typeClass()">
 
-
         <div class="form-group toggle">
-            <span class="title" v-text="attrs.title"></span>
+            <span class="title" v-text="attributes.title"></span>
             <label class="switch">
-                <input type="checkbox" :id="attrs._id" v-model="model.metaValue">
+                <input v-model="input" type="checkbox" :id="attributes._id">
                 <div class="slider round"></div>
             </label>
-            <p class="description" v-if="attrs.desc" v-html="attrs.desc"></p>
+            <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
         </div>
     </li>
 </template>
@@ -18,7 +17,7 @@
 
     export default {
         name   : 'upb-input-toggle',
-        props  : ['index', 'attrs', 'model'],
+        props  : ['index', 'target', 'model', 'attributes'], // model[target]
         mixins : [common]
     }
 </script>

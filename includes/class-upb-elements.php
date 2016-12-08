@@ -67,7 +67,7 @@
 
 				foreach ( $attributes as $index => $attribute ) {
 					//$attributes[ $index ][ 'metaKey' ]   = $attribute[ 'id' ];
-					//$attributes[ $index ][ '_id' ]       = $attribute[ 'id' ];
+					$attributes[ $index ][ '_id' ] = $attribute[ 'id' ];
 					//$attributes[ $index ][ 'metaValue' ] = $attribute[ 'value' ];
 					$attributes[ $index ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $attribute[ 'type' ] );
 				}
@@ -210,7 +210,7 @@
 				foreach ( $settings as $key => $value ) {
 
 					// For normal element attr
-					$settings[ $key ][ 'value' ]           = $attributes[ $value[ 'id' ] ];
+					$settings[ $key ][ 'value' ] = $attributes[ $value[ 'id' ] ];
 					//$settings[ $key ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $attributes[ $value[ 'type' ] ] );
 
 

@@ -1,21 +1,48 @@
 import store from '../../store'
 
 export default{
+
+    data(){
+        return {
+            input : this.model[this.target]
+        }
+    },
+
+    watch : {
+        input(value){
+            this.setValue(value);
+        }
+    },
+
     created(){
-        this.$watch(`model.metaValue`, (value) => {
-            this.attrs.value     = value;
-            //this.model.metaValue = value;
+        this.$watch(`modelxxx`, (value) => {
+
+            this.attributes.value = value;
 
             store.stateChanged();
 
-            if (this.attrs['reload']) {
+            if (this.attributes['reload']) {
                 store.reloadPreview()
             }
         });
+
     },
     methods : {
         typeClass(){
-            return `${this.attrs.type}-field-wrapper form-field-wrapper`;
+            return `${this.attributes.type}-field-wrapper form-field-wrapper`;
+        },
+
+        setValue(value){
+
+            this.attributes.value   = value;
+            this.model[this.target] = value;
+
+            store.stateChanged();
+
+            if (this.attributes['reload']) {
+                store.reloadPreview()
+            }
+
         }
     }
 }
