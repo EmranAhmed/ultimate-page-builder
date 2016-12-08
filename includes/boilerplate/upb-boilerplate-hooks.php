@@ -2,13 +2,23 @@
 
 	defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
-	add_filter( 'upb_column_settings_panel_toolbar', function () {
+	add_filter( 'upb_column_contents_panel_toolbar', function () {
 		return array(
 			array(
 				'id'     => 'column-settings',
 				'title'  => 'Settings',
 				'icon'   => 'mdi mdi-settings',
 				'action' => 'showSettingsPanel'
+			)
+		);
+	} );
+	add_filter( 'upb_column_settings_panel_toolbar', function () {
+		return array(
+			array(
+				'id'     => 'column-contents',
+				'title'  => 'Contents',
+				'icon'   => 'mdi mdi-file-tree',
+				'action' => 'showContentPanel'
 			)
 		);
 	} );

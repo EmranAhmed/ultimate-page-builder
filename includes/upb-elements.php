@@ -6,13 +6,13 @@
 	add_action( 'upb_register_element', function ( $element ) {
 
 		$attributes = array(
-			array( 'id' => 'title', 'type' => 'text', 'value' => 'Column %s' ),
-			array( 'id' => 'lg', 'type' => 'text', 'value' => '' ),
-			array( 'id' => 'md', 'type' => 'text', 'value' => '' ),
-			array( 'id' => 'sm', 'type' => 'text', 'value' => '' ),
-			array( 'id' => 'xs', 'type' => 'text', 'value' => '1:1' ),
-			array( 'id' => 'enable', 'type' => 'toggle', 'value' => TRUE ),
-			array( 'id' => 'background', 'type' => 'color', 'value' => '#fff' ),
+			array( 'id' => 'title', 'title' => 'Title', 'type' => 'text', 'value' => 'Column %s' ),
+			array( 'id' => 'lg', 'type' => 'hidden', 'value' => '' ),
+			array( 'id' => 'md', 'type' => 'hidden', 'value' => '' ),
+			array( 'id' => 'sm', 'type' => 'hidden', 'value' => '' ),
+			array( 'id' => 'xs', 'type' => 'hidden', 'value' => '1:1' ),
+			// array( 'id' => 'enable', 'title' => 'Enable', 'type' => 'toggle', 'value' => TRUE ),
+			array( 'id' => 'background', 'title' => 'Background', 'type' => 'color', 'value' => '#ffccff' ),
 		);
 
 		$contents = array();
