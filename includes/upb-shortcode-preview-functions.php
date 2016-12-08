@@ -1,4 +1,5 @@
 <?php
+	defined( 'ABSPATH' ) or die( 'Keep Quit' );
 
 	if ( ! function_exists( 'upb_shortcode_preview_section' ) ):
 		function upb_shortcode_preview_section() {

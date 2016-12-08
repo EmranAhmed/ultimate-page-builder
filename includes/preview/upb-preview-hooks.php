@@ -37,10 +37,9 @@
 			wp_enqueue_script( 'jquery' );
 
 
-			// You can
+			// You can change grid system as you need :)
 			wp_register_style( 'upb-grid', UPB_PLUGIN_ASSETS_URL . "css/upb-grid$suffix.css" );
 			wp_enqueue_style( 'upb-grid' );
-
 
 			do_action( 'upb_preview_wp_enqueue_scripts' );
 		}
@@ -49,21 +48,21 @@
 
 	add_filter( 'upb_before_preview_content', function () {
 		ob_start();
-		include_once UPB_PLUGIN_TEMPLATES_DIR . 'upb_before_content_wrapper.php';
+		include_once UPB_PLUGIN_TEMPLATES_PATH . 'upb_before_content_wrapper.php';
 
 		return ob_get_clean();
 	} );
 
 	add_filter( 'upb_preview_content', function ( $content ) {
 		ob_start();
-		include_once UPB_PLUGIN_TEMPLATES_DIR . 'upb_on_content_wrapper.php';
+		include_once UPB_PLUGIN_TEMPLATES_PATH . 'upb_on_content_wrapper.php';
 
 		return ob_get_clean();
 	} );
 
 	add_filter( 'upb_after_preview_content', function () {
 		ob_start();
-		include_once UPB_PLUGIN_TEMPLATES_DIR . 'upb_after_content_wrapper.php';
+		include_once UPB_PLUGIN_TEMPLATES_PATH . 'upb_after_content_wrapper.php';
 
 		return ob_get_clean();
 	} );

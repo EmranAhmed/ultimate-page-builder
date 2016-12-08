@@ -5,7 +5,7 @@ class store {
     constructor() {
         this.tabs   = window._upb_tabs;
         this.status = window._upb_status;
-        this.router = window._upb_router || [];
+        this.routes = window._upb_routes || [];
 
         this.l10n          = window._upb_l10n;
         this.router_config = window._upb_router_config;
@@ -54,7 +54,6 @@ class store {
             delete content['_upb_options'];
             delete content['_upb_field_attrs'];
             delete content['_upb_field_type'];
-            //delete content['_keyIndex'];
 
             if (content['contents']) {
                 this.cleanup(content['contents']);

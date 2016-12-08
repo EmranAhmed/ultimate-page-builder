@@ -14,7 +14,6 @@ Vue.component('section-list', SectionList);
 import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
 Vue.component('upb-breadcrumb', UPBBreadcrumb);
 
-
 export default {
     name  : 'sections-panel',
     props : ['index', 'model'],
@@ -43,9 +42,7 @@ export default {
 
             let query = this.searchQuery.toLowerCase().trim();
             if (query) {
-                return this.model.contents.filter(function (data) {
-                    return new RegExp(query, 'gui').test(data.attributes.title.toLowerCase().trim())
-                })
+                return this.model.contents.filter((data) => new RegExp(query, 'gui').test(data.attributes.title.toLowerCase().trim()))
             }
             else {
                 return this.model.contents;

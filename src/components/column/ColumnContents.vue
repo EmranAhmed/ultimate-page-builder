@@ -51,17 +51,12 @@
 
         <li class="upb-panel-contents">
             <ul class="upb-panel-contents-items" v-sortable="sortable">
-                <!-- Row List -->
+                <!-- Element List -->
+<!--
                 <component v-for="(item, index) in contents" :index="index" :selected="defaultRowId" @showContentsPanel="openRowContentsPanel(index)" @deleteItem="deleteItem(index)" :model="item" @cloneItem="cloneItem(index, item)" :is="listPanel(item.tag)"></component>
+-->
             </ul>
-
-
-            <!-- Column List -->
-
-            <component v-for="(item, index) in contents" v-if="isCurrentRow(index)" :row="defaultRowId" :index="index" :model="item" :is="rowContentsComponent"></component>
-
-
         </li>
     </ul>
 </template>
-<script src="./SectionContents.js"></script>
+<script src="./ColumnContents.js"></script>

@@ -14,6 +14,10 @@ import SectionSettings from './components/section/SectionSettings.vue'
 // RowsPanel
 import RowSettings from './components/row/RowSettings.vue'
 
+// ColumnPanel
+import ColumnContents from './components/column/ColumnContents.vue'
+//import ColumnSettings from './components/column/ColumnSettings.vue'
+
 //import Attributes from './components/tabs/Attributes.vue'
 //import List from './components/tabs/ListView.vue'
 
@@ -43,10 +47,15 @@ let routes = [
     },
 
     {
-        name : 'row-contents',
-        path : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:type(contents)',
-        //component : List, // column list
-        meta : {subPanel : true}
+        name      : 'row-contents',
+        path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:type(contents)',
+        component : {
+            template : '<span></span>',
+            created(){
+                this.$router.replace(`/sections/${this.$route.params.sectionId}/${this.$route.params.type}`);
+            }
+        },
+        meta      : {subPanel : true},
     },
     {
         name      : 'row-settings',
@@ -56,10 +65,10 @@ let routes = [
     },
 
     {
-        name : 'column-contents',
-        path : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:type(contents)',
-        //component : List,
-        meta : {subPanel : true}
+        name      : 'column-contents',
+        path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:type(contents)',
+        component : ColumnContents,
+        meta      : {subPanel : true}
     },
     {
         name : 'column-settings',
@@ -67,6 +76,10 @@ let routes = [
         //component : Attributes,
         meta : {subPanel : true}
     },
+
+    // element
+    // element-item
+    // element-item-contents
 
     {
         name      : 'elements',
@@ -81,8 +94,9 @@ let routes = [
     }
 ];
 
-if (store.router.length > 0) {
-    store.router.map((r)=> {
+// New Routes from Hook
+if (store.routes.length > 0) {
+    store.routes.map((r)=> {
         if (r['component']) {
             r.component = window[r.component];
             routes.push(r);

@@ -6,32 +6,24 @@ import Sortable from '../../plugins/vue-sortable'
 import extend from 'extend';
 import {sprintf} from 'sprintf-js';
 
-import RowList from '../row/RowList.vue';
-
-import RowContents from '../row/RowContents.vue';
+//import ElementList from '../element/ElementList.vue';
 
 Vue.use(Sortable);
 
-// Row List
-Vue.component('row-list', RowList);
-Vue.component('row-contents', RowContents);
+// Element List
+//Vue.component('element-list', ElementList);
 
 import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
 Vue.component('upb-breadcrumb', UPBBreadcrumb);
 
 export default {
-    name  : 'section-contents',
-    props : ['index', 'selected', 'model'],
+    name  : 'column-contents',
+    props : ['index', 'model'],
 
     data(){
         return {
 
-            defaultRowId         : 0,
-            showRowColumn        : false,
-            rowContentsComponent : '',
-
             l10n        : store.l10n,
-            breadcrumb  : store.breadcrumb,
             showHelp    : false,
             showSearch  : false,
             sortable    : {
@@ -40,24 +32,16 @@ export default {
                 axis        : 'y'
             },
             searchQuery : '',
-
-            item : {},
-
+            item        : {},
         }
     },
 
     created(){
-
         if (this.model.contents.length < 1) {
             this.$router.replace('/sections');
         }
         else {
             this.item = this.getItem();
-
-            if (this.item.contents.length > 0) {
-                this.defaultRowId = 0;
-                this.openRowContentsPanel(this.defaultRowId); // row column list
-            }
         }
     },
 
@@ -122,14 +106,6 @@ export default {
         }
     },
 
-    watch : {
-        searchQuery(search){
-            if (search.trim()) {
-                this.showRowColumn = false; // searching rows
-            }
-        }
-    },
-
     methods : {
 
         isSubPanel(){
@@ -144,42 +120,25 @@ export default {
             return [`upb-${this.item.tag}-panel`, `upb-panel-wrapper`].join(' ');
         },
 
-        isCurrentRow(index){
-            return this.defaultRowId == index && this.showRowColumn;
-        },
-
         getItem(){
             let sectionId = this.$route.params['sectionId'];
-            return this.model.contents[sectionId];
-        },
-
-        afterSort(values){
-            this.defaultRowId  = values.newIndex;
-            this.showRowColumn = true;
+            let rowId     = this.$route.params['rowId'];
+            let columnId  = this.$route.params['columnId'];
+            return this.model.contents[sectionId].contents[rowId].contents[columnId];
         },
 
         showSettingsPanel(){
 
             this.$router.push({
-                name   : `section-settings`,
+                name   : `column-settings`,
                 params : {
                     //tab       : 'sections',
                     sectionId : this.$route.params.sectionId,
+                    rowId     : this.$route.params.rowId,
+                    columnId  : this.$route.params.columnId,
                     type      : 'settings'
                 }
             });
-        },
-
-        openRowContentsPanel(index){
-            this.showRowColumn        = true;
-            this.defaultRowId         = index;
-            this.rowContentsComponent = 'row-contents';
-        },
-
-        // Sub Panel
-
-        listPanel(id){
-            return `${id}-list`
         },
 
         deleteItem(index){
@@ -188,8 +147,10 @@ export default {
         },
 
         cloneItem(index, item){
-            let cloned              = extend(true, {}, item);
-            cloned.attributes.title = sprintf(this.l10n.clone, cloned.attributes.title);
+            let cloned = extend(true, {}, item);
+            if (cloned.attributes['title']) {
+                cloned.attributes.title = sprintf(this.l10n.clone, cloned.attributes.title);
+            }
             this.item.contents.splice(index + 1, 0, cloned);
             store.stateChanged();
         },
@@ -210,15 +171,13 @@ export default {
 
             this.$nextTick(() => {
                 Vue.set(this.item, 'contents', extend(true, [], list));
-                this.afterSort(values);
             });
 
             // store.stateChanged();
         },
 
         onStart(e){
-            this.searchQuery   = '';
-            this.showRowColumn = false;
+            this.searchQuery = '';
         },
 
         toggleHelp(){
@@ -246,29 +205,6 @@ export default {
             else {
                 this[tool.action](data, event);
             }
-        },
-
-        cleanup(model) {
-
-            model.contents = model.contents.map((data, index) => {
-
-                data.attributes.title = sprintf(data.attributes.title, (data.contents.length + 1));
-
-                return data;
-            });
-
-            return model;
-        },
-
-        addNew(content, event = false){
-
-            // Only For Column cleanup
-
-            let data              = extend(true, {}, this.cleanup(content));
-            data.attributes.title = sprintf(data.attributes.title, (this.item.contents.length + 1));
-
-            this.item.contents.push(data);
-            store.stateChanged();
         }
     }
 }

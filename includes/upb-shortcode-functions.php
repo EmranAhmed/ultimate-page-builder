@@ -1,5 +1,7 @@
 <?php
 
+	defined( 'ABSPATH' ) or die( 'Keep Quit' );
+
 	if ( ! function_exists( 'upb_register_shortcode_column' ) ):
 		function upb_register_shortcode_column( $attrs, $contents = NULL ) {
 

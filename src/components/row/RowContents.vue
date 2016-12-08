@@ -49,7 +49,7 @@
 
                         <li class="row-grid-order-wrapper">
                             <ul class="row-grid-order upb-mini-row" v-sortable="sortable">
-                                <li v-for="(content, index) in contents" @mouseover="columnFocusIn(index)" @mouseout="columnFocusOut(index)" v-if="device.active" :class="sortOrderClass(index, content, device)">
+                                <li v-for="(content, index) in contents" @click="openColumnContents(index)" @mouseover="activeFocus(index)" @mouseout="removeFocus(index)" v-if="device.active" :class="sortOrderClass(index, content, device)">
                                     <div v-text="columnLayoutTitle(content, device)"></div>
                                 </li>
                             </ul>

@@ -2,6 +2,55 @@
 
 	defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
+	add_filter( 'upb_column_settings_panel_toolbar', function () {
+		return array(
+			array(
+				'id'     => 'column-settings',
+				'title'  => 'Settings',
+				'icon'   => 'mdi mdi-settings',
+				'action' => 'showSettingsPanel'
+			)
+		);
+	} );
+
+	add_filter( 'upb_column_list_toolbar', function ( $tools ) {
+		$tools[ 'move' ] = array(
+			'icon'  => 'mdi mdi-cursor-move',
+			'class' => 'handle',
+			'title' => 'Sort',
+		);
+
+		$tools[ 'delete' ] = array(
+			'icon'  => 'mdi mdi-delete',
+			'title' => 'Delete',
+		);
+
+		$tools[ 'enable' ]   = array(
+			'icon'  => 'mdi mdi-eye',
+			'title' => 'Enabled',
+		);
+		$tools[ 'disable' ]  = array(
+			'icon'  => 'mdi mdi-eye-off',
+			'title' => 'Disabled',
+		);
+		$tools[ 'contents' ] = array(
+			'icon'  => 'mdi mdi-table-edit',
+			'class' => 'show-contents',
+			'title' => 'Contents',
+		);
+		$tools[ 'settings' ] = array(
+			'icon'  => 'mdi mdi-settings',
+			'class' => 'show-settings',
+			'title' => 'Settings',
+		);
+		$tools[ 'clone' ]    = array(
+			'icon'  => 'mdi mdi-content-duplicate',
+			'title' => 'Clone',
+		);
+
+		return $tools;
+	} );
+
 
 	// Section
 	add_filter( 'upb_section_list_toolbar', function ( $tools ) {
@@ -77,57 +126,6 @@
 		);
 	} );
 
-	// Will Comes From DB
-	add_filter( '_____upb_sections_panel_contents', function () {
-
-
-		return array();
-
-		/*return upb_elements()->set_upb_options(
-			array(
-				array(
-					'tag'        => 'section',
-					'contents'   => array(
-						array(
-							'tag'        => 'row',
-							'contents'   => array(
-								array(
-									'tag'        => 'column',
-									'contents'   => array(),
-									'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL 1', 'lg' => '1:2', 'md' => '1:2', 'sm' => '', 'xs' => '' )
-								),
-								array(
-									'tag'        => 'column',
-									'contents'   => array(),
-									'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL 2', 'lg' => '1:2', 'md' => '1:2', 'sm' => '', 'xs' => '' )
-								),
-							),
-							'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'ROW GEN' )
-						)
-
-					),
-					'attributes' => array( 'enable' => TRUE, 'background' => '#fff', 'title' => 'Section A' )
-				),
-				array(
-					'tag'        => 'section',
-					'contents'   => array(),
-					'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'Section B' )
-				)
-			)
-		);*/
-
-		/*return upb_elements()->set_upb_options(
-			array(
-				upb_elements()->demo_data( 'section', upb_elements()->demo_data( 'row', upb_elements()->demo_data( 'column' ) ) ),
-				upb_elements()->demo_data( 'section', upb_elements()->demo_data( 'row', upb_elements()->demo_data( 'column' ) ) ),
-				upb_elements()->demo_data( 'section', upb_elements()->demo_data( 'row', upb_elements()->demo_data( 'column' ) ) )
-			)
-		);*/
-
-		// return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
-	} );
-
-
 	// device previews
 
 	add_filter( 'upb_preview_devices', function () {
@@ -163,19 +161,19 @@
 
 	add_filter( 'upb_grid_system', function () {
 		return array(
-			'name'              => 'Bootstrap 3',
+			'name'              => 'UPB Grid',
 			'simplifiedRatio'   => 'Its recommended to use simplified form of your grid ratio like: %s',
-			'prefixClass'       => 'col',
+			'prefixClass'       => 'upb-col',
 			'separator'         => '-', // col- deviceId - grid class
-			'groupClass'        => 'row',
+			'groupClass'        => 'upb-row',
 			'groupWrapper'      => array(
 				array(
 					'name'  => 'Full Width',
-					'class' => 'container-fluid'
+					'class' => 'upb-container-fluid'
 				),
 				array(
 					'name'  => 'Fixed Width',
-					'class' => 'container'
+					'class' => 'upb-container'
 				),
 			),
 			'defaultDeviceId'   => 'xs', // We should set default column element attributes as like defaultDeviceId, If xs then [column xs='...']
@@ -183,7 +181,7 @@
 			'devices'           => apply_filters( 'upb_preview_devices', array() ),
 			'totalGrid'         => 12,
 			'allowedGrid'       => array( 1, 2, 3, 4, 6, 12 ),
-			'nonAllowedMessage' => "Sorry, Bootstrap 3 doesn't support %s grid column."
+			'nonAllowedMessage' => "Sorry, UPB Grid 3 doesn't support %s grid column."
 		);
 	} );
 
@@ -419,7 +417,7 @@
 	} );
 
 
-	// Load CSS :)
+	// Load Scripts :)
 	add_action( 'upb_boilerplate_print_styles', function () {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
@@ -453,25 +451,20 @@
 
 
 		$data = sprintf( "var _upb_tabs = %s;\n", upb_tabs()->getJSON() );
-		// $data = sprintf( "var _upb_tabs = %s;\n", wp_json_encode( array() ) );
 
 		$data .= sprintf( "var _upb_router_config = %s;\n", wp_json_encode( array(
-			                                                                    //'base' => esc_url( add_query_arg( 'upb-preview', TRUE, get_preview_post_link( get_the_ID() ) ) ),
 			                                                                    'mode' => 'hash' // abstract, history, hash
 		                                                                    ) ) );
 
-		$data .= sprintf( "var _upb_router = %s;\n", wp_json_encode( array(
-			                                                             array(
-				                                                             //'name'      => 'logical',
-				                                                             //'path'      => '/:tab(logical)',
-				                                                             //'component' => 'LogicalPanel',
-			                                                             )
-		                                                             ) ) );
+		$data .= sprintf( "var _upb_routes = %s;\n", wp_json_encode( apply_filters( 'upb_routes', array(
+			array( /*'name'      => 'logical',
+				'path'      => '/:tab(logical)',
+				'component' => 'LogicalPanel',*/
+			)
+		) ) ) );
 
 
 		$data .= sprintf( "var _upb_status = %s;\n", wp_json_encode( array( 'dirty' => FALSE, '_nonce' => wp_create_nonce( '_upb' ), '_id' => get_the_ID() ) ) );
-
-		/*$data .= sprintf( "var _upb_settings = %s;", upb_settings()->getJSON() );*/
 
 		$data .= sprintf( "var _upb_preview_devices = %s;", wp_json_encode( apply_filters( 'upb_preview_devices', array() ) ) );
 
@@ -503,17 +496,17 @@
 		//$tabs = upb_tabs()->getAll();
 		//printf( '<script>console.log("HAY")</script>', wp_json_encode( $tabs ) );
 	} );
+
 	add_action( 'upb_boilerplate_print_scripts', function () {
 		//$tabs = upb_tabs()->getAll();
 		print( "<script>
-
 var LogicalPanel = {
-  template: '<span> Others </span>'
+  template: '<span> Example </span>',
+  props:[]
 }
 
 </script>" );
 	} );
-
 
 	add_action( 'upb_boilerplate_print_footer_scripts', function () {
 		//$tabs = upb_tabs()->getAll();

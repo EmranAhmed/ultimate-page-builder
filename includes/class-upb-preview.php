@@ -23,8 +23,8 @@
 			}
 
 			public function includes() {
-				require_once UPB_PLUGIN_INCLUDE_DIR . "preview/upb-preview-hooks.php";
-				require_once UPB_PLUGIN_INCLUDE_DIR . "preview/upb-preview-functions.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "preview/upb-preview-hooks.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "preview/upb-preview-functions.php";
 			}
 
 			public function hooks() {

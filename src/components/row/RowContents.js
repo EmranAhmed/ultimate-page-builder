@@ -17,14 +17,10 @@ Vue.use(Sortable);
 
 export default {
     name  : 'row-contents',
-    props : ['index', 'model'],
+    props : ['index', 'model', 'row'],
 
     data(){
         return {
-
-            showChild      : false,
-            childId        : null,
-            childComponent : '',
 
             l10n : store.l10n,
             grid : store.grid,
@@ -57,7 +53,7 @@ export default {
     },
 
     created(){
-        this.afterContentLoaded();
+
         this.devices = this.getDevices();
         this.setToolsForDevices();
         this.setSelectedColumnLayout();
@@ -75,13 +71,31 @@ export default {
 
     methods : {
 
+        openColumnContents(columnId){
+
+            this.removeFocus(columnId);
+
+            this.$router.push({
+                name   : `column-${this.$route.params.type}`,
+                params : {
+                    //tab       : 'sections',
+                    columnId  : columnId,
+                    rowId     : this.row,
+                    sectionId : this.$route.params.sectionId,
+                    type      : this.$route.params.type
+                }
+            });
+
+            //console.log(this.$route, index)
+
+        },
+
         loadContents(){
             this.$progressbar.show();
             store.upbElementOptions(this.model.contents, (data) => {
 
                 this.$nextTick(function () {
                     Vue.set(this.model, 'contents', extend(true, [], data));
-                    this.afterContentLoaded();
                 });
 
                 this.$progressbar.hide();
@@ -91,18 +105,12 @@ export default {
             });
         },
 
-        columnFocusIn(index){
+        activeFocus(index){
             this.model.contents[index]._upb_options.focus = true;
         },
 
-        columnFocusOut(index){
+        removeFocus(index){
             this.model.contents[index]._upb_options.focus = false;
-        },
-
-        afterContentLoaded(){
-            if (this.model.contents.length > 0) {
-                this.childId = 0;
-            }
         },
 
         panelClass(){
@@ -512,65 +520,8 @@ export default {
             ].join(' ');
         },
 
-        showSettingsPanel(){
-            this.$emit('showSettingsPanel')
-        },
-
-        back(){
-            this.$emit('onBack')
-        },
-
-        backed(){
-            this.breadcrumb.pop();
-            this.showChild      = false;
-            this.childId        = null;
-            this.childComponent = '';
-        },
-
-        clearPanel(){
-            this.breadcrumb.pop();
-            this.childComponent = '';
-            //this.showChild      = false;
-        },
-
-        openContentsPanel(index){
-
-            this.clearPanel();
-
-            //this.showChild      = true;
-            this.childId        = index;
-            //this.rowId          = index;
-            this.childComponent = 'row-contents-panel';
-            // this.breadcrumb.push(this.model.title);
-        },
-
-        openSettingsPanel(index){
-
-            this.clearPanel();
-
-            this.showChild      = true;
-            this.childId        = index;
-            this.childComponent = 'row-settings-panel';
-            this.breadcrumb.push(this.model.title);
-        },
-
-        singleModel(){
-            return this.model.contents[this.childId];
-        },
-
-        listPanel(id){
-            return `${id}-list`;
-        },
-
         deleteItem(start, end = 1){
             this.model.contents.splice(start, end);
-            store.stateChanged();
-        },
-
-        cloneItem(index, item){
-            let cloned              = extend(true, {}, item);
-            cloned.attributes.title = `Clone of ${cloned.attributes.title}`;
-            this.model.contents.splice(index + 1, 0, cloned);
             store.stateChanged();
         },
 

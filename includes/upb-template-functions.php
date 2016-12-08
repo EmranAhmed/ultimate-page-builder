@@ -17,14 +17,14 @@
 		// Look within passed path within the theme - this is priority.
 		$template = locate_template(
 			array(
-				trailingslashit( $template_path ) . $template_name,
-				'upb-template-' . $template_name
+				trailingslashit( $template_path ) . trim( $template_name ),
+				'upb-template-' . trim( $template_name )
 			)
 		);
 
 		// Get default template/
-		if ( ! $template ) {
-			$template = $default_path . $template_name;
+		if ( empty( $template ) ) {
+			$template = trailingslashit( $default_path ) . trim( $template_name );
 		}
 
 		// Return what we found.

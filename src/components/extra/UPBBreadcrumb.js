@@ -2,45 +2,31 @@ import store from '../../store';
 import extend from 'extend';
 
 export default {
-    name  : 'upb-breadcrumb',
-    props : ['model'],
+    name : 'upb-breadcrumb',
     data(){
         return {
             l10n       : store.l10n,
             breadcrumb : [],
-            contents   : {},
-            link       : '',
-            sections   : {}
+            link       : ''
         }
     },
 
     created(){
 
-        let params    = this.$route.params;
-        this.sections = extend(true, {}, store.tabs.filter((t)=> {
-            return t.id == params.tab;
+        let sections = extend(true, {}, store.tabs.filter((t)=> {
+            return t.id == this.$route.params.tab;
         }).pop());
 
-        let path = this.$route.path.split('/');
-
-        //let sliced = path.slice(2, path.length - 1); // 0
-        let sliced = path.slice(2, -2); // 0
-
-        console.log(sliced);
-        // console.log(path);
-
-        // 0 tab
-        // 1 = section
-        // 2 = row
+        let sliced = this.$route.path.split('/').slice(2, -2); // trim sections and contents|settings
 
         // Sections Added
-        this.link = `/${this.sections.id}`;
-        this.breadcrumb.push({title : this.sections.title, link : `/${this.sections.id}`});
+        this.link = `/${sections.id}`;
+        this.breadcrumb.push({title : sections.title, link : `/${sections.id}`});
 
-        sliced.forEach((value, index) => {
-            this.addToBreadcrumb(value);
-        });
-
+        if (sliced.length > 0) {
+            let unflattenPath = this.unflatten(sliced);
+            this.generateBreadcrumb(sections.contents, unflattenPath);
+        }
     },
 
     methods : {
@@ -59,19 +45,30 @@ export default {
             }
         },
 
-        addToBreadcrumb(index){
+        generateBreadcrumb(contents, path){
 
-            let params   = this.$route.params;
+            let index = path[0]['index'];
+            let child = path[0]['child'];
+            let data  = contents[index];
             this.link += `/${index}`;
-            let contents = _.isEmpty(this.contents) ? this.sections.contents[index] : this.contents[index];
 
-            this.contents = extend(true, {}, contents);
+            let title = data.attributes['title'] ? data.attributes.title : data._upb_options.element.name;
+            let link  = `${this.link}/${this.$route.params.type}`;
 
-            let link  = `${this.link}/${params.type}`;
-            let title = this.contents.attributes['title'] ? this.contents.attributes.title : this.contents._upb_options.element.name;
+            this.breadcrumb.push({title : title, link : link});
 
-            this.breadcrumb.push({title : title, link : link})
+            if (child.length > 0) {
+                this.generateBreadcrumb(data.contents, child);
+            }
+        },
 
+        unflatten(arr){
+            let newlist = [];
+            newlist.push({index : arr.shift(), child : []});
+            if (arr.length > 0) {
+                newlist[0].child = this.unflatten(arr)
+            }
+            return newlist;
         }
     }
 }

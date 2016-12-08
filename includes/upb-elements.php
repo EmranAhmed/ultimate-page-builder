@@ -26,7 +26,19 @@
 				'list'     => apply_filters( 'upb_column_list_toolbar', array() ),
 				'contents' => apply_filters( 'upb_column_contents_panel_toolbar', array() ),
 				'settings' => apply_filters( 'upb_column_settings_panel_toolbar', array() ),
-			)
+			),
+			'meta'    => array(
+				'contents' => apply_filters( 'upb_column_contents_panel_meta', array(
+					'help'   => '<h2>Column contents?</h2><p>Choose a section and drag elements</p>',
+					'search' => 'Search Element',
+					'title'  => '%s'
+				) ),
+				'settings' => apply_filters( 'upb_column_settings_panel_meta', array(
+					'help'   => '<h2>Element Settings?</h2><p>section settings</p>',
+					'search' => '',
+					'title'  => '%s Settings'
+				) ),
+			),
 		);
 
 		$element->register( 'column', $attributes, $contents, $_upb_options );

@@ -37,11 +37,14 @@
 
 			public function constants() {
 				define( 'UPB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+				define( 'UPB_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+
 				define( 'UPB_PLUGIN_ASSETS_URL', trailingslashit( plugin_dir_url( __FILE__ ) . 'assets' ) );
 				define( 'UPB_PLUGIN_VENDOR_URL', trailingslashit( plugin_dir_url( __FILE__ ) . 'vendor' ) );
-				define( 'UPB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-				define( 'UPB_PLUGIN_INCLUDE_DIR', trailingslashit( plugin_dir_path( __FILE__ ) . 'includes' ) );
-				define( 'UPB_PLUGIN_TEMPLATES_DIR', trailingslashit( plugin_dir_path( __FILE__ ) . 'templates' ) );
+
+				define( 'UPB_PLUGIN_INCLUDE_PATH', trailingslashit( plugin_dir_path( __FILE__ ) . 'includes' ) );
+				define( 'UPB_PLUGIN_TEMPLATES_PATH', trailingslashit( plugin_dir_path( __FILE__ ) . 'templates' ) );
+
 				define( 'UPB_PLUGIN_DIRNAME', dirname( plugin_basename( __FILE__ ) ) );
 				define( 'UPB_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 				define( 'UPB_PLUGIN_FILE', __FILE__ );
@@ -50,28 +53,28 @@
 			public function includes() {
 
 				// Common
-				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-template-functions.php";
-				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-shortcode-functions.php";
-				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-shortcode-preview-functions.php";
-				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-hooks.php";
-				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-functions.php";
-				require_once UPB_PLUGIN_INCLUDE_DIR . "upb-elements.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-template-functions.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-shortcode-functions.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-shortcode-preview-functions.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-hooks.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-functions.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-elements.php";
 
 				// Tabs
-				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-tabs.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-tabs.php";
 
-				// PostType Settings
-				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-settings.php";
+				// Settings
+				require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-settings.php";
 
 				// Elements
-				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-elements.php";
-				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-elements-props.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-elements.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-elements-props.php";
 
 				// Boilerplate
-				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-boilerplate.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-boilerplate.php";
 
 				// Preview
-				require_once UPB_PLUGIN_INCLUDE_DIR . "class-upb-preview.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-preview.php";
 
 			}
 
@@ -84,7 +87,7 @@
 			}
 
 			public function template_path() {
-				return apply_filters( 'upb_template_path', untrailingslashit( $this->plugin_path() ) . '/templates/' );
+				return apply_filters( 'upb_template_path', untrailingslashit( $this->plugin_path() ) . '/templates' );
 			}
 
 			public function plugin_path() {
@@ -102,7 +105,6 @@
 			public function plugin_url() {
 				return untrailingslashit( plugins_url( '/', __FILE__ ) );
 			}
-
 		}
 
 		function Ultimate_Page_Builder() {

@@ -23,8 +23,8 @@
 			}
 
 			public function includes() {
-				require_once UPB_PLUGIN_INCLUDE_DIR . "boilerplate/upb-boilerplate-functions.php";
-				require_once UPB_PLUGIN_INCLUDE_DIR . "boilerplate/upb-boilerplate-hooks.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "boilerplate/upb-boilerplate-functions.php";
+				require_once UPB_PLUGIN_INCLUDE_PATH . "boilerplate/upb-boilerplate-hooks.php";
 			}
 
 			public function hooks() {
@@ -34,7 +34,7 @@
 			public function boilerplate_template( $_template ) {
 
 				if ( upb_is_boilerplate() ) {
-					return UPB_PLUGIN_INCLUDE_DIR . "boilerplate/upb-boilerplate-template.php";
+					return UPB_PLUGIN_INCLUDE_PATH . "boilerplate/upb-boilerplate-template.php";
 				}
 
 				return $_template;
