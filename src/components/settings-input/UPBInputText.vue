@@ -1,15 +1,19 @@
 <template>
-    <li :class="typeClass()">
+    <li class="typeClass()">
         <div class="form-group">
             <label>
 
-                {{ model }}
+                {{ model[target] }}
+                <span class="title" v-text="attributes.title"></span>
 
-                <span class="title" v-text="attrs.title"></span>
-                <input v-model="model.metaValue" class="form-control" :id="attrs._id" :placeholder="attrs.placeholder">
+
+                <input v-model="model[target]" class="form-control">
+
             </label>
 
+<!--
             <p class="description" v-if="attrs.desc" v-html="attrs.desc"></p>
+-->
         </div>
     </li>
 </template>
@@ -19,7 +23,10 @@
 
     export default {
         name   : 'upb-input-text',
-        props  : ['index', 'attrs', 'model'],
-        mixins : [common],
+        props  : ['index', 'target', 'model', 'attributes'], // model[target]
+        //mixins : [common],
+        created(){
+            console.log(this.model, this.index, this.target, this.attributes)
+        }
     }
 </script>

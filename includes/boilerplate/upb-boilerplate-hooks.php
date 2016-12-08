@@ -5,6 +5,12 @@
 	add_filter( 'upb_column_contents_panel_toolbar', function () {
 		return array(
 			array(
+				'id'     => 'elements-panel',
+				'title'  => 'Add Element',
+				'icon'   => 'mdi mdi-shape-plus',
+				'action' => 'showElementsPanel'
+			),
+			array(
 				'id'     => 'column-settings',
 				'title'  => 'Settings',
 				'icon'   => 'mdi mdi-settings',
@@ -352,6 +358,16 @@
 
 
 		$options = array(
+			'type'    => 'text',
+			'title'   => 'Title',
+			'default' => 'xyz',
+		);
+
+
+		$settings->register( 'text', $options );
+
+
+		/*$options = array(
 			'type'    => 'toggle',
 			'title'   => 'Enable',
 			'default' => FALSE,
@@ -360,16 +376,6 @@
 
 
 		$settings->register( 'enable', $options );
-
-		/*$options = array(
-			'type'    => 'text',
-			'title'   => 'Position',
-			'default' => 'content',
-			'reload'  => TRUE
-		);
-
-
-		$settings->register( 'position', $options );*/
 
 
 		$options = array(
@@ -396,7 +402,7 @@
 		);
 
 
-		$settings->register( 'color', $options );
+		$settings->register( 'color', $options );*/
 
 
 	} );

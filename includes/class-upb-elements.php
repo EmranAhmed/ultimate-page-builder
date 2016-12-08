@@ -66,17 +66,16 @@
 
 
 				foreach ( $attributes as $index => $attribute ) {
-					$attributes[ $index ][ 'metaKey' ]   = $attribute[ 'id' ];
-					$attributes[ $index ][ '_id' ]       = $attribute[ 'id' ];
-					$attributes[ $index ][ 'metaValue' ] = $attribute[ 'value' ];
+					//$attributes[ $index ][ 'metaKey' ]   = $attribute[ 'id' ];
+					//$attributes[ $index ][ '_id' ]       = $attribute[ 'id' ];
+					//$attributes[ $index ][ 'metaValue' ] = $attribute[ 'value' ];
+					$attributes[ $index ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $attribute[ 'type' ] );
 				}
 
 				if ( is_string( $contents ) ) {
 					$attributes[] = array( 'id' => '_contents', 'title' => 'Contents', 'type' => 'contents', 'value' => $contents );
 				}
 
-
-				// @TODO: Already registered alert
 				$this->short_code_elements[ $tag ] = array(
 					'tag'           => $tag,
 					'contents'      => $contents,
@@ -211,11 +210,12 @@
 				foreach ( $settings as $key => $value ) {
 
 					// For normal element attr
-					$settings[ $key ][ 'value' ] = $attributes[ $value[ 'id' ] ];
+					$settings[ $key ][ 'value' ]           = $attributes[ $value[ 'id' ] ];
+					//$settings[ $key ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $attributes[ $value[ 'type' ] ] );
 
 
-					$settings[ $key ][ 'metaKey' ]   = $value[ 'id' ];
-					$settings[ $key ][ 'metaValue' ] = $attributes[ $value[ 'id' ] ];
+					//$settings[ $key ][ 'metaKey' ]   = $value[ 'id' ];
+					//$settings[ $key ][ 'metaValue' ] = $attributes[ $value[ 'id' ] ];
 
 
 					if ( isset( $attributes[ $key ] ) ) {

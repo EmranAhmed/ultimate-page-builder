@@ -141,6 +141,17 @@ export default {
             });
         },
 
+        showElementsPanel(){
+
+            this.$router.push({
+                name   : `elements`,
+                params : {
+                    tab : `elements`,
+                }
+            });
+
+        },
+
         deleteItem(index){
             this.item.contents.splice(index, 1);
             store.stateChanged();

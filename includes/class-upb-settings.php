@@ -65,11 +65,7 @@
 				$setting[ 'metaId' ]    = $id;
 				$setting[ 'metaKey' ]   = $_id;
 				$setting[ 'metaValue' ] = $options[ 'value' ];
-
-
-				$this->settings[] = $setting;
-
-
+				$this->settings[]       = $setting;
 			}
 
 			private function setAttrBasedOnType( $id, $options ) {

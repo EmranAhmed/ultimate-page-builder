@@ -1,12 +1,19 @@
 <template>
-    <li :class="typeClass()">
+    <li class="typeClass()">
         <div class="form-group">
             <label>
-                <span class="title" v-text="attrs.title"></span>
-                <input v-model="model[attrs.id]" class="form-control" :id="attrs._id" :placeholder="attrs.placeholder">
+
+                {{ model[target] }}
+                <span class="title" v-text="attributes.title"></span>
+
+
+                <input v-model="model[target]" class="form-control">
+
             </label>
 
-            <p class="description" v-if="attrs.desc" v-html="attrs.desc"></p>
+            <!--
+                        <p class="description" v-if="attrs.desc" v-html="attrs.desc"></p>
+            -->
         </div>
     </li>
 </template>
@@ -15,8 +22,11 @@
     import common from './common'
 
     export default {
-        name   : 'upb-input-text',
-        props  : ['index', 'attrs', 'model'],
-        mixins : [common],
+        name  : 'upb-input-text',
+        props : ['index', 'target', 'model', 'attributes'], // model[target]
+        //mixins : [common],
+        created(){
+            console.log(this.model, this.index, this.target, this.attributes)
+        }
     }
 </script>

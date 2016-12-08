@@ -51,7 +51,13 @@ export default {
         model(){
             return this.$root.$data.store.tabs.filter(function (data) {
                 return data.id == 'sections' ? data : false;
-            })[0]
+            }).pop()
+        },
+        settings(){
+            let settings = this.$root.$data.store.tabs.filter(function (data) {
+                return data.id == 'settings' ? data : false;
+            }).pop();
+            return settings['contents'] ? settings.contents : [];
         }
     },
 
