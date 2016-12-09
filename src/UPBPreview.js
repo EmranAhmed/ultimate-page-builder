@@ -5,16 +5,15 @@ import store from './store'
 import globalPreviewMixins from './globalPreviewMixins';
 import componentPreviewMixins from './componentPreviewMixins';
 
-//console.log(componentPreviewMixins);
-
 import Droppable from './plugins/vue-droppable'
+
 import PreviewElement from './plugins/vue-preview-element'
 import UPBPreviewMiniToolbar from './components/extra/UPBPreviewMiniToolbar.vue'
 
 Vue.component('upb-preview-mini-toolbar', UPBPreviewMiniToolbar);
 
-Vue.use(Droppable);
 Vue.use(PreviewElement);
+Vue.use(Droppable);
 
 store.getAllUPBElements((elements) => {
 
@@ -81,23 +80,16 @@ export default {
     methods : {
 
         addKeyIndex(){
-
             this.model.contents.map((m, i) => {
-                //m.attributes['_keyIndex'] = i;
                 m._upb_options['_keyIndex'] = i;
                 this.addIndexAttribute(m, m.attributes, m.contents);
             });
-
         },
 
         addIndexAttribute(model, attrs, contents){
             if (Array.isArray(contents)) {
                 contents.map((m, i) => {
-                    //m.attributes['_keyIndex'] = `${attrs._keyIndex}/${i}`;
-
                     m._upb_options['_keyIndex'] = `${model._upb_options._keyIndex}/${i}`;
-
-                    //m.attributes['_keyIndex'] = `${attrs._keyIndex}/${i}`;
                     this.addIndexAttribute(m, m.attributes, m.contents);
                 })
             }

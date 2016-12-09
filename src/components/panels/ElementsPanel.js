@@ -108,8 +108,8 @@ export default {
                     this.$el.querySelector('input[type="search"]').focus()
                 }
             });
-        },
-    },
+        }
+    }
 
     // components : fieldsComponent
 }

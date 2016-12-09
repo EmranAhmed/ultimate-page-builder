@@ -1,5 +1,4 @@
 <template>
-
     <ul :class="panelClass()">
 
         <li class="upb-panel-header-wrapper">
