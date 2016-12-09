@@ -4,7 +4,8 @@
 
 	Text {{ model.attributes }}
 
-	{{ model.contents }}
+	<!--  send ajax req and get it :) -->
+	<div v-html="model.contents"></div>
 
 
 </div>

@@ -11,18 +11,44 @@ import {sprintf} from 'sprintf-js'
 //Vue.component('section-settings-panel', SectionSettingsPanel);
 
 export default {
-    name    : 'section-list',
+    name    : 'element-list',
     props   : ['index', 'model'],
     data(){
         return {
             l10n : store.l10n,
+            item : []
         }
     },
     methods : {
 
+        title(){
+            return this.model.attributes['title'] ? this.model.attributes.title : this.model._upb_options.element.name;
+        },
+
+        toolsList(){
+
+            return this.model._upb_options.tools.list.filter((tool)=> {
+
+                if (tool.id == 'contents' && (_.isString(this.model.contents) || _.isBoolean(this.model.contents) )) {
+                    // Text content do not need to show on panel it will shown on settings
+                    return false;
+                }
+
+                if (tool.id == 'settings' && _.isEmpty(this.model.attributes)) {
+
+                    // No Attributes
+                    return false;
+                }
+
+                return true;
+            })
+
+        },
+
         activeFocus(){
             this.model._upb_options.focus = true;
         },
+
         removeFocus(){
             this.model._upb_options.focus = false;
         },
@@ -35,11 +61,15 @@ export default {
 
             this.removeFocus();
 
+
             this.$router.push({
-                name   : `section-${id}`,
+                name   : `element-${id}`,
                 params : {
                     //tab       : 'sections',
-                    sectionId : this.index,
+                    elementId : this.index,
+                    sectionId : this.$route.params.sectionId,
+                    rowId     : this.$route.params.rowId,
+                    columnId  : this.$route.params.columnId,
                     type      : id
                 }
             });
@@ -50,17 +80,23 @@ export default {
             this.removeFocus();
 
             this.$router.push({
-                name   : `section-${id}`,
+                name   : `element-${id}`,
                 params : {
                     //tab       : 'sections',
-                    sectionId : this.index,
+                    sectionId : this.$route.params.sectionId,
+                    rowId     : this.$route.params.rowId,
+                    columnId  : this.$route.params.columnId,
+                    elementId : this.index,
                     type      : id
                 }
             });
         },
 
         deleteAction(id, tool){
-            if (confirm(sprintf(this.l10n.delete, this.model.attributes.title))) {
+
+            let title = this.model.attributes['title'] ? this.model.attributes.title : this.model._upb_options.element.name
+
+            if (confirm(sprintf(this.l10n.delete, title))) {
                 this.$emit('deleteItem')
             }
         },
@@ -77,15 +113,6 @@ export default {
             this.model.attributes.enable = true;
         },
 
-        clickActions(id, tool){
-            if (this[`${id}Action`]) {
-                this[`${id}Action`](id, tool)
-            }
-            else {
-                util.warn(`You need to implement ${id}Action method.`, this);
-            }
-        },
-
         enabled(id){
 
             if (id == 'enable') {
@@ -99,6 +126,15 @@ export default {
             return true;
         },
 
+        clickActions(id, tool){
+            if (this[`${id}Action`]) {
+                this[`${id}Action`](id, tool)
+            }
+            else {
+                util.warn(`You need to implement "${id}Action" method.`, this);
+            }
+        },
+
         toolsClass(id, tool){
             return tool['class'] ? `${id} ${tool['class']}` : `${id}`;
         },
@@ -106,12 +142,5 @@ export default {
         itemClass(){
             return [this.model.attributes.enable ? 'item-enabled' : 'item-disabled', this.model._upb_options.focus ? 'item-focused' : 'item-unfocused'].join(' ');
         },
-
-        getContentPanel(id){
-            return `${id}-contents-panel`;
-        },
-        getSettingPanel(id){
-            return `${id}-settings-panel`;
-        }
     }
 }

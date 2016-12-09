@@ -6,7 +6,9 @@ import Sortable from '../../plugins/vue-sortable'
 import extend from 'extend';
 import {sprintf} from 'sprintf-js';
 
-//import ElementList from '../element/ElementList.vue';
+import ElementList from '../element/ElementList.vue';
+
+Vue.component('element-list', ElementList);
 
 Vue.use(Sortable);
 
@@ -98,7 +100,10 @@ export default {
             let query = this.searchQuery.toLowerCase().trim();
 
             if (query) {
-                return this.item.contents.filter((data) => new RegExp(query, 'gui').test(data.attributes.title.toLowerCase().trim()))
+                return this.item.contents.filter((data) => {
+                    let title = data.attributes['title'] ? data.attributes.title : data._upb_options.element.name;
+                    return new RegExp(query, 'gui').test(title.toLowerCase().trim())
+                })
             }
             else {
                 return this.item.contents;
@@ -128,7 +133,6 @@ export default {
         },
 
         showSettingsPanel(){
-
             this.$router.push({
                 name   : `column-settings`,
                 params : {
@@ -142,14 +146,12 @@ export default {
         },
 
         showElementsPanel(){
-
             this.$router.push({
                 name   : `elements`,
                 params : {
                     tab : `elements`,
                 }
             });
-
         },
 
         deleteItem(index){

@@ -1,11 +1,12 @@
 <template>
     <li :class="itemClass()" @mouseover="activeFocus()" @mouseout="removeFocus()">
+
         <ul class="tools">
-            <li v-for="(tool, id) in model._upb_options.tools.list" @click="clickActions(id, tool)" v-if="enabled(id)" :title="tool.title" :class="toolsClass(id, tool)">
+            <li v-for="tool in toolsList()" @click="clickActions(tool.id, tool)" v-if="enabled(tool.id)" :title="tool.title" :class="toolsClass(tool.id, tool)">
                 <i :class="tool.icon"></i>
             </li>
         </ul>
-        <div v-text="model.attributes.title"></div>
+        <div v-text="title()"></div>
     </li>
 </template>
-<script src="./SectionList.js"></script>
+<script src="./ElementList.js"></script>

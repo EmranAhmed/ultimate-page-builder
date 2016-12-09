@@ -65,6 +65,10 @@
 				$_upb_options = apply_filters( "upb_element_{$tag}_options", $_upb_options );
 
 
+				if ( is_string( $contents ) ) {
+					$attributes[] = array( 'id' => '_contents', 'title' => 'Contents', 'type' => 'contents', 'value' => $contents );
+				}
+
 				foreach ( $attributes as $index => $attribute ) {
 					//$attributes[ $index ][ 'metaKey' ]   = $attribute[ 'id' ];
 					$attributes[ $index ][ '_id' ] = $attribute[ 'id' ];
@@ -72,9 +76,6 @@
 					$attributes[ $index ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $attribute[ 'type' ] );
 				}
 
-				if ( is_string( $contents ) ) {
-					$attributes[] = array( 'id' => '_contents', 'title' => 'Contents', 'type' => 'contents', 'value' => $contents );
-				}
 
 				$this->short_code_elements[ $tag ] = array(
 					'tag'           => $tag,

@@ -18,8 +18,11 @@
         name   : 'upb-input-contents',
         props  : ['index', 'target', 'model', 'attributes', 'item'], // watch input and item.content = set :)
         mixins : [common],
-        created(){
 
-        },
+        watch : {
+            input(value){
+                this.item.contents = value
+            }
+        }
     }
 </script>

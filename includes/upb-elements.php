@@ -135,10 +135,10 @@
 	add_action( 'upb_register_element', function ( $element ) {
 
 		$attributes = array(
-			array( 'id' => 'title', 'type' => 'text', 'value' => 'Text Title' ),
+			array( 'id' => 'title', 'title' => 'Title', 'type' => 'text', 'value' => 'Text Title' ),
 			// array( 'id' => 'title', 'type' => 'textarea', 'value' => 'Text Title' ),
-			array( 'id' => 'enable', 'type' => 'toggle', 'value' => TRUE ),
-			array( 'id' => 'background', 'type' => 'color', 'value' => '#ffccff' ),
+			array( 'id' => 'enable', 'title' => 'Enable', 'type' => 'toggle', 'value' => TRUE ),
+			array( 'id' => 'background', 'title' => 'Background Color', 'type' => 'color', 'value' => '#ffccff' ),
 		);
 
 		$contents = '';
@@ -152,30 +152,53 @@
 
 			'tools' => array(
 				'list'     => apply_filters( 'upb_text_list_toolbar', array(
-					'move' => array(
+					array(
+						'id'    => 'move',
 						'icon'  => 'mdi mdi-cursor-move',
 						'class' => 'handle',
 						'title' => 'Sort',
 					),
-
-					'delete' => array(
+					array(
+						'id'    => 'delete',
 						'icon'  => 'mdi mdi-delete',
 						'title' => 'Delete',
 					),
-
-					'enable' => array(
-						'icon'  => 'mdi mdi-eye',
-						'title' => 'Enabled',
+					array(
+						'id'    => 'contents',
+						'icon'  => 'mdi mdi-table-edit',
+						'class' => 'show-contents',
+						'title' => 'Contents',
 					),
-
-					'disable' => array(
-						'icon'  => 'mdi mdi-eye-off',
-						'title' => 'Disabled',
+					array(
+						'id'    => 'settings',
+						'icon'  => 'mdi mdi-settings',
+						'class' => 'show-settings',
+						'title' => 'Settings',
+					),
+					array(
+						'id'    => 'clone',
+						'icon'  => 'mdi mdi-content-duplicate',
+						'title' => 'Clone',
 					)
 				) ),
 				'contents' => apply_filters( 'upb_text_contents_panel_toolbar', array() ),
 				'settings' => apply_filters( 'upb_text_settings_panel_toolbar', array() ),
-			)
+			),
+
+			'meta' => array(
+				'contents' => apply_filters( 'upb_text_contents_panel_meta', array(
+					'help'   => '<h2>Want to add contents?</h2><p>Choose a section and drag elements</p>',
+					'search' => 'Search',
+					'title'  => '%s'
+				) ),
+
+				'settings' => apply_filters( 'upb_text_settings_panel_meta', array(
+					'help'   => '<h2>Text Settings?</h2><p>section settings</p>',
+					'search' => '',
+					'title'  => '%s Settings'
+				) ),
+			),
+
 		);
 
 		$element->register( 'text', $attributes, $contents, $_upb_options );

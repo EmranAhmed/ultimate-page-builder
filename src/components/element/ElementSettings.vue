@@ -31,10 +31,11 @@
                 <li class="upb-panel-meta">
                     <div v-if="showHelp" v-html="panelMetaHelp"></div>
 
-                    <div v-if="showSearch">
+                    <!--<div v-if="showSearch">
                         <input v-model="searchQuery" :placeholder="panelMetaSearch" type="search">
-                    </div>
+                    </div>-->
                 </li>
+
 
                 <li class="upb-panel-tools">
                     <ul>
@@ -50,11 +51,11 @@
         </li>
 
         <li class="upb-panel-contents">
-            <ul class="upb-panel-contents-items" v-sortable="sortable">
-                <!-- Element List -->
-                <component v-for="(item, index) in contents" :model="item" :index="index" @deleteItem="deleteItem(index)" @cloneItem="cloneItem(index, item)" is="element-list"></component>
+            <ul class="upb-panel-contents-items">
+                <component v-for="(settings, index) in contents._upb_settings" :item="contents" :index="index" :attributes="settings" :target="settings.id" :model="item.attributes" :is="settings._upb_field_type"></component>
             </ul>
         </li>
     </ul>
 </template>
-<script src="./ColumnContents.js"></script>
+
+<script src="./ElementSettings.js"></script>
