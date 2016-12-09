@@ -19,6 +19,7 @@
   justify-content : flex-start; /* align items in Main Axis */
   align-items     : stretch; /* align items in Cross Axis */
   align-content   : stretch; /* Extra space in Cross Axis */
+  overflow        : auto;
   }
 
 .upb-panel-wrapper {
@@ -29,6 +30,7 @@
   justify-content : flex-start; /* align items in Main Axis */
   align-items     : stretch; /* align items in Cross Axis */
   align-content   : stretch; /* Extra space in Cross Axis */
+  overflow        : auto;
   }
 
 .upb-panel-wrapper > li.upb-sub-panel {
