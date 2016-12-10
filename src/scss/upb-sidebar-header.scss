@@ -10,42 +10,46 @@
     list-style : none;
     }
 
-    ul.tab-wrapper {
-      li {
-        padding: 10px 3px;
+  ul.tab-wrapper {
+    li {
+      padding : 10px 3px;
 
-        i::before{
-          margin-left: 1px;
+      i::before {
+        margin-left : 1px;
+        }
+      a {
+        border-radius : 50%;
+        width         : 30px;
+        height        : 30px;
+        line-height   : 30px;
+        display       : block;
+
+        &:focus {
+          box-shadow : none;
           }
+
+        }
+
+      &.active {
+        position : relative;
         a {
-          border-radius : 50%;
-          width         : 30px;
-          height        : 30px;
-          line-height   : 30px;
-          display       : block;
+          font-size        : 16px;
+          color            : $upb-sidebar-tab-active-color;
+          background-color : $upb-sidebar-tab-active-background-color;
           }
 
-        &.active {
-          position: relative;
-          a {
-            font-size     : 16px;
-            color            : $upb-sidebar-tab-active-color;
-            background-color : $upb-sidebar-tab-active-background-color;
-            }
-
-          &::after{
-            content: "";
-            position: absolute;
-            margin-left: -4px;
-            bottom: 0;
-            border-width: 4px;
-            border-style: solid;
-            border-color: transparent transparent $upb-sidebar-tab-active-background-color;
-            }
+        &::after {
+          content      : "";
+          position     : absolute;
+          margin-left  : -4px;
+          bottom       : 0;
+          border-width : 4px;
+          border-style : solid;
+          border-color : transparent transparent $upb-sidebar-tab-active-background-color;
           }
         }
       }
-
+    }
 
   .tab-wrapper {
     li {
@@ -67,8 +71,8 @@
   .btn-close {
     left         : 0;
     border-right : 1px solid $upb-sidebar-tab-button-separator-color;
-    a:hover{
-      background: $upb-sidebar-tab-button-separator-color;
+    a:hover {
+      background : $upb-sidebar-tab-button-separator-color;
       }
     }
 

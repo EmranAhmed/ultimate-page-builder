@@ -2,50 +2,37 @@
 
 defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
-define( 'IFRAME_REQUEST', TRUE );
-
-/** Load WordPress Administration Bootstrap */
-
-
-if ( ! current_user_can( 'customize' ) ) {
+if ( ! current_user_can( 'customize' ) ) :
 	wp_die(
 		'<h1>' . __( 'Cheatin&#8217; uh?' ) . '</h1>' .
-		'<p>' . __( 'Sorry, you are not allowed to customize this site. UPB' ) . '</p>',
+		'<p>' . __( 'Sorry, you are not allowed to build this page. UPB' ) . '</p>',
 		403
 	);
-}
-
-global $wp_scripts;
-
-$registered = $wp_scripts->registered;
-$wp_scripts = new WP_Scripts;
-$wp_scripts->registered = $registered;
+endif;
 
 
 // Load Styles and Scripts
-add_action( 'upb_boilerplate_print_scripts', 'print_head_scripts', 10 );
-add_action( 'upb_boilerplate_print_scripts', 'wp_print_head_scripts', 20 );
-//add_action( 'upb_boilerplate_print_scripts', 'wp_enqueue_scripts', 30 );
+//add_action( 'upb_boilerplate_print_scripts', 'print_head_scripts', 10 );
 
-add_action( 'upb_boilerplate_print_footer_scripts', '_wp_footer_scripts' );
+add_action( 'upb_boilerplate_print_scripts', 'wp_print_head_scripts' );
+
+//add_action( 'upb_boilerplate_print_scripts', '_print_scripts' );
+
+//add_action( 'upb_boilerplate_print_footer_scripts', '_wp_footer_scripts' );
+
 add_action( 'upb_boilerplate_print_footer_scripts', 'wp_print_footer_scripts' );
-//add_action( 'upb_boilerplate_print_footer_scripts', 'wp_admin_bar_render' );
 
+//add_action( 'upb_boilerplate_print_footer_scripts', 'print_footer_scripts' );
 
+add_action( 'upb_boilerplate_print_footer_scripts', 'wp_underscore_playlist_templates' );
+add_action( 'upb_boilerplate_print_footer_scripts', 'wp_print_media_templates' );
 
-
-//if ( function_exists( 'wp_underscore_playlist_templates' ) && function_exists( 'wp_print_media_templates' ) ) {
-
-	add_action( 'upb_boilerplate_print_footer_scripts', 'wp_underscore_playlist_templates' );
-	add_action( 'upb_boilerplate_print_footer_scripts', 'wp_print_media_templates' );
-//}
-
-add_action( 'upb_boilerplate_print_styles', 'print_admin_styles', 20 );
+// add_action( 'upb_boilerplate_print_styles', 'wp_print_styles' );
+// add_action( 'upb_boilerplate_print_styles', 'print_admin_styles' );
 
 do_action( 'upb_boilerplate_template_init' );
 
 do_action( 'upb_boilerplate_enqueue_scripts' );
-
 
 // Let's roll.
 @header( 'Content-Type: ' . get_option( 'html_type' ) . '; charset=' . get_option( 'blog_charset' ) );
@@ -63,10 +50,6 @@ wp_user_settings();
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=1.2">
 	<?php endif; ?>
 	<title><?php upb_boilerplate_title() ?></title>
-	<script type="text/javascript">
-		var ajaxurl = <?php echo wp_json_encode( admin_url( 'admin-ajax.php' ) ); ?>;
-		(function (html) {html.className = html.className.replace(/\bno-js\b/, 'js')}(document.documentElement))
-	</script>
 	<?php
 		do_action( 'upb_boilerplate_header' );
 		do_action( 'upb_boilerplate_print_scripts' );
@@ -80,27 +63,17 @@ wp_user_settings();
 	</div>
 </div>
 <div id="upb-wrapper" class="expanded preview-lg preview-default"> <!-- collapsed preview-lg preview-md preview-sm preview-xs -->
-
 	<div id="upb-sidebar-wrapper">
 		<div id="upb-sidebar">
-			<div id="upb-sidebar-header">
-				Loading...
-			</div>
-			<div id="upb-sidebar-contents">
-				Loading...
-			</div>
-			<div id="upb-sidebar-footer">
-				Loading...
-			</div>
+			<div id="upb-sidebar-header"></div>
+			<div id="upb-sidebar-contents"></div>
+			<div id="upb-sidebar-footer"></div>
 		</div>
 	</div>
-
 	<div id="upb-skeleton-wrapper">Structure</div>
-
 	<div id="upb-preview-wrapper">
 		<iframe src="<?php echo esc_url( add_query_arg( 'upb-preview', TRUE, get_preview_post_link( get_the_ID() ) ) ) ?>" frameborder="0" name="upb-preview-frame" seamless="seamless" id="upb-preview-frame"></iframe>
 	</div>
-
 	<?php do_action( 'upb_boilerplate_contents' ); ?>
 </div>
 <?php do_action( 'upb_boilerplate_print_footer_scripts' ); ?>

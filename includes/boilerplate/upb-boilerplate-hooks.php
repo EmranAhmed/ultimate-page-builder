@@ -2,6 +2,7 @@
 
 	defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
+	// Section
 	add_filter( 'upb_column_contents_panel_toolbar', function () {
 		return array(
 			array(
@@ -28,7 +29,6 @@
 			)
 		);
 	} );
-
 	add_filter( 'upb_column_list_toolbar', function ( $tools ) {
 		$tools[ 'move' ] = array(
 			'icon'  => 'mdi mdi-cursor-move',
@@ -352,8 +352,8 @@
 
 	} );
 
-	// Register Settings
 
+	// Register Settings
 	add_action( 'upb_register_setting', function ( $settings ) {
 
 
@@ -427,9 +427,6 @@
 
 		wp_register_script( 'wp-color-picker-alpha', UPB_PLUGIN_ASSETS_URL . "js/wp-color-picker-alpha$suffix.js", array( 'wp-color-picker' ), FALSE, TRUE );
 
-		// wp_register_script( 'jquery-ui-droppable-iframe', UPB_PLUGIN_ASSETS_URL . "js/jquery-ui-droppable-iframe$suffix.js", array(), FALSE, TRUE );
-
-
 	} );
 
 
@@ -437,20 +434,22 @@
 	add_action( 'upb_boilerplate_print_styles', function () {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
+		// ref: /wp-includes/script-loader.php
+		wp_enqueue_style( 'common' );
+		wp_enqueue_style( 'buttons' );
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_style( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URL . "css/upb-boilerplate$suffix.css" );
+
 		if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
 			// In Production Mode :)
 			wp_enqueue_style( 'upb-builder', UPB_PLUGIN_ASSETS_URL . "css/upb-builder$suffix.css" );
 		}
 
-		wp_enqueue_style( 'buttons' );
-		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_style( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URL . "css/upb-boilerplate$suffix.css" );
-
-
 	} );
 
 	add_action( 'upb_boilerplate_print_scripts', function () {
 		//$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		echo '<script type="text/javascript">(function (html) {html.className = html.className.replace(/\bno-js\b/, \'js\')}(document.documentElement))</script>';
 	} );
 
 
@@ -458,9 +457,8 @@
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-
-		wp_enqueue_script( 'wp-color-picker-alpha' );
 		wp_enqueue_media();
+		wp_enqueue_script( 'wp-color-picker-alpha' );
 
 		wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URL . "js/upb-builder$suffix.js", array( 'jquery-ui-sortable', 'wp-util', 'wp-color-picker', "shortcode" ), '', TRUE );
 
@@ -474,10 +472,11 @@
 		                                                                    ) ) );
 
 		$data .= sprintf( "var _upb_routes = %s;\n", wp_json_encode( apply_filters( 'upb_routes', array(
-			array( /*'name'      => 'logical',
+			array(
+				'name'      => 'logical',
 				'path'      => '/:tab(logical)',
-				'component' => 'LogicalPanel',*/
-			)
+				'component' => 'LogicalPanel',
+			) // you should register tab before
 		) ) ) );
 
 
@@ -510,24 +509,15 @@
 		) ) );
 	} );
 
-	add_action( 'upb_boilerplate_print_scripts', function () {
-		//$tabs = upb_tabs()->getAll();
-		//printf( '<script>console.log("HAY")</script>', wp_json_encode( $tabs ) );
-	} );
-
-	add_action( 'upb_boilerplate_print_scripts', function () {
-		//$tabs = upb_tabs()->getAll();
-		print( "<script>
-var LogicalPanel = {
-  template: '<span> Example </span>',
-  props:[]
-}
-
-</script>" );
-	} );
 
 	add_action( 'upb_boilerplate_print_footer_scripts', function () {
 		//$tabs = upb_tabs()->getAll();
+		print( "<script>
+var LogicalPanel = {
+  template: '<span> Logical Panel Template </span>',
+  props:[]
+}
+</script>" );
 	} );
 
 

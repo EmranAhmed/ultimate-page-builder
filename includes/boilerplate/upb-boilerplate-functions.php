@@ -57,18 +57,25 @@
 		do_action( 'upb_before_wp_editor' );
 
 		ob_start();
-		wp_editor( '%%UPB_EDITOR_CONTENTS%%', 'upb-editor-template', array(
-			'quicktags'        => TRUE,
-			'teeny'            => TRUE,
-			'textarea_rows'    => 10,
-			'tinymce'          => array(
-				'toolbar1' => 'bold,italic,strikethrough,underline,bullist,numlist,forecolor,wp_adv',
-				'toolbar2' => 'link,unlink,alignleft,aligncenter,alignright,alignjustify,outdent,indent',
-				'toolbar3' => 'formatselect,pastetext,removeformat,charmap,undo,redo'
-			),
-			'editor_class'     => 'upb-wp-editor',
-			'drag_drop_upload' => TRUE
-		) );
+		wp_editor( '%%UPB_EDITOR_CONTENTS%%',
+		           'upb-editor-template',
+		           apply_filters( 'upb_editor_template_settings', array(
+			           'quicktags'        => array(
+				           'buttons' => 'strong,em,del,ul,ol,li,close'
+			           ), // note that spaces in this list seem to cause an issue
+			           'teeny'            => TRUE,
+			           'textarea_rows'    => get_option( 'default_post_edit_rows', 10 ),
+			           'tinymce'          => array(
+				           'toolbar1' => 'bold,italic,underline,bullist,numlist,wp_adv,wp_fullscreen,fullscreen',
+				           'toolbar2' => 'strikethrough,forecolor,link,unlink,alignleft,aligncenter,alignright,alignjustify,outdent,indent',
+				           'toolbar3' => 'formatselect,pastetext,removeformat,charmap,undo,redo'
+			           ),
+			           'editor_class'     => 'upb-wp-editor',
+			           'drag_drop_upload' => TRUE
+		           ) )
+
+
+		);
 
 		return ob_get_clean();
 	}

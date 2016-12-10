@@ -1,5 +1,6 @@
 import common from './common'
 import store from '../../store'
+import extend from 'extend'
 
 export default {
     name   : 'upb-input-contents',
@@ -25,16 +26,13 @@ export default {
 
     created(){
 
-        tinyMCEPreInit.mceInit[this.attributes._id]          = _.clone(tinyMCEPreInit.mceInit['upb-editor-template']);
+        tinyMCEPreInit.mceInit[this.attributes._id]          = extend(true, {}, tinyMCEPreInit.mceInit['upb-editor-template']);
         tinyMCEPreInit.mceInit[this.attributes._id].id       = this.attributes._id;
         tinyMCEPreInit.mceInit[this.attributes._id].selector = '#' + this.attributes._id;
-
-        tinyMCEPreInit.qtInit[this.attributes._id] = {
-            id : this.attributes._id
-        };
-
-        tinyMCEPreInit.mceInit[this.attributes._id].setup = (editor) => {
-            editor.on('keyup change NodeChange', (e) => {
+        tinyMCEPreInit.qtInit[this.attributes._id]           = extend(true, {}, tinyMCEPreInit.qtInit['upb-editor-template']);
+        tinyMCEPreInit.qtInit[this.attributes._id].id        = this.attributes._id;
+        tinyMCEPreInit.mceInit[this.attributes._id].setup    = (editor) => {
+            editor.on('input change NodeChange', (e) => {
                 editor.save();
                 this.saveValue(tinymce.editors[this.attributes._id].getContent())
             });
@@ -51,19 +49,20 @@ export default {
             el.innerHTML = '<span class="wp-media-buttons-icon"></span>';
         });
 
-        quicktags(this.attributes._id);
+        let UPBQuickTag = quicktags(tinyMCEPreInit.qtInit[this.attributes._id]);
+
+        UPBQuickTag.canvas.addEventListener('input', (event) => {
+            this.saveValue(UPBQuickTag.canvas.value)
+        })
+
+        UPBQuickTag.toolbar.addEventListener('click', (event) => {
+            this.saveValue(UPBQuickTag.canvas.value)
+        })
 
         window.switchEditors.go(this.attributes._id, 'html'); // tmce | html
         window.wpActiveEditor = this.attributes._id;
 
-        this.$nextTick(()=> {
-
-            delete QTags.instances[0];
-
-            quicktags(this.attributes._id).canvas.addEventListener('keyup', (event) => {
-                this.saveValue(quicktags(this.attributes._id).canvas.value)
-            })
-        });
+        delete QTags.instances[0];
     },
 
     watch : {

@@ -2,6 +2,7 @@ import store from '../../store'
 
 export default{
 
+    props : ['index', 'target', 'model', 'attributes', 'item'], // model[target]
     data(){
         return {
             input : this.model[this.target]
