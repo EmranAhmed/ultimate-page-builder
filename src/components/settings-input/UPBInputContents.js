@@ -1,9 +1,8 @@
 import common from './common'
 import store from '../../store'
-import extend from 'extend'
 
 export default {
-    name   : 'upb-input-editor',
+    name   : 'upb-input-contents',
     props  : ['index', 'target', 'model', 'attributes', 'item'], // model[target]
     mixins : [common],
     data(){
@@ -11,7 +10,6 @@ export default {
             l10n   : store.l10n,
             markup : ''
         }
-
     },
 
     beforeDestroy(){
@@ -68,11 +66,11 @@ export default {
         });
     },
 
-    /*watch : {
-     input(value){
-     this.item.contents = value
-     }
-     },*/
+    watch : {
+        input(value){
+            this.item.contents = value
+        }
+    },
 
     methods : {
         saveValue(data){

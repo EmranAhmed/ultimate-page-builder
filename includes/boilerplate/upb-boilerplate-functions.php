@@ -31,5 +31,51 @@
 	}
 
 
+	function upb_editor_allow_br_tags( $init ) {
+		$init[ 'forced_root_block' ] = FALSE;
+
+		return $init;
+	}
+
+	function upb_load_wp_editor() {
+
+		// Remove all 3rd party integrations to prevent plugin conflicts.
+		remove_all_actions( 'before_wp_tiny_mce' );
+		remove_all_filters( 'mce_external_plugins' );
+		remove_all_filters( 'mce_buttons' );
+		remove_all_filters( 'tiny_mce_before_init' );
+		add_filter( 'tiny_mce_before_init', '_mce_set_direction' );
+
+		// Editor is modified
+		add_filter( 'user_can_richedit', '__return_true' );
+
+		if ( apply_filters( 'upb_use_br_tags', FALSE ) ) {
+			add_filter( 'tiny_mce_before_init', 'upb_editor_allow_br_tags' );
+		}
+
+		// Allow integrations to use hooks above before the editor is primed.
+		do_action( 'upb_before_wp_editor' );
+
+		ob_start();
+		wp_editor( '%%UPB_EDITOR_CONTENTS%%', 'upb-editor-template', array(
+			'quicktags'        => TRUE,
+			'teeny'            => TRUE,
+			'textarea_rows'    => 10,
+			'tinymce'          => array(
+				'toolbar1' => 'bold,italic,strikethrough,underline,bullist,numlist,forecolor,wp_adv',
+				'toolbar2' => 'link,unlink,alignleft,aligncenter,alignright,alignjustify,outdent,indent',
+				'toolbar3' => 'formatselect,pastetext,removeformat,charmap,undo,redo'
+			),
+			'editor_class'     => 'upb-wp-editor',
+			'drag_drop_upload' => TRUE
+		) );
+
+		return ob_get_clean();
+	}
+
+
+	function upb_wp_editor_template() {
+		return upb_load_wp_editor();
+	}
 
 

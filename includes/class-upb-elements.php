@@ -66,8 +66,7 @@
 
 
 				if ( is_string( $contents ) ) {
-					//$attributes[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', 'Contents' ), 'type' => 'contents', 'value' => $contents );
-					$attributes[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', 'Contents' ), 'type' => 'editor', 'value' => $contents );
+					$attributes[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', 'Contents' ), 'type' => 'contents', 'value' => $contents );
 				}
 
 				foreach ( $attributes as $index => $attribute ) {
@@ -103,7 +102,6 @@
 				}
 
 			}
-
 
 			public function get_elements() {
 				return $this->short_code_elements;
