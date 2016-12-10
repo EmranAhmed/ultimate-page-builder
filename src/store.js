@@ -58,10 +58,11 @@ class store {
             if (content['contents'] && _.isString(content['contents'])) {
                 delete content.attributes._contents;
             }
-            
+
             if (content['contents'] && _.isArray(content['contents'])) {
                 this.cleanup(content['contents']);
             }
+            
             return content;
         });
     }
