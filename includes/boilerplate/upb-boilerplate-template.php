@@ -2,6 +2,11 @@
 
 defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
+define( 'IFRAME_REQUEST', TRUE );
+
+/** Load WordPress Administration Bootstrap */
+
+
 if ( ! current_user_can( 'customize' ) ) {
 	wp_die(
 		'<h1>' . __( 'Cheatin&#8217; uh?' ) . '</h1>' .
@@ -10,9 +15,31 @@ if ( ! current_user_can( 'customize' ) ) {
 	);
 }
 
+global $wp_scripts;
+
+$registered = $wp_scripts->registered;
+$wp_scripts = new WP_Scripts;
+$wp_scripts->registered = $registered;
+
+
 // Load Styles and Scripts
-add_action( 'upb_boilerplate_print_scripts', 'print_head_scripts', 20 );
+add_action( 'upb_boilerplate_print_scripts', 'print_head_scripts', 10 );
+add_action( 'upb_boilerplate_print_scripts', 'wp_print_head_scripts', 20 );
+//add_action( 'upb_boilerplate_print_scripts', 'wp_enqueue_scripts', 30 );
+
 add_action( 'upb_boilerplate_print_footer_scripts', '_wp_footer_scripts' );
+add_action( 'upb_boilerplate_print_footer_scripts', 'wp_print_footer_scripts' );
+//add_action( 'upb_boilerplate_print_footer_scripts', 'wp_admin_bar_render' );
+
+
+
+
+//if ( function_exists( 'wp_underscore_playlist_templates' ) && function_exists( 'wp_print_media_templates' ) ) {
+
+	add_action( 'upb_boilerplate_print_footer_scripts', 'wp_underscore_playlist_templates' );
+	add_action( 'upb_boilerplate_print_footer_scripts', 'wp_print_media_templates' );
+//}
+
 add_action( 'upb_boilerplate_print_styles', 'print_admin_styles', 20 );
 
 do_action( 'upb_boilerplate_template_init' );

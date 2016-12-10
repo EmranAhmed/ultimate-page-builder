@@ -6,6 +6,7 @@ export default {
     'upb-input-select'   : require('./UPBInputSelect.vue'),
     'upb-input-contents' : require('./UPBInputContents.vue'),
     'upb-input-hidden'   : require('./UPBInputHidden.vue'),
+    'upb-input-editor'   : require('./UPBInputEditor.vue'),
 }
 
 

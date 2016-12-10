@@ -2,7 +2,8 @@
 
 <div v-preview-element>
 
-	Text {{ model.attributes }}
+	<upb-preview-mini-toolbar :contents="false" :model="model"></upb-preview-mini-toolbar>
+
 
 	<!--  send ajax req and get it :) -->
 	<div v-html="model.contents"></div>
