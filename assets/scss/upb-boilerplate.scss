@@ -15,6 +15,10 @@ html, body {
   height      : 100%;
   }
 
+a:focus {
+  box-shadow : none;
+  }
+
 @import "./upb-mini-grid";
 
 @import "./upb-structure";

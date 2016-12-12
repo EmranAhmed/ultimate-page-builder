@@ -14,6 +14,7 @@ class store {
         this.grid          = window._upb_grid_system;
         this.preview       = 'upb-preview-frame';
         this.panel         = '';
+        this.subpanel      = '';
     }
 
     reloadPreview() {
@@ -62,7 +63,7 @@ class store {
             if (content['contents'] && _.isArray(content['contents'])) {
                 this.cleanup(content['contents']);
             }
-            
+
             return content;
         });
     }

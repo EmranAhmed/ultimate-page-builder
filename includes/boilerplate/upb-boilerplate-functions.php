@@ -61,7 +61,7 @@
 		           'upb-editor-template',
 		           apply_filters( 'upb_editor_template_settings', array(
 			           'quicktags'        => array(
-				           'buttons' => 'strong,em,del,ul,ol,li,close'
+				           'buttons' => 'strong,em,del,ul,ol,li,close,fullscreen'
 			           ), // note that spaces in this list seem to cause an issue
 			           'teeny'            => TRUE,
 			           'textarea_rows'    => get_option( 'default_post_edit_rows', 10 ),

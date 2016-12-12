@@ -304,13 +304,15 @@
 					                                                     'id'     => 'load-sections',
 					                                                     'title'  => 'Load Section',
 					                                                     'icon'   => 'mdi mdi-cube-outline',
-					                                                     'action' => 'openSavedSectionPanel'
+					                                                     'action' => 'openSubPanel',
+					                                                     'data'   => 'sections'
 				                                                     ),
 				                                                     array(
 					                                                     'id'     => 'saved-layouts',
 					                                                     'title'  => 'Layouts',
 					                                                     'icon'   => 'mdi mdi-view-quilt',
-					                                                     'action' => 'openSavedLayoutPanel'
+					                                                     'action' => 'openSubPanel',
+					                                                     'data'   => 'layouts'
 				                                                     ),
 			                                                     )
 			), // add section | load section | layouts

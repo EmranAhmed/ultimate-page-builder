@@ -141,7 +141,7 @@
 			array( 'id' => 'background', 'title' => 'Background Color', 'type' => 'color', 'value' => '#ffccff' ),
 		);
 
-		$contents = '';
+		$contents = 'Put Contents';
 
 		$_upb_options = array(
 

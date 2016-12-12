@@ -110,6 +110,13 @@ export default {
             });
         },
 
+        openSubPanel(data, event){
+
+            store.subpanel = data;
+            //console.log(data, event);
+
+        },
+
         toolsAction(tool, event = false){
 
             let data = tool.data ? tool.data : false;

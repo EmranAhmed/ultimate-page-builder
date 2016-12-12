@@ -32,6 +32,9 @@
   z-index  : 99;
   overflow : visible;
   height   : 100%;
+  /*
+  background-color : $upb-wrapper-background-color;
+  */
 
   &.expanded {
     margin-left : 300px;
@@ -44,6 +47,20 @@
     margin-left : 0;
     #upb-sidebar-wrapper {
       margin-left : -300px;
+      }
+    }
+
+  &.show-subpanel {
+
+    background-color : $upb-wrapper-background-color;
+
+    #sidebar-sub-panel {
+      left : 300px;
+      }
+
+    #upb-preview-wrapper {
+      left    : 300px;
+      opacity : 0.4;
       }
     }
   }
@@ -74,15 +91,17 @@
   }
 
 #upb-preview-wrapper {
-  position  : absolute;
-  top       : 0;
-  left      : 0;
-  right     : 0;
-  width     : 100%;
-  max-width : 100%;
-  height    : 100%;
-  margin    : 0 auto;
-  z-index   : 9;
+  position   : absolute;
+  top        : 0;
+  left       : 0;
+  right      : 0;
+  width      : 100%;
+  max-width  : 100%;
+  height     : 100%;
+  margin     : 0 auto;
+  z-index    : 9;
+  transition : left .18s cubic-bezier(0.4, 0, 0.2, 1), opacity .18s cubic-bezier(0.4, 0, 0.2, 1);
+
   iframe {
     width    : 100%;
     height   : 100%;

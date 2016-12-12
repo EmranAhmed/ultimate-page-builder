@@ -1,15 +1,35 @@
 @import "../../assets/scss/variables";
 
 #upb-sidebar {
-  width           : 100%;
-  height          : 100%;
+  width  : 100%;
+  height : 100%;
+  }
 
-  display         : flex;
-  flex-direction  : column;
+#sidebar-sub-panel {
+  position         : absolute;
+  left             : 0;
+  top              : 0;
+  bottom           : 0;
+  width            : 300px;
+  height           : 100%;
+  background-color : $upb-sidebar-sub-panel-color;
+  transition       : left .18s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-  justify-content : flex-start; /* align items in Main Axis */
-  align-items     : stretch; /* align items in Cross Axis */
-  align-content   : stretch; /* Extra space in Cross Axis */
+#sidebar-main-panel {
+  width            : 100%;
+  height           : 100%;
+
+  display          : flex;
+  flex-direction   : column;
+  position         : relative;
+  z-index          : 3;
+
+  justify-content  : flex-start; /* align items in Main Axis */
+  align-items      : stretch; /* align items in Cross Axis */
+  align-content    : stretch; /* Extra space in Cross Axis */
+
+  background-color : $upb-sidebar-background-color;
   }
 
 #upb-sidebar-contents {
@@ -37,15 +57,17 @@
   overflow        : auto;
   }
 
+/*
 .upb-panel-wrapper > li.upb-sub-panel {
   flex            : 1;
   display         : flex;
   flex-direction  : column;
 
-  justify-content : flex-start; /* align items in Main Axis */
-  align-items     : stretch; /* align items in Cross Axis */
-  align-content   : stretch; /* Extra space in Cross Axis */
+  justify-content : flex-start; !* align items in Main Axis *!
+  align-items     : stretch; !* align items in Cross Axis *!
+  align-content   : stretch; !* Extra space in Cross Axis *!
   }
+*/
 
 .upb-panel-contents {
   flex            : 1;
