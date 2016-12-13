@@ -9,6 +9,9 @@ import VueNProgress from './plugins/vue-nprogress'
 
 Vue.use(VueNProgress);
 
+import vToast from './plugins/vue-toastr'
+Vue.use(vToast);
+
 //const states = window._upb_states;
 
 //const status = window._upb_status;

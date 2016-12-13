@@ -113,6 +113,18 @@ class store {
         });
     }
 
+    saveSectionToOption(contents, success, error) {
+
+        wp.ajax.send('_save_section', {
+            success : success,
+            error   : error,
+            data    : {
+                _nonce   : this.status._nonce,
+                contents : this.cleanup([extend(true, {}, contents)]).pop()
+            }
+        });
+    }
+
     getSavedLayouts(success, error) {
 
         wp.ajax.send('_get_saved_layouts', {

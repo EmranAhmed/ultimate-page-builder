@@ -176,6 +176,30 @@ export default {
             this.rowContentsComponent = 'row-contents';
         },
 
+        saveSectionLayout(){
+
+            this.$toast.info(this.l10n.sectionSaving);
+
+            store.saveSectionToOption(this.item, (data) => {
+
+                this.$toast.remove();
+
+                if (data) {
+                    this.$toast.success(this.l10n.sectionSaved);
+                }
+                else {
+                    this.$toast.error(this.l10n.sectionNotSaved);
+                }
+
+            }, () => {
+                this.$toast.remove();
+                this.$toast.error(this.l10n.sectionNotSaved);
+            });
+
+            // console.log(this.item)
+
+        },
+
         // Sub Panel
 
         listPanel(id){

@@ -23,6 +23,31 @@
 
 
 	// AJAX Requests
+	add_action( 'wp_ajax__save_section', function () {
+
+		if ( ! current_user_can( 'customize' ) ) {
+			status_header( 403 );
+			wp_send_json_error( 'upb_not_allowed' );
+		}
+
+		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+			status_header( 400 );
+			wp_send_json_error( 'bad_nonce' );
+		}
+
+		if ( empty( $_POST[ 'contents' ] ) || ! is_array( $_POST[ 'contents' ] ) ) {
+			status_header( 400 );
+			wp_send_json_error( 'missing_contents' );
+		}
+
+		$sections   = (array) get_option( '_upb_saved_sections', array() );
+		$sections[] = $_POST[ 'contents' ];
+
+		$update = update_option( '_upb_saved_sections', $sections, FALSE );
+
+		wp_send_json_success( $update );
+	} );
+
 	add_action( 'wp_ajax__get_upb_element_options', function () {
 
 		if ( ! current_user_can( 'customize' ) ) {
@@ -148,15 +173,11 @@
 			wp_send_json_error( 'bad_nonce' );
 		}
 
+		$saved_sections = (array) get_option( '_upb_saved_sections', array() );
 
-		$saved_sections = get_option( '_upb_saved_sections', array() );
-
-		// No Saved Section, so we load it from theme provider or plugin provider
-		if ( empty( $saved_sections ) ) {
-			$saved_sections = apply_filters( 'upb_loaded_sections', array() );
-		}
-
+		$saved_sections = upb_elements()->set_upb_options_recursive( $saved_sections );
 
 		wp_send_json_success( $saved_sections );
 	} );
+
 
