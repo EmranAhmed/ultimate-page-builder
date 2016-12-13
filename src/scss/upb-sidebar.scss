@@ -12,8 +12,34 @@
   bottom           : 0;
   width            : 300px;
   height           : 100%;
+  overflow         : auto;
   background-color : $upb-sidebar-sub-panel-color;
   border-left      : 1px solid $upb-sidebar-sub-panel-color;
+
+
+  &::-webkit-scrollbar {
+    width  : 5px;
+    height : 5px;
+    }
+  &::-webkit-scrollbar-thumb {
+    background    : #BBBBBB;
+    border-radius : 1px;
+    border        : 1px solid $upb-sidebar-background-color;
+    }
+  &::-webkit-scrollbar-thumb:hover {
+    background : #333333;
+    }
+  &::-webkit-scrollbar-thumb:active {
+    background : #333333;
+    }
+  &::-webkit-scrollbar-track {
+    background : $upb-sidebar-background-color;
+    }
+  &::-webkit-scrollbar-corner {
+    background : transparent;
+    }
+
+
   transition       : left .18s cubic-bezier(0.4, 0, 0.2, 1);
   }
 

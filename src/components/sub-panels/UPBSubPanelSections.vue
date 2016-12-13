@@ -19,16 +19,14 @@
         <div class="sub-panel-sections-list">
 
 
-            {{ contents }}
-
             <ul>
-                <li>
-                    <div>
-                        <a href="">add</a>
-                        <a href="">code</a>
-                        <a href="">remove</a>
+                <li v-for="(content, index) in contents">
+                    <div class="sub-panel-section-tools">
+                        <a @click.prevent="addSection(index)" href=""><i class="mdi mdi-plus"></i></a>
+                        <a @click.prevent="copySection(index)" href=""><i class="mdi mdi-clipboard-outline"></i></a>
+                        <a @click.prevent="deleteSection(index)" href="#"><i class="mdi mdi-close"></i></a>
                     </div>
-                    <div>Slider Section</div>
+                    <div class="sub-panel-section-title" v-text="content.attributes.title"></div>
                 </li>
 
             </ul>

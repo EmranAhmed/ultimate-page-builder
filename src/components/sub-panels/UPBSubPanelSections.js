@@ -17,7 +17,7 @@ export default {
 
             let query = this.searchQuery.toLowerCase().trim();
             if (query) {
-                return this.model.filter((data) => new RegExp(query, 'gui').test(model.title.toLowerCase().trim()))
+                return this.model.filter((data) => new RegExp(query, 'gui').test(data.attributes.title.toLowerCase().trim()))
             }
             else {
                 return this.model;
@@ -25,7 +25,7 @@ export default {
         }
     },
 
-    mounted(){
+    created(){
         this.loadContents();
     },
 
@@ -33,20 +33,18 @@ export default {
 
         loadContents(){
 
-            if (this.model.length <= 0) {
-                store.getSavedSections((contents) => {
+            this.$progressbar.show();
+            store.getSavedSections((contents) => {
 
-                    console.log(contents);
+                this.$nextTick(function () {
+                    Vue.set(this, 'model', contents);
+                });
+                this.$progressbar.hide();
 
-                    this.$nextTick(function () {
-                        // this.model = contents;
-                    });
-
-                }, function () {})
-            }
-            else {
-                return this.model;
-            }
+            }, (data) => {
+                console.log(data);
+                this.$progressbar.hide();
+            })
 
         },
 
@@ -54,6 +52,18 @@ export default {
 
             this.textareaContents = '';
             this.showTextarea     = !this.showTextarea;
+
+        },
+
+        deleteSection(index){
+            this.model.splice(index, 1);
+
+            store.saveAllSectionToOption(this.model, (data) => {
+
+                console.log(data);
+            }, ()=> {
+
+            });
 
         }
     }

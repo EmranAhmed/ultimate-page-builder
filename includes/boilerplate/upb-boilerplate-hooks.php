@@ -498,7 +498,7 @@
 		wp_localize_script( 'upb-builder', '_upb_l10n', apply_filters( '_upb_l10n_strings', array(
 			'sectionSaving'    => esc_attr__( 'Section Saving...' ),
 			'sectionSaved'     => esc_attr__( 'Section Saved.' ),
-			'sectionNotSaved'     => esc_attr__( "Section Can't Save." ),
+			'sectionNotSaved'  => esc_attr__( "Section Can't Save." ),
 			'saving'           => esc_attr__( 'Saving' ),
 			'saved'            => esc_attr__( 'Saved' ),
 			'save'             => esc_attr__( 'Save' ),

@@ -48,6 +48,30 @@
 		wp_send_json_success( $update );
 	} );
 
+
+	add_action( 'wp_ajax__save_section_all', function () {
+
+		if ( ! current_user_can( 'customize' ) ) {
+			status_header( 403 );
+			wp_send_json_error( 'upb_not_allowed' );
+		}
+
+		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+			status_header( 400 );
+			wp_send_json_error( 'bad_nonce' );
+		}
+
+		if ( empty( $_POST[ 'contents' ] ) ) {
+			$update = update_option( '_upb_saved_sections', array(), FALSE );
+		} else {
+			$sections = (array) $_POST[ 'contents' ];
+			$update   = update_option( '_upb_saved_sections', $sections, FALSE );
+		}
+
+		wp_send_json_success( $update );
+	} );
+
+
 	add_action( 'wp_ajax__get_upb_element_options', function () {
 
 		if ( ! current_user_can( 'customize' ) ) {
