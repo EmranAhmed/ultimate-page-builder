@@ -41,7 +41,7 @@
                 <li class="upb-panel-tools">
                     <ul>
                         <li v-for="tool in model.tools">
-                            <a @click.prevent="toolsAction(tool, $event)" href="#">
+                            <a :class="toolsActiveClass(tool)" @click.prevent="toolsAction(tool, $event)" href="#">
                                 <i :class="tool.icon"></i>
                                 <div v-text="tool.title"></div>
                             </a>

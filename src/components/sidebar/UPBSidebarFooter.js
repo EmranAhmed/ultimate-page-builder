@@ -30,6 +30,7 @@ export default {
 
         collapseSidebar(){
             this.sidebarExpand = false;
+            store.subpanel     = '';
             document.getElementById('upb-wrapper').classList.remove('expanded');
             document.getElementById('upb-wrapper').classList.add('collapsed');
         },
@@ -43,6 +44,7 @@ export default {
         toggleSkeletonPreview(){
 
             this.skeletonPreview = !this.skeletonPreview;
+            store.subpanel       = '';
 
             if (this.skeletonPreview) {
                 document.getElementById('upb-wrapper').classList.remove('preview-default');

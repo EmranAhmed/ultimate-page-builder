@@ -1,4 +1,10 @@
+import Vue from 'vue';
+
 import store from '../../store'
+
+import UPBSubPanelSections from './UPBSubPanelSections.vue'
+
+Vue.component('upb-sub-panel-sections', UPBSubPanelSections);
 
 export default {
     name  : 'upb-sidebar-sub-panel',
@@ -9,6 +15,16 @@ export default {
             devices         : store.devices,
             sidebarExpand   : true,
             skeletonPreview : false
+        }
+    },
+
+    computed : {
+        subPanelClass(){
+            return [`sub-panel-wrapper`, `sub-panel-${this.panel}-opened`].join(' ');
+        },
+
+        subPanelComponent(){
+            return `upb-sub-panel-${this.panel}`;
         }
     },
 

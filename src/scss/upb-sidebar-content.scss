@@ -76,9 +76,9 @@ button:focus {
             position : relative;
             &:after {
               display        : inline-block;
-              font           : normal normal 14px "Material Design Icons";
+              font           : normal normal normal 14px/1 "Material Design Icons";
               vertical-align : middle;
-              content        : "\F35F";
+              content        : "\F142";
               }
 
             &:last-child {
@@ -202,8 +202,9 @@ button:focus {
             margin-top     : 5px;
             }
 
-          &:hover {
-            background : $upb-sidebar-tab-panel-toolbar-separator-color;
+          &:hover,
+          &.active {
+            background-color : $upb-sidebar-tab-panel-toolbar-separator-color;
             }
           }
         }

@@ -9,7 +9,7 @@ class store {
 
         this.l10n          = window._upb_l10n;
         this.router_config = window._upb_router_config;
-        this.breadcrumb    = [];
+        // this.breadcrumb    = [];
         this.devices       = window._upb_preview_devices;
         this.grid          = window._upb_grid_system;
         this.preview       = 'upb-preview-frame';
@@ -102,15 +102,24 @@ class store {
         });
     }
 
-    getShortCodePreview(contents, success, error) {
+    getSavedSections(success, error) {
 
-        wp.ajax.send('_get_upb_shortcode_preview', {
+        wp.ajax.send('_get_saved_sections', {
             success : success,
             error   : error,
             data    : {
-                _nonce   : this.status._nonce,
-                id       : this.status._id,
-                contents : contents
+                _nonce : this.status._nonce
+            }
+        });
+    }
+
+    getSavedLayouts(success, error) {
+
+        wp.ajax.send('_get_saved_layouts', {
+            success : success,
+            error   : error,
+            data    : {
+                _nonce : this.status._nonce
             }
         });
     }

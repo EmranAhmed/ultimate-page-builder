@@ -111,17 +111,16 @@ export default {
         },
 
         openSubPanel(data, event){
+            store.subpanel = (store.subpanel == data) ? '' : data;
+        },
 
-            store.subpanel = data;
-            //console.log(data, event);
-
+        toolsActiveClass(tool){
+            return (_.isString(tool.data) && store.subpanel == tool.data) ? 'active' : '';
         },
 
         toolsAction(tool, event = false){
 
             let data = tool.data ? tool.data : false;
-
-            // console.log(tool.action, data);
 
             if (!this[tool.action]) {
                 util.warn(`You need to implement '${tool.action}' method.`, this);

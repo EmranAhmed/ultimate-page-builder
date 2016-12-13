@@ -2,7 +2,7 @@
 
 	defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
-	// Section
+	// Column
 	add_filter( 'upb_column_contents_panel_toolbar', function () {
 		return array(
 			array(
@@ -488,10 +488,16 @@
 
 		$data .= sprintf( "var _upb_grid_system = %s;", wp_json_encode( apply_filters( 'upb_grid_system', array() ) ) );
 
+		// $data .= sprintf( "var _upb_loaded_sections = %s;\n", wp_json_encode( apply_filters( 'upb_loaded_sections' ) ) );
+
+		// $data .= sprintf( "var _upb_loaded_layouts = %s;\n", wp_json_encode( apply_filters( 'upb_loaded_layouts' ) ) );
+
+
 		wp_script_add_data( 'upb-builder', 'data', $data );
 
 		wp_localize_script( 'upb-builder', '_upb_l10n', apply_filters( '_upb_l10n_strings', array(
 			'save'             => esc_attr__( 'Save' ),
+			'copy'             => esc_attr__( 'Copy' ),
 			'create'           => esc_attr__( 'Create' ),
 			'delete'           => esc_attr__( 'Are you sure to delete %s?' ),
 			'column_manual'    => esc_attr__( 'Manual' ),
