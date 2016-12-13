@@ -12,7 +12,6 @@
   "dependencies": {
     "extend": "^3.0.0",
     "mdi": "^1.7.22",
-    "toastr": "^2.1.2",
     "vue": "^2.0.1",
     "vue-router": "^2.0.3"
   },
