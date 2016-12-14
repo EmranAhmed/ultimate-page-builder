@@ -1,14 +1,17 @@
 import store from '../../store'
+import extend from 'extend'
+import {sprintf} from 'sprintf-js';
 
 export default {
-    name : 'upb-sub-panel-sections',
+    name  : 'upb-sub-panel-sections',
+    props : ['index', 'model'],
     data(){
         return {
             l10n             : store.l10n,
             searchQuery      : '',
             showTextarea     : false,
             textareaContents : '',
-            model            : []
+            item             : []
         }
     },
 
@@ -17,10 +20,10 @@ export default {
 
             let query = this.searchQuery.toLowerCase().trim();
             if (query) {
-                return this.model.filter((data) => new RegExp(query, 'gui').test(data.attributes.title.toLowerCase().trim()))
+                return this.item.filter((data) => new RegExp(query, 'gui').test(data.attributes.title.toLowerCase().trim()))
             }
             else {
-                return this.model;
+                return this.item;
             }
         }
     },
@@ -32,20 +35,13 @@ export default {
     methods : {
 
         loadContents(){
-
-            this.$progressbar.show();
             store.getSavedSections((contents) => {
-
                 this.$nextTick(function () {
-                    Vue.set(this, 'model', contents);
+                    Vue.set(this, 'item', contents);
                 });
-                this.$progressbar.hide();
-
             }, (data) => {
                 console.log(data);
-                this.$progressbar.hide();
             })
-
         },
 
         toggleTextarea(){
@@ -56,15 +52,33 @@ export default {
         },
 
         deleteSection(index){
-            this.model.splice(index, 1);
+            this.item.splice(index, 1);
 
-            store.saveAllSectionToOption(this.model, (data) => {
-
-                console.log(data);
-            }, ()=> {
+            store.saveAllSectionToOption(this.item, (data) => {
+                this.$toast.success(this.l10n.sectionDeleted);
+            }, (data)=> {
 
             });
 
+        },
+
+        addSection(index){
+
+            let item = extend(true, {}, this.item[index]);
+
+            // console.log(item);
+
+            this.model.filter((tab) => {
+                if (tab.id == 'sections') {
+                    tab.contents.push(item);
+                    this.$toast.success(sprintf(this.l10n.sectionAdded, item.attributes.title));
+
+                    tab.contents[tab.contents.length - 1]._upb_options.focus = true
+                }
+            });
+
+            store.stateChanged();
+            store.closeSubPanel();
         }
     }
 }

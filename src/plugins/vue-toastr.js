@@ -13,18 +13,7 @@ import extend from 'extend';
         toast.options = extend(true, {
             positionClass : 'toast-top-right',
             timeOut       : 3000
-        }, options)
-
-        /*{
-         closeButton: '',
-         debug: '',
-         newestOnTop: '',
-         progressBar: '',
-         rtl: '',
-         positionClass: 'toast-top-right',
-         preventDuplicates: '',
-         onclick: null
-         };*/
+        }, options);
 
         Vue.prototype.$toast = toast
     }

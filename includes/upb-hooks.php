@@ -23,9 +23,35 @@
 
 
 	// AJAX Requests
+	add_action( 'wp_ajax__upb_save', function () {
+
+		// Should have edit_pages cap :)
+		if ( ! current_user_can( 'edit_pages' ) ) {
+			status_header( 403 );
+			wp_send_json_error( 'upb_not_allowed' );
+		}
+
+		if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+			status_header( 400 );
+			wp_send_json_error( 'bad_nonce' );
+		}
+
+		if ( empty( $_POST[ 'contents' ] ) || ! is_array( $_POST[ 'contents' ] ) ) {
+			status_header( 400 );
+			wp_send_json_error( 'missing_contents' );
+		}
+
+		print_r( $_POST[ 'contents' ] );
+
+		// SAVE ON PAGE META :D
+	} );
+
+
+	// Section Template Save
 	add_action( 'wp_ajax__save_section', function () {
 
-		if ( ! current_user_can( 'customize' ) ) {
+		// Should have manage_options cap :)
+		if ( ! current_user_can( 'manage_options' ) ) {
 			status_header( 403 );
 			wp_send_json_error( 'upb_not_allowed' );
 		}
@@ -49,9 +75,10 @@
 	} );
 
 
+	// Modify Saved Template
 	add_action( 'wp_ajax__save_section_all', function () {
 
-		if ( ! current_user_can( 'customize' ) ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			status_header( 403 );
 			wp_send_json_error( 'upb_not_allowed' );
 		}
@@ -71,7 +98,7 @@
 		wp_send_json_success( $update );
 	} );
 
-
+	// Get Element Option
 	add_action( 'wp_ajax__get_upb_element_options', function () {
 
 		if ( ! current_user_can( 'customize' ) ) {
@@ -92,6 +119,7 @@
 		wp_send_json_success( upb_elements()->set_upb_options( $_POST[ 'contents' ] ) );
 	} );
 
+	// Section Panel Contents
 	add_action( 'wp_ajax__get_upb_sections_panel_contents', function () {
 
 		if ( ! current_user_can( 'customize' ) ) {
@@ -149,6 +177,7 @@
 		) );
 	} );
 
+	// Settings Panel Contents
 	add_action( 'wp_ajax__get_upb_settings_panel_contents', function () {
 
 		if ( ! current_user_can( 'customize' ) ) {
@@ -166,6 +195,7 @@
 		wp_send_json_success( upb_settings()->getAll() );
 	} );
 
+	// Elements Panel Contents
 	add_action( 'wp_ajax__get_upb_element_list', function () {
 
 		if ( ! current_user_can( 'customize' ) ) {
@@ -184,7 +214,7 @@
 		wp_send_json_success( upb_elements()->getAll() );
 	} );
 
-
+	// Get Saved Section
 	add_action( 'wp_ajax__get_saved_sections', function () {
 
 		if ( ! current_user_can( 'customize' ) ) {
@@ -203,5 +233,3 @@
 
 		wp_send_json_success( $saved_sections );
 	} );
-
-

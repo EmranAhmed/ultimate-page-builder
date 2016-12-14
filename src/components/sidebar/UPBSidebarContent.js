@@ -29,7 +29,11 @@ export default {
             const toDepth       = to.path.split('/').length;
             const fromDepth     = from.path.split('/').length;
             this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
-            this.item           = this.getTabContent();
+
+            // Close Subpanel If opened
+            store.closeSubPanel();
+            this.item = this.getTabContent();
+
         }
     },
 

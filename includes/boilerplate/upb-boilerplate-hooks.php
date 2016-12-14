@@ -293,12 +293,20 @@
 					                                                     'icon'   => 'mdi mdi-package-variant',
 					                                                     'action' => 'addNew',
 					                                                     'data'   => apply_filters( 'upb_new_section_data',
-					                                                                                upb_elements()->generate_element( 'section', upb_elements()->generate_element( 'row', upb_elements()->get_element( 'column' ), array(
+					                                                                                upb_elements()->generate_element(
+						                                                                                'section', upb_elements()->generate_element(
+						                                                                                'row', upb_elements()->generate_element(
+						                                                                                'column', array(), array(
 						                                                                                'title' => array(
 							                                                                                'type'  => 'text',
-							                                                                                'value' => 'New Row 1'
+							                                                                                'value' => 'Column 1'
 						                                                                                )
-					                                                                                ) ) ) )
+					                                                                                ) ), array(
+							                                                                                'title' => array(
+								                                                                                'type'  => 'text',
+								                                                                                'value' => 'Row 1'
+							                                                                                )
+						                                                                                ) ) ) )
 				                                                     ),
 				                                                     array(
 					                                                     'id'     => 'load-sections',
@@ -499,6 +507,8 @@
 			'sectionSaving'    => esc_attr__( 'Section Saving...' ),
 			'sectionSaved'     => esc_attr__( 'Section Saved.' ),
 			'sectionNotSaved'  => esc_attr__( "Section Can't Save." ),
+			'sectionDeleted'   => esc_attr__( "Section Removed." ),
+			'sectionAdded'     => esc_attr__( "%s Section Added." ),
 			'saving'           => esc_attr__( 'Saving' ),
 			'saved'            => esc_attr__( 'Saved' ),
 			'save'             => esc_attr__( 'Save' ),

@@ -68,6 +68,10 @@ class store {
         });
     }
 
+    closeSubPanel() {
+        this.subpanel = '';
+    }
+
     saveState(success, error) {
 
         const state = {};
