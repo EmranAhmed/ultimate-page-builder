@@ -56,14 +56,24 @@ export default {
             }
         },
 
-        toggleResponsivePreview(id){
+        toggleResponsivePreview(device){
 
-            this.devices.map((device) => {
-                device.active = (device.id == id);
-                document.getElementById('upb-wrapper').classList.remove(`preview-${device.id}`);
+            this.devices.map((d) => {
+                d.active = (d.id == device.id);
+                document.getElementById('upb-wrapper').classList.remove(`preview-${d.id}`);
             });
 
-            document.getElementById('upb-wrapper').classList.add(`preview-${id}`);
+            document.getElementById('upb-wrapper').classList.add(`preview-${device.id}`);
+
+            if (device['width']) {
+                document.getElementById('upb-preview-wrapper').style.width = device.width;
+            }
+            if (device['height']) {
+                document.getElementById('upb-preview-wrapper').style.height = device.height;
+            }
+            else {
+                document.getElementById('upb-preview-wrapper').style.height = '100%';
+            }
         }
     }
 }

@@ -150,24 +150,28 @@
 				'id'     => 'lg',
 				'title'  => 'Large',
 				'icon'   => 'mdi mdi-desktop-mac',
+				'width'  => '100%',
 				'active' => TRUE
 			),
 			array(
 				'id'     => 'md',
 				'title'  => 'Medium',
 				'icon'   => 'mdi mdi-laptop-mac',
+				'width'  => '992px',
 				'active' => FALSE
 			),
 			array(
 				'id'     => 'sm',
 				'title'  => 'Small',
 				'icon'   => 'mdi mdi-tablet-ipad',
+				'width'  => '768px',
 				'active' => FALSE
 			),
 			array(
 				'id'     => 'xs',
 				'title'  => 'Extra Small',
 				'icon'   => 'mdi mdi-cellphone-iphone',
+				'width'  => '480px',
 				'active' => FALSE
 			),
 		);
