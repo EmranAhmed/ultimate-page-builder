@@ -36,11 +36,11 @@
 			}
 
 			public function constants() {
-				define( 'UPB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+				define( 'UPB_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 				define( 'UPB_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
-				define( 'UPB_PLUGIN_ASSETS_URL', trailingslashit( plugin_dir_url( __FILE__ ) . 'assets' ) );
-				define( 'UPB_PLUGIN_VENDOR_URL', trailingslashit( plugin_dir_url( __FILE__ ) . 'vendor' ) );
+				define( 'UPB_PLUGIN_ASSETS_URI', trailingslashit( plugin_dir_url( __FILE__ ) . 'assets' ) );
+				define( 'UPB_PLUGIN_VENDOR_URI', trailingslashit( plugin_dir_url( __FILE__ ) . 'vendor' ) );
 
 				define( 'UPB_PLUGIN_INCLUDE_PATH', trailingslashit( plugin_dir_path( __FILE__ ) . 'includes' ) );
 				define( 'UPB_PLUGIN_TEMPLATES_PATH', trailingslashit( plugin_dir_path( __FILE__ ) . 'templates' ) );
@@ -90,6 +90,10 @@
 				return apply_filters( 'upb_template_path', untrailingslashit( $this->plugin_path() ) . '/templates' );
 			}
 
+			public function template_uri() {
+				return apply_filters( 'upb_template_uri', untrailingslashit( $this->plugin_uri() ) . '/templates' );
+			}
+
 			public function plugin_path() {
 				return untrailingslashit( plugin_dir_path( __FILE__ ) );
 			}
@@ -102,7 +106,7 @@
 				return apply_filters( 'upb_template_dir', 'upb-templates' );
 			}
 
-			public function plugin_url() {
+			public function plugin_uri() {
 				return untrailingslashit( plugins_url( '/', __FILE__ ) );
 			}
 		}

@@ -18,7 +18,12 @@ import { util } from 'vue';
 
             inserted : function (el, binding, vnode) {
 
-                $(el).addClass('upb-preview-element');
+                $(el).addClass(`upb-preview-element`).addClass(`upb-${vnode.context.model.tag}-preview`);
+
+                // No Contents Class
+                if (!_.isUndefined(vnode.context.model['contents']) && _.isEmpty(vnode.context.model.contents) && (_.isString(vnode.context.model.contents) || _.isArray(vnode.context.model.contents))) {
+                    //    $(el).addClass(`upb-preview-element-no-contents`)
+                }
 
                 $(el).find('>.upb-preview-mini-toolbar').on('mouseenter', function (event) {
                     event.stopPropagation();

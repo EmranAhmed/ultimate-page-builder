@@ -28,12 +28,8 @@
                     </div>
                     <div class="sub-panel-section-title" v-text="content.attributes.title"></div>
                 </li>
-
             </ul>
-
-
         </div>
-
     </div>
 </template>
 <script src="./UPBSubPanelSections.js"></script>

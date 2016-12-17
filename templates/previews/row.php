@@ -1,6 +1,6 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' ); ?>
 
-<div v-preview-element>
+<div v-preview-element :class="rowClass()">
 
 	<upb-preview-mini-toolbar :contents="false" :model="model"></upb-preview-mini-toolbar>
 

@@ -85,4 +85,19 @@
 		return upb_load_wp_editor();
 	}
 
+	function upb_allowed_attributes() {
+		$tags = wp_kses_allowed_html( 'post' );
+
+		$attrs = array();
+		foreach ( $tags as $tag => $attr ) {
+			if ( ! isset( $attrs[ $tag ] ) ) {
+				$attrs[ $tag ] = array();
+			}
+
+			$attrs[ $tag ] = array_keys( $attr );
+		}
+
+		return $attrs;
+	}
+
 

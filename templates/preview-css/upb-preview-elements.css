@@ -1,0 +1,20 @@
+.upb-preview-element {
+    min-height  : 50px;
+    padding-top : 20px;
+    }
+
+.upb-column-preview {
+    min-height : 100px;
+    }
+
+.upb-column-preview.upb-preview-element-no-contents {
+    border : 1px dotted #0000FF;
+    }
+
+.upb-section-preview {
+    background-color : var(--background-color);
+    }
+
+.upb-text-preview {
+    background-color : var(--background-color);
+    }

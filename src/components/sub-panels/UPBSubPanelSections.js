@@ -1,6 +1,6 @@
 import store from '../../store'
 import extend from 'extend'
-import {sprintf} from 'sprintf-js';
+import {sprintf} from 'sprintf-js'
 
 export default {
     name  : 'upb-sub-panel-sections',

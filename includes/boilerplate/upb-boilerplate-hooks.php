@@ -439,7 +439,7 @@
 		) );
 		wp_register_script( 'wp-color-picker', admin_url( "/js/color-picker$suffix.js" ), array( 'iris' ), FALSE, TRUE );
 
-		wp_register_script( 'wp-color-picker-alpha', UPB_PLUGIN_ASSETS_URL . "js/wp-color-picker-alpha$suffix.js", array( 'wp-color-picker' ), FALSE, TRUE );
+		wp_register_script( 'wp-color-picker-alpha', UPB_PLUGIN_ASSETS_URI . "js/wp-color-picker-alpha$suffix.js", array( 'wp-color-picker' ), FALSE, TRUE );
 
 	} );
 
@@ -452,11 +452,11 @@
 		wp_enqueue_style( 'common' );
 		wp_enqueue_style( 'buttons' );
 		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_style( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URL . "css/upb-boilerplate$suffix.css" );
+		wp_enqueue_style( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URI . "css/upb-boilerplate$suffix.css" );
 
 		if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
 			// In Production Mode :)
-			wp_enqueue_style( 'upb-builder', UPB_PLUGIN_ASSETS_URL . "css/upb-builder$suffix.css" );
+			wp_enqueue_style( 'upb-builder', UPB_PLUGIN_ASSETS_URI . "css/upb-builder$suffix.css" );
 		}
 
 	} );
@@ -474,9 +474,9 @@
 		wp_enqueue_media();
 		wp_enqueue_script( 'wp-color-picker-alpha' );
 
-		wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URL . "js/upb-builder$suffix.js", array( 'jquery-ui-sortable', 'wp-util', 'wp-color-picker', "shortcode" ), '', TRUE );
+		wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URI . "js/upb-builder$suffix.js", array( 'jquery-ui-sortable', 'wp-util', 'wp-color-picker', "shortcode" ), '', TRUE );
 
-		wp_enqueue_script( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URL . "js/upb-boilerplate$suffix.js", array( 'jquery', 'upb-builder' ), '', TRUE );
+		wp_enqueue_script( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URI . "js/upb-boilerplate$suffix.js", array( 'jquery', 'upb-builder' ), '', TRUE );
 
 
 		$data = sprintf( "var _upb_tabs = %s;\n", upb_tabs()->getJSON() );
@@ -508,31 +508,36 @@
 		wp_script_add_data( 'upb-builder', 'data', $data );
 
 		wp_localize_script( 'upb-builder', '_upb_l10n', apply_filters( '_upb_l10n_strings', array(
-			'sectionSaving'    => esc_attr__( 'Section Saving...' ),
-			'sectionSaved'     => esc_attr__( 'Section Saved.' ),
-			'sectionNotSaved'  => esc_attr__( "Section Can't Save." ),
-			'sectionDeleted'   => esc_attr__( "Section Removed." ),
-			'sectionAdded'     => esc_attr__( "%s Section Added." ),
-			'saving'           => esc_attr__( 'Saving' ),
-			'saved'            => esc_attr__( 'Saved' ),
-			'save'             => esc_attr__( 'Save' ),
-			'copy'             => esc_attr__( 'Copy' ),
-			'create'           => esc_attr__( 'Create' ),
-			'delete'           => esc_attr__( 'Are you sure to delete %s?' ),
-			'column_manual'    => esc_attr__( 'Manual' ),
-			'column_layout_of' => esc_attr__( 'Columns Layout of - %s' ),
-			'column_order'     => esc_attr__( 'Column Order' ),
-			'column_layout'    => esc_attr__( 'Column Layout' ),
-			'close'            => esc_attr__( 'Close' ),
-			'clone'            => esc_attr__( 'Clone of %s' ),
-			'help'             => esc_attr__( 'Help' ),
-			'search'           => esc_attr__( 'Search' ),
-			'back'             => esc_attr__( 'Back' ),
-			'breadcrumbRoot'   => esc_attr__( 'You are on' ),
-			'skeleton'         => esc_attr__( 'Skeleton preview' ),
-			'collapse'         => esc_attr__( 'Collapse' ),
-			'expand'           => esc_attr__( 'Expand' ),
-			'editorTemplate'   => upb_wp_editor_template(),
+			'sectionSaving'     => esc_attr__( 'Section Saving...' ),
+			'sectionSaved'      => esc_attr__( 'Section Saved.' ),
+			'sectionNotSaved'   => esc_attr__( "Section Can't Save." ),
+			'sectionDeleted'    => esc_attr__( "Section Removed." ),
+			'sectionAdded'      => esc_attr__( "%s Section Added." ),
+			'saving'            => esc_attr__( 'Saving' ),
+			'saved'             => esc_attr__( 'Saved' ),
+			'save'              => esc_attr__( 'Save' ),
+			'copy'              => esc_attr__( 'Copy' ),
+			'create'            => esc_attr__( 'Create' ),
+			'delete'            => esc_attr__( 'Are you sure to delete %s?' ),
+			'column_manual'     => esc_attr__( 'Manual' ),
+			'column_layout_of'  => esc_attr__( 'Columns Layout of - %s' ),
+			'column_order'      => esc_attr__( 'Column Order' ),
+			'column_layout'     => esc_attr__( 'Column Layout' ),
+			'close'             => esc_attr__( 'Close' ),
+			'clone'             => esc_attr__( 'Clone of %s' ),
+			'help'              => esc_attr__( 'Help' ),
+			'search'            => esc_attr__( 'Search' ),
+			'back'              => esc_attr__( 'Back' ),
+			'breadcrumbRoot'    => esc_attr__( 'You are on' ),
+			'skeleton'          => esc_attr__( 'Skeleton preview' ),
+			'collapse'          => esc_attr__( 'Collapse' ),
+			'expand'            => esc_attr__( 'Expand' ),
+
+			// Templates
+			'editorTemplate'    => upb_wp_editor_template(),
+			'allowedTags'       => array_keys( wp_kses_allowed_html( 'post' ) ),
+			'allowedAttributes' => upb_allowed_attributes(),
+			'allowedSchemes'    => wp_allowed_protocols(),
 		) ) );
 	} );
 
@@ -546,8 +551,3 @@ var LogicalPanel = {
 }
 </script>" );
 	} );
-
-
-
-
-

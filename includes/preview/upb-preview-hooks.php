@@ -2,6 +2,7 @@
 
 	defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
+
 	add_action( 'upb_preview_loaded', function () {
 		add_filter( 'show_admin_bar', '__return_false' );
 	} );
@@ -32,14 +33,17 @@
 
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-			wp_register_style( 'upb-shortcode-preview-core', UPB_PLUGIN_ASSETS_URL . "css/upb-preview$suffix.css" );
+			wp_register_style( 'upb-shortcode-preview-core', UPB_PLUGIN_ASSETS_URI . "css/upb-preview$suffix.css" );
 			wp_enqueue_style( 'upb-shortcode-preview-core' );
 			wp_enqueue_script( 'jquery' );
 
 
 			// You can change grid system as you need :)
-			wp_register_style( 'upb-grid', UPB_PLUGIN_ASSETS_URL . "css/upb-grid$suffix.css" );
+			wp_register_style( 'upb-grid', UPB_PLUGIN_ASSETS_URI . "css/upb-grid$suffix.css" );
 			wp_enqueue_style( 'upb-grid' );
+
+			wp_register_style( 'upb-preview-elements', upb_get_theme_file_uri( 'preview-css/upb-preview-elements.css' ) );
+			wp_enqueue_style( 'upb-preview-elements' );
 
 			do_action( 'upb_preview_wp_enqueue_scripts' );
 		}
@@ -66,3 +70,5 @@
 
 		return ob_get_clean();
 	} );
+
+

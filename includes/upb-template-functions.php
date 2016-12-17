@@ -47,3 +47,39 @@
 
 		do_action( 'upb_after_get_template', $template_name, $template_args );
 	}
+
+	function upb_get_theme_file_path( $file ) {
+
+		$template_dir = Ultimate_Page_Builder()->template_dir();
+		$default_path = Ultimate_Page_Builder()->template_path();
+
+		if ( file_exists( get_stylesheet_directory() . '/' . $template_dir . '/' . $file ) ) {
+			$path = get_stylesheet_directory() . '/' . $template_dir . '/' . $file;
+		} elseif ( file_exists( get_template_directory() . '/' . $template_dir . '/' . $file ) ) {
+			$path = get_template_directory() . '/' . $template_dir . '/' . $file;
+		} else {
+			$path = $default_path . '/' . $file;
+		}
+
+		return apply_filters( 'upb_get_theme_file_path', $path, $file );
+	}
+
+	function upb_get_theme_file_uri( $file ) {
+
+		$template_dir = Ultimate_Page_Builder()->template_dir();
+		$default_uri  = Ultimate_Page_Builder()->template_uri();
+
+		if ( file_exists( get_stylesheet_directory() . '/' . $template_dir . '/' . $file ) ) {
+			$uri = get_stylesheet_directory_uri() . '/' . $template_dir . '/' . $file;
+		} elseif ( file_exists( get_template_directory() . '/' . $template_dir . '/' . $file ) ) {
+			$uri = get_template_directory_uri() . '/' . $template_dir . '/' . $file;
+		} else {
+			$uri = $default_uri . '/' . $file;
+		}
+
+		return apply_filters( 'upb_get_theme_file_uri', $uri, $file );
+	}
+
+
+	//get_theme_file_uri();
+	//get_theme_file_path();
