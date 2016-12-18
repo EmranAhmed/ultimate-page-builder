@@ -90,7 +90,14 @@ export default{
 
         computed : {
             hasContents(){
-                return this.model.contents.length > 0;
+                
+                if (_.isUndefined(this.model['contents'])) {
+                    // this.$nextTick();
+                }
+                else {
+                    return this.model.contents.length > 0;
+                }
+
             }
         },
 
