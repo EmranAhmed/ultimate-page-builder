@@ -174,8 +174,8 @@ $container-lg : $container-large-desktop !default;
 
 // Creates a wrapper for a series of columns
 @mixin make-row($gutter: $grid-gutter-width) {
-  margin-left  : ceil(($gutter / -2));
-  margin-right : floor(($gutter / -2));
+  // margin-left  : ceil(($gutter / -2));
+  // margin-right : floor(($gutter / -2));
   @include clearfix;
   }
 

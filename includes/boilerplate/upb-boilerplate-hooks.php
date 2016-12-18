@@ -114,7 +114,19 @@
 				'title'  => 'Add Row',
 				'icon'   => 'mdi mdi-table-row-plus-after',
 				'action' => 'addNew',
-				'data'   => apply_filters( 'upb_new_row_data', upb_elements()->generate_element( 'row', upb_elements()->get_element( 'column' ) ) )
+				'data'   => apply_filters( 'upb_new_row_data', upb_elements()->generate_element(
+					'row', upb_elements()->generate_element(
+					'column', array(), array(
+					'title' => array(
+						'type'  => 'text',
+						'value' => 'Column 1'
+					)
+				) ), array(
+						'title' => array(
+							'type'  => 'text',
+							'value' => 'Row 1'
+						)
+					)  ) )
 			),
 			array(
 				'id'     => 'section-setting',
@@ -187,21 +199,16 @@
 			'separator'         => '-', // col- deviceId - grid class
 			'groupClass'        => 'upb-row',
 			'groupWrapper'      => array(
-				array(
-					'name'  => 'Full Width',
-					'class' => 'upb-container-fluid'
-				),
-				array(
-					'name'  => 'Fixed Width',
-					'class' => 'upb-container'
-				),
+				'upb-no-container'    => 'No Container',
+				'upb-container-fluid' => 'Fluid Container',
+				'upb-container'       => 'Fixed Container'
 			),
 			'defaultDeviceId'   => 'xs', // We should set default column element attributes as like defaultDeviceId, If xs then [column xs='...']
 			'deviceSizeTitle'   => 'Screen Sizes',
 			'devices'           => apply_filters( 'upb_preview_devices', array() ),
 			'totalGrid'         => 12,
 			'allowedGrid'       => array( 1, 2, 3, 4, 6, 12 ),
-			'nonAllowedMessage' => "Sorry, UPB Grid 3 doesn't support %s grid column."
+			'nonAllowedMessage' => "Sorry, UPB Grid doesn't support %s grid column."
 		);
 	} );
 
@@ -373,12 +380,51 @@
 
 		$options = array(
 			'type'    => 'text',
-			'title'   => 'Title',
+			'title'   => 'Test Title',
 			'default' => 'xyz',
 		);
 
+		$settings->register( 'test1', $options );
 
-		$settings->register( 'text', $options );
+		$options = array(
+			'type'    => 'textarea',
+			'title'   => 'TextArea',
+			'default' => 'textarea',
+		);
+
+		$settings->register( 'test2', $options );
+
+
+		$options = array(
+			'type'    => 'radio',
+			'title'   => 'Radio',
+			'default' => '1',
+			'options' => array( '1' => 'ONE', '2' => 'TWO' )
+		);
+
+		$settings->register( 'test3', $options );
+
+
+		$options = array(
+			'type'    => 'select',
+			'title'   => 'Select',
+			'default' => '1',
+			'options' => array( '1' => 'ONE', '2' => 'TWO' )
+		);
+
+		$settings->register( 'test4', $options );
+
+		$options = array(
+			'type'     => 'select',
+			'title'    => 'Select Multiple',
+			'multiple' => TRUE,
+			'default'  => array( '1' ),
+			'options'  => array( '1' => 'ONE', '2' => 'TWO' )
+		);
+		$settings->register( 'test5', $options );
+
+
+		// ==============================================
 
 
 		$options = array(

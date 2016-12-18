@@ -7,6 +7,7 @@ export default {
     'upb-input-contents' : require('./UPBInputContents.vue'),
     'upb-input-hidden'   : require('./UPBInputHidden.vue'),
     'upb-input-editor'   : require('./UPBInputEditor.vue'),
+    'upb-input-radio'    : require('./UPBInputRadio.vue'),
 }
 
 

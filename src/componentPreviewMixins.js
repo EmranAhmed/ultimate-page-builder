@@ -2,12 +2,86 @@ import store from './store'
 
 export default{
 
-    section : {},
+    section : {
+        computed : {
+            hasContents(){
+                return this.model.contents.length > 0;
+            }
+        },
+
+        created(){
+            this.$watch('model.contents', function (newVal, oldVal) {
+                this.addClass();
+            })
+        },
+
+        mounted(){
+            this.addClass();
+        },
+
+        methods : {
+            addClass(){
+                // No Content Class Added
+                if (this.hasContents) {
+                    this.$el.classList.remove('upb-preview-element-no-contents')
+                }
+                else {
+                    this.$el.classList.add('upb-preview-element-no-contents')
+                }
+            }
+        }
+    },
 
     row : {
+        computed : {
+            hasContents(){
+
+                if (_.isUndefined(this.model['contents'])) {
+                    // this.$nextTick();
+                }
+                else {
+                    return this.model.contents.length > 0;
+                }
+
+            },
+
+            containerClass(){
+                "use strict";
+
+            }
+        },
+
+        created(){
+            this.$watch('model.contents', function (newVal, oldVal) {
+                this.addClass();
+            })
+        },
+
+        mounted(){
+            this.addClass();
+        },
+
         methods : {
             rowClass(){
                 return store.grid.groupClass;
+            },
+
+            addClass(){
+
+                // Generated Grid Classes
+                let rowClass = [this.rowClass()];
+
+                // New Grid Added
+                rowClass.map(className=>this.$el.classList.add(className));
+
+                // No Content Class Added
+                if (this.hasContents) {
+                    this.$el.classList.remove('upb-preview-element-no-contents')
+                }
+                else {
+                    this.$el.classList.add('upb-preview-element-no-contents')
+                }
+
             }
         }
     },
@@ -16,7 +90,7 @@ export default{
 
         computed : {
             hasContents(){
-                return this.model.contents.length > 0 ? true : false;
+                return this.model.contents.length > 0;
             }
         },
 

@@ -56,7 +56,7 @@
 				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-template-functions.php";
 				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-shortcode-functions.php";
 				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-shortcode-preview-functions.php";
-				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-hooks.php";
+
 				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-functions.php";
 				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-elements.php";
 
@@ -75,6 +75,8 @@
 
 				// Preview
 				require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-preview.php";
+
+				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-hooks.php";
 
 			}
 

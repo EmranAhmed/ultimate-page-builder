@@ -49,11 +49,23 @@
 	// Row ( Section have row dependency that's why we should reg row before section )
 	add_action( 'upb_register_element', function ( $element ) {
 
+
 		$attributes = array(
 			array( 'id' => 'title', 'title' => 'Row title', 'type' => 'text', 'value' => 'New Row %s' ),
 			array( 'id' => 'enable', 'title' => 'Enable', 'type' => 'toggle', 'value' => TRUE ),
 			array( 'id' => 'background', 'title' => 'Background', 'type' => 'color', 'value' => '#fff' ),
 		);
+
+
+		$grid = apply_filters( 'upb_grid_system', array() );
+
+		if ( isset( $grid[ 'groupWrapper' ] ) ):
+
+			$default = array_keys( $grid[ 'groupWrapper' ] );
+
+			$attributes[] = array( 'id' => 'container', 'title' => 'Container Type', 'type' => 'radio', 'default' => $default[ 0 ], 'options' => $grid[ 'groupWrapper' ] );
+		endif;
+
 
 		$contents = array();
 

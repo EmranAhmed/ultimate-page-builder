@@ -9,6 +9,12 @@ export default{
         }
     },
 
+    computed : {
+        multiple(){
+            return (!_.isUndefined(this.attributes['multiple']) && this.attributes.multiple) ? true : false;
+        }
+    },
+
     watch : {
         input(value){
             this.setValue(value);
@@ -16,17 +22,16 @@ export default{
     },
 
     created(){
-        this.$watch(`modelxxx`, (value) => {
 
-            this.attributes.value = value;
+        // No Value but have default
+        if (_.isNull(this.attributes.value) && !_.isNull(this.attributes.default)) {
+            this.input = this.attributes.default
+        }
 
-            store.stateChanged();
-
-            if (this.attributes['reload']) {
-                store.reloadPreview()
-            }
-        });
-
+        // Have Default value
+        if (!_.isNull(this.attributes.value)) {
+            this.input = this.attributes.value
+        }
     },
     methods : {
         typeClass(){
@@ -35,15 +40,17 @@ export default{
 
         setValue(value){
 
-            this.attributes.value   = value;
-            this.model[this.target] = value;
+            Vue.set(this.attributes, 'value', value)
+            Vue.set(this.model, this.target, value)
+
+            //this.attributes.value   = value;
+            //this.model[this.target] = value;
 
             store.stateChanged();
 
             if (this.attributes['reload']) {
                 store.reloadPreview()
             }
-
         }
     }
 }
