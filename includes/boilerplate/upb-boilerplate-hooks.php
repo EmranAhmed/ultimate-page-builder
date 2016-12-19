@@ -199,8 +199,10 @@
 			'separator'         => '-', // col- deviceId - grid class
 			'groupClass'        => 'upb-row',
 			'groupWrapper'      => array(
-				'upb-container-fluid' => 'Fluid Container',
-				'upb-container'       => 'Fixed Container'
+				'upb-container-fluid'           => 'Fluid Container',
+				'upb-container'                 => 'Fixed Container',
+				'upb-container-fluid-no-gutter' => 'Non Gutter Fluid Container',
+				'upb-container-no-gutter'       => 'Non Gutter Fixed Container'
 			),
 			'defaultDeviceId'   => 'xs', // We should set default column element attributes as like defaultDeviceId, If xs then [column xs='...']
 			'deviceSizeTitle'   => 'Screen Sizes',

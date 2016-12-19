@@ -155,13 +155,17 @@ export default{
                     if (gridValue) {
                         let col = parseInt(gridValue.split(':')[0]);
                         let t   = parseInt(gridValue.split(':')[1]);
-                        let g   = Math.round((store.grid.totalGrid / t) * col)
+                        let g   = Math.round((store.grid.totalGrid / t) * col);
+
                         return `${store.grid.prefixClass}${store.grid.separator}${device.id}${store.grid.separator}${g}`
                     }
                     else {
                         return '';
                     }
                 });
+
+                // added extra grid class to control gutter
+                grid.unshift(store.grid.prefixClass);
 
                 return _.compact(grid);
 

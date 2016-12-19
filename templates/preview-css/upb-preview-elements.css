@@ -4,11 +4,11 @@
     }
 
 .upb-column-preview {
-    min-height : 100px;
+    min-height : 75px;
     }
 
 .upb-column-preview.upb-preview-element-no-contents {
-    border : 1px dotted #0000FF;
+    border : 1px solid #0000FF;
     }
 
 .upb-section-preview {

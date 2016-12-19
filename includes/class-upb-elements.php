@@ -236,6 +236,11 @@
 						$contents[ $index ][ 'contents' ] = $this->get_element( $content[ 'tag' ], 'contents' );
 					}
 
+					if ( is_string( $this->get_element( $content[ 'tag' ], 'contents' ) ) ) {
+						$contents[ $index ][ 'attributes' ][ '_contents' ] = wp_kses_post( $content[ 'contents' ] );
+						$content[ 'attributes' ][ '_contents' ]            = wp_kses_post( $content[ 'contents' ] );
+					}
+
 					//if ( ! isset( $contents[ $index ][ '_upb_settings' ] ) ) {
 					$contents[ $index ][ '_upb_settings' ] = $this->to_settings( $content[ 'tag' ], $content[ 'attributes' ] );
 					//}
@@ -250,12 +255,15 @@
 
 			public function set_upb_options_recursive( $contents ) {
 
-
 				foreach ( $contents as $index => $content ) {
-
 
 					if ( ! isset( $content[ 'contents' ] ) and is_array( $this->get_element( $content[ 'tag' ], 'contents' ) ) ) {
 						$contents[ $index ][ 'contents' ] = $this->get_element( $content[ 'tag' ], 'contents' );
+					}
+
+					if ( is_string( $this->get_element( $content[ 'tag' ], 'contents' ) ) ) {
+						$contents[ $index ][ 'attributes' ][ '_contents' ] = wp_kses_post( $content[ 'contents' ] );
+						$content[ 'attributes' ][ '_contents' ]            = wp_kses_post( $content[ 'contents' ] );
 					}
 
 					//if ( ! isset( $contents[ $index ][ '_upb_settings' ] ) ) {
@@ -272,7 +280,6 @@
 				}
 
 				return $contents;
-
 			}
 		}
 

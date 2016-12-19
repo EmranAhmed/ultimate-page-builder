@@ -21,10 +21,6 @@ class store {
         window.frames[this.preview].contentWindow.location.reload();
     }
 
-    /*reloadPreview() {
-     window.frames[this.preview].contentWindow.location.reload();
-     }*/
-
     getTabs() {
         return this.tabs;
     }

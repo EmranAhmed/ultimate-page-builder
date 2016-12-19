@@ -45,10 +45,8 @@ export default {
         },
 
         toggleTextarea(){
-
             this.textareaContents = '';
             this.showTextarea     = !this.showTextarea;
-
         },
 
         deleteSection(index){
@@ -66,7 +64,7 @@ export default {
 
             let item = extend(true, {}, this.item[index]);
 
-            // console.log(item);
+            console.log(item);
 
             this.model.filter((tab) => {
                 if (tab.id == 'sections') {
@@ -76,6 +74,8 @@ export default {
                     tab.contents[tab.contents.length - 1]._upb_options.focus = true
                 }
             });
+
+            console.log(this.model);
 
             store.stateChanged();
             store.closeSubPanel();

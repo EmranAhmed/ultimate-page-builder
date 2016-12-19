@@ -25,15 +25,30 @@ export default{
 
         // No Value but have default
         if (_.isNull(this.attributes.value) && !_.isNull(this.attributes.default)) {
-            this.input = this.attributes.default
+
+            if (this.attributes.default === 'true' || this.attributes.default === 'false') {
+                this.input = this.str2Bool(this.attributes.default);
+            }
+            else {
+                this.input = this.attributes.default;
+            }
         }
 
         // Have Default value
         if (!_.isNull(this.attributes.value)) {
-            this.input = this.attributes.value
+            if (this.attributes.value === 'true' || this.attributes.value === 'false') {
+                this.input = this.str2Bool(this.attributes.value);
+            }
+            else {
+                this.input = this.attributes.value;
+            }
         }
     },
     methods : {
+
+        str2Bool(strvalue){
+            return (strvalue && typeof strvalue == 'string') ? (strvalue.toLowerCase() == 'true' || strvalue == '1') : (strvalue == true);
+        },
         typeClass(){
             return `${this.attributes.type}-field-wrapper form-field-wrapper`;
         },
