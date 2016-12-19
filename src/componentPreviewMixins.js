@@ -5,7 +5,9 @@ export default{
     section : {
         computed : {
             hasContents(){
-                return this.model.contents.length > 0;
+                if (!_.isUndefined(this.model['contents'])) {
+                    return this.model.contents.length > 0;
+                }
             }
         },
 
@@ -35,19 +37,17 @@ export default{
     row : {
         computed : {
             hasContents(){
-
-                if (_.isUndefined(this.model['contents'])) {
-                    // this.$nextTick();
-                }
-                else {
+                if (!_.isUndefined(this.model['contents'])) {
                     return this.model.contents.length > 0;
                 }
-
             },
 
             containerClass(){
-                "use strict";
+                return this.model.attributes.container;
+            },
 
+            rowClass(){
+                return store.grid.groupClass;
             }
         },
 
@@ -62,24 +62,24 @@ export default{
         },
 
         methods : {
-            rowClass(){
-                return store.grid.groupClass;
-            },
 
             addClass(){
 
+                // We Have container wrapped
+                let element = this.$el.firstChild;
+
                 // Generated Grid Classes
-                let rowClass = [this.rowClass()];
+                let rowClass = [this.rowClass];
 
                 // New Grid Added
-                rowClass.map(className=>this.$el.classList.add(className));
+                rowClass.map(className=>element.classList.add(className));
 
                 // No Content Class Added
                 if (this.hasContents) {
-                    this.$el.classList.remove('upb-preview-element-no-contents')
+                    element.classList.remove('upb-preview-element-no-contents')
                 }
                 else {
-                    this.$el.classList.add('upb-preview-element-no-contents')
+                    element.classList.add('upb-preview-element-no-contents')
                 }
 
             }
@@ -90,14 +90,9 @@ export default{
 
         computed : {
             hasContents(){
-                
-                if (_.isUndefined(this.model['contents'])) {
-                    // this.$nextTick();
-                }
-                else {
+                if (!_.isUndefined(this.model['contents'])) {
                     return this.model.contents.length > 0;
                 }
-
             }
         },
 

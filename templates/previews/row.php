@@ -1,9 +1,9 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' ); ?>
 
 
-<div :class="model.attributes.container">
+<div :class="containerClass">
 
-	<div v-preview-element :class="rowClass()">
+	<div v-preview-element :class="rowClass">
 
 		<upb-preview-mini-toolbar :contents="false" :model="model"></upb-preview-mini-toolbar>
 

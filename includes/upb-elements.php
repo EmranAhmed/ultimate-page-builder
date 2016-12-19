@@ -6,7 +6,7 @@
 	add_action( 'upb_register_element', function ( $element ) {
 
 		$attributes = array(
-			array( 'id' => 'title', 'title' => 'Title', 'type' => 'text', 'value' => 'Column %s' ),
+			array( 'id' => 'title', 'title' => 'Title', 'type' => 'text', 'value' => 'Column 1' ),
 			array( 'id' => 'lg', 'type' => 'hidden', 'value' => '' ),
 			array( 'id' => 'md', 'type' => 'hidden', 'value' => '' ),
 			array( 'id' => 'sm', 'type' => 'hidden', 'value' => '' ),
@@ -51,7 +51,7 @@
 
 
 		$attributes = array(
-			array( 'id' => 'title', 'title' => 'Row title', 'type' => 'text', 'value' => 'New Row %s' ),
+			array( 'id' => 'title', 'title' => 'Row title', 'type' => 'text', 'value' => 'New Row 1' ),
 			array( 'id' => 'enable', 'title' => 'Enable', 'type' => 'toggle', 'value' => TRUE ),
 			array( 'id' => 'background', 'title' => 'Background', 'type' => 'color', 'value' => '#fff' ),
 		);
@@ -63,7 +63,7 @@
 
 			$default = array_keys( $grid[ 'groupWrapper' ] );
 
-			$attributes[] = array( 'id' => 'container', 'title' => 'Container Type', 'type' => 'radio', 'default' => $default[ 0 ], 'options' => $grid[ 'groupWrapper' ] );
+			$attributes[] = array( 'id' => 'container', 'title' => 'Container Type', 'type' => 'radio', 'value' => $default[ 0 ], 'options' => $grid[ 'groupWrapper' ] );
 		endif;
 
 

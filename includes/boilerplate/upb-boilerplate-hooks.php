@@ -124,9 +124,9 @@
 				) ), array(
 						'title' => array(
 							'type'  => 'text',
-							'value' => 'Row 1'
+							'value' => 'New Row %s'
 						)
-					)  ) )
+					) ) )
 			),
 			array(
 				'id'     => 'section-setting',
@@ -199,7 +199,6 @@
 			'separator'         => '-', // col- deviceId - grid class
 			'groupClass'        => 'upb-row',
 			'groupWrapper'      => array(
-				'upb-no-container'    => 'No Container',
 				'upb-container-fluid' => 'Fluid Container',
 				'upb-container'       => 'Fixed Container'
 			),

@@ -40,8 +40,8 @@ export default{
 
         setValue(value){
 
-            Vue.set(this.attributes, 'value', value)
-            Vue.set(this.model, this.target, value)
+            Vue.set(this.attributes, 'value', value);
+            Vue.set(this.model, this.target, value);
 
             //this.attributes.value   = value;
             //this.model[this.target] = value;
