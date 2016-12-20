@@ -32,6 +32,8 @@ add_action( 'upb_boilerplate_print_footer_scripts', 'wp_print_media_templates' )
 
 do_action( 'upb_boilerplate_template_init' );
 
+
+
 do_action( 'upb_boilerplate_enqueue_scripts' );
 
 // Let's roll.

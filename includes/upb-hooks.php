@@ -41,10 +41,20 @@
             wp_send_json_error( 'missing_contents' );
         }
 
-        print_r( $_POST[ 'states' ] );
-        print_r( $_POST[ 'shortcode' ] );
-
         // SAVE ON PAGE META :D
+
+        $post_id = absint( $_POST[ 'id' ] );
+
+
+        update_post_meta( $post_id, '_upb_sections', $_POST[ 'states' ][ 'sections' ] );
+
+        update_post_meta( $post_id, '_upb_shortcodes', $_POST[ 'shortcode' ] );
+
+
+        upb_settings()->set_settings( $_POST[ 'states' ][ 'settings' ] );
+
+        wp_send_json_success( TRUE );
+
     } );
 
 
@@ -133,46 +143,12 @@
             wp_send_json_error( 'bad_nonce' );
         }
 
-        // return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
+        $post_id = absint( $_POST[ 'id' ] );
 
-        wp_send_json_success( upb_elements()->set_upb_options_recursive(
-            array(
-                array(
-                    'tag'        => 'section',
-                    'contents'   => array(
-                        array(
-                            'tag'        => 'row',
-                            'contents'   => array(
-                                array(
-                                    'tag'        => 'column',
-                                    'contents'   => array(),
-                                    'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL 1', 'lg' => '1:3', 'md' => '2:4', 'sm' => '', 'xs' => '' )
-                                ),
-                                array(
-                                    'tag'        => 'column',
-                                    'contents'   => array(),
-                                    'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL 2', 'lg' => '1:3', 'md' => '1:4', 'sm' => '', 'xs' => '' )
-                                ),
-                                array(
-                                    'tag'        => 'column',
-                                    'contents'   => array(),
-                                    'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'COL 3', 'lg' => '1:3', 'md' => '1:4', 'sm' => '', 'xs' => '' )
-                                ),
-                            ),
-                            'attributes' => array( 'enable' => TRUE, 'background' => '#ddd', 'title' => 'ROW GEN' )
-                        )
-                    ),
-                    'attributes' => array( 'enable' => TRUE, 'background-color' => '#fff', 'title' => 'Section A' )
-                ),
-                array(
-                    'tag'        => 'section',
-                    'contents'   => array(),
-                    'attributes' => array( 'enable' => TRUE, 'background-color' => '#ddd', 'title' => 'Section B' )
-                )
-            )
+        $sections = get_post_meta( $post_id, '_upb_sections', TRUE );
 
+        wp_send_json_success( upb_elements()->set_upb_options_recursive( $sections ) );
 
-        ) );
     } );
 
     // Settings Panel Contents
@@ -188,7 +164,7 @@
             wp_send_json_error( 'bad_nonce' );
         }
 
-        // return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
+        // return get_post_meta( get_the_ID(), '_upb_settings', TRUE );
 
         wp_send_json_success( upb_settings()->getAll() );
     } );
@@ -205,9 +181,6 @@
             status_header( 400 );
             wp_send_json_error( 'bad_nonce' );
         }
-
-        // return get_post_meta( get_the_ID(), '_upb_sections', TRUE );
-
 
         wp_send_json_success( upb_elements()->getAll() );
     } );

@@ -17,6 +17,8 @@ Vue.use(Droppable);
 
 store.getAllUPBElements((elements) => {
 
+   // console.log(elements);
+
     elements.map((element)=> {
 
         let template           = element._upb_options.preview.template;

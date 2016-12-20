@@ -116,6 +116,8 @@ class store {
 
     getPanelContents(panel_hook, success, error) {
 
+        console.log(panel_hook);
+
         wp.ajax.send(panel_hook, {
             success : success,
             error   : error,

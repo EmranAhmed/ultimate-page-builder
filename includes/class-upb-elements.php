@@ -76,7 +76,6 @@
                     $attributes[ $index ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $attribute[ 'type' ] );
                 }
 
-
                 $this->short_code_elements[ $tag ] = array(
                     'tag'           => $tag,
                     'contents'      => $contents,
@@ -85,10 +84,8 @@
                     '_upb_options'  => $_upb_options
                 );
 
-
                 $shortcode_fn    = sprintf( 'upb_register_shortcode_%s', $tag );
                 $vue_template_fn = sprintf( 'upb_shortcode_preview_%s', $tag );
-
 
                 if ( ! shortcode_exists( $tag ) && ! is_callable( $shortcode_fn ) ) {
                     trigger_error( sprintf( 'Ultimate page builder shortcode "%s" template function "%s" not found.', $tag, $shortcode_fn ), E_USER_WARNING );
@@ -98,14 +95,11 @@
                     }
                 }
 
-
                 if ( ! is_callable( $vue_template_fn ) ) {
                     trigger_error( sprintf( 'Ultimate page builder shortcode preview "%s" template function "%s" not found.', $tag, $vue_template_fn ), E_USER_WARNING );
                 } else {
                     add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', $tag ), $vue_template_fn );
                 }
-
-
             }
 
             public function get_elements() {
@@ -191,10 +185,17 @@
                 $new_attributes = array();
                 foreach ( $attributes as $index => $attribute ) {
 
+
+                    $value = isset( $attribute[ 'value' ] ) ? $attribute[ 'value' ] : '';
+
+                    if ( $value === 'true' || $value === 'false' ) {
+                        $value = filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+                    }
+
                     if ( isset( $attribute[ 'id' ] ) ) {
-                        $new_attributes[ $attribute[ 'id' ] ] = isset( $attribute[ 'value' ] ) ? $attribute[ 'value' ] : '';
+                        $new_attributes[ $attribute[ 'id' ] ] = $value;
                     } else {
-                        $new_attributes[ $index ] = isset( $attribute[ 'value' ] ) ? $attribute[ 'value' ] : '';
+                        $new_attributes[ $index ] = $value;
                     }
                 }
 
@@ -223,6 +224,10 @@
                     // Saved Value
                     if ( ! is_null( $attributes[ $value[ 'id' ] ] ) ) {
                         $settings[ $key ][ 'value' ] = $attributes[ $value[ 'id' ] ];
+                    }
+
+                    if ( $settings[ $key ][ 'value' ] === 'true' || $settings[ $key ][ 'value' ] === 'false' ) {
+                        $settings[ $key ][ 'value' ] = filter_var( $settings[ $key ][ 'value' ], FILTER_VALIDATE_BOOLEAN );
                     }
 
 
