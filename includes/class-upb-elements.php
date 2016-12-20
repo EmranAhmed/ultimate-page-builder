@@ -93,7 +93,9 @@
                 if ( ! shortcode_exists( $tag ) && ! is_callable( $shortcode_fn ) ) {
                     trigger_error( sprintf( 'Ultimate page builder shortcode "%s" template function "%s" not found.', $tag, $shortcode_fn ), E_USER_WARNING );
                 } else {
-                    add_shortcode( $tag, $shortcode_fn );
+                    if ( ! shortcode_exists( $tag ) ) {
+                        add_shortcode( $tag, $shortcode_fn );
+                    }
                 }
 
 
@@ -102,6 +104,7 @@
                 } else {
                     add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', $tag ), $vue_template_fn );
                 }
+
 
             }
 
@@ -221,7 +224,7 @@
                     if ( ! is_null( $attributes[ $value[ 'id' ] ] ) ) {
                         $settings[ $key ][ 'value' ] = $attributes[ $value[ 'id' ] ];
                     }
-                    
+
 
                     // Set to attribute
 

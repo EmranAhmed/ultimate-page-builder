@@ -1,66 +1,63 @@
 <?php
 
-	defined( 'ABSPATH' ) or die( 'Keep Quit' );
+    defined( 'ABSPATH' ) or die( 'Keep Quit' );
 
-	if ( ! function_exists( 'upb_register_shortcode_column' ) ):
-		function upb_register_shortcode_column( $attrs, $contents = NULL ) {
+    if ( ! function_exists( 'upb_register_shortcode_column' ) ):
+        function upb_register_shortcode_column( $attrs, $contents = NULL ) {
 
-			$default = upb_elements()->get_element( 'column', 'attributes' );
+            $default = upb_elements()->get_element( 'column', 'attributes' );
 
-			$attributes = shortcode_atts( $default, $attrs, 'column' );
+            $attributes = shortcode_atts( $default, $attrs, 'column' );
 
-			ob_start();
+            ob_start();
 
-			upb_get_template( "shortcodes/column.php", compact( 'attributes', 'contents' ) );
+            upb_get_template( "shortcodes/column.php", compact( 'attributes', 'contents' ) );
 
-			return ob_get_clean();
-		}
-	endif;
+            return ob_get_clean();
+        }
+    endif;
 
+    if ( ! function_exists( 'upb_register_shortcode_row' ) ):
+        function upb_register_shortcode_row( $attrs, $contents = NULL ) {
 
-	if ( ! function_exists( 'upb_register_shortcode_row' ) ):
-		function upb_register_shortcode_row( $attrs, $contents = NULL ) {
+            $default = upb_elements()->get_element( 'row', 'attributes' );
 
-			$default = upb_elements()->get_element( 'row', 'attributes' );
+            $attributes = shortcode_atts( $default, $attrs, 'row' );
 
-			$attributes = shortcode_atts( $default, $attrs, 'row' );
+            ob_start();
 
-			ob_start();
+            upb_get_template( "shortcodes/row.php", compact( 'attributes', 'contents' ) );
 
-			upb_get_template( "shortcodes/row.php", compact( 'attributes', 'contents' ) );
+            return ob_get_clean();
+        }
+    endif;
 
-			return ob_get_clean();
-		}
-	endif;
+    if ( ! function_exists( 'upb_register_shortcode_section' ) ):
+        function upb_register_shortcode_section( $attrs, $contents = NULL ) {
 
+            $default = upb_elements()->get_element( 'section', 'attributes' );
 
-	if ( ! function_exists( 'upb_register_shortcode_section' ) ):
-		function upb_register_shortcode_section( $attrs, $contents = NULL ) {
+            $attributes = shortcode_atts( $default, $attrs, 'section' );
 
-			$default = upb_elements()->get_element( 'section', 'attributes' );
+            ob_start();
 
-			$attributes = shortcode_atts( $default, $attrs, 'section' );
+            upb_get_template( "shortcodes/section.php", compact( 'attributes', 'contents' ) );
 
-			ob_start();
+            return ob_get_clean();
+        }
+    endif;
 
-			upb_get_template( "shortcodes/section.php", compact( 'attributes', 'contents' ) );
+    if ( ! function_exists( 'upb_register_shortcode_text' ) ):
+        function upb_register_shortcode_text( $attrs, $contents = NULL ) {
 
-			return ob_get_clean();
-		}
-	endif;
+            $default = upb_elements()->get_element( 'text', 'attributes' );
 
+            $attributes = shortcode_atts( $default, $attrs, 'text' );
 
-	if ( ! function_exists( 'upb_register_shortcode_text' ) ):
-		function upb_register_shortcode_text( $attrs, $contents = NULL ) {
+            ob_start();
 
-			$default = upb_elements()->get_element( 'text', 'attributes' );
+            upb_get_template( "shortcodes/text.php", compact( 'attributes', 'contents' ) );
 
-			$attributes = shortcode_atts( $default, $attrs, 'text' );
-
-			ob_start();
-
-			upb_get_template( "shortcodes/text.php", compact( 'attributes', 'contents' ) );
-
-			return ob_get_clean();
-		}
-	endif;
+            return ob_get_clean();
+        }
+    endif;

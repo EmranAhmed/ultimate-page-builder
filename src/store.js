@@ -1,4 +1,5 @@
-import extend from 'extend';
+import extend from 'extend'
+import sanitizeHtml from 'sanitize-html'
 
 class store {
 
@@ -70,24 +71,47 @@ class store {
 
     saveState(success, error) {
 
-        const state = {};
+        const contents = {};
 
         this.tabs.map((data) => {
-            let newdata       = extend(true, {}, data);
-            state[data['id']] = this.cleanup(newdata.contents);
+            let newdata          = extend(true, {}, data);
+            contents[data['id']] = this.cleanup(newdata.contents);
         });
 
-        console.log(state);
+        console.log(contents);
 
         wp.ajax.send("_upb_save", {
             success : success,
             error   : error,
             data    : {
-                _nonce : this.status._nonce,
-                id     : this.status._id,
-                states : state
+                _nonce    : this.status._nonce,
+                id        : this.status._id,
+                states    : contents,
+                shortcode : this.getShortcode(contents.sections)
             }
         });
+    }
+
+    getShortcode(shortcodes) {
+        return shortcodes.map((shortcode)=> {
+            return wp.shortcode.string({
+                tag     : shortcode.tag,
+                attrs   : shortcode.attributes,
+                content : this.getShortcodeContent(shortcode.contents)
+            });
+        }).join('');
+    }
+
+    getShortcodeContent(content) {
+
+        if (_.isArray(content)) {
+            return this.getShortcode(content);
+        }
+
+        if (_.isString(content)) {
+            return this.wp_kses_post(content);
+        }
+        return null;
     }
 
     getPanelContents(panel_hook, success, error) {
@@ -180,6 +204,14 @@ class store {
                 _nonce   : this.status._nonce,
                 contents : contents
             }
+        });
+    }
+
+    wp_kses_post(contents) {
+        return sanitizeHtml(contents, {
+            allowedTags       : this.l10n.allowedTags,
+            allowedAttributes : this.l10n.allowedAttributes,
+            allowedSchemes    : this.l10n.allowedSchemes
         });
     }
 }

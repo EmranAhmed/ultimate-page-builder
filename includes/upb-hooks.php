@@ -36,12 +36,13 @@
             wp_send_json_error( 'bad_nonce' );
         }
 
-        if ( empty( $_POST[ 'contents' ] ) || ! is_array( $_POST[ 'contents' ] ) ) {
+        if ( empty( $_POST[ 'shortcode' ] ) || ! is_array( $_POST[ 'states' ] ) ) {
             status_header( 400 );
             wp_send_json_error( 'missing_contents' );
         }
 
-        print_r( $_POST[ 'contents' ] );
+        print_r( $_POST[ 'states' ] );
+        print_r( $_POST[ 'shortcode' ] );
 
         // SAVE ON PAGE META :D
     } );
