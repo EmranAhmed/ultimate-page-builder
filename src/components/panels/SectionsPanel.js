@@ -75,6 +75,8 @@ export default {
                 this.$progressbar.show();
                 store.getPanelContents('_get_upb_sections_panel_contents', (data) => {
 
+                    console.log(data);
+
                     this.$nextTick(function () {
                         Vue.set(this.model, 'contents', extend(true, [], data));
                     });

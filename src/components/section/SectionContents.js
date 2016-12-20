@@ -1,23 +1,23 @@
-import Vue, { util } from 'vue';
+import Vue, { util } from 'vue'
 
 import store from '../../store'
 
 import Sortable from '../../plugins/vue-sortable'
-import extend from 'extend';
-import {sprintf} from 'sprintf-js';
+import extend from 'extend'
+import {sprintf} from 'sprintf-js'
 
-import RowList from '../row/RowList.vue';
+import RowList from '../row/RowList.vue'
 
-import RowContents from '../row/RowContents.vue';
+import RowContents from '../row/RowContents.vue'
 
 Vue.use(Sortable);
 
 // Row List
-Vue.component('row-list', RowList);
-Vue.component('row-contents', RowContents);
+Vue.component('row-list', RowList)
+Vue.component('row-contents', RowContents)
 
-import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
-Vue.component('upb-breadcrumb', UPBBreadcrumb);
+import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue'
+Vue.component('upb-breadcrumb', UPBBreadcrumb)
 
 export default {
     name  : 'section-contents',
@@ -39,10 +39,9 @@ export default {
                 placeholder : "upb-sort-placeholder",
                 axis        : 'y'
             },
+
             searchQuery : '',
-
-            item : {},
-
+            item        : {}
         }
     },
 

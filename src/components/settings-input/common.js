@@ -25,12 +25,8 @@ export default{
 
         // No Value but have default
         if (_.isNull(this.attributes.value) && !_.isNull(this.attributes.default)) {
-
             if (this.attributes.default === 'true' || this.attributes.default === 'false') {
                 this.input = this.str2Bool(this.attributes.default);
-            }
-            else {
-                this.input = this.attributes.default;
             }
         }
 
@@ -38,9 +34,6 @@ export default{
         if (!_.isNull(this.attributes.value)) {
             if (this.attributes.value === 'true' || this.attributes.value === 'false') {
                 this.input = this.str2Bool(this.attributes.value);
-            }
-            else {
-                this.input = this.attributes.value;
             }
         }
     },

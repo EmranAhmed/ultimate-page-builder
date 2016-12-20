@@ -30,7 +30,7 @@ export default {
             const fromDepth     = from.path.split('/').length;
             this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
 
-            // Close Subpanel If opened
+            // Close Sub Panel If opened
             store.closeSubPanel();
             this.item = this.getTabContent();
 

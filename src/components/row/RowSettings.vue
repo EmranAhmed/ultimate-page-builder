@@ -52,7 +52,7 @@
 
         <li class="upb-panel-contents">
             <ul class="upb-panel-contents-items">
-                <component v-for="(settings, index) in contents._upb_settings" :index="index" :attributes="settings" :target="settings.id" :model="item.attributes" :is="settings._upb_field_type"></component>
+                <component v-for="(settings, index) in contents._upb_settings" :item="contents" :index="index" :attributes="settings" :target="settings.id" :model="item.attributes" :is="settings._upb_field_type"></component>
             </ul>
         </li>
     </ul>

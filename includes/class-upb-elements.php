@@ -1,286 +1,310 @@
 <?php
 
-	defined( 'ABSPATH' ) or die( 'Keep Silent' );
+    defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
-	if ( ! class_exists( 'UPB_Elements' ) ):
+    if ( ! class_exists( 'UPB_Elements' ) ):
 
-		class UPB_Elements {
+        class UPB_Elements {
 
-			private static $instance            = NULL;
-			private        $short_code_elements = array();
+            private static $instance            = NULL;
+            private        $short_code_elements = array();
 
-			private $core_elements = array( 'section', 'row', 'column' );
+            private $core_elements = array( 'section', 'row', 'column' );
 
-			private function __construct() {
-				$this->props = new UPB_Elements_Props();
-			}
+            private function __construct() {
+                $this->props = new UPB_Elements_Props();
+            }
 
-			public static function getInstance() {
+            public static function getInstance() {
 
-				if ( is_null( self::$instance ) ) {
-					self::$instance = new self();
-				}
+                if ( is_null( self::$instance ) ) {
+                    self::$instance = new self();
+                }
 
-				return self::$instance;
-			}
+                return self::$instance;
+            }
 
-			public function register( $tag, $attributes = array(), $contents = FALSE, $_upb_options = array() ) {
+            public function register( $tag, $attributes = array(), $contents = FALSE, $_upb_options = array() ) {
 
 
-				if ( $this->has_element( $tag ) ) {
-					throw new Exception( sprintf( 'Ultimate page builder element "%s" already registered.', $tag ) );
-				}
+                if ( $this->has_element( $tag ) ) {
+                    throw new Exception( sprintf( 'Ultimate page builder element "%s" already registered.', $tag ) );
+                }
 
-				$_upb_options[ 'focus' ] = FALSE;
+                $_upb_options[ 'focus' ] = FALSE;
 
 
-				if ( in_array( $tag, $this->core_elements ) ) {
-					$_upb_options[ 'core' ] = TRUE;
-				}
+                if ( in_array( $tag, $this->core_elements ) ) {
+                    $_upb_options[ 'core' ] = TRUE;
+                }
 
 
-				if ( ! isset( $_upb_options[ 'preview' ] ) ) {
-					$_upb_options[ 'preview' ] = array(
-						//	'component' => 'upb-' . $tag,
-						'template' => $tag,
-						'mixins'   => '{}' // javascript object, like: { methods:{ abcd(){} } } or window.abcdMixins = {}
+                if ( ! isset( $_upb_options[ 'preview' ] ) ) {
+                    $_upb_options[ 'preview' ] = array(
+                        //	'component' => 'upb-' . $tag,
+                        'template' => $tag,
+                        'mixins'   => '{}' // javascript object, like: { methods:{ abcd(){} } } or window.abcdMixins = {}
 
-					);
-				}
+                    );
+                }
 
-				//if ( ! isset( $_upb_options[ 'preview' ][ 'component' ] ) ) {
-				$_upb_options[ 'preview' ][ 'component' ] = 'upb-' . $tag;
-				//}
+                //if ( ! isset( $_upb_options[ 'preview' ][ 'component' ] ) ) {
+                $_upb_options[ 'preview' ][ 'component' ] = 'upb-' . $tag;
+                //}
 
-				if ( ! isset( $_upb_options[ 'preview' ][ 'mixins' ] ) ) {
-					$_upb_options[ 'preview' ][ 'mixins' ] = '{}';
-				}
+                if ( ! isset( $_upb_options[ 'preview' ][ 'mixins' ] ) ) {
+                    $_upb_options[ 'preview' ][ 'mixins' ] = '{}';
+                }
 
-				if ( ! isset( $_upb_options[ 'preview' ][ 'template' ] ) ) {
-					$_upb_options[ 'preview' ][ 'template' ] = $tag;
-				}
+                if ( ! isset( $_upb_options[ 'preview' ][ 'template' ] ) ) {
+                    $_upb_options[ 'preview' ][ 'template' ] = $tag;
+                }
 
 
-				$attributes   = apply_filters( "upb_element_{$tag}_attributes", $attributes );
-				$_upb_options = apply_filters( "upb_element_{$tag}_options", $_upb_options );
+                $attributes   = apply_filters( "upb_element_{$tag}_attributes", $attributes );
+                $_upb_options = apply_filters( "upb_element_{$tag}_options", $_upb_options );
 
 
-				if ( is_string( $contents ) ) {
-					$attributes[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', 'Contents' ), 'type' => 'contents', 'value' => $contents );
-				}
+                if ( is_string( $contents ) ) {
+                    $attributes[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', 'Contents' ), 'type' => 'contents', 'value' => $contents );
+                }
 
-				foreach ( $attributes as $index => $attribute ) {
-					//$attributes[ $index ][ 'metaKey' ]   = $attribute[ 'id' ];
-					$attributes[ $index ][ '_id' ] = $attribute[ 'id' ];
-					//$attributes[ $index ][ 'metaValue' ] = $attribute[ 'value' ];
-					$attributes[ $index ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $attribute[ 'type' ] );
-				}
+                foreach ( $attributes as $index => $attribute ) {
+                    //$attributes[ $index ][ 'metaKey' ]   = $attribute[ 'id' ];
+                    $attributes[ $index ][ '_id' ] = $attribute[ 'id' ];
+                    //$attributes[ $index ][ 'metaValue' ] = $attribute[ 'value' ];
+                    $attributes[ $index ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $attribute[ 'type' ] );
+                }
 
 
-				$this->short_code_elements[ $tag ] = array(
-					'tag'           => $tag,
-					'contents'      => $contents,
-					'attributes'    => ( empty( $attributes ) ? FALSE : $this->to_attributes( $attributes ) ),
-					'_upb_settings' => ( empty( $attributes ) ? FALSE : $attributes ),
-					'_upb_options'  => $_upb_options
-				);
+                $this->short_code_elements[ $tag ] = array(
+                    'tag'           => $tag,
+                    'contents'      => $contents,
+                    'attributes'    => ( empty( $attributes ) ? FALSE : $this->to_attributes( $attributes ) ),
+                    '_upb_settings' => ( empty( $attributes ) ? FALSE : $attributes ),
+                    '_upb_options'  => $_upb_options
+                );
 
 
-				$shortcode_fn    = sprintf( 'upb_register_shortcode_%s', $tag );
-				$vue_template_fn = sprintf( 'upb_shortcode_preview_%s', $tag );
+                $shortcode_fn    = sprintf( 'upb_register_shortcode_%s', $tag );
+                $vue_template_fn = sprintf( 'upb_shortcode_preview_%s', $tag );
 
-				if ( ! is_callable( $shortcode_fn ) ) {
-					trigger_error( sprintf( 'Ultimate page builder shortcode "%s" template function "%s" not found.', $tag, $shortcode_fn ), E_USER_WARNING );
-				} else {
-					add_shortcode( $tag, $shortcode_fn );
-				}
 
-				if ( ! is_callable( $vue_template_fn ) ) {
-					trigger_error( sprintf( 'Ultimate page builder shortcode preview "%s" template function "%s" not found.', $tag, $vue_template_fn ), E_USER_WARNING );
-				} else {
-					add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', $tag ), $vue_template_fn );
-				}
+                if ( ! shortcode_exists( $tag ) && ! is_callable( $shortcode_fn ) ) {
+                    trigger_error( sprintf( 'Ultimate page builder shortcode "%s" template function "%s" not found.', $tag, $shortcode_fn ), E_USER_WARNING );
+                } else {
+                    add_shortcode( $tag, $shortcode_fn );
+                }
 
-			}
 
-			public function get_elements() {
-				return $this->short_code_elements;
-			}
+                if ( ! is_callable( $vue_template_fn ) ) {
+                    trigger_error( sprintf( 'Ultimate page builder shortcode preview "%s" template function "%s" not found.', $tag, $vue_template_fn ), E_USER_WARNING );
+                } else {
+                    add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', $tag ), $vue_template_fn );
+                }
 
-			public function getAll() {
-				return array_values( $this->short_code_elements );
-			}
+            }
 
-			public function get_element( $tag, $key = FALSE ) {
+            public function get_elements() {
+                return $this->short_code_elements;
+            }
 
-				if ( ! $this->has_element( $tag ) ) {
-					return FALSE;
-				}
+            public function getAll() {
+                return array_values( $this->short_code_elements );
+            }
 
-				if ( $key ) {
-					return $this->short_code_elements[ $tag ][ $key ];
-				} else {
-					return $this->short_code_elements[ $tag ];
-				}
-			}
+            public function get_element( $tag, $key = FALSE ) {
 
-			public function generate_element( $tag, $contents = array(), $attributes = array() ) {
+                if ( ! $this->has_element( $tag ) ) {
+                    return FALSE;
+                }
 
-				if ( ! $this->has_element( $tag ) ) {
-					throw new Exception( sprintf( 'Ultimate page builder element "%s" is not registered.', $tag ) );
-				}
+                if ( $key ) {
+                    return $this->short_code_elements[ $tag ][ $key ];
+                } else {
+                    return $this->short_code_elements[ $tag ];
+                }
+            }
 
-				$el = $this->get_element( $tag );
+            public function generate_element( $tag, $contents = array(), $attributes = array() ) {
 
-				if ( ! empty( $contents ) ) {
+                if ( ! $this->has_element( $tag ) ) {
+                    throw new Exception( sprintf( 'Ultimate page builder element "%s" is not registered.', $tag ) );
+                }
 
-					if ( isset( $contents[ 0 ] ) ) {
-						foreach ( $contents as $content ) {
-							array_push( $el[ 'contents' ], $content );
-						}
-					} else {
-						array_push( $el[ 'contents' ], $contents );
-					}
-				}
+                $el = $this->get_element( $tag );
 
-				if ( ! empty( $attributes ) ) {
-					$el[ 'attributes' ]    = array_merge( $el[ 'attributes' ], $this->to_attributes( $attributes ) );
-					$el[ '_upb_settings' ] = array_merge( $el[ '_upb_settings' ], $el[ 'attributes' ] );
-				}
+                if ( ! empty( $contents ) ) {
 
-				return $el;
-			}
+                    if ( isset( $contents[ 0 ] ) ) {
+                        foreach ( $contents as $content ) {
+                            array_push( $el[ 'contents' ], $content );
+                        }
+                    } else {
+                        array_push( $el[ 'contents' ], $contents );
+                    }
+                }
 
-			public function demo_data( $tag, $contents = array(), $attributes = array() ) {
+                if ( ! empty( $attributes ) ) {
+                    $el[ 'attributes' ]    = array_merge( $el[ 'attributes' ], $this->to_attributes( $attributes ) );
+                    $el[ '_upb_settings' ] = array_merge( $el[ '_upb_settings' ], $el[ 'attributes' ] );
+                }
 
-				if ( ! $this->has_element( $tag ) ) {
-					throw new Exception( sprintf( 'Ultimate page builder element "%s" is not registered.', $tag ) );
-				}
+                return $el;
+            }
 
-				$el = $this->get_element( $tag );
+            public function demo_data( $tag, $contents = array(), $attributes = array() ) {
 
-				if ( ! empty( $contents ) ) {
+                if ( ! $this->has_element( $tag ) ) {
+                    throw new Exception( sprintf( 'Ultimate page builder element "%s" is not registered.', $tag ) );
+                }
 
-					if ( isset( $contents[ 0 ] ) ) {
-						foreach ( $contents as $content ) {
-							array_push( $el[ 'contents' ], $content );
-						}
-					} else {
-						array_push( $el[ 'contents' ], $contents );
-					}
-				}
+                $el = $this->get_element( $tag );
 
-				if ( ! empty( $attributes ) ) {
-					$el[ 'attributes' ] = array_merge( $el[ 'attributes' ], $this->to_attributes( $attributes ) );
-				}
+                if ( ! empty( $contents ) ) {
 
-				return $el;
-			}
+                    if ( isset( $contents[ 0 ] ) ) {
+                        foreach ( $contents as $content ) {
+                            array_push( $el[ 'contents' ], $content );
+                        }
+                    } else {
+                        array_push( $el[ 'contents' ], $contents );
+                    }
+                }
 
-			public function has_element( $tag ) {
-				return isset( $this->short_code_elements[ $tag ] );
-			}
+                if ( ! empty( $attributes ) ) {
+                    $el[ 'attributes' ] = array_merge( $el[ 'attributes' ], $this->to_attributes( $attributes ) );
+                }
 
-			public function to_attributes( $attributes ) {
+                return $el;
+            }
 
-				$new_attributes = array();
-				foreach ( $attributes as $index => $attribute ) {
+            public function has_element( $tag ) {
+                return isset( $this->short_code_elements[ $tag ] );
+            }
 
-					if ( isset( $attribute[ 'id' ] ) ) {
-						$new_attributes[ $attribute[ 'id' ] ] = isset( $attribute[ 'value' ] ) ? $attribute[ 'value' ] : '';
-					} else {
-						$new_attributes[ $index ] = isset( $attribute[ 'value' ] ) ? $attribute[ 'value' ] : '';
-					}
-				}
+            public function to_attributes( $attributes ) {
 
-				return $new_attributes;
-			}
+                $new_attributes = array();
+                foreach ( $attributes as $index => $attribute ) {
 
-			public function to_settings( $tag, $attributes ) {
+                    if ( isset( $attribute[ 'id' ] ) ) {
+                        $new_attributes[ $attribute[ 'id' ] ] = isset( $attribute[ 'value' ] ) ? $attribute[ 'value' ] : '';
+                    } else {
+                        $new_attributes[ $index ] = isset( $attribute[ 'value' ] ) ? $attribute[ 'value' ] : '';
+                    }
+                }
 
-				$settings = $this->get_element( $tag, '_upb_settings' );
+                return $new_attributes;
+            }
 
-				// Keeps Old Attribute
-				/*foreach ( $attributes as $key => $value ) {
-					$settings[ $key ][ 'value' ] = $value;
-				}*/
+            public function to_settings( $tag, $attributes ) {
 
+                $settings = (array) $this->get_element( $tag, '_upb_settings' );
 
-				// Always new attribute
-				foreach ( $settings as $key => $value ) {
+                // Keeps Old Attribute
+                /*foreach ( $attributes as $key => $value ) {
+                    $settings[ $key ][ 'value' ] = $value;
+                }*/
 
-					// For normal element attr
-					$settings[ $key ][ 'value' ] = $attributes[ $value[ 'id' ] ];
-					//$settings[ $key ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $attributes[ $value[ 'type' ] ] );
 
+                // Always new attribute
+                foreach ( $settings as $key => $value ) {
 
-					//$settings[ $key ][ 'metaKey' ]   = $value[ 'id' ];
-					//$settings[ $key ][ 'metaValue' ] = $attributes[ $value[ 'id' ] ];
 
+                    // New Settings added and have default value
+                    if ( is_null( $attributes[ $value[ 'id' ] ] ) && isset( $settings[ $key ][ 'default' ] ) && ! isset( $settings[ $key ][ 'value' ] ) ) {
+                        $settings[ $key ][ 'value' ] = $settings[ $key ][ 'default' ];
+                    }
 
-					if ( isset( $attributes[ $key ] ) ) {
-						// For Keywise element attr
-						//$settings[ $key ][ 'value' ] = $attributes[ $key ];
-					}
-				}
+                    // Saved Value
+                    if ( ! is_null( $attributes[ $value[ 'id' ] ] ) ) {
+                        $settings[ $key ][ 'value' ] = $attributes[ $value[ 'id' ] ];
+                    }
+                    
 
+                    // Set to attribute
 
-				return $settings;
-			}
 
-			public function set_upb_options( $contents ) {
+                    // For normal element attr
+                    //$settings[ $key ][ 'value' ] = $attributes[ $value[ 'id' ] ];
 
-				foreach ( $contents as $index => $content ) {
 
-					if ( ! isset( $content[ 'contents' ] ) and is_array( $this->get_element( $content[ 'tag' ], 'contents' ) ) ) {
-						$contents[ $index ][ 'contents' ] = $this->get_element( $content[ 'tag' ], 'contents' );
-					}
+                    if ( is_null( $attributes[ $value[ 'id' ] ] ) && isset( $settings[ $key ][ 'default' ] ) ) {
+                        //    $settings[ $key ][ 'value' ] = $settings[ $key ][ 'default' ];
+                    }
 
-					if ( is_string( $this->get_element( $content[ 'tag' ], 'contents' ) ) ) {
-						$contents[ $index ][ 'attributes' ][ '_contents' ] = wp_kses_post( $content[ 'contents' ] );
-						$content[ 'attributes' ][ '_contents' ]            = wp_kses_post( $content[ 'contents' ] );
-					}
 
-					//if ( ! isset( $contents[ $index ][ '_upb_settings' ] ) ) {
-					$contents[ $index ][ '_upb_settings' ] = $this->to_settings( $content[ 'tag' ], $content[ 'attributes' ] );
-					//}
+                    //$settings[ $key ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $attributes[ $value[ 'type' ] ] );
 
-					//if ( ! isset( $contents[ $index ][ '_upb_options' ] ) ) {
-					$contents[ $index ][ '_upb_options' ] = $this->get_element( $content[ 'tag' ], '_upb_options' );
-					//}
-				}
 
-				return $contents;
-			}
+                    //$settings[ $key ][ 'metaKey' ]   = $value[ 'id' ];
+                    //$settings[ $key ][ 'metaValue' ] = $attributes[ $value[ 'id' ] ];
 
-			public function set_upb_options_recursive( $contents ) {
 
-				foreach ( $contents as $index => $content ) {
+                    if ( isset( $attributes[ $key ] ) ) {
+                        // For Keywise element attr
+                        //$settings[ $key ][ 'value' ] = $attributes[ $key ];
+                    }
+                }
 
-					if ( ! isset( $content[ 'contents' ] ) and is_array( $this->get_element( $content[ 'tag' ], 'contents' ) ) ) {
-						$contents[ $index ][ 'contents' ] = $this->get_element( $content[ 'tag' ], 'contents' );
-					}
 
-					if ( is_string( $this->get_element( $content[ 'tag' ], 'contents' ) ) ) {
-						$contents[ $index ][ 'attributes' ][ '_contents' ] = wp_kses_post( $content[ 'contents' ] );
-						$content[ 'attributes' ][ '_contents' ]            = wp_kses_post( $content[ 'contents' ] );
-					}
+                return $settings;
+            }
 
-					//if ( ! isset( $contents[ $index ][ '_upb_settings' ] ) ) {
-					$contents[ $index ][ '_upb_settings' ] = $this->to_settings( $content[ 'tag' ], $content[ 'attributes' ] );
-					//}
+            public function set_upb_options( $contents ) {
 
-					//if ( ! isset( $contents[ $index ][ '_upb_options' ] ) ) {
-					$contents[ $index ][ '_upb_options' ] = $this->get_element( $content[ 'tag' ], '_upb_options' );
-					//}
+                foreach ( $contents as $index => $content ) {
 
-					if ( ! empty( $content[ 'contents' ] ) && is_array( $content[ 'contents' ] ) ) {
-						$contents[ $index ][ 'contents' ] = $this->set_upb_options_recursive( $content[ 'contents' ] );
-					}
-				}
+                    if ( ! isset( $content[ 'contents' ] ) and is_array( $this->get_element( $content[ 'tag' ], 'contents' ) ) ) {
+                        $contents[ $index ][ 'contents' ] = $this->get_element( $content[ 'tag' ], 'contents' );
+                    }
 
-				return $contents;
-			}
-		}
+                    if ( is_string( $this->get_element( $content[ 'tag' ], 'contents' ) ) ) {
+                        $contents[ $index ][ 'attributes' ][ '_contents' ] = wp_kses_post( $content[ 'contents' ] );
+                        $content[ 'attributes' ][ '_contents' ]            = wp_kses_post( $content[ 'contents' ] );
+                    }
 
-	endif;
+                    //if ( ! isset( $contents[ $index ][ '_upb_settings' ] ) ) {
+                    $contents[ $index ][ '_upb_settings' ] = $this->to_settings( $content[ 'tag' ], $content[ 'attributes' ] );
+                    //}
+
+                    //if ( ! isset( $contents[ $index ][ '_upb_options' ] ) ) {
+                    $contents[ $index ][ '_upb_options' ] = $this->get_element( $content[ 'tag' ], '_upb_options' );
+                    //}
+                }
+
+                return $contents;
+            }
+
+            public function set_upb_options_recursive( $contents ) {
+
+                foreach ( $contents as $index => $content ) {
+
+                    if ( ! isset( $content[ 'contents' ] ) and is_array( $this->get_element( $content[ 'tag' ], 'contents' ) ) ) {
+                        $contents[ $index ][ 'contents' ] = $this->get_element( $content[ 'tag' ], 'contents' );
+                    }
+
+                    if ( is_string( $this->get_element( $content[ 'tag' ], 'contents' ) ) ) {
+                        $contents[ $index ][ 'attributes' ][ '_contents' ] = wp_kses_post( $content[ 'contents' ] );
+                        $content[ 'attributes' ][ '_contents' ]            = wp_kses_post( $content[ 'contents' ] );
+                    }
+
+                    //if ( ! isset( $contents[ $index ][ '_upb_settings' ] ) ) {
+                    $contents[ $index ][ '_upb_settings' ] = $this->to_settings( $content[ 'tag' ], $content[ 'attributes' ] );
+                    //}
+
+                    //if ( ! isset( $contents[ $index ][ '_upb_options' ] ) ) {
+                    $contents[ $index ][ '_upb_options' ] = $this->get_element( $content[ 'tag' ], '_upb_options' );
+                    //}
+
+                    if ( ! empty( $content[ 'contents' ] ) && is_array( $content[ 'contents' ] ) ) {
+                        $contents[ $index ][ 'contents' ] = $this->set_upb_options_recursive( $content[ 'contents' ] );
+                    }
+                }
+
+                return $contents;
+            }
+        }
+
+    endif;
