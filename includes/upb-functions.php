@@ -44,3 +44,7 @@
 
     }
 
+    function upb_is_enabled() {
+        return Ultimate_Page_Builder()->is_enabled();
+    }
+

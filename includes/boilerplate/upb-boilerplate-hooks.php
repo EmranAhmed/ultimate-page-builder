@@ -491,7 +491,6 @@
             'pick'          => __( 'Select Color' ),
             'current'       => __( 'Current Color' ),
         ) );
-        wp_register_script( 'wp-color-picker', admin_url( "/js/color-picker$suffix.js" ), array( 'iris' ), FALSE, TRUE );
 
         wp_register_script( 'wp-color-picker-alpha', UPB_PLUGIN_ASSETS_URI . "js/wp-color-picker-alpha$suffix.js", array( 'wp-color-picker' ), FALSE, TRUE );
 

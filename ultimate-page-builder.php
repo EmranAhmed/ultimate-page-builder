@@ -1,123 +1,138 @@
 <?php
-	/**
-	 * Plugin Name: Ultimate Page Builder
-	 * Plugin URI: http://wordpress.org/plugins/ultimate-page-builder/
-	 * Description: Ultimate Page builder from Customizer
-	 * Author: Emran Ahmed
-	 * Version: 1.0.0
-	 * Domain Path: /languages
-	 * Text Domain: ultimate-page-builder
-	 * Author URI: http://themehippo.com/
-	 */
+    /**
+     * Plugin Name: Ultimate Page Builder
+     * Plugin URI: http://wordpress.org/plugins/ultimate-page-builder/
+     * Description: Ultimate Page builder from Customizer
+     * Author: Emran Ahmed
+     * Version: 1.0.0
+     * Domain Path: /languages
+     * Text Domain: ultimate-page-builder
+     * Author URI: http://themehippo.com/
+     */
 
-	defined( 'ABSPATH' ) or die( 'Keep Silent' );
+    defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
-	if ( ! class_exists( 'Ultimate_Page_Builder' ) ):
+    if ( ! class_exists( 'Ultimate_Page_Builder' ) ):
 
-		final class Ultimate_Page_Builder {
+        final class Ultimate_Page_Builder {
 
-			protected static $_instance = NULL;
+            protected static $_instance = NULL;
 
-			public static function init() {
-				if ( is_null( self::$_instance ) ) {
-					self::$_instance = new self();
-				}
+            private $_enabled = FALSE;
 
-				return self::$_instance;
-			}
+            public static function init() {
+                if ( is_null( self::$_instance ) ) {
+                    self::$_instance = new self();
+                }
 
-			public function __construct() {
+                return self::$_instance;
+            }
 
-				$this->constants();
-				$this->includes();
-				$this->hooks();
+            public function __construct() {
 
-				do_action( 'ultimate_page_builder_loaded', $this );
-			}
+                $this->constants();
+                $this->includes();
+                $this->hooks();
 
-			public function constants() {
-				define( 'UPB_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
-				define( 'UPB_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+                do_action( 'ultimate_page_builder_loaded', $this );
+            }
 
-				define( 'UPB_PLUGIN_ASSETS_URI', trailingslashit( plugin_dir_url( __FILE__ ) . 'assets' ) );
-				define( 'UPB_PLUGIN_VENDOR_URI', trailingslashit( plugin_dir_url( __FILE__ ) . 'vendor' ) );
+            public function constants() {
+                define( 'UPB_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
+                define( 'UPB_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
-				define( 'UPB_PLUGIN_INCLUDE_PATH', trailingslashit( plugin_dir_path( __FILE__ ) . 'includes' ) );
-				define( 'UPB_PLUGIN_TEMPLATES_PATH', trailingslashit( plugin_dir_path( __FILE__ ) . 'templates' ) );
+                define( 'UPB_PLUGIN_ASSETS_URI', trailingslashit( plugin_dir_url( __FILE__ ) . 'assets' ) );
+                define( 'UPB_PLUGIN_VENDOR_URI', trailingslashit( plugin_dir_url( __FILE__ ) . 'vendor' ) );
 
-				define( 'UPB_PLUGIN_DIRNAME', dirname( plugin_basename( __FILE__ ) ) );
-				define( 'UPB_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-				define( 'UPB_PLUGIN_FILE', __FILE__ );
-			}
+                define( 'UPB_PLUGIN_INCLUDE_PATH', trailingslashit( plugin_dir_path( __FILE__ ) . 'includes' ) );
+                define( 'UPB_PLUGIN_TEMPLATES_PATH', trailingslashit( plugin_dir_path( __FILE__ ) . 'templates' ) );
 
-			public function includes() {
+                define( 'UPB_PLUGIN_DIRNAME', dirname( plugin_basename( __FILE__ ) ) );
+                define( 'UPB_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+                define( 'UPB_PLUGIN_FILE', __FILE__ );
+            }
 
-				// Common
-				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-template-functions.php";
-				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-shortcode-functions.php";
-				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-shortcode-preview-functions.php";
+            public function includes() {
 
-				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-functions.php";
-				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-elements.php";
+                // Common
+                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-template-functions.php";
+                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-shortcode-functions.php";
+                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-shortcode-preview-functions.php";
 
-				// Tabs
-				require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-tabs.php";
+                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-functions.php";
+                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-elements.php";
 
-				// Settings
-				require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-settings.php";
+                // Tabs
+                require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-tabs.php";
 
-				// Elements
-				require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-elements.php";
-				require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-elements-props.php";
+                // Settings
+                require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-settings.php";
 
-				// Boilerplate
-				require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-boilerplate.php";
+                // Elements
+                require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-elements.php";
+                require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-elements-props.php";
 
-				// Preview
-				require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-preview.php";
+                // Boilerplate
+                require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-boilerplate.php";
 
-				require_once UPB_PLUGIN_INCLUDE_PATH . "upb-hooks.php";
+                // Preview
+                require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-preview.php";
 
-			}
+                // Load
+                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-hooks.php";
+                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-ajax-functions.php";
 
-			public function hooks() {
-				add_action( 'init', array( $this, 'language' ) );
-			}
+            }
 
-			public function language() {
-				load_plugin_textdomain( 'ultimate-page-builder', FALSE, trailingslashit( UPB_PLUGIN_DIRNAME ) . 'languages' );
-			}
+            public function hooks() {
+                add_action( 'init', array( $this, 'language' ) );
+                add_action( 'wp', array( $this, 'upb_enabled' ) );
+            }
 
-			public function template_path() {
-				return apply_filters( 'upb_template_path', untrailingslashit( $this->plugin_path() ) . '/templates' );
-			}
+            public function upb_enabled() {
+                if ( ! upb_is_preview() && (bool) get_post_meta( get_the_ID(), '_upb_settings_page_enable', TRUE ) ) {
+                    $this->_enabled = TRUE;
+                }
+            }
 
-			public function template_uri() {
-				return apply_filters( 'upb_template_uri', untrailingslashit( $this->plugin_uri() ) . '/templates' );
-			}
+            public function is_enabled() {
+                return $this->_enabled;
+            }
 
-			public function plugin_path() {
-				return untrailingslashit( plugin_dir_path( __FILE__ ) );
-			}
+            public function language() {
+                load_plugin_textdomain( 'ultimate-page-builder', FALSE, trailingslashit( UPB_PLUGIN_DIRNAME ) . 'languages' );
+            }
 
-			public function plugin_basename() {
-				return plugin_basename( __FILE__ );
-			}
+            public function template_path() {
+                return apply_filters( 'upb_template_path', untrailingslashit( $this->plugin_path() ) . '/templates' );
+            }
 
-			public function template_dir() {
-				return apply_filters( 'upb_template_dir', 'upb-templates' );
-			}
+            public function template_uri() {
+                return apply_filters( 'upb_template_uri', untrailingslashit( $this->plugin_uri() ) . '/templates' );
+            }
 
-			public function plugin_uri() {
-				return untrailingslashit( plugins_url( '/', __FILE__ ) );
-			}
-		}
+            public function plugin_path() {
+                return untrailingslashit( plugin_dir_path( __FILE__ ) );
+            }
 
-		function Ultimate_Page_Builder() {
-			return Ultimate_Page_Builder::init();
-		}
+            public function plugin_basename() {
+                return plugin_basename( __FILE__ );
+            }
 
-		// Global for backwards compatibility.
-		$GLOBALS[ 'ultimate_page_builder' ] = Ultimate_Page_Builder();
+            public function template_dir() {
+                return apply_filters( 'upb_template_dir', 'upb-templates' );
+            }
 
-	endif;
+            public function plugin_uri() {
+                return untrailingslashit( plugins_url( '/', __FILE__ ) );
+            }
+        }
+
+        function Ultimate_Page_Builder() {
+            return Ultimate_Page_Builder::init();
+        }
+
+        // Global for backwards compatibility.
+        $GLOBALS[ 'ultimate_page_builder' ] = Ultimate_Page_Builder();
+
+    endif;
