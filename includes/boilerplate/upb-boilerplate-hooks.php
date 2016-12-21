@@ -424,6 +424,13 @@
         );
         $settings->register( 'test5', $options );
 
+        $options = array(
+            'type'    => 'editor',
+            'title'   => 'Editor',
+            'default' => 'CONTENTS',
+        );
+        $settings->register( 'test6', $options );
+
 
         // ==============================================
 
@@ -442,12 +449,12 @@
         $options = array(
             'type'    => 'select',
             'title'   => 'Position',
-            'default' => 'upb-after-preview',
+            'default' => 'upb-after-contents',
             'reload'  => TRUE,
             'options' => array(
-                'upb-before-preview' => 'Before Contents',
-                'upb-on-preview'     => 'Instead of Contents',
-                'upb-after-preview'  => 'After Contents',
+                'upb-before-contents' => 'Before Contents',
+                'upb-on-contents'     => 'Instead of Contents',
+                'upb-after-contents'  => 'After Contents',
             )
         );
 
@@ -537,7 +544,7 @@
                 'name'      => 'logical',
                 'path'      => '/:tab(logical)',
                 'component' => 'LogicalPanel',
-            ) // you should register tab before
+            ) // you should register tab before add router
         ) ) ) );
 
 
@@ -546,11 +553,6 @@
         $data .= sprintf( "var _upb_preview_devices = %s;", wp_json_encode( apply_filters( 'upb_preview_devices', array() ) ) );
 
         $data .= sprintf( "var _upb_grid_system = %s;", wp_json_encode( apply_filters( 'upb_grid_system', array() ) ) );
-
-        // $data .= sprintf( "var _upb_loaded_sections = %s;\n", wp_json_encode( apply_filters( 'upb_loaded_sections' ) ) );
-
-        // $data .= sprintf( "var _upb_loaded_layouts = %s;\n", wp_json_encode( apply_filters( 'upb_loaded_layouts' ) ) );
-
 
         wp_script_add_data( 'upb-builder', 'data', $data );
 
@@ -562,6 +564,7 @@
             'sectionAdded'      => esc_attr__( "%s Section Added." ),
             'saving'            => esc_attr__( 'Saving' ),
             'saved'             => esc_attr__( 'Saved' ),
+            'savingProblem'     => esc_attr__( 'Problem on Saving' ),
             'save'              => esc_attr__( 'Save' ),
             'copy'              => esc_attr__( 'Copy' ),
             'create'            => esc_attr__( 'Create' ),
@@ -579,6 +582,7 @@
             'skeleton'          => esc_attr__( 'Skeleton preview' ),
             'collapse'          => esc_attr__( 'Collapse' ),
             'expand'            => esc_attr__( 'Expand' ),
+            'closeUrl'          => esc_url( get_permalink() ),
 
             // Templates
             'editorTemplate'    => upb_wp_editor_template(),

@@ -32,12 +32,10 @@ class store {
             this.getPanelContents(`_get_upb_${tab.id}_panel_contents`, function (contents) {
                 tab.contents = extend(true, [], contents);
             }, function (error) {
-                console.log(error);
+                //console.log(error);
             })
-
         });
     }
-
 
     getStatus() {
         return this.status;
@@ -90,8 +88,6 @@ class store {
             let newdata          = extend(true, {}, data);
             contents[data['id']] = this.cleanup(newdata.contents);
         });
-
-        console.log(contents);
 
         wp.ajax.send("_upb_save", {
             success : success,

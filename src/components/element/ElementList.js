@@ -2,14 +2,6 @@ import Vue, { util } from 'vue';
 import store from '../../store'
 import {sprintf} from 'sprintf-js'
 
-// Section Contents
-//import SectionContentsPanel from '../section/SectionContentsPanel.vue'
-//Vue.component('section-contents-panel', SectionContentsPanel);
-
-// Section Settings
-//import SectionSettingsPanel from '../section/SectionSettingsPanel.vue'
-//Vue.component('section-settings-panel', SectionSettingsPanel);
-
 export default {
     name    : 'element-list',
     props   : ['index', 'model'],
@@ -18,6 +10,11 @@ export default {
             l10n : store.l10n,
             item : []
         }
+    },
+    created(){
+        this.$watch(`model.attributes`, (value) => {
+            store.stateChanged();
+        }, {deep : true});
     },
     methods : {
 
@@ -34,13 +31,7 @@ export default {
                     return false;
                 }
 
-                if (tool.id == 'settings' && _.isEmpty(this.model.attributes)) {
-
-                    // No Attributes
-                    return false;
-                }
-
-                return true;
+                return (!(tool.id == 'settings' && _.isEmpty(this.model.attributes)));
             })
 
         },
@@ -55,12 +46,7 @@ export default {
 
         contentsAction(id, tool){
 
-            // console.log(this.$route.params);
-
-            //this.$router.push('/sections/0/contents')
-
             this.removeFocus();
-
 
             this.$router.push({
                 name   : `element-${id}`,
@@ -141,6 +127,6 @@ export default {
 
         itemClass(){
             return [this.model.attributes.enable ? 'item-enabled' : 'item-disabled', this.model._upb_options.focus ? 'item-focused' : 'item-unfocused'].join(' ');
-        },
+        }
     }
 }

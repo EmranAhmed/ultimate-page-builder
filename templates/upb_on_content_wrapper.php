@@ -1,2 +1,2 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' ); ?>
-<div id="upb-on-preview"><?php echo $content ?></div>
+<div id="upb-on-contents"><?php echo $content ?></div>

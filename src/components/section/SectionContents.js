@@ -58,6 +58,8 @@ export default {
                 this.openRowContentsPanel(this.defaultRowId); // row column list
             }
         }
+
+
     },
 
     computed : {

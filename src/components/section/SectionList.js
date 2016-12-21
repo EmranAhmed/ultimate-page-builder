@@ -2,22 +2,21 @@ import Vue, { util } from 'vue';
 import store from '../../store'
 import {sprintf} from 'sprintf-js'
 
-// Section Contents
-//import SectionContentsPanel from '../section/SectionContentsPanel.vue'
-//Vue.component('section-contents-panel', SectionContentsPanel);
-
-// Section Settings
-//import SectionSettingsPanel from '../section/SectionSettingsPanel.vue'
-//Vue.component('section-settings-panel', SectionSettingsPanel);
-
 export default {
-    name    : 'section-list',
-    props   : ['index', 'model'],
+    name  : 'section-list',
+    props : ['index', 'model'],
     data(){
         return {
             l10n : store.l10n,
         }
     },
+
+    created(){
+        this.$watch(`model.attributes`, (value) => {
+            store.stateChanged();
+        }, {deep : true});
+    },
+
     methods : {
 
         activeFocus(){
@@ -28,10 +27,6 @@ export default {
         },
 
         contentsAction(id, tool){
-
-            // console.log(this.$route.params);
-
-            //this.$router.push('/sections/0/contents')
 
             this.removeFocus();
 

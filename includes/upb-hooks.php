@@ -149,7 +149,6 @@
     } );
 
 
-
     add_action( 'wp_ajax__get_upb_elements_panel_contents', function () {
 
         if ( ! current_user_can( 'customize' ) ) {
@@ -185,4 +184,44 @@
         $saved_sections = upb_elements()->set_upb_options_recursive( $saved_sections );
 
         wp_send_json_success( $saved_sections );
+    } );
+
+
+    add_filter( 'upb-before-contents', function ( $contents, $shortcodes ) {
+        ob_start();
+
+        upb_get_template( 'wrapper/before.php', compact( 'contents', 'shortcodes' ) );
+
+        return ob_get_clean();
+    }, 10, 2 );
+
+    add_filter( 'upb-on-contents', function ( $contents, $shortcodes ) {
+        ob_start();
+        upb_get_template( 'wrapper/contents.php', compact( 'contents', 'shortcodes' ) );
+
+        return ob_get_clean();
+    }, 10, 2 );
+
+    add_filter( 'upb-after-contents', function ( $contents, $shortcodes ) {
+        ob_start();
+
+        upb_get_template( 'wrapper/after.php', compact( 'contents', 'shortcodes' ) );
+
+        return ob_get_clean();
+    }, 10, 2 );
+
+
+    add_filter( 'the_content', function ( $contents ) {
+        
+        if ( ! upb_is_preview() && (bool) get_post_meta( get_the_ID(), '_upb_settings_page_enable', TRUE ) ):
+
+            $position   = get_post_meta( get_the_ID(), '_upb_settings_page_position', TRUE );
+            $shortcodes = get_post_meta( get_the_ID(), '_upb_shortcodes', TRUE );
+
+            return apply_filters( $position, $contents, $shortcodes );
+        endif;
+
+        return $contents;
+
+
     } );

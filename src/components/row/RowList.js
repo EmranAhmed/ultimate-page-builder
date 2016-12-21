@@ -17,6 +17,12 @@ export default {
 
     computed : {},
 
+    created(){
+        this.$watch(`model.attributes`, (value) => {
+            store.stateChanged();
+        }, {deep : true});
+    },
+
     methods : {
 
         activeFocus(){

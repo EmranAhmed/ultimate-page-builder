@@ -47,7 +47,7 @@ document.getElementById("upb-preview-frame").addEventListener('load', function (
 
     store.panel = upbBuilder
 
-    // console.log(settings);
+    //console.log(settings);
 
     if (settings.enable) {
         new Vue({
@@ -61,7 +61,6 @@ document.getElementById("upb-preview-frame").addEventListener('load', function (
             .$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById(settings.position))
     }
 });
-
 
 /*window.previewWindowLoaded = function (iframe) {
  upbPreview.$mount(iframe.contentWindow.document.getElementById('upb-preview'));

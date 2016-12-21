@@ -26,20 +26,15 @@ export default {
         save(){
             if (store.isDirty()) {
 
-
                 this.$progressbar.show();
                 store.saveState(() => {
                     store.stateSaved();
                     store.reloadPreview();
                     this.$progressbar.hide();
+                    this.$toast.success(this.l10n.save);
                 }, () => {
-
-
-                    ///////
-                    //store.stateSaved();
-
-                    //store.reloadPreview();
                     this.$progressbar.hide();
+                    this.$toast.error(this.l10n.savingProblem);
                 });
             }
         },

@@ -1,7 +1,7 @@
 <template>
     <div id="upb-sidebar-header">
         <ul>
-            <li class="btn-close"><a href="#" :title="l10n.close"><i class="mdi mdi-window-close"></i></a></li>
+            <li class="btn-close"><a :href="l10n.closeUrl" :title="l10n.close"><i class="mdi mdi-window-close"></i></a></li>
             <ul class="tab-wrapper">
                 <component v-for="item in model" :model="item" is="upb-sidebar-header-item"></component>
             </ul>
