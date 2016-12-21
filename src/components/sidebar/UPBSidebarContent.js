@@ -81,7 +81,7 @@ export default {
         },
 
         has(keyName){
-            return (typeof this.$route.params[keyName] == 'number') ? true : false;
+            return typeof this.$route.params[keyName] == 'number';
         }
     }
 }

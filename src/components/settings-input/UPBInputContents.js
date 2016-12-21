@@ -1,7 +1,6 @@
 import common from './common'
 import store from '../../store'
 import extend from 'extend'
-import sanitizeHtml from 'sanitize-html'
 
 export default {
     name   : 'upb-input-contents',
@@ -74,15 +73,7 @@ export default {
 
     methods : {
         saveValue(data){
-            this.input = this.kses(data)
-        },
-
-        kses(contents){
-            return sanitizeHtml(contents, {
-                allowedTags       : this.l10n.allowedTags,
-                allowedAttributes : this.l10n.allowedAttributes,
-                allowedSchemes    : this.l10n.allowedSchemes,
-            });
+            this.input = store.wpKsesPost(data)
         }
     }
 }

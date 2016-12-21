@@ -20,23 +20,6 @@ export default{
             this.setValue(value);
         }
     },
-
-    created(){
-
-        // No Value but have default
-        if (_.isNull(this.attributes.value) && !_.isNull(this.attributes.default)) {
-            if (this.attributes.default === 'true' || this.attributes.default === 'false') {
-            //    this.input = this.str2Bool(this.attributes.default);
-            }
-        }
-
-        // Have Default value
-        if (!_.isNull(this.attributes.value)) {
-            if (this.attributes.value === 'true' || this.attributes.value === 'false') {
-            //    this.input = this.str2Bool(this.attributes.value);
-            }
-        }
-    },
     methods : {
 
         str2Bool(strvalue){

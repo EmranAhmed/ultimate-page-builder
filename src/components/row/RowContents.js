@@ -86,23 +86,6 @@ export default {
                 }
             });
 
-            //console.log(this.$route, index)
-
-        },
-
-        loadContents(){
-            this.$progressbar.show();
-            store.upbElementOptions(this.model.contents, (data) => {
-
-                this.$nextTick(function () {
-                    Vue.set(this.model, 'contents', extend(true, [], data));
-                });
-
-                this.$progressbar.hide();
-            }, function (data) {
-                console.log(data);
-                this.$progressbar.hide();
-            });
         },
 
         activeFocus(index){

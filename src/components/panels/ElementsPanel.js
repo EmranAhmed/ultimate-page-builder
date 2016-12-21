@@ -36,62 +36,29 @@ export default {
     },
 
     computed : {
+        items(){
+            return this.model.contents.filter(function (data) {
+                return !data._upb_options.core;
+            })
+        },
+
         contents(){
             let query = this.searchQuery.toLowerCase().trim();
             if (query) {
-                return this.model.contents.filter(function (data) {
+                return this.items.filter(function (data) {
                     return new RegExp(query, 'gui').test(data._upb_options.element.name.toLowerCase().trim())
                 })
             }
             else {
-                return this.model.contents;
+                return this.items;
             }
         }
-    },
-
-    watch : {
-        $route (to, from) {
-
-            this.loadContents();
-
-            /*const toDepth       = to.path.split('/').length;
-             const fromDepth     = from.path.split('/').length;
-             this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
-             */
-            //console.log(toDepth, fromDepth)
-        }
-    },
-
-    mounted(){
-        this.loadContents();
     },
 
     methods : {
 
         panelClass(){
             return [`upb-${this.model.id}-panel`, `upb-panel-wrapper`].join(' ');
-        },
-
-        loadContents(){
-
-            if (this.model.contents.length <= 0) {
-                this.$progressbar.show();
-                store.getPanelContents('_get_upb_element_list', (contents) => {
-
-                    let data = contents.filter(function (content) {
-                        return !content._upb_options['core']
-                    });
-
-                    this.$nextTick(function () {
-                        Vue.set(this.model, 'contents', extend(true, [], data));
-                    });
-
-                    this.$progressbar.hide();
-                }, (data) => {
-                    console.log(data);
-                    this.$progressbar.hide();
-                });
-            }
         },
 
         toggleHelp(){

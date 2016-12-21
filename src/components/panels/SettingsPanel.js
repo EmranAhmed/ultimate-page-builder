@@ -43,48 +43,10 @@ export default {
         }
     },
 
-    watch : {
-        $route (to, from) {
-
-            this.loadContents();
-
-            /*const toDepth       = to.path.split('/').length;
-             const fromDepth     = from.path.split('/').length;
-             this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
-             */
-            //console.log(toDepth, fromDepth)
-        }
-    },
-
-    mounted(){
-        this.loadContents();
-    },
-
     methods : {
 
         panelClass(){
             return [`upb-${this.model.id}-panel`, `upb-panel-wrapper`].join(' ');
-        },
-
-        loadContents(){
-            // load data
-
-            if (this.model.contents.length <= 0) {
-                this.$progressbar.show();
-                store.getPanelContents('_get_upb_settings_panel_contents', (data) => {
-
-                    console.log(data);
-
-                    this.$nextTick(function () {
-                        Vue.set(this.model, 'contents', extend(true, [], data));
-                    });
-
-                    this.$progressbar.hide();
-                }, (data) => {
-                    console.log(data);
-                    this.$progressbar.hide();
-                });
-            }
         },
 
         toggleHelp(){

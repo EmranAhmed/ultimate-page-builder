@@ -14,9 +14,7 @@ Vue.use(vToast);
 
 //const states = window._upb_states;
 
-//const status = window._upb_status;
-
-// window.upbBuilder
+store.loadTabContents();
 
 const upbBuilder = new Vue({
     router,
@@ -63,6 +61,7 @@ document.getElementById("upb-preview-frame").addEventListener('load', function (
             .$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById(settings.position))
     }
 });
+
 
 /*window.previewWindowLoaded = function (iframe) {
  upbPreview.$mount(iframe.contentWindow.document.getElementById('upb-preview'));

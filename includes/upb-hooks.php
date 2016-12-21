@@ -109,27 +109,6 @@
         wp_send_json_success( $update );
     } );
 
-    // Get Element Option
-    add_action( 'wp_ajax__get_upb_element_options', function () {
-
-        if ( ! current_user_can( 'customize' ) ) {
-            status_header( 403 );
-            wp_send_json_error( 'upb_not_allowed' );
-        }
-
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            status_header( 400 );
-            wp_send_json_error( 'bad_nonce' );
-        }
-
-        if ( empty( $_POST[ 'contents' ] ) || ! is_array( $_POST[ 'contents' ] ) ) {
-            status_header( 400 );
-            wp_send_json_error( 'missing_contents' );
-        }
-
-        wp_send_json_success( upb_elements()->set_upb_options( $_POST[ 'contents' ] ) );
-    } );
-
     // Section Panel Contents
     add_action( 'wp_ajax__get_upb_sections_panel_contents', function () {
 
@@ -169,8 +148,9 @@
         wp_send_json_success( upb_settings()->getAll() );
     } );
 
-    // Elements Panel Contents
-    add_action( 'wp_ajax__get_upb_element_list', function () {
+
+
+    add_action( 'wp_ajax__get_upb_elements_panel_contents', function () {
 
         if ( ! current_user_can( 'customize' ) ) {
             status_header( 403 );
@@ -182,8 +162,10 @@
             wp_send_json_error( 'bad_nonce' );
         }
 
+        //wp_send_json_success( upb_elements()->getNonCore() );
         wp_send_json_success( upb_elements()->getAll() );
     } );
+
 
     // Get Saved Section
     add_action( 'wp_ajax__get_saved_sections', function () {

@@ -81,7 +81,6 @@ export default{
                 else {
                     element.classList.add('upb-preview-element-no-contents')
                 }
-
             }
         }
     },

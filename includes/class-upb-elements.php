@@ -34,6 +34,7 @@
                 $_upb_options[ 'focus' ] = FALSE;
 
 
+                $_upb_options[ 'core' ] = FALSE;
                 if ( in_array( $tag, $this->core_elements ) ) {
                     $_upb_options[ 'core' ] = TRUE;
                 }
@@ -108,6 +109,19 @@
 
             public function getAll() {
                 return array_values( $this->short_code_elements );
+            }
+
+            public function getNonCore() {
+
+                $shortcode = array();
+
+                foreach ( array_values( $this->short_code_elements ) as $code ) {
+                    if ( ! in_array( $code[ 'tag' ], $this->core_elements ) ) {
+                        $shortcode[] = $code;
+                    }
+                }
+
+                return $shortcode;
             }
 
             public function get_element( $tag, $key = FALSE ) {
@@ -274,6 +288,9 @@
                     }
 
                     //if ( ! isset( $contents[ $index ][ '_upb_settings' ] ) ) {
+
+                    $contents[ $index ][ 'attributes' ] = $this->toBoolean( $content[ 'attributes' ] );
+
                     $contents[ $index ][ '_upb_settings' ] = $this->to_settings( $content[ 'tag' ], $content[ 'attributes' ] );
                     //}
 
@@ -283,6 +300,21 @@
                 }
 
                 return $contents;
+            }
+
+            public function toBoolean( $attributes ) {
+
+                $attrs = array();
+                foreach ( $attributes as $name => $attribute ) {
+
+                    $attrs[ $name ] = $attribute;
+                    if ( $attribute == 'true' || $attribute == 'false' ) {
+                        $attrs[ $name ] = filter_var( $attribute, FILTER_VALIDATE_BOOLEAN );
+                    }
+                }
+
+                return $attrs;
+
             }
 
             public function set_upb_options_recursive( $contents ) {
@@ -297,6 +329,9 @@
                         $contents[ $index ][ 'attributes' ][ '_contents' ] = wp_kses_post( $content[ 'contents' ] );
                         $content[ 'attributes' ][ '_contents' ]            = wp_kses_post( $content[ 'contents' ] );
                     }
+
+                    $contents[ $index ][ 'attributes' ] = $this->toBoolean( $content[ 'attributes' ] );
+
 
                     //if ( ! isset( $contents[ $index ][ '_upb_settings' ] ) ) {
                     $contents[ $index ][ '_upb_settings' ] = $this->to_settings( $content[ 'tag' ], $content[ 'attributes' ] );

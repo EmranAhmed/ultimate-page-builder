@@ -26,6 +26,19 @@ class store {
         return this.tabs;
     }
 
+    loadTabContents() {
+        this.getTabs().map((tab)=> {
+
+            this.getPanelContents(`_get_upb_${tab.id}_panel_contents`, function (contents) {
+                tab.contents = extend(true, [], contents);
+            }, function (error) {
+                console.log(error);
+            })
+
+        });
+    }
+
+
     getStatus() {
         return this.status;
     }
@@ -109,14 +122,12 @@ class store {
         }
 
         if (_.isString(content)) {
-            return this.wp_kses_post(content);
+            return this.wpKsesPost(content);
         }
         return null;
     }
 
     getPanelContents(panel_hook, success, error) {
-
-        console.log(panel_hook);
 
         wp.ajax.send(panel_hook, {
             success : success,
@@ -187,29 +198,16 @@ class store {
     }
 
     getAllUPBElements(success, error) {
-
-        wp.ajax.send("_get_upb_element_list", {
+        wp.ajax.send("_get_upb_elements_panel_contents", {
             success : success,
             error   : error,
             data    : {
                 _nonce : this.status._nonce
             }
         });
-
     }
 
-    upbElementOptions(contents, success, error) {
-        wp.ajax.send("_get_upb_element_options", {
-            success : success,
-            error   : error,
-            data    : {
-                _nonce   : this.status._nonce,
-                contents : contents
-            }
-        });
-    }
-
-    wp_kses_post(contents) {
+    wpKsesPost(contents) {
         return sanitizeHtml(contents, {
             allowedTags       : this.l10n.allowedTags,
             allowedAttributes : this.l10n.allowedAttributes,

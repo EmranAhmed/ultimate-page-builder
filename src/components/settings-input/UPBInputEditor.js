@@ -69,15 +69,7 @@ export default {
 
     methods : {
         saveValue(data){
-            this.input = this.kses(data)
+            this.input = store.wpKsesPost(data)
         },
-
-        kses(contents){
-            return sanitizeHtml(contents, {
-                allowedTags       : this.l10n.allowedTags,
-                allowedAttributes : this.l10n.allowedAttributes,
-                allowedSchemes    : this.l10n.allowedSchemes
-            });
-        }
     }
 }

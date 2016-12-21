@@ -17,7 +17,7 @@ Vue.use(Droppable);
 
 store.getAllUPBElements((elements) => {
 
-   // console.log(elements);
+    // console.log(elements);
 
     elements.map((element)=> {
 
