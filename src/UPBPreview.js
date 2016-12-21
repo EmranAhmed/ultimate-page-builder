@@ -89,7 +89,7 @@ export default {
         },
 
         addIndexAttribute(model, attrs, contents){
-            if (Array.isArray(contents)) {
+            if (_.isArray(contents)) {
                 contents.map((m, i) => {
                     m._upb_options['_keyIndex'] = `${model._upb_options._keyIndex}/${i}`;
                     this.addIndexAttribute(m, m.attributes, m.contents);

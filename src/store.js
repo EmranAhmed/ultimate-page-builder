@@ -32,8 +32,9 @@ class store {
             this.getPanelContents(`_get_upb_${tab.id}_panel_contents`, function (contents) {
                 tab.contents = extend(true, [], contents);
             }, function (error) {
-                //console.log(error);
+                console.log(error);
             })
+
         });
     }
 
@@ -96,12 +97,12 @@ class store {
                 _nonce    : this.status._nonce,
                 id        : this.status._id,
                 states    : contents,
-                shortcode : this.getShortcode(contents.sections)
+                shortcode : this.generateShortcodes(contents.sections)
             }
         });
     }
 
-    getShortcode(shortcodes) {
+    generateShortcodes(shortcodes) {
         return shortcodes.map((shortcode)=> {
             return wp.shortcode.string({
                 tag     : shortcode.tag,

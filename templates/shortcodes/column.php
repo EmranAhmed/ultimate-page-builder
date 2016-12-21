@@ -1,12 +1,15 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' );
-
+    
     // $attributes, $contents
+
+
 ?>
 
-<div class="upb-section">
+<div class="<?php echo esc_attr( upb_make_column_class( $attributes, 'upb-col' ) ) ?>">
+
     <style scoped>
         :scope {
-            background-color : <?php echo esc_attr($attributes['background-color']) ?>;
+            background : <?php echo esc_attr($attributes['background']) ?>;
             }
     </style>
 

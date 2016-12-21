@@ -59,10 +59,8 @@ export default {
             this.saveValue(UPBQuickTag.canvas.value)
         })
 
-        window.addEventListener('load', _=> {
-            window.switchEditors.go(this.attributes._id, 'html'); // tmce | html
-            window.wpActiveEditor = this.attributes._id;
-        });
+        window.switchEditors.go(this.attributes._id, 'html'); // tmce | html
+        window.wpActiveEditor = this.attributes._id;
 
         delete QTags.instances[0];
     },

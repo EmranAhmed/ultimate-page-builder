@@ -29,7 +29,7 @@ export default {
             return this.$root.$data.store.panel._route;
         },
         has_contents(){
-            return Array.isArray(this.model.contents);
+            return _.isArray(this.model.contents);
         },
         has_settings(){
             return typeof this.model.attributes === 'object';

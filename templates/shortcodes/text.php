@@ -1,12 +1,13 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' );
-
+    
     // $attributes, $contents
+
 ?>
 
-<div class="upb-section">
+<div class="upb-text">
     <style scoped>
         :scope {
-            background-color : <?php echo esc_attr($attributes['background-color']) ?>;
+            background : <?php echo esc_attr($attributes['background']) ?>;
             }
     </style>
 

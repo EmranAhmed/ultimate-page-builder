@@ -48,3 +48,38 @@
         return Ultimate_Page_Builder()->is_enabled();
     }
 
+    function upb_grid_system() {
+        return apply_filters( 'upb_grid_system', array() );
+    }
+
+
+    function upb_devices() {
+        $devices = apply_filters( 'upb_preview_devices', array() );
+
+        return array_map( function ( $device ) {
+            return $device[ 'id' ];
+        }, array_values( $devices ) );
+    }
+
+    function upb_make_column_class( $attributes, $extra = FALSE ) {
+
+        $grid    = upb_grid_system();
+        $devices = upb_devices();
+
+        $columns = array();
+
+        if ( $extra ) {
+            $columns[] = $extra;
+        }
+
+        foreach ( $attributes as $name => $value ) {
+            if ( in_array( $name, $devices ) && ! empty( $value ) ) {
+                $col       = explode( ':', $value );
+                $columns[] = $grid[ 'prefixClass' ] . $grid[ 'separator' ] . $name . $grid[ 'separator' ] . ( ( absint( $grid[ 'totalGrid' ] ) / absint( $col[ 1 ] ) ) * absint( $col[ 0 ] ) );
+            }
+        }
+
+
+        return implode( ' ', $columns );
+    }
+

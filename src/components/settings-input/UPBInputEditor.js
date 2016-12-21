@@ -9,8 +9,9 @@ export default {
     mixins : [common],
     data(){
         return {
-            l10n   : store.l10n,
-            markup : ''
+            l10n    : store.l10n,
+            markup  : '',
+            timeOut : null
         }
 
     },
@@ -24,6 +25,7 @@ export default {
         delete tinyMCEPreInit.mceInit[this.attributes._id];
         delete tinyMCEPreInit.qtInit[this.attributes._id];
         this.$el.querySelector(`#wrapper-${this.attributes._id}`).innerHTML = '';
+        clearTimeout(this.timeOut);
     },
 
     created(){
@@ -61,12 +63,13 @@ export default {
             this.saveValue(UPBQuickTag.canvas.value)
         })
 
-        window.addEventListener('load', _=> {
-            window.switchEditors.go(this.attributes._id, 'html'); // tmce | html
+        this.timeOut = setTimeout(_ => {
             window.wpActiveEditor = this.attributes._id;
-        });
+            window.switchEditors.go(this.attributes._id, 'html'); // tmce | html
+        }, 200);
 
         delete QTags.instances[0];
+
     },
 
     methods : {

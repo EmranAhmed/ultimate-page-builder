@@ -127,7 +127,7 @@ export default {
             let sectionId = this.$route.params['sectionId'];
             let rowId     = this.$route.params['rowId'];
 
-            console.log(this.model.contents[sectionId]['contents'][rowId]);
+            // console.log(this.model.contents[sectionId]['contents'][rowId]);
 
             return this.model.contents[sectionId]['contents'][rowId];
 
