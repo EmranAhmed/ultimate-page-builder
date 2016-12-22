@@ -28,7 +28,7 @@
             if (g1.match(/:scope/)) {
                 g1 = g1.replace(/([^\s]*):scope/, function (h0, h1) {
                     if (h1 === "") {
-                        return "";
+                        return ""; // "> *"
                     }
                     else {
                         return "> " + h1;
@@ -49,15 +49,16 @@
         var styles = document.body.querySelectorAll("style[scoped]");
 
         if (styles.length === 0) {
-            //document.getElementsByTagName("body")[0].style.visibility = "visible";
+            document.getElementsByTagName("body")[0].style.visibility = "visible";
             return;
         }
 
         var head = document.head || document.getElementsByTagName("head")[0];
 
         // Create the <style> tag
-        var newstyle  = document.createElement("style");
-        newstyle.type = 'text/css';
+        var newstyle   = document.createElement("style");
+        newstyle.type  = 'text/css';
+        newstyle.media = "screen";
 
         // CSS Rules
         var csses = "";
@@ -96,7 +97,7 @@
         }
 
         head.appendChild(newstyle);
-        //document.getElementsByTagName("body")[0].style.visibility = "visible";
+        document.getElementsByTagName("body")[0].style.visibility = "visible";
     }
 
     if ("scoped" in document.createElement("style")) {

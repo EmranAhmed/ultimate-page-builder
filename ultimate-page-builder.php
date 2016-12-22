@@ -2,7 +2,7 @@
     /**
      * Plugin Name: Ultimate Page Builder
      * Plugin URI: http://wordpress.org/plugins/ultimate-page-builder/
-     * Description: Ultimate Page builder from Customizer
+     * Description: Ultimate Page builder
      * Author: Emran Ahmed
      * Version: 1.0.0
      * Domain Path: /languages

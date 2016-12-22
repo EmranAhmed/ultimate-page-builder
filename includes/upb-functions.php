@@ -24,9 +24,13 @@
         return UPB_Settings::getInstance();
     }
 
+    function upb_is_buildable() {
+        return apply_filters( 'upb_has_access', TRUE ) && is_page();
+    }
+
     function upb_is_preview() {
 
-        if ( apply_filters( 'upb_has_access', TRUE ) && is_page() && isset( $_GET[ 'upb-preview' ] ) && $_GET[ 'upb-preview' ] == '1' && is_user_logged_in() ) {
+        if ( upb_is_buildable() && isset( $_GET[ 'upb-preview' ] ) && $_GET[ 'upb-preview' ] == '1' && is_user_logged_in() ) {
             return TRUE;
         }
 
@@ -36,7 +40,7 @@
 
     function upb_is_boilerplate() {
 
-        if ( apply_filters( 'upb_has_access', TRUE ) && is_page() && isset( $_GET[ 'upb' ] ) && $_GET[ 'upb' ] == '1' && is_user_logged_in() ) {
+        if ( upb_is_buildable() && isset( $_GET[ 'upb' ] ) && $_GET[ 'upb' ] == '1' && is_user_logged_in() ) {
             return TRUE;
         }
 

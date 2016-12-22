@@ -82,4 +82,32 @@
         endif;
     } );
 
+    // Add Toolbar Menus
+    add_action( 'wp_before_admin_bar_render', function () {
+        global $wp_admin_bar;
+
+        $enabled = array(
+            'id'    => 'load-upb',
+            'title' => esc_html__( 'Load Page Builder', 'ultimate-page-builder' ),
+            'href'  => esc_url( add_query_arg( 'upb', '1', get_permalink() ) ),
+            'group' => FALSE
+        );
+
+        $use = array(
+            'id'    => 'use-upb',
+            'title' => esc_html__( 'Use Build Page', 'ultimate-page-builder' ),
+            'href'  => esc_url( add_query_arg( 'upb', '1', get_permalink() ) ),
+            'group' => FALSE
+        );
+
+        if ( upb_is_buildable() && upb_is_enabled() ):
+            $wp_admin_bar->add_menu( $enabled );
+        endif;
+
+        if ( upb_is_buildable() && ! upb_is_enabled() ):
+            $wp_admin_bar->add_menu( $use );
+        endif;
+
+    } );
+
 
