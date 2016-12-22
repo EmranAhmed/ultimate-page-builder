@@ -90,7 +90,10 @@
             }
 
             public function upb_enabled() {
-                if ( ! upb_is_preview() && (bool) get_post_meta( get_the_ID(), '_upb_settings_page_enable', TRUE ) ) {
+
+                $enable = filter_var( get_post_meta( get_the_ID(), '_upb_settings_page_enable', TRUE ), FILTER_VALIDATE_BOOLEAN );
+
+                if ( ! upb_is_preview() && $enable ) {
                     $this->_enabled = TRUE;
                 }
             }
