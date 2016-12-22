@@ -29,7 +29,7 @@ export default {
                 this.$progressbar.show();
                 store.saveState(() => {
                     store.stateSaved();
-                    store.reloadPreview();
+                    // store.reloadPreview();
                     this.$progressbar.hide();
                     this.$toast.success(this.l10n.save);
                 }, () => {

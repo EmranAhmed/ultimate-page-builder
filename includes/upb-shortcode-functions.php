@@ -5,7 +5,7 @@
     if ( ! function_exists( 'upb_register_shortcode_column' ) ):
         function upb_register_shortcode_column( $attrs, $contents = NULL ) {
 
-            $default = (array) upb_elements()->get_element( 'column', 'attributes' );
+            $default = upb_elements()->get_attributes( 'column' );
 
             $attributes = shortcode_atts( $default, $attrs, 'column' );
 
@@ -20,7 +20,7 @@
     if ( ! function_exists( 'upb_register_shortcode_row' ) ):
         function upb_register_shortcode_row( $attrs, $contents = NULL ) {
 
-            $default = (array) upb_elements()->get_element( 'row', 'attributes' );
+            $default = upb_elements()->get_attributes( 'row' );
 
             $attributes = shortcode_atts( $default, $attrs, 'row' );
 
@@ -35,7 +35,7 @@
     if ( ! function_exists( 'upb_register_shortcode_section' ) ):
         function upb_register_shortcode_section( $attrs, $contents = NULL ) {
 
-            $default = (array) upb_elements()->get_element( 'section', 'attributes' );
+            $default = upb_elements()->get_attributes( 'section' );
 
             $attributes = shortcode_atts( $default, $attrs, 'section' );
 
@@ -50,7 +50,7 @@
     if ( ! function_exists( 'upb_register_shortcode_text' ) ):
         function upb_register_shortcode_text( $attrs, $contents = NULL ) {
 
-            $default = (array) upb_elements()->get_element( 'text', 'attributes' );
+            $default = upb_elements()->get_attributes( 'text' );
 
             $attributes = shortcode_atts( $default, $attrs, 'text' );
 

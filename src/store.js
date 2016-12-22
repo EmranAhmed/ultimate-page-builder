@@ -97,12 +97,12 @@ class store {
                 _nonce    : this.status._nonce,
                 id        : this.status._id,
                 states    : contents,
-                shortcode : this.generateShortcodes(contents.sections)
+                shortcode : this.getShortcode(contents.sections)
             }
         });
     }
 
-    generateShortcodes(shortcodes) {
+    getShortcode(shortcodes) {
         return shortcodes.map((shortcode)=> {
             return wp.shortcode.string({
                 tag     : shortcode.tag,

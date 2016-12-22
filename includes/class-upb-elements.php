@@ -137,6 +137,25 @@
                 }
             }
 
+            public function get_attributes( $tag ) {
+
+                if ( $this->has_element( $tag ) && isset( $this->short_code_elements[ $tag ][ 'attributes' ] ) ) {
+                    $attributes = $this->short_code_elements[ $tag ][ 'attributes' ];
+
+                    if ( isset( $attributes[ '_contents' ] ) ) {
+                        unset( $attributes[ '_contents' ] );
+                    }
+
+                    return $attributes;
+
+                }
+
+                return array();
+
+                //
+
+            }
+
             public function generate_element( $tag, $contents = array(), $attributes = array() ) {
 
                 if ( ! $this->has_element( $tag ) ) {
