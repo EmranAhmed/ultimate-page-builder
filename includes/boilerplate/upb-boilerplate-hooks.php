@@ -379,6 +379,51 @@
     add_action( 'upb_register_setting', function ( $settings ) {
 
 
+
+        $options = array(
+            'type'     => 'select2',
+            'title'    => 'Select multi',
+            //'default'  => array( '2' ),
+            'multiple' => TRUE,
+            'options'  => array( '1' => 'ONE', '2' => 'TWO', '3' => 'Three' ),
+            'settings' => array(
+                'placeholder' => 'Placeholder',
+                'allowClear'  => TRUE
+            )
+        );
+
+        $settings->register( 'test8', $options );
+
+
+        $options = array(
+            'type'    => 'toggle',
+            'title'   => 'Enable',
+            'default' => FALSE,
+            'reload'  => TRUE
+        );
+
+
+        $settings->register( 'enable', $options );
+
+
+        $options = array(
+            'type'    => 'select',
+            'title'   => 'Position',
+            'default' => 'upb-after-contents',
+            'reload'  => TRUE,
+            'options' => array(
+                'upb-before-contents' => 'Before Contents',
+                'upb-on-contents'     => 'Instead of Contents',
+                'upb-after-contents'  => 'After Contents',
+            )
+        );
+
+
+        $settings->register( 'position', $options );
+
+        //=================================================
+
+
         $options = array(
             'type'    => 'text',
             'title'   => 'Test Title',
@@ -436,33 +481,6 @@
 
 
         $options = array(
-            'type'    => 'toggle',
-            'title'   => 'Enable',
-            'default' => FALSE,
-            'reload'  => TRUE
-        );
-
-
-        $settings->register( 'enable', $options );
-
-
-        $options = array(
-            'type'    => 'select',
-            'title'   => 'Position',
-            'default' => 'upb-after-contents',
-            'reload'  => TRUE,
-            'options' => array(
-                'upb-before-contents' => 'Before Contents',
-                'upb-on-contents'     => 'Instead of Contents',
-                'upb-after-contents'  => 'After Contents',
-            )
-        );
-
-
-        $settings->register( 'position', $options );
-
-
-        $options = array(
             'type'    => 'color',
             'title'   => 'Color',
             'default' => '#ffccff',
@@ -471,6 +489,22 @@
 
 
         $settings->register( 'color', $options );
+
+
+        $options = array(
+            'type'     => 'select2',
+            'title'    => 'Select2',
+            'default'  => '1',
+            'options'  => array( '1' => 'ONE', '2' => 'TWO' ),
+            'settings' => array(
+                'placeholder' => 'Placeholder',
+                'allowClear'  => TRUE
+            )
+        );
+
+        $settings->register( 'test7', $options );
+
+
 
 
     } );
@@ -482,6 +516,10 @@
 
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         // Color
+
+        wp_register_style( 'select2', UPB_PLUGIN_ASSETS_URI . "css/select2$suffix.css" );
+        wp_register_script( 'select2', UPB_PLUGIN_ASSETS_URI . "js/select2$suffix.js", array( 'jquery' ), FALSE, TRUE );
+
 
         wp_register_script( 'iris', admin_url( "/js/iris.min.js" ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), FALSE, TRUE );
         wp_register_script( 'wp-color-picker', admin_url( "/js/color-picker$suffix.js" ), array( 'iris' ), FALSE, TRUE );
@@ -505,6 +543,9 @@
         wp_enqueue_style( 'common' );
         wp_enqueue_style( 'buttons' );
         wp_enqueue_style( 'wp-color-picker' );
+        wp_enqueue_style( 'select2' );
+
+
         wp_enqueue_style( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URI . "css/upb-boilerplate$suffix.css" );
 
         if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
@@ -526,6 +567,7 @@
 
         wp_enqueue_media();
         wp_enqueue_script( 'wp-color-picker-alpha' );
+        wp_enqueue_script( 'select2' );
 
         wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URI . "js/upb-builder$suffix.js", array( 'jquery-ui-sortable', 'wp-util', 'wp-color-picker', "shortcode" ), '', TRUE );
 

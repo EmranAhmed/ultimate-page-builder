@@ -58,16 +58,21 @@ else {
 // http://webpack.github.io/docs/configuration.html#devtool
 
 module.exports = {
-    devtool : '#eval-source-map',
-    entry   : {
+    devtool   : '#eval-source-map',
+    entry     : {
         builder : path.resolve(__dirname, './src/builder.js'),
     },
-    output  : {
+    output    : {
         path       : path.resolve(__dirname, './assets'),
         publicPath : '/assets/',
         filename   : 'js/upb-[name].js'
     },
-    module  : {
+    externals : {
+        jquery : 'jQuery',
+        $      : 'jQuery',
+        jQuery : 'jQuery'
+    },
+    module    : {
         rules : [
             {
                 test    : /\.vue$/,
@@ -93,7 +98,7 @@ module.exports = {
             }
         ]
     },
-    resolve : {
+    resolve   : {
         alias : {
             'vue$' : 'vue/dist/vue',
             //styles: path.resolve(__dirname, '../src/path/to/your/styles') // @import styles/variables

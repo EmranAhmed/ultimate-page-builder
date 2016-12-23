@@ -74,6 +74,17 @@
 
                 $options[ 'value' ] = $options[ 'default' ];
 
+
+                switch ( $options[ 'type' ] ) {
+                    case 'select':
+                    case 'select2':
+                        if ( isset( $options[ 'multiple' ] ) && $options[ 'multiple' ] ) {
+                            $options[ 'default' ] = array();
+                        }
+                        break;
+                }
+
+
                 // if no option saved show default else show saved one
                 //$options = $this->setAttrBasedOnType( $id, $options );
 
@@ -91,6 +102,11 @@
 
                     case 'color':
                         $options[ 'alpha' ] = isset( $options[ 'alpha' ] ) ? $options[ 'alpha' ] : FALSE;
+                        $options[ 'value' ] = empty( $value ) ? $options[ 'default' ] : $value;
+                        break;
+
+                    case 'select':
+                    case 'select2':
                         $options[ 'value' ] = empty( $value ) ? $options[ 'default' ] : $value;
                         break;
 
