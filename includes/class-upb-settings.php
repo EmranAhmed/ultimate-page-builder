@@ -67,12 +67,12 @@
 
                 $_id = $this->prefix . $id;
 
-                $options[ 'id' ]      = $id;
-                $options[ '_id' ]     = $_id;
-                $options[ 'desc' ]    = isset( $options[ 'desc' ] ) ? $options[ 'desc' ] : FALSE;
-                $options[ 'default' ] = isset( $options[ 'default' ] ) ? $options[ 'default' ] : '';
-
-                $options[ 'value' ] = $options[ 'default' ];
+                $options[ 'id' ]          = $id;
+                $options[ '_id' ]         = $_id;
+                $options[ 'desc' ]        = isset( $options[ 'desc' ] ) ? $options[ 'desc' ] : FALSE;
+                $options[ 'default' ]     = isset( $options[ 'default' ] ) ? $options[ 'default' ] : '';
+                $options[ 'value' ]       = $options[ 'default' ];
+                $options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : '';
 
 
                 switch ( $options[ 'type' ] ) {
@@ -82,13 +82,15 @@
                             $options[ 'default' ] = array();
                         }
                         break;
+
+                    case 'image':
+                        $options[ 'size' ] = isset( $options[ 'size' ] ) ? $options[ 'size' ] : 'full';
+                        break;
                 }
 
 
                 // if no option saved show default else show saved one
                 //$options = $this->setAttrBasedOnType( $id, $options );
-
-                $options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : '';
 
 
                 $this->settings[] = $options;

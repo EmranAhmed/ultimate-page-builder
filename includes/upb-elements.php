@@ -53,6 +53,17 @@
             array( 'id' => 'title', 'title' => 'Row title', 'type' => 'text', 'value' => 'New Row 1' ),
             array( 'id' => 'enable', 'title' => 'Enable', 'type' => 'toggle', 'value' => TRUE ),
             array( 'id' => 'background', 'title' => 'Background', 'type' => 'color', 'value' => '#fff' ),
+            array(
+                'id'      => 'background-image',
+                'title'   => 'Background Image',
+                'type'    => 'image',
+                'value'   => '',
+                'buttons' => array(
+                    'add'    => 'Add',
+                    'remove' => 'Remove',
+                    'choose' => 'Select...',
+                )
+            ),
         );
 
 

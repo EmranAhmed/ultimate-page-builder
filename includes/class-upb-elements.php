@@ -72,6 +72,9 @@
 
                 foreach ( $attributes as $index => $attribute ) {
                     //$attributes[ $index ][ 'metaKey' ]   = $attribute[ 'id' ];
+
+                    $attributes[ $index ] = $this->props->attributes( $attributes[ $index ] );
+
                     $attributes[ $index ][ '_id' ] = $attribute[ 'id' ];
                     //$attributes[ $index ][ 'metaValue' ] = $attribute[ 'value' ];
                     $attributes[ $index ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $attribute[ 'type' ] );
@@ -218,7 +221,6 @@
                 $new_attributes = array();
                 foreach ( $attributes as $index => $attribute ) {
 
-
                     $value = isset( $attribute[ 'value' ] ) ? $attribute[ 'value' ] : '';
 
                     if ( $value === 'true' || $value === 'false' ) {
@@ -264,24 +266,9 @@
                     }
 
 
-                    // Set to attribute
-
-
-                    // For normal element attr
-                    //$settings[ $key ][ 'value' ] = $attributes[ $value[ 'id' ] ];
-
-
                     if ( is_null( $attributes[ $value[ 'id' ] ] ) && isset( $settings[ $key ][ 'default' ] ) ) {
-                        //    $settings[ $key ][ 'value' ] = $settings[ $key ][ 'default' ];
+                        // $settings[ $key ][ 'value' ] = $settings[ $key ][ 'default' ];
                     }
-
-
-                    //$settings[ $key ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $attributes[ $value[ 'type' ] ] );
-
-
-                    //$settings[ $key ][ 'metaKey' ]   = $value[ 'id' ];
-                    //$settings[ $key ][ 'metaValue' ] = $attributes[ $value[ 'id' ] ];
-
 
                     if ( isset( $attributes[ $key ] ) ) {
                         // For Keywise element attr
