@@ -211,6 +211,17 @@ class store {
             allowedSchemes    : this.l10n.allowedSchemes
         });
     }
+
+    wpAjax(action, query, success, error) {
+        wp.ajax.send(action, {
+            success : success,
+            error   : error,
+            data    : extend(true, {
+                _nonce  : this.status._nonce,
+                post_id : this.status._id,
+            }, query)
+        });
+    }
 }
 
 export default new store();

@@ -1,5 +1,16 @@
 @import "../../assets/scss/variables";
 
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content : " "; // 1
+    display : table; // 2
+    }
+  &:after {
+    clear : both;
+    }
+  }
+
 // Input Reset
 
 input[type="search"] {
@@ -13,6 +24,10 @@ input[type="search"]::-webkit-search-decoration {
 input:focus,
 button:focus {
   outline : none;
+  }
+
+.clearfix {
+  @include clearfix;
   }
 
 /*---------------------
@@ -593,6 +608,47 @@ button:focus {
       box-sizing    : border-box;
       }
 
+    }
+  }
+
+/**
+FORM CODE
+*/
+
+.attachment-media-view {
+
+  .placeholder {
+    width       : 100%;
+    position    : relative;
+    text-align  : center;
+    cursor      : default;
+    border      : 1px dashed #B4B9BE;
+    padding     : 9px 0;
+    line-height : 20px;
+    }
+
+  img {
+    max-width : 100%;
+    }
+
+  .preview {
+    overflow : hidden;
+    width    : 100%;
+    }
+
+  .actions {
+    margin-top : 8px;
+    clear      : both;
+    }
+  .remove-button, .default-button {
+    float        : left;
+    margin-right : 3px;
+    width        : 48%;
+    }
+
+  .upload-button, .new-button {
+    float : right;
+    width : 48%;
     }
   }
 

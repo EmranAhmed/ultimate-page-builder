@@ -166,3 +166,27 @@
 
         wp_send_json_success( $saved_sections );
     } );
+
+
+    add_action( 'wp_ajax__upb_get_image', function () {
+        if ( ! current_user_can( 'customize' ) ) {
+            status_header( 403 );
+            wp_send_json_error( 'upb_not_allowed' );
+        }
+
+        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+            status_header( 400 );
+            wp_send_json_error( 'bad_nonce' );
+        }
+
+        if ( empty( $_POST[ 'query' ] ) || empty( $_POST[ 'query' ][ 'attachment_id' ] ) ) {
+            status_header( 400 );
+            wp_send_json_error( 'no_data' );
+        }
+
+        $attachment_id = absint( $_POST[ 'query' ][ 'attachment_id' ] );
+        $size          = esc_html( $_POST[ 'query' ][ 'size' ] );
+
+        wp_send_json_success( wp_get_attachment_image_src( $attachment_id, $size ) );
+
+    } );

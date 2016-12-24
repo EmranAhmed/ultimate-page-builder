@@ -379,6 +379,20 @@
     add_action( 'upb_register_setting', function ( $settings ) {
 
 
+        $options = array(
+            'type'        => 'image',
+            'title'       => 'Image Select',
+            'placeholder' => 'No Image is Selected',
+            'size'        => 'full',
+            'buttons'     => array(
+                'add'    => 'Add',
+                'remove' => 'Remove',
+                'choose' => 'Select...',
+            )
+        );
+
+        $settings->register( 'test9', $options );
+
 
         $options = array(
             'type'     => 'select2',
@@ -503,8 +517,6 @@
         );
 
         $settings->register( 'test7', $options );
-
-
 
 
     } );

@@ -1,10 +1,10 @@
 <template>
     <div id="upb-sidebar-contents">
-        <!--
-        <transition :name="transitionName">
+
+        <!--<transition :name="transitionName">
             <router-view :model="item"></router-view>
-        </transition>
-        -->
+        </transition>-->
+
         <router-view :model="item"></router-view>
     </div>
 </template>
