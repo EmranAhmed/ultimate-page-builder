@@ -145,23 +145,29 @@
                 }
             }
 
-            public function get_attributes( $tag ) {
+            public function get_attributes( $tag, $attrs = array() ) {
                 $attributes = $this->get_element( $tag, 'attributes' );
 
                 if ( $attributes ) {
+
+                    $settings = $this->to_settings( $tag, $attributes );
+
+                    foreach ( $settings as $index => $setting ) {
+                        if ( isset( $attrs[ $setting[ 'id' ] ] ) ) {
+                            $settings[ $index ][ 'value' ] = $attrs[ $setting[ 'id' ] ];
+                        }
+                    }
+
+                    $attributes = $this->to_attributes( $settings );
 
                     if ( isset( $attributes[ '_contents' ] ) ) {
                         unset( $attributes[ '_contents' ] );
                     }
 
                     return $attributes;
-
                 }
 
                 return array();
-
-                //
-
             }
 
             public function generate_element( $tag, $contents = array(), $attributes = array() ) {

@@ -51,7 +51,7 @@
                             }
 
                             if ( ! is_array( $options[ 'value' ] ) ) {
-                                $options[ 'value' ] = implode( $options[ 'delimiter' ], $options[ 'value' ] );
+                                $options[ 'value' ] = explode( $options[ 'delimiter' ], $options[ 'value' ] );
                             }
                         }
                         break;
@@ -60,12 +60,13 @@
 
                         $options[ 'delimiter' ] = isset( $options[ 'delimiter' ] ) ? $options[ 'delimiter' ] : ',';
 
+
                         if ( is_null( $options[ 'value' ] ) ) {
                             $options[ 'value' ] = $options[ 'default' ];
                         }
 
                         if ( ! is_array( $options[ 'value' ] ) ) {
-                            $options[ 'value' ] = implode( $options[ 'delimiter' ], $options[ 'value' ] );
+                            $options[ 'value' ] = explode( $options[ 'delimiter' ], $options[ 'value' ] );
                         }
 
                         break;

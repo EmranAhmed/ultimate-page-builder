@@ -125,6 +125,16 @@
                 'value'    => array( '1' ),
                 'options'  => array( '1' => 'ONE', '2' => 'TWO' )
             ),
+
+
+            array(
+                'id'      => 'multix',
+                'title'   => 'Checkbox Multiple',
+                'type'    => 'checkbox',
+                'value'   => array( '1', '3' ),
+                'options' => array( '1' => 'A', '2' => 'B', '3' => 'C' )
+            ),
+
             array( 'id' => 'title', 'title' => 'Section title', 'type' => 'text', 'value' => 'New Section %s' ),
             array( 'id' => 'enable', 'title' => 'Enable', 'type' => 'toggle', 'value' => TRUE ),
             array( 'id' => 'background-color', 'title' => 'Background Color', 'type' => 'color', 'value' => '#ffccff' ),

@@ -5,10 +5,8 @@
     if ( ! function_exists( 'upb_register_shortcode_column' ) ):
         function upb_register_shortcode_column( $attrs, $contents = NULL ) {
 
-            $default  = upb_elements()->get_attributes( 'column' );
-            $settings = upb_elements()->get_element( 'column', '_upb_settings' );
-
-            $attributes = shortcode_atts( $default, $attrs, 'column' );
+            $attributes = upb_elements()->get_attributes( 'column', $attrs );
+            $settings   = upb_elements()->get_element( 'column', '_upb_settings' );
 
             ob_start();
 
@@ -19,14 +17,11 @@
     endif;
 
 
-
     if ( ! function_exists( 'upb_register_shortcode_row' ) ):
         function upb_register_shortcode_row( $attrs, $contents = NULL ) {
 
-            $default  = upb_elements()->get_attributes( 'row' );
-            $settings = upb_elements()->get_element( 'row', '_upb_settings' );
-
-            $attributes = shortcode_atts( $default, $attrs, 'row' );
+            $attributes = upb_elements()->get_attributes( 'row', $attrs );
+            $settings   = upb_elements()->get_element( 'row', '_upb_settings' );
 
             ob_start();
 
@@ -37,14 +32,11 @@
     endif;
 
 
-
     if ( ! function_exists( 'upb_register_shortcode_section' ) ):
         function upb_register_shortcode_section( $attrs, $contents = NULL ) {
 
-            $default  = upb_elements()->get_attributes( 'section' );
-            $settings = upb_elements()->get_element( 'section', '_upb_settings' );
-
-            $attributes = shortcode_atts( $default, $attrs, 'section' );
+            $attributes = upb_elements()->get_attributes( 'section', $attrs );
+            $settings   = upb_elements()->get_element( 'section', '_upb_settings' );
 
             ob_start();
 
@@ -53,7 +45,6 @@
             return ob_get_clean();
         }
     endif;
-
 
 
     if ( ! function_exists( 'upb_register_shortcode_text' ) ):
