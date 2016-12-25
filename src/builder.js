@@ -47,7 +47,7 @@ document.getElementById("upb-preview-frame").addEventListener('load', function (
 
     store.panel = upbBuilder
 
-    //console.log(settings);
+    // console.log(jQuery);
 
     if (settings.enable) {
         new Vue({
@@ -59,6 +59,7 @@ document.getElementById("upb-preview-frame").addEventListener('load', function (
         })
         //.$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById('upb-preview'))
             .$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById(settings.position))
+
     }
 });
 

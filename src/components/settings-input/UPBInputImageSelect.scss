@@ -1,0 +1,23 @@
+@import "../../../assets/scss/variables";
+
+.image-select label {
+  float : left;
+  }
+
+.image-select input[type="radio"] {
+  visibility : hidden;
+  position   : absolute;
+  }
+
+.image-select img {
+  border     : 4px solid transparent;
+  box-sizing : border-box;
+  cursor     : pointer;
+  height     : auto;
+  max-width  : 100%;
+  padding    : 1px;
+  }
+
+.image-select input:checked + img {
+  border-color : $upb-sidebar-tab-active-background-color;
+  }

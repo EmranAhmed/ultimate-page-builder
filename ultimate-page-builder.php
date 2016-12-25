@@ -55,12 +55,13 @@
             public function includes() {
 
                 // Common
+                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-functions.php";
                 require_once UPB_PLUGIN_INCLUDE_PATH . "upb-template-functions.php";
                 require_once UPB_PLUGIN_INCLUDE_PATH . "upb-shortcode-functions.php";
                 require_once UPB_PLUGIN_INCLUDE_PATH . "upb-shortcode-preview-functions.php";
 
-                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-functions.php";
                 require_once UPB_PLUGIN_INCLUDE_PATH . "upb-elements.php";
+                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-settings.php";
 
                 // Tabs
                 require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-tabs.php";
@@ -74,6 +75,7 @@
 
                 // Boilerplate
                 require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-boilerplate.php";
+
 
                 // Preview
                 require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-preview.php";

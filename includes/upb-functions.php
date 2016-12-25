@@ -2,6 +2,26 @@
 
     defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
+    function upb_assets_uri( $url = '' ) {
+        return UPB_PLUGIN_ASSETS_URI . untrailingslashit( $url );
+    }
+
+    function upb_plugin_uri( $url = '' ) {
+        return UPB_PLUGIN_URI . untrailingslashit( $url );
+    }
+
+    function upb_plugin_path( $path = '' ) {
+        return UPB_PLUGIN_PATH . untrailingslashit( $path );
+    }
+
+    function upb_include_path( $path = '' ) {
+        return UPB_PLUGIN_INCLUDE_PATH . untrailingslashit( $path );
+    }
+
+    function upb_templates_path( $path = '' ) {
+        return UPB_PLUGIN_TEMPLATES_PATH . untrailingslashit( $path );
+    }
+
     function upb_is_ios() {
         return wp_is_mobile() && preg_match( '/iPad|iPod|iPhone/', $_SERVER[ 'HTTP_USER_AGENT' ] );
     }

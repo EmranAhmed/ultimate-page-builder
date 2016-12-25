@@ -577,6 +577,16 @@ button:focus {
         }
 
       }
+
+    .upb-draggable-element {
+
+      cursor : move; /* fallback: no `url()` support or images disabled */
+      cursor : grab; /* W3C standards syntax, should come least */
+
+      &:active {
+        cursor : grabbing;
+        }
+      }
     }
   }
 

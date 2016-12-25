@@ -67,7 +67,7 @@
 
 
                 if ( is_string( $contents ) ) {
-                    $attributes[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', 'Contents' ), 'type' => 'contents', 'value' => $contents );
+                    $attributes[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', 'Contents' ), 'type' => 'contents', 'value' => wpautop( $contents ) );
                 }
 
                 foreach ( $attributes as $index => $attribute ) {

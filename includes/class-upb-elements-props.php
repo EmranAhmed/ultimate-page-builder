@@ -13,6 +13,12 @@
                 $options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : '';
 
                 switch ( $options[ 'type' ] ) {
+                    case 'editor':
+                        if ( isset( $options[ 'value' ] ) && ! empty( $options[ 'value' ] ) ) {
+                            $options[ 'value' ] = wpautop( $options[ 'value' ] );
+                        }
+                        break;
+
                     case 'select':
                     case 'select2':
                         if ( isset( $options[ 'multiple' ] ) && $options[ 'multiple' ] ) {
@@ -21,7 +27,15 @@
                         break;
 
                     case 'image':
-                        $options[ 'size' ] = isset( $options[ 'size' ] ) ? $options[ 'size' ] : 'full';
+                        $options[ 'placeholder' ] = ! empty( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : 'No Image';
+                        $options[ 'size' ]        = isset( $options[ 'size' ] ) ? $options[ 'size' ] : 'full';
+                        $options[ 'buttons' ]     = isset( $options[ 'buttons' ] )
+                            ? $options[ 'buttons' ]
+                            : array(
+                                'add'    => 'Use Image',
+                                'remove' => 'Remove',
+                                'choose' => 'Select',
+                            );
                         break;
 
                     case 'color':
