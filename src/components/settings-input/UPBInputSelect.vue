@@ -1,6 +1,7 @@
 <template>
     <li :class="typeClass()">
         <div class="form-group">
+
             <label v-if="multiple">
                 <span class="title" v-text="attributes.title"></span>
                 <select v-model="input" :id="attributes._id" multiple>

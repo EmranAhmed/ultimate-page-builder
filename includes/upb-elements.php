@@ -6,6 +6,8 @@
     add_action( 'upb_register_element', function ( $element ) {
 
         $attributes = array(
+
+
             array( 'id' => 'title', 'title' => 'Title', 'type' => 'text', 'value' => 'Column 1' ),
             array( 'id' => 'lg', 'type' => 'hidden', 'value' => '' ),
             array( 'id' => 'md', 'type' => 'hidden', 'value' => '' ),
@@ -63,7 +65,8 @@
                     'remove' => 'Remove',
                     'choose' => 'Select...',
                 )
-            ),
+            )
+
         );
 
 
@@ -114,6 +117,14 @@
     add_action( 'upb_register_element', function ( $element ) {
 
         $attributes = array(
+            array(
+                'id'       => 'multi',
+                'title'    => 'Select Multiple',
+                'type'     => 'select',
+                'multiple' => TRUE,
+                'value'    => array( '1' ),
+                'options'  => array( '1' => 'ONE', '2' => 'TWO' )
+            ),
             array( 'id' => 'title', 'title' => 'Section title', 'type' => 'text', 'value' => 'New Section %s' ),
             array( 'id' => 'enable', 'title' => 'Enable', 'type' => 'toggle', 'value' => TRUE ),
             array( 'id' => 'background-color', 'title' => 'Background Color', 'type' => 'color', 'value' => '#ffccff' ),

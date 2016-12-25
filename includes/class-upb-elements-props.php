@@ -6,23 +6,17 @@
 
         class UPB_Elements_Props {
 
-            public function attributes( $options ) {
+            public function filterOptions( $options ) {
 
                 $options[ 'desc' ]        = isset( $options[ 'desc' ] ) ? $options[ 'desc' ] : FALSE;
                 $options[ 'default' ]     = isset( $options[ 'default' ] ) ? $options[ 'default' ] : '';
                 $options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : '';
 
+
                 switch ( $options[ 'type' ] ) {
                     case 'editor':
                         if ( isset( $options[ 'value' ] ) && ! empty( $options[ 'value' ] ) ) {
                             $options[ 'value' ] = wpautop( $options[ 'value' ] );
-                        }
-                        break;
-
-                    case 'select':
-                    case 'select2':
-                        if ( isset( $options[ 'multiple' ] ) && $options[ 'multiple' ] ) {
-                            // $options[ 'default' ] = array();
                         }
                         break;
 
@@ -40,6 +34,40 @@
 
                     case 'color':
                         $options[ 'alpha' ] = isset( $options[ 'alpha' ] ) ? $options[ 'alpha' ] : FALSE;
+                        break;
+
+                    case 'toggle':
+                        $options[ 'value' ] = filter_var( $options[ 'value' ], FILTER_VALIDATE_BOOLEAN );
+                        break;
+
+                    case 'select':
+                    case 'select2':
+                        if ( isset( $options[ 'multiple' ] ) && $options[ 'multiple' ] ) {
+                            $options[ 'delimiter' ] = isset( $options[ 'delimiter' ] ) ? $options[ 'delimiter' ] : ',';
+
+                            // Processing saved attributes
+                            if ( is_null( $options[ 'value' ] ) ) {
+                                $options[ 'value' ] = $options[ 'default' ];
+                            }
+
+                            if ( ! is_array( $options[ 'value' ] ) ) {
+                                $options[ 'value' ] = implode( $options[ 'delimiter' ], $options[ 'value' ] );
+                            }
+                        }
+                        break;
+
+                    case 'checkbox':
+
+                        $options[ 'delimiter' ] = isset( $options[ 'delimiter' ] ) ? $options[ 'delimiter' ] : ',';
+
+                        if ( is_null( $options[ 'value' ] ) ) {
+                            $options[ 'value' ] = $options[ 'default' ];
+                        }
+
+                        if ( ! is_array( $options[ 'value' ] ) ) {
+                            $options[ 'value' ] = implode( $options[ 'delimiter' ], $options[ 'value' ] );
+                        }
+
                         break;
                 }
 

@@ -1,6 +1,7 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
-    // $attributes, $contents
+    // $attributes, $contents, $settings
+
 ?>
 
 <div class="upb-section">

@@ -6,6 +6,24 @@
     add_action( 'upb_register_setting', function ( $settings ) {
 
 
+        // print_r(upb_responsive_hidden()); die;
+
+
+        $options = array(
+            'type'      => 'checkbox',
+            'title'     => 'CheckBox',
+            'default'   => array( '1', '2' ),
+            'delimiter' => ',',
+            'options'   => array(
+                '1' => '1 Column',
+                '2' => '2 Column',
+                '3' => '3 Column',
+            )
+        );
+
+        $settings->register( 'test11', $options );
+
+
         $options = array(
             'type'    => 'image-select',
             'title'   => 'Image Select',

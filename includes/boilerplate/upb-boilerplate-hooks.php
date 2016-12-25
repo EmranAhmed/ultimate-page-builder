@@ -189,6 +189,31 @@
         );
     } );
 
+    add_filter( 'upb_responsive_hidden', function () {
+        return array(
+            array(
+                'id'    => 'hidden-lg',
+                'title' => 'Large',
+                'icon'  => 'mdi mdi-desktop-mac',
+            ),
+            array(
+                'id'    => 'hidden-md',
+                'title' => 'Medium',
+                'icon'  => 'mdi mdi-laptop-mac'
+            ),
+            array(
+                'id'    => 'hidden-sm',
+                'title' => 'Small',
+                'icon'  => 'mdi mdi-tablet-ipad'
+            ),
+            array(
+                'id'    => 'hidden-xs',
+                'title' => 'Extra Small',
+                'icon'  => 'mdi mdi-cellphone-iphone'
+            ),
+        );
+    } );
+
     // grid system
 
     add_filter( 'upb_grid_system', function () {
@@ -375,8 +400,6 @@
     } );
 
 
-
-
     // Backend Scripts
 
     add_action( 'upb_boilerplate_enqueue_scripts', function () {
@@ -388,7 +411,7 @@
         wp_register_script( 'select2', UPB_PLUGIN_ASSETS_URI . "js/select2$suffix.js", array( 'jquery' ), FALSE, TRUE );
 
 
-        wp_register_script( 'iris', admin_url( "/js/iris.min.js" ), array( 'jquery-ui-draggable','jquery-ui-slider', 'jquery-touch-punch' ), FALSE, TRUE );
+        wp_register_script( 'iris', admin_url( "/js/iris.min.js" ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), FALSE, TRUE );
         wp_register_script( 'wp-color-picker', admin_url( "/js/color-picker$suffix.js" ), array( 'iris' ), FALSE, TRUE );
         wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', array(
             'clear'         => __( 'Clear' ),
@@ -461,6 +484,9 @@
         $data .= sprintf( "var _upb_preview_devices = %s;", wp_json_encode( apply_filters( 'upb_preview_devices', array() ) ) );
 
         $data .= sprintf( "var _upb_grid_system = %s;", wp_json_encode( apply_filters( 'upb_grid_system', array() ) ) );
+
+        // $data .= sprintf( "var _upb_responsive_hidden = %s;", wp_json_encode( apply_filters( 'upb_responsive_hidden', array() ) ) );
+
 
         wp_script_add_data( 'upb-builder', 'data', $data );
 

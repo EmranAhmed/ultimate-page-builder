@@ -24,7 +24,7 @@
                 return self::$instance;
             }
 
-            public function register( $tag, $attributes = array(), $contents = FALSE, $_upb_options = array() ) {
+            public function register( $tag, $settings = array(), $contents = FALSE, $_upb_options = array() ) {
 
 
                 if ( $this->has_element( $tag ) ) {
@@ -62,29 +62,34 @@
                 }
 
 
-                $attributes   = apply_filters( "upb_element_{$tag}_attributes", $attributes );
+                $settings     = apply_filters( "upb_element_{$tag}_settings", $settings );
                 $_upb_options = apply_filters( "upb_element_{$tag}_options", $_upb_options );
 
 
                 if ( is_string( $contents ) ) {
-                    $attributes[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', 'Contents' ), 'type' => 'contents', 'value' => wpautop( $contents ) );
+                    $settings[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', 'Contents' ), 'type' => 'contents', 'value' => wp_kses_post( wpautop( $contents ) ) );
                 }
 
-                foreach ( $attributes as $index => $attribute ) {
-                    //$attributes[ $index ][ 'metaKey' ]   = $attribute[ 'id' ];
+                foreach ( $settings as $key => $setting ) {
+                    // $attributes[ $index ][ 'metaKey' ]   = $attribute[ 'id' ];
 
-                    $attributes[ $index ] = $this->props->attributes( $attributes[ $index ] );
+                    if ( ! isset( $settings[ $key ][ 'default' ] ) ) {
+                        $settings[ $key ][ 'default' ] = $settings[ $key ][ 'value' ];
+                    }
 
-                    $attributes[ $index ][ '_id' ] = $attribute[ 'id' ];
+                    $settings[ $key ] = $this->props->filterOptions( $settings[ $key ] );
+
+
+                    $settings[ $key ][ '_id' ] = $setting[ 'id' ];
                     //$attributes[ $index ][ 'metaValue' ] = $attribute[ 'value' ];
-                    $attributes[ $index ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $attribute[ 'type' ] );
+                    $settings[ $key ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $setting[ 'type' ] );
                 }
 
                 $this->short_code_elements[ $tag ] = array(
                     'tag'           => $tag,
                     'contents'      => $contents,
-                    'attributes'    => ( empty( $attributes ) ? FALSE : $this->to_attributes( $attributes ) ),
-                    '_upb_settings' => ( empty( $attributes ) ? FALSE : $attributes ),
+                    'attributes'    => ( empty( $settings ) ? FALSE : $this->to_attributes( $settings ) ),
+                    '_upb_settings' => ( empty( $settings ) ? FALSE : $settings ),
                     '_upb_options'  => $_upb_options
                 );
 
@@ -141,9 +146,9 @@
             }
 
             public function get_attributes( $tag ) {
+                $attributes = $this->get_element( $tag, 'attributes' );
 
-                if ( $this->has_element( $tag ) && isset( $this->short_code_elements[ $tag ][ 'attributes' ] ) ) {
-                    $attributes = $this->short_code_elements[ $tag ][ 'attributes' ];
+                if ( $attributes ) {
 
                     if ( isset( $attributes[ '_contents' ] ) ) {
                         unset( $attributes[ '_contents' ] );
@@ -221,16 +226,13 @@
                 $new_attributes = array();
                 foreach ( $attributes as $index => $attribute ) {
 
-                    $value = isset( $attribute[ 'value' ] ) ? $attribute[ 'value' ] : '';
+                    $attribute = $this->props->filterOptions( $attribute );
 
-                    if ( $value === 'true' || $value === 'false' ) {
-                        $value = filter_var( $value, FILTER_VALIDATE_BOOLEAN );
-                    }
-
+                    // NEW ATTRIBUTE
                     if ( isset( $attribute[ 'id' ] ) ) {
-                        $new_attributes[ $attribute[ 'id' ] ] = $value;
+                        $new_attributes[ $attribute[ 'id' ] ] = $attribute[ 'value' ];
                     } else {
-                        $new_attributes[ $index ] = $value;
+                        $new_attributes[ $index ] = $attribute[ 'value' ];
                     }
                 }
 
@@ -249,33 +251,9 @@
 
                 // Always new attribute
                 foreach ( $settings as $key => $value ) {
-
-
-                    // New Settings added and have default value
-                    if ( is_null( $attributes[ $value[ 'id' ] ] ) && isset( $settings[ $key ][ 'default' ] ) && ! isset( $settings[ $key ][ 'value' ] ) ) {
-                        $settings[ $key ][ 'value' ] = $settings[ $key ][ 'default' ];
-                    }
-
-                    // Saved Value
-                    if ( ! is_null( $attributes[ $value[ 'id' ] ] ) ) {
-                        $settings[ $key ][ 'value' ] = $attributes[ $value[ 'id' ] ];
-                    }
-
-                    if ( $settings[ $key ][ 'value' ] === 'true' || $settings[ $key ][ 'value' ] === 'false' ) {
-                        $settings[ $key ][ 'value' ] = filter_var( $settings[ $key ][ 'value' ], FILTER_VALIDATE_BOOLEAN );
-                    }
-
-
-                    if ( is_null( $attributes[ $value[ 'id' ] ] ) && isset( $settings[ $key ][ 'default' ] ) ) {
-                        // $settings[ $key ][ 'value' ] = $settings[ $key ][ 'default' ];
-                    }
-
-                    if ( isset( $attributes[ $key ] ) ) {
-                        // For Keywise element attr
-                        //$settings[ $key ][ 'value' ] = $attributes[ $key ];
-                    }
+                    $settings[ $key ][ 'value' ] = $attributes[ $value[ 'id' ] ];
+                    $settings[ $key ]            = $this->props->filterOptions( $settings[ $key ] );
                 }
-
 
                 return $settings;
             }
@@ -295,9 +273,11 @@
 
                     //if ( ! isset( $contents[ $index ][ '_upb_settings' ] ) ) {
 
-                    $contents[ $index ][ 'attributes' ] = $this->toBoolean( $content[ 'attributes' ] );
 
                     $contents[ $index ][ '_upb_settings' ] = $this->to_settings( $content[ 'tag' ], $content[ 'attributes' ] );
+                    $contents[ $index ][ 'attributes' ]    = $this->to_attributes( $contents[ $index ][ '_upb_settings' ] );
+
+
                     //}
 
                     //if ( ! isset( $contents[ $index ][ '_upb_options' ] ) ) {
@@ -306,21 +286,6 @@
                 }
 
                 return $contents;
-            }
-
-            public function toBoolean( $attributes ) {
-
-                $attrs = array();
-                foreach ( $attributes as $name => $attribute ) {
-
-                    $attrs[ $name ] = $attribute;
-                    if ( $attribute == 'true' || $attribute == 'false' ) {
-                        $attrs[ $name ] = filter_var( $attribute, FILTER_VALIDATE_BOOLEAN );
-                    }
-                }
-
-                return $attrs;
-
             }
 
             public function set_upb_options_recursive( $contents ) {
@@ -336,11 +301,14 @@
                         $content[ 'attributes' ][ '_contents' ]            = wp_kses_post( $content[ 'contents' ] );
                     }
 
-                    $contents[ $index ][ 'attributes' ] = $this->toBoolean( $content[ 'attributes' ] );
+                    // $contents[ $index ][ 'attributes' ] = $this->toBoolean( $content[ 'attributes' ] );
 
 
                     //if ( ! isset( $contents[ $index ][ '_upb_settings' ] ) ) {
                     $contents[ $index ][ '_upb_settings' ] = $this->to_settings( $content[ 'tag' ], $content[ 'attributes' ] );
+                    $contents[ $index ][ 'attributes' ]    = $this->to_attributes( $contents[ $index ][ '_upb_settings' ] );
+
+                    // print_r($contents[ $index ][ 'attributes' ]);
                     //}
 
                     //if ( ! isset( $contents[ $index ][ '_upb_options' ] ) ) {

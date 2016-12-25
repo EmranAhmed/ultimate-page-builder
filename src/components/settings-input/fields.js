@@ -11,6 +11,7 @@ export default {
     'upb-input-select2'      : require('./UPBInputSelect2.vue'),
     'upb-input-image'        : require('./UPBInputImage.vue'),
     'upb-input-image-select' : require('./UPBInputImageSelect.vue'),
+    'upb-input-checkbox'     : require('./UPBInputCheckbox.vue'),
 }
 
 

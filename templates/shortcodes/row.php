@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
 
-    // $attributes, $contents
+    // $attributes, $contents, $settings
 
 
     $grid = upb_grid_system();

@@ -77,18 +77,28 @@
     }
 
 
-    function upb_devices() {
+    function upb_devices( $key = FALSE ) {
         $devices = apply_filters( 'upb_preview_devices', array() );
 
-        return array_map( function ( $device ) {
-            return $device[ 'id' ];
-        }, array_values( $devices ) );
+        if ( ! $key ) {
+            return array_values( $devices );
+        } else {
+            return array_map( function ( $device ) use ( $key ) {
+                return $device[ $key ];
+            }, array_values( $devices ) );
+        }
+    }
+
+    function upb_responsive_hidden() {
+        $devices = apply_filters( 'upb_responsive_hidden', array() );
+
+        return array_values( $devices );
     }
 
     function upb_make_column_class( $attributes, $extra = FALSE ) {
 
         $grid    = upb_grid_system();
-        $devices = upb_devices();
+        $devices = upb_devices( 'id' );
 
         $columns = array();
 
