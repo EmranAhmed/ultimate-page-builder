@@ -135,6 +135,14 @@
                 'options' => array( '1' => 'A', '2' => 'B', '3' => 'C' )
             ),
 
+            array(
+                'id'      => 'hide',
+                'title'   => 'Device Hidden',
+                'type'    => 'device-hidden',
+                'value'   => array(),
+                'options' => upb_responsive_hidden()
+            ),
+
             array( 'id' => 'title', 'title' => 'Section title', 'type' => 'text', 'value' => 'New Section %s' ),
             array( 'id' => 'enable', 'title' => 'Enable', 'type' => 'toggle', 'value' => TRUE ),
             array( 'id' => 'background-color', 'title' => 'Background Color', 'type' => 'color', 'value' => '#ffccff' ),

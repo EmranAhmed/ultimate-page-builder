@@ -78,9 +78,17 @@
                 switch ( $options[ 'type' ] ) {
                     case 'select':
                     case 'select2':
-                        if ( isset( $options[ 'multiple' ] ) && $options[ 'multiple' ] ) {
+                        if ( isset( $options[ 'multiple' ] ) && $options[ 'multiple' ] && ! is_array( $options[ 'default' ] ) ) {
                             $options[ 'default' ] = array();
                         }
+                        break;
+
+                    case 'checkbox':
+
+                        if ( ! is_array( $options[ 'default' ] ) ) {
+                            $options[ 'default' ] = array();
+                        }
+
                         break;
 
                     case 'image':
@@ -109,6 +117,7 @@
 
                     case 'select':
                     case 'select2':
+                    case 'checkbox':
                         $options[ 'value' ] = empty( $value ) ? $options[ 'default' ] : $value;
                         break;
 

@@ -431,11 +431,10 @@
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
         // ref: /wp-includes/script-loader.php
-        // For Clean Slate We did not use wp_head hook on biler plate template
+        // to Clean Slate We did not use wp_head hook on boilerplate template
         // that's why default registared scripts / styles will not load without re-registering :)
         // Only Admin CSS will load
         wp_enqueue_style( 'dashicon' );
-        // wp_enqueue_style( 'forms' );
         wp_enqueue_style( 'common' );
         wp_enqueue_style( 'buttons' );
         wp_enqueue_style( 'wp-color-picker' );
@@ -491,7 +490,6 @@
         $data .= sprintf( "var _upb_grid_system = %s;", wp_json_encode( apply_filters( 'upb_grid_system', array() ) ) );
 
         // $data .= sprintf( "var _upb_responsive_hidden = %s;", wp_json_encode( apply_filters( 'upb_responsive_hidden', array() ) ) );
-
 
         wp_script_add_data( 'upb-builder', 'data', $data );
 

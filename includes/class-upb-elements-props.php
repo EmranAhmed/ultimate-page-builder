@@ -57,9 +57,9 @@
                         break;
 
                     case 'checkbox':
+                    case 'device-hidden':
 
                         $options[ 'delimiter' ] = isset( $options[ 'delimiter' ] ) ? $options[ 'delimiter' ] : ',';
-
 
                         if ( is_null( $options[ 'value' ] ) ) {
                             $options[ 'value' ] = $options[ 'default' ];

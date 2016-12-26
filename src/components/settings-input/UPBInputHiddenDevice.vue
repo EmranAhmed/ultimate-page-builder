@@ -1,22 +1,26 @@
 <template>
     <li :class="typeClass()">
+        <div class="form-group">
 
-        <div class="form-group toggle">
+
             <span class="title" v-text="attributes.title"></span>
-            <label class="switch">
-                <input class="toggle-input" v-model="input" type="checkbox" :id="attributes._id">
-                <div class="slider round"></div>
+            <label v-for="device in attributes.options">
+                <input class="device-input" type="checkbox" :value="device.id" v-model="input">
+                <i :class="device.icon" :title="device.title"></i>
             </label>
+
+
             <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
         </div>
     </li>
 </template>
-<style lang="sass" src="./UPBInputToggle.scss"></style>
 <script>
+
     import common from './common'
+    //import store from '../../store'
 
     export default {
-        name   : 'upb-input-toggle',
+        name   : 'upb-input-device-hidden',
         props  : ['index', 'target', 'model', 'attributes'], // model[target]
         mixins : [common]
     }
