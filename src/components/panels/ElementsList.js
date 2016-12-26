@@ -104,7 +104,7 @@ export default {
 
         itemClass(){
 
-            return `${this.model.tag}-element element`
+            return `${this.model.tag}-element upb-element element`
         },
 
         getContentPanel(id){

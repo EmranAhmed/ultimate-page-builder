@@ -17,3 +17,10 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: includes/upb-hooks.php:91
+msgid "Load Page Builder"
+msgstr ""
+
+#: includes/upb-hooks.php:98
+msgid "Use Build Page"
+msgstr ""

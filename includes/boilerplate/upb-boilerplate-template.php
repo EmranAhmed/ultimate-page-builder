@@ -3,11 +3,11 @@
 defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
 if ( ! current_user_can( 'customize' ) ) :
-	wp_die(
-		'<h1>' . __( 'Cheatin&#8217; uh?' ) . '</h1>' .
-		'<p>' . __( 'Sorry, you are not allowed to build this page. UPB' ) . '</p>',
-		403
-	);
+    wp_die(
+        '<h1>' . __( 'Cheatin&#8217; uh?' ) . '</h1>' .
+        '<p>' . __( 'Sorry, you are not allowed to build this page. UPB' ) . '</p>',
+        403
+    );
 endif;
 
 
@@ -27,12 +27,10 @@ add_action( 'upb_boilerplate_print_footer_scripts', 'wp_print_footer_scripts' );
 add_action( 'upb_boilerplate_print_footer_scripts', 'wp_underscore_playlist_templates' );
 add_action( 'upb_boilerplate_print_footer_scripts', 'wp_print_media_templates' );
 
-// add_action( 'upb_boilerplate_print_styles', 'wp_print_styles' );
+add_action( 'upb_boilerplate_print_styles', 'wp_print_styles' );
 // add_action( 'upb_boilerplate_print_styles', 'print_admin_styles' );
 
 do_action( 'upb_boilerplate_template_init' );
-
-
 
 do_action( 'upb_boilerplate_enqueue_scripts' );
 
@@ -44,39 +42,44 @@ wp_user_settings();
 ?><!DOCTYPE html>
 <html class="no-js" <?php language_attributes(); ?>>
 <head>
-	<meta charset="<?php echo get_option( 'blog_charset' ); ?>">
-	<?php if ( upb_is_ie() ): ?>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-	<?php endif; ?>
-	<?php if ( wp_is_mobile() ) : ?>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=1.2">
-	<?php endif; ?>
-	<title><?php upb_boilerplate_title() ?></title>
-	<?php
-		do_action( 'upb_boilerplate_header' );
-		do_action( 'upb_boilerplate_print_scripts' );
-		do_action( 'upb_boilerplate_print_styles' );
-	?>
+    <meta charset="<?php echo get_option( 'blog_charset' ); ?>">
+    <?php if ( upb_is_ie() ): ?>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <?php endif; ?>
+    <?php if ( wp_is_mobile() ) : ?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=1.2">
+    <?php endif; ?>
+    <title><?php upb_boilerplate_title() ?></title>
+    <?php
+        // ref: /wp-includes/script-loader.php
+        // For Clean Slate We did not use wp_head hook on biler plate template
+        // that's why default registared scripts / styles will not load without re-registering :)
+        // Only Admin CSS will load
+
+        do_action( 'upb_boilerplate_header' );
+        do_action( 'upb_boilerplate_print_scripts' );
+        do_action( 'upb_boilerplate_print_styles' );
+    ?>
 </head>
 <body class="<?php upb_boilerplate_body_class() ?>">
 <div id="upb-pre-loader">
-	<div>
-		<?php esc_html_e( 'Loading...' ) ?>
-	</div>
+    <div>
+        <?php esc_html_e( 'Loading...' ) ?>
+    </div>
 </div>
 <div id="upb-wrapper" class="expanded preview-lg preview-default"> <!-- collapsed preview-lg preview-md preview-sm preview-xs -->
-	<div id="upb-sidebar-wrapper">
-		<div id="upb-sidebar">
-			<div id="upb-sidebar-header"></div>
-			<div id="upb-sidebar-contents"></div>
-			<div id="upb-sidebar-footer"></div>
-		</div>
-	</div>
-	<div id="upb-skeleton-wrapper">Structure</div>
-	<div id="upb-preview-wrapper">
-		<iframe src="<?php echo esc_url( add_query_arg( 'upb-preview', TRUE, get_preview_post_link( get_the_ID() ) ) ) ?>" frameborder="0" name="upb-preview-frame" seamless="seamless" id="upb-preview-frame"></iframe>
-	</div>
-	<?php do_action( 'upb_boilerplate_contents' ); ?>
+    <div id="upb-sidebar-wrapper">
+        <div id="upb-sidebar">
+            <div id="upb-sidebar-header"></div>
+            <div id="upb-sidebar-contents"></div>
+            <div id="upb-sidebar-footer"></div>
+        </div>
+    </div>
+    <div id="upb-skeleton-wrapper">Structure</div>
+    <div id="upb-preview-wrapper">
+        <iframe src="<?php echo esc_url( add_query_arg( 'upb-preview', TRUE, get_preview_post_link( get_the_ID() ) ) ) ?>" frameborder="0" name="upb-preview-frame" seamless="seamless" id="upb-preview-frame"></iframe>
+    </div>
+    <?php do_action( 'upb_boilerplate_contents' ); ?>
 </div>
 <?php do_action( 'upb_boilerplate_print_footer_scripts' ); ?>
 </body>

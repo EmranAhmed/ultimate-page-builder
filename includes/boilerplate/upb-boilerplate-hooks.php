@@ -407,6 +407,7 @@
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         // Color
 
+        wp_register_style( 'dashicon', includes_url( "/css/dashicons$suffix.css" ) );
         wp_register_style( 'select2', UPB_PLUGIN_ASSETS_URI . "css/select2$suffix.css" );
         wp_register_script( 'select2', UPB_PLUGIN_ASSETS_URI . "js/select2$suffix.js", array( 'jquery' ), FALSE, TRUE );
 
@@ -430,11 +431,15 @@
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
         // ref: /wp-includes/script-loader.php
+        // For Clean Slate We did not use wp_head hook on biler plate template
+        // that's why default registared scripts / styles will not load without re-registering :)
+        // Only Admin CSS will load
+        wp_enqueue_style( 'dashicon' );
+        // wp_enqueue_style( 'forms' );
         wp_enqueue_style( 'common' );
         wp_enqueue_style( 'buttons' );
         wp_enqueue_style( 'wp-color-picker' );
         wp_enqueue_style( 'select2' );
-
 
         wp_enqueue_style( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URI . "css/upb-boilerplate$suffix.css" );
 

@@ -21,11 +21,6 @@ input[type="search"]::-webkit-search-decoration {
   display : none;
   }
 
-input:focus,
-button:focus {
-  outline : none;
-  }
-
 .clearfix {
   @include clearfix;
   }
@@ -337,8 +332,15 @@ button:focus {
         border : 1px solid $upb-sidebar-panel-content-item-selected-border;
         }
 
+      &.form-field-wrapper {
+        border           : none !important;
+        box-shadow       : none !important;
+        background-color : transparent !important;
+        margin-bottom    : 20px !important;
+        }
+
       // form field wrapper
-      &.form-field-wrapper{
+      /*&.form-field-wrapper{
         border: none !important;
         box-shadow: none !important;
         background-color: transparent !important;
@@ -407,7 +409,7 @@ button:focus {
           }
 
 
-        }
+        }*/
       }
 
     .row-contents-layout {
