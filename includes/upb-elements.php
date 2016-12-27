@@ -172,12 +172,6 @@
                     'title'  => '%s Settings'
                 ) ),
             ),
-            'assets'  => array(
-                'preview' => array(
-                    //'css' => upb_templates_uri( 'preview-css/sections.css' ),
-                    //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
-                )
-            )
         );
 
         $element->register( 'section', $attributes, $contents, $_upb_options );
@@ -197,7 +191,7 @@
             array( 'id' => 'background', 'title' => 'Background Color', 'type' => 'color', 'value' => '#ffccff' ),
         );
 
-        $contents = 'Put Contents';
+        $contents = '<p>Put Contents</p>';
 
         $_upb_options = array(
 
@@ -254,6 +248,17 @@
                     'title'  => '%s Settings'
                 ) ),
             ),
+
+            'assets' => array(
+                'preview'   => array(
+                    //'css' => upb_templates_uri( 'preview-css/sections.css' ),
+                    //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                ),
+                'shortcode' => array(
+                    //'css' => upb_templates_uri( 'preview-css/sections.css' ),
+                    //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                )
+            )
 
         );
 

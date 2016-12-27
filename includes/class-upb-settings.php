@@ -127,7 +127,7 @@
                         break;
 
                     case 'editor':
-                        $options[ 'value' ] = ( $value === '' ) ? wpautop( $options[ 'default' ] ) : wp_kses_post( $value );
+                        $options[ 'value' ] = ( $value === '' ) ? wp_kses_post( wpautop( $options[ 'default' ] ) ) : wp_kses_post( $value );
                         break;
 
                     case 'textarea':

@@ -26,13 +26,11 @@
 
             public function register( $tag, $settings = array(), $contents = FALSE, $_upb_options = array() ) {
 
-
                 if ( $this->has_element( $tag ) ) {
-                    throw new Exception( sprintf( 'Ultimate page builder element "%s" already registered.', $tag ) );
+                    trigger_error( sprintf( 'Ultimate page builder element "%s" already registered.', $tag ), E_USER_WARNING );
                 }
 
                 $_upb_options[ 'focus' ] = FALSE;
-
 
                 $_upb_options[ 'core' ] = FALSE;
                 if ( in_array( $tag, $this->core_elements ) ) {
@@ -56,6 +54,7 @@
                     $_upb_options[ 'preview' ][ 'mixins' ] = '{}';
                 }
 
+                // Assets
                 if ( ! isset( $_upb_options[ 'assets' ] ) ) {
                     $_upb_options[ 'assets' ] = array();
                 }
@@ -70,6 +69,19 @@
                 if ( ! isset( $_upb_options[ 'assets' ][ 'preview' ][ 'css' ] ) ) {
                     $_upb_options[ 'assets' ][ 'preview' ][ 'css' ] = FALSE;
                 }
+
+                if ( ! isset( $_upb_options[ 'assets' ][ 'shortcode' ] ) ) {
+                    $_upb_options[ 'assets' ][ 'shortcode' ] = array();
+                }
+
+                if ( ! isset( $_upb_options[ 'assets' ][ 'shortcode' ][ 'js' ] ) ) {
+                    $_upb_options[ 'assets' ][ 'shortcode' ][ 'js' ] = FALSE;
+                }
+                if ( ! isset( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ) ) {
+                    $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] = FALSE;
+                }
+
+                ///
 
                 if ( ! isset( $_upb_options[ 'preview' ][ 'template' ] ) ) {
                     $_upb_options[ 'preview' ][ 'template' ] = $tag;
@@ -110,18 +122,59 @@
                 $shortcode_fn    = sprintf( 'upb_register_shortcode_%s', $tag );
                 $vue_template_fn = sprintf( 'upb_shortcode_preview_%s', $tag );
 
-                if ( ! shortcode_exists( $tag ) && ! is_callable( $shortcode_fn ) ) {
-                    trigger_error( sprintf( 'Ultimate page builder shortcode "%s" template function "%s" not found.', $tag, $shortcode_fn ), E_USER_WARNING );
+                // Override functionality
+                if ( ! shortcode_exists( $tag ) && is_callable( $shortcode_fn ) ) {
+                    // To override shortcode functions :)
+                    add_shortcode( $tag, $shortcode_fn );
                 } else {
                     if ( ! shortcode_exists( $tag ) ) {
-                        add_shortcode( $tag, $shortcode_fn );
+
+
+                        if ( ! empty( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ) ) {
+                            wp_register_style( sprintf( 'upb-element-%s', $tag ), esc_url( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ), array(), FALSE );
+                        }
+
+                        if ( ! empty( $_upb_options[ 'assets' ][ 'shortcode' ][ 'js' ] ) ) {
+                            wp_register_script( sprintf( 'upb-element-%s', $tag ), esc_url( $_upb_options[ 'assets' ][ 'shortcode' ][ 'js' ] ), array(), FALSE, TRUE );
+                        }
+
+                        add_shortcode( $tag, function ( $attrs, $contents = NULL ) use ( $tag ) {
+
+                            $attributes = upb_elements()->get_attributes( $tag, $attrs );
+                            $settings   = upb_elements()->get_element( $tag, '_upb_settings' );
+                            // $options   = upb_elements()->get_element( $tag, '_upb_options' );
+
+                            ob_start();
+                            upb_get_template( sprintf( "shortcodes/%s.php", $tag ), compact( 'attributes', 'contents', 'settings' ) );
+
+                            return ob_get_clean();
+                        } );
                     }
                 }
 
-                if ( ! is_callable( $vue_template_fn ) ) {
-                    trigger_error( sprintf( 'Ultimate page builder shortcode preview "%s" template function "%s" not found.', $tag, $vue_template_fn ), E_USER_WARNING );
-                } else {
+                // Override functionality
+                if ( is_callable( $vue_template_fn ) ) {
                     add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', $tag ), $vue_template_fn );
+                } else {
+                    add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', $tag ), function () use ( $tag ) {
+
+
+                        if ( ! current_user_can( 'customize' ) ) {
+                            status_header( 403 );
+                            wp_send_json_error( 'upb_not_allowed' );
+                        }
+
+                        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+                            status_header( 400 );
+                            wp_send_json_error( 'bad_nonce' );
+                        }
+
+                        ob_start();
+                        upb_get_template( sprintf( "previews/%s.php", $tag ) );
+                        wp_send_json_success( ob_get_clean() );
+
+
+                    } );
                 }
             }
 
@@ -134,16 +187,9 @@
             }
 
             public function getNonCore() {
-
-                $shortcode = array();
-
-                foreach ( array_values( $this->short_code_elements ) as $code ) {
-                    if ( ! in_array( $code[ 'tag' ], $this->core_elements ) ) {
-                        $shortcode[] = $code;
-                    }
-                }
-
-                return $shortcode;
+                return array_filter( array_values( $this->short_code_elements ), function ( $tag ) {
+                    return ! in_array( $tag[ 'tag' ], $this->core_elements );
+                } );
             }
 
             public function get_element( $tag, $key = FALSE ) {

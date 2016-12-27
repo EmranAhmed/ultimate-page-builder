@@ -16,7 +16,7 @@
                 switch ( $options[ 'type' ] ) {
                     case 'editor':
                         if ( isset( $options[ 'value' ] ) && ! empty( $options[ 'value' ] ) ) {
-                            $options[ 'value' ] = wpautop( $options[ 'value' ] );
+                            $options[ 'value' ] = wp_kses_post( wpautop( $options[ 'value' ] ) );
                         }
                         break;
 

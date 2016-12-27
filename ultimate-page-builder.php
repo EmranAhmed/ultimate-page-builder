@@ -58,13 +58,12 @@
                 // Common
                 require_once UPB_PLUGIN_INCLUDE_PATH . "upb-functions.php";
                 require_once UPB_PLUGIN_INCLUDE_PATH . "upb-template-functions.php";
-                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-shortcode-functions.php";
-                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-shortcode-preview-functions.php";
 
+                // Defines
                 require_once UPB_PLUGIN_INCLUDE_PATH . "upb-elements.php";
                 require_once UPB_PLUGIN_INCLUDE_PATH . "upb-settings.php";
 
-                // Tabs
+                // TABS
                 require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-tabs.php";
 
                 // Settings

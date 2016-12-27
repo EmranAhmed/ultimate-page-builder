@@ -76,9 +76,13 @@
 
         wp_register_script( 'upb-scoped-css-polyfill', UPB_PLUGIN_ASSETS_URI . "js/upb-scoped-polyfill$suffix.js", array(), FALSE, TRUE );
 
+
         if ( upb_is_enabled() ):
             wp_enqueue_style( 'upb-grid' );
             wp_enqueue_script( 'upb-scoped-css-polyfill' );
+
+            // Load Shortcodes Styles
+            upb_enqueue_shortcode_assets();
         endif;
     } );
 

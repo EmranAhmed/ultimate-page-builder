@@ -3,7 +3,7 @@
         <div class="form-group">
             <label>
                 <span class="title" v-text="attributes.title"></span>
-                <input v-model="input" :id="attributes._id" :placeholder="attributes.placeholder" class="form-control">
+                <input type="text" v-model="input" :id="attributes._id" :placeholder="attributes.placeholder" class="form-control">
             </label>
 
             <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>

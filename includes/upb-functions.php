@@ -117,3 +117,29 @@
 
         return implode( ' ', $columns );
     }
+
+    function upb_enqueue_shortcode_assets() {
+
+        if ( upb_is_enabled() ):
+
+            $post_ID = get_queried_object_id();
+
+            $shortcodes = get_post_meta( $post_ID, '_upb_shortcodes', TRUE );
+
+            array_map( function ( $element ) use ( $shortcodes ) {
+
+                if ( has_shortcode( $shortcodes, $element[ 'tag' ] ) ) {
+
+                    if ( ! empty( $element[ '_upb_options' ][ 'assets' ][ 'shortcode' ][ 'js' ] ) ) {
+                        wp_enqueue_script( sprintf( 'upb-element-%s', $element[ 'tag' ] ) );
+                    }
+
+                    if ( ! empty( $element[ '_upb_options' ][ 'assets' ][ 'shortcode' ][ 'css' ] ) ) {
+                        wp_enqueue_style( sprintf( 'upb-element-%s', $element[ 'tag' ] ) );
+                    }
+                }
+            }, upb_elements()->getAll() );
+        endif;
+    }
+
+
