@@ -294,6 +294,33 @@ $container-lg : $container-large-desktop !default;
     }
   }
 
+
+
+
+@mixin responsive-visibility($parent) {
+  #{$parent} {
+    display: block !important;
+    }
+  table#{$parent}  { display: table !important; }
+  tr#{$parent}     { display: table-row !important; }
+  th#{$parent},
+  td#{$parent}     { display: table-cell !important; }
+  }
+
+// [converter] $parent hack
+@mixin responsive-invisibility($parent) {
+  #{$parent} {
+    display: none !important;
+    }
+  }
+
+@at-root {
+  @-ms-viewport {
+    width: device-width;
+    }
+  }
+
+
 //
 // Grid system
 // --------------------------------------------------
@@ -398,4 +425,22 @@ $container-lg : $container-large-desktop !default;
 
 @media (min-width : $screen-lg-min) {
   @include make-grid(lg);
+  }
+
+
+
+@media (max-width: $screen-xs-max) {
+  @include responsive-invisibility('.hidden-xs');
+  }
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  @include responsive-invisibility('.hidden-sm');
+  }
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  @include responsive-invisibility('.hidden-md');
+  }
+
+@media (min-width: $screen-lg-min) {
+  @include responsive-invisibility('.hidden-lg');
   }
