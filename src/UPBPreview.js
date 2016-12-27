@@ -36,6 +36,8 @@ store.getAllUPBElements((elements) => {
                     mixins   : [globalPreviewMixins, upbComponentMixins, componentMixins]
                 });
 
+                store.loadPreviewAssets(element.tag, element._upb_options.assets.preview);
+
             })
         });
 

@@ -45,7 +45,6 @@
                         //	'component' => 'upb-' . $tag,
                         'template' => $tag,
                         'mixins'   => '{}' // javascript object, like: { methods:{ abcd(){} } } or window.abcdMixins = {}
-
                     );
                 }
 
@@ -55,6 +54,21 @@
 
                 if ( ! isset( $_upb_options[ 'preview' ][ 'mixins' ] ) ) {
                     $_upb_options[ 'preview' ][ 'mixins' ] = '{}';
+                }
+
+                if ( ! isset( $_upb_options[ 'assets' ] ) ) {
+                    $_upb_options[ 'assets' ] = array();
+                }
+
+                if ( ! isset( $_upb_options[ 'assets' ][ 'preview' ] ) ) {
+                    $_upb_options[ 'assets' ][ 'preview' ] = array();
+                }
+
+                if ( ! isset( $_upb_options[ 'assets' ][ 'preview' ][ 'js' ] ) ) {
+                    $_upb_options[ 'assets' ][ 'preview' ][ 'js' ] = FALSE;
+                }
+                if ( ! isset( $_upb_options[ 'assets' ][ 'preview' ][ 'css' ] ) ) {
+                    $_upb_options[ 'assets' ][ 'preview' ][ 'css' ] = FALSE;
                 }
 
                 if ( ! isset( $_upb_options[ 'preview' ][ 'template' ] ) ) {

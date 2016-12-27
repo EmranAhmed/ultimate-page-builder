@@ -181,6 +181,24 @@ class store {
         });
     }
 
+    loadPreviewAssets(name, assets) {
+        _.each(assets, function (url, type) {
+            if (!_.isEmpty(url)) {
+                let prefix = `upb_preview_assets_${name}-${type}`;
+                console.log(url, type);
+
+                if (type == 'css') {
+                    jQuery(`<link id="${prefix}" type="text/css" href="${url}">`).appendTo("head");
+                }
+
+                if (type == 'js') {
+                    jQuery(`<script id="${prefix}" type="text/js" src="${url}"></script>`).appendTo("head");
+                }
+
+            }
+        });
+    }
+
     getShortCodePreviewTemplate(name = 'default', success, error) {
 
         wp.ajax.send(`_get_upb_shortcode_preview_${name}`, {

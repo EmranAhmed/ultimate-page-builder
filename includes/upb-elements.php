@@ -172,7 +172,12 @@
                     'title'  => '%s Settings'
                 ) ),
             ),
-
+            'assets'  => array(
+                'preview' => array(
+                    'css' => '',
+                    'js'  => ''
+                )
+            )
         );
 
         $element->register( 'section', $attributes, $contents, $_upb_options );
