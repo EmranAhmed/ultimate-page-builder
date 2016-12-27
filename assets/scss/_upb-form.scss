@@ -1,7 +1,7 @@
 .form-field-wrapper {
 
-  .form-group{
-    padding: 0 !important;
+  .form-group {
+    padding : 0 !important;
     }
 
   input[type="text"],
@@ -22,55 +22,59 @@
   input[type="url"],
   input[type="week"],
   select,
-  textarea
-  {
-    border           : 1px solid #DDDDDD;
+  textarea {
+    font-size        : 12px;
+    border           : 1px solid #dddddd;
     box-shadow       : inset 0 1px 2px rgba(0, 0, 0, 0.07);
-    background-color : #FFFFFF;
-    color            : #32373C;
+    background-color : #ffffff;
+    color            : #32373c;
     outline          : none;
     transition       : 0.05s border-color ease-in-out;
 
     &:focus {
-      border-color : #5B9DD9;
+      border-color : #5b9dd9;
       box-shadow   : 0 0 2px rgba(30, 140, 190, 0.8);
       }
     }
 
+  input[type="text"],
+  textarea,
+  select.select-input,
+  select.select-multiple-input {
+    width     : 100%;
+    font-size : 12px;
+    }
 
-  select{
-    -webkit-appearance: none;
-    width: 100%;
-    background-image:
-    linear-gradient(45deg, transparent 50%, gray 50%),
+  select.select-input {
+    -webkit-appearance  : none;
+    background-image    : linear-gradient(45deg, transparent 50%, gray 50%),
     linear-gradient(135deg, gray 50%, transparent 50%),
-    linear-gradient(to right, #ccc, #ccc);
-    background-position:
-    calc(100% - 14px) calc(1em + -3px),
+    linear-gradient(to right, #dddddd, #dddddd);
+    background-position : calc(100% - 13px) calc(1em + -3px),
     calc(100% - 9px) calc(1em + -3px),
     calc(100% - 2em) 0.1em;
-    background-size:
-    5px 5px,
-    5px 5px,
+    background-size     : 5px 5px,
+    4px 4px,
     1px 1.5em;
-    background-repeat: no-repeat;
+    background-repeat   : no-repeat;
 
-    &:focus{
-      background-image:
-      linear-gradient(45deg, gray 50%, transparent 50%),
-      linear-gradient(135deg, transparent 50%, gray 50%),
-      linear-gradient(to right, #ccc, #ccc);
-      background-position:
-      calc(100% - 10px) calc(1em + -4px),
-      calc(100% - 14px) calc(1em + -4px),
+    &:focus {
+      background-image    : linear-gradient(45deg, #bbbbbb 50%, transparent 50%),
+      linear-gradient(135deg, transparent 50%, #bbbbbb 50%),
+      linear-gradient(to right, #dddddd, #dddddd);
+      background-position : calc(100% - 10px) calc(1em + -4px),
+      calc(100% - 13px) calc(1em + -4px),
       calc(100% - 2em) 0.1em;
-      background-size:
-      4px 4px,
+      background-size     : 4px 4px,
       4px 4px,
       1px 1.5em;
-      background-repeat: no-repeat;
-      outline: 0;
+      background-repeat   : no-repeat;
+      outline             : 0;
       }
+    }
+
+  select.select-multiple-input {
+    box-shadow : inset 0 1px 2px rgba(0, 0, 0, 0.07);
     }
 
   /* rtl:ignore */
@@ -87,15 +91,15 @@
 
   input[type="checkbox"],
   input[type="radio"] {
-    border             : 1px solid #B4B9BE;
-    background         : #FFFFFF;
+    border             : 1px solid #b4b9be;
+    background         : #ffffff;
     color              : #555555;
     clear              : none;
     cursor             : pointer;
     display            : inline-block;
     line-height        : 0;
     height             : 16px;
-    margin             : -4px 4px 0 0;
+    margin             : 0 4px 0 0;
     outline            : 0;
     padding            : 0 !important;
     text-align         : center;
@@ -110,12 +114,12 @@
     }
 
   input[type="radio"]:checked + label:before {
-    color : #82878C;
+    color : #82878c;
     }
 
   .wp-core-ui input[type="reset"]:hover,
   .wp-core-ui input[type="reset"]:active {
-    color : #00A0D2;
+    color : #00a0d2;
     }
 
   .wp-core-ui input[type="checkbox"],
@@ -153,7 +157,7 @@
   input[type="checkbox"]:checked:before {
     content : "\f147";
     margin  : -3px 0 0 -4px;
-    color   : #1E8CBE;
+    color   : #1e8cbe;
     }
 
   input[type="radio"]:checked:before {
@@ -166,7 +170,7 @@
     height                : 6px;
     margin                : 4px;
     line-height           : 16px;
-    background-color      : #1E8CBE;
+    background-color      : #1e8cbe;
     }
 
   @-moz-document url-prefix() {
@@ -234,20 +238,20 @@
   input[readonly],
   textarea.readonly,
   textarea[readonly] {
-    background-color : #EEEEEE;
+    background-color : #eeeeee;
     }
 
   ::-webkit-input-placeholder {
-    color : #72777C;
+    color : #72777c;
     }
 
   ::-moz-placeholder {
-    color   : #72777C;
+    color   : #72777c;
     opacity : 1;
     }
 
   :-ms-input-placeholder {
-    color : #72777C;
+    color : #72777c;
     }
 
   .form-input-tip {
@@ -394,7 +398,7 @@
 
   .color-option:hover,
   .color-option.selected {
-    background : #DDDDDD;
+    background : #dddddd;
     }
 
   .color-palette {
@@ -416,33 +420,64 @@
   /*----------------
    * Title
    *----------------*/
-  .title{
-    font-size: 11px;
-    margin: 0 0 10px;
-    text-transform: uppercase;
-    font-weight: 500;
-    display: block;
+  .title {
+    font-size      : 11px;
+    margin         : 0 0 10px;
+    text-transform : uppercase;
+    font-weight    : 500;
+    display        : block;
     }
 
   /*----------------
    * label
    *----------------*/
-  &.checkbox-field-wrapper label{
-    line-height: 20px;
-    display: block;
-    padding-bottom: 6px;
-    cursor: pointer;
+  &.checkbox-field-wrapper label {
+    line-height : 20px;
+    display     : block;
+    cursor      : pointer;
 
-    span{
-      font-size: 12px;
-      font-weight: normal;
+    span {
+      font-size   : 12px;
+      font-weight : normal;
       }
     }
 
-  &.radio-field-wrapper label{
-    font-size: 12px !important;
+  &.radio-field-wrapper label {
+    font-size   : 12px !important;
+    font-weight : normal;
+    }
+
+  /*----------------
+   * Color Picker
+   *----------------*/
+  &.color-field-wrapper a.wp-color-result:after {
+    line-height : 20px !important;
+    font-weight : normal;
+    }
+
+  /*----------------
+   * image field
+   *----------------*/
+  &.image-field-wrapper .placeholder{
+    font-size: 12px;
     font-weight: normal;
     }
 
+  /*-----------------------
+   * Device Hidden Field
+   *----------------------*/
+  &.device-hidden-field-wrapper{
+    input[type="checkbox"]{
+      display: none;
+      }
+
+    i{
+      margin-right: 10px;
+      }
+
+    input:checked + i {
+      color : $upb-sidebar-tab-active-background-color;
+      }
+    }
 
   }
