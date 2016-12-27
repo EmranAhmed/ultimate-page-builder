@@ -89,6 +89,27 @@
             public function hooks() {
                 add_action( 'init', array( $this, 'language' ) );
                 add_action( 'wp', array( $this, 'upb_enabled' ) );
+                add_action( 'wp', array( $this, 'ui_functions' ), 11 );
+                add_action( 'send_headers', array( $this, 'no_cache_headers' ) );
+            }
+
+            public function ui_functions() {
+                if ( upb_is_preview() or upb_is_boilerplate() ):
+                    // Tell W3TC not to minify while the builder is active.
+                    define( 'DONOTMINIFY', TRUE );
+                    // Tell Autoptimize not to minify while the builder is active.
+                    add_filter( 'autoptimize_filter_noptimize', '__return_true' );
+                endif;
+            }
+
+            public function no_cache_headers() {
+                if ( upb_is_preview() or upb_is_boilerplate() ):
+                    header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s' ) . ' GMT' );
+                    header( 'Cache-Control: no-store, no-cache, must-revalidate' );
+                    header( 'Cache-Control: post-check=0, pre-check=0', FALSE );
+                    header( 'Pragma: no-cache' );
+                    header( 'Expires: Sat, 26 Jul 1997 05:00:00 GMT' );
+                endif;
             }
 
             public function upb_enabled() {

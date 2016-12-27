@@ -59,8 +59,12 @@ export default {
             this.saveValue(UPBQuickTag.canvas.value)
         })
 
-        window.switchEditors.go(this.attributes._id, 'html'); // tmce | html
+        tinymce.init(tinyMCEPreInit.mceInit[this.attributes._id]);
+
+        QTags._buttonsInit();
+
         window.wpActiveEditor = this.attributes._id;
+        window.switchEditors.go(this.attributes._id, 'tmce'); // tmce | html
 
         delete QTags.instances[0];
     },

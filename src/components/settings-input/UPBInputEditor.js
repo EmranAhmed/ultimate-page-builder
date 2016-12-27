@@ -33,14 +33,15 @@ export default {
         tinyMCEPreInit.mceInit[this.attributes._id]          = extend(true, {}, tinyMCEPreInit.mceInit['upb-editor-template']);
         tinyMCEPreInit.mceInit[this.attributes._id].id       = this.attributes._id;
         tinyMCEPreInit.mceInit[this.attributes._id].selector = '#' + this.attributes._id;
-        tinyMCEPreInit.qtInit[this.attributes._id]           = extend(true, {}, tinyMCEPreInit.qtInit['upb-editor-template']);
-        tinyMCEPreInit.qtInit[this.attributes._id].id        = this.attributes._id;
         tinyMCEPreInit.mceInit[this.attributes._id].setup    = (editor) => {
             editor.on('input change NodeChange', (e) => {
                 editor.save();
                 this.saveValue(tinymce.editors[this.attributes._id].getContent())
             });
         };
+
+        tinyMCEPreInit.qtInit[this.attributes._id]    = extend(true, {}, tinyMCEPreInit.qtInit['upb-editor-template']);
+        tinyMCEPreInit.qtInit[this.attributes._id].id = this.attributes._id;
 
         this.markup = this.l10n.editorTemplate.replace(new RegExp('upb-editor-template', 'g'), this.attributes._id).replace(new RegExp('%%UPB_EDITOR_CONTENTS%%', 'g'), this.input);
     },
@@ -63,10 +64,21 @@ export default {
             this.saveValue(UPBQuickTag.canvas.value)
         })
 
+        //if(typeof tinymce != 'undefined') {
+        tinymce.init(tinyMCEPreInit.mceInit[this.attributes._id]);
+        //}
+
+        //if(typeof quicktags != 'undefined') {
+        //quicktags({id : this.attributes._id});
+        QTags._buttonsInit();
+        //}
+
+        //
+        window.wpActiveEditor = this.attributes._id;
+
         this.timeOut = setTimeout(_ => {
-            window.wpActiveEditor = this.attributes._id;
-            window.switchEditors.go(this.attributes._id, 'html'); // tmce | html
-        }, 200);
+            window.switchEditors.go(this.attributes._id, 'tmce'); // tmce | html
+        }, 300);
 
         delete QTags.instances[0];
 
