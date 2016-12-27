@@ -22,6 +22,10 @@
         return UPB_PLUGIN_TEMPLATES_PATH . untrailingslashit( $path );
     }
 
+    function upb_templates_uri( $path = '' ) {
+        return UPB_PLUGIN_TEMPLATES_URI . untrailingslashit( $path );
+    }
+
     function upb_is_ios() {
         return wp_is_mobile() && preg_match( '/iPad|iPod|iPhone/', $_SERVER[ 'HTTP_USER_AGENT' ] );
     }
@@ -55,7 +59,6 @@
         }
 
         return FALSE;
-
     }
 
     function upb_is_boilerplate() {
@@ -75,7 +78,6 @@
     function upb_grid_system() {
         return apply_filters( 'upb_grid_system', array() );
     }
-
 
     function upb_devices( $key = FALSE ) {
         $devices = apply_filters( 'upb_preview_devices', array() );
@@ -113,7 +115,5 @@
             }
         }
 
-
         return implode( ' ', $columns );
     }
-

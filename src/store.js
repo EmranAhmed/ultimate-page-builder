@@ -182,19 +182,22 @@ class store {
     }
 
     loadPreviewAssets(name, assets) {
-        _.each(assets, function (url, type) {
+        _.each(assets, (url, type)=> {
             if (!_.isEmpty(url)) {
-                let prefix = `upb_preview_assets_${name}-${type}`;
-                console.log(url, type);
+                let prefix  = `upb_preview_assets_${name}-${type}`;
+                let preview = jQuery(window.frames[this.preview].contentWindow.document);
+
+                if (jQuery(`#${prefix}`, preview).length > 0) {
+                    return false;
+                }
 
                 if (type == 'css') {
-                    jQuery(`<link id="${prefix}" type="text/css" href="${url}">`).appendTo("head");
+                    jQuery('head', preview).append(`<link rel="stylesheet" id="${prefix}" type="text/css" href="${url}" />`);
                 }
 
                 if (type == 'js') {
-                    jQuery(`<script id="${prefix}" type="text/js" src="${url}"></script>`).appendTo("head");
+                    jQuery('head', preview).append(`<script id="${prefix}" type="text/javascript" src="${url}"></script>`);
                 }
-
             }
         });
     }

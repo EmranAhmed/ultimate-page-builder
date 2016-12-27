@@ -174,8 +174,8 @@
             ),
             'assets'  => array(
                 'preview' => array(
-                    'css' => '',
-                    'js'  => ''
+                    //'css' => upb_templates_uri( 'preview-css/sections.css' ),
+                    //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
                 )
             )
         );
