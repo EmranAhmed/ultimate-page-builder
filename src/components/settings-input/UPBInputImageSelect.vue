@@ -6,7 +6,7 @@
 
             <div class="image-select">
                 <label v-for="(option, value) in attributes.options">
-                    <input type="radio" :value="value" v-model="input">
+                    <input class="image-select-input" type="radio" :value="value" v-model="input">
                     <img :src="option.url" :title="option.label" :alt="option.label">
                 </label>
 

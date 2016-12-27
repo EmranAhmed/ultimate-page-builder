@@ -5,7 +5,7 @@
             <span class="title" v-text="attributes.title"></span>
 
             <div v-for="(option, value) in attributes.options">
-                <input type="radio" :id="value" :value="value" v-model="input">
+                <input class="radio-input" type="radio" :id="value" :value="value" v-model="input">
                 <label :for="value" v-text="option"></label>
             </div>
 

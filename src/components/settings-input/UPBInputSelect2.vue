@@ -4,14 +4,14 @@
 
             <label v-if="multiple">
                 <span class="title" v-text="attributes.title"></span>
-                <select multiple v-model="input" style="width: 100%" v-select2="attributes.settings" :id="attributes._id">
+                <select class="select2-multiple-input" multiple v-model="input" style="width: 100%" v-select2="attributes.settings" :id="attributes._id">
                     <option v-for="(option, value) in attributes.options" :value="value" v-text="option"></option>
                 </select>
             </label>
 
             <label v-else>
                 <span class="title" v-text="attributes.title"></span>
-                <select v-model="input" style="width: 100%" v-select2="attributes.settings" :id="attributes._id">
+                <select class="select2-input" v-model="input" style="width: 100%" v-select2="attributes.settings" :id="attributes._id">
                     <option v-for="(option, value) in attributes.options" :value="value" v-text="option"></option>
                 </select>
             </label>

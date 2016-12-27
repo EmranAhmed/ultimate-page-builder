@@ -1,14 +1,11 @@
 <template>
     <li :class="typeClass()">
         <div class="form-group">
-
-
             <span class="title" v-text="attributes.title"></span>
             <label v-for="(label, value) in attributes.options">
-                <input type="checkbox" :value="value" v-model="input">
+                <input class="checkbox-input" type="checkbox" :value="value" v-model="input">
                 <span v-text="label"></span>
             </label>
-
 
             <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
         </div>

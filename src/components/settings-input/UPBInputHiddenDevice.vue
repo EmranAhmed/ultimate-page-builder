@@ -5,7 +5,7 @@
 
             <span class="title" v-text="attributes.title"></span>
             <label v-for="device in attributes.options">
-                <input class="device-input" type="checkbox" :value="device.id" v-model="input">
+                <input class="device-hidden-input" type="checkbox" :value="device.id" v-model="input">
                 <i :class="device.icon" :title="device.title"></i>
             </label>
 

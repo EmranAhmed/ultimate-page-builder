@@ -5,7 +5,6 @@
                 <span class="title" v-text="attributes.title"></span>
                 <div class="description" v-if="attributes.desc" v-html="attributes.desc"></div>
 
-                <!--<input type="hidden" v-model="input">-->
             </label>
 
             <div v-image-media class="attachment-media-view">
