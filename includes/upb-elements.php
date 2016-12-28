@@ -143,6 +143,41 @@
                 'options' => upb_responsive_hidden()
             ),
 
+
+
+            array(
+                'id'          => 'bgimageposition',
+                'title'       => 'Background Image Position',
+                'type'        => 'background-image-position',
+                'value'       => '',
+                'size'        => 'full',
+                'use'         => 'bgimage',
+                'placeholder' => 'Choose background',
+                'buttons'     => array(
+                    'add'    => 'Use',
+                    'remove' => 'Remove',
+                    'choose' => 'Choose',
+                )
+            ),
+
+            array(
+                'id'          => 'bgimage',
+                'title'       => 'Background',
+                'type'        => 'background-image',
+                'value'       => '',
+                'size'        => 'full',
+                'placeholder' => 'Choose background',
+                'buttons'     => array(
+                    'add'    => 'Use',
+                    'remove' => 'Remove',
+                    'choose' => 'Choose',
+                )
+            ),
+
+
+
+
+
             array( 'id' => 'title', 'title' => 'Section title', 'type' => 'text', 'value' => 'New Section %s' ),
             array( 'id' => 'enable', 'title' => 'Enable', 'type' => 'toggle', 'value' => TRUE ),
             array( 'id' => 'background-color', 'title' => 'Background Color', 'type' => 'color', 'value' => '#ffccff' ),

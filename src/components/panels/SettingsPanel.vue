@@ -50,7 +50,7 @@
 
         <li class="upb-panel-contents">
             <ul class="upb-panel-contents-items">
-                <component v-for="(item, index) in model.contents" :index="index" :attributes="item._upb_field_attrs" target="metaValue" :model="model.contents[index]" :is="item._upb_field_type"></component>
+                <component v-for="(setting, index) in model.contents" keyindexname="metaId" keyvaluename="metaValue" :items="model.contents" :index="index" :attributes="setting._upb_field_attrs" target="metaValue" :model="model.contents[index]" :is="setting._upb_field_type"></component>
             </ul>
         </li>
     </ul>

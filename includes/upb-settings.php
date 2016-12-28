@@ -10,6 +10,33 @@
 
 
         $options = array(
+            'title'       => 'Background',
+            'type'        => 'background-image',
+            'default'     => '',
+            'size'        => 'full',
+            'placeholder' => 'Choose background',
+            'buttons'     => array(
+                'add'    => 'Use',
+                'remove' => 'Remove',
+                'choose' => 'Choose',
+            )
+        );
+
+        $settings->register( 'test13', $options );
+
+
+        $options = array(
+            'title'       => 'Background Image Position',
+            'type'        => 'background-image-position',
+            'default'     => '',
+            'use'         => 'test13',
+            'placeholder' => 'Choose background',
+        );
+
+        $settings->register( 'test12', $options );
+
+
+        $options = array(
             'type'      => 'checkbox',
             'title'     => 'CheckBox',
             'default'   => array( '1', '2' ),

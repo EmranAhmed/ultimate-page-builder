@@ -73,6 +73,7 @@
                 $options[ 'default' ]     = isset( $options[ 'default' ] ) ? $options[ 'default' ] : '';
                 $options[ 'value' ]       = $options[ 'default' ];
                 $options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : '';
+                $options[ 'use' ]         = isset( $options[ 'use' ] ) ? $options[ 'use' ] : FALSE;
 
 
                 switch ( $options[ 'type' ] ) {

@@ -102,6 +102,9 @@
                     if ( ! isset( $settings[ $key ][ 'default' ] ) ) {
                         $settings[ $key ][ 'default' ] = $settings[ $key ][ 'value' ];
                     }
+                    if ( ! isset( $settings[ $key ][ 'use' ] ) ) {
+                        $settings[ $key ][ 'use' ] = FALSE;
+                    }
 
                     $settings[ $key ] = $this->props->filterOptions( $settings[ $key ] );
 
@@ -128,7 +131,6 @@
                     add_shortcode( $tag, $shortcode_fn );
                 } else {
                     if ( ! shortcode_exists( $tag ) ) {
-
 
                         if ( ! empty( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ) ) {
                             wp_register_style( sprintf( 'upb-element-%s', $tag ), esc_url( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ), array(), FALSE );

@@ -3,11 +3,11 @@ import common from './common'
 
 import ImageMedia from '../../plugins/vue-image-media'
 
-Vue.use(ImageMedia)
+Vue.use(ImageMedia);
 
 export default {
-    name   : 'upb-input-image',
-    props  : ['index', 'target', 'model', 'attributes'], // model[target] v-model="input"
+    name   : 'upb-input-background-image',
+    // props  : ['index', 'target', 'model', 'attributes'], // model[target] v-model="input"
     mixins : [common],
     data(){
         return {
@@ -16,7 +16,6 @@ export default {
     },
 
     created(){
-
         if (this.input) {
 
             store.wpAjax(
@@ -39,12 +38,11 @@ export default {
 
     methods : {
         onSelect(e, id, src){
-            this.input = id;
-            this.src   = src;
+            this.input = src;
+
         },
         onRemove(e){
             this.input = null;
-            this.src   = null;
         }
     }
 }

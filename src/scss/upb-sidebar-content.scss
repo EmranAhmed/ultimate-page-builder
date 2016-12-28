@@ -647,6 +647,17 @@ FORM CODE
   .preview {
     overflow : hidden;
     width    : 100%;
+    position : relative;
+    }
+
+  .pointer {
+    width            : 2px;
+    height           : 2px;
+    padding          : 5px;
+    background-color : #000000;
+    border           : 2px solid #FFFFFF;
+    border-radius    : 50%;
+    position         : absolute;
     }
 
   .actions {
