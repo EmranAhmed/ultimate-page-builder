@@ -4,10 +4,7 @@
             <label>
                 <span class="title" v-text="attributes.title"></span>
                 <div class="description" v-if="attributes.desc" v-html="attributes.desc"></div>
-
             </label>
-
-            {{ positions }}
 
             <div v-image-media class="attachment-media-view">
                 <div v-show="input" class="preview background-preview">
@@ -25,6 +22,14 @@
                     <div class="clearfix"></div>
                 </div>
             </div>
+        </div>
+
+
+        <div class="form-group">
+            <label>
+                <span class="title" v-text="attributes.title"></span>
+                <div class="description" v-if="attributes.desc" v-html="attributes.desc"></div>
+            </label>
         </div>
     </li>
 </template>

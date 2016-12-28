@@ -15,18 +15,23 @@ import { util } from 'vue';
 
             },
 
-            update : function (newValue, oldValue, vnode) {
-
+            update : function (el, binding, vnode) {
             },
 
             unbind : function (el) {
                 $(el).draggable("destroy");
             },
 
-            componentUpdated : function () {},
+            componentUpdated : function (el, binding, vnode) {
+
+                let [left, top] = binding.value.split(' ');
+
+                $(el).css('left', left.trim());
+                $(el).css('top', top.trim());
+
+            },
 
             inserted : function (el, binding, vnode) {
-
 
                 let [left, top] = binding.value.split(' ');
 

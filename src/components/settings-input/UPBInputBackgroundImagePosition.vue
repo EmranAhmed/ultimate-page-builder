@@ -2,14 +2,8 @@
     <li :class="typeClass()">
         <div class="form-group">
             <label>
-
-
-                {{ input }}
-
                 <span class="title" v-text="attributes.title"></span>
-
                 <input class="text-input" type="text" v-model.lazy="input" :id="attributes._id" :placeholder="attributes.placeholder">
-
             </label>
 
             <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
@@ -22,16 +16,7 @@
     import common from './common'
 
     export default {
-        name     : 'upb-input-background-image-position',
-        // props  : ['index', 'target', 'model', 'attributes'], // model[target]
-        mixins   : [common],
-        computed : {
-            bg(){
-                //return this.getValueOf(this.attributes.use)
-            }
-        },
-        created(){
-
-        }
+        name   : 'upb-input-background-image-position',
+        mixins : [common],
     }
 </script>
