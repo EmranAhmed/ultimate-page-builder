@@ -16,18 +16,17 @@ input[type="time"],
 input[type="url"],
 input[type="week"],
 select,
-textarea{
+textarea {
   &:focus {
-    border :1px solid #5b9dd9 !important;
-    box-shadow: none !important;
-    outline          : none !important;
+    border     : 1px solid #5b9dd9 !important;
+    box-shadow : none !important;
+    outline    : none !important;
     }
   }
 
-button:focus{
-    outline: none;
+button:focus {
+  outline : none;
   }
-
 
 .form-field-wrapper {
 
@@ -63,9 +62,9 @@ button:focus{
     transition       : 0.05s border-color ease-in-out;
 
     &:focus {
-      border :1px solid #5b9dd9;
-      box-shadow: none;
-      outline          : none;
+      border     : 1px solid #5b9dd9;
+      box-shadow : none;
+      outline    : none;
       }
     }
 
@@ -490,55 +489,55 @@ button:focus{
   /*----------------
    * image field
    *----------------*/
-  .attachment-media-view .placeholder{
-    font-size: 12px;
-    font-weight: normal;
+  .attachment-media-view .placeholder {
+    font-size   : 12px;
+    font-weight : normal;
     }
 
   /*-----------------------
    * Device Hidden Field
    *----------------------*/
-  &.device-hidden-field-wrapper{
-    input[type="checkbox"]{
-      visibility: hidden;
-      position: absolute;
+  &.device-hidden-field-wrapper {
+    input[type="checkbox"] {
+      visibility : hidden;
+      position   : absolute;
       }
 
-    .device-hidden-input{
-      display: flex;
-      -ms-flex-pack: distribute;
-      justify-content: space-around;
-      background: #FFFFFF;
-      border: 1px solid #DDDDDD;
-      border-radius: 2px;
+    .device-hidden-input {
+      display         : flex;
+      -ms-flex-pack   : distribute;
+      justify-content : space-around;
+      background      : #ffffff;
+      border          : 1px solid #dddddd;
+      border-radius   : 2px;
 
-      label{
-        position: relative;
-        font-size: 20px;
-        flex: 1;
-        padding: 7px;
-        border-right: 1px solid #DDDDDD;
-        text-align: center;
-        cursor: pointer;
-        height: 30px;
+      label {
+        position     : relative;
+        font-size    : 20px;
+        flex         : 1;
+        padding      : 7px;
+        border-right : 1px solid #dddddd;
+        text-align   : center;
+        cursor       : pointer;
+        height       : 30px;
 
-        &:last-child{
-          border: 0;
+        &:last-child {
+          border : 0;
           }
-        i{
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          left: 0;
-          top: 0;
-          line-height: 30px;
+        i {
+          position    : absolute;
+          width       : 100%;
+          height      : 100%;
+          left        : 0;
+          top         : 0;
+          line-height : 30px;
           }
         }
       }
 
     input:checked + i {
-      background : #eee;
-      color: #999;
+      background : #eeeeee;
+      color      : #999999;
       }
     }
 
@@ -547,67 +546,68 @@ button:focus{
 /*-----------------------
  * Sidebar subpanel
  *----------------------*/
-#sidebar-sub-panel-sections{
-  .sub-panel-sections-header{
-    padding: 10px 15px;
-    background: #e0e0e0;
-    display: table;
-    width: 100%;
+#sidebar-sub-panel-sections {
+  .sub-panel-sections-header {
+    padding    : 10px 15px;
+    background : #e0e0e0;
+    display    : table;
+    width      : 100%;
 
     input[type="search"],
-    button{
-      display: table-cell;
-      font-size: 17px;
-      height: 30px;
-      line-height: 30px;
-      font-weight: normal;
+    button {
+      display     : table-cell;
+      font-size   : 17px;
+      height      : 30px;
+      line-height : 30px;
+      font-weight : normal;
       }
 
-    input[type="search"]{
-      width: 85%;
-      padding: 0 5px;
-      border: 1px solid #cecece;
-      box-shadow       : inset 0 1px 2px rgba(0, 0, 0, 0.07);
-      box-sizing: border-box;
-      margin-right: 3%;
+    input[type="search"] {
+      width        : 85%;
+      padding      : 0 5px;
+      border       : 1px solid #cecece;
+      box-shadow   : inset 0 1px 2px rgba(0, 0, 0, 0.07);
+      box-sizing   : border-box;
+      margin-right : 3%;
       }
-    button{
-      width: 30px;
-      border: 0;
-      background: #1E67ED;
-      color: #fff;
-      cursor: pointer;
+    button {
+      width      : 30px;
+      border     : 0;
+      background : #1e67ed;
+      color      : #ffffff;
+      cursor     : pointer;
 
-      &:hover{
-        background: #333;
+      &:hover {
+        background : #333333;
         }
       }
     }
 
-  .sub-panel-sections-load{
-    padding: 15px;
-    text-align: right;
-    textarea{
-      width: 100%;
-      padding: 10px;
-      box-shadow: inset 0 1px 2px rgba(31, 29, 29, 0.07);
-      border: 1px solid #ddd;
-      font-size: 12px;
+  .sub-panel-sections-load {
+    padding    : 15px;
+    text-align : right;
+    textarea {
+      width      : 100%;
+      padding    : 10px;
+      box-shadow : inset 0 1px 2px rgba(31, 29, 29, 0.07);
+      border     : 1px solid #dddddd;
+      font-size  : 12px;
+      resize     : vertical;
       }
 
-    button{
-      border: 1px solid #ddd;
-      background: #fff;
-      padding: 5px 10px;
-      text-transform: uppercase;
-      box-shadow: 0 1px 2px rgba(0,0,0,.1);
-      border-radius: 2px;
-      font-size: 10px;
-      font-weight: bold;
-      cursor: pointer;
+    button {
+      border         : 1px solid #dddddd;
+      background     : #ffffff;
+      padding        : 5px 10px;
+      text-transform : uppercase;
+      box-shadow     : 0 1px 2px rgba(0, 0, 0, .1);
+      border-radius  : 2px;
+      font-size      : 10px;
+      font-weight    : bold;
+      cursor         : pointer;
 
-      &:hover{
-        border-color: #bbb;
+      &:hover {
+        border-color : #bbbbbb;
         }
       }
     }
