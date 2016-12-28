@@ -23,14 +23,6 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="form-group">
-            <label>
-                <span class="title" v-text="attributes.title"></span>
-                <div class="description" v-if="attributes.desc" v-html="attributes.desc"></div>
-            </label>
-        </div>
     </li>
 </template>
 <script src="./UPBInputBackgroundImage.js"></script>
