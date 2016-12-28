@@ -2,8 +2,10 @@ import store from '../../store'
 import common from './common'
 
 import ImageMedia from '../../plugins/vue-image-media'
+import BackgroundPosition from '../../plugins/vue-background-position'
 
 Vue.use(ImageMedia);
+Vue.use(BackgroundPosition);
 
 export default {
     name   : 'upb-input-background-image',
@@ -12,6 +14,16 @@ export default {
     data(){
         return {
             src : ''
+        }
+    },
+
+    computed : {
+        positions(){
+
+            //console.log(this.attributes.use);
+
+            return this.getValueOf(this.attributes.use);
+            //return '0% 0%';
         }
     },
 
@@ -43,6 +55,11 @@ export default {
         },
         onRemove(e){
             this.input = null;
+        },
+
+        pointerMovedTo(position){
+            this.setValueOf(this.attributes.use, position);
         }
+
     }
 }

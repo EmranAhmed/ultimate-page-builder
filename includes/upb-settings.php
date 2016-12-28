@@ -14,6 +14,7 @@
             'type'        => 'background-image',
             'default'     => '',
             'size'        => 'full',
+            'use'         => 'test12',
             'placeholder' => 'Choose background',
             'buttons'     => array(
                 'add'    => 'Use',
@@ -28,8 +29,8 @@
         $options = array(
             'title'       => 'Background Image Position',
             'type'        => 'background-image-position',
-            'default'     => '',
-            'use'         => 'test13',
+            'default'     => '0% 0%',
+            //'use'         => 'test13',
             'placeholder' => 'Choose background',
         );
 

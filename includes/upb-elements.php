@@ -144,14 +144,13 @@
             ),
 
 
-
             array(
                 'id'          => 'bgimageposition',
                 'title'       => 'Background Image Position',
                 'type'        => 'background-image-position',
-                'value'       => '',
+                'value'       => '0% 0%',
                 'size'        => 'full',
-                'use'         => 'bgimage',
+                //'use'         => 'bgimage',
                 'placeholder' => 'Choose background',
                 'buttons'     => array(
                     'add'    => 'Use',
@@ -165,6 +164,7 @@
                 'title'       => 'Background',
                 'type'        => 'background-image',
                 'value'       => '',
+                'use'         => 'bgimageposition',
                 'size'        => 'full',
                 'placeholder' => 'Choose background',
                 'buttons'     => array(
@@ -173,9 +173,6 @@
                     'choose' => 'Choose',
                 )
             ),
-
-
-
 
 
             array( 'id' => 'title', 'title' => 'Section title', 'type' => 'text', 'value' => 'New Section %s' ),

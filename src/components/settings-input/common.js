@@ -36,6 +36,41 @@ export default{
             }
             return null;
         },
+        setValueOf(key, value){
+
+            let find                = {};
+            find[this.keyindexname] = key;
+
+            //console.log(this.model, key)
+
+            this.items.filter((item, index)=> {
+
+                if (item[this.keyindexname] == key) {
+
+                    //console.log(index);
+
+                    // console.log(this.attributes)
+                    //console.log(item, this.keyvaluename)
+
+                    // Settings Panel
+                    if (!_.isUndefined(item['_upb_field_attrs'])) {
+                        Vue.set(this.items[index]._upb_field_attrs, 'value', value);
+                    }
+
+                    // Element Setting
+                    if (!_.isUndefined(this.model[key])) {
+                        Vue.set(this.model, key, value);
+                    }
+
+                    Vue.set(this.items[index], this.keyvaluename, value);
+
+                    console.log(this.model, this.target);
+
+                }
+
+            });
+
+        },
 
         str2Bool(strvalue){
             return (strvalue && typeof strvalue == 'string') ? (strvalue.toLowerCase() == 'true' || strvalue == '1') : (strvalue == true);

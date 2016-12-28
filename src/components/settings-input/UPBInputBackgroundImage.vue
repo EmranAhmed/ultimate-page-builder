@@ -7,12 +7,17 @@
 
             </label>
 
+            {{ positions }}
+
             <div v-image-media class="attachment-media-view">
-                <div v-if="input" class="preview background-preview">
+                <div v-show="input" class="preview background-preview">
+
+                    <div class="pointer" v-background-position="positions"></div>
+
                     <img :src="input" alt="" draggable="false">
                 </div>
 
-                <div v-else class="placeholder" v-text="attributes.placeholder"></div>
+                <div v-show="!input" class="placeholder" v-text="attributes.placeholder"></div>
 
                 <div class="actions">
                     <button v-show="input" type="button" class="button remove-button" v-text="attributes.buttons.remove"></button>

@@ -70,6 +70,12 @@
                         }
 
                         break;
+
+                    default:
+                        if ( is_null( $options[ 'value' ] ) ) {
+                            $options[ 'value' ] = $options[ 'default' ];
+                        }
+                        break;
                 }
 
                 return $options;

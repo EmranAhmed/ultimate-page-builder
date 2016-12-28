@@ -4,12 +4,12 @@
             <label>
 
 
-                {{ bg }}
+                {{ input }}
 
                 <span class="title" v-text="attributes.title"></span>
-                <!--
-                                <input class="text-input" type="text" v-model="input" :id="attributes._id" :placeholder="attributes.placeholder">
-                -->
+
+                <input class="text-input" type="text" v-model.lazy="input" :id="attributes._id" :placeholder="attributes.placeholder">
+
             </label>
 
             <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
@@ -27,7 +27,7 @@
         mixins   : [common],
         computed : {
             bg(){
-                return this.getValueOf(this.attributes.use)
+                //return this.getValueOf(this.attributes.use)
             }
         },
         created(){
