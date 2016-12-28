@@ -11,6 +11,10 @@
 /* Hide default HTML checkbox */
 .switch input {
   display : none;
+
+  &:focus{
+    border: 0 !important;
+    }
   }
 
 /* The slider */
