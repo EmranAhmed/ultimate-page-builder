@@ -153,7 +153,7 @@
 
             public function set_setting( $id, $value ) {
                 $_id = $this->prefix . $id;
-
+                
                 return update_post_meta( $this->get_the_ID(), $_id, $value );
             }
 

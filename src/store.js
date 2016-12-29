@@ -89,6 +89,10 @@ class store {
             contents[data['id']] = this.cleanup(newdata.contents);
         });
 
+        if (contents['elements']) {
+            delete contents.elements;
+        }
+
         wp.ajax.send("_upb_save", {
             success : success,
             error   : error,

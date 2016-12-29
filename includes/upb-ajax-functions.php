@@ -17,7 +17,7 @@
             wp_send_json_error( 'bad_nonce' );
         }
 
-        if ( empty( $_POST[ 'shortcode' ] ) || ! is_array( $_POST[ 'states' ] ) ) {
+        if ( ! is_array( $_POST[ 'states' ] ) ) {
             status_header( 400 );
             wp_send_json_error( 'missing_contents' );
         }
@@ -26,11 +26,13 @@
 
         $post_id = absint( $_POST[ 'id' ] );
 
-
-        update_post_meta( $post_id, '_upb_sections', $_POST[ 'states' ][ 'sections' ] );
-
-        update_post_meta( $post_id, '_upb_shortcodes', $_POST[ 'shortcode' ] );
-
+        if ( ! empty( $_POST[ 'shortcode' ] ) ) {
+            update_post_meta( $post_id, '_upb_sections', $_POST[ 'states' ][ 'sections' ] );
+            update_post_meta( $post_id, '_upb_shortcodes', trim( $_POST[ 'shortcode' ] ) );
+        } else {
+            delete_post_meta( $post_id, '_upb_sections' );
+            delete_post_meta( $post_id, '_upb_shortcodes' );
+        }
 
         upb_settings()->set_settings( $_POST[ 'states' ][ 'settings' ] );
 
