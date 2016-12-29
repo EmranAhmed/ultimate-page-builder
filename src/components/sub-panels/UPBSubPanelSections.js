@@ -57,16 +57,17 @@ export default {
 
             let data = this.textareaContents;
 
-            console.log(data);
+            // console.log(JSON.parse(data));
 
-            /*wp.ajax.send('_save_section_by_content', {
-                success : success,
-                error   : error,
-                data    : {
-                    _nonce   : this.status._nonce,
-                    contents : this.cleanup(extend(true, [], contents))
-                }
-            });*/
+            store.saveSectionToOption(JSON.parse(data), (data)=> {
+
+                this.toggleTextarea();
+                this.loadContents();
+                this.$toast.success(sprintf(this.l10n.sectionAdded, ''));
+                
+                // sectionAdded
+
+            })
 
         },
 
