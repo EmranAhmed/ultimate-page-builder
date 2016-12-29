@@ -11,9 +11,9 @@
 
         <div v-if="showTextarea" class="sub-panel-sections-load">
 
-            <textarea v-model="textareaContents" placeholder="paste section json"></textarea>
+            <textarea v-model="textareaContents" :placeholder="l10n.pasteJSON"></textarea>
 
-            <button>Add</button>
+            <button @click.prevent="addToSection()" v-text="l10n.add"></button>
         </div>
 
         <div class="sub-panel-sections-list">
@@ -23,8 +23,9 @@
                 <li v-for="(content, index) in contents">
                     <div class="sub-panel-section-tools">
                         <a @click.prevent="addSection(index)" href=""><i class="mdi mdi-plus"></i></a>
-                        <a @click.prevent="copySection(index)" href=""><i class="mdi mdi-clipboard-outline"></i></a>
+                        <a v-copy2clipboard="toJSON(index)" href=""><i class="mdi mdi-clipboard-outline"></i></a>
                         <a @click.prevent="deleteSection(index)" href="#"><i class="mdi mdi-close"></i></a>
+
                     </div>
                     <div class="sub-panel-section-title" v-text="content.attributes.title"></div>
                 </li>
