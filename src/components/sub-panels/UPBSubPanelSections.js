@@ -55,19 +55,36 @@ export default {
 
         addToSection(){
 
-            let data = this.textareaContents;
+            let data = this.textareaContents.trim();
 
-            // console.log(JSON.parse(data));
+            if (data) {
 
-            store.saveSectionToOption(JSON.parse(data), (data)=> {
+                try {
+                    let item = JSON.parse(data);
 
-                this.toggleTextarea();
-                this.loadContents();
-                this.$toast.success(sprintf(this.l10n.sectionAdded, ''));
-                
-                // sectionAdded
+                    // let item = store.cleanup([itemParsed]).pop();
 
-            })
+                    if (item.tag == 'section' && _.isArray(item.contents) && _.isObject(item.attributes)) {
+
+                        store.saveSectionToOption(item, (data)=> {
+
+                            this.toggleTextarea();
+                            this.loadContents();
+                            this.$toast.success(sprintf(this.l10n.sectionAdded, ''));
+
+                        })
+
+                    }
+                    else {
+                        this.$toast.error('Use valid section content');
+                    }
+
+                } catch (err) {
+                    // console.log('Could Not Copy', err);
+                    this.$toast.error('Use valid JSON Data');
+                }
+
+            }
 
         },
 

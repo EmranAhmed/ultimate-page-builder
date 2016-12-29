@@ -59,7 +59,8 @@
         }
 
         $sections   = (array) get_option( '_upb_saved_sections', array() );
-        $sections[] = $_POST[ 'contents' ];
+        $sections[] = wp_kses_post_deep( stripslashes_deep( $_POST[ 'contents' ] ) );
+
 
         $update = update_option( '_upb_saved_sections', $sections, FALSE );
 
@@ -162,7 +163,7 @@
 
         $saved_sections = (array) get_option( '_upb_saved_sections', array() );
 
-        $saved_sections = upb_elements()->set_upb_options_recursive( $saved_sections );
+        $saved_sections = upb_elements()->set_upb_options_recursive( wp_kses_post_deep( stripslashes_deep( $saved_sections ) ) );
 
         wp_send_json_success( $saved_sections );
     } );
