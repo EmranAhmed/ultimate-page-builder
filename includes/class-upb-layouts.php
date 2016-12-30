@@ -10,8 +10,6 @@
 
             private $layouts = array();
 
-            private $option_key = '_upb_layouts';
-
             private function __construct() {
                 //$this->props = new UPB_Elements_Props();
             }

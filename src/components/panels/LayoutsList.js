@@ -32,7 +32,9 @@ export default {
                 // Send Ajax and get UPB Options
                 store.addUPBOptions(code, data=> {
                     if (_.isArray(data)) {
-                        store.addContentsToTab('sections', data)
+                        store.addContentsToTab('sections', data);
+                        this.$toast.success(sprintf(this.l10n.layoutAdded, this.l10n.pageTitle));
+                        this.$router.replace('/sections');
                     }
                 }, data=> {
                     console.log(data);

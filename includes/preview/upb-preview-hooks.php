@@ -2,7 +2,6 @@
 
     defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
-
     add_action( 'upb_preview_loaded', function () {
         add_filter( 'show_admin_bar', '__return_false' );
     } );
@@ -34,7 +33,6 @@
         if ( ! current_theme_supports( 'upb-custom-grid-layout' ) ) {
             wp_register_style( 'upb-grid', UPB_PLUGIN_ASSETS_URI . "css/upb-grid$suffix.css" );
         }
-
 
         if ( upb_is_preview() ) {
 
@@ -74,5 +72,3 @@
 
         return ob_get_clean();
     } );
-
-

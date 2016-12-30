@@ -27,7 +27,7 @@
 				// id, active, settings, contents, title, icon, class, callback
 
 				if ( isset( $this->tabs[ $id ] ) && is_array( $this->tabs[ $id ] ) ) {
-					throw new Exception( sprintf( 'Ultimate Page builder tab "%s" already registered.', $tab[ 'title' ] ) );
+					throw new Exception( sprintf( __('Ultimate Page builder tab "%s" already registered.', 'ultimate-page-builder'), $tab[ 'title' ] ) );
 				} else {
 
 					if ( ! isset( $tab[ 'action' ] ) ) {
@@ -55,6 +55,4 @@
 				return wp_json_encode( $this->tabs );
 			}
 		}
-
-
 	endif;

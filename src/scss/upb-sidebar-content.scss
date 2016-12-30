@@ -150,6 +150,16 @@ input[type="search"]::-webkit-search-decoration {
     font-weight : 100;
     text-align  : center;
 
+    i {
+      color          : $upb-sidebar-help-color;
+      font-size      : 16px;
+      vertical-align : middle;
+      }
+
+    a {
+      color : $upb-sidebar-help-color;
+      }
+
     h2 {
       font-size     : 16px;
       font-weight   : 500;
@@ -161,7 +171,7 @@ input[type="search"]::-webkit-search-decoration {
       padding : 10px;
       display : block;
       width   : 100%;
-      border: 1px solid transparent;
+      border  : 1px solid transparent;
       }
     }
 
@@ -711,52 +721,51 @@ FORM CODE
   position    : absolute;
   }
 
-
-#sidebar-sub-panel-sections{
-  .sub-panel-sections-list{
-    padding: 15px;
-    li{
-      width: 100%;
-      border: 1px solid #c6c6c6;
-      background-color: #FFFFFF;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-      border-radius: 3px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
+#sidebar-sub-panel-sections {
+  .sub-panel-sections-list {
+    padding : 15px;
+    li {
+      width            : 100%;
+      border           : 1px solid #C6C6C6;
+      background-color : #FFFFFF;
+      box-shadow       : 0 0 5px rgba(0, 0, 0, 0.1);
+      border-radius    : 3px;
+      margin-bottom    : 10px;
+      display          : flex;
+      align-items      : center;
 
       .sub-panel-section-tools,
-      .sub-panel-section-title{
-        flex: initial;
+      .sub-panel-section-title {
+        flex : initial;
         }
 
-      .sub-panel-section-tools{
-        width: 30px;
-        text-align: center;
-        a{
-          display: block;
-          padding: 4px;
-          color:#888;
-          border-bottom: 1px solid #c6c6c6;
-          border-right: 1px solid #c6c6c6;
+      .sub-panel-section-tools {
+        width      : 30px;
+        text-align : center;
+        a {
+          display       : block;
+          padding       : 4px;
+          color         : #888888;
+          border-bottom : 1px solid #C6C6C6;
+          border-right  : 1px solid #C6C6C6;
 
-          &:last-child{
-            border-bottom: 0;
+          &:last-child {
+            border-bottom : 0;
             }
 
-          &:hover{
-            background: #ddd;
-            color: #000;
+          &:hover {
+            background : #DDDDDD;
+            color      : #000000;
             }
           }
         }
 
-      .sub-panel-section-title{
-        text-align: center;
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-        font-weight: 500;
+      .sub-panel-section-title {
+        text-align  : center;
+        width       : 100%;
+        padding     : 10px;
+        font-size   : 16px;
+        font-weight : 500;
         }
       }
     }

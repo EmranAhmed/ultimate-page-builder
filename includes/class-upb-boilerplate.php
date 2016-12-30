@@ -4,6 +4,7 @@
     if ( ! class_exists( 'UPB_Boilerplate' ) ):
 
         class UPB_Boilerplate {
+
             protected static $_instance = NULL;
 
             public static function init() {

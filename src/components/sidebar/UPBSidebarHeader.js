@@ -31,7 +31,7 @@ export default {
                     store.stateSaved();
                     // store.reloadPreview();
                     this.$progressbar.hide();
-                    this.$toast.success(this.l10n.save);
+                    this.$toast.success(this.l10n.saved);
                 }, () => {
                     this.$progressbar.hide();
                     this.$toast.error(this.l10n.savingProblem);

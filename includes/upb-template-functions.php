@@ -81,5 +81,5 @@
     }
 
 
-    //get_theme_file_uri();
-    //get_theme_file_path();
+    //get_theme_file_uri(); 4.7
+    //get_theme_file_path(); 4.7

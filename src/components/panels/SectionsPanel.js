@@ -81,14 +81,18 @@ export default {
 
         copyLayoutToClipboard(){
 
-            let item = extend(true, [], this.model.contents);
-            let json = JSON.stringify(store.cleanup(item));
+            if (this.model.contents.length > 0) {
+                let item = extend(true, [], this.model.contents);
+                let json = JSON.stringify(store.cleanup(item));
 
-            copy(json);
+                copy(json);
 
-            this.$toast.success(sprintf(this.l10n.layoutCopied, this.l10n.pageTitle));
+                this.$toast.success(sprintf(this.l10n.layoutCopied, this.l10n.pageTitle));
 
-            // console.log('COPY LAYOUT DATA');
+            }
+            else {
+                this.$toast.info(this.l10n.layoutNotCopied);
+            }
         },
 
         toolsActiveClass(tool){

@@ -144,7 +144,6 @@
 
             }
 
-
             public function get_setting( $id ) {
                 $_id = $this->prefix . $id;
 

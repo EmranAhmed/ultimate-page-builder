@@ -11,6 +11,7 @@
 
         $options = array(
             'title'       => 'Background',
+            'desc'        => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
             'type'        => 'background-image',
             'default'     => '',
             'size'        => 'full',
@@ -27,7 +28,9 @@
 
 
         $options = array(
-            'title'       => 'Background Image Position',
+            'title' => 'Background Image Position',
+            'desc'  => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
             'type'        => 'background-image-position',
             'default'     => '0% 0%',
             //'use'         => 'test13',
@@ -38,8 +41,10 @@
 
 
         $options = array(
-            'type'      => 'checkbox',
-            'title'     => 'CheckBox',
+            'type'  => 'checkbox',
+            'title' => 'CheckBox',
+            'desc'  => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
             'default'   => array( '1', '2' ),
             'delimiter' => ',',
             'options'   => array(
@@ -53,8 +58,10 @@
 
 
         $options = array(
-            'type'    => 'image-select',
-            'title'   => 'Image Select',
+            'type'  => 'image-select',
+            'title' => 'Image Select',
+            'desc'  => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
             'default' => '1',
             'options' => array(
                 '1' => array(
@@ -76,8 +83,10 @@
 
 
         $options = array(
-            'type'        => 'image',
-            'title'       => 'Image Media',
+            'type'  => 'image',
+            'title' => 'Image Media',
+            'desc'  => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
             'placeholder' => 'No Image is Selected',
             'size'        => 'full',
             'buttons'     => array(
@@ -93,6 +102,8 @@
         $options = array(
             'type'     => 'select2',
             'title'    => 'Select multi',
+            'desc'     => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
             //'default'  => array( '2' ),
             'multiple' => TRUE,
             'options'  => array( '1' => 'ONE', '2' => 'TWO', '3' => 'Three' ),
@@ -106,8 +117,10 @@
 
 
         $options = array(
-            'type'    => 'toggle',
-            'title'   => 'Enable',
+            'type'  => 'toggle',
+            'title' => 'Enable',
+            'desc'  => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
             'default' => FALSE,
             'reload'  => TRUE
         );
@@ -117,8 +130,10 @@
 
 
         $options = array(
-            'type'    => 'select',
-            'title'   => 'Position',
+            'type'  => 'select',
+            'title' => 'Position',
+            'desc'  => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
             'default' => 'upb-after-contents',
             'reload'  => TRUE,
             'options' => array(
@@ -138,6 +153,8 @@
             'type'    => 'text',
             'title'   => 'Test Title',
             'default' => 'xyz',
+            'desc'    => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
         );
 
         $settings->register( 'test1', $options );
@@ -146,6 +163,8 @@
             'type'    => 'textarea',
             'title'   => 'TextArea',
             'default' => 'textarea',
+            'desc'    => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
         );
 
         $settings->register( 'test2', $options );
@@ -155,6 +174,8 @@
             'type'    => 'radio',
             'title'   => 'Radio',
             'default' => '1',
+            'desc'    => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
             'options' => array( '1' => 'ONE', '2' => 'TWO' )
         );
 
@@ -165,14 +186,18 @@
             'type'    => 'select',
             'title'   => 'Select',
             'default' => '1',
+            'desc'    => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
             'options' => array( '1' => 'ONE', '2' => 'TWO' )
         );
 
         $settings->register( 'test4', $options );
 
         $options = array(
-            'type'     => 'select',
-            'title'    => 'Select Multiple',
+            'type'  => 'select',
+            'title' => 'Select Multiple',
+            'desc'  => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
             'multiple' => TRUE,
             'default'  => array( '1' ),
             'options'  => array( '1' => 'ONE', '2' => 'TWO' )
@@ -180,9 +205,11 @@
         $settings->register( 'test5', $options );
 
         $options = array(
-            'type'    => 'editor',
-            'title'   => 'Editor',
-            'default' => 'CONTENTS',
+            'type'  => 'editor',
+            'title' => 'Editor',
+            'desc'  => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
+            'default' => '<p>CONTENTS</p>',
         );
         $settings->register( 'test6', $options );
 
@@ -191,8 +218,10 @@
 
 
         $options = array(
-            'type'    => 'color',
-            'title'   => 'Color',
+            'type'  => 'color',
+            'title' => 'Color',
+            'desc'  => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
             'default' => '#ffccff',
             'alpha'   => TRUE //
         );
@@ -202,8 +231,10 @@
 
 
         $options = array(
-            'type'     => 'select2',
-            'title'    => 'Select2',
+            'type'  => 'select2',
+            'title' => 'Select2',
+            'desc'  => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+
             'default'  => '1',
             'options'  => array( '1' => 'ONE', '2' => 'TWO' ),
             'settings' => array(

@@ -7,7 +7,6 @@
 
         $attributes = array(
 
-
             array( 'id' => 'title', 'title' => 'Title', 'type' => 'text', 'value' => 'Column 1' ),
             array( 'id' => 'lg', 'type' => 'hidden', 'value' => '' ),
             array( 'id' => 'md', 'type' => 'hidden', 'value' => '' ),
@@ -120,6 +119,7 @@
             array(
                 'id'       => 'multi',
                 'title'    => 'Select Multiple',
+                'desc'     => 'Globally e-enable next-generation leadership via maintainable users. Synergistically.',
                 'type'     => 'select',
                 'multiple' => TRUE,
                 'value'    => array( '1' ),
@@ -130,6 +130,7 @@
             array(
                 'id'      => 'multix',
                 'title'   => 'Checkbox Multiple',
+                'desc'    => 'Globally e-enable next-generation leadership via maintainable users. Synergistically.',
                 'type'    => 'checkbox',
                 'value'   => array( '1', '3' ),
                 'options' => array( '1' => 'A', '2' => 'B', '3' => 'C' )
@@ -138,6 +139,7 @@
             array(
                 'id'      => 'hide',
                 'title'   => 'Device Hidden',
+                'desc'    => 'Objectively scale backward-compatible customer service via.',
                 'type'    => 'device-hidden',
                 'value'   => array(),
                 'options' => upb_responsive_hidden()
@@ -148,6 +150,7 @@
                 'id'          => 'bgimageposition',
                 'title'       => 'Background Image Position',
                 'type'        => 'background-image-position',
+                'desc'        => 'Dramatically simplify cost effective systems with..',
                 'value'       => '0% 0%',
                 'size'        => 'full',
                 //'use'         => 'bgimage',
@@ -163,6 +166,7 @@
                 'id'          => 'bgimage',
                 'title'       => 'Background',
                 'type'        => 'background-image',
+                'desc'        => 'Dramatically empower enabled architectures via cutting-edge.',
                 'value'       => '',
                 'use'         => 'bgimageposition',
                 'size'        => 'full',
@@ -175,9 +179,27 @@
             ),
 
 
-            array( 'id' => 'title', 'title' => 'Section title', 'type' => 'text', 'value' => 'New Section %s' ),
-            array( 'id' => 'enable', 'title' => 'Enable', 'type' => 'toggle', 'value' => TRUE ),
-            array( 'id' => 'background-color', 'title' => 'Background Color', 'type' => 'color', 'value' => '#ffccff' ),
+            array(
+                'id'    => 'title',
+                'desc'  => 'Dramatically empower enabled architectures via cutting-edge.',
+                'title' => 'Section title',
+                'type'  => 'text',
+                'value' => 'New Section %s'
+            ),
+            array(
+                'id'    => 'enable',
+                'desc'  => 'Dramatically empower enabled architectures via cutting-edge.',
+                'title' => 'Enable',
+                'type'  => 'toggle',
+                'value' => TRUE
+            ),
+            array(
+                'id'    => 'background-color',
+                'desc'  => 'Dramatically empower enabled architectures via cutting-edge.',
+                'title' => 'Background Color',
+                'type'  => 'color',
+                'value' => '#ffccff'
+            ),
         );
 
         $contents = array();
@@ -194,7 +216,7 @@
             ),
             'meta'    => array(
                 'contents' => apply_filters( 'upb_section_contents_panel_meta', array(
-                    'help'   => '<h2>Want to add contents?</h2><p>Choose a section and drag elements</p>',
+                    'help'   => '<h2>Now what?</h2><p>Create your layout column. Or click on mini column to add elements.</p>',
                     'search' => 'Search Rows',
                     'title'  => '%s'
                 ) ),
@@ -211,7 +233,7 @@
     } );
 
 
-    //////  NON CORE
+    //  NON CORE
 
     // Text
     add_action( 'upb_register_element', function ( $element ) {
@@ -297,4 +319,6 @@
         $element->register( 'text', $attributes, $contents, $_upb_options );
 
     } );
+
+
 

@@ -49,21 +49,21 @@
         );
         $tools[ 'disable' ]  = array(
             'icon'  => 'mdi mdi-eye-off',
-            'title' => 'Disabled',
+            'title' => esc_html__( 'Disabled', 'ultimate-page-builder' ),
         );
         $tools[ 'contents' ] = array(
             'icon'  => 'mdi mdi-table-edit',
             'class' => 'show-contents',
-            'title' => 'Contents',
+            'title' => esc_html__( 'Contents', 'ultimate-page-builder' ),
         );
         $tools[ 'settings' ] = array(
             'icon'  => 'mdi mdi-settings',
             'class' => 'show-settings',
-            'title' => 'Settings',
+            'title' => esc_html__( 'Settings', 'ultimate-page-builder' ),
         );
         $tools[ 'clone' ]    = array(
             'icon'  => 'mdi mdi-content-duplicate',
-            'title' => 'Clone',
+            'title' => esc_html__( 'Clone', 'ultimate-page-builder' ),
         );
 
         return $tools;
@@ -75,35 +75,35 @@
         $tools[ 'move' ] = array(
             'icon'  => 'mdi mdi-cursor-move',
             'class' => 'handle',
-            'title' => 'Sort',
+            'title' => esc_html__( 'Sort', 'ultimate-page-builder' ),
         );
 
         $tools[ 'delete' ] = array(
             'icon'  => 'mdi mdi-delete',
-            'title' => 'Delete',
+            'title' => esc_html__( 'Delete', 'ultimate-page-builder' ),
         );
 
         $tools[ 'enable' ]   = array(
             'icon'  => 'mdi mdi-eye',
-            'title' => 'Enabled',
+            'title' => esc_html__( 'Enabled', 'ultimate-page-builder' ),
         );
         $tools[ 'disable' ]  = array(
             'icon'  => 'mdi mdi-eye-off',
-            'title' => 'Disabled',
+            'title' => esc_html__( 'Disabled', 'ultimate-page-builder' ),
         );
         $tools[ 'contents' ] = array(
             'icon'  => 'mdi mdi-table-edit',
             'class' => 'show-contents',
-            'title' => 'Contents',
+            'title' => esc_html__( 'Contents', 'ultimate-page-builder' ),
         );
         $tools[ 'settings' ] = array(
             'icon'  => 'mdi mdi-settings',
             'class' => 'show-settings',
-            'title' => 'Settings',
+            'title' => esc_html__( 'Settings', 'ultimate-page-builder' ),
         );
         $tools[ 'clone' ]    = array(
             'icon'  => 'mdi mdi-content-duplicate',
-            'title' => 'Clone',
+            'title' => esc_html__( 'Clone', 'ultimate-page-builder' ),
         );
 
         return $tools;
@@ -113,7 +113,7 @@
         return array(
             array(
                 'id'     => 'add-new-row',
-                'title'  => 'Add Row',
+                'title'  => esc_html__( 'Add Row', 'ultimate-page-builder' ),
                 'icon'   => 'mdi mdi-table-row-plus-after',
                 'action' => 'addNew',
                 'data'   => apply_filters( 'upb_new_row_data', upb_elements()->generate_element(
@@ -121,24 +121,24 @@
                     'column', array(), array(
                     'title' => array(
                         'type'  => 'text',
-                        'value' => 'Column 1'
+                        'value' => esc_html__( 'Column 1', 'ultimate-page-builder' )
                     )
                 ) ), array(
                         'title' => array(
                             'type'  => 'text',
-                            'value' => 'New Row %s'
+                            'value' => esc_html__( 'New Row %s', 'ultimate-page-builder' )
                         )
                     ) ) )
             ),
             array(
                 'id'     => 'section-setting',
-                'title'  => 'Settings',
+                'title'  => esc_html__( 'Settings', 'ultimate-page-builder' ),
                 'icon'   => 'mdi mdi-settings',
                 'action' => 'showSettingsPanel'
             ),
             array(
                 'id'     => 'save-section',
-                'title'  => 'Save Section',
+                'title'  => esc_html__( 'Save Section', 'ultimate-page-builder' ),
                 'icon'   => 'mdi mdi-cube-send',
                 'action' => 'saveSectionLayout'
             ),
@@ -149,7 +149,7 @@
         return array(
             array(
                 'id'     => 'section-contents',
-                'title'  => 'Contents',
+                'title'  => esc_html__( 'Contents', 'ultimate-page-builder' ),
                 'icon'   => 'mdi mdi-file-tree',
                 'action' => 'showContentPanel'
             )
@@ -162,28 +162,28 @@
         return array(
             array(
                 'id'     => 'lg',
-                'title'  => 'Large',
+                'title'  => esc_html__( 'Large', 'ultimate-page-builder' ),
                 'icon'   => 'mdi mdi-desktop-mac',
                 'width'  => '100%',
                 'active' => TRUE
             ),
             array(
                 'id'     => 'md',
-                'title'  => 'Medium',
+                'title'  => esc_html__( 'Medium', 'ultimate-page-builder' ),
                 'icon'   => 'mdi mdi-laptop-mac',
                 'width'  => '992px',
                 'active' => FALSE
             ),
             array(
                 'id'     => 'sm',
-                'title'  => 'Small',
+                'title'  => esc_html__( 'Small', 'ultimate-page-builder' ),
                 'icon'   => 'mdi mdi-tablet-ipad',
                 'width'  => '768px',
                 'active' => FALSE
             ),
             array(
                 'id'     => 'xs',
-                'title'  => 'Extra Small',
+                'title'  => esc_html__( 'Extra Small', 'ultimate-page-builder' ),
                 'icon'   => 'mdi mdi-cellphone-iphone',
                 'width'  => '480px',
                 'active' => FALSE
@@ -195,22 +195,22 @@
         return array(
             array(
                 'id'    => 'hidden-lg',
-                'title' => 'Large',
+                'title' => esc_html__( 'Large', 'ultimate-page-builder' ),
                 'icon'  => 'mdi mdi-desktop-mac',
             ),
             array(
                 'id'    => 'hidden-md',
-                'title' => 'Medium',
+                'title' => esc_html__( 'Medium', 'ultimate-page-builder' ),
                 'icon'  => 'mdi mdi-laptop-mac'
             ),
             array(
                 'id'    => 'hidden-sm',
-                'title' => 'Small',
+                'title' => esc_html__( 'Small', 'ultimate-page-builder' ),
                 'icon'  => 'mdi mdi-tablet-ipad'
             ),
             array(
                 'id'    => 'hidden-xs',
-                'title' => 'Extra Small',
+                'title' => esc_html__( 'Extra Small', 'ultimate-page-builder' ),
                 'icon'  => 'mdi mdi-cellphone-iphone'
             ),
         );
@@ -220,23 +220,23 @@
 
     add_filter( 'upb_grid_system', function () {
         return array(
-            'name'              => 'UPB Grid',
-            'simplifiedRatio'   => 'Its recommended to use simplified form of your grid ratio like: %s',
+            'name'              => esc_html__( 'UPB Grid', 'ultimate-page-builder' ),
+            'simplifiedRatio'   => esc_html__( 'Its recommended to use simplified form of your grid ratio like: %s', 'ultimate-page-builder' ),
             'prefixClass'       => 'upb-col',
             'separator'         => '-', // col- deviceId - grid class
             'groupClass'        => 'upb-row',
             'groupWrapper'      => array(
-                'upb-container-fluid'           => 'Fluid Container',
-                'upb-container'                 => 'Fixed Container',
-                'upb-container-fluid-no-gutter' => 'Non Gutter Fluid Container',
-                'upb-container-no-gutter'       => 'Non Gutter Fixed Container'
+                'upb-container-fluid'           => esc_html__( 'Fluid Container', 'ultimate-page-builder' ),
+                'upb-container-fluid-no-gutter' => esc_html__( 'Fluid Container without gutter', 'ultimate-page-builder' ),
+                'upb-container'                 => esc_html__( 'Fixed Container', 'ultimate-page-builder' ),
+                'upb-container-no-gutter'       => esc_html__( 'Fixed Container without gutter', 'ultimate-page-builder' )
             ),
             'defaultDeviceId'   => 'xs', // We should set default column element attributes as like defaultDeviceId, If xs then [column xs='...']
-            'deviceSizeTitle'   => 'Screen Sizes',
+            'deviceSizeTitle'   => esc_html__( 'Screen Sizes', 'ultimate-page-builder' ),
             'devices'           => apply_filters( 'upb_preview_devices', array() ),
             'totalGrid'         => 12,
             'allowedGrid'       => array( 1, 2, 3, 4, 6, 12 ),
-            'nonAllowedMessage' => "Sorry, UPB Grid doesn't support %s grid column."
+            'nonAllowedMessage' => esc_html__( "Sorry, UPB Grid doesn't support %s grid column.", 'ultimate-page-builder' )
         );
     } );
 
@@ -246,35 +246,36 @@
         $tools[ 'move' ] = array(
             'icon'  => 'mdi mdi-cursor-move',
             'class' => 'handle',
-            'title' => 'Sort',
+            'title' => esc_html__( 'Sort', 'ultimate-page-builder' ),
         );
 
         $tools[ 'delete' ] = array(
             'icon'  => 'mdi mdi-delete',
-            'title' => 'Delete',
+            'title' => esc_html__( 'Delete', 'ultimate-page-builder' ),
         );
 
-        $tools[ 'enable' ]   = array(
+        $tools[ 'enable' ] = array(
             'icon'  => 'mdi mdi-eye',
-            'title' => 'Enabled',
+            'title' => esc_html__( 'Enabled', 'ultimate-page-builder' ),
         );
+
         $tools[ 'disable' ]  = array(
             'icon'  => 'mdi mdi-eye-off',
-            'title' => 'Disabled',
+            'title' => esc_html__( 'Disabled', 'ultimate-page-builder' ),
         );
         $tools[ 'contents' ] = array(
             'icon'  => 'mdi mdi-view-column',
             'class' => 'show-contents',
-            'title' => 'Column',
+            'title' => esc_html__( 'Columns', 'ultimate-page-builder' ),
         );
         $tools[ 'settings' ] = array(
             'icon'  => 'mdi mdi-settings',
             'class' => 'show-settings',
-            'title' => 'Settings',
+            'title' => esc_html__( 'Settings', 'ultimate-page-builder' ),
         );
         $tools[ 'clone' ]    = array(
             'icon'  => 'mdi mdi-content-duplicate',
-            'title' => 'Clone',
+            'title' => esc_html__( 'Clone', 'ultimate-page-builder' ),
         );
 
         return $tools;
@@ -322,13 +323,13 @@
 
 
         $data = array(
-            'title'    => 'Sections',
-            'help'     => '<h2>Just Getting Starting?</h2><p>Add a section then click on it to manage column layouts or drag it to reorder.</p>',
-            'search'   => 'Search Sections',
+            'title'    => esc_html__( 'Sections', 'ultimate-page-builder' ),
+            'help'     => wp_kses_post( __( '<h2>Just Getting Starting?</h2><p>Add a section then click on <i class="mdi mdi-table-edit"></i> icon to manage column layouts or click on <i class="mdi mdi-settings"></i> icon to change settings or use <i class="mdi mdi-cursor-move"></i> to reorder.</p>', 'ultimate-page-builder' ) ),
+            'search'   => esc_html__( 'Search Sections', 'ultimate-page-builder' ),
             'tools'    => apply_filters( 'upb_tab_sections_tools', array(
                                                                      array(
                                                                          'id'     => 'add-new-section',
-                                                                         'title'  => 'Add Section',
+                                                                         'title'  => esc_html__( 'Add Section', 'ultimate-page-builder' ),
                                                                          'icon'   => 'mdi mdi-package-variant',
                                                                          'action' => 'addNew',
                                                                          'data'   => apply_filters( 'upb_new_section_data',
@@ -338,25 +339,25 @@
                                                                                                         'column', array(), array(
                                                                                                         'title' => array(
                                                                                                             'type'  => 'text',
-                                                                                                            'value' => 'Column 1'
+                                                                                                            'value' => esc_html__( 'Column 1', 'ultimate-page-builder' )
                                                                                                         )
                                                                                                     ) ), array(
                                                                                                             'title' => array(
                                                                                                                 'type'  => 'text',
-                                                                                                                'value' => 'Row 1'
+                                                                                                                'value' => esc_html__( 'Row 1', 'ultimate-page-builder' )
                                                                                                             )
                                                                                                         ) ) ) )
                                                                      ),
                                                                      array(
                                                                          'id'     => 'load-sections',
-                                                                         'title'  => 'Sections',
+                                                                         'title'  => esc_html__( 'Sections', 'ultimate-page-builder' ),
                                                                          'icon'   => 'mdi mdi-cube-outline',
                                                                          'action' => 'openSubPanel',
                                                                          'data'   => 'sections'
                                                                      ),
                                                                      array(
                                                                          'id'     => 'copy-layouts',
-                                                                         'title'  => 'Copy Layout',
+                                                                         'title'  => esc_html__( 'Copy Layout', 'ultimate-page-builder' ),
                                                                          'icon'   => 'mdi mdi-clipboard-text',
                                                                          'action' => 'copyLayoutToClipboard',
                                                                      ),
@@ -370,9 +371,9 @@
 
 
         $data = array(
-            'title'    => 'Elements',
-            'search'   => 'Search Element',
-            'help'     => '<h2>Just Getting Starting?</h2><p>Add a Elements</p>',
+            'title'    => esc_html__( 'Elements', 'ultimate-page-builder' ),
+            'search'   => esc_html__( 'Search Element', 'ultimate-page-builder' ),
+            'help'     => wp_kses_post( __( '<h2>How to use?</h2><p>Just drag an element and drop it to right side column layout.</p>', 'ultimate-page-builder' ) ),
             'tools'    => apply_filters( 'upb_tab_elements_tools', array() ), // add section | load section | layouts
             'icon'     => 'mdi mdi-shape-plus',
             'contents' => apply_filters( 'upb_tab_elements_contents', array() ),
@@ -380,8 +381,8 @@
         $tab->register( 'elements', $data, FALSE );
 
         $data = array(
-            'title'    => 'Settings',
-            'help'     => '<p>Simply enable or disable page builder for this page or set other options.</p>',
+            'title'    => esc_html__( 'Settings', 'ultimate-page-builder' ),
+            'help'     => wp_kses_post( __( '<p>Simply enable or disable page builder for this page or set other options.</p>', 'ultimate-page-builder' ) ),
             'tools'    => apply_filters( 'upb_tab_settings_tools', array() ), // add section | load section | layouts
             'icon'     => 'mdi mdi-settings',
             'contents' => apply_filters( 'upb_tab_settings_contents', array() ),
@@ -390,9 +391,9 @@
 
 
         $data = array(
-            'title'    => 'Pre-build Layouts',
-            'search'   => 'Search Layouts',
-            'help'     => '<p>Pre build layouts</p>',
+            'title'    => esc_html__( 'Pre-build Layouts', 'ultimate-page-builder' ),
+            'search'   => esc_html__( 'Search Layouts', 'ultimate-page-builder' ),
+            'help'     => wp_kses_post( __( '<p>Pre build layouts</p>', 'ultimate-page-builder' ) ),
             'tools'    => apply_filters( 'upb_tab_layouts_tools', array() ), // add section | load section | layouts
             'icon'     => 'mdi mdi-palette',
             'contents' => apply_filters( 'upb_tab_layouts_contents', array() ),
@@ -416,10 +417,10 @@
         wp_register_script( 'iris', admin_url( "/js/iris.min.js" ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), FALSE, TRUE );
         wp_register_script( 'wp-color-picker', admin_url( "/js/color-picker$suffix.js" ), array( 'iris' ), FALSE, TRUE );
         wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', array(
-            'clear'         => __( 'Clear' ),
-            'defaultString' => __( 'Default' ),
-            'pick'          => __( 'Select Color' ),
-            'current'       => __( 'Current Color' ),
+            'clear'         => esc_html__( 'Clear', 'ultimate-page-builder' ),
+            'defaultString' => esc_html__( 'Default', 'ultimate-page-builder' ),
+            'pick'          => esc_html__( 'Select Color', 'ultimate-page-builder' ),
+            'current'       => esc_html__( 'Current Color', 'ultimate-page-builder' ),
         ) );
 
         wp_register_script( 'wp-color-picker-alpha', UPB_PLUGIN_ASSETS_URI . "js/wp-color-picker-alpha$suffix.js", array( 'wp-color-picker' ), FALSE, TRUE );
@@ -479,7 +480,7 @@
                 'name'      => 'logical',
                 'path'      => '/:tab(logical)',
                 'component' => 'LogicalPanel',
-            ) // you should register tab before add router
+            ) // you should register a tab before add router
         ) ) ) );
 
 
@@ -489,41 +490,41 @@
 
         $data .= sprintf( "var _upb_grid_system = %s;", wp_json_encode( apply_filters( 'upb_grid_system', array() ) ) );
 
-        // $data .= sprintf( "var _upb_responsive_hidden = %s;", wp_json_encode( apply_filters( 'upb_responsive_hidden', array() ) ) );
-
         wp_script_add_data( 'upb-builder', 'data', $data );
 
         wp_localize_script( 'upb-builder', '_upb_l10n', apply_filters( '_upb_l10n_strings', array(
-            'sectionSaving'     => esc_attr__( 'Section Saving...' ),
-            'sectionSaved'      => esc_attr__( 'Section Saved.' ),
-            'sectionNotSaved'   => esc_attr__( "Section Can't Save." ),
-            'sectionDeleted'    => esc_attr__( "Section Removed." ),
-            'sectionAdded'      => esc_attr__( "%s Section Added." ),
-            'saving'            => esc_attr__( 'Saving' ),
-            'saved'             => esc_attr__( 'Saved' ),
-            'savingProblem'     => esc_attr__( 'Problem on Saving' ),
-            'add'               => esc_attr__( 'Add' ),
-            'sectionCopied'     => esc_attr__( '%s data copied to clipboard' ),
-            'layoutCopied'      => esc_attr__( '%s layout copied to clipboard' ),
-            'layoutUse'         => esc_attr__( 'Use this layout' ),
-            'pasteJSON'         => esc_attr__( 'Paste JSON Contents' ),
-            'save'              => esc_attr__( 'Save' ),
-            'copy'              => esc_attr__( 'Copy' ),
-            'create'            => esc_attr__( 'Create' ),
-            'delete'            => esc_attr__( 'Are you sure to delete %s?' ),
-            'column_manual'     => esc_attr__( 'Manual' ),
-            'column_layout_of'  => esc_attr__( 'Columns Layout of - %s' ),
-            'column_order'      => esc_attr__( 'Column Order' ),
-            'column_layout'     => esc_attr__( 'Column Layout' ),
-            'close'             => esc_attr__( 'Close' ),
-            'clone'             => esc_attr__( 'Clone of %s' ),
-            'help'              => esc_attr__( 'Help' ),
-            'search'            => esc_attr__( 'Search' ),
-            'back'              => esc_attr__( 'Back' ),
-            'breadcrumbRoot'    => esc_attr__( 'You are on' ),
-            'skeleton'          => esc_attr__( 'Skeleton preview' ),
-            'collapse'          => esc_attr__( 'Collapse' ),
-            'expand'            => esc_attr__( 'Expand' ),
+            'sectionSaving'     => esc_attr__( 'Section Saving...', 'ultimate-page-builder' ),
+            'sectionSaved'      => esc_attr__( 'Section Saved.', 'ultimate-page-builder' ),
+            'sectionNotSaved'   => esc_attr__( "Section Can't Save.", 'ultimate-page-builder' ),
+            'sectionDeleted'    => esc_attr__( "Section Removed.", 'ultimate-page-builder' ),
+            'sectionAdded'      => esc_attr__( "%s Section Added.", 'ultimate-page-builder' ),
+            'saving'            => esc_attr__( 'Saving', 'ultimate-page-builder' ),
+            'saved'             => esc_attr__( 'Saved', 'ultimate-page-builder' ),
+            'savingProblem'     => esc_attr__( 'Problem on Saving', 'ultimate-page-builder' ),
+            'add'               => esc_attr__( 'Add', 'ultimate-page-builder' ),
+            'sectionCopied'     => esc_attr__( '%s data copied to clipboard', 'ultimate-page-builder' ),
+            'layoutCopied'      => esc_attr__( '%s layout copied to clipboard', 'ultimate-page-builder' ),
+            'layoutNotCopied'   => esc_attr__( 'Nothing to copy', 'ultimate-page-builder' ),
+            'layoutAdded'       => esc_attr__( '%s Layout added', 'ultimate-page-builder' ),
+            'layoutUse'         => esc_attr__( 'Use this layout', 'ultimate-page-builder' ),
+            'pasteJSON'         => esc_attr__( 'Paste JSON Contents', 'ultimate-page-builder' ),
+            'save'              => esc_attr__( 'Save', 'ultimate-page-builder' ),
+            'copy'              => esc_attr__( 'Copy', 'ultimate-page-builder' ),
+            'create'            => esc_attr__( 'Create', 'ultimate-page-builder' ),
+            'delete'            => esc_attr__( 'Are you sure to delete %s?', 'ultimate-page-builder' ),
+            'column_manual'     => esc_attr__( 'Manual', 'ultimate-page-builder' ),
+            'column_layout_of'  => esc_attr__( 'Columns Layout of - %s', 'ultimate-page-builder' ),
+            'column_order'      => esc_attr__( 'Column Order', 'ultimate-page-builder' ),
+            'column_layout'     => esc_attr__( 'Column layout', 'ultimate-page-builder' ),
+            'close'             => esc_attr__( 'Close', 'ultimate-page-builder' ),
+            'clone'             => esc_attr__( 'Clone of %s', 'ultimate-page-builder' ),
+            'help'              => esc_attr__( 'Help', 'ultimate-page-builder' ),
+            'search'            => esc_attr__( 'Search', 'ultimate-page-builder' ),
+            'back'              => esc_attr__( 'Back', 'ultimate-page-builder' ),
+            'breadcrumbRoot'    => esc_attr__( 'You are on', 'ultimate-page-builder' ),
+            'skeleton'          => esc_attr__( 'Skeleton preview', 'ultimate-page-builder' ),
+            'collapse'          => esc_attr__( 'Collapse', 'ultimate-page-builder' ),
+            'expand'            => esc_attr__( 'Expand', 'ultimate-page-builder' ),
             // 'closeUrl'         => esc_url( get_permalink() ),
             'closeUrl'          => esc_url( add_query_arg( 'preview', 'true', get_permalink() ) ),
 
