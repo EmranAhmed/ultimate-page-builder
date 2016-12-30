@@ -28,11 +28,17 @@ export default {
 
                 let code = JSON.parse(template);
 
-                console.log(code);
+                // console.log(code);
                 // Send Ajax and get UPB Options
-                // store.addUPBOptions(code, data=>{}, data=>{})
+                store.addUPBOptions(code, data=> {
+                    if (_.isArray(data)) {
+                        store.addContentsToTab('sections', data)
+                    }
+                }, data=> {
+                    console.log(data);
+                })
 
-                //  store.addContentsToTab('sections', data)
+                //
 
             } catch (err) {
                 // console.log('Could Not Copy', err);

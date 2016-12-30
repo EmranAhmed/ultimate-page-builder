@@ -37,7 +37,7 @@ export default {
     methods : {
 
         loadContents(){
-            store.getSavedSections((contents) => {
+            store.getSavedSections(contents => {
                 this.$nextTick(function () {
                     Vue.set(this, 'item', contents);
                 });

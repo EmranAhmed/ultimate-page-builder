@@ -30,7 +30,7 @@ class store {
             if (tab.id == tabId) {
                 if (_.isArray(contents) && !_.isEmpty(contents)) {
                     contents.map((content)=> {
-                        tab.push(content);
+                        tab.contents.push(content);
                     })
                 }
             }
