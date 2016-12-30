@@ -9,6 +9,7 @@ export default {
     'upb-input-editor'                    : require('./UPBInputEditor.vue'),
     'upb-input-radio'                     : require('./UPBInputRadio.vue'),
     'upb-input-select2'                   : require('./UPBInputSelect2.vue'),
+    'upb-input-icons'                     : require('./UPBInputIcons.vue'),
     'upb-input-image'                     : require('./UPBInputImage.vue'),
     'upb-input-image-select'              : require('./UPBInputImageSelect.vue'),
     'upb-input-checkbox'                  : require('./UPBInputCheckbox.vue'),

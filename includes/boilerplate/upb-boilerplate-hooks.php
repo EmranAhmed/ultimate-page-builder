@@ -350,7 +350,7 @@
                                                                      ),
                                                                      array(
                                                                          'id'     => 'load-sections',
-                                                                         'title'  => esc_html__( 'Sections', 'ultimate-page-builder' ),
+                                                                         'title'  => esc_html__( 'Saved Sections', 'ultimate-page-builder' ),
                                                                          'icon'   => 'mdi mdi-cube-outline',
                                                                          'action' => 'openSubPanel',
                                                                          'data'   => 'sections'
@@ -404,7 +404,6 @@
 
 
     // Backend Scripts
-
     add_action( 'upb_boilerplate_enqueue_scripts', function () {
 
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
@@ -493,49 +492,50 @@
         wp_script_add_data( 'upb-builder', 'data', $data );
 
         wp_localize_script( 'upb-builder', '_upb_l10n', apply_filters( '_upb_l10n_strings', array(
-            'sectionSaving'     => esc_attr__( 'Section Saving...', 'ultimate-page-builder' ),
-            'sectionSaved'      => esc_attr__( 'Section Saved.', 'ultimate-page-builder' ),
-            'sectionNotSaved'   => esc_attr__( "Section Can't Save.", 'ultimate-page-builder' ),
-            'sectionDeleted'    => esc_attr__( "Section Removed.", 'ultimate-page-builder' ),
-            'sectionAdded'      => esc_attr__( "%s Section Added.", 'ultimate-page-builder' ),
-            'saving'            => esc_attr__( 'Saving', 'ultimate-page-builder' ),
-            'saved'             => esc_attr__( 'Saved', 'ultimate-page-builder' ),
-            'savingProblem'     => esc_attr__( 'Problem on Saving', 'ultimate-page-builder' ),
-            'add'               => esc_attr__( 'Add', 'ultimate-page-builder' ),
-            'sectionCopied'     => esc_attr__( '%s data copied to clipboard', 'ultimate-page-builder' ),
-            'layoutCopied'      => esc_attr__( '%s layout copied to clipboard', 'ultimate-page-builder' ),
-            'layoutNotCopied'   => esc_attr__( 'Nothing to copy', 'ultimate-page-builder' ),
-            'layoutAdded'       => esc_attr__( '%s Layout added', 'ultimate-page-builder' ),
-            'layoutUse'         => esc_attr__( 'Use this layout', 'ultimate-page-builder' ),
-            'pasteJSON'         => esc_attr__( 'Paste JSON Contents', 'ultimate-page-builder' ),
-            'save'              => esc_attr__( 'Save', 'ultimate-page-builder' ),
-            'copy'              => esc_attr__( 'Copy', 'ultimate-page-builder' ),
-            'create'            => esc_attr__( 'Create', 'ultimate-page-builder' ),
-            'delete'            => esc_attr__( 'Are you sure to delete %s?', 'ultimate-page-builder' ),
-            'column_manual'     => esc_attr__( 'Manual', 'ultimate-page-builder' ),
-            'column_layout_of'  => esc_attr__( 'Columns Layout of - %s', 'ultimate-page-builder' ),
-            'column_order'      => esc_attr__( 'Column Order', 'ultimate-page-builder' ),
-            'column_layout'     => esc_attr__( 'Column layout', 'ultimate-page-builder' ),
-            'close'             => esc_attr__( 'Close', 'ultimate-page-builder' ),
-            'clone'             => esc_attr__( 'Clone of %s', 'ultimate-page-builder' ),
-            'help'              => esc_attr__( 'Help', 'ultimate-page-builder' ),
-            'search'            => esc_attr__( 'Search', 'ultimate-page-builder' ),
-            'back'              => esc_attr__( 'Back', 'ultimate-page-builder' ),
-            'breadcrumbRoot'    => esc_attr__( 'You are on', 'ultimate-page-builder' ),
-            'skeleton'          => esc_attr__( 'Skeleton preview', 'ultimate-page-builder' ),
-            'collapse'          => esc_attr__( 'Collapse', 'ultimate-page-builder' ),
-            'expand'            => esc_attr__( 'Expand', 'ultimate-page-builder' ),
+            'sectionSaving'      => esc_attr__( 'Section Saving...', 'ultimate-page-builder' ),
+            'sectionSaved'       => esc_attr__( 'Section Saved.', 'ultimate-page-builder' ),
+            'sectionNotSaved'    => esc_attr__( "Section Can't Save.", 'ultimate-page-builder' ),
+            'sectionDeleted'     => esc_attr__( "Section Removed.", 'ultimate-page-builder' ),
+            'sectionAdded'       => esc_attr__( "%s Section Added.", 'ultimate-page-builder' ),
+            'saving'             => esc_attr__( 'Saving', 'ultimate-page-builder' ),
+            'saved'              => esc_attr__( 'Saved', 'ultimate-page-builder' ),
+            'savingProblem'      => esc_attr__( 'Problem on Saving', 'ultimate-page-builder' ),
+            'add'                => esc_attr__( 'Add', 'ultimate-page-builder' ),
+            'sectionCopied'      => esc_attr__( '%s data copied to clipboard', 'ultimate-page-builder' ),
+            'searchSavedSection' => esc_attr__( 'Search saved section', 'ultimate-page-builder' ),
+            'layoutCopied'       => esc_attr__( '%s layout copied to clipboard', 'ultimate-page-builder' ),
+            'layoutNotCopied'    => esc_attr__( 'Nothing to copy', 'ultimate-page-builder' ),
+            'layoutAdded'        => esc_attr__( '%s Layout added', 'ultimate-page-builder' ),
+            'layoutUse'          => esc_attr__( 'Use this layout', 'ultimate-page-builder' ),
+            'pasteJSON'          => esc_attr__( 'Paste JSON Contents', 'ultimate-page-builder' ),
+            'save'               => esc_attr__( 'Save', 'ultimate-page-builder' ),
+            'copy'               => esc_attr__( 'Copy', 'ultimate-page-builder' ),
+            'create'             => esc_attr__( 'Create', 'ultimate-page-builder' ),
+            'delete'             => esc_attr__( 'Are you sure to delete %s?', 'ultimate-page-builder' ),
+            'column_manual'      => esc_attr__( 'Manual', 'ultimate-page-builder' ),
+            'column_layout_of'   => esc_attr__( 'Columns Layout of - %s', 'ultimate-page-builder' ),
+            'column_order'       => esc_attr__( 'Column Order', 'ultimate-page-builder' ),
+            'column_layout'      => esc_attr__( 'Column layout', 'ultimate-page-builder' ),
+            'close'              => esc_attr__( 'Close', 'ultimate-page-builder' ),
+            'clone'              => esc_attr__( 'Clone of %s', 'ultimate-page-builder' ),
+            'help'               => esc_attr__( 'Help', 'ultimate-page-builder' ),
+            'search'             => esc_attr__( 'Search', 'ultimate-page-builder' ),
+            'back'               => esc_attr__( 'Back', 'ultimate-page-builder' ),
+            'breadcrumbRoot'     => esc_attr__( 'You are on', 'ultimate-page-builder' ),
+            'skeleton'           => esc_attr__( 'Skeleton preview', 'ultimate-page-builder' ),
+            'collapse'           => esc_attr__( 'Collapse', 'ultimate-page-builder' ),
+            'expand'             => esc_attr__( 'Expand', 'ultimate-page-builder' ),
             // 'closeUrl'         => esc_url( get_permalink() ),
-            'closeUrl'          => esc_url( add_query_arg( 'preview', 'true', get_permalink() ) ),
+            'closeUrl'           => esc_url( add_query_arg( 'preview', 'true', get_permalink() ) ),
 
 
             // Templates
-            'layoutPlaceholder' => upb_assets_uri( 'images/layout-placeholder.png' ),
-            'editorTemplate'    => upb_wp_editor_template(),
-            'allowedTags'       => array_keys( wp_kses_allowed_html( 'post' ) ),
-            'allowedAttributes' => upb_allowed_attributes(),
-            'allowedSchemes'    => wp_allowed_protocols(),
-            'pageTitle'         => get_the_title(),
+            'layoutPlaceholder'  => upb_assets_uri( 'images/layout-placeholder.png' ),
+            'editorTemplate'     => upb_wp_editor_template(),
+            'allowedTags'        => array_keys( wp_kses_allowed_html( 'post' ) ),
+            'allowedAttributes'  => upb_allowed_attributes(),
+            'allowedSchemes'     => wp_allowed_protocols(),
+            'pageTitle'          => get_the_title(),
         ) ) );
     } );
 

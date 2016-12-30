@@ -13,6 +13,11 @@
                 $options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : '';
 
 
+                if ( $options[ 'type' ] == 'select2' || $options[ 'type' ] == 'icons' ) {
+                    $options[ 'settings' ][ 'placeholder' ] = $options[ 'placeholder' ];
+                }
+
+
                 switch ( $options[ 'type' ] ) {
                     case 'editor':
                         if ( isset( $options[ 'value' ] ) && ! empty( $options[ 'value' ] ) ) {

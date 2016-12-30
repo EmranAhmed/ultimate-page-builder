@@ -105,6 +105,8 @@ class store {
             delete contents.elements;
         }
 
+
+
         wp.ajax.send("_upb_save", {
             success : success,
             error   : error,

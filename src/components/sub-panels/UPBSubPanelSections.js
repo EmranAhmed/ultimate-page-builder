@@ -51,7 +51,7 @@ export default {
             this.showTextarea     = !this.showTextarea;
         },
 
-        addToSection(){
+        save(){
 
             let data = this.textareaContents.trim();
 
@@ -63,28 +63,22 @@ export default {
                     if (item.tag == 'section' && _.isArray(item.contents) && _.isObject(item.attributes)) {
 
                         store.saveSectionToOption(item, (data)=> {
-
                             this.toggleTextarea();
                             this.loadContents();
                             this.$toast.success(sprintf(this.l10n.sectionAdded, ''));
-
                         })
-
                     }
                     else {
                         this.$toast.error('Use valid section content');
                     }
-
                 } catch (err) {
                     // console.log('Could Not Copy', err);
                     this.$toast.error('Use valid JSON Data');
                 }
-
             }
-
         },
 
-        deleteSection(index){
+        delete(index){
             this.item.splice(index, 1);
 
             store.saveAllSectionToOption(this.item, (data) => {
@@ -94,17 +88,14 @@ export default {
             });
         },
 
-        copyToClipboard(index){
+        copy(index){
             let item = extend(true, {}, this.item[index]);
             let json = JSON.stringify(store.cleanup([item]).pop());
-
             copy(json);
-
             this.$toast.success(sprintf(this.l10n.sectionCopied, item.attributes.title));
-
         },
 
-        addSection(index){
+        add(index){
 
             let item = extend(true, {}, this.item[index]);
 

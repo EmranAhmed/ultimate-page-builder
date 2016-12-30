@@ -27,7 +27,7 @@
             public function register( $tag, $settings = array(), $contents = FALSE, $_upb_options = array() ) {
 
                 if ( $this->has_element( $tag ) ) {
-                    trigger_error( sprintf( 'Ultimate page builder element "%s" already registered.', $tag ), E_USER_WARNING );
+                    trigger_error( sprintf( esc_html__( 'Ultimate page builder element "%s" already registered.', 'ultimate-page-builder' ), $tag ), E_USER_WARNING );
                 }
 
                 $_upb_options[ 'focus' ] = FALSE;
@@ -87,7 +87,6 @@
                     $_upb_options[ 'preview' ][ 'template' ] = $tag;
                 }
 
-
                 $settings     = apply_filters( "upb_element_{$tag}_settings", $settings );
                 $_upb_options = apply_filters( "upb_element_{$tag}_options", $_upb_options );
 
@@ -99,9 +98,16 @@
                 foreach ( $settings as $key => $setting ) {
                     // $attributes[ $index ][ 'metaKey' ]   = $attribute[ 'id' ];
 
-                    if ( ! isset( $settings[ $key ][ 'default' ] ) ) {
+                    // Have Default but no value
+                    if ( isset( $settings[ $key ][ 'default' ] ) && ! isset( $settings[ $key ][ 'value' ] ) ) {
+                        $settings[ $key ][ 'value' ] = $settings[ $key ][ 'default' ];
+                    }
+
+                    // No Default but Have Value
+                    if ( ! isset( $settings[ $key ][ 'default' ] ) && isset( $settings[ $key ][ 'value' ] ) ) {
                         $settings[ $key ][ 'default' ] = $settings[ $key ][ 'value' ];
                     }
+
                     if ( ! isset( $settings[ $key ][ 'use' ] ) ) {
                         $settings[ $key ][ 'use' ] = FALSE;
                     }

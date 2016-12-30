@@ -42,7 +42,7 @@
         if ( file_exists( $located ) ) {
             include $located;
         } else {
-            trigger_error( sprintf( 'Ultimate page builder try to load "%s" but template "%s" not found.', $located, $template_name ), E_USER_WARNING );
+            trigger_error( sprintf( esc_html__( 'Ultimate page builder try to load "%s" but template "%s" not found.', 'ultimate-page-builder' ), $located, $template_name ), E_USER_WARNING );
         }
 
         do_action( 'upb_after_get_template', $template_name, $template_args );

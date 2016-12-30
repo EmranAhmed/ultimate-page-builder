@@ -8,6 +8,20 @@
 
         // print_r(upb_responsive_hidden()); die;
 
+        $options = array(
+            'type'        => 'icons',
+            'title'       => 'Icons',
+            'desc'        => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+            'default'     => '',
+            'options'     => upb_material_design_icons(),
+            'placeholder' => 'Choose Icon',
+            'settings'    => array(
+                'allowClear' => TRUE
+            )
+        );
+
+        $settings->register( 'testicon', $options );
+
 
         $options = array(
             'title'       => 'Background',

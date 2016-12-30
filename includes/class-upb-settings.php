@@ -40,6 +40,7 @@
                     $saved_settings[ $i ][ '_upb_field_type' ]  = 'upb-input-' . $options[ 'type' ];
                     $saved_settings[ $i ][ '_upb_field_attrs' ] = $options;
 
+                    $saved_settings[ $i ][ 'metaType' ]  = $options[ 'type' ];
                     $saved_settings[ $i ][ 'metaId' ]    = $options[ 'id' ];
                     $saved_settings[ $i ][ 'metaKey' ]   = $options[ '_id' ];
                     $saved_settings[ $i ][ 'metaValue' ] = $options[ 'value' ];
@@ -76,6 +77,10 @@
                 $options[ 'use' ]         = isset( $options[ 'use' ] ) ? $options[ 'use' ] : FALSE;
 
 
+                if ( $options[ 'type' ] == 'select2' || $options[ 'type' ] == 'icons' ) {
+                    $options[ 'settings' ][ 'placeholder' ] = $options[ 'placeholder' ];
+                }
+
                 switch ( $options[ 'type' ] ) {
                     case 'select':
                     case 'select2':
@@ -108,6 +113,7 @@
             private function setAttrBasedOnType( $id, $options ) {
 
                 $value = $this->get_setting( $id );
+
 
                 switch ( $options[ 'type' ] ):
 
@@ -150,7 +156,7 @@
                 return get_post_meta( $this->get_the_ID(), $_id, TRUE );
             }
 
-            public function set_setting( $id, $value ) {
+            public function set_setting( $type, $id, $value ) {
                 $_id = $this->prefix . $id;
 
                 return update_post_meta( $this->get_the_ID(), $_id, $value );
@@ -158,7 +164,7 @@
 
             public function set_settings( $settings ) {
                 foreach ( $settings as $setting ) {
-                    $this->set_setting( $setting[ 'metaId' ], $setting[ 'metaValue' ] );
+                    $this->set_setting( $setting[ 'metaType' ], $setting[ 'metaId' ], $setting[ 'metaValue' ] );
                 }
             }
         }

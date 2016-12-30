@@ -116,6 +116,22 @@
     add_action( 'upb_register_element', function ( $element ) {
 
         $attributes = array(
+
+
+            array(
+                'id'          => 'icon',
+                'type'        => 'icons',
+                'title'       => 'Icons',
+                'desc'        => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+                'value'       => '',
+                'placeholder' => 'Choose Icon',
+                'options'     => upb_material_design_icons(),
+                'settings'    => array(
+                    'allowClear' => TRUE
+                )
+            ),
+
+
             array(
                 'id'       => 'multi',
                 'title'    => 'Select Multiple',
