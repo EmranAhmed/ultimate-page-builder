@@ -62,6 +62,7 @@
                 // Defines
                 require_once UPB_PLUGIN_INCLUDE_PATH . "upb-elements.php";
                 require_once UPB_PLUGIN_INCLUDE_PATH . "upb-settings.php";
+                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-layouts.php";
 
                 // TABS
                 require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-tabs.php";
@@ -72,6 +73,9 @@
                 // Elements
                 require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-elements.php";
                 require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-elements-props.php";
+
+                // Layouts
+                require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-layouts.php";
 
                 // Boilerplate
                 require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-boilerplate.php";

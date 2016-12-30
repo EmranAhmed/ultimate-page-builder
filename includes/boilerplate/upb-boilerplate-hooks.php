@@ -347,17 +347,16 @@
                                                                      ),
                                                                      array(
                                                                          'id'     => 'load-sections',
-                                                                         'title'  => 'Load Section',
+                                                                         'title'  => 'Sections',
                                                                          'icon'   => 'mdi mdi-cube-outline',
                                                                          'action' => 'openSubPanel',
                                                                          'data'   => 'sections'
                                                                      ),
                                                                      array(
-                                                                         'id'     => 'saved-layouts',
-                                                                         'title'  => 'Layouts',
-                                                                         'icon'   => 'mdi mdi-view-quilt',
-                                                                         'action' => 'openSubPanel',
-                                                                         'data'   => 'layouts'
+                                                                         'id'     => 'copy-layouts',
+                                                                         'title'  => 'Copy Layout',
+                                                                         'icon'   => 'mdi mdi-clipboard-text',
+                                                                         'action' => 'copyLayoutToClipboard',
                                                                      ),
                                                                  )
             ), // add section | load section | layouts
@@ -388,14 +387,15 @@
         $tab->register( 'settings', $data, FALSE );
 
 
-        /*$data = array(
-            'title'    => 'Logical',
-            'help'     => '<h2>Just Getting Starting?</h2><p>Add a section</p>',
-            'tools'    => apply_filters( 'upb_tab_logical_tools', array() ), // add section | load section | layouts
-            'icon'     => 'mdi mdi-json',
-            'contents' => apply_filters( 'upb_tab_logical_contents', array() ),
+        $data = array(
+            'title'    => 'Pre-build Layouts',
+            'search'   => 'Search Layouts',
+            'help'     => '<p>Pre build layouts</p>',
+            'tools'    => apply_filters( 'upb_tab_layouts_tools', array() ), // add section | load section | layouts
+            'icon'     => 'mdi mdi-palette',
+            'contents' => apply_filters( 'upb_tab_layouts_contents', array() ),
         );
-        $tab->register( 'logical', $data, FALSE );*/
+        $tab->register( 'layouts', $data, FALSE );
 
     } );
 
@@ -410,7 +410,6 @@
         wp_register_style( 'dashicon', includes_url( "/css/dashicons$suffix.css" ) );
         wp_register_style( 'select2', UPB_PLUGIN_ASSETS_URI . "css/select2$suffix.css" );
         wp_register_script( 'select2', UPB_PLUGIN_ASSETS_URI . "js/select2$suffix.js", array( 'jquery' ), FALSE, TRUE );
-
 
         wp_register_script( 'iris', admin_url( "/js/iris.min.js" ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), FALSE, TRUE );
         wp_register_script( 'wp-color-picker', admin_url( "/js/color-picker$suffix.js" ), array( 'iris' ), FALSE, TRUE );
@@ -453,7 +452,6 @@
         //$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         echo '<script type="text/javascript">(function (html) {html.className = html.className.replace(/\bno-js\b/, \'js\')}(document.documentElement))</script>';
     } );
-
 
     add_action( 'upb_boilerplate_enqueue_scripts', function () {
 
@@ -503,7 +501,9 @@
             'saved'             => esc_attr__( 'Saved' ),
             'savingProblem'     => esc_attr__( 'Problem on Saving' ),
             'add'               => esc_attr__( 'Add' ),
-            'copiedSuccess'     => esc_attr__( '%s data copied to clipboard' ),
+            'sectionCopied'     => esc_attr__( '%s data copied to clipboard' ),
+            'layoutCopied'      => esc_attr__( '%s layout copied to clipboard' ),
+            'layoutUse'         => esc_attr__( 'Use this layout' ),
             'pasteJSON'         => esc_attr__( 'Paste JSON Contents' ),
             'save'              => esc_attr__( 'Save' ),
             'copy'              => esc_attr__( 'Copy' ),
@@ -525,13 +525,14 @@
             'closeUrl'          => esc_url( get_permalink() ),
 
             // Templates
+            'layoutPlaceholder' => upb_assets_uri( 'images/layout-placeholder.png' ),
             'editorTemplate'    => upb_wp_editor_template(),
             'allowedTags'       => array_keys( wp_kses_allowed_html( 'post' ) ),
             'allowedAttributes' => upb_allowed_attributes(),
             'allowedSchemes'    => wp_allowed_protocols(),
+            'pageTitle'         => get_the_title(),
         ) ) );
     } );
-
 
     add_action( 'upb_boilerplate_print_footer_scripts', function () {
         //$tabs = upb_tabs()->getAll();

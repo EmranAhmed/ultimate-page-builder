@@ -20,6 +20,11 @@
 
     add_action( 'wp_loaded', 'upb_settings_register_action' );
 
+    function upb_layouts_register_action() {
+        do_action( 'upb_register_layout', upb_layouts() );
+    }
+
+    add_action( 'wp_loaded', 'upb_layouts_register_action' );
 
     // Content Load
 

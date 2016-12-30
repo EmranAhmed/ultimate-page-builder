@@ -25,6 +25,18 @@ class store {
         return this.tabs;
     }
 
+    addContentsToTab(tabId, contents = []) {
+        this.getTabs().map((tab, index)=> {
+            if (tab.id == tabId) {
+                if (_.isArray(contents) && !_.isEmpty(contents)) {
+                    contents.map((content)=> {
+                        tab.push(content);
+                    })
+                }
+            }
+        })
+    }
+
     loadTabContents() {
         this.getTabs().map((tab)=> {
 
@@ -233,6 +245,18 @@ class store {
             allowedTags       : this.l10n.allowedTags,
             allowedAttributes : this.l10n.allowedAttributes,
             allowedSchemes    : this.l10n.allowedSchemes
+        });
+    }
+
+    addUPBOptions(contents, success, error) {
+        wp.ajax.send(`_add_upb_options`, {
+            success : success,
+            error   : error,
+            data    : {
+                _nonce   : this.status._nonce,
+                post_id  : this.status._id,
+                contents : contents
+            }
         });
     }
 

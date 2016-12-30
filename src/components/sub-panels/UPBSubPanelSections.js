@@ -2,9 +2,7 @@ import store from '../../store'
 import extend from 'extend'
 import {sprintf} from 'sprintf-js'
 
-import Copy2Clipboard from '../../plugins/vue-copy2clipboard';
-
-Vue.use(Copy2Clipboard);
+import copy from 'copy-to-clipboard';
 
 export default {
     name  : 'upb-sub-panel-sections',
@@ -62,8 +60,6 @@ export default {
                 try {
                     let item = JSON.parse(data);
 
-                    // let item = store.cleanup([itemParsed]).pop();
-
                     if (item.tag == 'section' && _.isArray(item.contents) && _.isObject(item.attributes)) {
 
                         store.saveSectionToOption(item, (data)=> {
@@ -98,17 +94,14 @@ export default {
             });
         },
 
-        copiedToClipboard(title){
-            this.$toast.success(sprintf(this.l10n.copiedSuccess, title));
-        },
-
-        toJSON(index){
+        copyToClipboard(index){
             let item = extend(true, {}, this.item[index]);
+            let json = JSON.stringify(store.cleanup([item]).pop());
 
-            return {
-                title : item.attributes.title,
-                json  : JSON.stringify(store.cleanup([item]).pop())
-            }
+            copy(json);
+
+            this.$toast.success(sprintf(this.l10n.sectionCopied, item.attributes.title));
+
         },
 
         addSection(index){

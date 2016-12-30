@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 import SectionsPanel from './components/panels/SectionsPanel.vue'
 import SettingsPanel from './components/panels/SettingsPanel.vue'
 import ElementsPanel from './components/panels/ElementsPanel.vue'
+import LayoutsPanel from './components/panels/LayoutsPanel.vue'
 
 // RowsPanel
 import SectionContents from './components/section/SectionContents.vue'
@@ -101,11 +102,15 @@ let routes = [
         path      : '/:tab(elements)',
         component : ElementsPanel
     },
-
     {
         name      : 'settings',
         path      : '/:tab(settings)',
         component : SettingsPanel
+    },
+    {
+        name      : 'layouts',
+        path      : '/:tab(layouts)',
+        component : LayoutsPanel
     }
 ];
 

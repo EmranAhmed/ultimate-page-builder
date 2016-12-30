@@ -23,7 +23,7 @@
                 <li v-for="(content, index) in contents">
                     <div class="sub-panel-section-tools">
                         <a @click.prevent="addSection(index)" href=""><i class="mdi mdi-plus"></i></a>
-                        <a v-copy2clipboard="toJSON(index)" href=""><i class="mdi mdi-clipboard-outline"></i></a>
+                        <a @click.prevent="copyToClipboard(index)" href=""><i class="mdi mdi-clipboard-outline"></i></a>
                         <a @click.prevent="deleteSection(index)" href="#"><i class="mdi mdi-close"></i></a>
 
                     </div>

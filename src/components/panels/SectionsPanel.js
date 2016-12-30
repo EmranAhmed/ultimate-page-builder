@@ -4,6 +4,8 @@ import store from '../../store'
 import extend from 'extend';
 import {sprintf} from 'sprintf-js';
 
+import copy from 'copy-to-clipboard';
+
 import Sortable from '../../plugins/vue-sortable'
 Vue.use(Sortable);
 
@@ -77,13 +79,25 @@ export default {
             store.subpanel = (store.subpanel == data) ? '' : data;
         },
 
+        copyLayoutToClipboard(){
+
+            let item = extend(true, [], this.model.contents);
+            let json = JSON.stringify(store.cleanup(item));
+
+            copy(json);
+
+            this.$toast.success(sprintf(this.l10n.layoutCopied, this.l10n.pageTitle));
+
+            // console.log('COPY LAYOUT DATA');
+        },
+
         toolsActiveClass(tool){
             return (_.isString(tool.data) && store.subpanel == tool.data) ? 'active' : '';
         },
 
         toolsAction(tool, event = false){
 
-            let data = tool.data ? tool.data : false;
+            let data = _.isUndefined(tool['data']) ? false : tool.data;
 
             if (!this[tool.action]) {
                 util.warn(`You need to implement '${tool.action}' method.`, this);

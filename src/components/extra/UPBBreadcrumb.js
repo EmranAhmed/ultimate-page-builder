@@ -7,6 +7,7 @@ export default {
         return {
             l10n       : store.l10n,
             breadcrumb : [],
+            path       : [],
             link       : ''
         }
     },
@@ -18,6 +19,8 @@ export default {
         }).pop());
 
         let sliced = this.$route.path.split('/').slice(2, -2); // trim sections and contents|settings
+
+        this.path = this.$route.path.split('/').slice(1, -2);
 
         // Sections Added
         this.link = `/${sections.id}`;

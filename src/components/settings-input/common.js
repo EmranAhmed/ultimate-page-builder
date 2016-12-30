@@ -21,11 +21,11 @@ export default{
     },
 
     watch : {
-        input(value){
+        input(value, oldValue){
             this.setValue(value);
         },
 
-        value(value){
+        value(value, oldValue){
             Vue.set(this, 'input', value);
         }
     },

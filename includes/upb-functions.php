@@ -2,6 +2,7 @@
 
     defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
+    // URI Functions
     function upb_assets_uri( $url = '' ) {
         return UPB_PLUGIN_ASSETS_URI . untrailingslashit( $url );
     }
@@ -26,15 +27,6 @@
         return UPB_PLUGIN_TEMPLATES_URI . untrailingslashit( $path );
     }
 
-    function upb_is_ios() {
-        return wp_is_mobile() && preg_match( '/iPad|iPod|iPhone/', $_SERVER[ 'HTTP_USER_AGENT' ] );
-    }
-
-    function upb_is_ie() {
-        global $is_IE;
-
-        return wp_is_mobile() && $is_IE;
-    }
 
     function upb_elements() {
         return UPB_Elements::getInstance();
@@ -46,6 +38,21 @@
 
     function upb_settings() {
         return UPB_Settings::getInstance();
+    }
+
+    function upb_layouts() {
+        return UPB_Layouts::getInstance();
+    }
+
+    // Conditional
+    function upb_is_ios() {
+        return wp_is_mobile() && preg_match( '/iPad|iPod|iPhone/', $_SERVER[ 'HTTP_USER_AGENT' ] );
+    }
+
+    function upb_is_ie() {
+        global $is_IE;
+
+        return wp_is_mobile() && $is_IE;
     }
 
     function upb_is_buildable() {
@@ -74,6 +81,7 @@
     function upb_is_enabled() {
         return Ultimate_Page_Builder()->is_enabled();
     }
+
 
     function upb_grid_system() {
         return apply_filters( 'upb_grid_system', array() );

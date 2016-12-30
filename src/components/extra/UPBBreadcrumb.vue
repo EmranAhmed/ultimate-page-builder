@@ -1,6 +1,6 @@
 <template>
     <ul>
-        <li :class="className()" v-if="breadcrumb.length > 0">
+        <li :class="className()" v-if="path.length > 0">
             <a href="#" v-for="b in breadcrumb" v-text="b.title" @click.prevent="goTo(b.link)"></a>
         </li>
         <li class="no-breadcrumb" v-else v-text="l10n.breadcrumbRoot"></li>
