@@ -81,9 +81,12 @@
 
         wp_register_script( 'upb-scoped-css-polyfill', UPB_PLUGIN_ASSETS_URI . "js/upb-scoped-polyfill$suffix.js", array(), FALSE, TRUE );
 
-
         if ( upb_is_enabled() ):
-            wp_enqueue_style( 'upb-grid' );
+
+            if ( ! current_theme_supports( 'upb-custom-grid-layout' ) ) {
+                wp_enqueue_style( 'upb-grid' );
+            }
+
             wp_enqueue_script( 'upb-scoped-css-polyfill' );
 
             // Load Shortcodes Styles
@@ -96,24 +99,24 @@
         global $wp_admin_bar;
 
         $enabled = array(
-            'id'    => 'load-upb',
-            'title' => esc_html__( 'Load Page Builder', 'ultimate-page-builder' ),
-            'href'  => esc_url( add_query_arg( 'upb', '1', get_permalink() ) ),
-            'group' => FALSE
+            'id'    => 'edit-with-upb',
+            'title' => esc_html__( 'Edit with Ultimate Page Builder', 'ultimate-page-builder' ),
+            'href'  => esc_url( upb_get_edit_link() ),
+            'meta'  => array( 'class' => 'edit-with-upb' ),
         );
 
         $use = array(
             'id'    => 'use-upb',
-            'title' => esc_html__( 'Use Build Page', 'ultimate-page-builder' ),
-            'href'  => esc_url( add_query_arg( 'upb', '1', get_permalink() ) ),
-            'group' => FALSE
+            'title' => esc_html__( 'Use Ultimate Page Builder', 'ultimate-page-builder' ),
+            'href'  => esc_url( upb_get_edit_link() ),
+            'meta'  => array( 'class' => 'use-upb' ),
         );
 
-        if ( upb_is_buildable() && upb_is_enabled() ):
+        if ( is_singular() && upb_is_buildable() && upb_is_enabled() ):
             $wp_admin_bar->add_menu( $enabled );
         endif;
 
-        if ( upb_is_buildable() && ! upb_is_enabled() ):
+        if ( is_singular() && upb_is_buildable() && ! upb_is_enabled() ):
             $wp_admin_bar->add_menu( $use );
         endif;
 

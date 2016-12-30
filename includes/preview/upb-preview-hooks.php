@@ -30,7 +30,11 @@
     add_action( 'wp_enqueue_scripts', function () {
 
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-        wp_register_style( 'upb-grid', UPB_PLUGIN_ASSETS_URI . "css/upb-grid$suffix.css" );
+
+        if ( ! current_theme_supports( 'upb-custom-grid-layout' ) ) {
+            wp_register_style( 'upb-grid', UPB_PLUGIN_ASSETS_URI . "css/upb-grid$suffix.css" );
+        }
+
 
         if ( upb_is_preview() ) {
 
@@ -39,7 +43,9 @@
             wp_enqueue_script( 'jquery' );
 
             // You can change grid system as you need :)
-            wp_enqueue_style( 'upb-grid' );
+            if ( ! current_theme_supports( 'upb-custom-grid-layout' ) ) {
+                wp_enqueue_style( 'upb-grid' );
+            }
 
             wp_register_style( 'upb-preview-elements', upb_get_theme_file_uri( 'preview-css/upb-preview-elements.css' ) );
             wp_enqueue_style( 'upb-preview-elements' );

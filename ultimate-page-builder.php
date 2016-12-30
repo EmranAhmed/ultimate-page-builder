@@ -95,6 +95,59 @@
                 add_action( 'wp', array( $this, 'upb_enabled' ) );
                 add_action( 'wp', array( $this, 'ui_functions' ), 11 );
                 add_action( 'send_headers', array( $this, 'no_cache_headers' ) );
+                add_filter( 'page_row_actions', array( $this, 'addRowActions' ), 10, 2 );
+                add_filter( 'post_row_actions', array( $this, 'addRowActions' ), 10, 2 );
+            }
+
+            public function addRowActions( $actions, $post ) {
+
+                if ( upb_is_buildable( $post ) ) {
+                    $url                        = upb_get_edit_link( $post );
+                    $label                      = esc_html__( 'Edit with Ultimate Page Builder', 'ultimate-page-builder' );
+                    $actions[ 'edit_with_upb' ] = "<a href=\"$url\">$label</a>";
+                }
+
+                return $actions;
+            }
+
+            public function getPost( $post_id = '' ) {
+
+                // Allow pass through of full post objects
+                if ( isset( $post_id->ID ) ) {
+                    return $post_id;
+                }
+
+                // Get post by ID
+                if ( is_int( $post_id ) ) {
+                    return get_post( $post_id );
+                }
+
+                // Or, in the dashboard use a query string
+                if ( is_admin() && isset( $_GET[ 'post' ] ) ) {
+                    return get_post( $_GET[ 'post' ] );
+                }
+
+                // Or, use the queried object
+                if ( '' == $post_id ) {
+                    $post = get_queried_object();
+                    if ( is_a( $post, 'WP_POST' ) ) {
+                        return $post;
+                    }
+                }
+
+                // Otherwise there's just no way...
+                return FALSE;
+
+            }
+
+            public function getAllowedPostTypes() {
+                return apply_filters( 'upb_allowed_post_types', array( 'page' ) );
+            }
+
+            public function isPostTypeAllowed( $post_id = '' ) {
+                $post = $this->getPost( $post_id );
+
+                return ( $post && in_array( $post->post_type, $this->getAllowedPostTypes() ) );
             }
 
             public function ui_functions() {
@@ -158,11 +211,11 @@
             }
         }
 
-        function Ultimate_Page_Builder() {
+        function UPB() {
             return Ultimate_Page_Builder::init();
         }
 
         // Global for backwards compatibility.
-        $GLOBALS[ 'ultimate_page_builder' ] = Ultimate_Page_Builder();
+        $GLOBALS[ 'ultimate_page_builder' ] = UPB();
 
     endif;

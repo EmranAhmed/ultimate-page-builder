@@ -4,8 +4,8 @@ defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
 if ( ! current_user_can( 'customize' ) ) :
     wp_die(
-        '<h1>' . __( 'Cheatin&#8217; uh?' ) . '</h1>' .
-        '<p>' . __( 'Sorry, you are not allowed to build this page. UPB' ) . '</p>',
+        '<h1>' . esc_html__( 'Cheatin&#8217; uh?', 'ultimate-page-builder' ) . '</h1>' .
+        '<p>' . esc_html__( 'Sorry, you are not allowed to build this page with Ultimate page builder', 'ultimate-page-builder' ) . '</p>',
         403
     );
 endif;
@@ -52,7 +52,7 @@ wp_user_settings();
     <title><?php upb_boilerplate_title() ?></title>
     <?php
         // ref: /wp-includes/script-loader.php
-        // For Clean Slate We did not use wp_head hook on biler plate template
+        // For Clean Slate We did not use wp_head hook on boilerplate template
         // that's why default registared scripts / styles will not load without re-registering :)
         // Only Admin CSS will load
 
@@ -64,7 +64,7 @@ wp_user_settings();
 <body class="<?php upb_boilerplate_body_class() ?>">
 <div id="upb-pre-loader">
     <div>
-        <?php esc_html_e( 'Loading...' ) ?>
+        <?php esc_html_e( 'Loading...', 'ultimate-page-builder' ) ?>
     </div>
 </div>
 <div id="upb-wrapper" class="expanded preview-lg preview-default"> <!-- collapsed preview-lg preview-md preview-sm preview-xs -->
@@ -77,7 +77,7 @@ wp_user_settings();
     </div>
     <div id="upb-skeleton-wrapper">Structure</div>
     <div id="upb-preview-wrapper">
-        <iframe src="<?php echo esc_url( add_query_arg( 'upb-preview', TRUE, get_preview_post_link( get_the_ID() ) ) ) ?>" frameborder="0" name="upb-preview-frame" seamless="seamless" id="upb-preview-frame"></iframe>
+        <iframe src="<?php echo upb_get_preview_link() ?>" frameborder="0" name="upb-preview-frame" seamless="seamless" id="upb-preview-frame"></iframe>
     </div>
     <?php do_action( 'upb_boilerplate_contents' ); ?>
 </div>

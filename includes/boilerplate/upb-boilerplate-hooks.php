@@ -6,44 +6,46 @@
     add_filter( 'upb_column_contents_panel_toolbar', function () {
         return array(
             array(
+                'title'  => esc_html__( 'Add Element', 'ultimate-page-builder' ),
                 'id'     => 'elements-panel',
-                'title'  => 'Add Element',
                 'icon'   => 'mdi mdi-shape-plus',
                 'action' => 'showElementsPanel'
             ),
             array(
+                'title'  => esc_html__( 'Settings', 'ultimate-page-builder' ),
                 'id'     => 'column-settings',
-                'title'  => 'Settings',
                 'icon'   => 'mdi mdi-settings',
                 'action' => 'showSettingsPanel'
             )
         );
     } );
+
     add_filter( 'upb_column_settings_panel_toolbar', function () {
         return array(
             array(
                 'id'     => 'column-contents',
-                'title'  => 'Contents',
+                'title'  => esc_html__( 'Contents', 'ultimate-page-builder' ),
                 'icon'   => 'mdi mdi-file-tree',
                 'action' => 'showContentPanel'
             )
         );
     } );
+
     add_filter( 'upb_column_list_toolbar', function ( $tools ) {
         $tools[ 'move' ] = array(
             'icon'  => 'mdi mdi-cursor-move',
             'class' => 'handle',
-            'title' => 'Sort',
+            'title' => esc_html__( 'Sort', 'ultimate-page-builder' ),
         );
 
         $tools[ 'delete' ] = array(
             'icon'  => 'mdi mdi-delete',
-            'title' => 'Delete',
+            'title' => esc_html__( 'Delete', 'ultimate-page-builder' ),
         );
 
         $tools[ 'enable' ]   = array(
             'icon'  => 'mdi mdi-eye',
-            'title' => 'Enabled',
+            'title' => esc_html__( 'Enabled', 'ultimate-page-builder' ),
         );
         $tools[ 'disable' ]  = array(
             'icon'  => 'mdi mdi-eye-off',
@@ -522,7 +524,9 @@
             'skeleton'          => esc_attr__( 'Skeleton preview' ),
             'collapse'          => esc_attr__( 'Collapse' ),
             'expand'            => esc_attr__( 'Expand' ),
-            'closeUrl'          => esc_url( get_permalink() ),
+            // 'closeUrl'         => esc_url( get_permalink() ),
+            'closeUrl'          => esc_url( add_query_arg( 'preview', 'true', get_permalink() ) ),
+
 
             // Templates
             'layoutPlaceholder' => upb_assets_uri( 'images/layout-placeholder.png' ),

@@ -44,6 +44,14 @@
         return UPB_Layouts::getInstance();
     }
 
+    function upb_get_edit_link( $post = 0 ) {
+        return esc_url( add_query_arg( 'upb', '1', get_permalink( $post ) ) );
+    }
+
+    function upb_get_preview_link() {
+        return esc_url( add_query_arg( 'upb-preview', TRUE, get_preview_post_link( get_the_ID() ) ) );
+    }
+
     // Conditional
     function upb_is_ios() {
         return wp_is_mobile() && preg_match( '/iPad|iPod|iPhone/', $_SERVER[ 'HTTP_USER_AGENT' ] );
@@ -55,8 +63,8 @@
         return wp_is_mobile() && $is_IE;
     }
 
-    function upb_is_buildable() {
-        return apply_filters( 'upb_has_access', TRUE ) && is_page();
+    function upb_is_buildable( $post = '' ) {
+        return apply_filters( 'upb_has_access', TRUE ) && UPB()->isPostTypeAllowed( $post );
     }
 
     function upb_is_preview() {
@@ -79,7 +87,7 @@
     }
 
     function upb_is_enabled() {
-        return Ultimate_Page_Builder()->is_enabled();
+        return UPB()->is_enabled();
     }
 
 
