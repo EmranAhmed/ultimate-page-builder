@@ -18,6 +18,10 @@ const uglify        = require('gulp-uglify');
 const babel         = require('gulp-babel');
 const webpack       = require("webpack");
 const webpackConfig = require("./webpack.config.js");
+const fsExtra       = require("fs-extra");
+const path          = require("path");
+const cliColor      = require("cli-color");
+const emojic        = require("emojic");
 
 const autoprefixerOptions = [
     'last 3 versions',
@@ -53,6 +57,38 @@ const wpPotOptions = {
     'team'           : 'ThemeHippo <themehippo@gmail.com>',
     'translatePath'  : './languages'
 };
+
+gulp.task('bundle', _=> {
+    let bundledir = path.basename(path.resolve(__dirname));
+    let copyfrom  = path.resolve(__dirname);
+    let copyto    = path.resolve(bundledir);
+    let includes  = ['assets',
+                     'includes',
+                     'languages',
+                     'templates',
+                     'LICENSE.txt',
+                     'README.md',
+                     `${bundledir}.php`];
+
+    fsExtra.ensureDir(copyto, function (err) {
+        if (err) return console.error(err)
+
+        console.log(cliColor.white(`=>${emojic.whiteCheckMark}   Build directory created`));
+
+        includes.map(include=> {
+
+            fsExtra.copy(`${copyfrom}/${include}`, `${copyto}/${include}`, function (err) {
+                if (err) return console.error(err)
+
+                console.log(cliColor.white(`=>${emojic.smiley}   ${include} copied...`));
+
+            })
+
+        })
+
+    })
+
+})
 
 // Scripts
 
