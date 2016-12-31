@@ -3,6 +3,8 @@
 
 .upb-preview-element {
   position : relative;
+  min-height  : 50px;
+  padding-top : 25px;
 
   .upb-preview-mini-toolbar {
     position  : absolute;

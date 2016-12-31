@@ -1,14 +1,9 @@
-.upb-preview-element {
-    min-height  : 50px;
-    padding-top : 25px;
-    }
-
 .upb-column-preview {
     min-height : 75px;
     }
 
 .upb-column-preview.upb-preview-element-no-contents {
-    border : 1px solid #0000FF;
+    border : 1px solid #FF727F;
     }
 
 .upb-section-preview {
