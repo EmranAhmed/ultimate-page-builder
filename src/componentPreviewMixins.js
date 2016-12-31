@@ -165,9 +165,7 @@ export default{
 
                 // added extra grid class to control gutter
                 grid.unshift(store.grid.prefixClass);
-
                 return _.compact(grid);
-
             }
         }
     }

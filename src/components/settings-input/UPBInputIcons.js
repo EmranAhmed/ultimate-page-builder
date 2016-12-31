@@ -16,7 +16,6 @@ export default {
 
             settings['templateResult']    = state => this.template(state);
             settings['templateSelection'] = state => this.template(state);
-
             return settings;
         }
     },

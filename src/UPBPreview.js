@@ -40,7 +40,6 @@ store.getAllUPBElements((elements) => {
 
             })
         });
-
     });
 
 }, _=> {});
@@ -65,7 +64,6 @@ export default {
     },
 
     updated(){
-
         if (this.model.contents) {
             this.addKeyIndex();
         }
@@ -74,7 +72,6 @@ export default {
                 this.addKeyIndex();
             })
         }
-
     },
 
     created(){

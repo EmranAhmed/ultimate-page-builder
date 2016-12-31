@@ -117,33 +117,34 @@
 
 
         $options = array(
-            'type'  => 'image',
-            'title' => 'Image Media',
-            'desc'  => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+            'type'      => 'image',
+            'title'     => 'Image Media',
+            'desc'      => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
 
-            'placeholder' => 'No Image is Selected',
-            'size'        => 'full',
-            'buttons'     => array(
+            //'placeholder' => 'No Image is Selected',
+            'attribute' => 'src',
+            /*'buttons'     => array(
                 'add'    => 'Add',
                 'remove' => 'Remove',
                 'choose' => 'Select...',
-            )
+            )*/
         );
 
         $settings->register( 'test9', $options );
 
 
         $options = array(
-            'type'     => 'select2',
-            'title'    => 'Select multi',
-            'desc'     => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+            'type'        => 'select2',
+            'title'       => 'Select multi',
+            'desc'        => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
 
             //'default'  => array( '2' ),
-            'multiple' => TRUE,
-            'options'  => array( '1' => 'ONE', '2' => 'TWO', '3' => 'Three' ),
-            'settings' => array(
-                'placeholder' => 'Placeholder',
-                'allowClear'  => TRUE
+            'placeholder' => 'Placeholder',
+            'multiple'    => TRUE,
+            'options'     => array( '1' => 'ONE', '2' => 'TWO', '3' => 'Three' ),
+            'settings'    => array(
+
+                'allowClear' => TRUE
             )
         );
 

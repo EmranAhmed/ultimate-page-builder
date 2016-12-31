@@ -17,23 +17,24 @@
                     $options[ 'settings' ][ 'placeholder' ] = $options[ 'placeholder' ];
                 }
 
-
                 switch ( $options[ 'type' ] ) {
                     case 'editor':
                         if ( isset( $options[ 'value' ] ) && ! empty( $options[ 'value' ] ) ) {
-                            $options[ 'value' ] = wp_kses_post( wpautop( $options[ 'value' ] ) );
+                            $options[ 'value' ] = wp_kses_post( $options[ 'value' ] );
                         }
                         break;
 
                     case 'image':
-                        $options[ 'placeholder' ] = ! empty( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : 'No Image';
-                        $options[ 'size' ]        = isset( $options[ 'size' ] ) ? $options[ 'size' ] : 'full';
-                        $options[ 'buttons' ]     = isset( $options[ 'buttons' ] )
+                        $options[ 'placeholder' ] = ! empty( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : esc_html__( 'No Image', 'ultimate-page-builder' );
+                        $options[ 'size' ]        = isset( $options[ 'size' ] ) ? $options[ 'size' ] : 'full'; // ‘thumbnail’, ‘medium’, ‘large’, ‘full’
+                        $options[ 'attribute' ]   = isset( $options[ 'attribute' ] ) ? $options[ 'attribute' ] : 'id'; // id, src
+
+                        $options[ 'buttons' ] = isset( $options[ 'buttons' ] )
                             ? $options[ 'buttons' ]
                             : array(
-                                'add'    => 'Use Image',
-                                'remove' => 'Remove',
-                                'choose' => 'Select',
+                                'add'    => esc_html__( 'Use Image', 'ultimate-page-builder' ),
+                                'remove' => esc_html__( 'Remove', 'ultimate-page-builder' ),
+                                'choose' => esc_html__( 'Select', 'ultimate-page-builder' ),
                             );
                         break;
 
@@ -80,9 +81,13 @@
 
                         break;
 
+                    case 'textarea':
+                        $options[ 'value' ] = empty( $options[ 'value' ] ) ? esc_textarea( $options[ 'default' ] ) : esc_textarea( $options[ 'value' ] );
+                        break;
+
                     default:
                         if ( is_null( $options[ 'value' ] ) ) {
-                            $options[ 'value' ] = $options[ 'default' ];
+                            $options[ 'value' ] = esc_html( $options[ 'default' ] );
                         }
                         break;
                 }

@@ -2,9 +2,10 @@
     <li :class="typeClass()">
         <div class="form-group">
             <label>
+
                 <span class="title" v-text="attributes.title"></span>
                 <select class="select2-input" style="width: 100%" v-select2="settings" :id="attributes._id">
-                    <option :value="attributes.options.id" :title="attributes.options.title" v-text="attributes.options.text"></option>
+                    <option :value="input" :title="attributes.options.title" v-text="attributes.options.text"></option>
                 </select>
             </label>
 

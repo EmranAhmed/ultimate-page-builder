@@ -57,10 +57,6 @@ class store {
         return this.status.dirty;
     }
 
-    changeStatus() {
-        this.status.dirty = !this.status.dirty
-    }
-
     stateChanged() {
         this.status.dirty = true
     }

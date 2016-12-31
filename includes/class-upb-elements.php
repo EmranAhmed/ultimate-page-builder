@@ -54,6 +54,10 @@
                     $_upb_options[ 'preview' ][ 'mixins' ] = '{}';
                 }
 
+                if ( ! isset( $_upb_options[ 'preview' ][ 'template' ] ) ) {
+                    $_upb_options[ 'preview' ][ 'template' ] = $tag;
+                }
+
                 // Assets
                 if ( ! isset( $_upb_options[ 'assets' ] ) ) {
                     $_upb_options[ 'assets' ] = array();
@@ -83,16 +87,12 @@
 
                 ///
 
-                if ( ! isset( $_upb_options[ 'preview' ][ 'template' ] ) ) {
-                    $_upb_options[ 'preview' ][ 'template' ] = $tag;
-                }
-
                 $settings     = apply_filters( "upb_element_{$tag}_settings", $settings );
                 $_upb_options = apply_filters( "upb_element_{$tag}_options", $_upb_options );
 
 
                 if ( is_string( $contents ) ) {
-                    $settings[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', 'Contents' ), 'type' => 'contents', 'value' => wp_kses_post( wpautop( $contents ) ) );
+                    $settings[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', 'Contents' ), 'type' => 'contents', 'value' => wp_kses_post( $contents ) );
                 }
 
                 foreach ( $settings as $key => $setting ) {
@@ -260,32 +260,6 @@
                 if ( ! empty( $attributes ) ) {
                     $el[ 'attributes' ]    = array_merge( $el[ 'attributes' ], $this->to_attributes( $attributes ) );
                     $el[ '_upb_settings' ] = array_merge( $el[ '_upb_settings' ], $el[ 'attributes' ] );
-                }
-
-                return $el;
-            }
-
-            public function demo_data( $tag, $contents = array(), $attributes = array() ) {
-
-                if ( ! $this->has_element( $tag ) ) {
-                    throw new Exception( sprintf( 'Ultimate page builder element "%s" is not registered.', $tag ) );
-                }
-
-                $el = $this->get_element( $tag );
-
-                if ( ! empty( $contents ) ) {
-
-                    if ( isset( $contents[ 0 ] ) ) {
-                        foreach ( $contents as $content ) {
-                            array_push( $el[ 'contents' ], $content );
-                        }
-                    } else {
-                        array_push( $el[ 'contents' ], $contents );
-                    }
-                }
-
-                if ( ! empty( $attributes ) ) {
-                    $el[ 'attributes' ] = array_merge( $el[ 'attributes' ], $this->to_attributes( $attributes ) );
                 }
 
                 return $el;

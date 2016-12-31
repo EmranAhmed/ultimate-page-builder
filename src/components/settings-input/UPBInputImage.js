@@ -17,14 +17,14 @@ export default {
 
     created(){
 
-        if (this.input) {
+        if (this.input && this.attributes.attribute == 'id') {
 
             store.wpAjax(
                 'get-attachment', // see /wp-admin/admin-ajax.php, will converted to wp_ajax_get_attachment
                 {
                     id : this.input,
                 },
-                (image) => {
+                image => {
                     if (_.isUndefined(image.sizes)) {
                         this.src = image.url;
                     }
@@ -32,15 +32,24 @@ export default {
                         this.src = image.sizes[this.attributes.size].url;
                     }
                 },
-                function () { console.log(`Image Not Found`) }
+                _ => { console.log(`Image Not Found by ID# ${this.input}`) }
             );
+        }
+        else {
+            this.src = this.input;
         }
     },
 
     methods : {
         onSelect(e, id, src){
-            this.input = id;
-            this.src   = src;
+
+            if (this.attributes.attribute == 'id') {
+                this.input = id;
+            }
+            else {
+                this.input = src;
+            }
+            this.src = src;
         },
         onRemove(e){
             this.input = null;

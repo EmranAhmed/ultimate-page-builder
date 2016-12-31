@@ -99,14 +99,18 @@
                         break;
 
                     case 'image':
-                        $options[ 'size' ] = isset( $options[ 'size' ] ) ? $options[ 'size' ] : 'full';
+                        $options[ 'placeholder' ] = ! empty( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : esc_html__( 'No Image', 'ultimate-page-builder' );
+                        $options[ 'size' ]        = isset( $options[ 'size' ] ) ? $options[ 'size' ] : 'full'; //  ‘thumbnail’, ‘medium’, ‘large’, ‘full’
+                        $options[ 'attribute' ]   = isset( $options[ 'attribute' ] ) ? $options[ 'attribute' ] : 'id'; // id / src
+                        $options[ 'buttons' ]     = isset( $options[ 'buttons' ] )
+                            ? $options[ 'buttons' ]
+                            : array(
+                                'add'    => esc_html__( 'Use Image', 'ultimate-page-builder' ),
+                                'remove' => esc_html__( 'Remove', 'ultimate-page-builder' ),
+                                'choose' => esc_html__( 'Select', 'ultimate-page-builder' ),
+                            );
                         break;
                 }
-
-
-                // if no option saved show default else show saved one
-                //$options = $this->setAttrBasedOnType( $id, $options );
-
 
                 $this->settings[] = $options;
             }
@@ -119,7 +123,8 @@
                 switch ( $options[ 'type' ] ):
 
                     case 'ajax':
-                        $options[ 'options' ] = apply_filters( $options[ 'hooks' ][ 'filter' ], $value );
+                        $options[ 'value' ]   = empty( $value ) ? $options[ 'default' ] : $value;
+                        $options[ 'options' ] = apply_filters( $options[ 'hooks' ][ 'filter' ], $options[ 'value' ] );
                         break;
 
                     case 'color':
@@ -139,15 +144,15 @@
                         break;
 
                     case 'editor':
-                        $options[ 'value' ] = ( $value === '' ) ? wp_kses_post( wpautop( $options[ 'default' ] ) ) : wp_kses_post( $value );
+                        $options[ 'value' ] = ( $value === '' ) ? wp_kses_post( $options[ 'default' ] ) : wp_kses_post( $value );
                         break;
 
                     case 'textarea':
-                        $options[ 'value' ] = ( $value === '' ) ? $options[ 'default' ] : apply_filters( 'upb_settings_textarea_options', wp_kses( $value, array() ), $value );
+                        $options[ 'value' ] = ( $value === '' ) ? esc_textarea( $options[ 'default' ] ) : esc_textarea( $value );
                         break;
 
                     default:
-                        $options[ 'value' ] = ( $value === '' ) ? $options[ 'default' ] : $value;
+                        $options[ 'value' ] = ( $value === '' ) ? esc_html( $options[ 'default' ] ) : esc_html( $value );
                         break;
                 endswitch;
 

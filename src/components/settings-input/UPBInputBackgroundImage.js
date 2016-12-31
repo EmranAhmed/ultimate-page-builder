@@ -26,7 +26,9 @@ export default {
         },
 
         pointerMovedTo(position){
-            this.setValueOf(this.attributes.use, position);
+            if (this.attributes.use) {
+                this.setValueOf(this.attributes.use, position);
+            }
         }
     }
 }

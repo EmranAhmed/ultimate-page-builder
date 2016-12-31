@@ -45,7 +45,6 @@ export default {
             return extend(true, settings, this.attributes.settings);
 
         }
-
     },
 
     methods : {

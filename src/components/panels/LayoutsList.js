@@ -34,19 +34,18 @@ export default {
                     if (_.isArray(data)) {
                         store.addContentsToTab('sections', data);
                         this.$toast.success(sprintf(this.l10n.layoutAdded, this.l10n.pageTitle));
+
+                        store.stateChanged();
                         this.$router.replace('/sections');
                     }
                 }, data=> {
                     console.log(data);
                 })
 
-                //
-
             } catch (err) {
                 // console.log('Could Not Copy', err);
                 this.$toast.error('Use valid JSON Data');
             }
-
         }
     }
 }

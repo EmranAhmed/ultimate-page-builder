@@ -117,6 +117,20 @@
 
         $attributes = array(
 
+            array(
+                'id'        => 'images',
+                'title'     => 'Image',
+                'type'      => 'image',
+                'attribute' => 'id', // src
+                // 'size'      => 'full',
+                'value'     => '',
+                'buttons'   => array(
+                    'add'    => 'Add',
+                    'remove' => 'Remove',
+                    'choose' => 'Select...',
+                )
+            ),
+
 
             array(
                 'id'          => 'ajaxpost',
@@ -186,14 +200,7 @@
                 'type'        => 'background-image-position',
                 'desc'        => 'Dramatically simplify cost effective systems with..',
                 'value'       => '0% 0%',
-                'size'        => 'full',
-                //'use'         => 'bgimage',
-                'placeholder' => 'Choose background',
-                'buttons'     => array(
-                    'add'    => 'Use',
-                    'remove' => 'Remove',
-                    'choose' => 'Choose',
-                )
+                'placeholder' => '0% 0%',
             ),
 
             array(
