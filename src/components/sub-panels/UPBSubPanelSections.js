@@ -1,8 +1,7 @@
 import store from '../../store'
 import extend from 'extend'
 import {sprintf} from 'sprintf-js'
-
-import copy from 'copy-to-clipboard';
+import copy from 'copy-to-clipboard'
 
 export default {
     name  : 'upb-sub-panel-sections',
@@ -46,12 +45,12 @@ export default {
             })
         },
 
-        toggleTextarea(){
+        toggleTextArea(){
             this.textareaContents = '';
             this.showTextarea     = !this.showTextarea;
         },
 
-        save(){
+        saveSection(){
 
             let data = this.textareaContents.trim();
 
@@ -78,24 +77,25 @@ export default {
             }
         },
 
-        delete(index){
+        deleteSection(index){
+
             this.item.splice(index, 1);
 
             store.saveAllSectionToOption(this.item, (data) => {
                 this.$toast.success(this.l10n.sectionDeleted);
             }, (data)=> {
-
+                console.log(data);
             });
         },
 
-        copy(index){
+        copySection(index){
             let item = extend(true, {}, this.item[index]);
             let json = JSON.stringify(store.cleanup([item]).pop());
             copy(json);
             this.$toast.success(sprintf(this.l10n.sectionCopied, item.attributes.title));
         },
 
-        add(index){
+        addSection(index){
 
             let item = extend(true, {}, this.item[index]);
 
