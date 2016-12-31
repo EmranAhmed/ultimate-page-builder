@@ -69,10 +69,18 @@ export default {
 
         onChange(data, e){
             this.input = data.id;
+
+            this.attributes.options.id    = data.id;
+            this.attributes.options.title = data.title;
+            this.attributes.options.text  = data.text;
         },
 
         onRemove(data){
             Vue.set(this, 'input', '');
+
+            this.attributes.options.id    = '';
+            this.attributes.options.title = '';
+            this.attributes.options.text  = '';
         }
     }
 }
