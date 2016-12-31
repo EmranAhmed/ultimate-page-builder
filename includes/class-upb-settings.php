@@ -68,16 +68,17 @@
 
                 $_id = $this->prefix . $id;
 
-                $options[ 'id' ]          = $id;
-                $options[ '_id' ]         = $_id;
-                $options[ 'desc' ]        = isset( $options[ 'desc' ] ) ? $options[ 'desc' ] : FALSE;
-                $options[ 'default' ]     = isset( $options[ 'default' ] ) ? $options[ 'default' ] : '';
+                $options[ 'id' ]      = $id;
+                $options[ '_id' ]     = $_id;
+                $options[ 'desc' ]    = isset( $options[ 'desc' ] ) ? $options[ 'desc' ] : FALSE;
+                $options[ 'default' ] = isset( $options[ 'default' ] ) ? $options[ 'default' ] : '';
+
                 $options[ 'value' ]       = $options[ 'default' ];
                 $options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : '';
                 $options[ 'use' ]         = isset( $options[ 'use' ] ) ? $options[ 'use' ] : FALSE;
 
 
-                if ( $options[ 'type' ] == 'select2' || $options[ 'type' ] == 'icons' ) {
+                if ( $options[ 'type' ] == 'select2' || $options[ 'type' ] == 'icons' || $options[ 'type' ] == 'ajax' ) {
                     $options[ 'settings' ][ 'placeholder' ] = $options[ 'placeholder' ];
                 }
 
@@ -116,6 +117,10 @@
 
 
                 switch ( $options[ 'type' ] ):
+
+                    case 'ajax':
+                        $options[ 'options' ] = apply_filters( $options[ 'hooks' ][ 'filter' ], $value );
+                        break;
 
                     case 'color':
                         $options[ 'alpha' ] = isset( $options[ 'alpha' ] ) ? $options[ 'alpha' ] : FALSE;
@@ -158,6 +163,7 @@
 
             public function set_setting( $type, $id, $value ) {
                 $_id = $this->prefix . $id;
+
 
                 return update_post_meta( $this->get_the_ID(), $_id, $value );
             }

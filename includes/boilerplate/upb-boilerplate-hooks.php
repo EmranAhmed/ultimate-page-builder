@@ -527,6 +527,7 @@
             'expand'             => esc_attr__( 'Expand', 'ultimate-page-builder' ),
             // 'closeUrl'         => esc_url( get_permalink() ),
             'closeUrl'           => esc_url( add_query_arg( 'preview', 'true', get_permalink() ) ),
+            'ajaxUrl'            => esc_url( admin_url( 'admin-ajax.php', 'relative' ) ),
 
 
             // Templates

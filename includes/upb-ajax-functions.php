@@ -205,3 +205,60 @@
         wp_send_json_success( $contents );
     } );
 
+
+    add_action( 'wp_ajax__upb_search_posts', function () {
+        if ( ! current_user_can( 'customize' ) ) {
+            status_header( 403 );
+            wp_send_json_error( 'upb_not_allowed' );
+        }
+
+        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+            status_header( 400 );
+            wp_send_json_error( 'bad_nonce' );
+        }
+
+        if ( empty( $_GET[ 'query' ] ) ) {
+            status_header( 400 );
+            wp_send_json_error( 'no_search_term' );
+        }
+
+        $result = array();
+
+        $args = array(
+            'posts_per_page' => 10,
+            'post_type'      => 'post',
+            'post_status'    => 'publish',
+            's'              => esc_sql( $_GET[ 'query' ] ),
+            'orderby'        => 'title',
+            'order'          => 'ASC'
+        );
+
+        $query = new WP_Query( $args );
+
+        if ( $query->have_posts() ) {
+            while ( $query->have_posts() ) {
+                $query->the_post();
+                $result[] = array(
+                    'id'    => get_the_ID(),
+                    'title' => get_the_title(),
+                    'text'  => get_the_title(),
+                );
+            }
+        }
+
+        wp_reset_postdata();
+
+        wp_send_json_success( $result );
+    } );
+
+    add_filter( '_upb_get_post', function ( $id ) {
+
+        if ( empty( $id ) ) {
+            return array();
+        }
+
+        $post = get_post( absint( $id ) );
+
+        return array( 'id' => $post->ID, 'title' => esc_html( $post->post_title ), 'text' => esc_html( $post->post_title ) );
+    } );
+

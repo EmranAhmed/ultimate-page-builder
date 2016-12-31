@@ -1,11 +1,11 @@
 <template>
     <li :class="typeClass()">
         <div class="form-group">
-
             <label>
                 <span class="title" v-text="attributes.title"></span>
-                <select class="select2-input" v-model="input" style="width: 100%" v-select2="settings" :id="attributes._id">
-                    <option v-for="(option, value) in attributes.options" :value="value" v-text="option"></option>
+
+                <select class="select2-input" style="width: 100%" v-select2="settings" :id="attributes._id">
+                    <option :value="attributes.options.id" :title="attributes.options.title" v-text="attributes.options.text"></option>
                 </select>
             </label>
 
@@ -14,4 +14,4 @@
     </li>
 </template>
 
-<script src="./UPBInputIcons.js"></script>
+<script src="./UPBInputAjax.js"></script>

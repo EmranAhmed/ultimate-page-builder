@@ -119,6 +119,24 @@
 
 
             array(
+                'id'          => 'ajaxpost',
+                'type'        => 'ajax',
+                'title'       => 'Posts...',
+                'desc'        => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+                'value'       => '',
+                'hooks'       => array(
+                    'ajax'   => '_upb_search_posts', // wp_ajax hook
+                    'filter' => '_upb_get_post', // filter hook
+                ),
+                'template'    => '<div> ID# %(id)s - %(title)s </div>',
+                'placeholder' => 'Posts',
+                'settings'    => array(
+                    'allowClear' => TRUE
+                )
+            ),
+
+
+            array(
                 'id'          => 'icon',
                 'type'        => 'icons',
                 'title'       => 'Icons',

@@ -92,6 +92,14 @@ class store {
         this.subpanel = '';
     }
 
+    getNonce() {
+        return this.status._nonce;
+    }
+
+    getId() {
+        return this.status._id;
+    }
+
     saveState(success, error) {
 
         const contents = {};
@@ -104,8 +112,6 @@ class store {
         if (contents['elements']) {
             delete contents.elements;
         }
-
-
 
         wp.ajax.send("_upb_save", {
             success : success,

@@ -8,6 +8,26 @@
 
         // print_r(upb_responsive_hidden()); die;
 
+
+        $options = array(
+            'type'        => 'ajax',
+            'title'       => 'Posts',
+            'desc'        => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+            'default'     => '',
+            'hooks'       => array(
+                'ajax'   => '_upb_search_posts', // wp_ajax hook
+                'filter' => '_upb_get_post', // filter hook
+            ),
+            'template'    => '<div> ID# %(id)s - %(title)s </div>',
+            'placeholder' => 'Posts',
+            'settings'    => array(
+                'allowClear' => TRUE
+            )
+        );
+
+        $settings->register( 'testajax', $options );
+
+
         $options = array(
             'type'        => 'icons',
             'title'       => 'Icons',

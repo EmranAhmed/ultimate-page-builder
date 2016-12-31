@@ -5,7 +5,8 @@ export default{
     props : ['index', 'target', 'model', 'attributes', 'item', 'items', 'keyindexname', 'keyvaluename', 'defaultValue'], // model[target]
     data(){
         return {
-            input : this.model[this.target]
+            input : this.model[this.target],
+            l10n  : store.l10n
         }
     },
 
