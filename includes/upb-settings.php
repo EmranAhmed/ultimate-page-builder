@@ -9,7 +9,7 @@
         // print_r(upb_responsive_hidden()); die;
 
 
-        $options = array(
+        $optionsx = array(
             'type'        => 'ajax',
             'title'       => 'Posts',
             'desc'        => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
@@ -25,7 +25,7 @@
             )
         );
 
-        $settings->register( 'testajax', $options );
+        $settings->register( 'test15', $optionsx );
 
 
         $options = array(
@@ -40,7 +40,7 @@
             )
         );
 
-        $settings->register( 'testicon', $options );
+        $settings->register( 'test14', $options );
 
 
         $options = array(
