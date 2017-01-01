@@ -48,8 +48,15 @@
         return esc_url( add_query_arg( 'upb', '1', get_permalink( $post ) ) );
     }
 
-    function upb_get_preview_link() {
-        return esc_url( add_query_arg( 'upb-preview', TRUE, get_preview_post_link( get_the_ID() ) ) );
+    function upb_get_preview_link( $rand = FALSE ) {
+
+        $query = array( 'upb-preview' => TRUE );
+
+        if ( $rand ) {
+            $query[ 'v' ] = rand( 2, 999 );
+        }
+
+        return esc_url( add_query_arg( $query, get_preview_post_link( get_the_ID() ) ) );
     }
 
     // Conditional

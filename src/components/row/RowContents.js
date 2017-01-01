@@ -165,7 +165,7 @@ export default {
                     this.devices.map((d)=> {
 
                         let colLength = this.selectedColumnLayout[d.id].split('+').length;
-                        
+
                         d.reconfig = (device.active && d.active && activeDevices.length > 1 && d.id != device.id && currentColLength !== colLength) ? true : false;
 
                     });
