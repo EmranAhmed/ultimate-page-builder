@@ -346,7 +346,7 @@ input[type="search"]::-webkit-search-decoration {
         border           : none !important;
         box-shadow       : none !important;
         background-color : transparent !important;
-        margin-bottom    : 20px !important;
+        margin-bottom    : 30px !important;
         }
 
       }
@@ -601,6 +601,18 @@ input[type="search"]::-webkit-search-decoration {
         }
       }
     }
+
+  /* ----------------
+ * Description
+ *---------------*/
+  .description{
+    font-weight: normal;
+    font-style: italic;
+    color: $upb-sidebar-panel-content-description-color;
+    margin: 5px 0 0;
+    font-size: 12px;
+    }
+
   }
 
 /*-----------------------
@@ -769,6 +781,7 @@ FORM CODE
         }
       }
     }
+
   }
 
 
