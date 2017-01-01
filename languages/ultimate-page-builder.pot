@@ -333,6 +333,22 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
+#: includes/class-upb-elements-props.php:28, includes/class-upb-settings.php:102
+msgid "No Image"
+msgstr ""
+
+#: includes/class-upb-elements-props.php:35, includes/class-upb-settings.php:108
+msgid "Use Image"
+msgstr ""
+
+#: includes/class-upb-elements-props.php:36, includes/class-upb-settings.php:109
+msgid "Remove"
+msgstr ""
+
+#: includes/class-upb-elements-props.php:37, includes/class-upb-settings.php:110
+msgid "Select"
+msgstr ""
+
 #: includes/class-upb-elements.php:30
 msgid "Ultimate page builder element \"%s\" already registered."
 msgstr ""
