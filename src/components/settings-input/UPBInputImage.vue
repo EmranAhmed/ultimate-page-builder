@@ -19,7 +19,7 @@
                 </div>
             </div>
 
-            <div class="description" v-if="attributes.desc" v-html="attributes.desc"></div>
+            <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
 
         </div>
     </li>
