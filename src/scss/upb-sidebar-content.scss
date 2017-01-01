@@ -349,6 +349,30 @@ input[type="search"]::-webkit-search-decoration {
         margin-bottom    : 30px !important;
         }
 
+      &.upb-layout-list{
+        display: table;
+        width: 100%;
+        .preview-image-wrapper,
+        .layouts-contents{
+          display: table-cell;
+
+          }
+
+        .preview-image-wrapper{
+          width: 105px;
+          }
+
+        .layouts-contents {
+          vertical-align: middle;
+          > div:last-child{
+            font-size: 12px !important;
+            font-weight: normal !important;
+            margin-top: 5px;
+
+            }
+          }
+        }
+
       }
 
     .row-contents-layout {

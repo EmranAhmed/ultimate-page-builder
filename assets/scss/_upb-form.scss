@@ -77,24 +77,20 @@ button:focus {
 
   select.select-input {
     -webkit-appearance  : none;
-    background-image    : linear-gradient(45deg, transparent 50%, gray 50%),
-    linear-gradient(135deg, gray 50%, transparent 50%),
-    linear-gradient(to right, #DDDDDD, #DDDDDD);
+    background-image    : linear-gradient(45deg, transparent 50%, #888888 50%),
+    linear-gradient(135deg, #888888 50%, transparent 50%);
     background-position : calc(100% - 13px) calc(1em + -3px),
-    calc(100% - 9px) calc(1em + -3px),
-    calc(100% - 2em) 0.1em;
-    background-size     : 5px 5px,
-    4px 4px,
+    calc(100% - 9px) calc(1em + -3px);
+    background-size     : 4px 4px,
+    4px 5px,
     1px 1.5em;
     background-repeat   : no-repeat;
 
     &:focus {
-      background-image    : linear-gradient(45deg, #BBBBBB 50%, transparent 50%),
-      linear-gradient(135deg, transparent 50%, #BBBBBB 50%),
-      linear-gradient(to right, #DDDDDD, #DDDDDD);
-      background-position : calc(100% - 10px) calc(1em + -4px),
-      calc(100% - 13px) calc(1em + -4px),
-      calc(100% - 2em) 0.1em;
+      background-image    : linear-gradient(45deg, #888888 50%, transparent 50%),
+      linear-gradient(135deg, transparent 50%, #888888 50%);
+      background-position : calc(100% - 9px) calc(1em + -4px),
+      calc(100% - 13px) calc(1em + -4px);
       background-size     : 4px 4px,
       4px 4px,
       1px 1.5em;
