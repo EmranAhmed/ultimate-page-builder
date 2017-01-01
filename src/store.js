@@ -8,13 +8,14 @@ class store {
         this.status = window._upb_status;
         this.routes = window._upb_routes || [];
 
-        this.l10n          = window._upb_l10n;
-        this.router_config = window._upb_router_config;
-        this.devices       = window._upb_preview_devices;
-        this.grid          = window._upb_grid_system;
-        this.preview       = 'upb-preview-frame';
-        this.panel         = '';
-        this.subpanel      = '';
+        this.l10n            = window._upb_l10n;
+        this.router_config   = window._upb_router_config;
+        this.devices         = window._upb_preview_devices;
+        this.grid            = window._upb_grid_system;
+        this.preview         = 'upb-preview-frame';
+        this.panel           = '';
+        this.subpanel        = '';
+        this.sidebarExpanded = true;
     }
 
     reloadPreview() {

@@ -29,14 +29,16 @@ export default {
         },
 
         collapseSidebar(){
-            this.sidebarExpand = false;
-            store.subpanel     = '';
+            this.sidebarExpand    = false;
+            store.sidebarExpanded = false;
+            store.subpanel        = '';
             document.getElementById('upb-wrapper').classList.remove('expanded');
             document.getElementById('upb-wrapper').classList.add('collapsed');
         },
 
         expandSidebar(){
-            this.sidebarExpand = true;
+            this.sidebarExpand    = true;
+            store.sidebarExpanded = true;
             document.getElementById('upb-wrapper').classList.remove('collapsed');
             document.getElementById('upb-wrapper').classList.add('expanded');
         },

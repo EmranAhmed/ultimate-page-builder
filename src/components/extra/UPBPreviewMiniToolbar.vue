@@ -1,5 +1,5 @@
 <template>
-    <div :class="className()">
+    <div :class="className()" v-if="sidebarExpanded">
         <ul v-if="!onlyBorder">
             <li><span v-text="model._upb_options.element.name"></span></li>
             <li v-if="has_contents && contents" @click.prevent="openContentsPanel()"><i class="mdi mdi-book-open"></i></li>

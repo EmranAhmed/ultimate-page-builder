@@ -15,11 +15,11 @@ Vue.component('upb-preview-mini-toolbar', UPBPreviewMiniToolbar);
 Vue.use(PreviewElement);
 Vue.use(Droppable);
 
-store.getAllUPBElements((elements) => {
+store.getAllUPBElements(elements => {
 
     // console.log(elements);
 
-    elements.map((element)=> {
+    elements.map(element=> {
 
         let template           = element._upb_options.preview.template;
         let component          = `upb-${element.tag}`;

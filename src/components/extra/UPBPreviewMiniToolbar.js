@@ -1,3 +1,5 @@
+import store from '../../store'
+
 export default {
     name  : 'upb-preview-mini-toolbar',
     props : {
@@ -22,6 +24,11 @@ export default {
     },
 
     computed : {
+
+        sidebarExpanded(){
+            return this.$root.$data.store.sidebarExpanded
+        },
+
         $router(){
             return this.$root.$data.store.panel._router;
         },
@@ -40,29 +47,24 @@ export default {
         }
     },
     methods  : {
-
         className(){
             return [`upb-preview-mini-toolbar`, this.is_focused ? 'highlight' : ''].join(' ')
         },
 
         openContentsPanel(){
             this.$router.replace(`/sections`);
-
-            this.$nextTick(()=> {
+            this.$nextTick(_=> {
                 let path = `/sections/%/contents`.replace('%', this.model._upb_options._keyIndex);
                 this.$router.replace(path);
             })
         },
 
         openSettingsPanel(){
-
             this.$router.replace(`/sections`);
-
-            this.$nextTick(()=> {
+            this.$nextTick(_=> {
                 let path = `/sections/%/settings`.replace('%', this.model._upb_options._keyIndex);
                 this.$router.replace(path);
             })
         }
     }
-
 }
