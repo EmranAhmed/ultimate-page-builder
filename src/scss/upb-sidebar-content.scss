@@ -349,25 +349,25 @@ input[type="search"]::-webkit-search-decoration {
         margin-bottom    : 30px !important;
         }
 
-      &.upb-layout-list{
-        display: table;
-        width: 100%;
+      &.upb-layout-list {
+        display : table;
+        width   : 100%;
         .preview-image-wrapper,
-        .layouts-contents{
-          display: table-cell;
+        .layouts-contents {
+          display : table-cell;
 
           }
 
-        .preview-image-wrapper{
-          width: 105px;
+        .preview-image-wrapper {
+          width : 105px;
           }
 
         .layouts-contents {
-          vertical-align: middle;
-          > div:last-child{
-            font-size: 12px !important;
-            font-weight: normal !important;
-            margin-top: 5px;
+          vertical-align : middle;
+          > div:last-child {
+            font-size   : 12px !important;
+            font-weight : normal !important;
+            margin-top  : 5px;
 
             }
           }
@@ -390,11 +390,17 @@ input[type="search"]::-webkit-search-decoration {
       .row-grid-screen-sizes-title,
       .row-grid-structure-title,
       .row-grid-order-title,
-      .ratio-suggestion-message {
+      .ratio-suggestion-message,
+      .reconfig-message {
         font-size      : 11px;
-        margin         : 30px 0 10px;
+        margin         : 20px 0 10px;
         text-transform : uppercase;
         font-weight    : 500;
+        }
+
+      .reconfig-message {
+        color      : red;
+        text-align : left;
         }
 
       .row-grid-screen-sizes ul {
@@ -430,14 +436,14 @@ input[type="search"]::-webkit-search-decoration {
           .device-activity {
             .active,
             .inactive {
-              width         : 8px;
-              height        : 8px;
+              width         : 10px;
+              height        : 10px;
               display       : block;
               border-radius : 100%;
               position      : absolute;
-              bottom        : -4px;
+              bottom        : -6px;
               left          : 50%;
-              margin-left   : -4px;
+              margin-left   : -5px;
               overflow      : hidden;
               text-indent   : 100%;
               cursor        : pointer;
@@ -629,12 +635,12 @@ input[type="search"]::-webkit-search-decoration {
   /* ----------------
  * Description
  *---------------*/
-  .description{
-    font-weight: normal;
-    font-style: italic;
-    color: $upb-sidebar-panel-content-description-color;
-    margin: 5px 0 0;
-    font-size: 12px;
+  .description {
+    font-weight : normal;
+    font-style  : italic;
+    color       : $upb-sidebar-panel-content-description-color;
+    margin      : 5px 0 0;
+    font-size   : 12px;
     }
 
   }

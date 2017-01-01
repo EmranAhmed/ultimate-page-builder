@@ -37,14 +37,14 @@ export default {
             selectedColumnLayout : {},
             showManualInput      : {},
             manualLayout         : {},
-            devices              : []
+            devices              : [],
         }
     },
 
     computed : {
 
         layoutOfTitle(){
-            return sprintf(this.l10n.column_layout_of, this.model.attributes.title);
+            return sprintf(this.l10n.columnLayoutOf, this.model.attributes.title);
         },
 
         contents(){
@@ -70,6 +70,33 @@ export default {
     },
 
     methods : {
+
+        deviceTitle(device){
+
+            if (device.reconfig) {
+                return sprintf(this.l10n.reConfigDeviceColumn, device.title)
+            }
+
+            if (!device.current) {
+                return sprintf(this.l10n.showDeviceColumn, device.title)
+            }
+
+            return device.title;
+        },
+
+        toggleDeviceTitle(device){
+
+            if (device.reconfig) {
+                return sprintf(this.l10n.reConfigDeviceColumn, device.title)
+            }
+
+            if (device.active) {
+                return sprintf(this.l10n.disableDeviceColumn, device.title)
+            }
+            else {
+                return sprintf(this.l10n.enableDeviceColumn, device.title)
+            }
+        },
 
         openColumnContents(columnId){
 
@@ -138,12 +165,9 @@ export default {
                     this.devices.map((d)=> {
 
                         let colLength = this.selectedColumnLayout[d.id].split('+').length;
+                        
+                        d.reconfig = (device.active && d.active && activeDevices.length > 1 && d.id != device.id && currentColLength !== colLength) ? true : false;
 
-                        d.reconfig = false;
-
-                        if (device.active && d.active && activeDevices.length > 1 && d.id != device.id && currentColLength !== colLength) {
-                            d.reconfig = true;
-                        }
                     });
 
                     this.selectedColumnOperation(device, value);
