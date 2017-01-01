@@ -62,7 +62,7 @@ export default {
                     if (item.tag == 'section' && _.isArray(item.contents) && _.isObject(item.attributes)) {
 
                         store.saveSectionToOption(item, (data)=> {
-                            this.toggleTextarea();
+                            this.toggleTextArea();
                             this.loadContents();
                             this.$toast.success(sprintf(this.l10n.sectionAdded, ''));
                         })
