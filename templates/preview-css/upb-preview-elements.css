@@ -1,18 +1,27 @@
-.upb-column-preview {
-    min-height : 75px;
+.column-preview {
+    min-height : 105px;
     }
 
-.upb-column-preview.upb-preview-element-no-contents {
-    border : 1px solid #FF727F;
+.upb-preview-element-no-contents {
+    border : 1px solid #1E67ED !important;
     }
 
-.upb-section-preview {
+.upb-add-element-message {
+    position        : absolute !important;
+    padding         : 15px 5px !important;
+    text-decoration : none !important;
+    box-shadow      : none !important;
+    outline         : none !important;
+    color           : #1E67ED !important;
+    }
+
+.section-preview {
     background-color    : var(--background-color);
     background-image    : var(--background-image);
     background-position : var(--background-image-position);
     background-repeat   : no-repeat;
     }
 
-.upb-text-preview {
+.text-preview {
     background-color : var(--background-color);
     }

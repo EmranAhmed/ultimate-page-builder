@@ -525,6 +525,7 @@
             'skeleton'           => esc_attr__( 'Skeleton preview', 'ultimate-page-builder' ),
             'collapse'           => esc_attr__( 'Collapse', 'ultimate-page-builder' ),
             'expand'             => esc_attr__( 'Expand', 'ultimate-page-builder' ),
+            'dropElementMessage' => esc_attr__( 'Add Element', 'ultimate-page-builder' ),
             // 'closeUrl'         => esc_url( get_permalink() ),
             'closeUrl'           => esc_url( add_query_arg( 'preview', 'true', get_permalink() ) ),
             'ajaxUrl'            => esc_url( admin_url( 'admin-ajax.php', 'relative' ) ),

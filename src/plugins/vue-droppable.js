@@ -28,9 +28,34 @@ import store from '../store';
                 });
 
                 el.addEventListener('drop', function (event) {
-                    vnode.context.model.contents.push(JSON.parse(event.dataTransfer.getData("text")));
 
-                    store.stateChanged();
+                    if (!vnode.context.dropAccept) {
+                        util.warn('You need to implement the `dropAccept` method', vnode.context);
+                    }
+
+                    if (!vnode.context.afterDrop) {
+                        util.warn('You need to implement the `onDrop` method', vnode.context);
+                    }
+
+                    try {
+
+                        let content = JSON.parse(event.dataTransfer.getData("text"));
+
+                        // Drop Accept should return true or false
+                        if (vnode.context.dropAccept(content)) {
+                            vnode.context.afterDrop(content, true);
+                        }
+                        else {
+                            vnode.context.afterDrop(content, false);
+                        }
+
+                        // vnode.context.model.contents.push(content);
+
+                        // store.stateChanged();
+
+                    } catch (e) {
+                        console.log('Some thing was wrong on drop', e)
+                    }
                 });
             }
         });

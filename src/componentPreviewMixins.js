@@ -3,14 +3,6 @@ import store from './store'
 export default{
 
     section : {
-        computed : {
-            hasContents(){
-                if (!_.isUndefined(this.model['contents'])) {
-                    return this.model.contents.length > 0;
-                }
-            }
-        },
-
         created(){
             this.$watch('model.contents', function (newVal, oldVal) {
                 this.addClass();
@@ -36,12 +28,6 @@ export default{
 
     row : {
         computed : {
-            hasContents(){
-                if (!_.isUndefined(this.model['contents'])) {
-                    return this.model.contents.length > 0;
-                }
-            },
-
             containerClass(){
                 return this.model.attributes.container;
             },
@@ -86,14 +72,6 @@ export default{
     },
 
     column : {
-
-        computed : {
-            hasContents(){
-                if (!_.isUndefined(this.model['contents'])) {
-                    return this.model.contents.length > 0;
-                }
-            }
-        },
 
         created(){
 
@@ -166,6 +144,28 @@ export default{
                 // added extra grid class to control gutter
                 grid.unshift(store.grid.prefixClass);
                 return _.compact(grid);
+            },
+
+            dropAccept(content){
+                return true;
+            },
+
+            afterDrop(content, accepted = false){
+                if (accepted) {
+                    this.model.contents.push(content);
+                    store.stateChanged();
+
+                    this.$nextTick(function () {
+
+                        if (_.isArray(content.contents)) {
+                            this.$router.replace(`/sections/${content._upb_options._keyIndex}/contents`);
+                        }
+
+                        else if (_.isObject(content.attributes)) {
+                            this.$router.replace(`/sections/${content._upb_options._keyIndex}/settings`);
+                        }
+                    })
+                }
             }
         }
     }
