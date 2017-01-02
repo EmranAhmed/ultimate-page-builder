@@ -232,7 +232,7 @@ input[type="search"]::-webkit-search-decoration {
     }
 
   /* ---------------------
-   * panel Contents */
+   * panel Contents scroll bar */
 
   .upb-panel-contents {
     &::-webkit-scrollbar {
@@ -632,7 +632,7 @@ input[type="search"]::-webkit-search-decoration {
       }
     }
 
-  /* ----------------
+/* ----------------
  * Description
  *---------------*/
   .description {
@@ -641,6 +641,36 @@ input[type="search"]::-webkit-search-decoration {
     color       : $upb-sidebar-panel-content-description-color;
     margin      : 5px 0 0;
     font-size   : 12px;
+    }
+
+ /* ----------------
+  * Elements Panel
+  *---------------*/
+  .upb-elements-panel{
+    .upb-element{
+      width: 49%;
+      display: inline-block;
+      vertical-align: top;
+      text-align: center;
+
+
+      > div{
+        font-size: 14px !important;
+        }
+
+      .icon-wrapper{
+        font-size: 24px !important;
+        padding-bottom: 0;
+        }
+
+
+      &:nth-child(odd){
+        margin-right: 1%;
+        }
+      &:nth-child(even){
+        margin-left: 1%;
+        }
+      }
     }
 
   }
