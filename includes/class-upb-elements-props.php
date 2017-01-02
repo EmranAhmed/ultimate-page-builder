@@ -13,7 +13,12 @@
                 $options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : '';
 
 
-                if ( $options[ 'type' ] == 'select2' || $options[ 'type' ] == 'icons' || $options[ 'type' ] == 'ajax' ) {
+                if (
+                    $options[ 'type' ] == 'select2'
+                    || $options[ 'type' ] == 'icons'
+                    || $options[ 'type' ] == 'ajax'
+                    || $options[ 'type' ] == 'icon-ajax'
+                ) {
                     $options[ 'settings' ][ 'placeholder' ] = $options[ 'placeholder' ];
                 }
 
@@ -46,8 +51,9 @@
                         $options[ 'value' ] = filter_var( $options[ 'value' ], FILTER_VALIDATE_BOOLEAN );
                         break;
 
+                    case 'icon-ajax':
                     case 'ajax':
-                        $options[ 'options' ] = apply_filters( $options[ 'hooks' ][ 'filter' ], $options[ 'value' ] );
+                        $options[ 'options' ] = apply_filters( $options[ 'hooks' ][ 'filter' ], $options[ 'value' ], $options );
                         break;
 
                     case 'select':

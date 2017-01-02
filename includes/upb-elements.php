@@ -152,6 +152,25 @@
 
 
             array(
+                'id'          => 'ajaxicon',
+                'type'        => 'icon-ajax',
+                'title'       => 'Material Design Icons',
+                'desc'        => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+                'value'       => '',
+                'hooks'       => array(
+                    'ajax'   => '_upb_search_material_icons', // wp_ajax hook
+                    'filter' => '_upb_get_material_icon', // filter hook
+                ),
+                'template'    => '<span class="select2-icon-input"><i class="%(id)s"></i>  %(title)s</div>',
+                'placeholder' => 'Search Icons',
+                'settings'    => array(
+                    'allowClear' => TRUE,
+                    'delay'      => 250,
+                )
+            ),
+
+
+            /*array(
                 'id'          => 'icon',
                 'type'        => 'icons',
                 'title'       => 'Icons',
@@ -162,7 +181,7 @@
                 'settings'    => array(
                     'allowClear' => TRUE
                 )
-            ),
+            ),*/
 
 
             array(
@@ -384,6 +403,7 @@
                     'allowClear' => TRUE
                 )
             ),
+
 
         );
 

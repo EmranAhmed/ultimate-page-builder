@@ -195,7 +195,9 @@ export default{
                     id,
                     title
                 }, data=> {
-                    jQuery('.ajax-result', this.$el).html(data);
+
+                    this.$el.querySelector('.ajax-result').innerHTML = data
+
                 });
             }
         }

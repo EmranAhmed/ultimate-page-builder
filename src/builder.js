@@ -32,14 +32,13 @@ const upbBuilder = new Vue({
     render : createElement => createElement(UPBSidebar)
 });
 
-document.getElementById("upb-preview-frame").addEventListener('load', function () {
+function loadPreview() {
 
     let settings = {};
 
     store.tabs.filter(function (content) {
         return content.id == 'settings' ? content : false;
     }).pop().contents.map(function (data) {
-
         if (data.metaId == 'enable' || data.metaId == 'position') {
             settings[data.metaId] = data.metaValue;
         }
@@ -59,16 +58,16 @@ document.getElementById("upb-preview-frame").addEventListener('load', function (
             .$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById(settings.position))
 
     }
+}
+
+window.onload = _=> {
+
+    //console.log('Sidebar loaded');
+    loadPreview();
+}
+
+document.getElementById("upb-preview-frame").addEventListener('load', _=> {
+
+    //console.log('preview loaded');
+    loadPreview();
 });
-
-/*window.previewWindowLoaded = function (iframe) {
- upbPreview.$mount(iframe.contentWindow.document.getElementById('upb-preview'));
- };*/
-
-/*window.frames['upb-preview-frame'].window.onload = function () {
- ////upbPreview.$mount(window.frames['upb-preview-frame'].window.document.getElementById('upb-preview'))
- // upbPreview.$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById('upb-preview'))
-
- console.log('onload')
- };*/
-

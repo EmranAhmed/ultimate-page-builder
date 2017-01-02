@@ -78,7 +78,12 @@
                 $options[ 'use' ]         = isset( $options[ 'use' ] ) ? $options[ 'use' ] : FALSE;
 
 
-                if ( $options[ 'type' ] == 'select2' || $options[ 'type' ] == 'icons' || $options[ 'type' ] == 'ajax' ) {
+                if (
+                    $options[ 'type' ] == 'select2'
+                    || $options[ 'type' ] == 'icons'
+                    || $options[ 'type' ] == 'ajax'
+                    || $options[ 'type' ] == 'icon-ajax'
+                ) {
                     $options[ 'settings' ][ 'placeholder' ] = $options[ 'placeholder' ];
                 }
 
@@ -119,12 +124,12 @@
 
                 $value = $this->get_setting( $id );
 
-
                 switch ( $options[ 'type' ] ):
 
                     case 'ajax':
+                    case 'icon-ajax':
                         $options[ 'value' ]   = empty( $value ) ? $options[ 'default' ] : $value;
-                        $options[ 'options' ] = apply_filters( $options[ 'hooks' ][ 'filter' ], $options[ 'value' ] );
+                        $options[ 'options' ] = apply_filters( $options[ 'hooks' ][ 'filter' ], $options[ 'value' ], $options );
                         break;
 
                     case 'color':

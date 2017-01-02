@@ -48,13 +48,9 @@
         return esc_url( add_query_arg( 'upb', '1', get_permalink( $post ) ) );
     }
 
-    function upb_get_preview_link( $rand = FALSE ) {
+    function upb_get_preview_link() {
 
         $query = array( 'upb-preview' => TRUE );
-
-        if ( $rand ) {
-            $query[ 'v' ] = rand( 2, 999 );
-        }
 
         return esc_url( add_query_arg( $query, get_preview_post_link( get_the_ID() ) ) );
     }

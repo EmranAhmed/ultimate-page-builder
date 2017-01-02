@@ -17,6 +17,7 @@ class store {
         this.panel           = '';
         this.subpanel        = '';
         this.sidebarExpanded = true;
+        this.previewMounted  = false;
     }
 
     isElementRegistered(tag) {

@@ -10,6 +10,7 @@ export default {
     'upb-input-radio'                     : require('./UPBInputRadio.vue'),
     'upb-input-select2'                   : require('./UPBInputSelect2.vue'),
     'upb-input-icons'                     : require('./UPBInputIcons.vue'),
+    'upb-input-icon-ajax'                 : require('./UPBInputIconAjax.vue'),
     'upb-input-ajax'                      : require('./UPBInputAjax.vue'),
     'upb-input-image'                     : require('./UPBInputImage.vue'),
     'upb-input-image-select'              : require('./UPBInputImageSelect.vue'),

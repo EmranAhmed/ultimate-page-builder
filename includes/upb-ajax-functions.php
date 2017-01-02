@@ -233,6 +233,63 @@
         return array( 'id' => $post->ID, 'title' => esc_html( $post->post_title ), 'text' => esc_html( $post->post_title ) );
     } );
 
+    // Icon Ajax
+    add_action( 'wp_ajax__upb_search_material_icons', function () {
+        if ( ! current_user_can( 'customize' ) ) {
+            wp_send_json_error( 'upb_not_allowed', 403 );
+        }
+
+        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+            wp_send_json_error( 'bad_nonce', 400 );
+        }
+
+        if ( empty( $_GET[ 'query' ] ) ) {
+            wp_send_json_error( 'no_search_term', 400 );
+        }
+
+        $query = esc_html( $_GET[ 'query' ] );
+
+
+        $icons = upb_material_design_icons();
+
+        $finds = array_filter( $icons, function ( $icon ) use ( $query ) {
+
+            // $pattern = "@${$query}@i";
+            // preg_match_all( $pattern, $icon, $matches );
+
+            $p = strpos( $icon, $query );
+
+            if ( $p === FALSE ) {
+                return FALSE;
+            } else {
+                return TRUE;
+            }
+
+
+        } );
+
+
+        $result = array_values( array_map( function ( $icon, $key ) {
+
+            return array( 'id' => $key, 'title' => $icon, 'text' => $icon );
+
+        }, $finds, array_keys( $finds ) ) );
+
+        wp_send_json_success( $result );
+    } );
+
+    add_filter( '_upb_get_material_icon', function ( $id ) {
+
+        if ( empty( $id ) ) {
+            return array();
+        }
+
+        $icons = upb_material_design_icons();
+
+        return array( 'id' => $id, 'title' => esc_html( $icons[ $id ] ), 'text' => esc_html( $icons[ $id ] ) );
+    } );
+
+
     // Contact form 7 Post
     add_action( 'wp_ajax__upb_contact_form7_preview', function () {
         if ( ! current_user_can( 'customize' ) ) {

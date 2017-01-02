@@ -9,6 +9,26 @@
         // print_r(upb_responsive_hidden()); die;
 
 
+        $options = array(
+            'type'        => 'icon-ajax',
+            'title'       => 'Material Design Icons',
+            'desc'        => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+            'default'     => '',
+            'hooks'       => array(
+                'ajax'   => '_upb_search_material_icons', // wp_ajax hook
+                'filter' => '_upb_get_material_icon', // filter hook
+            ),
+            'template'    => '<span class="select2-icon-input"><i class="%(id)s"></i>  %(title)s</div>',
+            'placeholder' => 'Search Icons',
+            'settings'    => array(
+                'allowClear' => TRUE,
+                'delay'      => 250,
+            )
+        );
+
+        $settings->register( 'test66', $options );
+
+
         $optionsx = array(
             'type'        => 'ajax',
             'title'       => 'Posts',
@@ -28,7 +48,7 @@
         $settings->register( 'test15', $optionsx );
 
 
-        $options = array(
+        /*$options = array(
             'type'        => 'icons',
             'title'       => 'Icons',
             'desc'        => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
@@ -40,7 +60,7 @@
             )
         );
 
-        $settings->register( 'test14', $options );
+        $settings->register( 'test14', $options );*/
 
 
         $options = array(
@@ -239,14 +259,13 @@
         );
         $settings->register( 'test5', $options );
 
-        $options = array(
+        /*$options = array(
             'type'  => 'editor',
             'title' => 'Editor',
             'desc'  => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
-
             'default' => '<p>CONTENTS</p>',
         );
-        $settings->register( 'test6', $options );
+        $settings->register( 'test6', $options );*/
 
 
         // ==============================================
