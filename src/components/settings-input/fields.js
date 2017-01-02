@@ -1,4 +1,9 @@
-export default {
+import common from './common'
+import store from '../../store'
+import extend from 'extend';
+
+const fieldsComponents = {
+
     'upb-input-text'                      : require('./UPBInputText.vue'),
     'upb-input-textarea'                  : require('./UPBInputTextarea.vue'),
     'upb-input-toggle'                    : require('./UPBInputToggle.vue'),
@@ -18,6 +23,29 @@ export default {
     'upb-input-device-hidden'             : require('./UPBInputHiddenDevice.vue'),
     'upb-input-background-image'          : require('./UPBInputBackgroundImage.vue'),
     'upb-input-background-image-position' : require('./UPBInputBackgroundImagePosition.vue'),
+
+};
+
+Object.keys(fieldsComponents).map((key) => {
+    if (_.isObject(fieldsComponents[key])) {
+        // Vue.component(key, fieldsComponents[key])
+    }
+});
+
+if (_.isArray(store.fields) && !_.isEmpty(store.fields)) {
+    store.fields.map(input=> {
+
+        if (!_.isUndefined(input['component']) && !_.isUndefined(input['name'])) {
+            fieldsComponents[`upb-input-${input.name}`] = extend(true, {
+                mixins : [common]
+            }, window[input.component] || {});
+        }
+
+        // Vue.component(`upb-input-${input.name}`, fieldsComponent[`upb-input-${input.name}`])
+
+    });
 }
+
+export default fieldsComponents
 
 

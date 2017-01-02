@@ -2,26 +2,9 @@ import Vue from 'vue';
 import store from '../../store'
 import {sprintf} from 'sprintf-js';
 import extend from 'extend';
-
 import fieldsComponent from '../settings-input/fields';
-
-// Row
-// import Row from '../row/Row.vue'
-// Vue.component('row', Row);
-
-//import extend from 'extend';
-
 import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
 Vue.component('upb-breadcrumb', UPBBreadcrumb);
-
-// loop and register component
-// Dynamically Import
-Object.keys(fieldsComponent).map((key) => {
-
-    if (typeof fieldsComponent[key] == 'object') {
-        Vue.component(key, fieldsComponent[key])
-    }
-});
 
 export default {
     name  : 'column-settings',
@@ -65,7 +48,6 @@ export default {
             else {
                 return false;
             }
-
         },
 
         panelMetaTools(){
@@ -76,7 +58,6 @@ export default {
             else {
                 return false;
             }
-
         },
 
         contents(){
@@ -130,7 +111,6 @@ export default {
             let rowId     = this.$route.params['rowId'];
             let columnId  = this.$route.params['columnId'];
             return this.model.contents[sectionId].contents[rowId].contents[columnId];
-
         },
 
         toggleHelp(){
@@ -140,5 +120,4 @@ export default {
     },
 
     components : fieldsComponent
-
 }

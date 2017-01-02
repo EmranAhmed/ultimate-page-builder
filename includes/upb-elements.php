@@ -119,6 +119,14 @@
         $attributes = array(
 
             array(
+                'id'    => 'extra',
+                'title' => 'Extra',
+                'type'  => 'extra', // auto prefixed with upb-input-extra
+                'value' => ''
+            ),
+
+
+            array(
                 'id'        => 'images',
                 'title'     => 'Image',
                 'type'      => 'image',

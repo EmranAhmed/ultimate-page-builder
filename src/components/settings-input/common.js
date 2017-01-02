@@ -6,11 +6,15 @@ export default{
     data(){
         return {
             input : this.model[this.target],
-            l10n  : store.l10n
+            l10n  : store.l10n,
         }
     },
 
     computed : {
+
+        store(){
+            return store;
+        },
 
         multiple(){
             return (!_.isUndefined(this.attributes['multiple']) && this.attributes.multiple) ? true : false;

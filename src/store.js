@@ -7,6 +7,7 @@ class store {
         this.tabs   = window._upb_tabs;
         this.status = window._upb_status;
         this.routes = window._upb_routes || [];
+        this.fields = window._upb_fields || [];
 
         this.l10n            = window._upb_l10n;
         this.router_config   = window._upb_router_config;
@@ -17,7 +18,6 @@ class store {
         this.panel           = '';
         this.subpanel        = '';
         this.sidebarExpanded = true;
-        this.previewMounted  = false;
     }
 
     isElementRegistered(tag) {

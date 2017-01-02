@@ -1,22 +1,10 @@
 import Vue, { util } from 'vue';
 import store from '../../store'
-
 import extend from 'extend';
 import {sprintf} from 'sprintf-js';
-
 import fieldsComponent from '../settings-input/fields';
-
 import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
 Vue.component('upb-breadcrumb', UPBBreadcrumb);
-
-// loop and register component
-// Dynamically Import
-Object.keys(fieldsComponent).map((key) => {
-
-    if (typeof fieldsComponent[key] == 'object') {
-        Vue.component(key, fieldsComponent[key])
-    }
-});
 
 export default {
     name  : 'settings-panel',

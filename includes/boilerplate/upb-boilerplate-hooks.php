@@ -467,7 +467,6 @@
 
         wp_enqueue_script( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URI . "js/upb-boilerplate$suffix.js", array( 'jquery', 'upb-builder' ), '', TRUE );
 
-
         $data = sprintf( "var _upb_tabs = %s;\n", upb_tabs()->getJSON() );
 
         $data .= sprintf( "var _upb_router_config = %s;\n", wp_json_encode( array(
@@ -482,6 +481,12 @@
             ) // you should register a tab before add router
         ) ) ) );
 
+        $data .= sprintf( "var _upb_fields = %s;\n", wp_json_encode( apply_filters( 'upb_fields', array(
+            array(
+                'name'      => 'extra',
+                'component' => 'upbExtraInput',
+            )
+        ) ) ) );
 
         $data .= sprintf( "var _upb_status = %s;\n", wp_json_encode( array( 'dirty' => FALSE, '_nonce' => wp_create_nonce( '_upb' ), '_id' => get_the_ID() ) ) );
 
@@ -553,7 +558,36 @@
         print( "<script>
 var LogicalPanel = {
   template: '<span> Logical Panel Template </span>',
+  // template: '#template',
   props:[]
+}
+</script>" );
+
+
+        print( '<script type="text/x-template" id="extra-input-template">
+
+
+<li :class="typeClass()">
+        <div class="form-group">
+            <label>
+                <span class="title" v-text="attributes.title"></span>
+                <input class="text-input" type="text" v-model="input" :id="attributes._id" :placeholder="attributes.placeholder">
+            </label>
+
+            <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
+
+        </div>
+</li>
+
+
+</script>' );
+
+
+print( "<script>
+var upbExtraInput = {
+  // template: '<span> Input Extra </span>',
+     template: '#extra-input-template',
+   created(){ console.log(this.attributes) },
 }
 </script>" );
     } );
