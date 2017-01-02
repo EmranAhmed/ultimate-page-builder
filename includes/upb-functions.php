@@ -50,7 +50,7 @@
 
     function upb_get_preview_link() {
 
-        $query = array( 'upb-preview' => TRUE );
+        $query = array( 'upb-preview' => TRUE, 'rand' => time() );
 
         return esc_url( add_query_arg( $query, get_preview_post_link( get_the_ID() ) ) );
     }
