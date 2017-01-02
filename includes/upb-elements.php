@@ -118,12 +118,12 @@
 
         $attributes = array(
 
-            array(
+            /*array(
                 'id'    => 'extra',
                 'title' => 'Extra',
                 'type'  => 'extra', // auto prefixed with upb-input-extra
                 'value' => ''
-            ),
+            ),*/
 
 
             array(
