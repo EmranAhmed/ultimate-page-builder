@@ -342,6 +342,12 @@
   max-height : 200px;
   overflow-y : auto;
   font-size  : 12px;
+
+  .select2-icon-input i{
+    position: relative;
+    font-size: 18px;
+    top: 3px;
+    }
   }
 
 .select2-container--default .select2-results__option[role=group] {
