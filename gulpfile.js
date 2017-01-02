@@ -73,14 +73,14 @@ gulp.task('bundle', _=> {
     fsExtra.ensureDir(copyto, function (err) {
         if (err) return console.error(err)
 
-        console.log(cliColor.white(`=> ${emojic.whiteCheckMark} Build directory created`));
+        console.log(cliColor.white(`=> ${emojic.whiteCheckMark}  Build directory created`));
 
         includes.map(include=> {
 
             fsExtra.copy(`${copyfrom}/${include}`, `${copyto}/${include}`, function (err) {
                 if (err) return console.error(err)
 
-                console.log(cliColor.white(`=> ${emojic.smiley} ${include} copied...`));
+                console.log(cliColor.white(`=> ${emojic.smiley}  ${include} copied...`));
 
                 if (include == 'assets') {
                     // Just Removed SCSS Dir

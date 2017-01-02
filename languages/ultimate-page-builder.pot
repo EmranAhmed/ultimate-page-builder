@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:9
+#: includes/boilerplate/upb-boilerplate-hooks.php:9, includes/boilerplate/upb-boilerplate-hooks.php:529
 msgid "Add Element"
 msgstr ""
 
@@ -86,7 +86,7 @@ msgid "UPB Grid"
 msgstr ""
 
 #: includes/boilerplate/upb-boilerplate-hooks.php:224
-msgid "Its recommended to use simplified form of your grid ratio like: %s"
+msgid "Its recommended to use simplified form of column grid ratio like: %s"
 msgstr ""
 
 #: includes/boilerplate/upb-boilerplate-hooks.php:229
@@ -286,39 +286,59 @@ msgid "Column layout"
 msgstr ""
 
 #: includes/boilerplate/upb-boilerplate-hooks.php:519
-msgid "Close"
+msgid "Drag to sort column or click to open contents panel"
 msgstr ""
 
 #: includes/boilerplate/upb-boilerplate-hooks.php:520
-msgid "Clone of %s"
+msgid "Close"
 msgstr ""
 
 #: includes/boilerplate/upb-boilerplate-hooks.php:521
-msgid "Help"
+msgid "Clone of %s"
 msgstr ""
 
 #: includes/boilerplate/upb-boilerplate-hooks.php:522
-msgid "Search"
+msgid "Help"
 msgstr ""
 
 #: includes/boilerplate/upb-boilerplate-hooks.php:523
-msgid "Back"
+msgid "Search"
 msgstr ""
 
 #: includes/boilerplate/upb-boilerplate-hooks.php:524
-msgid "You are on"
+msgid "Back"
 msgstr ""
 
 #: includes/boilerplate/upb-boilerplate-hooks.php:525
-msgid "Skeleton preview"
+msgid "You are on"
 msgstr ""
 
 #: includes/boilerplate/upb-boilerplate-hooks.php:526
-msgid "Collapse"
+msgid "Skeleton preview"
 msgstr ""
 
 #: includes/boilerplate/upb-boilerplate-hooks.php:527
+msgid "Collapse"
+msgstr ""
+
+#: includes/boilerplate/upb-boilerplate-hooks.php:528
 msgid "Expand"
+msgstr ""
+
+#: includes/boilerplate/upb-boilerplate-hooks.php:530
+msgid "Show %s device column layouts"
+msgstr ""
+
+#: includes/boilerplate/upb-boilerplate-hooks.php:531
+msgid "Click to enable %s device screen layout"
+msgstr ""
+
+#: includes/boilerplate/upb-boilerplate-hooks.php:532
+msgid "Click to disable %s device screen layout"
+msgstr ""
+
+#: includes/boilerplate/upb-boilerplate-hooks.php:533
+msgid "%s device column layouts should be same as other enabled device column layout"
 msgstr ""
 
 #: includes/boilerplate/upb-boilerplate-template.php:7
