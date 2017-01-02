@@ -191,6 +191,10 @@
                 return array_values( $this->short_code_elements );
             }
 
+            public function getNamed() {
+                return array_keys( $this->short_code_elements );
+            }
+
             public function getNonCore() {
                 return array_filter( array_values( $this->short_code_elements ), function ( $tag ) {
                     return ! in_array( $tag[ 'tag' ], $this->core_elements );

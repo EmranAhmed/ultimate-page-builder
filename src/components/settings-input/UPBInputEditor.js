@@ -50,7 +50,8 @@ export default {
 
         this.$el.querySelector(`#wrapper-${this.attributes._id}`).innerHTML = this.markup;
 
-        this.$el.querySelectorAll('.button.insert-media.add_media').forEach(function (el) {
+        // [...this.$el.querySelectorAll('.button.insert-media.add_media')].map()
+        Array.from(this.$el.querySelectorAll('.button.insert-media.add_media'), el => {
             el.innerHTML = '<span class="wp-media-buttons-icon"></span>';
         });
 

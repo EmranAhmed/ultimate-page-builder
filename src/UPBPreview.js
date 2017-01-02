@@ -17,8 +17,6 @@ Vue.use(Droppable);
 
 store.getAllUPBElements(elements => {
 
-    // console.log(elements);
-
     elements.map(element=> {
 
         let template           = element._upb_options.preview.template;
@@ -90,8 +88,10 @@ export default {
         addIndexAttribute(model, attrs, contents){
             if (_.isArray(contents)) {
                 contents.map((m, i) => {
-                    m._upb_options['_keyIndex'] = `${model._upb_options._keyIndex}/${i}`;
-                    this.addIndexAttribute(m, m.attributes, m.contents);
+                    if (store.isElementRegistered(m.tag)) {
+                        m._upb_options['_keyIndex'] = `${model._upb_options._keyIndex}/${i}`;
+                        this.addIndexAttribute(m, m.attributes, m.contents);
+                    }
                 })
             }
         }

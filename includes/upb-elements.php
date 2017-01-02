@@ -462,7 +462,9 @@
 
         );
 
-        $element->register( 'contact-form-7', $attributes, $contents, $_upb_options );
+        if ( shortcode_exists( 'contact-form-7' ) ) {
+            $element->register( 'contact-form-7', $attributes, $contents, $_upb_options );
+        }
 
     } );
 

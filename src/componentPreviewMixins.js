@@ -84,7 +84,6 @@ export default{
             }, {deep : true})
 
             //
-
         },
 
         mounted(){
@@ -92,6 +91,10 @@ export default{
         },
 
         methods : {
+
+            isElementRegistered(tag){
+                return store.elements.includes(tag);
+            },
 
             addClass(){
 
@@ -103,7 +106,9 @@ export default{
 
                 // Take Existing Grid Class
                 let removableClass = [];
-                this.$el.classList.forEach(className=> {
+
+                // or [...this.$el.classList].map()
+                Array.from(this.$el.classList, className=> {
                     if (className.substr(0, prefixClass.length) === prefixClass) {
                         removableClass.push(className)
                     }
@@ -122,6 +127,7 @@ export default{
                 else {
                     this.$el.classList.add('upb-preview-element-no-contents')
                 }
+
             },
 
             columnClass(){
@@ -130,9 +136,9 @@ export default{
                     let gridValue = this.model.attributes[device.id].trim();
 
                     if (gridValue) {
-                        let col = parseInt(gridValue.split(':')[0]);
-                        let t   = parseInt(gridValue.split(':')[1]);
-                        let g   = Math.round((store.grid.totalGrid / t) * col);
+                        let [col, t] = gridValue.split(':');
+                        //let t   = parseInt(gridValue.split(':')[1]);
+                        let g = Math.round((store.grid.totalGrid / parseInt(t)) * parseInt(col));
 
                         return `${store.grid.prefixClass}${store.grid.separator}${device.id}${store.grid.separator}${g}`
                     }

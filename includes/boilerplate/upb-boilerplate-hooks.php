@@ -489,6 +489,8 @@
 
         $data .= sprintf( "var _upb_grid_system = %s;", wp_json_encode( apply_filters( 'upb_grid_system', array() ) ) );
 
+        $data .= sprintf( "var _upb_registered_elements = %s;", wp_json_encode( upb_elements()->getNamed() ) );
+
         wp_script_add_data( 'upb-builder', 'data', $data );
 
         wp_localize_script( 'upb-builder', '_upb_l10n', apply_filters( '_upb_l10n_strings', array(

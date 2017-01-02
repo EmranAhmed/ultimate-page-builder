@@ -3,7 +3,9 @@
 
     <upb-preview-mini-toolbar :model="model"></upb-preview-mini-toolbar>
 
-    <component v-for="(content, index) in model.contents" :index="index" :model="content" :is="content._upb_options.preview.component"></component>
+    <component v-for="(content, index) in model.contents" v-if="isElementRegistered(content.tag)" :index="index" :model="content" :is="content._upb_options.preview.component"></component>
+
+    <a href="#" @click.prevent="openElementsPanel()" class="upb-add-element-message" v-else v-text="l10n.dropElementMessage"></a>
 
     <a href="#" @click.prevent="openElementsPanel()" class="upb-add-element-message" v-if="!hasContents" v-text="l10n.dropElementMessage"></a>
 </div>
