@@ -2,6 +2,7 @@
 
     defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
+    // Core Elements
     // Column
     add_action( 'upb_register_element', function ( $element ) {
 
@@ -42,7 +43,7 @@
             ),
         );
 
-        $element->register( 'column', $attributes, $contents, $_upb_options );
+        $element->register( 'upb-column', $attributes, $contents, $_upb_options );
 
     } );
 
@@ -107,7 +108,7 @@
             ),
         );
 
-        $element->register( 'row', $attributes, $contents, $_upb_options );
+        $element->register( 'upb-row', $attributes, $contents, $_upb_options );
 
     } );
 
@@ -269,7 +270,7 @@
             ),
         );
 
-        $element->register( 'section', $attributes, $contents, $_upb_options );
+        $element->register( 'upb-section', $attributes, $contents, $_upb_options );
 
     } );
 
@@ -357,9 +358,111 @@
 
         );
 
-        $element->register( 'text', $attributes, $contents, $_upb_options );
+        $element->register( 'upb-text', $attributes, $contents, $_upb_options );
 
     } );
 
 
+    add_action( 'upb_register_element', function ( $element ) {
+
+        $attributes = array(
+            array( 'id' => 'title', 'title' => esc_html__( 'Title', 'ultimate-page-builder' ), 'type' => 'text', 'value' => esc_html( 'Contact form 1' ) ),
+            array( 'id' => 'enable', 'title' => esc_html__( 'Enable', 'ultimate-page-builder' ), 'type' => 'toggle', 'value' => TRUE ),
+            array(
+                'id'          => 'id',
+                'type'        => 'ajax',
+                'title'       => esc_html__( 'Contact Form', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Contact form list', 'ultimate-page-builder' ),
+                'value'       => '',
+                'hooks'       => array(
+                    'ajax'   => '_upb_search_contact_form7', // wp_ajax hook
+                    'filter' => '_upb_get_contact_form7', // filter hook
+                ),
+                'template'    => '<div> ID# %(id)s - %(title)s </div>',
+                'placeholder' => esc_html__( 'Search contact form', 'ultimate-page-builder' ),
+                'settings'    => array(
+                    'allowClear' => TRUE
+                )
+            ),
+
+        );
+
+        $contents = FALSE;
+
+        $_upb_options = array(
+
+            'element' => array(
+                'name' => esc_html__( 'Contact form 7', 'ultimate-page-builder' ),
+                'icon' => 'mdi mdi-newspaper'
+            ),
+
+            'tools' => array(
+                'list'     => apply_filters( 'upb_contact-form-7_list_toolbar', array(
+                    array(
+                        'id'    => 'move',
+                        'icon'  => 'mdi mdi-cursor-move',
+                        'class' => 'handle',
+                        'title' => esc_html__( 'Sort', 'ultimate-page-builder' ),
+                    ),
+                    array(
+                        'id'    => 'delete',
+                        'icon'  => 'mdi mdi-delete',
+                        'title' => esc_html__( 'Delete', 'ultimate-page-builder' ),
+                    ),
+                    /*array(
+                        'id'    => 'contents',
+                        'icon'  => 'mdi mdi-table-edit',
+                        'class' => 'show-contents',
+                        'title' => 'Contents',
+                    ),*/
+                    array(
+                        'id'    => 'settings',
+                        'icon'  => 'mdi mdi-settings',
+                        'class' => 'show-settings',
+                        'title' => esc_html__( 'Settings', 'ultimate-page-builder' ),
+                    ),
+                    array(
+                        'id'    => 'clone',
+                        'icon'  => 'mdi mdi-content-duplicate',
+                        'title' => esc_html__( 'Clone', 'ultimate-page-builder' ),
+                    )
+                ) ),
+                //'contents' => apply_filters( 'upb_contact-form-7_contents_panel_toolbar', array() ),
+                'settings' => apply_filters( 'upb_contact-form-7_settings_panel_toolbar', array() ),
+            ),
+
+            'meta' => array(
+                'contents' => apply_filters( 'upb_contact-form-7_contents_panel_meta', array(
+                    'help'   => '<h2>Want to add contents?</h2><p>Choose a section and drag elements</p>',
+                    'search' => esc_html__( 'Search', 'ultimate-page-builder' ),
+                    'title'  => '%s'
+                ) ),
+
+                'settings' => apply_filters( 'upb_contact-form-7_settings_panel_meta', array(
+                    'help'   => '<h2>Text Settings?</h2><p>section settings</p>',
+                    'search' => '',
+                    'title'  => esc_html__( '%s Settings', 'ultimate-page-builder' )
+                ) ),
+
+                'messages' => array(
+                    'chooseForm' => esc_html__( 'Choose a form', 'ultimate-page-builder' )
+                )
+            ),
+
+            'assets' => array(
+                'preview'   => array(
+                    //'css' => upb_templates_uri( 'preview-css/sections.css' ),
+                    //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                ),
+                'shortcode' => array(
+                    //'css' => upb_templates_uri( 'preview-css/sections.css' ),
+                    //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                )
+            )
+
+        );
+
+        $element->register( 'contact-form-7', $attributes, $contents, $_upb_options );
+
+    } );
 

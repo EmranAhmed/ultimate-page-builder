@@ -110,6 +110,10 @@ class store {
             delete contents.elements;
         }
 
+        if (contents['layouts']) {
+            delete contents.layouts;
+        }
+
         wp.ajax.send("_upb_save", {
             success : success,
             error   : error,

@@ -2,7 +2,7 @@ import store from './store'
 
 export default{
 
-    section : {
+    'upb-section' : {
         created(){
             this.$watch('model.contents', function (newVal, oldVal) {
                 this.addClass();
@@ -26,7 +26,7 @@ export default{
         }
     },
 
-    row : {
+    'upb-row' : {
         computed : {
             containerClass(){
                 return this.model.attributes.container;
@@ -71,7 +71,7 @@ export default{
         }
     },
 
-    column : {
+    'upb-column' : {
 
         created(){
 
@@ -166,6 +166,31 @@ export default{
                         }
                     })
                 }
+            }
+        }
+    },
+
+    'contact-form-7' : {
+
+        created(){
+
+            this.$watch('model.attributes', (attributes, oldVal)=> {
+                this.getForm(attributes.id, attributes.title);
+            }, {deep : true});
+
+            if (this.model.attributes.id) {
+                this.getForm(this.model.attributes.id, this.model.attributes.title);
+            }
+        },
+
+        methods : {
+            getForm(id, title){
+                store.wpAjax('_upb_contact_form7_preview', {
+                    id,
+                    title
+                }, data=> {
+                    jQuery('.ajax-result', this.$el).html(data);
+                });
             }
         }
     }

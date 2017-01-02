@@ -204,7 +204,7 @@ export default {
         // Sub Panel
 
         listPanel(id){
-            return `${id}-list`
+            return `row-list`
         },
 
         deleteItem(index){

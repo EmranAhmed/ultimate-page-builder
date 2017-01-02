@@ -9,7 +9,7 @@
             private static $instance            = NULL;
             private        $short_code_elements = array();
 
-            private $core_elements = array( 'section', 'row', 'column' );
+            private $core_elements = array( 'upb-section', 'upb-row', 'upb-column' );
 
             private function __construct() {
                 $this->props = new UPB_Elements_Props();
@@ -128,8 +128,8 @@
                     '_upb_options'  => $_upb_options
                 );
 
-                $shortcode_fn    = sprintf( 'upb_register_shortcode_%s', $tag );
-                $vue_template_fn = sprintf( 'upb_shortcode_preview_%s', $tag );
+                $shortcode_fn        = sprintf( 'upb_register_shortcode_%s', str_ireplace( '-', '_', $tag ) );
+                $preview_template_fn = sprintf( 'upb_register_preview_%s', str_ireplace( '-', '_', $tag ) );
 
                 // Override functionality
                 if ( ! shortcode_exists( $tag ) && is_callable( $shortcode_fn ) ) {
@@ -161,11 +161,10 @@
                 }
 
                 // Override functionality
-                if ( is_callable( $vue_template_fn ) ) {
-                    add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', $tag ), $vue_template_fn );
+                if ( is_callable( $preview_template_fn ) ) {
+                    add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', $tag ), $preview_template_fn );
                 } else {
                     add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', $tag ), function () use ( $tag ) {
-
 
                         if ( ! current_user_can( 'customize' ) ) {
                             status_header( 403 );
@@ -180,8 +179,6 @@
                         ob_start();
                         upb_get_template( sprintf( "previews/%s.php", $tag ) );
                         wp_send_json_success( ob_get_clean() );
-
-
                     } );
                 }
             }

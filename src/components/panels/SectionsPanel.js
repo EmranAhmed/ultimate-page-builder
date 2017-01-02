@@ -123,7 +123,7 @@ export default {
         // List Contents
 
         listPanel(id){
-            return `${id}-list`
+            return `section-list`
         },
 
         deleteItem(index){

@@ -117,8 +117,8 @@
                 'icon'   => 'mdi mdi-table-row-plus-after',
                 'action' => 'addNew',
                 'data'   => apply_filters( 'upb_new_row_data', upb_elements()->generate_element(
-                    'row', upb_elements()->generate_element(
-                    'column', array(), array(
+                    'upb-row', upb_elements()->generate_element(
+                    'upb-column', array(), array(
                     'title' => array(
                         'type'  => 'text',
                         'value' => esc_html__( 'Column 1', 'ultimate-page-builder' )
@@ -284,7 +284,7 @@
 
     add_filter( 'upb_row_contents_panel_toolbar', function ( $tools ) {
         return array(
-            'new'     => apply_filters( 'upb_new_column_data', upb_elements()->get_element( 'column' ) ),
+            'new'     => apply_filters( 'upb_new_column_data', upb_elements()->get_element( 'upb-column' ) ),
             'layouts' => array(
                 array(
                     'class' => 'grid-1-1',
@@ -334,9 +334,9 @@
                                                                          'action' => 'addNew',
                                                                          'data'   => apply_filters( 'upb_new_section_data',
                                                                                                     upb_elements()->generate_element(
-                                                                                                        'section', upb_elements()->generate_element(
-                                                                                                        'row', upb_elements()->generate_element(
-                                                                                                        'column', array(), array(
+                                                                                                        'upb-section', upb_elements()->generate_element(
+                                                                                                        'upb-row', upb_elements()->generate_element(
+                                                                                                        'upb-column', array(), array(
                                                                                                         'title' => array(
                                                                                                             'type'  => 'text',
                                                                                                             'value' => esc_html__( 'Column 1', 'ultimate-page-builder' )

@@ -1,4 +1,4 @@
-.column-preview {
+.upb-column-preview {
     min-height : 105px;
     }
 
@@ -15,13 +15,13 @@
     color           : #1E67ED !important;
     }
 
-.section-preview {
+.upb-section-preview {
     background-color    : var(--background-color);
     background-image    : var(--background-image);
     background-position : var(--background-image-position);
     background-repeat   : no-repeat;
     }
 
-.text-preview {
+.upb-text-preview {
     background-color : var(--background-color);
     }
