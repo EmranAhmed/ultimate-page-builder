@@ -17,7 +17,6 @@ export default {
         }, {deep : true});
     },
     methods : {
-
         title(){
             return this.model.attributes['title'] ? this.model.attributes.title : this.model._upb_options.element.name;
         },

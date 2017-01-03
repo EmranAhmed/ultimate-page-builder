@@ -19,6 +19,7 @@ import RowSettings from './components/row/RowSettings.vue'
 import ColumnContents from './components/column/ColumnContents.vue'
 import ColumnSettings from './components/column/ColumnSettings.vue'
 
+import ElementContents from './components/element/ElementContents.vue'
 import ElementSettings from './components/element/ElementSettings.vue'
 
 //import Attributes from './components/tabs/Attributes.vue'
@@ -81,10 +82,10 @@ let routes = [
     },
 
     {
-        name : 'element-contents',
-        path : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:elementId(\\d+)/:type(contents)',
-        //component : ElementContents,
-        meta : {subPanel : true}
+        name      : 'element-contents',
+        path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:elementId(\\d+)/:type(contents)',
+        component : ElementContents,
+        meta      : {subPanel : true}
     },
     {
         name      : 'element-settings',

@@ -390,6 +390,7 @@
     } );
 
 
+    // CF7
     add_action( 'upb_register_element', function ( $element ) {
 
         $attributes = array(
@@ -496,3 +497,207 @@
 
     } );
 
+
+    add_action( 'upb_register_element', function ( $element ) {
+
+
+        // Accordion Item
+
+        $attributes = array(
+            array( 'id' => 'title', 'title' => esc_html__( 'Title', 'ultimate-page-builder' ), 'type' => 'text', 'value' => esc_html( 'Accordion Item' ) ),
+            array( 'id' => 'enable', 'title' => esc_html__( 'Enable', 'ultimate-page-builder' ), 'type' => 'toggle', 'value' => TRUE ),
+            array( 'id' => 'opened', 'title' => esc_html__( 'Auto Opened', 'ultimate-page-builder' ), 'type' => 'toggle', 'value' => FALSE ),
+        );
+
+        $contents = '<p>Accordion Item</p>';
+
+        $_upb_options = array(
+
+            'element' => array(
+                'name'   => esc_html__( 'Accordion Item', 'ultimate-page-builder' ),
+                'icon'   => 'mdi mdi-playlist-plus',
+                'nested' => TRUE,
+            ),
+
+            'tools' => array(
+                'list'     => apply_filters( 'upb_accordion-item_list_toolbar', array(
+                    array(
+                        'id'    => 'move',
+                        'icon'  => 'mdi mdi-cursor-move',
+                        'class' => 'handle',
+                        'title' => esc_html__( 'Sort', 'ultimate-page-builder' ),
+                    ),
+                    array(
+                        'id'    => 'delete',
+                        'icon'  => 'mdi mdi-delete',
+                        'title' => esc_html__( 'Delete', 'ultimate-page-builder' ),
+                    ),
+                    /*array(
+                        'id'    => 'contents',
+                        'icon'  => 'mdi mdi-table-edit',
+                        'class' => 'show-contents',
+                        'title' => 'Contents',
+                    ),*/
+                    array(
+                        'id'    => 'settings',
+                        'icon'  => 'mdi mdi-settings',
+                        'class' => 'show-settings',
+                        'title' => esc_html__( 'Settings', 'ultimate-page-builder' ),
+                    ),
+                    array(
+                        'id'    => 'clone',
+                        'icon'  => 'mdi mdi-content-duplicate',
+                        'title' => esc_html__( 'Clone', 'ultimate-page-builder' ),
+                    )
+                ) ),
+                'contents' => apply_filters( 'upb_accordion-item_contents_panel_toolbar', array() ),
+                'settings' => apply_filters( 'upb_accordion-item_settings_panel_toolbar', array() ),
+            ),
+
+            'meta' => array(
+                'contents' => apply_filters( 'upb_accordion-item_contents_panel_meta', array(
+                    'help'   => '<h2>Want to add contents?</h2><p>Choose a section and drag elements</p>',
+                    'search' => esc_html__( 'Search', 'ultimate-page-builder' ),
+                    'title'  => '%s'
+                ) ),
+
+                'settings' => apply_filters( 'upb_accordion-item_settings_panel_meta', array(
+                    'help'   => '<h2>Text Settings?</h2><p>section settings</p>',
+                    'search' => 'Accordion Item',
+                    'title'  => esc_html__( '%s Settings', 'ultimate-page-builder' )
+                ) )
+            ),
+
+            'assets' => array(
+                'preview'   => array(
+                    //'css' => upb_templates_uri( 'preview-css/sections.css' ),
+                    //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                ),
+                'shortcode' => array(
+                    //'css' => upb_templates_uri( 'preview-css/sections.css' ),
+                    //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                )
+            )
+
+        );
+
+        $element->register( 'upb-accordion-item', $attributes, $contents, $_upb_options );
+
+
+        // Accordion
+
+
+        $attributes = array(
+            array( 'id' => 'title', 'title' => esc_html__( 'Title', 'ultimate-page-builder' ), 'type' => 'text', 'value' => esc_html( 'Accordion' ) ),
+            array( 'id' => 'enable', 'title' => esc_html__( 'Enable', 'ultimate-page-builder' ), 'type' => 'toggle', 'value' => TRUE ),
+        );
+
+        $contents = array();
+
+        $_upb_options = array(
+
+            'element' => array(
+                'name' => esc_html__( 'Accordion', 'ultimate-page-builder' ),
+                'icon' => 'mdi mdi-format-line-weight'
+            ),
+
+            'tools' => array(
+                'list' => apply_filters( 'upb_accordion_list_toolbar', array(
+                    array(
+                        'id'    => 'move',
+                        'icon'  => 'mdi mdi-cursor-move',
+                        'class' => 'handle',
+                        'title' => esc_html__( 'Sort', 'ultimate-page-builder' ),
+                    ),
+                    array(
+                        'id'    => 'delete',
+                        'icon'  => 'mdi mdi-delete',
+                        'title' => esc_html__( 'Delete', 'ultimate-page-builder' ),
+                    ),
+                    array(
+                        'id'    => 'enable',
+                        'icon'  => 'mdi mdi-eye',
+                        'title' => esc_html__( 'Enabled', 'ultimate-page-builder' ),
+                    ),
+                    array(
+                        'id'    => 'disable',
+                        'icon'  => 'mdi mdi-eye-off',
+                        'title' => esc_html__( 'Disabled', 'ultimate-page-builder' ),
+                    ),
+                    array(
+                        'id'    => 'contents',
+                        'icon'  => 'mdi mdi-table-edit',
+                        'class' => 'show-contents',
+                        'title' => 'Contents',
+                    ),
+                    array(
+                        'id'    => 'settings',
+                        'icon'  => 'mdi mdi-settings',
+                        'class' => 'show-settings',
+                        'title' => esc_html__( 'Settings', 'ultimate-page-builder' ),
+                    ),
+                    array(
+                        'id'    => 'clone',
+                        'icon'  => 'mdi mdi-content-duplicate',
+                        'title' => esc_html__( 'Clone', 'ultimate-page-builder' ),
+                    )
+                ) ),
+
+                'contents' => apply_filters( 'upb_accordion_contents_panel_toolbar', array(
+
+                    array(
+                        'id'     => 'add-accordion-item',
+                        'title'  => esc_html__( 'Add New', 'ultimate-page-builder' ),
+                        'icon'   => 'mdi mdi-table-row-plus-after',
+                        'action' => 'addNew',
+                        'data'   => apply_filters( 'upb_new_accordion_item', upb_elements()->generate_element( 'upb-accordion-item', '<p>Accordion Item</p>', array( 'title' => array( 'type' => 'text', 'value' => esc_html__( 'Accordion Item %s', 'ultimate-page-builder' ) ) ) ) )
+                    ),
+
+                    array(
+                        'id'     => 'accordion-setting',
+                        'title'  => esc_html__( 'Settings', 'ultimate-page-builder' ),
+                        'icon'   => 'mdi mdi-settings',
+                        'action' => 'showSettingsPanel'
+                    )
+                ) ),
+
+                'settings' => apply_filters( 'upb_accordion_settings_panel_toolbar', array(
+                    array(
+                        'id'     => 'accordion-contents',
+                        'title'  => esc_html__( 'Contents', 'ultimate-page-builder' ),
+                        'icon'   => 'mdi mdi-file-tree',
+                        'action' => 'showContentsPanel'
+                    )
+                ) ),
+            ),
+
+            'meta' => array(
+                'contents' => apply_filters( 'upb_accordion_contents_panel_meta', array(
+                    'help'   => '<h2>Want to add contents?</h2><p>Choose a section and drag elements</p>',
+                    'search' => esc_html__( 'Search', 'ultimate-page-builder' ),
+                    'title'  => '%s'
+                ) ),
+
+                'settings' => apply_filters( 'upb_accordion_settings_panel_meta', array(
+                    'help'   => '<h2>Text Settings?</h2><p>section settings</p>',
+                    'search' => 'Accordion',
+                    'title'  => esc_html__( '%s Settings', 'ultimate-page-builder' )
+                ) )
+            ),
+
+            'assets' => array(
+                'preview'   => array(
+                    //'css' => upb_templates_uri( 'preview-css/sections.css' ),
+                    //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                ),
+                'shortcode' => array(
+                    //'css' => upb_templates_uri( 'preview-css/sections.css' ),
+                    //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                )
+            )
+
+        );
+
+        $element->register( 'upb-accordion', $attributes, $contents, $_upb_options );
+
+    } );

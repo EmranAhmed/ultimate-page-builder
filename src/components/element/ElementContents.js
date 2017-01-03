@@ -1,21 +1,41 @@
 import Vue, { util } from 'vue';
+
 import store from '../../store'
-import {sprintf} from 'sprintf-js';
+
+import Sortable from '../../plugins/vue-sortable'
 import extend from 'extend';
-import fieldsComponent from '../settings-input/fields';
+import {sprintf} from 'sprintf-js';
+
+import ElementList from '../element/ElementList.vue';
+
+Vue.component('element-list', ElementList);
+
+Vue.use(Sortable);
+
+// Element List
+//Vue.component('element-list', ElementList);
+
 import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
 Vue.component('upb-breadcrumb', UPBBreadcrumb);
 
 export default {
-    name  : 'element-settings',
+    name  : 'element-contents',
     props : ['index', 'model'],
 
     data(){
         return {
             l10n       : store.l10n,
-            showHelp   : false,
-            showSearch : false,
-            item       : {}
+            breadcrumb : store.breadcrumb,
+
+            showHelp    : false,
+            showSearch  : false,
+            searchQuery : '',
+            sortable    : {
+                handle      : '> .tools > .handle',
+                placeholder : "upb-sort-placeholder",
+                axis        : 'y'
+            },
+            item        : {}
         }
     },
 
@@ -33,10 +53,7 @@ export default {
 
         panelTitle(){
             if (this.item['_upb_options']) {
-
-                let title = this.item.attributes['title'] ? this.item.attributes.title : this.item._upb_options.element.name;
-
-                return sprintf(this.item._upb_options.meta.settings.title, title)
+                return sprintf(this.item._upb_options.meta.contents.title, this.item.attributes.title)
             }
             else {
                 return false;
@@ -46,7 +63,7 @@ export default {
         panelMetaHelp(){
 
             if (this.item['_upb_options']) {
-                return this.item._upb_options.meta.settings.help
+                return this.item._upb_options.meta.contents.help
             }
             else {
                 return false;
@@ -57,7 +74,7 @@ export default {
         panelMetaTools(){
 
             if (this.item['_upb_options']) {
-                return this.item._upb_options.tools.settings;
+                return this.item._upb_options.tools.contents;
             }
             else {
                 return false;
@@ -66,7 +83,22 @@ export default {
         },
 
         contents(){
-            return this.item['_upb_settings'] ? this.item : {}
+
+            if (!this.item['contents']) {
+                return {};
+            }
+
+            let query = this.searchQuery.toLowerCase().trim();
+
+            if (query) {
+                return this.item.contents.filter((data) => {
+                    let title = data.attributes['title'] ? data.attributes.title : data._upb_options.element.name;
+                    return new RegExp(query, 'gui').test(title.toLowerCase().trim())
+                })
+            }
+            else {
+                return this.item.contents;
+            }
         }
     },
 
@@ -94,6 +126,51 @@ export default {
 
         back(){
             this.$router.go(-1);
+        },
+
+        addNew(content, event = false){
+
+            let data              = extend(true, {}, content);
+            data.attributes.title = sprintf(data.attributes.title, (this.item.contents.length + 1));
+
+            this.item.contents.push(data);
+            store.stateChanged();
+        },
+
+        deleteItem(index){
+            this.item.contents.splice(index, 1);
+            store.stateChanged();
+        },
+
+        cloneItem(index, item){
+            let cloned = extend(true, {}, item);
+            if (cloned.attributes['title']) {
+                cloned.attributes.title = sprintf(this.l10n.clone, cloned.attributes.title);
+            }
+            this.item.contents.splice(index + 1, 0, cloned);
+            store.stateChanged();
+        },
+
+        onStart(e){
+            this.searchQuery = ''
+        },
+
+        onUpdate(e, values){
+
+
+            //###
+            //this.contents.splice(values.newIndex, 0, this.contents.splice(values.oldIndex, 1).pop());
+            store.stateChanged();
+
+            let list = extend(true, [], this.item.contents);
+
+            list.splice(values.newIndex, 0, list.splice(values.oldIndex, 1).pop());
+
+            Vue.delete(this.item, 'contents');
+
+            this.$nextTick(() => {
+                Vue.set(this.item, 'contents', extend(true, [], list));
+            });
         },
 
         // Alias of showContentPanel
@@ -144,9 +221,17 @@ export default {
         toggleHelp(){
             this.showSearch = false;
             this.showHelp   = !this.showHelp;
-        }
-    },
+        },
 
-    components : fieldsComponent
+        toggleFilter(){
+            this.showHelp   = false;
+            this.showSearch = !this.showSearch;
 
+            this.$nextTick(() => {
+                if (this.showSearch) {
+                    this.$el.querySelector('input[type="search"]').focus()
+                }
+            });
+        },
+    }
 }

@@ -26,7 +26,17 @@ export default {
     computed : {
         items(){
             return this.model.contents.filter(function (data) {
-                return !data._upb_options.core;
+
+                if (data._upb_options.core) {
+                    return false;
+                }
+                else {
+                    if (data._upb_options.element.nested) {
+                        return false;
+                    }
+                }
+
+                return true;
             })
         },
 

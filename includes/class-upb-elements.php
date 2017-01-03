@@ -33,10 +33,15 @@
                 $_upb_options[ 'focus' ] = FALSE;
 
                 $_upb_options[ 'core' ] = FALSE;
+
+
                 if ( in_array( $tag, $this->core_elements ) ) {
                     $_upb_options[ 'core' ] = TRUE;
                 }
 
+                if ( ! isset( $_upb_options[ 'element' ][ 'nested' ] ) ) {
+                    $_upb_options[ 'element' ][ 'nested' ] = FALSE;
+                }
 
                 if ( ! isset( $_upb_options[ 'preview' ] ) ) {
                     $_upb_options[ 'preview' ] = array(
@@ -247,7 +252,7 @@
 
                 $el = $this->get_element( $tag );
 
-                if ( ! empty( $contents ) ) {
+                if ( ! empty( $contents ) && is_array( $contents ) ) {
 
                     if ( isset( $contents[ 0 ] ) ) {
                         foreach ( $contents as $content ) {
@@ -257,6 +262,11 @@
                         array_push( $el[ 'contents' ], $contents );
                     }
                 }
+
+                if ( ! empty( $contents ) && is_string( $contents ) ) {
+                    $el[ 'contents' ] = wp_kses_post( $contents );
+                }
+
 
                 if ( ! empty( $attributes ) ) {
                     $el[ 'attributes' ]    = array_merge( $el[ 'attributes' ], $this->to_attributes( $attributes ) );
