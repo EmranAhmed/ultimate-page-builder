@@ -17,11 +17,11 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:9, includes/boilerplate/upb-boilerplate-hooks.php:529
+#: includes/boilerplate/upb-boilerplate-hooks.php:9, includes/boilerplate/upb-boilerplate-hooks.php:536
 msgid "Add Element"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:15, includes/boilerplate/upb-boilerplate-hooks.php:62, includes/boilerplate/upb-boilerplate-hooks.php:102, includes/boilerplate/upb-boilerplate-hooks.php:135, includes/boilerplate/upb-boilerplate-hooks.php:274, includes/boilerplate/upb-boilerplate-hooks.php:384
+#: includes/boilerplate/upb-boilerplate-hooks.php:15, includes/boilerplate/upb-boilerplate-hooks.php:62, includes/boilerplate/upb-boilerplate-hooks.php:102, includes/boilerplate/upb-boilerplate-hooks.php:135, includes/boilerplate/upb-boilerplate-hooks.php:274, includes/boilerplate/upb-boilerplate-hooks.php:384, includes/upb-elements.php:450
 msgid "Settings"
 msgstr ""
 
@@ -29,11 +29,11 @@ msgstr ""
 msgid "Contents"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:38, includes/boilerplate/upb-boilerplate-hooks.php:78, includes/boilerplate/upb-boilerplate-hooks.php:249
+#: includes/boilerplate/upb-boilerplate-hooks.php:38, includes/boilerplate/upb-boilerplate-hooks.php:78, includes/boilerplate/upb-boilerplate-hooks.php:249, includes/upb-elements.php:433
 msgid "Sort"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:43, includes/boilerplate/upb-boilerplate-hooks.php:83, includes/boilerplate/upb-boilerplate-hooks.php:254
+#: includes/boilerplate/upb-boilerplate-hooks.php:43, includes/boilerplate/upb-boilerplate-hooks.php:83, includes/boilerplate/upb-boilerplate-hooks.php:254, includes/upb-elements.php:438
 msgid "Delete"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:66, includes/boilerplate/upb-boilerplate-hooks.php:106, includes/boilerplate/upb-boilerplate-hooks.php:278
+#: includes/boilerplate/upb-boilerplate-hooks.php:66, includes/boilerplate/upb-boilerplate-hooks.php:106, includes/boilerplate/upb-boilerplate-hooks.php:278, includes/upb-elements.php:455
 msgid "Clone"
 msgstr ""
 
@@ -189,155 +189,155 @@ msgstr ""
 msgid "Current Color"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:495
+#: includes/boilerplate/upb-boilerplate-hooks.php:502
 msgid "Section Saving..."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:496
+#: includes/boilerplate/upb-boilerplate-hooks.php:503
 msgid "Section Saved."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:497
+#: includes/boilerplate/upb-boilerplate-hooks.php:504
 msgid "Section Can't Save."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:498
+#: includes/boilerplate/upb-boilerplate-hooks.php:505
 msgid "Section Removed."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:499
+#: includes/boilerplate/upb-boilerplate-hooks.php:506
 msgid "%s Section Added."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:500
+#: includes/boilerplate/upb-boilerplate-hooks.php:507
 msgid "Saving"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:501
+#: includes/boilerplate/upb-boilerplate-hooks.php:508
 msgid "Saved"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:502
+#: includes/boilerplate/upb-boilerplate-hooks.php:509
 msgid "Problem on Saving"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:503
+#: includes/boilerplate/upb-boilerplate-hooks.php:510
 msgid "Add"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:504
+#: includes/boilerplate/upb-boilerplate-hooks.php:511
 msgid "%s data copied to clipboard"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:505
+#: includes/boilerplate/upb-boilerplate-hooks.php:512
 msgid "Search saved section"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:506
+#: includes/boilerplate/upb-boilerplate-hooks.php:513
 msgid "%s layout copied to clipboard"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:507
+#: includes/boilerplate/upb-boilerplate-hooks.php:514
 msgid "Nothing to copy"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:508
+#: includes/boilerplate/upb-boilerplate-hooks.php:515
 msgid "%s Layout added"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:509
+#: includes/boilerplate/upb-boilerplate-hooks.php:516
 msgid "Use this layout"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:510
+#: includes/boilerplate/upb-boilerplate-hooks.php:517
 msgid "Paste JSON Contents"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:511
+#: includes/boilerplate/upb-boilerplate-hooks.php:518
 msgid "Save"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:512
+#: includes/boilerplate/upb-boilerplate-hooks.php:519
 msgid "Copy"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:513
+#: includes/boilerplate/upb-boilerplate-hooks.php:520
 msgid "Create"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:514
+#: includes/boilerplate/upb-boilerplate-hooks.php:521
 msgid "Are you sure to delete %s?"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:515
+#: includes/boilerplate/upb-boilerplate-hooks.php:522
 msgid "Manual"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:516
+#: includes/boilerplate/upb-boilerplate-hooks.php:523
 msgid "Columns Layout of - %s"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:517
+#: includes/boilerplate/upb-boilerplate-hooks.php:524
 msgid "Column Order"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:518
+#: includes/boilerplate/upb-boilerplate-hooks.php:525
 msgid "Column layout"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:519
+#: includes/boilerplate/upb-boilerplate-hooks.php:526
 msgid "Drag to sort column or click to open contents panel"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:520
+#: includes/boilerplate/upb-boilerplate-hooks.php:527
 msgid "Close"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:521
+#: includes/boilerplate/upb-boilerplate-hooks.php:528
 msgid "Clone of %s"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:522
+#: includes/boilerplate/upb-boilerplate-hooks.php:529
 msgid "Help"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:523
+#: includes/boilerplate/upb-boilerplate-hooks.php:530, includes/upb-elements.php:465
 msgid "Search"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:524
+#: includes/boilerplate/upb-boilerplate-hooks.php:531
 msgid "Back"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:525
+#: includes/boilerplate/upb-boilerplate-hooks.php:532
 msgid "You are on"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:526
+#: includes/boilerplate/upb-boilerplate-hooks.php:533
 msgid "Skeleton preview"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:527
+#: includes/boilerplate/upb-boilerplate-hooks.php:534
 msgid "Collapse"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:528
+#: includes/boilerplate/upb-boilerplate-hooks.php:535
 msgid "Expand"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:530
+#: includes/boilerplate/upb-boilerplate-hooks.php:537
 msgid "Show %s device column layouts"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:531
+#: includes/boilerplate/upb-boilerplate-hooks.php:538
 msgid "Click to enable %s device screen layout"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:532
+#: includes/boilerplate/upb-boilerplate-hooks.php:539
 msgid "Click to disable %s device screen layout"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:533
+#: includes/boilerplate/upb-boilerplate-hooks.php:540
 msgid "%s device column layouts should be same as other enabled device column layout"
 msgstr ""
 
@@ -353,19 +353,19 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: includes/class-upb-elements-props.php:28, includes/class-upb-settings.php:102
+#: includes/class-upb-elements-props.php:33, includes/class-upb-settings.php:107
 msgid "No Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:35, includes/class-upb-settings.php:108
+#: includes/class-upb-elements-props.php:40, includes/class-upb-settings.php:113
 msgid "Use Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:36, includes/class-upb-settings.php:109
+#: includes/class-upb-elements-props.php:41, includes/class-upb-settings.php:114
 msgid "Remove"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:37, includes/class-upb-settings.php:110
+#: includes/class-upb-elements-props.php:42, includes/class-upb-settings.php:115
 msgid "Select"
 msgstr ""
 
@@ -375,6 +375,38 @@ msgstr ""
 
 #: includes/class-upb-tabs.php:30
 msgid "Ultimate Page builder tab \"%s\" already registered."
+msgstr ""
+
+#: includes/upb-elements.php:396
+msgid "Title"
+msgstr ""
+
+#: includes/upb-elements.php:397
+msgid "Enable"
+msgstr ""
+
+#: includes/upb-elements.php:401
+msgid "Contact Form"
+msgstr ""
+
+#: includes/upb-elements.php:402
+msgid "Contact form list"
+msgstr ""
+
+#: includes/upb-elements.php:409
+msgid "Search contact form"
+msgstr ""
+
+#: includes/upb-elements.php:423
+msgid "Contact form 7"
+msgstr ""
+
+#: includes/upb-elements.php:472
+msgid "%s Settings"
+msgstr ""
+
+#: includes/upb-elements.php:476
+msgid "Choose a form"
 msgstr ""
 
 #: includes/upb-hooks.php:103, ultimate-page-builder.php:106
