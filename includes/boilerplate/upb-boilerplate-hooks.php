@@ -587,7 +587,9 @@ print( "<script>
 var upbExtraInput = {
   // template: '<span> Input Extra </span>',
      template: '#extra-input-template',
-   created(){ console.log(this.attributes) },
+   created(){
+   //console.log(this.attributes)
+    },
 }
 </script>" );
     } );
