@@ -22,6 +22,8 @@ import ColumnSettings from './components/column/ColumnSettings.vue'
 import ElementContents from './components/element/ElementContents.vue'
 import ElementSettings from './components/element/ElementSettings.vue'
 
+import ElementItemSettings from './components/element-item/ElementItemSettings.vue'
+
 //import Attributes from './components/tabs/Attributes.vue'
 //import List from './components/tabs/ListView.vue'
 
@@ -91,6 +93,19 @@ let routes = [
         name      : 'element-settings',
         path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:elementId(\\d+)/:type(settings)',
         component : ElementSettings,
+        meta      : {subPanel : true}
+    },
+
+    {
+        name : 'element-item-contents',
+        path : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:elementId(\\d+)/:elementItemId(\\d+)/:type(contents)',
+        // component : ElementItemContents,
+        meta : {subPanel : true}
+    },
+    {
+        name      : 'element-item-settings',
+        path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:elementId(\\d+)/:elementItemId(\\d+)/:type(settings)',
+        component : ElementItemSettings,
         meta      : {subPanel : true}
     },
 

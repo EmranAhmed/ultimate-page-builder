@@ -1,4 +1,5 @@
-.upb-column-preview {
+.upb-column-preview,
+.upb-preview-element-non-core.upb-preview-element-type-container {
     min-height : 105px;
     }
 
@@ -14,6 +15,11 @@
     outline         : none !important;
     color           : #1E67ED !important;
     }
+
+
+
+
+
 
 .upb-section-preview {
     background-color    : var(--background-color);

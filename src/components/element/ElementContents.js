@@ -6,9 +6,9 @@ import Sortable from '../../plugins/vue-sortable'
 import extend from 'extend';
 import {sprintf} from 'sprintf-js';
 
-import ElementList from '../element/ElementList.vue';
+import ElementItemList from '../element-item/ElementItemList.vue';
 
-Vue.component('element-list', ElementList);
+Vue.component('element-item-list', ElementItemList);
 
 Vue.use(Sortable);
 
@@ -64,6 +64,17 @@ export default {
 
             if (this.item['_upb_options']) {
                 return this.item._upb_options.meta.contents.help
+            }
+            else {
+                return false;
+            }
+
+        },
+
+        panelMetaSearch(){
+
+            if (this.item['_upb_options']) {
+                return this.item._upb_options.meta.contents.search
             }
             else {
                 return false;

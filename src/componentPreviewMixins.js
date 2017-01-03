@@ -3,27 +3,27 @@ import store from './store'
 export default{
 
     'upb-section' : {
-        created(){
-            this.$watch('model.contents', function (newVal, oldVal) {
-                this.addClass();
-            })
-        },
+        /*created(){
+         this.$watch('model.contents', function (newVal, oldVal) {
+         this.addClass();
+         })
+         },
 
-        mounted(){
-            this.addClass();
-        },
+         mounted(){
+         this.addClass();
+         },*/
 
-        methods : {
-            addClass(){
-                // No Content Class Added
-                if (this.hasContents) {
-                    this.$el.classList.remove('upb-preview-element-no-contents')
-                }
-                else {
-                    this.$el.classList.add('upb-preview-element-no-contents')
-                }
-            }
-        }
+        /*methods : {
+         addClass(){
+         // No Content Class Added
+         if (this.hasContents) {
+         this.$el.classList.remove('upb-preview-element-no-contents')
+         }
+         else {
+         this.$el.classList.add('upb-preview-element-no-contents')
+         }
+         }
+         }*/
     },
 
     'upb-row' : {
@@ -37,15 +37,15 @@ export default{
             }
         },
 
-        created(){
-            this.$watch('model.contents', function (newVal, oldVal) {
-                this.addClass();
-            })
-        },
+        /*created(){
+         this.$watch('model.contents', function (newVal, oldVal) {
+         this.addClass();
+         })
+         },
 
-        mounted(){
-            this.addClass();
-        },
+         mounted(){
+         this.addClass();
+         },*/
 
         methods : {
 
@@ -67,28 +67,36 @@ export default{
                 else {
                     element.classList.add('upb-preview-element-no-contents')
                 }
+
+                if (!this.model._upb_options.core) {
+                    this.$el.classList.add('upb-preview-element-non-core')
+                }
+
+                if (_.isArray(this.model.contents)) {
+                    this.$el.classList.add('upb-preview-element-type-container')
+                }
             }
         }
     },
 
     'upb-column' : {
 
-        created(){
+        /*created(){
 
-            this.$watch('model.contents', function (newVal, oldVal) {
-                this.addClass();
-            })
+         this.$watch('model.contents', function (newVal, oldVal) {
+         this.addClass();
+         })
 
-            this.$watch('model.attributes', function (newVal, oldVal) {
-                this.addClass();
-            }, {deep : true})
+         this.$watch('model.attributes', function (newVal, oldVal) {
+         this.addClass();
+         }, {deep : true})
 
-            //
-        },
+         //
+         },
 
-        mounted(){
-            this.addClass();
-        },
+         mounted(){
+         this.addClass();
+         },*/
 
         methods : {
 
@@ -128,6 +136,13 @@ export default{
                     this.$el.classList.add('upb-preview-element-no-contents')
                 }
 
+                if (!this.model._upb_options.core) {
+                    this.$el.classList.add('upb-preview-element-non-core')
+                }
+
+                if (_.isArray(this.model.contents)) {
+                    this.$el.classList.add('upb-preview-element-type-container')
+                }
             },
 
             columnClass(){
@@ -195,9 +210,7 @@ export default{
                     id,
                     title
                 }, data=> {
-
                     this.$el.querySelector('.ajax-result').innerHTML = data
-
                 });
             }
         }

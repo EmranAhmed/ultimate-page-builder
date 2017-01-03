@@ -533,7 +533,6 @@
             'skeleton'             => esc_attr__( 'Skeleton preview', 'ultimate-page-builder' ),
             'collapse'             => esc_attr__( 'Collapse', 'ultimate-page-builder' ),
             'expand'               => esc_attr__( 'Expand', 'ultimate-page-builder' ),
-            'dropElementMessage'   => esc_attr__( 'Add Element', 'ultimate-page-builder' ),
             'showDeviceColumn'     => esc_attr__( 'Show %s device column layouts', 'ultimate-page-builder' ),
             'enableDeviceColumn'   => esc_attr__( 'Click to enable %s device screen layout', 'ultimate-page-builder' ),
             'disableDeviceColumn'  => esc_attr__( 'Click to disable %s device screen layout', 'ultimate-page-builder' ),
@@ -583,7 +582,7 @@ var LogicalPanel = {
 </script>' );
 
 
-print( "<script>
+        print( "<script>
 var upbExtraInput = {
   // template: '<span> Input Extra </span>',
      template: '#extra-input-template',

@@ -40,6 +40,10 @@
                     'search' => '',
                     'title'  => '%s Settings'
                 ) ),
+
+                'messages' => array(
+                    'addElement' => esc_html__( 'Click to Add Element', 'ultimate-page-builder' )
+                )
             ),
         );
 
@@ -474,7 +478,7 @@
                 ) ),
 
                 'messages' => array(
-                    'chooseForm' => esc_html__( 'Choose a form', 'ultimate-page-builder' )
+                    'chooseForm' => esc_html__( 'Choose a form from left panel', 'ultimate-page-builder' )
                 )
             ),
 
@@ -648,7 +652,7 @@
                     array(
                         'id'     => 'add-accordion-item',
                         'title'  => esc_html__( 'Add New', 'ultimate-page-builder' ),
-                        'icon'   => 'mdi mdi-table-row-plus-after',
+                        'icon'   => 'mdi mdi-view-stream',
                         'action' => 'addNew',
                         'data'   => apply_filters( 'upb_new_accordion_item', upb_elements()->generate_element( 'upb-accordion-item', '<p>Accordion Item</p>', array( 'title' => array( 'type' => 'text', 'value' => esc_html__( 'Accordion Item %s', 'ultimate-page-builder' ) ) ) ) )
                     ),
@@ -682,7 +686,11 @@
                     'help'   => '<h2>Text Settings?</h2><p>section settings</p>',
                     'search' => 'Accordion',
                     'title'  => esc_html__( '%s Settings', 'ultimate-page-builder' )
-                ) )
+                ) ),
+
+                'messages' => array(
+                    'addElement' => esc_html__( 'Add Accordion Item', 'ultimate-page-builder' )
+                )
             ),
 
             'assets' => array(
@@ -695,7 +703,6 @@
                     //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
                 )
             )
-
         );
 
         $element->register( 'upb-accordion', $attributes, $contents, $_upb_options );
