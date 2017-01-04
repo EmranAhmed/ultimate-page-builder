@@ -34,7 +34,6 @@
 
                 $_upb_options[ 'core' ] = FALSE;
 
-
                 if ( in_array( $tag, $this->core_elements ) ) {
                     $_upb_options[ 'core' ] = TRUE;
                 }
@@ -118,7 +117,6 @@
                     }
 
                     $settings[ $key ] = $this->props->filterOptions( $settings[ $key ] );
-
 
                     $settings[ $key ][ '_id' ] = $setting[ 'id' ];
                     //$attributes[ $index ][ 'metaValue' ] = $attribute[ 'value' ];

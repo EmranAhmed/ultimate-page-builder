@@ -25,7 +25,7 @@
             array(
                 'id'     => 'column-contents',
                 'title'  => esc_html__( 'Contents', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-file-tree',
+                'icon'   => 'mdi mdi-table-edit',
                 'action' => 'showContentPanel'
             )
         );
@@ -150,7 +150,7 @@
             array(
                 'id'     => 'section-contents',
                 'title'  => esc_html__( 'Contents', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-file-tree',
+                'icon'   => 'mdi mdi-table-edit',
                 'action' => 'showContentPanel'
             )
         );
@@ -264,7 +264,7 @@
             'title' => esc_html__( 'Disabled', 'ultimate-page-builder' ),
         );
         $tools[ 'contents' ] = array(
-            'icon'  => 'mdi mdi-view-column',
+            'icon'  => 'mdi mdi-table-edit',
             'class' => 'show-contents',
             'title' => esc_html__( 'Columns', 'ultimate-page-builder' ),
         );
@@ -364,8 +364,7 @@
                                                                  )
             ), // add section | load section | layouts
             'icon'     => 'mdi mdi-package-variant',
-            'contents' => apply_filters( 'upb_sections_panel_contents', array() ),
-            // load from get_post_meta, if you load data then ajax data will not run
+            'contents' => apply_filters( 'upb_sections_panel_contents', array() )
         );
         $tab->register( 'sections', $data, TRUE );
 
@@ -467,13 +466,13 @@
 
         wp_enqueue_script( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URI . "js/upb-boilerplate$suffix.js", array( 'jquery', 'upb-builder' ), '', TRUE );
 
-        $data = sprintf( "var _upb_tabs = %s;\n", upb_tabs()->getJSON() );
+        $data = sprintf( "const _upb_tabs = %s;\n", upb_tabs()->getJSON() );
 
-        $data .= sprintf( "var _upb_router_config = %s;\n", wp_json_encode( array(
+        $data .= sprintf( "const _upb_router_config = %s;\n", wp_json_encode( array(
                                                                                 'mode' => 'hash' // abstract, history, hash
                                                                             ) ) );
 
-        $data .= sprintf( "var _upb_routes = %s;\n", wp_json_encode( apply_filters( 'upb_routes', array(
+        $data .= sprintf( "const _upb_routes = %s;\n", wp_json_encode( apply_filters( 'upb_routes', array(
             array(
                 'name'      => 'logical',
                 'path'      => '/:tab(logical)',
@@ -481,20 +480,20 @@
             ) // you should register a tab before add router
         ) ) ) );
 
-        $data .= sprintf( "var _upb_fields = %s;\n", wp_json_encode( apply_filters( 'upb_fields', array(
+        $data .= sprintf( "const _upb_fields = %s;\n", wp_json_encode( apply_filters( 'upb_fields', array(
             array(
                 'name'      => 'extra',
                 'component' => 'upbExtraInput',
             )
         ) ) ) );
 
-        $data .= sprintf( "var _upb_status = %s;\n", wp_json_encode( array( 'dirty' => FALSE, '_nonce' => wp_create_nonce( '_upb' ), '_id' => get_the_ID() ) ) );
+        $data .= sprintf( "const _upb_status = %s;\n", wp_json_encode( array( 'dirty' => FALSE, '_nonce' => wp_create_nonce( '_upb' ), '_id' => get_the_ID() ) ) );
 
-        $data .= sprintf( "var _upb_preview_devices = %s;", wp_json_encode( apply_filters( 'upb_preview_devices', array() ) ) );
+        $data .= sprintf( "const _upb_preview_devices = %s;", wp_json_encode( apply_filters( 'upb_preview_devices', array() ) ) );
 
-        $data .= sprintf( "var _upb_grid_system = %s;", wp_json_encode( apply_filters( 'upb_grid_system', array() ) ) );
+        $data .= sprintf( "const _upb_grid_system = %s;", wp_json_encode( apply_filters( 'upb_grid_system', array() ) ) );
 
-        $data .= sprintf( "var _upb_registered_elements = %s;", wp_json_encode( upb_elements()->getNamed() ) );
+        $data .= sprintf( "const _upb_registered_elements = %s;", wp_json_encode( upb_elements()->getNamed() ) );
 
         wp_script_add_data( 'upb-builder', 'data', $data );
 
@@ -555,7 +554,7 @@
     add_action( 'upb_boilerplate_print_footer_scripts', function () {
         //$tabs = upb_tabs()->getAll();
         print( "<script>
-var LogicalPanel = {
+const LogicalPanel = {
   template: '<span> Logical Panel Template </span>',
   // template: '#template',
   props:[]
@@ -583,7 +582,7 @@ var LogicalPanel = {
 
 
         print( "<script>
-var upbExtraInput = {
+const upbExtraInput = {
   // template: '<span> Input Extra </span>',
      template: '#extra-input-template',
    created(){

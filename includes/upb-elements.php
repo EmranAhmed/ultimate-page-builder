@@ -513,14 +513,14 @@
             array( 'id' => 'opened', 'title' => esc_html__( 'Auto Opened', 'ultimate-page-builder' ), 'type' => 'toggle', 'value' => FALSE ),
         );
 
-        $contents = '<p>Accordion Item</p>';
+        $contents = wp_kses_post( '<p>Accordion Item</p>' );
 
         $_upb_options = array(
 
             'element' => array(
                 'name'   => esc_html__( 'Accordion Item', 'ultimate-page-builder' ),
                 'icon'   => 'mdi mdi-playlist-plus',
-                'nested' => TRUE,
+                'nested' => TRUE
             ),
 
             'tools' => array(
@@ -567,7 +567,7 @@
 
                 'settings' => apply_filters( 'upb_accordion-item_settings_panel_meta', array(
                     'help'   => '<h2>Text Settings?</h2><p>section settings</p>',
-                    'search' => 'Accordion Item',
+                    'search' => esc_html__( 'Search', 'ultimate-page-builder' ),
                     'title'  => esc_html__( '%s Settings', 'ultimate-page-builder' )
                 ) )
             ),
@@ -589,7 +589,6 @@
 
 
         // Accordion
-
 
         $attributes = array(
             array( 'id' => 'title', 'title' => esc_html__( 'Title', 'ultimate-page-builder' ), 'type' => 'text', 'value' => esc_html( 'Accordion' ) ),
@@ -652,7 +651,7 @@
                     array(
                         'id'     => 'add-accordion-item',
                         'title'  => esc_html__( 'Add New', 'ultimate-page-builder' ),
-                        'icon'   => 'mdi mdi-view-stream',
+                        'icon'   => 'mdi mdi-shape-plus',
                         'action' => 'addNew',
                         'data'   => apply_filters( 'upb_new_accordion_item', upb_elements()->generate_element( 'upb-accordion-item', '<p>Accordion Item</p>', array( 'title' => array( 'type' => 'text', 'value' => esc_html__( 'Accordion Item %s', 'ultimate-page-builder' ) ) ) ) )
                     ),
@@ -669,7 +668,7 @@
                     array(
                         'id'     => 'accordion-contents',
                         'title'  => esc_html__( 'Contents', 'ultimate-page-builder' ),
-                        'icon'   => 'mdi mdi-file-tree',
+                        'icon'   => 'mdi mdi-table-edit',
                         'action' => 'showContentsPanel'
                     )
                 ) ),
@@ -678,13 +677,13 @@
             'meta' => array(
                 'contents' => apply_filters( 'upb_accordion_contents_panel_meta', array(
                     'help'   => '<h2>Want to add contents?</h2><p>Choose a section and drag elements</p>',
-                    'search' => esc_html__( 'Search', 'ultimate-page-builder' ),
+                    'search' => esc_html__( 'Search Item', 'ultimate-page-builder' ),
                     'title'  => '%s'
                 ) ),
 
                 'settings' => apply_filters( 'upb_accordion_settings_panel_meta', array(
                     'help'   => '<h2>Text Settings?</h2><p>section settings</p>',
-                    'search' => 'Accordion',
+                    'search' => '',
                     'title'  => esc_html__( '%s Settings', 'ultimate-page-builder' )
                 ) ),
 

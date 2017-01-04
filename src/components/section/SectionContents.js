@@ -30,11 +30,11 @@ export default {
             showRowColumn        : false,
             rowContentsComponent : '',
 
-            l10n        : store.l10n,
-            breadcrumb  : store.breadcrumb,
-            showHelp    : false,
-            showSearch  : false,
-            sortable    : {
+            l10n       : store.l10n,
+            breadcrumb : store.breadcrumb,
+            showHelp   : false,
+            showSearch : false,
+            sortable   : {
                 handle      : '> .tools > .handle',
                 placeholder : "upb-sort-placeholder",
                 axis        : 'y'
@@ -58,7 +58,6 @@ export default {
                 this.openRowContentsPanel(this.defaultRowId); // row column list
             }
         }
-
 
     },
 

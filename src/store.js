@@ -4,16 +4,16 @@ import sanitizeHtml from 'sanitize-html'
 class store {
 
     constructor() {
-        this.tabs   = window._upb_tabs;
-        this.status = window._upb_status;
-        this.routes = window._upb_routes || [];
-        this.fields = window._upb_fields || [];
+        this.tabs   = _upb_tabs;
+        this.status = _upb_status;
+        this.routes = _upb_routes || [];
+        this.fields = _upb_fields || [];
 
-        this.l10n            = window._upb_l10n;
-        this.router_config   = window._upb_router_config;
-        this.devices         = window._upb_preview_devices;
-        this.grid            = window._upb_grid_system;
-        this.elements        = window._upb_registered_elements;
+        this.l10n            = _upb_l10n;
+        this.router_config   = _upb_router_config;
+        this.devices         = _upb_preview_devices;
+        this.grid            = _upb_grid_system;
+        this.elements        = _upb_registered_elements;
         this.preview         = 'upb-preview-frame';
         this.panel           = '';
         this.subpanel        = '';
@@ -44,6 +44,34 @@ class store {
         })
     }
 
+    getContentsOfTab(tabId) {
+        return this.getTabs().filter((tab)=> {
+            return tab.id == tabId;
+        })
+    }
+
+    getSettings() {
+        return this.getContentsOfTab('settings').pop().contents;
+    }
+
+    getSetting(id = false) {
+
+        if (!id) {
+            return null;
+        }
+
+        let setting = this.getSettings().filter(setting=> {
+            return setting.metaId == id;
+        }).pop();
+
+        if (_.isObject(setting)) {
+            return setting.metaValue;
+        }
+        else {
+            return null;
+        }
+    }
+
     loadTabContents() {
         this.getTabs().map((tab)=> {
 
@@ -52,7 +80,6 @@ class store {
             }, function (error) {
                 console.log(error);
             })
-
         });
     }
 

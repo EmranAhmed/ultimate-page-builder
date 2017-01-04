@@ -61,7 +61,6 @@ function loadPreview() {
 }
 
 window.onload = _=> {
-
     //console.log('Sidebar loaded');
     loadPreview();
 }
