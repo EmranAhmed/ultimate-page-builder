@@ -12,8 +12,6 @@ Vue.use(VueNProgress);
 import vToast from './plugins/vue-toastr'
 Vue.use(vToast);
 
-//const states = window._upb_states;
-
 store.loadTabContents();
 
 const upbBuilder = new Vue({
@@ -32,41 +30,47 @@ const upbBuilder = new Vue({
     render : createElement => createElement(UPBSidebar)
 });
 
-function loadPreview() {
+const previewWindow = {
 
-    let settings = {};
+    mount(){
+        let settings = {};
 
-    store.tabs.filter(function (content) {
-        return content.id == 'settings' ? content : false;
-    }).pop().contents.map(function (data) {
-        if (data.metaId == 'enable' || data.metaId == 'position') {
-            settings[data.metaId] = data.metaValue;
+        store.tabs.filter(function (content) {
+            return content.id == 'settings' ? content : false;
+        }).pop().contents.map(function (data) {
+            if (data.metaId == 'enable' || data.metaId == 'position') {
+                settings[data.metaId] = data.metaValue;
+            }
+        });
+
+        store.panel = upbBuilder
+
+        if (settings.enable) {
+            new Vue({
+                //router,
+                data   : {
+                    store
+                },
+                render : createElement => createElement(UPBPreview)
+            })
+            //.$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById('upb-preview'))
+                .$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById(settings.position))
+
         }
-    });
 
-    store.panel = upbBuilder
+    },
 
-    if (settings.enable) {
-        new Vue({
-            //router,
-            data   : {
-                store
-            },
-            render : createElement => createElement(UPBPreview)
-        })
-        //.$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById('upb-preview'))
-            .$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById(settings.position))
-
+    setUrl(){
+        document.getElementById('upb-preview-frame').src = document.getElementById('upb-preview-frame').dataset.url;
     }
-}
+};
 
-window.onload = _=> {
+window.addEventListener('load', _=> {
     //console.log('Sidebar loaded');
-    loadPreview();
-}
+    previewWindow.setUrl();
+});
 
 document.getElementById("upb-preview-frame").addEventListener('load', _=> {
-
-    //console.log('preview loaded');
-    loadPreview();
+    //console.log('Preview loaded');
+    previewWindow.mount();
 });

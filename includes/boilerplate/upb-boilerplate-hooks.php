@@ -469,8 +469,8 @@
         $data = sprintf( "const _upb_tabs = %s;\n", upb_tabs()->getJSON() );
 
         $data .= sprintf( "const _upb_router_config = %s;\n", wp_json_encode( array(
-                                                                                'mode' => 'hash' // abstract, history, hash
-                                                                            ) ) );
+                                                                                  'mode' => 'hash' // abstract, history, hash
+                                                                              ) ) );
 
         $data .= sprintf( "const _upb_routes = %s;\n", wp_json_encode( apply_filters( 'upb_routes', array(
             array(
