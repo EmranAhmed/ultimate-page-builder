@@ -162,6 +162,16 @@
         endif;
     }
 
+    function upb_add_script_template( $id, $contents ) {
+        echo '<script type="text/x-template" id="upb-' . $id . '-template">';
+        echo $contents;
+        echo '</script>';
+    }
+
+    function upb_get_script_template_id( $id ) {
+        return 'upb-' . $id . '-template">';
+    }
+
 
     // https://cdn.materialdesignicons.com/1.7.22/css/materialdesignicons.css
     // https://cdn.materialdesignicons.com/1.7.22/

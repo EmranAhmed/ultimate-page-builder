@@ -85,8 +85,13 @@
                 if ( ! isset( $_upb_options[ 'assets' ][ 'shortcode' ][ 'js' ] ) ) {
                     $_upb_options[ 'assets' ][ 'shortcode' ][ 'js' ] = FALSE;
                 }
+
                 if ( ! isset( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ) ) {
                     $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] = FALSE;
+                }
+
+                if ( ! isset( $_upb_options[ 'third_party_path' ] ) ) {
+                    $_upb_options[ 'third_party_path' ] = FALSE;
                 }
 
                 ///
@@ -136,7 +141,7 @@
 
                 // Override functionality
                 if ( ! shortcode_exists( $tag ) && is_callable( $shortcode_fn ) ) {
-                    // To override shortcode functions :)
+                    // To override short code functions :)
                     add_shortcode( $tag, $shortcode_fn );
                 } else {
                     if ( ! shortcode_exists( $tag ) ) {
@@ -149,14 +154,14 @@
                             wp_register_script( sprintf( 'upb-element-%s', $tag ), esc_url( $_upb_options[ 'assets' ][ 'shortcode' ][ 'js' ] ), array(), FALSE, TRUE );
                         }
 
-                        add_shortcode( $tag, function ( $attrs, $contents = NULL ) use ( $tag ) {
+                        add_shortcode( $tag, function ( $attrs, $contents = NULL ) use ( $tag, $_upb_options ) {
 
                             $attributes = upb_elements()->get_attributes( $tag, $attrs );
                             $settings   = upb_elements()->get_element( $tag, '_upb_settings' );
                             // $options   = upb_elements()->get_element( $tag, '_upb_options' );
 
                             ob_start();
-                            upb_get_template( sprintf( "shortcodes/%s.php", $tag ), compact( 'attributes', 'contents', 'settings' ) );
+                            upb_get_template( sprintf( "shortcodes/%s.php", $tag ), compact( 'attributes', 'contents', 'settings' ), $_upb_options[ 'third_party_path' ] );
 
                             return ob_get_clean();
                         } );
@@ -167,20 +172,18 @@
                 if ( is_callable( $preview_template_fn ) ) {
                     add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', $tag ), $preview_template_fn );
                 } else {
-                    add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', $tag ), function () use ( $tag ) {
+                    add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', $tag ), function () use ( $tag, $_upb_options ) {
 
                         if ( ! current_user_can( 'customize' ) ) {
-                            status_header( 403 );
-                            wp_send_json_error( 'upb_not_allowed' );
+                            wp_send_json_error( 'upb_not_allowed', 403 );
                         }
 
                         if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-                            status_header( 400 );
-                            wp_send_json_error( 'bad_nonce' );
+                            wp_send_json_error( 'bad_nonce', 400 );
                         }
 
                         ob_start();
-                        upb_get_template( sprintf( "previews/%s.php", $tag ) );
+                        upb_get_template( sprintf( "previews/%s.php", $tag ), $_upb_options[ 'third_party_path' ] );
                         wp_send_json_success( ob_get_clean() );
                     } );
                 }
