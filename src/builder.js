@@ -1,10 +1,8 @@
 import Vue from 'vue'
 import store from './store'
 import router from './router'
-
 import UPBSidebar from './UPBSidebar.vue'
 import UPBPreview from './UPBPreview.vue'
-
 import VueNProgress from './plugins/vue-nprogress'
 
 Vue.use(VueNProgress);
@@ -52,12 +50,8 @@ const previewWindow = {
                     store
                 },
                 render : createElement => createElement(UPBPreview)
-            })
-            //.$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById('upb-preview'))
-                .$mount(window.frames['upb-preview-frame'].contentWindow.document.getElementById(settings.position))
-
+            }).$mount(store.previewDocument().getElementById(settings.position))
         }
-
     },
 
     setUrl(){

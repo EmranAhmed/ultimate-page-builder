@@ -380,6 +380,7 @@
                 'preview'   => array(
                     //'css' => upb_templates_uri( 'preview-css/sections.css' ),
                     //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                    //'inline_js' => 'console.log("Hello Again");',
                 ),
                 'shortcode' => array(
                     //'css' => upb_templates_uri( 'preview-css/sections.css' ),
@@ -486,6 +487,7 @@
                 'preview'   => array(
                     //'css' => upb_templates_uri( 'preview-css/sections.css' ),
                     //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                    //'inline_js' => 'console.log("Hello Again");',
                 ),
                 'shortcode' => array(
                     //'css' => upb_templates_uri( 'preview-css/sections.css' ),
@@ -576,6 +578,7 @@
                 'preview'   => array(
                     //'css' => upb_templates_uri( 'preview-css/sections.css' ),
                     //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                    //'inline_js' => 'console.log("Hello Again");',
                 ),
                 'shortcode' => array(
                     //'css' => upb_templates_uri( 'preview-css/sections.css' ),
@@ -694,10 +697,9 @@
 
             'assets' => array(
                 'preview'   => array(
-                    'css'       => upb_templates_uri( 'preview-css/sections.css' ),
+                    //'css'       => upb_templates_uri( 'preview-css/sections.css' ),
                     //'js'     => upb_templates_uri( 'preview-js/sections.js' ),
-                    'js'        => 'https://luke-chang.github.io/js-spatial-navigation/spatial_navigation.js',
-                    'inline_js' => 'jQuery("a, .focusable").SpatialNavigation(); console.log("SpatialNavigation worked");',
+                    //'inline_js' => 'console.log("Hello Again");',
                 ),
                 'shortcode' => array(
                     //'css' => upb_templates_uri( 'preview-css/sections.css' ),
