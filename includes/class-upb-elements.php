@@ -74,6 +74,12 @@
                 if ( ! isset( $_upb_options[ 'assets' ][ 'preview' ][ 'js' ] ) ) {
                     $_upb_options[ 'assets' ][ 'preview' ][ 'js' ] = FALSE;
                 }
+
+                // each time init script
+                if ( ! isset( $_upb_options[ 'assets' ][ 'preview' ][ 'run_js' ] ) ) {
+                    $_upb_options[ 'assets' ][ 'preview' ][ 'run_js' ] = FALSE;
+                }
+
                 if ( ! isset( $_upb_options[ 'assets' ][ 'preview' ][ 'css' ] ) ) {
                     $_upb_options[ 'assets' ][ 'preview' ][ 'css' ] = FALSE;
                 }

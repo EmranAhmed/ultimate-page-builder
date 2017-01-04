@@ -162,6 +162,7 @@
         endif;
     }
 
+    // add_action upb_boilerplate_print_footer_scripts with upb_get_template
     function upb_add_script_template( $id, $contents ) {
         echo '<script type="text/x-template" id="upb-' . $id . '-template">';
         echo $contents;

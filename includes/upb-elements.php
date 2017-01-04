@@ -694,8 +694,10 @@
 
             'assets' => array(
                 'preview'   => array(
-                    //'css' => upb_templates_uri( 'preview-css/sections.css' ),
-                    //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                    'css'       => upb_templates_uri( 'preview-css/sections.css' ),
+                    //'js'     => upb_templates_uri( 'preview-js/sections.js' ),
+                    'js'        => 'https://luke-chang.github.io/js-spatial-navigation/spatial_navigation.js',
+                    'inline_js' => 'jQuery("a, .focusable").SpatialNavigation(); console.log("SpatialNavigation worked");',
                 ),
                 'shortcode' => array(
                     //'css' => upb_templates_uri( 'preview-css/sections.css' ),

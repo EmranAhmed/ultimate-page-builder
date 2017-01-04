@@ -1,12 +1,8 @@
 import Vue from 'vue';
-
 import store from './store'
-
 import globalPreviewMixins from './globalPreviewMixins';
 import componentPreviewMixins from './componentPreviewMixins';
-
 import Droppable from './plugins/vue-droppable'
-
 import PreviewElement from './plugins/vue-preview-element'
 import UPBPreviewMiniToolbar from './components/extra/UPBPreviewMiniToolbar.vue'
 
@@ -33,9 +29,6 @@ store.getAllUPBElements(elements => {
                     template : templateData,
                     mixins   : [globalPreviewMixins, upbComponentMixins, componentMixins]
                 });
-
-                store.loadPreviewAssets(element.tag, element._upb_options.assets.preview);
-
             })
         });
     });

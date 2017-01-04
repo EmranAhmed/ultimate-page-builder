@@ -24,6 +24,10 @@ class store {
         return this.elements.includes(tag);
     }
 
+    previewDocument() {
+        return window.frames[this.preview].contentWindow.document;
+    }
+
     reloadPreview() {
         window.frames[this.preview].contentWindow.location.reload();
     }
@@ -235,27 +239,6 @@ class store {
             error   : error,
             data    : {
                 _nonce : this.status._nonce
-            }
-        });
-    }
-
-    loadPreviewAssets(name, assets) {
-        _.each(assets, (url, type)=> {
-            if (!_.isEmpty(url)) {
-                let prefix  = `upb_preview_assets_${name}-${type}`;
-                let preview = jQuery(window.frames[this.preview].contentWindow.document);
-
-                if (jQuery(`#${prefix}`, preview).length > 0) {
-                    return false;
-                }
-
-                if (type == 'css') {
-                    jQuery('head', preview).append(`<link rel="stylesheet" id="${prefix}" type="text/css" href="${url}" />`);
-                }
-
-                if (type == 'js') {
-                    jQuery('head', preview).append(`<script id="${prefix}" type="text/javascript" src="${url}"></script>`);
-                }
             }
         });
     }
