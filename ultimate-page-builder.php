@@ -95,11 +95,30 @@
                 add_action( 'wp', array( $this, 'upb_enabled' ) );
                 add_action( 'wp', array( $this, 'ui_functions' ), 11 );
                 add_action( 'send_headers', array( $this, 'no_cache_headers' ) );
-                add_filter( 'page_row_actions', array( $this, 'addRowActions' ), 10, 2 );
-                add_filter( 'post_row_actions', array( $this, 'addRowActions' ), 10, 2 );
+                add_filter( 'page_row_actions', array( $this, 'add_row_actions' ), 10, 2 );
+                add_filter( 'post_row_actions', array( $this, 'add_row_actions' ), 10, 2 );
+
+                // Admin Script
+                add_action( 'admin_print_scripts-post-new.php', array( $this, 'load_admin_scripts' ) );
+                add_action( 'admin_print_scripts-post.php', array( $this, 'load_admin_scripts' ) );
             }
 
-            public function addRowActions( $actions, $post ) {
+            public function load_admin_scripts() {
+                global $post_type;
+
+                if ( in_array( $post_type, $this->get_allowed_post_types() ) ) {
+                    $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+                    wp_enqueue_script( 'upb-admin-editor', UPB_PLUGIN_ASSETS_URI . "js/admin-editor-tab$suffix.js", array( 'jquery' ), FALSE, TRUE );
+
+
+                    wp_localize_script( 'upb-admin-editor', '_upb_admin_editor', array(
+                        'edit_link' => upb_get_edit_link(),
+                        'edit_text' => esc_html__( 'Edit with Ultimate Page Builder', 'ultimate-page-builder' )
+                    ) );
+                }
+            }
+
+            public function add_row_actions( $actions, $post ) {
 
                 if ( upb_is_buildable( $post ) ) {
                     $url                        = upb_get_edit_link( $post );
@@ -110,7 +129,7 @@
                 return $actions;
             }
 
-            public function getPost( $post_id = '' ) {
+            public function get_post( $post_id = '' ) {
 
                 // Allow pass through of full post objects
                 if ( isset( $post_id->ID ) ) {
@@ -140,14 +159,14 @@
 
             }
 
-            public function getAllowedPostTypes() {
+            public function get_allowed_post_types() {
                 return apply_filters( 'upb_allowed_post_types', array( 'page' ) );
             }
 
-            public function isPostTypeAllowed( $post_id = '' ) {
-                $post = $this->getPost( $post_id );
+            public function is_post_type_allowed( $post_id = '' ) {
+                $post = $this->get_post( $post_id );
 
-                return ( $post && in_array( $post->post_type, $this->getAllowedPostTypes() ) );
+                return ( $post && in_array( $post->post_type, $this->get_allowed_post_types() ) );
             }
 
             public function ui_functions() {

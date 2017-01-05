@@ -45,7 +45,11 @@
     }
 
     function upb_get_edit_link( $post = 0 ) {
-        return esc_url( add_query_arg( 'upb', '1', get_permalink( $post ) ) );
+        if ( is_admin() ) {
+            return esc_url( add_query_arg( 'upb', '1', wp_get_shortlink( $post ) ) );
+        } else {
+            return esc_url( add_query_arg( 'upb', '1', get_permalink( $post ) ) );
+        }
     }
 
     function upb_get_preview_link() {
@@ -68,7 +72,7 @@
     }
 
     function upb_is_buildable( $post = '' ) {
-        return apply_filters( 'upb_has_access', TRUE ) && UPB()->isPostTypeAllowed( $post );
+        return apply_filters( 'upb_has_access', TRUE ) && UPB()->is_post_type_allowed( $post );
     }
 
     function upb_is_preview() {

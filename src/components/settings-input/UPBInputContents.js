@@ -8,13 +8,17 @@ export default {
     mixins : [common],
     data(){
         return {
-            l10n   : store.l10n,
-            markup : ''
+            l10n : store.l10n
+        }
+    },
+
+    computed : {
+        wrapperId(){
+            return `wrapper-${this.attributes._id}`
         }
     },
 
     beforeDestroy(){
-
         // Reset data
         tinymce.EditorManager.execCommand('mceRemoveEditor', true, this.attributes._id);
 
@@ -29,8 +33,6 @@ export default {
         tinyMCEPreInit.mceInit[this.attributes._id]          = extend(true, {}, tinyMCEPreInit.mceInit['upb-editor-template']);
         tinyMCEPreInit.mceInit[this.attributes._id].id       = this.attributes._id;
         tinyMCEPreInit.mceInit[this.attributes._id].selector = '#' + this.attributes._id;
-        tinyMCEPreInit.qtInit[this.attributes._id]           = extend(true, {}, tinyMCEPreInit.qtInit['upb-editor-template']);
-        tinyMCEPreInit.qtInit[this.attributes._id].id        = this.attributes._id;
         tinyMCEPreInit.mceInit[this.attributes._id].setup    = (editor) => {
             editor.on('input change NodeChange', (e) => {
                 editor.save();
@@ -38,40 +40,38 @@ export default {
             });
         };
 
-        this.markup = this.l10n.editorTemplate.replace(new RegExp('upb-editor-template', 'g'), this.attributes._id).replace(new RegExp('%%UPB_EDITOR_CONTENTS%%', 'g'), this.input);
+        tinyMCEPreInit.qtInit[this.attributes._id]    = extend(true, {}, tinyMCEPreInit.qtInit['upb-editor-template']);
+        tinyMCEPreInit.qtInit[this.attributes._id].id = this.attributes._id;
     },
 
     mounted(){
 
-        this.$el.querySelector(`#wrapper-${this.attributes._id}`).innerHTML = this.markup;
-
-        /*this.$el.querySelectorAll('.button.insert-media.add_media').forEach(function (el) {
-         el.innerHTML = '<span class="wp-media-buttons-icon"></span>';
-         });*/
+        this.$el.querySelector(`#wrapper-${this.attributes._id}`).innerHTML = this.editorTemplate();
 
         // [...this.$el.querySelectorAll('.button.insert-media.add_media')].map()
         Array.from(this.$el.querySelectorAll('.button.insert-media.add_media'), el => {
             el.innerHTML = '<span class="wp-media-buttons-icon"></span>';
         });
 
-        let UPBQuickTag = quicktags(tinyMCEPreInit.qtInit[this.attributes._id]);
+        tinymce.init(tinyMCEPreInit.qtInit[this.attributes._id]);
 
+        let UPBQuickTag = quicktags(tinyMCEPreInit.qtInit[this.attributes._id]);
         UPBQuickTag.canvas.addEventListener('input', (event) => {
             this.saveValue(UPBQuickTag.canvas.value)
-        })
+        });
 
         UPBQuickTag.toolbar.addEventListener('click', (event) => {
             this.saveValue(UPBQuickTag.canvas.value)
-        })
-
-        tinymce.init(tinyMCEPreInit.mceInit[this.attributes._id]);
+        });
 
         QTags._buttonsInit();
 
-        window.wpActiveEditor = this.attributes._id;
-        window.switchEditors.go(this.attributes._id, 'tmce'); // tmce | html
-
-        delete QTags.instances[0];
+        // run this code in the next run loop
+        _.defer(_=> {
+            window.switchEditors.go(this.attributes._id, 'tmce'); // tmce | html
+            window.wpActiveEditor = this.attributes._id;
+            delete QTags.instances[0];
+        }, this);
     },
 
     watch : {
@@ -81,6 +81,9 @@ export default {
     },
 
     methods : {
+        editorTemplate(){
+            return this.l10n.editorTemplate.replace(new RegExp('upb-editor-template', 'g'), this.attributes._id).replace(new RegExp('%%UPB_EDITOR_CONTENTS%%', 'g'), this.input);
+        },
         saveValue(data){
             this.input = store.wpKsesPost(data)
         }

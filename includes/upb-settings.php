@@ -259,13 +259,13 @@
         );
         $settings->register( 'test5', $options );
 
-        /*$options = array(
-            'type'  => 'editor',
-            'title' => 'Editor',
-            'desc'  => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
-            'default' => '<p>CONTENTS</p>',
+        $options = array(
+            'type'    => 'editor',
+            'title'   => 'Editor',
+            'desc'    => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
+            'default' => '<p>CONTENTS OKOKOK</p>',
         );
-        $settings->register( 'test6', $options );*/
+        $settings->register( 'test6', $options );
 
 
         // ==============================================

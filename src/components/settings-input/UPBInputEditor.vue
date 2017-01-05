@@ -5,7 +5,7 @@
                 <span class="title" v-text="attributes.title"></span>
             </label>
 
-            <div :id="`wrapper-${attributes._id}`"></div>
+            <div :id="wrapperId"></div>
 
             <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
 
