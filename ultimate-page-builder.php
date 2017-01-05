@@ -55,52 +55,72 @@
 
             public function includes() {
 
-                // Common
-                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-functions.php";
-                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-template-functions.php";
+                if ( $this->has_required_php_version() ) {
+                    // Common
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "upb-functions.php";
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "upb-template-functions.php";
 
-                // Defines
-                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-elements.php";
-                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-settings.php";
-                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-layouts.php";
+                    // Defines
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "upb-elements.php";
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "upb-settings.php";
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "upb-layouts.php";
 
-                // TABS
-                require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-tabs.php";
+                    // TABS
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-tabs.php";
 
-                // Settings
-                require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-settings.php";
+                    // Settings
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-settings.php";
 
-                // Elements
-                require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-elements.php";
-                require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-elements-props.php";
+                    // Elements
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-elements.php";
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-elements-props.php";
 
-                // Layouts
-                require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-layouts.php";
+                    // Layouts
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-layouts.php";
 
-                // Boilerplate
-                require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-boilerplate.php";
+                    // Boilerplate
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-boilerplate.php";
 
 
-                // Preview
-                require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-preview.php";
+                    // Preview
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-preview.php";
 
-                // Load
-                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-hooks.php";
-                require_once UPB_PLUGIN_INCLUDE_PATH . "upb-ajax-functions.php";
-
+                    // Load
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "upb-hooks.php";
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "upb-ajax-functions.php";
+                }
             }
 
             public function hooks() {
+                add_action( 'admin_notices', array( $this, 'php_requirement_notice' ) );
                 add_action( 'init', array( $this, 'language' ) );
-                add_action( 'wp', array( $this, 'upb_enabled' ) );
-                add_action( 'wp', array( $this, 'ui_functions' ), 11 );
-                add_action( 'send_headers', array( $this, 'no_cache_headers' ) );
-                add_filter( 'page_row_actions', array( $this, 'add_row_actions' ), 10, 2 );
-                add_filter( 'post_row_actions', array( $this, 'add_row_actions' ), 10, 2 );
 
-                // Admin Script
-                add_action( 'admin_print_scripts-post-new.php', array( $this, 'load_admin_scripts' ) );
-                add_action( 'admin_print_scripts-post.php', array( $this, 'load_admin_scripts' ) );
+                if ( $this->has_required_php_version() ) {
+                    add_action( 'wp', array( $this, 'upb_enabled' ) );
+                    add_action( 'wp', array( $this, 'ui_functions' ), 11 );
+                    add_action( 'send_headers', array( $this, 'no_cache_headers' ) );
+                    add_filter( 'page_row_actions', array( $this, 'add_row_actions' ), 10, 2 );
+                    add_filter( 'post_row_actions', array( $this, 'add_row_actions' ), 10, 2 );
+
+                    // Admin Script
+                    add_action( 'admin_print_scripts-post-new.php', array( $this, 'load_admin_scripts' ) );
+                    add_action( 'admin_print_scripts-post.php', array( $this, 'load_admin_scripts' ) );
+                }
+            }
+
+            public function has_required_php_version() {
+                return version_compare( PHP_VERSION, '5.3.0', '>' );
+            }
+
+            public function php_requirement_notice() {
+                if ( ! $this->has_required_php_version() ) {
+                    $class   = 'notice notice-error';
+                    $text    = esc_html__( 'Please check PHP version requirement.', 'ultimate-page-builder' );
+                    $link    = esc_url( 'https://wordpress.org/about/requirements/' );
+                    $message = wp_kses( __( "It's required to use latest version of PHP to use <strong>Ultimate Page Builder</strong>.", 'ultimate-page-builder' ), array( 'strong' => array() ) );
+
+                    printf( '<div class="%1$s"><p>%2$s <a target="_blank" href="%3$s">%4$s</a></p></div>', $class, $message, $link, $text );
+                }
             }
 
             public function load_admin_scripts() {
