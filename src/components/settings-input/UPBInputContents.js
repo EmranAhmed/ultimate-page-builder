@@ -70,6 +70,7 @@ export default {
         _.defer(_=> {
             window.switchEditors.go(this.attributes._id, 'tmce'); // tmce | html
             window.wpActiveEditor = this.attributes._id;
+            // tinymce.EditorManager.execCommand( 'mceAddEditor', true, this.attributes._id );
             delete QTags.instances[0];
         }, this);
     },
