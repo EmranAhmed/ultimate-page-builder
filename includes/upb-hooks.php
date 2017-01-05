@@ -63,7 +63,7 @@
         return $contents;
 
 
-    } );
+    }, 20 );
 
     // Body Class
     add_filter( 'body_class', function ( $classes ) {
