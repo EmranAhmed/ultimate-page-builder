@@ -56,6 +56,15 @@ const previewWindow = {
 
     setUrl(){
         document.getElementById('upb-preview-frame').src = document.getElementById('upb-preview-frame').dataset.url;
+    },
+
+    addBlankTarget(){
+
+        let elements = store.previewDocument().querySelectorAll('a, form');
+
+        Array.from(elements, element=> {
+            element.setAttribute('target', '_blank');
+        })
     }
 };
 
@@ -66,5 +75,6 @@ window.addEventListener('load', _=> {
 
 document.getElementById("upb-preview-frame").addEventListener('load', _=> {
     //console.log('Preview loaded');
+    previewWindow.addBlankTarget();
     previewWindow.mount();
 });
