@@ -1,4 +1,4 @@
-# Ultimate Page Builder for WordPress
+# Ultimate Page Builder
 
 ## Using NPM
 
@@ -13,7 +13,7 @@
 
 ## Using Yarn
 
-## Development
+### Development
 - `yarn install`
 - `yarn run dev`
 - Check [Yarn Usage](https://yarnpkg.com/en/docs/usage)
@@ -21,6 +21,11 @@
 
 ### Build
 - `yarn run build`
+
+### Bundle
+
+- Remove CSS / JS from `assets/css` and `assets/js`
+- `yarn run bundle`
 
 ### Add package
 
