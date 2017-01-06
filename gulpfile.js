@@ -67,7 +67,7 @@ gulp.task('bundle', _=> {
                      'languages',
                      'templates',
                      'LICENSE.txt',
-                     'README.md',
+                     'README.txt',
                      `${bundledir}.php`];
 
     fsExtra.ensureDir(copyto, function (err) {
