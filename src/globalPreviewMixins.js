@@ -26,8 +26,6 @@ export default{
         this.$watch('model.attributes', function (newVal, oldVal) {
             this.addClass();
         }, {deep : true});
-
-        //
     },
 
     mounted(){

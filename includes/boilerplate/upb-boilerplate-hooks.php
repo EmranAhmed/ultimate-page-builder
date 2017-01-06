@@ -240,7 +240,6 @@
         );
     } );
 
-
     // Row
     add_filter( 'upb_row_list_toolbar', function ( $tools ) {
         $tools[ 'move' ] = array(
@@ -280,7 +279,6 @@
 
         return $tools;
     } );
-
 
     add_filter( 'upb_row_contents_panel_toolbar', function ( $tools ) {
         return array(
@@ -401,13 +399,12 @@
 
     } );
 
-
     // Backend Scripts
     add_action( 'upb_boilerplate_enqueue_scripts', function () {
 
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-        // Color
 
+        // Color
         wp_register_style( 'dashicon', includes_url( "/css/dashicons$suffix.css" ) );
         wp_register_style( 'select2', UPB_PLUGIN_ASSETS_URI . "css/select2$suffix.css" );
         wp_register_script( 'select2', UPB_PLUGIN_ASSETS_URI . "js/select2$suffix.js", array( 'jquery' ), FALSE, TRUE );
@@ -424,7 +421,6 @@
         wp_register_script( 'wp-color-picker-alpha', UPB_PLUGIN_ASSETS_URI . "js/wp-color-picker-alpha$suffix.js", array( 'wp-color-picker' ), FALSE, TRUE );
 
     } );
-
 
     // Load Scripts :)
     add_action( 'upb_boilerplate_print_styles', function () {
@@ -540,7 +536,6 @@
             'closeUrl'             => esc_url( add_query_arg( 'preview', 'true', get_permalink() ) ),
             'ajaxUrl'              => esc_url( admin_url( 'admin-ajax.php', 'relative' ) ),
 
-
             // Templates
             'layoutPlaceholder'    => upb_assets_uri( 'images/layout-placeholder.png' ),
             'editorTemplate'       => upb_wp_editor_template(),
@@ -561,33 +556,25 @@ const LogicalPanel = {
 }
 </script>" );
 
-
-        print( '<script type="text/x-template" id="extra-input-template">
-
-
+print( '<script type="text/x-template" id="extra-input-template">
 <li :class="typeClass()">
         <div class="form-group">
             <label>
                 <span class="title" v-text="attributes.title"></span>
                 <input class="text-input" type="text" v-model="input" :id="attributes._id" :placeholder="attributes.placeholder">
             </label>
-
             <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
-
         </div>
 </li>
-
-
 </script>' );
 
-
-        print( "<script>
+print( "<script>
 const upbExtraInput = {
   // template: '<span> Input Extra </span>',
-     template: '#extra-input-template',
+   template: '#extra-input-template',
    created(){
    //console.log(this.attributes)
     },
 }
 </script>" );
-    } );
+} );

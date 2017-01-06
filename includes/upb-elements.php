@@ -699,7 +699,7 @@
                 'preview'   => array(
                     //'css'       => upb_templates_uri( 'preview-css/sections.css' ),
                     //'js'     => upb_templates_uri( 'preview-js/sections.js' ),
-                    //'inline_js' => 'console.log("Hello Again");',
+                    //'inline_js' => ';(function () { console.log("Hello Again") }());',
                 ),
                 'shortcode' => array(
                     //'css' => upb_templates_uri( 'preview-css/sections.css' ),
