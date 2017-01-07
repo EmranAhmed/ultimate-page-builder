@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:9
+#: includes/boilerplate/upb-boilerplate-hooks.php:9, includes/upb-elements.php:45
 msgid "Add Element"
 msgstr ""
 
@@ -377,10 +377,6 @@ msgstr ""
 msgid "Ultimate Page builder tab \"%s\" already registered."
 msgstr ""
 
-#: includes/upb-elements.php:45
-msgid "Click to Add Element"
-msgstr ""
-
 #: includes/upb-elements.php:402, includes/upb-elements.php:513, includes/upb-elements.php:597
 msgid "Title"
 msgstr ""
@@ -447,6 +443,34 @@ msgstr ""
 
 #: includes/upb-hooks.php:110
 msgid "Use Ultimate Page Builder"
+msgstr ""
+
+#: includes/upb-settings.php:10
+msgid "Enable / Disable"
+msgstr ""
+
+#: includes/upb-settings.php:11
+msgid "Enable or Disable page builder for this page."
+msgstr ""
+
+#: includes/upb-settings.php:21
+msgid "Elements Position"
+msgstr ""
+
+#: includes/upb-settings.php:22
+msgid "Choose where you want to show page builder elements based on main contents"
+msgstr ""
+
+#: includes/upb-settings.php:26
+msgid "Before Contents"
+msgstr ""
+
+#: includes/upb-settings.php:27
+msgid "Instead of Contents"
+msgstr ""
+
+#: includes/upb-settings.php:28
+msgid "After Contents"
 msgstr ""
 
 #: includes/upb-template-functions.php:52
