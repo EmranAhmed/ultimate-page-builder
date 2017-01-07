@@ -520,9 +520,9 @@
         $_upb_options = array(
 
             'element' => array(
-                'name'   => esc_html__( 'Accordion Item', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-playlist-plus',
-                'nested' => TRUE
+                'name'  => esc_html__( 'Accordion Item', 'ultimate-page-builder' ),
+                'icon'  => 'mdi mdi-playlist-plus',
+                'child' => TRUE
             ),
 
             'tools' => array(

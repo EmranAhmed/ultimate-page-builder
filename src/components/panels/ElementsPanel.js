@@ -31,7 +31,7 @@ export default {
                     return false;
                 }
                 else {
-                    if (data._upb_options.element.nested) {
+                    if (data._upb_options.element.child) {
                         return false;
                     }
                 }

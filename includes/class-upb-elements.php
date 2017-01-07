@@ -38,8 +38,8 @@
                     $_upb_options[ 'core' ] = TRUE;
                 }
 
-                if ( ! isset( $_upb_options[ 'element' ][ 'nested' ] ) ) {
-                    $_upb_options[ 'element' ][ 'nested' ] = FALSE;
+                if ( ! isset( $_upb_options[ 'element' ][ 'child' ] ) ) {
+                    $_upb_options[ 'element' ][ 'child' ] = FALSE;
                 }
 
                 if ( ! isset( $_upb_options[ 'preview' ] ) ) {
