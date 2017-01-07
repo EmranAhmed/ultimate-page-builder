@@ -1,4 +1,5 @@
 import store from './store'
+import extend from 'extend'
 
 export default{
     props : {
@@ -21,15 +22,24 @@ export default{
 
         this.$watch('model.contents', function (newVal, oldVal) {
             this.addClass();
+            this.setPreviewData();
         });
 
         this.$watch('model.attributes', function (newVal, oldVal) {
             this.addClass();
+            this.setPreviewData();
+            this.inlineScriptInit(true);
         }, {deep : true});
+    },
+
+    beforeDestroy(){
+        this.deletePreviewData();
+        this.removeInlineScript();
     },
 
     mounted(){
         this.addClass();
+        this.setPreviewData();
         this.loadScripts();
     },
 
@@ -38,6 +48,15 @@ export default{
             if (!_.isUndefined(this.model['contents'])) {
                 return this.model.contents.length > 0;
             }
+        },
+        unique_id(){
+            return `upb-${this._uid}`;
+        },
+        attributes(){
+            return this.model.attributes;
+        },
+        contents(){
+            return this.model.contents;
         },
         $router(){
             return this.$root.$data.store.panel._router;
@@ -49,6 +68,29 @@ export default{
 
     methods : {
 
+        setPreviewData(){
+            store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id] = extend(true, {}, {
+                element    : this.$el,
+                attributes : this.attributes,
+                contents   : this.contents
+            });
+        },
+        deletePreviewData(){
+            return delete store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id];
+        },
+
+        removeInlineScript(){
+            if (this.model._upb_options.assets.preview.inline_js) {
+
+                let prefixInlineJS  = `upb_preview_assets_${this.unique_id}-inline-js`;
+                let previewDocument = store.previewDocument();
+
+                if (previewDocument.querySelectorAll(`#${prefixInlineJS}`).length > 0) {
+                    previewDocument.getElementsByTagName('body')[0].removeChild(previewDocument.getElementById(prefixInlineJS));
+                }
+            }
+        },
+
         inlineScriptInit(remove = false){
 
             // NOTE: If inline_js wrapped with <script> tag. then appendChild cannot execute script
@@ -57,13 +99,18 @@ export default{
             if (this.model._upb_options.assets.preview.inline_js) {
                 let previewDocument = store.previewDocument();
                 let script          = document.createElement('script');
-                let prefixInlineJS  = `upb_preview_assets_${this.model.tag}-inline-js`;
-                script.id           = prefixInlineJS;
-                script.type         = 'text/javascript';
-                script.innerHTML    = this.model._upb_options.assets.preview.inline_js;
+                let prefixInlineJS  = `upb_preview_assets_${this.unique_id}-inline-js`;
 
-                if (remove && previewDocument.querySelectorAll(`#${prefixInlineJS}`).length > 0) {
-                    previewDocument.getElementsByTagName('body')[0].removeChild(previewDocument.getElementById(prefixInlineJS));
+                script.id   = prefixInlineJS;
+                script.type = 'text/javascript';
+                // script.innerHTML    =  ;
+
+                script.innerHTML = `;(function(upbComponentId){
+                    ${this.model._upb_options.assets.preview.inline_js}
+                }( '${this.unique_id}' ));`;
+
+                if (remove) {
+                    this.removeInlineScript();
                 }
 
                 previewDocument.getElementsByTagName('body')[0].appendChild(script);
@@ -74,7 +121,7 @@ export default{
 
             let previewDocument = store.previewDocument();
 
-            let prefixInlineJS = `upb_preview_assets_${this.model.tag}-inline-js`;
+            let prefixInlineJS = `upb_preview_assets_${this.unique_id}-inline-js`;
             let prefixJS       = `upb_preview_assets_${this.model.tag}-js`;
             let prefixCSS      = `upb_preview_assets_${this.model.tag}-css`;
 

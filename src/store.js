@@ -28,6 +28,10 @@ class store {
         return window.frames[this.preview].contentWindow.document;
     }
 
+    previewWindow() {
+        return window.frames[this.preview].contentWindow;
+    }
+
     reloadPreview() {
         window.frames[this.preview].contentWindow.location.reload();
     }

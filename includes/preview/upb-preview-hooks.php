@@ -20,6 +20,17 @@
         }
     } );
 
+
+    add_action( 'wp_head', function () {
+        if ( upb_is_preview() ) {
+            do_action( 'upb_preview_wp_head' );
+            echo '<script type="text/javascript">';
+            echo "Object.defineProperty(window, '_UPB_PREVIEW_DATA', { value : {}, writable: false });";
+            echo '</script>';
+        }
+    } );
+
+
     add_action( 'after_setup_theme', function () {
         if ( upb_is_preview() ) {
             do_action( 'upb_preview_after_setup_theme' );

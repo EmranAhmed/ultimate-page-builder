@@ -380,7 +380,7 @@
                 'preview'   => array(
                     //'css' => upb_templates_uri( 'preview-css/sections.css' ),
                     //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
-                    //'inline_js' => 'console.log("Hello Again");',
+                    //'inline_js' => 'console.log( upbComponentId );',
                 ),
                 'shortcode' => array(
                     //'css' => upb_templates_uri( 'preview-css/sections.css' ),
@@ -700,6 +700,7 @@
                     //'css'       => upb_templates_uri( 'preview-css/sections.css' ),
                     //'js'     => upb_templates_uri( 'preview-js/sections.js' ),
                     //'inline_js' => ';(function () { console.log("Hello Again") }());',
+                    'inline_js' => 'console.log( _UPB_PREVIEW_DATA[upbComponentId] );',
                 ),
                 'shortcode' => array(
                     //'css' => upb_templates_uri( 'preview-css/sections.css' ),
