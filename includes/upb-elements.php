@@ -42,7 +42,7 @@
                 ) ),
 
                 'messages' => array(
-                    'addElement' => esc_html__( 'Click to Add Element', 'ultimate-page-builder' )
+                    'addElement' => esc_html__( 'Add Element', 'ultimate-page-builder' )
                 )
             ),
         );
@@ -271,7 +271,7 @@
                 'desc'  => 'Dramatically empower enabled architectures via cutting-edge.',
                 'title' => 'Background Color',
                 'type'  => 'color',
-                'value' => '#ffccff'
+                'value' => '#ffffff'
             ),
         );
 

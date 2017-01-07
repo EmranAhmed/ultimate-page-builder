@@ -3,29 +3,22 @@ import store from '../../store'
 import {sprintf} from 'sprintf-js'
 
 export default {
-
-    name : 'upb-layouts-list',
-
-    props : ['index', 'model'],
-
+    name     : 'upb-layouts-list',
+    props    : ['index', 'model'],
     data(){
         return {
             l10n : store.l10n
         }
     },
-
     computed : {
         image(){
             return this.model.preview ? model.preview : this.l10n.layoutPlaceholder;
         }
     },
-
-    methods : {
-
+    methods  : {
         useLayout(){
             let template = this.model.template.trim();
             try {
-
                 let code = JSON.parse(template);
 
                 // console.log(code);
@@ -34,7 +27,6 @@ export default {
                     if (_.isArray(data)) {
                         store.addContentsToTab('sections', data);
                         this.$toast.success(sprintf(this.l10n.layoutAdded, this.l10n.pageTitle));
-
                         store.stateChanged();
                         this.$router.replace('/sections');
                     }

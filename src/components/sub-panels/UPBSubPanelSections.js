@@ -59,7 +59,7 @@ export default {
                 try {
                     let item = JSON.parse(data);
 
-                    if (item.tag == 'section' && _.isArray(item.contents) && _.isObject(item.attributes)) {
+                    if (item.tag == 'upb-section' && _.isArray(item.contents) && _.isObject(item.attributes)) {
 
                         store.saveSectionToOption(item, (data)=> {
                             this.toggleTextArea();

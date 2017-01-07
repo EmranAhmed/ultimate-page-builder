@@ -23,14 +23,19 @@
         $post_id = absint( $_POST[ 'id' ] );
 
         if ( ! empty( $_POST[ 'shortcode' ] ) ) {
-            update_post_meta( $post_id, '_upb_sections', $_POST[ 'states' ][ 'sections' ] );
-            update_post_meta( $post_id, '_upb_shortcodes', trim( $_POST[ 'shortcode' ] ) );
+
+            $sections   = wp_kses_post_deep( $_POST[ 'states' ][ 'sections' ] );
+            $shortcodes = wp_kses_post( trim( $_POST[ 'shortcode' ] ) );
+
+            update_post_meta( $post_id, '_upb_sections', $sections );
+            update_post_meta( $post_id, '_upb_shortcodes', $shortcodes );
         } else {
             delete_post_meta( $post_id, '_upb_sections' );
             delete_post_meta( $post_id, '_upb_shortcodes' );
         }
 
-        upb_settings()->set_settings( $_POST[ 'states' ][ 'settings' ] );
+        $settings = wp_kses_post_deep( $_POST[ 'states' ][ 'settings' ] );
+        upb_settings()->set_settings( $settings );
 
         wp_send_json_success( TRUE );
 
@@ -74,7 +79,7 @@
         if ( empty( $_POST[ 'contents' ] ) ) {
             $update = update_option( '_upb_saved_sections', array(), FALSE );
         } else {
-            $sections = (array) $_POST[ 'contents' ];
+            $sections = (array) wp_kses_post_deep( $_POST[ 'contents' ] );
             $update   = update_option( '_upb_saved_sections', $sections, FALSE );
         }
 
