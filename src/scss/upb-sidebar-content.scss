@@ -99,9 +99,13 @@ input[type="search"]::-webkit-search-decoration {
             }
           }
         .panel-title {
-          font-size      : 18px;
+          font-size      : 16px;
           text-transform : uppercase;
           font-weight    : 500;
+          text-overflow  : ellipsis;
+          overflow       : hidden;
+          max-width      : 220px;
+          white-space    : nowrap;
           }
         }
 
@@ -120,7 +124,6 @@ input[type="search"]::-webkit-search-decoration {
 
         &.active {
           background : rgba($upb-sidebar-tab-panel-icon-background-color, .5);
-
           }
 
         &:hover {
@@ -134,7 +137,6 @@ input[type="search"]::-webkit-search-decoration {
         &.upb-content-search-toggle {
           bottom : 15px;
           }
-
         }
       }
     }
@@ -632,9 +634,9 @@ input[type="search"]::-webkit-search-decoration {
       }
     }
 
-/* ----------------
- * Description
- *---------------*/
+  /* ----------------
+   * Description
+   *---------------*/
   .description {
     font-weight : normal;
     font-style  : italic;
@@ -643,32 +645,30 @@ input[type="search"]::-webkit-search-decoration {
     font-size   : 12px;
     }
 
- /* ----------------
-  * Elements Panel
-  *---------------*/
-  .upb-elements-panel{
-    .upb-element{
-      width: 49%;
-      display: inline-block;
-      vertical-align: top;
-      text-align: center;
+  /* ----------------
+   * Elements Panel
+   *---------------*/
+  .upb-elements-panel {
+    .upb-element {
+      width          : 49%;
+      display        : inline-block;
+      vertical-align : top;
+      text-align     : center;
 
-
-      > div{
-        font-size: 14px !important;
+      > div {
+        font-size : 14px !important;
         }
 
-      .icon-wrapper{
-        font-size: 24px !important;
-        padding-bottom: 0;
+      .icon-wrapper {
+        font-size      : 24px !important;
+        padding-bottom : 0;
         }
 
-
-      &:nth-child(odd){
-        margin-right: 1%;
+      &:nth-child(odd) {
+        margin-right : 1%;
         }
-      &:nth-child(even){
-        margin-left: 1%;
+      &:nth-child(even) {
+        margin-left : 1%;
         }
       }
     }

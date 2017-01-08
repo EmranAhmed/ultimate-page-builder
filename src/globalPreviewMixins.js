@@ -26,9 +26,7 @@ export default{
         });
 
         this.$watch('model.attributes', function (newVal, oldVal) {
-            this.addClass();
-            this.setPreviewData();
-            this.inlineScriptInit(true);
+            this.attributeWatch();
         }, {deep : true});
     },
 
@@ -68,6 +66,12 @@ export default{
 
     methods : {
 
+        attributeWatch : _.debounce(function () {
+            this.addClass();
+            this.setPreviewData();
+            this.inlineScriptInit(true);
+        }, 800),
+
         setPreviewData(){
             store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id] = extend(true, {}, {
                 element    : this.$el,
@@ -75,6 +79,7 @@ export default{
                 contents   : this.contents
             });
         },
+
         deletePreviewData(){
             return delete store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id];
         },
