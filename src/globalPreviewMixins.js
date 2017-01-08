@@ -175,9 +175,7 @@ export default{
 
         addClass(){
             // No Content Class Added
-
-            console.log(this.contents);
-
+            
             if (this.hasContents) {
                 this.$el.classList.remove('upb-preview-element-no-contents');
             }
