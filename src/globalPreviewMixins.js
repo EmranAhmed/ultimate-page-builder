@@ -43,9 +43,11 @@ export default{
 
     computed : {
         hasContents(){
-            if (!_.isUndefined(this.model['contents'])) {
+            if (_.isArray(this.model['contents'])) {
                 return this.model.contents.length > 0;
             }
+
+            return true;
         },
         unique_id(){
             return `upb-${this._uid}`;
@@ -173,6 +175,9 @@ export default{
 
         addClass(){
             // No Content Class Added
+
+            console.log(this.contents);
+
             if (this.hasContents) {
                 this.$el.classList.remove('upb-preview-element-no-contents');
             }
