@@ -1,26 +1,3 @@
-.upb-column-preview,
-.upb-preview-element-non-core.upb-preview-element-type-container {
-    min-height : 105px;
-    }
-
-.upb-preview-element-no-contents {
-    border : 1px solid #1E67ED !important;
-    }
-
-.upb-add-element-message {
-    position        : absolute !important;
-    padding         : 15px 5px !important;
-    text-decoration : none !important;
-    box-shadow      : none !important;
-    outline         : none !important;
-    color           : #1E67ED !important;
-    }
-
-
-
-
-
-
 .upb-section-preview {
     background-color    : var(--background-color);
     background-image    : var(--background-image);

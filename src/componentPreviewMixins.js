@@ -37,16 +37,6 @@ export default{
             }
         },
 
-        /*created(){
-         this.$watch('model.contents', function (newVal, oldVal) {
-         this.addClass();
-         })
-         },
-
-         mounted(){
-         this.addClass();
-         },*/
-
         methods : {
 
             addClass(){
@@ -61,42 +51,18 @@ export default{
                 rowClass.map(className=>element.classList.add(className));
 
                 // No Content Class Added
-                if (this.hasContents) {
-                    element.classList.remove('upb-preview-element-no-contents')
-                }
-                else {
-                    element.classList.add('upb-preview-element-no-contents')
-                }
-
                 if (!this.model._upb_options.core) {
-                    this.$el.classList.add('upb-preview-element-non-core')
+                    this.$el.classList.add('upb-preview-element-non-core');
                 }
 
                 if (_.isArray(this.model.contents)) {
-                    this.$el.classList.add('upb-preview-element-type-container')
+                    this.$el.classList.add('upb-preview-element-type-container');
                 }
             }
         }
     },
 
     'upb-column' : {
-
-        /*created(){
-
-         this.$watch('model.contents', function (newVal, oldVal) {
-         this.addClass();
-         })
-
-         this.$watch('model.attributes', function (newVal, oldVal) {
-         this.addClass();
-         }, {deep : true})
-
-         //
-         },
-
-         mounted(){
-         this.addClass();
-         },*/
 
         methods : {
 
@@ -130,18 +96,18 @@ export default{
 
                 // No Content Class Added
                 if (this.hasContents) {
-                    this.$el.classList.remove('upb-preview-element-no-contents')
+                    this.$el.classList.remove('upb-preview-element-no-contents');
                 }
                 else {
-                    this.$el.classList.add('upb-preview-element-no-contents')
+                    this.$el.classList.add('upb-preview-element-no-contents');
                 }
 
                 if (!this.model._upb_options.core) {
-                    this.$el.classList.add('upb-preview-element-non-core')
+                    this.$el.classList.add('upb-preview-element-non-core');
                 }
 
                 if (_.isArray(this.model.contents)) {
-                    this.$el.classList.add('upb-preview-element-type-container')
+                    this.$el.classList.add('upb-preview-element-type-container');
                 }
             },
 
@@ -210,7 +176,7 @@ export default{
                     id,
                     title
                 }, data=> {
-                    this.$el.querySelector('.ajax-result').innerHTML = data
+                    this.$el.querySelector('.ajax-result').innerHTML = data;
                 });
             }
         }

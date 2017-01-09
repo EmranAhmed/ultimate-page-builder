@@ -2,11 +2,11 @@
 @import "./node_modules/mdi/scss/materialdesignicons";
 
 .upb-preview-element {
-  position : relative;
+  position    : relative;
   min-height  : 50px;
   padding-top : 25px;
 
-  .upb-preview-mini-toolbar {
+  > .upb-preview-mini-toolbar {
     position  : absolute;
     height    : 100%;
     width     : 100%;
@@ -44,4 +44,53 @@
       border-color : $upb-preview-element-highlight-color;
       }
     }
+
+  /*&.upb-column-preview {
+    border : none;
+    }*/
+
+  &.upb-column-preview,
+  &.upb-preview-element-non-core.upb-preview-element-type-container {
+    min-height : 105px;
+    }
+
+  > .upb-add-element-message {
+    position        : absolute !important;
+    padding         : 5px !important;
+    margin          : 10px 5px !important;
+    text-decoration : none !important;
+    box-shadow      : none !important;
+    outline         : none !important;
+    color           : $upb-preview-element-highlight-color !important;
+    }
+
+  &.upb-preview-element-disabled {
+
+    //&.upb-sidebar-collapsed {
+    background-color : rgba($upb-preview-element-disable-color, 0.05) !important;
+    //  }
+
+    .upb-preview-mini-toolbar {
+      > ul {
+        background-color : $upb-preview-element-disable-color;
+        }
+      &:hover,
+      &.highlight {
+        border-color : $upb-preview-element-disable-color;
+        }
+      }
+
+    &.upb-preview-element-no-contents > .upb-preview-mini-toolbar {
+      border-color : $upb-preview-element-disable-color !important;
+      }
+
+    > .upb-add-element-message {
+      color : $upb-preview-element-disable-color !important;
+      }
+    }
+
+  &.upb-preview-element-no-contents > .upb-preview-mini-toolbar {
+    border-color : $upb-preview-element-highlight-color !important;
+    }
+
   }

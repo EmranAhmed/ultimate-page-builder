@@ -20,13 +20,26 @@ export default {
         }
     },
     data(){
-        return {}
+        return {
+            l10n : store.l10n
+        }
     },
 
     computed : {
 
-        sidebarExpanded(){
+        is_sidebar_expanded(){
             return this.$root.$data.store.sidebarExpanded
+        },
+
+        is_enabled(){
+
+            if (!_.isUndefined(this.model.attributes['enable'])) {
+                return this.model.attributes.enable;
+            }
+            else {
+                return true;
+            }
+
         },
 
         $router(){

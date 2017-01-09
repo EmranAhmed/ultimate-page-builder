@@ -20,12 +20,18 @@ export default{
 
     created(){
 
+        this.$watch('sidebarExpanded', function (newVal, oldVal) {
+            this.addClass();
+        });
+
         this.$watch('model.contents', function (newVal, oldVal) {
             this.addClass();
             this.setPreviewData();
         });
 
         this.$watch('model.attributes', function (newVal, oldVal) {
+            this.addClass();
+            this.setPreviewData();
             this.attributeWatch();
         }, {deep : true});
     },
@@ -58,6 +64,20 @@ export default{
         contents(){
             return this.model.contents;
         },
+        isEnabled(){
+
+            if (!_.isUndefined(this.model.attributes['enable'])) {
+                return this.model.attributes.enable;
+            }
+            else {
+                return true;
+            }
+
+        },
+
+        sidebarExpanded(){
+            return this.$root.$data.store.sidebarExpanded
+        },
         $router(){
             return this.$root.$data.store.panel._router;
         },
@@ -69,17 +89,17 @@ export default{
     methods : {
 
         attributeWatch : _.debounce(function () {
-            this.addClass();
-            this.setPreviewData();
             this.inlineScriptInit(true);
-        }, 800),
+        }, 400),
 
         setPreviewData(){
-            store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id] = extend(true, {}, {
-                element    : this.$el,
-                attributes : this.attributes,
-                contents   : this.contents
-            });
+            if (this.model._upb_options.assets.preview.inline_js) {
+                store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id] = extend(true, {}, {
+                    element    : this.$el,
+                    attributes : this.attributes,
+                    contents   : this.contents
+                });
+            }
         },
 
         deletePreviewData(){
@@ -174,8 +194,22 @@ export default{
         },
 
         addClass(){
+
             // No Content Class Added
-            
+            if (this.sidebarExpanded) {
+                this.$el.classList.remove('upb-sidebar-collapsed');
+            }
+            else {
+                this.$el.classList.add('upb-sidebar-collapsed');
+            }
+
+            if (this.isEnabled) {
+                this.$el.classList.remove('upb-preview-element-disabled');
+            }
+            else {
+                this.$el.classList.add('upb-preview-element-disabled');
+            }
+
             if (this.hasContents) {
                 this.$el.classList.remove('upb-preview-element-no-contents');
             }

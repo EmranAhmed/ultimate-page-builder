@@ -109,7 +109,7 @@
             }
 
             public function has_required_php_version() {
-                return version_compare( PHP_VERSION, '5.3.0', '>' );
+                return version_compare( PHP_VERSION, '5.4' ) >= 0;
             }
 
             public function php_requirement_notice() {
@@ -117,7 +117,7 @@
                     $class   = 'notice notice-error';
                     $text    = esc_html__( 'Please check PHP version requirement.', 'ultimate-page-builder' );
                     $link    = esc_url( 'https://wordpress.org/about/requirements/' );
-                    $message = wp_kses( __( "It's required to use latest version of PHP to use <strong>Ultimate Page Builder</strong>.", 'ultimate-page-builder' ), array( 'strong' => array() ) );
+                    $message = wp_kses( __( "<strong>Ultimate Page Builder</strong> require PHP 5.4 or above.", 'ultimate-page-builder' ), array( 'strong' => array() ) );
 
                     printf( '<div class="%1$s"><p>%2$s <a target="_blank" href="%3$s">%4$s</a></p></div>', $class, $message, $link, $text );
                 }
@@ -130,7 +130,6 @@
                     $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
                     wp_enqueue_script( 'upb-admin-editor', UPB_PLUGIN_ASSETS_URI . "js/admin-editor-tab$suffix.js", array( 'jquery' ), FALSE, TRUE );
 
-
                     wp_localize_script( 'upb-admin-editor', '_upb_admin_editor', array(
                         'edit_link' => upb_get_edit_link(),
                         'edit_text' => esc_html__( 'Edit with Ultimate Page Builder', 'ultimate-page-builder' )
@@ -141,9 +140,7 @@
             public function add_row_actions( $actions, $post ) {
 
                 if ( upb_is_buildable( $post ) ) {
-                    $url                        = upb_get_edit_link( $post );
-                    $label                      = esc_html__( 'Edit with Ultimate Page Builder', 'ultimate-page-builder' );
-                    $actions[ 'edit_with_upb' ] = "<a href=\"$url\">$label</a>";
+                    $actions[ 'edit_with_upb' ] = sprintf( '<a href="%s">%s</a>', upb_get_edit_link( $post ), esc_html__( 'Edit with Ultimate Page Builder', 'ultimate-page-builder' ) );
                 }
 
                 return $actions;
