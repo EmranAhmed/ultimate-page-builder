@@ -1,5 +1,5 @@
 <template>
-    <li :class="typeClass()">
+    <li :class="typeClass()" v-if="isRequired">
         <div class="form-group">
             <label>
                 <span class="title" v-text="attributes.title"></span>

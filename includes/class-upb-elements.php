@@ -113,6 +113,20 @@
                 foreach ( $settings as $key => $setting ) {
                     // $attributes[ $index ][ 'metaKey' ]   = $attribute[ 'id' ];
 
+
+                    // Require
+                    //===================
+                    // require=>array(
+                    // array('title', '!=', '' ),
+                    // array( 'title', '==', 'xxx')
+                    // )
+                    //
+                    // array( array('title', '!=', '') ) // if depended value is array check length or check text
+
+                    if ( ! isset( $settings[ $key ][ 'require' ] ) || ! is_array( $settings[ $key ][ 'require' ] ) ) {
+                        $settings[ $key ][ 'require' ] = FALSE;
+                    }
+
                     // Have Default but no value
                     if ( isset( $settings[ $key ][ 'default' ] ) && ! isset( $settings[ $key ][ 'value' ] ) ) {
                         $settings[ $key ][ 'value' ] = $settings[ $key ][ 'default' ];

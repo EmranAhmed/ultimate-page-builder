@@ -23,6 +23,7 @@ const fieldsComponents = {
     'upb-input-device-hidden'             : require('./UPBInputHiddenDevice.vue'),
     'upb-input-background-image'          : require('./UPBInputBackgroundImage.vue'),
     'upb-input-background-image-position' : require('./UPBInputBackgroundImagePosition.vue'),
+    'upb-input-radio-icon'                : require('./UPBInputRadioIcon.vue'),
 
 };
 

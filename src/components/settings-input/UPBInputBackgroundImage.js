@@ -11,12 +11,6 @@ export default {
     name   : 'upb-input-background-image',
     mixins : [common],
 
-    computed : {
-        positions(){
-            return this.getValueOf(this.attributes.use);
-        }
-    },
-
     methods : {
         onSelect(e, id, src){
             this.input = src;

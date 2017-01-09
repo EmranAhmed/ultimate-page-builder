@@ -225,15 +225,33 @@
                 'options' => upb_responsive_hidden()
             ),
 
+            array(
+                'id'      => 'chooseing',
+                'title'   => 'Backgrounds',
+                'desc'    => 'Objectively scale backward-compatible customer service via.',
+                'type'    => 'radio-icon',
+                'value'   => 'none',
+                'options' => array(
+                    'none'  => array( 'title' => 'No background', 'icon' => 'mdi mdi-close-octagon-outline' ),
+                    'color' => array( 'title' => 'Background Color', 'icon' => 'mdi mdi-format-color-fill' ),
+                    'image' => array( 'title' => 'Background Image', 'icon' => 'mdi mdi-image' ),
+                    'video' => array( 'title' => 'Background Video', 'icon' => 'mdi mdi-video' )
+                )
+            ),
+
 
             array(
-                'id'          => 'bgimageposition',
-                'title'       => 'Background Image Position',
-                'type'        => 'background-image-position',
-                'desc'        => 'Dramatically simplify cost effective systems with..',
-                'value'       => '0% 0%',
-                'placeholder' => '0% 0%',
+                'id'      => 'bgcolorzzz',
+                'title'   => 'Background Color xxx',
+                'type'    => 'color',
+                'desc'    => 'Dramatically empower enabled architectures via cutting-edge.',
+                'value'   => 'rgba(255,255,255,0)',
+                'alpha'   => TRUE,
+                'require' => array(
+                    array( 'chooseing', '=', 'color' )
+                )
             ),
+
 
             array(
                 'id'          => 'bgimage',
@@ -248,6 +266,21 @@
                     'add'    => 'Use',
                     'remove' => 'Remove',
                     'choose' => 'Choose',
+                ),
+                'require'     => array(
+                    array( 'chooseing', '=', 'image' )
+                )
+            ),
+
+            array(
+                'id'          => 'bgimageposition',
+                'title'       => 'Background Image Position',
+                'type'        => 'background-image-position',
+                'desc'        => 'Dramatically simplify cost effective systems with..',
+                'value'       => '0% 0%',
+                'placeholder' => '0% 0%',
+                'require'     => array(
+                    array( 'bgimage', '!=', '' )
                 )
             ),
 

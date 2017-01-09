@@ -499,7 +499,6 @@ button:focus {
 
     .device-hidden-input {
       display         : flex;
-      -ms-flex-pack   : distribute;
       justify-content : space-around;
       background      : #FFFFFF;
       border          : 1px solid #DDDDDD;
@@ -535,6 +534,51 @@ button:focus {
       }
     }
 
+  /*-----------------------
+ * Device Hidden Field
+ *----------------------*/
+  &.radio-icon-field-wrapper {
+    input[type="radio"], input[type="checkbox"] {
+      visibility : hidden;
+      position   : absolute;
+      }
+
+    .device-hidden-input {
+      display         : flex;
+      justify-content : space-around;
+      background      : #FFFFFF;
+      border          : 1px solid $upb-sidebar-tab-active-background-color;
+      border-radius   : 2px;
+
+      label {
+        position     : relative;
+        font-size    : 20px;
+        flex         : 1;
+        padding      : 7px;
+        border-right : 1px solid $upb-sidebar-tab-active-background-color;
+        text-align   : center;
+        cursor       : pointer;
+        height       : 30px;
+
+        &:last-child {
+          border : 0;
+          }
+        i {
+          position    : absolute;
+          width       : 100%;
+          height      : 100%;
+          left        : 0;
+          top         : 0;
+          line-height : 30px;
+          }
+        }
+      }
+
+    input:checked + i {
+      background : $upb-sidebar-tab-active-background-color;
+      color      : #FFFFFF;
+      }
+    }
   }
 
 /*-----------------------
@@ -564,8 +608,8 @@ button:focus {
       box-sizing   : border-box;
       margin-right : 3%;
 
-      &::-webkit-input-placeholder{
-        font-size: 12px;
+      &::-webkit-input-placeholder {
+        font-size : 12px;
         }
       }
     button {

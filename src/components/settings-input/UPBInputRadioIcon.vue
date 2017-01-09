@@ -1,11 +1,15 @@
 <template>
     <li :class="typeClass()" v-if="isRequired">
         <div class="form-group">
+
             <span class="title" v-text="attributes.title"></span>
-            <label v-for="(label, value) in attributes.options">
-                <input class="checkbox-input" type="checkbox" :value="value" v-model="input">
-                <span v-text="label"></span>
-            </label>
+
+            <div class="device-hidden-input">
+                <label v-for="(option, value) in attributes.options">
+                    <input class="device-hidden-input" type="radio" :value="value" v-model="input">
+                    <i :class="option.icon" :title="option.title"></i>
+                </label>
+            </div>
 
             <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
         </div>
@@ -14,10 +18,11 @@
 <script>
 
     import common from './common'
+    //import store from '../../store'
 
     export default {
-        name   : 'upb-input-checkbox',
+        name   : 'upb-input-radio-icon',
         props  : ['index', 'target', 'model', 'attributes'], // model[target]
-        mixins : [common],
+        mixins : [common]
     }
 </script>

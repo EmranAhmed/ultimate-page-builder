@@ -5,8 +5,9 @@ export default{
     props : ['index', 'target', 'model', 'attributes', 'item', 'items', 'keyindexname', 'keyvaluename', 'defaultValue'], // model[target]
     data(){
         return {
-            input : this.model[this.target],
-            l10n  : store.l10n,
+            input     : this.model[this.target],
+            l10n      : store.l10n,
+            showInput : true
         }
     },
 
@@ -22,20 +23,89 @@ export default{
 
         value(){
             return this.model[this.target];
+        },
+
+        useAttributeValue(){
+            if (this.attributes.use) {
+                return this.getValueOf(this.attributes.use);
+            }
+        },
+
+        isRequired(){
+            return this.showInput;
         }
     },
 
     watch : {
+
         input(value, oldValue){
             this.setValue(value);
         },
 
         value(value, oldValue){
             Vue.set(this, 'input', value);
+        },
+
+        items : {
+            handler : function (value, oldValue) {
+                this.checkRequired();
+            },
+            deep    : true
         }
     },
 
+    created(){
+        this.checkRequired();
+    },
+
     methods : {
+
+        checkRequired(){
+            if (this.attributes.require) {
+
+                // console.log(this.attributes.title);
+
+                this.showInput = this.attributes.require.every((request)=> {
+
+                    let [id, operator, desireValue] = request;
+                    let currentValue = _.isNull(this.getValueOf(id)) ? '' : this.getValueOf(id);
+
+                    switch (operator) {
+                        case '=':
+                        case '==':
+                            if (_.isString(desireValue) && currentValue == desireValue) {
+                                return request;
+                            }
+
+                            if ((_.isArray(currentValue) && _.isString(desireValue)) && currentValue.includes(desireValue)) {
+                                return request;
+                            }
+
+                            if ((_.isString(currentValue) && _.isArray(desireValue)) && desireValue.includes(currentValue)) {
+                                return request;
+                            }
+
+                            break;
+                        case '!=':
+                        case '!==':
+
+                            // console.log(this.attributes.title, currentValue, desireValue)
+
+                            if (_.isString(desireValue) && currentValue != desireValue.trim()) {
+                                return request;
+                            }
+                            if ((_.isArray(currentValue) && _.isString(desireValue)) && !currentValue.includes(desireValue.trim())) {
+                                return request;
+                            }
+
+                            if ((_.isString(currentValue) && _.isArray(desireValue)) && !desireValue.includes(currentValue.trim())) {
+                                return request;
+                            }
+                            break;
+                    }
+                });
+            }
+        },
 
         getValueOf(key = false){
             if (!_.isEmpty(key)) {

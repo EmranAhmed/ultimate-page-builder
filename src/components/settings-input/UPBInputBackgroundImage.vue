@@ -1,5 +1,5 @@
 <template>
-    <li :class="typeClass()">
+    <li :class="typeClass()" v-if="isRequired">
         <div class="form-group">
             <label>
                 <span class="title" v-text="attributes.title"></span>
@@ -8,7 +8,7 @@
             <div v-image-media class="attachment-media-view">
                 <div v-show="input" class="preview background-preview">
 
-                    <div class="pointer" v-background-position="positions"></div>
+                    <div class="pointer" v-background-position="useAttributeValue"></div>
 
                     <img :src="input" alt="" draggable="false">
                 </div>
