@@ -73,7 +73,8 @@ export default{
                     switch (operator) {
                         case '=':
                         case '==':
-                            if (_.isString(desireValue) && currentValue == desireValue) {
+
+                            if ((_.isBoolean(desireValue) || _.isString(desireValue)) && currentValue == desireValue) {
                                 return request;
                             }
 
@@ -88,12 +89,11 @@ export default{
                             break;
                         case '!=':
                         case '!==':
-
-                            // console.log(this.attributes.title, currentValue, desireValue)
-
-                            if (_.isString(desireValue) && currentValue != desireValue.trim()) {
+                            
+                            if ((_.isBoolean(desireValue) || _.isString(desireValue)) && currentValue != desireValue) {
                                 return request;
                             }
+
                             if ((_.isArray(currentValue) && _.isString(desireValue)) && !currentValue.includes(desireValue.trim())) {
                                 return request;
                             }

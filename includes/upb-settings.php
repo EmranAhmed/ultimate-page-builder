@@ -26,6 +26,9 @@
                 'upb-before-contents' => esc_html__( 'Before Contents', 'ultimate-page-builder' ),
                 'upb-on-contents'     => esc_html__( 'Instead of Contents', 'ultimate-page-builder' ),
                 'upb-after-contents'  => esc_html__( 'After Contents', 'ultimate-page-builder' ),
+            ),
+            'require' => array(
+                array( 'enable', '=', TRUE )
             )
         );
 

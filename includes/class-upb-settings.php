@@ -76,6 +76,7 @@
                 $options[ 'value' ]       = $options[ 'default' ];
                 $options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : '';
                 $options[ 'use' ]         = isset( $options[ 'use' ] ) ? $options[ 'use' ] : FALSE;
+                $options[ 'require' ]     = isset( $options[ 'require' ] ) ? $options[ 'require' ] : FALSE;
 
 
                 if (

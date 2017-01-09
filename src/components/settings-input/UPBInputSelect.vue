@@ -1,7 +1,6 @@
 <template>
     <li :class="typeClass()" v-if="isRequired">
         <div class="form-group">
-
             <label v-if="multiple">
                 <span class="title" v-text="attributes.title"></span>
                 <select class="select-multiple-input" v-model="input" :id="attributes._id" multiple>
