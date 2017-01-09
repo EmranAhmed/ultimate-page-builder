@@ -60,6 +60,7 @@ wp_user_settings();
         do_action( 'upb_boilerplate_print_scripts' );
         do_action( 'upb_boilerplate_print_styles' );
     ?>
+    <script type="text/javascript">(function (html) {html.className = html.className.replace(/\bno-js\b/, 'js')}(document.documentElement))</script>
 </head>
 <body class="<?php upb_boilerplate_body_class() ?>">
 <div id="upb-pre-loader">
@@ -75,10 +76,8 @@ wp_user_settings();
             <div id="upb-sidebar-footer"></div>
         </div>
     </div>
-    <div id="upb-skeleton-wrapper">Structure</div>
+    <div id="upb-skeleton-wrapper"></div>
     <div id="upb-preview-wrapper">
-        <!--        <iframe src="<?php /*echo upb_get_preview_link() */ ?>" frameborder="0" name="upb-preview-frame" seamless="seamless" id="upb-preview-frame"></iframe>
--->
         <iframe data-url="<?php echo upb_get_preview_link() ?>" frameborder="0" name="upb-preview-frame" seamless="seamless" id="upb-preview-frame"></iframe>
     </div>
     <?php do_action( 'upb_boilerplate_contents' ); ?>

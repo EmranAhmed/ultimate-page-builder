@@ -3,322 +3,69 @@
     defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
     // Column
-    add_filter( 'upb_column_contents_panel_toolbar', function () {
-        return array(
-            array(
-                'title'  => esc_html__( 'Add Element', 'ultimate-page-builder' ),
-                'id'     => 'elements-panel',
-                'icon'   => 'mdi mdi-shape-plus',
-                'action' => 'showElementsPanel'
-            ),
-            array(
-                'title'  => esc_html__( 'Settings', 'ultimate-page-builder' ),
-                'id'     => 'column-settings',
-                'icon'   => 'mdi mdi-settings',
-                'action' => 'showSettingsPanel'
-            )
-        );
-    } );
+    add_filter( 'upb_upb-column_contents_panel_toolbar', function ( $toolbar ) {
 
-    add_filter( 'upb_column_settings_panel_toolbar', function () {
-        return array(
-            array(
-                'id'     => 'column-contents',
-                'title'  => esc_html__( 'Contents', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-table-edit',
-                'action' => 'showContentPanel'
-            )
-        );
-    } );
-
-    add_filter( 'upb_column_list_toolbar', function ( $tools ) {
-        $tools[ 'move' ] = array(
-            'icon'  => 'mdi mdi-cursor-move',
-            'class' => 'handle',
-            'title' => esc_html__( 'Sort', 'ultimate-page-builder' ),
+        $new = array(
+            'title'  => esc_html__( 'Elements Panel', 'ultimate-page-builder' ),
+            'id'     => 'elements-panel',
+            'icon'   => 'mdi mdi-shape-plus',
+            'action' => 'showElementsPanel'
         );
 
-        $tools[ 'delete' ] = array(
-            'icon'  => 'mdi mdi-delete',
-            'title' => esc_html__( 'Delete', 'ultimate-page-builder' ),
-        );
+        array_unshift( $toolbar, $new );
 
-        $tools[ 'enable' ]   = array(
-            'icon'  => 'mdi mdi-eye',
-            'title' => esc_html__( 'Enabled', 'ultimate-page-builder' ),
-        );
-        $tools[ 'disable' ]  = array(
-            'icon'  => 'mdi mdi-eye-off',
-            'title' => esc_html__( 'Disabled', 'ultimate-page-builder' ),
-        );
-        $tools[ 'contents' ] = array(
-            'icon'  => 'mdi mdi-table-edit',
-            'class' => 'show-contents',
-            'title' => esc_html__( 'Contents', 'ultimate-page-builder' ),
-        );
-        $tools[ 'settings' ] = array(
-            'icon'  => 'mdi mdi-settings',
-            'class' => 'show-settings',
-            'title' => esc_html__( 'Settings', 'ultimate-page-builder' ),
-        );
-        $tools[ 'clone' ]    = array(
-            'icon'  => 'mdi mdi-content-duplicate',
-            'title' => esc_html__( 'Clone', 'ultimate-page-builder' ),
-        );
+        return $toolbar;
 
-        return $tools;
-    } );
-
-
-    // Section
-    add_filter( 'upb_section_list_toolbar', function ( $tools ) {
-        $tools[ 'move' ] = array(
-            'icon'  => 'mdi mdi-cursor-move',
-            'class' => 'handle',
-            'title' => esc_html__( 'Sort', 'ultimate-page-builder' ),
-        );
-
-        $tools[ 'delete' ] = array(
-            'icon'  => 'mdi mdi-delete',
-            'title' => esc_html__( 'Delete', 'ultimate-page-builder' ),
-        );
-
-        $tools[ 'enable' ]   = array(
-            'icon'  => 'mdi mdi-eye',
-            'title' => esc_html__( 'Enabled', 'ultimate-page-builder' ),
-        );
-        $tools[ 'disable' ]  = array(
-            'icon'  => 'mdi mdi-eye-off',
-            'title' => esc_html__( 'Disabled', 'ultimate-page-builder' ),
-        );
-        $tools[ 'contents' ] = array(
-            'icon'  => 'mdi mdi-table-edit',
-            'class' => 'show-contents',
-            'title' => esc_html__( 'Contents', 'ultimate-page-builder' ),
-        );
-        $tools[ 'settings' ] = array(
-            'icon'  => 'mdi mdi-settings',
-            'class' => 'show-settings',
-            'title' => esc_html__( 'Settings', 'ultimate-page-builder' ),
-        );
-        $tools[ 'clone' ]    = array(
-            'icon'  => 'mdi mdi-content-duplicate',
-            'title' => esc_html__( 'Clone', 'ultimate-page-builder' ),
-        );
-
-        return $tools;
-    } );
-
-    add_filter( 'upb_section_contents_panel_toolbar', function () {
-        return array(
-            array(
-                'id'     => 'add-new-row',
-                'title'  => esc_html__( 'Add Row', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-table-row-plus-after',
-                'action' => 'addNew',
-                'data'   => apply_filters( 'upb_new_row_data', upb_elements()->generate_element(
-                    'upb-row', upb_elements()->generate_element(
-                    'upb-column', array(), array(
-                    'title' => array(
-                        'type'  => 'text',
-                        'value' => esc_html__( 'Column 1', 'ultimate-page-builder' )
-                    )
-                ) ), array(
-                        'title' => array(
-                            'type'  => 'text',
-                            'value' => esc_html__( 'New Row %s', 'ultimate-page-builder' )
-                        )
-                    ) ) )
-            ),
-            array(
-                'id'     => 'section-setting',
-                'title'  => esc_html__( 'Settings', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-settings',
-                'action' => 'showSettingsPanel'
-            ),
-            array(
-                'id'     => 'save-section',
-                'title'  => esc_html__( 'Save Section', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-cube-send',
-                'action' => 'saveSectionLayout'
-            ),
-        );
-    } );
-
-    add_filter( 'upb_section_settings_panel_toolbar', function () {
-        return array(
-            array(
-                'id'     => 'section-contents',
-                'title'  => esc_html__( 'Contents', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-table-edit',
-                'action' => 'showContentPanel'
-            )
-        );
-    } );
-
-    // device previews
-
-    add_filter( 'upb_preview_devices', function () {
-        return array(
-            array(
-                'id'     => 'lg',
-                'title'  => esc_html__( 'Large', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-desktop-mac',
-                'width'  => '100%',
-                'active' => TRUE
-            ),
-            array(
-                'id'     => 'md',
-                'title'  => esc_html__( 'Medium', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-laptop-mac',
-                'width'  => '992px',
-                'active' => FALSE
-            ),
-            array(
-                'id'     => 'sm',
-                'title'  => esc_html__( 'Small', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-tablet-ipad',
-                'width'  => '768px',
-                'active' => FALSE
-            ),
-            array(
-                'id'     => 'xs',
-                'title'  => esc_html__( 'Extra Small', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-cellphone-iphone',
-                'width'  => '480px',
-                'active' => FALSE
-            ),
-        );
-    } );
-
-    add_filter( 'upb_responsive_hidden', function () {
-        return array(
-            array(
-                'id'    => 'hidden-lg',
-                'title' => esc_html__( 'Large', 'ultimate-page-builder' ),
-                'icon'  => 'mdi mdi-desktop-mac',
-            ),
-            array(
-                'id'    => 'hidden-md',
-                'title' => esc_html__( 'Medium', 'ultimate-page-builder' ),
-                'icon'  => 'mdi mdi-laptop-mac'
-            ),
-            array(
-                'id'    => 'hidden-sm',
-                'title' => esc_html__( 'Small', 'ultimate-page-builder' ),
-                'icon'  => 'mdi mdi-tablet-ipad'
-            ),
-            array(
-                'id'    => 'hidden-xs',
-                'title' => esc_html__( 'Extra Small', 'ultimate-page-builder' ),
-                'icon'  => 'mdi mdi-cellphone-iphone'
-            ),
-        );
-    } );
-
-    // grid system
-
-    add_filter( 'upb_grid_system', function () {
-        return array(
-            'name'              => esc_html__( 'UPB Grid', 'ultimate-page-builder' ),
-            'simplifiedRatio'   => esc_html__( 'Its recommended to use simplified form of column grid ratio like: %s', 'ultimate-page-builder' ),
-            'prefixClass'       => 'upb-col',
-            'separator'         => '-', // col- deviceId - grid class
-            'groupClass'        => 'upb-row',
-            'groupWrapper'      => array(
-                'upb-container-fluid'           => esc_html__( 'Fluid Container', 'ultimate-page-builder' ),
-                'upb-container-fluid-no-gutter' => esc_html__( 'Fluid Container without gutter', 'ultimate-page-builder' ),
-                'upb-container'                 => esc_html__( 'Fixed Container', 'ultimate-page-builder' ),
-                'upb-container-no-gutter'       => esc_html__( 'Fixed Container without gutter', 'ultimate-page-builder' )
-            ),
-            'defaultDeviceId'   => 'xs', // We should set default column element attributes as like defaultDeviceId, If xs then [column xs='...']
-            'deviceSizeTitle'   => esc_html__( 'Screen Sizes', 'ultimate-page-builder' ),
-            'devices'           => apply_filters( 'upb_preview_devices', array() ),
-            'totalGrid'         => 12,
-            'allowedGrid'       => array( 1, 2, 3, 4, 6, 12 ),
-            'nonAllowedMessage' => esc_html__( "Sorry, UPB Grid doesn't support %s grid column.", 'ultimate-page-builder' )
-        );
     } );
 
     // Row
-    add_filter( 'upb_row_list_toolbar', function ( $tools ) {
-        $tools[ 'move' ] = array(
-            'icon'  => 'mdi mdi-cursor-move',
-            'class' => 'handle',
-            'title' => esc_html__( 'Sort', 'ultimate-page-builder' ),
-        );
+    add_filter( 'upb_upb-row_contents_panel_toolbar', function ( $toolbar ) {
+        $toolbar[ 'new' ]     = apply_filters( 'upb_new_column_data', upb_elements()->get_element( 'upb-column' ) );
+        $toolbar[ 'layouts' ] = upb_sample_grid_layout();
 
-        $tools[ 'delete' ] = array(
-            'icon'  => 'mdi mdi-delete',
-            'title' => esc_html__( 'Delete', 'ultimate-page-builder' ),
-        );
-
-        $tools[ 'enable' ] = array(
-            'icon'  => 'mdi mdi-eye',
-            'title' => esc_html__( 'Enabled', 'ultimate-page-builder' ),
-        );
-
-        $tools[ 'disable' ]  = array(
-            'icon'  => 'mdi mdi-eye-off',
-            'title' => esc_html__( 'Disabled', 'ultimate-page-builder' ),
-        );
-        $tools[ 'contents' ] = array(
-            'icon'  => 'mdi mdi-table-edit',
-            'class' => 'show-contents',
-            'title' => esc_html__( 'Columns', 'ultimate-page-builder' ),
-        );
-        $tools[ 'settings' ] = array(
-            'icon'  => 'mdi mdi-settings',
-            'class' => 'show-settings',
-            'title' => esc_html__( 'Settings', 'ultimate-page-builder' ),
-        );
-        $tools[ 'clone' ]    = array(
-            'icon'  => 'mdi mdi-content-duplicate',
-            'title' => esc_html__( 'Clone', 'ultimate-page-builder' ),
-        );
-
-        return $tools;
+        return $toolbar;
     } );
 
-    add_filter( 'upb_row_contents_panel_toolbar', function ( $tools ) {
-        return array(
-            'new'     => apply_filters( 'upb_new_column_data', upb_elements()->get_element( 'upb-column' ) ),
-            'layouts' => array(
-                array(
-                    'class' => 'grid-1-1',
-                    'value' => '1:1',
-                ),
-                array(
-                    'class' => 'grid-1-2',
-                    'value' => '1:2 + 1:2',
-                ),
-                array(
-                    'class' => 'grid-1-3__2-3',
-                    'value' => '1:3 + 2:3',
-                ),
-                array(
-                    'class' => 'grid-2-3__1-3',
-                    'value' => '2:3 + 1:3',
-                ),
-                array(
-                    'class' => 'grid-1-3__1-3__1-3',
-                    'value' => '1:3 + 1:3 + 1:3',
-                ),
-                array(
-                    'class' => 'grid-1-4__2-4__1-4',
-                    'value' => '1:4 + 2:4 + 1:4',
-                ),
-                array(
-                    'class' => 'grid-1-4__1-4__1-4__1-4',
-                    'value' => '1:4 + 1:4 + 1:4 + 1:4',
+    // Section
+    add_filter( 'upb_upb-section_contents_panel_toolbar', function ( $toolbar ) {
+
+        $new = array(
+            'id'     => 'add-new-row',
+            'title'  => esc_html__( 'Add Row', 'ultimate-page-builder' ),
+            'icon'   => 'mdi mdi-table-row-plus-after',
+            'action' => 'addNew',
+            'data'   => apply_filters( 'upb_new_row_data', upb_elements()->generate_element(
+                'upb-row', upb_elements()->generate_element(
+                'upb-column', array(), array(
+                'title' => array(
+                    'type'  => 'text',
+                    'value' => esc_html__( 'Column 1', 'ultimate-page-builder' )
                 )
-            )
+            ) ), array(
+                    'title' => array(
+                        'type'  => 'text',
+                        'value' => esc_html__( 'New Row %s', 'ultimate-page-builder' )
+                    )
+                ) ) )
         );
+
+        $save = array(
+            'id'     => 'save-section',
+            'title'  => esc_html__( 'Save Section', 'ultimate-page-builder' ),
+            'icon'   => 'mdi mdi-cube-send',
+            'action' => 'saveSectionLayout'
+        );
+
+        array_unshift( $toolbar, $new );
+
+        array_push( $toolbar, $save );
+
+        return $toolbar;
     } );
+
 
     // Register Tabs
     add_action( 'upb_register_tab', function ( $tab ) {
-
 
         $data = array(
             'title'    => esc_html__( 'Sections', 'ultimate-page-builder' ),
@@ -422,7 +169,7 @@
 
     } );
 
-    // Load Scripts :)
+    // Load Admin Styles :)
     add_action( 'upb_boilerplate_print_styles', function () {
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
@@ -443,11 +190,6 @@
             wp_enqueue_style( 'upb-style', UPB_PLUGIN_ASSETS_URI . "css/upb-style$suffix.css" );
         }
 
-    } );
-
-    add_action( 'upb_boilerplate_print_scripts', function () {
-        //$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-        echo '<script type="text/javascript">(function (html) {html.className = html.className.replace(/\bno-js\b/, \'js\')}(document.documentElement))</script>';
     } );
 
     add_action( 'upb_boilerplate_enqueue_scripts', function () {
@@ -485,9 +227,9 @@
 
         $data .= sprintf( "const _upb_status = %s;\n", wp_json_encode( array( 'dirty' => FALSE, '_nonce' => wp_create_nonce( '_upb' ), '_id' => get_the_ID() ) ) );
 
-        $data .= sprintf( "const _upb_preview_devices = %s;", wp_json_encode( apply_filters( 'upb_preview_devices', array() ) ) );
+        $data .= sprintf( "const _upb_preview_devices = %s;", wp_json_encode( upb_preview_devices() ) );
 
-        $data .= sprintf( "const _upb_grid_system = %s;", wp_json_encode( apply_filters( 'upb_grid_system', array() ) ) );
+        $data .= sprintf( "const _upb_grid_system = %s;", wp_json_encode( upb_grid_system() ) );
 
         $data .= sprintf( "const _upb_registered_elements = %s;", wp_json_encode( upb_elements()->getNamed() ) );
 

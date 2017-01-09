@@ -6,39 +6,36 @@
     // Column
     add_action( 'upb_register_element', function ( $element ) {
 
-        $attributes = array(
+        $attributes = array();
 
-            array( 'id' => 'title', 'title' => 'Title', 'type' => 'text', 'value' => 'Column 1' ),
-            array( 'id' => 'lg', 'type' => 'hidden', 'value' => '' ),
-            array( 'id' => 'md', 'type' => 'hidden', 'value' => '' ),
-            array( 'id' => 'sm', 'type' => 'hidden', 'value' => '' ),
-            array( 'id' => 'xs', 'type' => 'hidden', 'value' => '1:1' ),
-            // array( 'id' => 'enable', 'title' => 'Enable', 'type' => 'toggle', 'value' => TRUE ),
-            array( 'id' => 'background', 'title' => 'Background', 'type' => 'color', 'value' => '#ffccff' ),
-        );
+        array_push( $attributes, upb_title_input( esc_html__( 'Column Title', 'ultimate-page-builder' ), '', esc_html__( 'Column 1', 'ultimate-page-builder' ) ) );
+
+        $attributes = array_merge( $attributes, upb_column_device_input() );
 
         $contents = array();
 
         $_upb_options = array(
             'element' => array(
-                'name' => 'Column',
+                'name' => esc_html__( 'Column', 'ultimate-page-builder' ),
                 //'icon' => 'mdi mdi-format-text'
             ),
             'tools'   => array(
-                'list'     => apply_filters( 'upb_column_list_toolbar', array() ),
-                'contents' => apply_filters( 'upb_column_contents_panel_toolbar', array() ),
-                'settings' => apply_filters( 'upb_column_settings_panel_toolbar', array() ),
+                //'list'     => apply_filters( 'upb_column_list_toolbar', array() ),
+                //'contents' => apply_filters( 'upb_column_contents_panel_toolbar', array() ),
+                //'settings' => apply_filters( 'upb_column_settings_panel_toolbar', array() ),
             ),
             'meta'    => array(
+
                 'contents' => apply_filters( 'upb_column_contents_panel_meta', array(
                     'help'   => '<h2>Column contents?</h2><p>Choose a section and drag elements</p>',
-                    'search' => 'Search Element',
+                    'search' => esc_html__( 'Search Element', 'ultimate-page-builder' ),
                     'title'  => '%s'
                 ) ),
+
                 'settings' => apply_filters( 'upb_column_settings_panel_meta', array(
                     'help'   => '<h2>Element Settings?</h2><p>section settings</p>',
                     'search' => '',
-                    'title'  => '%s Settings'
+                    'title'  => esc_html__( '%s Settings', 'ultimate-page-builder' )
                 ) ),
 
                 'messages' => array(
@@ -55,33 +52,16 @@
     // Row ( Section have row dependency that's why we should reg row before section )
     add_action( 'upb_register_element', function ( $element ) {
 
-        $attributes = array(
-            array( 'id' => 'title', 'title' => 'Row title', 'type' => 'text', 'value' => 'New Row 1' ),
-            array( 'id' => 'enable', 'title' => 'Enable', 'type' => 'toggle', 'value' => TRUE ),
-            array( 'id' => 'background', 'title' => 'Background', 'type' => 'color', 'value' => '#fff' ),
-            array(
-                'id'      => 'background-image',
-                'title'   => 'Background Image',
-                'type'    => 'image',
-                'value'   => '',
-                'buttons' => array(
-                    'add'    => 'Add',
-                    'remove' => 'Remove',
-                    'choose' => 'Select...',
-                )
-            )
 
-        );
+        $attributes = array();
 
+        array_push( $attributes, upb_title_input( esc_html__( 'Row Title', 'ultimate-page-builder' ), '', esc_html__( 'New Row 1', 'ultimate-page-builder' ) ) );
 
-        $grid = apply_filters( 'upb_grid_system', array() );
+        array_push( $attributes, upb_enable_input( esc_html__( 'Row Enable / Disable', 'ultimate-page-builder' ), '' ) );
 
-        if ( isset( $grid[ 'groupWrapper' ] ) ):
+        array_push( $attributes, upb_responsive_hidden_input() );
 
-            $default = array_keys( $grid[ 'groupWrapper' ] );
-
-            $attributes[] = array( 'id' => 'container', 'title' => 'Container Type', 'type' => 'radio', 'value' => $default[ 0 ], 'options' => $grid[ 'groupWrapper' ] );
-        endif;
+        array_push( $attributes, upb_row_wrapper_input() );
 
 
         $contents = array();
@@ -90,9 +70,9 @@
             'help'    => '<h2>What to do?</h2><p>Add row and start</p>',
             'search'  => 'Search Rows',
             'tools'   => array(
-                'list'     => apply_filters( 'upb_row_list_toolbar', array() ),
-                'contents' => apply_filters( 'upb_row_contents_panel_toolbar', array() ),
-                'settings' => apply_filters( 'upb_row_settings_panel_toolbar', array() ),
+                //'list'     => apply_filters( 'upb_row_list_toolbar', array() ),
+                //'contents' => apply_filters( 'upb_row_contents_panel_toolbar', array() ),
+                //'settings' => apply_filters( 'upb_row_settings_panel_toolbar', array() ),
             ),
             'element' => array(
                 'name' => 'Row',
@@ -120,193 +100,16 @@
     // Section
     add_action( 'upb_register_element', function ( $element ) {
 
-        $attributes = array(
 
-            /*array(
-                'id'    => 'extra',
-                'title' => 'Extra',
-                'type'  => 'extra', // auto prefixed with upb-input-extra
-                'value' => ''
-            ),*/
+        $attributes = array();
 
+        array_push( $attributes, upb_title_input( esc_html__( 'Section Title', 'ultimate-page-builder' ), '', esc_html__( 'New Section %s', 'ultimate-page-builder' ) ) );
 
-            array(
-                'id'        => 'images',
-                'title'     => 'Image',
-                'type'      => 'image',
-                'attribute' => 'id', // src
-                // 'size'      => 'full',
-                'value'     => '',
-                'buttons'   => array(
-                    'add'    => 'Add',
-                    'remove' => 'Remove',
-                    'choose' => 'Select...',
-                )
-            ),
+        $attributes = array_merge( $attributes, upb_background_input_group() );
 
+        array_push( $attributes, upb_enable_input( esc_html__( 'Section Enable / Disable', 'ultimate-page-builder' ), '' ) );
 
-            array(
-                'id'          => 'ajaxpost',
-                'type'        => 'ajax',
-                'title'       => 'Posts...',
-                'desc'        => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
-                'value'       => '',
-                'hooks'       => array(
-                    'ajax'   => '_upb_search_posts', // wp_ajax hook
-                    'filter' => '_upb_get_post', // filter hook
-                ),
-                'template'    => '<div> ID# %(id)s - %(title)s </div>',
-                'placeholder' => 'Posts',
-                'settings'    => array(
-                    'allowClear' => TRUE
-                )
-            ),
-
-
-            array(
-                'id'          => 'ajaxicon',
-                'type'        => 'icon-ajax',
-                'title'       => 'Material Design Icons',
-                'desc'        => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
-                'value'       => '',
-                'hooks'       => array(
-                    'ajax'   => '_upb_search_material_icons', // wp_ajax hook
-                    'filter' => '_upb_get_material_icon', // filter hook
-                ),
-                'template'    => '<span class="select2-icon-input"><i class="%(id)s"></i>  %(title)s</div>',
-                'placeholder' => 'Search Icons',
-                'settings'    => array(
-                    'allowClear' => TRUE,
-                    'delay'      => 250,
-                )
-            ),
-
-
-            /*array(
-                'id'          => 'icon',
-                'type'        => 'icons',
-                'title'       => 'Icons',
-                'desc'        => 'Synergistically reintermediate world-class data vis-a-vis revolutionary applications. Distinctively.',
-                'value'       => '',
-                'placeholder' => 'Choose Icon',
-                'options'     => upb_material_design_icons(),
-                'settings'    => array(
-                    'allowClear' => TRUE
-                )
-            ),*/
-
-
-            array(
-                'id'       => 'multi',
-                'title'    => 'Select Multiple',
-                'desc'     => 'Globally e-enable next-generation leadership via maintainable users. Synergistically.',
-                'type'     => 'select',
-                'multiple' => TRUE,
-                'value'    => array( '1' ),
-                'options'  => array( '1' => 'ONE', '2' => 'TWO' )
-            ),
-
-
-            array(
-                'id'      => 'multix',
-                'title'   => 'Checkbox Multiple',
-                'desc'    => 'Globally e-enable next-generation leadership via maintainable users. Synergistically.',
-                'type'    => 'checkbox',
-                'value'   => array( '1', '3' ),
-                'options' => array( '1' => 'A', '2' => 'B', '3' => 'C' )
-            ),
-
-            array(
-                'id'      => 'hide',
-                'title'   => 'Device Hidden',
-                'desc'    => 'Objectively scale backward-compatible customer service via.',
-                'type'    => 'device-hidden',
-                'value'   => array(),
-                'options' => upb_responsive_hidden()
-            ),
-
-            array(
-                'id'      => 'chooseing',
-                'title'   => 'Backgrounds',
-                'desc'    => 'Objectively scale backward-compatible customer service via.',
-                'type'    => 'radio-icon',
-                'value'   => 'none',
-                'options' => array(
-                    'none'  => array( 'title' => 'No background', 'icon' => 'mdi mdi-close-octagon-outline' ),
-                    'color' => array( 'title' => 'Background Color', 'icon' => 'mdi mdi-format-color-fill' ),
-                    'image' => array( 'title' => 'Background Image', 'icon' => 'mdi mdi-image' ),
-                    'video' => array( 'title' => 'Background Video', 'icon' => 'mdi mdi-video' )
-                )
-            ),
-
-
-            array(
-                'id'      => 'bgcolorzzz',
-                'title'   => 'Background Color xxx',
-                'type'    => 'color',
-                'desc'    => 'Dramatically empower enabled architectures via cutting-edge.',
-                'value'   => 'rgba(255,255,255,0)',
-                'alpha'   => TRUE,
-                'require' => array(
-                    array( 'chooseing', '=', 'color' )
-                )
-            ),
-
-
-            array(
-                'id'          => 'bgimage',
-                'title'       => 'Background',
-                'type'        => 'background-image',
-                'desc'        => 'Dramatically empower enabled architectures via cutting-edge.',
-                'value'       => '',
-                'use'         => 'bgimageposition',
-                'size'        => 'full',
-                'placeholder' => 'Choose background',
-                'buttons'     => array(
-                    'add'    => 'Use',
-                    'remove' => 'Remove',
-                    'choose' => 'Choose',
-                ),
-                'require'     => array(
-                    array( 'chooseing', '=', 'image' )
-                )
-            ),
-
-            array(
-                'id'          => 'bgimageposition',
-                'title'       => 'Background Image Position',
-                'type'        => 'background-image-position',
-                'desc'        => 'Dramatically simplify cost effective systems with..',
-                'value'       => '0% 0%',
-                'placeholder' => '0% 0%',
-                'require'     => array(
-                    array( 'bgimage', '!=', '' )
-                )
-            ),
-
-
-            array(
-                'id'    => 'title',
-                'desc'  => 'Dramatically empower enabled architectures via cutting-edge.',
-                'title' => 'Section title',
-                'type'  => 'text',
-                'value' => 'New Section %s'
-            ),
-            array(
-                'id'    => 'enable',
-                'desc'  => 'Dramatically empower enabled architectures via cutting-edge.',
-                'title' => 'Enable',
-                'type'  => 'toggle',
-                'value' => TRUE
-            ),
-            array(
-                'id'    => 'background-color',
-                'desc'  => 'Dramatically empower enabled architectures via cutting-edge.',
-                'title' => 'Background Color',
-                'type'  => 'color',
-                'value' => '#ffffff'
-            ),
-        );
+        array_push( $attributes, upb_responsive_hidden_input() );
 
         $contents = array();
 
@@ -314,11 +117,6 @@
             'element' => array(
                 'name' => 'Section',
                 //'icon' => 'mdi mdi-format-text'
-            ),
-            'tools'   => array(
-                'list'     => apply_filters( 'upb_section_list_toolbar', array() ),
-                'contents' => apply_filters( 'upb_section_contents_panel_toolbar', array() ),
-                'settings' => apply_filters( 'upb_section_settings_panel_toolbar', array() ),
             ),
             'meta'    => array(
                 'contents' => apply_filters( 'upb_section_contents_panel_meta', array(
@@ -360,7 +158,7 @@
                 'icon' => 'mdi mdi-format-text'
             ),
 
-            'tools' => array(
+            /*'tools' => array(
                 'list'     => apply_filters( 'upb_text_list_toolbar', array(
                     array(
                         'id'    => 'move',
@@ -393,7 +191,7 @@
                 ) ),
                 'contents' => apply_filters( 'upb_text_contents_panel_toolbar', array() ),
                 'settings' => apply_filters( 'upb_text_settings_panel_toolbar', array() ),
-            ),
+            ),*/
 
             'meta' => array(
                 'contents' => apply_filters( 'upb_text_contents_panel_meta', array(
@@ -494,6 +292,8 @@
                         'title' => esc_html__( 'Clone', 'ultimate-page-builder' ),
                     )
                 ) ),
+
+
                 //'contents' => apply_filters( 'upb_contact-form-7_contents_panel_toolbar', array() ),
                 'settings' => apply_filters( 'upb_contact-form-7_settings_panel_toolbar', array() ),
             ),

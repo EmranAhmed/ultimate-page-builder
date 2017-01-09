@@ -89,7 +89,7 @@ export default{
                             break;
                         case '!=':
                         case '!==':
-                            
+
                             if ((_.isBoolean(desireValue) || _.isString(desireValue)) && currentValue != desireValue) {
                                 return request;
                             }

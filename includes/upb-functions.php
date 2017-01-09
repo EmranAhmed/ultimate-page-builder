@@ -27,7 +27,23 @@
         return UPB_PLUGIN_TEMPLATES_URI . untrailingslashit( $path );
     }
 
+    function upb_get_edit_link( $post = 0 ) {
+        if ( is_admin() ) {
+            return esc_url( add_query_arg( 'upb', '1', wp_get_shortlink( $post ) ) );
+        } else {
+            return esc_url( add_query_arg( 'upb', '1', get_permalink( $post ) ) );
+        }
+    }
 
+    function upb_get_preview_link() {
+
+        //$query = array( 'upb-preview' => TRUE, 'rand' => time() );
+        $query = array( 'upb-preview' => TRUE );
+
+        return esc_url( add_query_arg( $query, get_preview_post_link( get_the_ID() ) ) );
+    }
+
+    // Class instances
     function upb_elements() {
         return UPB_Elements::getInstance();
     }
@@ -44,21 +60,6 @@
         return UPB_Layouts::getInstance();
     }
 
-    function upb_get_edit_link( $post = 0 ) {
-        if ( is_admin() ) {
-            return esc_url( add_query_arg( 'upb', '1', wp_get_shortlink( $post ) ) );
-        } else {
-            return esc_url( add_query_arg( 'upb', '1', get_permalink( $post ) ) );
-        }
-    }
-
-    function upb_get_preview_link() {
-
-        //$query = array( 'upb-preview' => TRUE, 'rand' => time() );
-        $query = array( 'upb-preview' => TRUE );
-
-        return esc_url( add_query_arg( $query, get_preview_post_link( get_the_ID() ) ) );
-    }
 
     // Conditional
     function upb_is_ios() {
@@ -98,13 +99,74 @@
         return UPB()->is_enabled();
     }
 
+    // Grid
+    function upb_grid_system( $key = FALSE ) {
 
-    function upb_grid_system() {
-        return apply_filters( 'upb_grid_system', array() );
+        $grid = apply_filters( 'upb_grid_system', array(
+            'name'              => esc_html__( 'UPB Grid', 'ultimate-page-builder' ),
+            'simplifiedRatio'   => esc_html__( 'Its recommended to use simplified form of column grid ratio like: %s', 'ultimate-page-builder' ),
+            'prefixClass'       => 'upb-col',
+            'separator'         => '-', // col- deviceId - grid class
+            'groupClass'        => 'upb-row',
+            'groupWrapper'      => array(
+                'upb-container-fluid'           => esc_html__( 'Fluid Container', 'ultimate-page-builder' ),
+                'upb-container-fluid-no-gutter' => esc_html__( 'Fluid Container without gutter', 'ultimate-page-builder' ),
+                'upb-container'                 => esc_html__( 'Fixed Container', 'ultimate-page-builder' ),
+                'upb-container-no-gutter'       => esc_html__( 'Fixed Container without gutter', 'ultimate-page-builder' )
+            ),
+            'defaultDeviceId'   => 'xs', // We should set default column element attributes as like defaultDeviceId, If xs then [column xs='...']
+            'deviceSizeTitle'   => esc_html__( 'Screen Sizes', 'ultimate-page-builder' ),
+            'devices'           => upb_preview_devices(),
+            'totalGrid'         => 12,
+            'allowedGrid'       => array( 1, 2, 3, 4, 6, 12 ),
+            'nonAllowedMessage' => esc_html__( "Sorry, UPB Grid doesn't support %s grid column.", 'ultimate-page-builder' )
+        ) );
+
+
+        if ( $key ) {
+            return isset( $grid[ $key ] ) ? $grid[ $key ] : NULL;
+        }
+
+        return $grid;
+    }
+
+    function upb_preview_devices() {
+        return apply_filters( 'upb_preview_devices', array(
+            array(
+                'id'     => 'lg',
+                'title'  => esc_html__( 'Large', 'ultimate-page-builder' ),
+                'icon'   => 'mdi mdi-desktop-mac',
+                'width'  => '100%',
+                'active' => TRUE
+            ),
+            array(
+                'id'     => 'md',
+                'title'  => esc_html__( 'Medium', 'ultimate-page-builder' ),
+                'icon'   => 'mdi mdi-laptop-mac',
+                'width'  => '992px',
+                'active' => FALSE
+            ),
+            array(
+                'id'     => 'sm',
+                'title'  => esc_html__( 'Small', 'ultimate-page-builder' ),
+                'icon'   => 'mdi mdi-tablet-ipad',
+                'width'  => '768px',
+                'active' => FALSE
+            ),
+            array(
+                'id'     => 'xs',
+                'title'  => esc_html__( 'Extra Small', 'ultimate-page-builder' ),
+                'icon'   => 'mdi mdi-cellphone-iphone',
+                'width'  => '480px',
+                'active' => FALSE
+            ),
+        ) );
     }
 
     function upb_devices( $key = FALSE ) {
-        $devices = apply_filters( 'upb_preview_devices', array() );
+
+        // Because Preview device and grid device may not same
+        $devices = upb_grid_system( 'devices' );
 
         if ( ! $key ) {
             return array_values( $devices );
@@ -115,8 +177,62 @@
         }
     }
 
+    function upb_sample_grid_layout() {
+        return apply_filters( 'upb_sample_grid_layout', array(
+            array(
+                'class' => 'grid-1-1',
+                'value' => '1:1',
+            ),
+            array(
+                'class' => 'grid-1-2',
+                'value' => '1:2 + 1:2',
+            ),
+            array(
+                'class' => 'grid-1-3__2-3',
+                'value' => '1:3 + 2:3',
+            ),
+            array(
+                'class' => 'grid-2-3__1-3',
+                'value' => '2:3 + 1:3',
+            ),
+            array(
+                'class' => 'grid-1-3__1-3__1-3',
+                'value' => '1:3 + 1:3 + 1:3',
+            ),
+            array(
+                'class' => 'grid-1-4__2-4__1-4',
+                'value' => '1:4 + 2:4 + 1:4',
+            ),
+            array(
+                'class' => 'grid-1-4__1-4__1-4__1-4',
+                'value' => '1:4 + 1:4 + 1:4 + 1:4',
+            )
+        ) );
+    }
+
     function upb_responsive_hidden() {
-        $devices = apply_filters( 'upb_responsive_hidden', array() );
+        $devices = apply_filters( 'upb_responsive_hidden', array(
+            array(
+                'id'    => 'hidden-lg',
+                'title' => esc_html__( 'Large', 'ultimate-page-builder' ),
+                'icon'  => 'mdi mdi-desktop-mac',
+            ),
+            array(
+                'id'    => 'hidden-md',
+                'title' => esc_html__( 'Medium', 'ultimate-page-builder' ),
+                'icon'  => 'mdi mdi-laptop-mac'
+            ),
+            array(
+                'id'    => 'hidden-sm',
+                'title' => esc_html__( 'Small', 'ultimate-page-builder' ),
+                'icon'  => 'mdi mdi-tablet-ipad'
+            ),
+            array(
+                'id'    => 'hidden-xs',
+                'title' => esc_html__( 'Extra Small', 'ultimate-page-builder' ),
+                'icon'  => 'mdi mdi-cellphone-iphone'
+            ),
+        ) );
 
         return array_values( $devices );
     }
@@ -142,6 +258,146 @@
         return implode( ' ', $columns );
     }
 
+    // Some Build-In Inputs
+    function upb_responsive_hidden_input( $id = 'hidden-device', $title = '', $desc = '', $default = array() ) {
+
+        $title = trim( $title ) ? trim( $title ) : esc_html__( 'Hide on device', 'ultimate-page-builder' );
+        $desc  = trim( $desc ) ? trim( $desc ) : esc_html__( 'Hide element on specific media device', 'ultimate-page-builder' );
+
+        return array(
+            'id'      => esc_attr( $id ),
+            'title'   => esc_html( $title ),
+            'desc'    => wp_kses_post( $desc ),
+            'type'    => 'device-hidden',
+            'value'   => $default,
+            'options' => upb_responsive_hidden()
+        );
+    }
+
+    function upb_background_input_group() {
+        return array(
+
+            array(
+                'id'      => 'background-type',
+                'title'   => esc_html__( 'Background type', 'ultimate-page-builder' ),
+                'desc'    => esc_html__( 'Choose your element background type', 'ultimate-page-builder' ),
+                'type'    => 'radio-icon',
+                'value'   => 'none',
+                'options' => array(
+                    'none'  => array( 'title' => esc_html__( 'No background', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-close-octagon-outline' ),
+                    'color' => array( 'title' => esc_html__( 'Background Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-format-color-fill' ),
+                    'image' => array( 'title' => esc_html__( 'Background Image', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-image' ),
+                    'both'  => array( 'title' => esc_html__( 'Background Image and Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-folder-multiple-image' ),
+                    // 'video' => array( 'title' => esc_html__( 'Background Video', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-file-video' )
+                )
+            ),
+
+            array(
+                'id'      => 'background-color',
+                'title'   => esc_html__( 'Background Color', 'ultimate-page-builder' ),
+                'desc'    => esc_html__( 'Element background color', 'ultimate-page-builder' ),
+                'type'    => 'color',
+                'value'   => 'rgba(255,255,255,0)',
+                'alpha'   => TRUE,
+                'require' => array(
+                    array( 'background-type', '=', array( 'color', 'both' ) )
+                )
+            ),
+
+            array(
+                'id'          => 'background-image',
+                'title'       => esc_html__( 'Background Image', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Element background image', 'ultimate-page-builder' ),
+                'type'        => 'background-image',
+                'value'       => '',
+                'use'         => 'background-image-position',
+                'placeholder' => esc_html__( 'Choose background image', 'ultimate-page-builder' ),
+                'buttons'     => array(
+                    'add'    => esc_html__( 'Add', 'ultimate-page-builder' ),
+                    'remove' => esc_html__( 'Remove', 'ultimate-page-builder' ),
+                    'choose' => esc_html__( 'Choose', 'ultimate-page-builder' ),
+                ),
+                'require'     => array(
+                    array( 'background-type', '=', array( 'image', 'both' ) )
+                )
+            ),
+
+            array(
+                'id'          => 'background-image-position',
+                'title'       => esc_html__( 'Background Image Position', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Change Background Image Position. You can move background image pointer to see preview.', 'ultimate-page-builder' ),
+                'type'        => 'background-image-position',
+                'value'       => '0% 0%',
+                'placeholder' => '0% 0%',
+                'require'     => array(
+                    array( 'background-image', '!=', '' )
+                )
+            ),
+        );
+    }
+
+    function upb_title_input( $title = '', $desc = '', $default = 'New %s' ) {
+
+        $title = trim( $title ) ? trim( $title ) : esc_html__( 'Title', 'ultimate-page-builder' );
+        $desc  = trim( $desc ) ? trim( $desc ) : FALSE;
+
+        return array(
+            'id'    => 'title',
+            'title' => esc_html( $title ),
+            'desc'  => wp_kses_post( $desc ),
+            'type'  => 'text',
+            'value' => esc_attr( $default ),
+        );
+    }
+
+    function upb_enable_input( $title = '', $desc = '', $default = TRUE ) {
+
+        $title = trim( $title ) ? trim( $title ) : esc_html__( 'Enable / Disable', 'ultimate-page-builder' );
+        $desc  = trim( $desc ) ? trim( $desc ) : esc_html__( 'Enable or Disable Element', 'ultimate-page-builder' );
+
+        return array(
+            'id'    => 'enable',
+            'title' => esc_html( $title ),
+            'desc'  => wp_kses_post( $desc ),
+            'type'  => 'toggle',
+            'value' => (bool) $default,
+        );
+    }
+
+    function upb_column_device_input( $defaults = array() ) {
+
+        // $defaults = array('md'=>'1:1', 'sm'=>'1:1')
+
+        $devices = upb_devices( 'id' );
+
+        if ( empty( $defaults ) ) {
+            foreach ( $devices as $device ) {
+                $defaults[ $device ] = '';
+            }
+            $defaults[ upb_grid_system( 'defaultDeviceId' ) ] = '1:1';
+        }
+
+        return array_map( function ( $device, $defaultDevice, $defaultValue ) {
+            $value = $device == $defaultDevice ? $defaultValue : '';
+
+            return array( 'id' => $device, 'type' => 'hidden', 'value' => $value );
+        }, $devices, array_keys( $defaults ), $defaults );
+    }
+
+    function upb_row_wrapper_input() {
+        $groups = upb_grid_system( 'groupWrapper' );
+        if ( $groups ):
+            $default = array_keys( $groups );
+
+            return array( 'id' => 'container', 'title' => esc_html__( 'Container Type', 'ultimate-page-builder' ), 'type' => 'radio', 'value' => $default[ 0 ], 'options' => $groups );
+        endif;
+
+        return array();
+    }
+
+    // End Build-In Inputs
+
+    // Helpers
     function upb_enqueue_shortcode_assets() {
 
         if ( upb_is_enabled() ):
@@ -177,13 +433,13 @@
         return 'upb-' . $id . '-template">';
     }
 
-
-    // https://cdn.materialdesignicons.com/1.7.22/css/materialdesignicons.css
-    // https://cdn.materialdesignicons.com/1.7.22/
-    // https://materialdesignicons.com/
-
     function upb_material_design_icons() {
-        return array(
+
+        // https://cdn.materialdesignicons.com/1.7.22/css/materialdesignicons.css
+        // https://cdn.materialdesignicons.com/1.7.22/
+        // https://materialdesignicons.com/
+
+        return apply_filters( 'upb_material_design_icons', array(
             'mdi mdi-access-point'                            => 'access-point',
             'mdi mdi-access-point-network'                    => 'access-point-network',
             'mdi mdi-account'                                 => 'account',
@@ -1907,7 +2163,5 @@
             'mdi mdi-youtube-play'                            => 'youtube-play',
             'mdi mdi-zip-box'                                 => 'zip-box',
             'mdi mdi-blank'                                   => 'blank'
-        );
+        ) );
     }
-
-

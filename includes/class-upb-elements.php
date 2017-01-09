@@ -100,6 +100,95 @@
                     $_upb_options[ 'third_party_path' ] = FALSE;
                 }
 
+                // List Toolbar
+                if ( ! isset( $_upb_options[ 'tools' ] ) || ! isset( $_upb_options[ 'tools' ][ 'list' ] ) ) {
+                    $list_toolbar = array();
+
+                    $list_toolbar[ 'move' ] = array(
+                        'icon'  => 'mdi mdi-cursor-move',
+                        'class' => 'handle',
+                        'title' => esc_html__( 'Sort', 'ultimate-page-builder' ),
+                    );
+
+                    $list_toolbar[ 'delete' ] = array(
+                        'icon'  => 'mdi mdi-delete-forever',
+                        'title' => esc_html__( 'Delete', 'ultimate-page-builder' ),
+                    );
+
+                    if ( in_array( 'enable', array_column( $settings, 'id' ) ) ) {
+                        $list_toolbar[ 'enable' ] = array(
+                            'icon'  => 'mdi mdi-eye',
+                            'title' => esc_html__( 'Enabled', 'ultimate-page-builder' ),
+                        );
+
+                        $list_toolbar[ 'disable' ] = array(
+                            'icon'  => 'mdi mdi-eye-off',
+                            'title' => esc_html__( 'Disabled', 'ultimate-page-builder' ),
+                        );
+                    }
+
+
+                    if ( is_array( $contents ) ) {
+                        $list_toolbar[ 'contents' ] = array(
+                            'icon'  => 'mdi mdi-table-edit',
+                            'class' => 'show-contents',
+                            'title' => esc_html__( 'Contents', 'ultimate-page-builder' ),
+                        );
+                    }
+                    if ( is_array( $settings ) && ! empty( $settings ) ) {
+                        $list_toolbar[ 'settings' ] = array(
+                            'icon'  => 'mdi mdi-settings',
+                            'class' => 'show-settings',
+                            'title' => esc_html__( 'Settings', 'ultimate-page-builder' ),
+                        );
+                    }
+
+                    $list_toolbar[ 'clone' ] = array(
+                        'icon'  => 'mdi mdi-content-duplicate',
+                        'title' => esc_html__( 'Clone', 'ultimate-page-builder' ),
+                    );
+
+                    $_upb_options[ 'tools' ][ 'list' ] = apply_filters( "upb_{$tag}_list_toolbar", $list_toolbar );
+
+                }
+
+
+                // Contents Toolbar
+                if ( ! isset( $_upb_options[ 'tools' ] ) || ! isset( $_upb_options[ 'tools' ][ 'contents' ] ) ) {
+
+                    $list_toolbar = array();
+                    if ( is_array( $settings ) && ! empty( $settings ) ) {
+                        $list_toolbar[] = array(
+                            'id'     => "$tag-setting",
+                            'title'  => esc_html__( 'Settings', 'ultimate-page-builder' ),
+                            'icon'   => 'mdi mdi-settings',
+                            'action' => 'showSettingsPanel'
+                        );
+                    }
+
+                    $_upb_options[ 'tools' ][ 'contents' ] = apply_filters( "upb_{$tag}_contents_panel_toolbar", $list_toolbar );
+                }
+
+                // Settings Toolbar
+                if ( ! isset( $_upb_options[ 'tools' ] ) || ! isset( $_upb_options[ 'tools' ][ 'settings' ] ) ) {
+
+                    $list_toolbar = array();
+                    if ( is_array( $contents ) ) {
+                        $list_toolbar[] = array(
+                            'id'     => "$tag-contents",
+                            'title'  => esc_html__( 'Contents', 'ultimate-page-builder' ),
+                            'icon'   => 'mdi mdi-table-edit',
+                            'action' => 'showContentPanel'
+                        );
+                    }
+
+                    $_upb_options[ 'tools' ][ 'settings' ] = apply_filters( "upb_{$tag}_settings_panel_toolbar", $list_toolbar );
+                }
+
+
+                // CORE OPTIONS
+
+
                 ///
 
                 $settings     = apply_filters( "upb_element_{$tag}_settings", $settings );
