@@ -25,251 +25,251 @@ msgstr ""
 msgid "Add Row"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:42, includes/boilerplate/upb-boilerplate-hooks.php:87, includes/upb-elements.php:11
+#: includes/boilerplate/upb-boilerplate-hooks.php:40, includes/boilerplate/upb-boilerplate-hooks.php:79, includes/upb-elements.php:11
 msgid "Column 1"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:47
+#: includes/boilerplate/upb-boilerplate-hooks.php:42
 msgid "New Row %s"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:54
+#: includes/boilerplate/upb-boilerplate-hooks.php:48
 msgid "Save Section"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:71
+#: includes/boilerplate/upb-boilerplate-hooks.php:65
 msgid "Sections"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:72
+#: includes/boilerplate/upb-boilerplate-hooks.php:66
 msgid "<h2>Just Getting Starting?</h2><p>Add a section then click on <i class=\"mdi mdi-table-edit\"></i> icon to manage column layouts or click on <i class=\"mdi mdi-settings\"></i> icon to change settings or use <i class=\"mdi mdi-cursor-move\"></i> to reorder.</p>"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:73
+#: includes/boilerplate/upb-boilerplate-hooks.php:67
 msgid "Search Sections"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:77
+#: includes/boilerplate/upb-boilerplate-hooks.php:71
 msgid "Add Section"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:92
+#: includes/boilerplate/upb-boilerplate-hooks.php:81
 msgid "Row 1"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:98
+#: includes/boilerplate/upb-boilerplate-hooks.php:86
 msgid "Saved Sections"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:105
+#: includes/boilerplate/upb-boilerplate-hooks.php:93
 msgid "Copy Layout"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:118
+#: includes/boilerplate/upb-boilerplate-hooks.php:106
 msgid "Elements"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:119
+#: includes/boilerplate/upb-boilerplate-hooks.php:107
 msgid "Search Element"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:120
-msgid "<h2>How to use?</h2><p>Just drag an element and drop it to right side column layout.</p>"
+#: includes/boilerplate/upb-boilerplate-hooks.php:108
+msgid "<h2>How to use?</h2><p>Drag and drop an element to the right column and customize them based on your need.</p>"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:128, includes/class-upb-elements.php:153, includes/class-upb-elements.php:173, includes/upb-elements.php:319
+#: includes/boilerplate/upb-boilerplate-hooks.php:116, includes/class-upb-elements.php:157, includes/class-upb-elements.php:177, includes/upb-elements.php:322
 msgid "Settings"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:129
-msgid "<p>Simply enable or disable page builder for this page or set other options.</p>"
+#: includes/boilerplate/upb-boilerplate-hooks.php:117
+msgid "<p>Simply enable or disable page builder for the current page and select elements building position.</p>"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:138
+#: includes/boilerplate/upb-boilerplate-hooks.php:126
 msgid "Pre-build Layouts"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:139
+#: includes/boilerplate/upb-boilerplate-hooks.php:127
 msgid "Search Layouts"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:140
-msgid "<p>Pre build layouts</p>"
+#: includes/boilerplate/upb-boilerplate-hooks.php:128
+msgid "<p>Click on your desired pre-built layout to make available to the current page.</p>"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:162
+#: includes/boilerplate/upb-boilerplate-hooks.php:150
 msgid "Clear"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:163
+#: includes/boilerplate/upb-boilerplate-hooks.php:151
 msgid "Default"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:164
+#: includes/boilerplate/upb-boilerplate-hooks.php:152
 msgid "Select Color"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:165
+#: includes/boilerplate/upb-boilerplate-hooks.php:153
 msgid "Current Color"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:239
+#: includes/boilerplate/upb-boilerplate-hooks.php:229
 msgid "Section Saving..."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:240
+#: includes/boilerplate/upb-boilerplate-hooks.php:230
 msgid "Section Saved."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:241
+#: includes/boilerplate/upb-boilerplate-hooks.php:231
 msgid "Section Can't Save."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:242
+#: includes/boilerplate/upb-boilerplate-hooks.php:232
 msgid "Section Removed."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:243
+#: includes/boilerplate/upb-boilerplate-hooks.php:233
 msgid "%s Section Added."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:244
+#: includes/boilerplate/upb-boilerplate-hooks.php:234
 msgid "Saving"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:245
+#: includes/boilerplate/upb-boilerplate-hooks.php:235
 msgid "Saved"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:246
+#: includes/boilerplate/upb-boilerplate-hooks.php:236
 msgid "Problem on Saving"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:247, includes/upb-functions.php:316
+#: includes/boilerplate/upb-boilerplate-hooks.php:237
 msgid "Add"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:248
+#: includes/boilerplate/upb-boilerplate-hooks.php:238
 msgid "%s data copied to clipboard"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:249
+#: includes/boilerplate/upb-boilerplate-hooks.php:239
 msgid "Search saved section"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:250
+#: includes/boilerplate/upb-boilerplate-hooks.php:240
 msgid "%s layout copied to clipboard"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:251
+#: includes/boilerplate/upb-boilerplate-hooks.php:241
 msgid "Nothing to copy"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:252
+#: includes/boilerplate/upb-boilerplate-hooks.php:242
 msgid "%s Layout added"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:253
+#: includes/boilerplate/upb-boilerplate-hooks.php:243
 msgid "Use this layout"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:254
+#: includes/boilerplate/upb-boilerplate-hooks.php:244
 msgid "Paste JSON Contents"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:255
+#: includes/boilerplate/upb-boilerplate-hooks.php:245
 msgid "Save"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:256
+#: includes/boilerplate/upb-boilerplate-hooks.php:246
 msgid "Copy"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:257
+#: includes/boilerplate/upb-boilerplate-hooks.php:247
 msgid "Create"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:258
+#: includes/boilerplate/upb-boilerplate-hooks.php:248
 msgid "Are you sure to delete %s?"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:259
+#: includes/boilerplate/upb-boilerplate-hooks.php:249
 msgid "Manual"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:260
+#: includes/boilerplate/upb-boilerplate-hooks.php:250
 msgid "Columns Layout of - %s"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:261
+#: includes/boilerplate/upb-boilerplate-hooks.php:251
 msgid "Column Order"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:262
+#: includes/boilerplate/upb-boilerplate-hooks.php:252
 msgid "Column layout"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:263
+#: includes/boilerplate/upb-boilerplate-hooks.php:253
 msgid "Drag to sort column or click to open contents panel"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:264
+#: includes/boilerplate/upb-boilerplate-hooks.php:254
 msgid "Close"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:265
+#: includes/boilerplate/upb-boilerplate-hooks.php:255
 msgid "Clone of %s"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:266
+#: includes/boilerplate/upb-boilerplate-hooks.php:256
 msgid "Help"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:267, includes/class-upb-elements.php:219, includes/class-upb-elements.php:232
+#: includes/boilerplate/upb-boilerplate-hooks.php:257, includes/class-upb-elements.php:223, includes/class-upb-elements.php:236
 msgid "Search"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:268
+#: includes/boilerplate/upb-boilerplate-hooks.php:258
 msgid "Back"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:269
+#: includes/boilerplate/upb-boilerplate-hooks.php:259
 msgid "You are on"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:270
+#: includes/boilerplate/upb-boilerplate-hooks.php:260
 msgid "Skeleton preview"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:271
+#: includes/boilerplate/upb-boilerplate-hooks.php:261
 msgid "Collapse"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:272
+#: includes/boilerplate/upb-boilerplate-hooks.php:262
 msgid "Expand"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:273, includes/class-upb-elements.php:135
+#: includes/boilerplate/upb-boilerplate-hooks.php:263, includes/class-upb-elements.php:139
 msgid "Disabled"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:274, includes/class-upb-elements.php:129
+#: includes/boilerplate/upb-boilerplate-hooks.php:264, includes/class-upb-elements.php:133
 msgid "Enabled"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:275
+#: includes/boilerplate/upb-boilerplate-hooks.php:265
 msgid "Show %s device column layouts"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:276
+#: includes/boilerplate/upb-boilerplate-hooks.php:266
 msgid "Click to enable %s device screen layout"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:277
+#: includes/boilerplate/upb-boilerplate-hooks.php:267
 msgid "Click to disable %s device screen layout"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:278
+#: includes/boilerplate/upb-boilerplate-hooks.php:268
 msgid "%s device column layouts should be same as other enabled device column layout"
 msgstr ""
 
@@ -285,19 +285,19 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: includes/class-upb-elements-props.php:33, includes/class-upb-settings.php:108
+#: includes/class-upb-elements-props.php:34, includes/class-upb-settings.php:109
 msgid "No Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:40, includes/class-upb-settings.php:114
+#: includes/class-upb-elements-props.php:41, includes/class-upb-settings.php:115
 msgid "Use Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:41, includes/class-upb-settings.php:115, includes/upb-functions.php:317
+#: includes/class-upb-elements-props.php:42, includes/class-upb-settings.php:116, includes/upb-functions.php:317
 msgid "Remove"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:42, includes/class-upb-settings.php:116
+#: includes/class-upb-elements-props.php:43, includes/class-upb-settings.php:117
 msgid "Select"
 msgstr ""
 
@@ -305,27 +305,27 @@ msgstr ""
 msgid "Ultimate page builder element \"%s\" already registered."
 msgstr ""
 
-#: includes/class-upb-elements.php:116
+#: includes/class-upb-elements.php:120
 msgid "Sort"
 msgstr ""
 
-#: includes/class-upb-elements.php:122
+#: includes/class-upb-elements.php:126
 msgid "Delete"
 msgstr ""
 
-#: includes/class-upb-elements.php:144, includes/class-upb-elements.php:189, includes/class-upb-elements.php:249
+#: includes/class-upb-elements.php:148, includes/class-upb-elements.php:193, includes/class-upb-elements.php:253
 msgid "Contents"
 msgstr ""
 
-#: includes/class-upb-elements.php:160
+#: includes/class-upb-elements.php:164
 msgid "Clone"
 msgstr ""
 
-#: includes/class-upb-elements.php:228
+#: includes/class-upb-elements.php:232
 msgid "%s Settings"
 msgstr ""
 
-#: includes/class-upb-elements.php:241
+#: includes/class-upb-elements.php:245
 msgid "Add Element"
 msgstr ""
 
@@ -337,107 +337,107 @@ msgstr ""
 msgid "Column Title"
 msgstr ""
 
-#: includes/upb-elements.php:19
+#: includes/upb-elements.php:22
 msgid "Column"
 msgstr ""
 
-#: includes/upb-elements.php:43
+#: includes/upb-elements.php:46
 msgid "Row Title"
 msgstr ""
 
-#: includes/upb-elements.php:43
+#: includes/upb-elements.php:46
 msgid "New Row 1"
 msgstr ""
 
-#: includes/upb-elements.php:45
+#: includes/upb-elements.php:48
 msgid "Row Enable / Disable"
 msgstr ""
 
-#: includes/upb-elements.php:80
+#: includes/upb-elements.php:83
 msgid "Section Title"
 msgstr ""
 
-#: includes/upb-elements.php:80
+#: includes/upb-elements.php:83
 msgid "New Section %s"
 msgstr ""
 
-#: includes/upb-elements.php:84
+#: includes/upb-elements.php:87
 msgid "Section Enable / Disable"
 msgstr ""
 
-#: includes/upb-elements.php:117, includes/upb-elements.php:117, includes/upb-functions.php:341
+#: includes/upb-elements.php:122, includes/upb-elements.php:122, includes/upb-functions.php:341
 msgid "Title"
 msgstr ""
 
-#: includes/upb-elements.php:119, includes/upb-elements.php:168, includes/upb-elements.php:243, includes/upb-elements.php:292, includes/upb-functions.php:355, includes/upb-settings.php:10
+#: includes/upb-elements.php:124, includes/upb-elements.php:174, includes/upb-elements.php:251, includes/upb-elements.php:293, includes/upb-functions.php:376, includes/upb-settings.php:10
 msgid "Enable / Disable"
 msgstr ""
 
-#: includes/upb-elements.php:166
+#: includes/upb-elements.php:172
 msgid "Form Title"
 msgstr ""
 
-#: includes/upb-elements.php:166
+#: includes/upb-elements.php:172
 msgid "Contact form 1"
 msgstr ""
 
-#: includes/upb-elements.php:175
+#: includes/upb-elements.php:183
 msgid "Contact Form"
 msgstr ""
 
-#: includes/upb-elements.php:176
+#: includes/upb-elements.php:184
 msgid "Contact form list"
 msgstr ""
 
-#: includes/upb-elements.php:183
+#: includes/upb-elements.php:191
 msgid "Search contact form"
 msgstr ""
 
-#: includes/upb-elements.php:194
+#: includes/upb-elements.php:202
 msgid "Contact form 7"
 msgstr ""
 
-#: includes/upb-elements.php:209
+#: includes/upb-elements.php:217
 msgid "Choose a form from left panel"
 msgstr ""
 
-#: includes/upb-elements.php:241
+#: includes/upb-elements.php:249
 msgid "Accordion Item Title"
 msgstr ""
 
-#: includes/upb-elements.php:241, includes/upb-elements.php:297
+#: includes/upb-elements.php:249, includes/upb-elements.php:300
 msgid "Accordion Item 1"
 msgstr ""
 
-#: includes/upb-elements.php:245
+#: includes/upb-elements.php:253
 msgid "Default Active"
 msgstr ""
 
-#: includes/upb-elements.php:252
+#: includes/upb-elements.php:260
 msgid "Accordion Item"
 msgstr ""
 
-#: includes/upb-elements.php:290
+#: includes/upb-elements.php:291
 msgid "Accordion Title"
 msgstr ""
 
-#: includes/upb-elements.php:290, includes/upb-elements.php:304
+#: includes/upb-elements.php:291, includes/upb-elements.php:307
 msgid "Accordion"
 msgstr ""
 
-#: includes/upb-elements.php:298
+#: includes/upb-elements.php:301
 msgid "Accordion Item 2"
 msgstr ""
 
-#: includes/upb-elements.php:312
+#: includes/upb-elements.php:315
 msgid "Add New"
 msgstr ""
 
-#: includes/upb-elements.php:315
+#: includes/upb-elements.php:318
 msgid "Accordion Item %s"
 msgstr ""
 
-#: includes/upb-elements.php:336
+#: includes/upb-elements.php:339
 msgid "Add Accordion Item"
 msgstr ""
 
@@ -537,6 +537,10 @@ msgstr ""
 msgid "Choose background image"
 msgstr ""
 
+#: includes/upb-functions.php:316
+msgid "Add Background"
+msgstr ""
+
 #: includes/upb-functions.php:318
 msgid "Choose"
 msgstr ""
@@ -549,11 +553,27 @@ msgstr ""
 msgid "Change Background Image Position. You can move background image pointer to see preview."
 msgstr ""
 
-#: includes/upb-functions.php:356
+#: includes/upb-functions.php:358
+msgid "Custom CSS Class"
+msgstr ""
+
+#: includes/upb-functions.php:359
+msgid "Custom CSS Class. Separate classes with space"
+msgstr ""
+
+#: includes/upb-functions.php:366
+msgid "Custom CSS ID"
+msgstr ""
+
+#: includes/upb-functions.php:367
+msgid "CSS ID of an element should be unique."
+msgstr ""
+
+#: includes/upb-functions.php:377
 msgid "Enable or Disable Element"
 msgstr ""
 
-#: includes/upb-functions.php:392
+#: includes/upb-functions.php:413
 msgid "Container Type"
 msgstr ""
 
