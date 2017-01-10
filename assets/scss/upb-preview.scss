@@ -2,11 +2,24 @@
 @import "./node_modules/mdi/scss/materialdesignicons";
 
 .upb-preview-element {
-  position    : relative;
-  min-height  : 50px;
-  padding-top : 25px;
+  position : relative;
+
+  &.upb-has-mini-toolbar {
+    min-height  : 50px;
+    padding-top : 25px;
+    }
+
+  &.upb-sidebar-collapsed {
+    padding-top : 0;
+    min-height  : 1px;
+    }
 
   > .upb-preview-mini-toolbar {
+
+    + * {
+      position : relative;
+      }
+
     position  : absolute;
     height    : 100%;
     width     : 100%;
@@ -92,5 +105,4 @@
   &.upb-preview-element-no-contents > .upb-preview-mini-toolbar {
     border-color : $upb-preview-element-highlight-color !important;
     }
-
   }

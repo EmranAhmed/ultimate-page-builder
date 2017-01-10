@@ -242,7 +242,7 @@
 
         array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
 
-        array_push( $attributes, array( 'id' => 'opened', 'title' => esc_html__( 'Auto Opened', 'ultimate-page-builder' ), 'type' => 'toggle', 'value' => FALSE ) );
+        array_push( $attributes, array( 'id' => 'active', 'title' => esc_html__( 'Default Active', 'ultimate-page-builder' ), 'type' => 'toggle', 'value' => FALSE ) );
 
         $contents = wp_kses_post( '<p>Accordion Item</p>' );
 
@@ -269,6 +269,8 @@
                     //'css' => upb_templates_uri( 'preview-css/sections.css' ),
                     //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
                     //'inline_js' => 'console.log("Hello Again");',
+                    'inline_js' => ';(function ($, upb) { $(".upb-accordion-toggle").upbAccordion()  }(jQuery, _UPB_PREVIEW_DATA[upbComponentId]));',
+
                 ),
                 'shortcode' => array(
                     //'css' => upb_templates_uri( 'preview-css/sections.css' ),
@@ -291,7 +293,10 @@
 
         array_push( $attributes, upb_responsive_hidden_input() );
 
-        $contents = array();
+        $contents = array(
+            upb_elements()->generate_element( 'upb-accordion-item', '<p>Authoritatively formulate one-to-one interfaces with sustainable information. Collaboratively impact value-added meta-services rather than superior growth.</p>', array( 'active' => array( 'type' => 'toggle', 'value' => TRUE ), 'title' => array( 'type' => 'text', 'value' => esc_html__( 'Accordion Item 1', 'ultimate-page-builder' ) ) ) ),
+            upb_elements()->generate_element( 'upb-accordion-item', '<p>Holisticly customize top-line leadership skills for wireless solutions. Appropriately actualize principle-centered products rather than sustainable.</p>', array( 'active' => array( 'type' => 'toggle', 'value' => FALSE ), 'title' => array( 'type' => 'text', 'value' => esc_html__( 'Accordion Item 2', 'ultimate-page-builder' ) ) ) )
+        );
 
         $_upb_options = array(
 
@@ -335,13 +340,15 @@
             'assets' => array(
                 'preview'   => array(
                     // 'css'       => upb_templates_uri( 'preview-css/sections.css' ),
-                    // 'js'     => upb_templates_uri( 'preview-js/sections.js' ),
+                    'js' => upb_assets_uri( 'js/upb-accordion.js' ),
                     // 'inline_js' => ';(function () { console.log("Hello Again") }());',
-                    // 'inline_js' => 'console.log( _UPB_PREVIEW_DATA[upbComponentId] );',
+                    //'inline_js' => 'console.log( _UPB_PREVIEW_DATA[upbComponentId] );',
+                    //'inline_js' => ';(function ($, upb) { $(".upb-accordion-toggle", upb).upbAccordion()  }(jQuery, _UPB_PREVIEW_DATA[upbComponentId]));',
                 ),
                 'shortcode' => array(
                     // 'css' => upb_templates_uri( 'preview-css/sections.css' ),
                     // 'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                    'js' => upb_assets_uri( 'js/upb-accordion.js' )
                 )
             )
         );

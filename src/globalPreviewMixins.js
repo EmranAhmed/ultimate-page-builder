@@ -197,17 +197,21 @@ export default{
 
             // No Content Class Added
             if (this.sidebarExpanded) {
+                this.$el.classList.add('upb-sidebar-expanded');
                 this.$el.classList.remove('upb-sidebar-collapsed');
             }
             else {
                 this.$el.classList.add('upb-sidebar-collapsed');
+                this.$el.classList.remove('upb-sidebar-expanded');
             }
 
             if (this.isEnabled) {
                 this.$el.classList.remove('upb-preview-element-disabled');
+                this.$el.classList.add('upb-preview-element-enabled');
             }
             else {
                 this.$el.classList.add('upb-preview-element-disabled');
+                this.$el.classList.remove('upb-preview-element-enabled');
             }
 
             if (this.hasContents) {

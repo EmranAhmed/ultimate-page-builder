@@ -25,6 +25,13 @@ export default {
         }
     },
 
+    deactivated(){
+        jQuery(this.$el).parent().removeClass('upb-has-mini-toolbar');
+    },
+    mounted(){
+        jQuery(this.$el).parent().addClass('upb-has-mini-toolbar');
+    },
+
     computed : {
 
         is_sidebar_expanded(){

@@ -4,7 +4,7 @@
      * Plugin URI: http://wordpress.org/plugins/ultimate-page-builder/
      * Description: Ultimate Page builder
      * Author: Emran Ahmed
-     * Version: 1.0.0-beta1
+     * Version: 1.0.0-beta.1
      * Domain Path: /languages
      * Text Domain: ultimate-page-builder
      * Author URI: http://themehippo.com/
