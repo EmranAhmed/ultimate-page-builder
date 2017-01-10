@@ -21,20 +21,6 @@ export default {
             return this.model.attributes['title'] ? this.model.attributes.title : this.model._upb_options.element.name;
         },
 
-        toolsList(){
-
-            return this.model._upb_options.tools.list.filter((tool)=> {
-
-                if (tool.id == 'contents' && (_.isString(this.model.contents) || _.isBoolean(this.model.contents) )) {
-                    // Text content do not need to show on panel it will shown on settings
-                    return false;
-                }
-
-                return (!(tool.id == 'settings' && _.isEmpty(this.model.attributes)));
-            })
-
-        },
-
         activeFocus(){
             this.model._upb_options.focus = true;
         },

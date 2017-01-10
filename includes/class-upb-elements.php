@@ -100,43 +100,54 @@
                     $_upb_options[ 'third_party_path' ] = FALSE;
                 }
 
-                // List Toolbar
-                if ( ! isset( $_upb_options[ 'tools' ] ) || ! isset( $_upb_options[ 'tools' ][ 'list' ] ) ) {
+                // Toolbar List
+
+                if ( ! isset( $_upb_options[ 'tools' ] ) ) {
+                    $_upb_options[ 'tools' ] = array();
+                }
+
+                if ( ! isset( $_upb_options[ 'tools' ][ 'list' ] ) ) {
                     $list_toolbar = array();
 
                     $list_toolbar[ 'move' ] = array(
+                        'id'    => 'move',
                         'icon'  => 'mdi mdi-cursor-move',
                         'class' => 'handle',
                         'title' => esc_html__( 'Sort', 'ultimate-page-builder' ),
                     );
 
                     $list_toolbar[ 'delete' ] = array(
+                        'id'    => 'delete',
                         'icon'  => 'mdi mdi-delete-forever',
                         'title' => esc_html__( 'Delete', 'ultimate-page-builder' ),
                     );
 
                     if ( in_array( 'enable', array_column( $settings, 'id' ) ) ) {
                         $list_toolbar[ 'enable' ] = array(
+                            'id'    => 'enable',
                             'icon'  => 'mdi mdi-eye',
                             'title' => esc_html__( 'Enabled', 'ultimate-page-builder' ),
                         );
 
                         $list_toolbar[ 'disable' ] = array(
+                            'id'    => 'disable',
                             'icon'  => 'mdi mdi-eye-off',
                             'title' => esc_html__( 'Disabled', 'ultimate-page-builder' ),
                         );
                     }
 
-
                     if ( is_array( $contents ) ) {
                         $list_toolbar[ 'contents' ] = array(
+                            'id'    => 'contents',
                             'icon'  => 'mdi mdi-table-edit',
                             'class' => 'show-contents',
                             'title' => esc_html__( 'Contents', 'ultimate-page-builder' ),
                         );
                     }
+
                     if ( is_array( $settings ) && ! empty( $settings ) ) {
                         $list_toolbar[ 'settings' ] = array(
+                            'id'    => 'settings',
                             'icon'  => 'mdi mdi-settings',
                             'class' => 'show-settings',
                             'title' => esc_html__( 'Settings', 'ultimate-page-builder' ),
@@ -144,17 +155,16 @@
                     }
 
                     $list_toolbar[ 'clone' ] = array(
+                        'id'    => 'clone',
                         'icon'  => 'mdi mdi-content-duplicate',
                         'title' => esc_html__( 'Clone', 'ultimate-page-builder' ),
                     );
 
                     $_upb_options[ 'tools' ][ 'list' ] = apply_filters( "upb_{$tag}_list_toolbar", $list_toolbar );
-
                 }
 
-
                 // Contents Toolbar
-                if ( ! isset( $_upb_options[ 'tools' ] ) || ! isset( $_upb_options[ 'tools' ][ 'contents' ] ) ) {
+                if ( ! isset( $_upb_options[ 'tools' ][ 'contents' ] ) ) {
 
                     $list_toolbar = array();
                     if ( is_array( $settings ) && ! empty( $settings ) ) {
@@ -170,12 +180,12 @@
                 }
 
                 // Settings Toolbar
-                if ( ! isset( $_upb_options[ 'tools' ] ) || ! isset( $_upb_options[ 'tools' ][ 'settings' ] ) ) {
+                if ( ! isset( $_upb_options[ 'tools' ][ 'settings' ] ) ) {
 
                     $list_toolbar = array();
                     if ( is_array( $contents ) ) {
                         $list_toolbar[] = array(
-                            'id'     => "$tag-contents",
+                            'id'     => "{$tag}-contents",
                             'title'  => esc_html__( 'Contents', 'ultimate-page-builder' ),
                             'icon'   => 'mdi mdi-table-edit',
                             'action' => 'showContentPanel'
@@ -185,29 +195,68 @@
                     $_upb_options[ 'tools' ][ 'settings' ] = apply_filters( "upb_{$tag}_settings_panel_toolbar", $list_toolbar );
                 }
 
+                // Meta Toolbar
+                if ( ! isset( $_upb_options[ 'meta' ] ) ) {
+                    $_upb_options[ 'meta' ] = array();
+                }
 
-                // CORE OPTIONS
+                if ( ! isset( $_upb_options[ 'meta' ][ 'contents' ] ) ) {
+                    $_upb_options[ 'meta' ][ 'contents' ] = array();
+                }
+                if ( ! isset( $_upb_options[ 'meta' ][ 'settings' ] ) ) {
+                    $_upb_options[ 'meta' ][ 'settings' ] = array();
+                }
+                if ( ! isset( $_upb_options[ 'meta' ][ 'messages' ] ) ) {
+                    $_upb_options[ 'meta' ][ 'messages' ] = array();
+                }
 
+                // Meta Contents
+                if ( ! isset( $_upb_options[ 'meta' ][ 'contents' ][ 'title' ] ) ) {
+                    $_upb_options[ 'meta' ][ 'contents' ][ 'title' ] = '%s';
+                }
 
-                ///
+                if ( ! isset( $_upb_options[ 'meta' ][ 'contents' ][ 'search' ] ) ) {
+                    $_upb_options[ 'meta' ][ 'contents' ][ 'search' ] = esc_html__( 'Search', 'ultimate-page-builder' );
+                }
 
+                if ( ! isset( $_upb_options[ 'meta' ][ 'contents' ][ 'help' ] ) ) {
+                    $_upb_options[ 'meta' ][ 'contents' ][ 'help' ] = '';
+                }
+
+                // Meta Settings
+                if ( ! isset( $_upb_options[ 'meta' ][ 'settings' ][ 'title' ] ) ) {
+                    $_upb_options[ 'meta' ][ 'settings' ][ 'title' ] = esc_html__( '%s Settings', 'ultimate-page-builder' );
+                }
+
+                if ( ! isset( $_upb_options[ 'meta' ][ 'settings' ][ 'search' ] ) ) {
+                    $_upb_options[ 'meta' ][ 'settings' ][ 'search' ] = esc_html__( 'Search', 'ultimate-page-builder' );
+                }
+
+                if ( ! isset( $_upb_options[ 'meta' ][ 'settings' ][ 'help' ] ) ) {
+                    $_upb_options[ 'meta' ][ 'settings' ][ 'help' ] = '';
+                }
+
+                // Meta Messages
+                if ( ! isset( $_upb_options[ 'meta' ][ 'messages' ][ 'addElement' ] ) ) {
+                    $_upb_options[ 'meta' ][ 'messages' ][ 'addElement' ] = esc_html__( 'Add Element', 'ultimate-page-builder' );
+                }
+
+                // WP Hooks
                 $settings     = apply_filters( "upb_element_{$tag}_settings", $settings );
                 $_upb_options = apply_filters( "upb_element_{$tag}_options", $_upb_options );
 
-
                 if ( is_string( $contents ) ) {
-                    $settings[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', 'Contents' ), 'type' => 'contents', 'value' => wp_kses_post( $contents ) );
+                    $settings[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', esc_html__( 'Contents', 'ultimate-page-builder' ) ), 'type' => 'contents', 'value' => wp_kses_post( $contents ) );
                 }
 
                 foreach ( $settings as $key => $setting ) {
-                    // $attributes[ $index ][ 'metaKey' ]   = $attribute[ 'id' ];
-
 
                     // Require
                     //===================
                     // require=>array(
                     // array('title', '!=', '' ),
-                    // array( 'title', '==', 'xxx')
+                    // array( 'title', '=', 'xxx')
+                    // array( 'title', '=', array('xxx', 'yyy'))
                     // )
                     //
                     // array( array('title', '!=', '') ) // if depended value is array check length or check text
@@ -233,7 +282,7 @@
                     $settings[ $key ] = $this->props->filterOptions( $settings[ $key ] );
 
                     $settings[ $key ][ '_id' ] = $setting[ 'id' ];
-                    //$attributes[ $index ][ 'metaValue' ] = $attribute[ 'value' ];
+
                     $settings[ $key ][ '_upb_field_type' ] = sprintf( 'upb-input-%s', $setting[ 'type' ] );
                 }
 

@@ -306,12 +306,10 @@
         }
 
         if ( ! empty( $_POST[ 'id' ] ) ) {
-
-            $short_code = do_shortcode( sprintf( '[contact-form-7 id="%d" title="%s"]', $_POST[ 'id' ], esc_html( $_POST[ 'title' ] ) ) );
-
+            $short_code = do_shortcode( sprintf( '[contact-form-7 id="%d" title="%s"]', absint( $_POST[ 'id' ] ), esc_html( $_POST[ 'title' ] ) ) );
             wp_send_json_success( $short_code );
         } else {
-            wp_send_json_success( '' );
+            wp_send_json_success();
         }
     } );
 

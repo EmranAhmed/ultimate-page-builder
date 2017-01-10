@@ -172,11 +172,9 @@ export default{
 
         methods : {
             getForm(id, title){
-                store.wpAjax('_upb_contact_form7_preview', {
-                    id,
-                    title
-                }, data=> {
-                    this.$el.querySelector('.ajax-result').innerHTML = data;
+                store.wpAjax('_upb_contact_form7_preview', {id, title}, contents=> {
+                    jQuery('.ajax-result', this.$el).html(contents);
+                    //this.$el.querySelector('.ajax-result').innerHTML = contents;
                 });
             }
         }
