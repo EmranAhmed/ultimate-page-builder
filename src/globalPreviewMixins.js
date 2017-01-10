@@ -7,7 +7,10 @@ export default{
             type : Number
         },
 
-        model : {
+        model  : {
+            type : Object
+        },
+        parent : {
             type : Object
         }
     },

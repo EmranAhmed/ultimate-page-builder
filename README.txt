@@ -1,19 +1,24 @@
 === Ultimate Page Builder ===
-Contributors: EmranAhmed
-Tags: page, builder, theme, customize
-Requires at least: 4.5
+Contributors: EmranAhmed, wpeshaan, webdzainer
+Tags: page builder, drag and drop page builder, front-end builder, home page builder, landing page builder, layout builder, page, page builder, page builder plugin, site-builder, template builder, visual page builder, website builder, wysiwyg builder
+Requires at least: 4.3
 Tested up to: 4.7
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Another Page Builder for WordPress based on VueJS
+An Incredibly easiest and highly customizable drag and drop page builder helps create professional websites without writing a line of code.
 
 == Description ==
-The **Ultimate Page Builder** plugin to build page easily on WordPress.
+Ultimate Page Builder is efficiently crafted powerful drag and drop frontend WordPress page builder.
+It offers WYSIWYG interface to build web page LIVE.
+Say goodbye the days to click back and forth between the clunky dashboard and site frontend while editing or building page.
+
+The powerful technology like Vue.js is powering the innovating website builder for WordPress which has make it possible to compose high-end page designs and unique layouts real-time without writing a single line of code.
 
 = Links =
-* [Github](https://github.com/EmranAhmed/ultimate-page-builder/?utm_medium=referral&utm_source=wordpress.org&utm_campaign=Ultimate+Page+Builder+Readme&utm_content=Repo+Link)
+* [Facebook User Group](https://www.facebook.com/groups/UltimatePageBuilder/)
+* [Website](https://themehippo.com/?utm_source=wordpress.org&utm_campaign=Ultimate+Page+Builder)
 
 == Installation ==
 
@@ -46,6 +51,6 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 == Changelog ==
 
-= 1.0.0 =
+= 1.0.0-beta.1 =
 
 - Initial release

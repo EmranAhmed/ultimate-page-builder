@@ -37,15 +37,9 @@
             'data'   => apply_filters( 'upb_new_row_data', upb_elements()->generate_element(
                 'upb-row', upb_elements()->generate_element(
                 'upb-column', array(), array(
-                'title' => array(
-                    'type'  => 'text',
-                    'value' => esc_html__( 'Column 1', 'ultimate-page-builder' )
-                )
+                'title' => esc_html__( 'Column 1', 'ultimate-page-builder' )
             ) ), array(
-                    'title' => array(
-                        'type'  => 'text',
-                        'value' => esc_html__( 'New Row %s', 'ultimate-page-builder' )
-                    )
+                    'title' => esc_html__( 'New Row %s', 'ultimate-page-builder' )
                 ) ) )
         );
 
@@ -82,15 +76,9 @@
                                                                                                         'upb-section', upb_elements()->generate_element(
                                                                                                         'upb-row', upb_elements()->generate_element(
                                                                                                         'upb-column', array(), array(
-                                                                                                        'title' => array(
-                                                                                                            'type'  => 'text',
-                                                                                                            'value' => esc_html__( 'Column 1', 'ultimate-page-builder' )
-                                                                                                        )
+                                                                                                        'title' => esc_html__( 'Column 1', 'ultimate-page-builder' )
                                                                                                     ) ), array(
-                                                                                                            'title' => array(
-                                                                                                                'type'  => 'text',
-                                                                                                                'value' => esc_html__( 'Row 1', 'ultimate-page-builder' )
-                                                                                                            )
+                                                                                                            'title' => esc_html__( 'Row 1', 'ultimate-page-builder' )
                                                                                                         ) ) ) )
                                                                      ),
                                                                      array(
@@ -117,7 +105,7 @@
         $data = array(
             'title'    => esc_html__( 'Elements', 'ultimate-page-builder' ),
             'search'   => esc_html__( 'Search Element', 'ultimate-page-builder' ),
-            'help'     => wp_kses_post( __( '<h2>How to use?</h2><p>Just drag an element and drop it to right side column layout.</p>', 'ultimate-page-builder' ) ),
+            'help'     => wp_kses_post( __( '<h2>How to use?</h2><p>Drag and drop an element to the right column and customize them based on your need.</p>', 'ultimate-page-builder' ) ),
             'tools'    => apply_filters( 'upb_tab_elements_tools', array() ), // add section | load section | layouts
             'icon'     => 'mdi mdi-shape-plus',
             'contents' => apply_filters( 'upb_tab_elements_contents', array() ),
@@ -126,7 +114,7 @@
 
         $data = array(
             'title'    => esc_html__( 'Settings', 'ultimate-page-builder' ),
-            'help'     => wp_kses_post( __( '<p>Simply enable or disable page builder for this page or set other options.</p>', 'ultimate-page-builder' ) ),
+            'help'     => wp_kses_post( __( '<p>Simply enable or disable page builder for the current page and select elements building position.</p>', 'ultimate-page-builder' ) ),
             'tools'    => apply_filters( 'upb_tab_settings_tools', array() ), // add section | load section | layouts
             'icon'     => 'mdi mdi-settings',
             'contents' => apply_filters( 'upb_tab_settings_contents', array() ),
@@ -137,7 +125,7 @@
         $data = array(
             'title'    => esc_html__( 'Pre-build Layouts', 'ultimate-page-builder' ),
             'search'   => esc_html__( 'Search Layouts', 'ultimate-page-builder' ),
-            'help'     => wp_kses_post( __( '<p>Pre build layouts</p>', 'ultimate-page-builder' ) ),
+            'help'     => wp_kses_post( __( '<p>Click on your desired pre-built layout to make available to the current page.</p>', 'ultimate-page-builder' ) ),
             'tools'    => apply_filters( 'upb_tab_layouts_tools', array() ), // add section | load section | layouts
             'icon'     => 'mdi mdi-palette',
             'contents' => apply_filters( 'upb_tab_layouts_contents', array() ),

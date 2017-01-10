@@ -350,6 +350,27 @@
         );
     }
 
+    function upb_css_class_id_input_group( $default_class = '', $default_id = '' ) {
+
+        return array(
+            array(
+                'id'    => 'css_class',
+                'title' => esc_html__( 'Custom CSS Class', 'ultimate-page-builder' ),
+                'desc'  => esc_html__( 'Custom CSS Class. Separate classes with space', 'ultimate-page-builder' ),
+                'type'  => 'text',
+                'value' => esc_attr( $default_class )
+            ),
+
+            array(
+                'id'    => 'css_id',
+                'title' => esc_html__( 'Custom CSS ID', 'ultimate-page-builder' ),
+                'desc'  => esc_html__( 'CSS ID of an element should be unique.', 'ultimate-page-builder' ),
+                'type'  => 'text',
+                'value' => esc_attr( $default_id ),
+            )
+        );
+    }
+
     function upb_enable_input( $title = '', $desc = '', $default = TRUE ) {
 
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Enable / Disable', 'ultimate-page-builder' );

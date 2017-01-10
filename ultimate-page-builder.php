@@ -1,13 +1,13 @@
 <?php
     /**
      * Plugin Name: Ultimate Page Builder
-     * Plugin URI: http://wordpress.org/plugins/ultimate-page-builder/
-     * Description: Ultimate Page builder
+     * Plugin URI: https://wordpress.org/plugins/ultimate-page-builder/
+     * Description: An Incredibly easiest and highly customizable drag and drop page builder helps create professional websites without writing a line of code.
      * Author: Emran Ahmed
      * Version: 1.0.0-beta.1
      * Domain Path: /languages
      * Text Domain: ultimate-page-builder
-     * Author URI: http://themehippo.com/
+     * Author URI: https://themehippo.com/
      */
 
     defined( 'ABSPATH' ) or die( 'Keep Silent' );

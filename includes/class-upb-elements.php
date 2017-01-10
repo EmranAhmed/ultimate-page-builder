@@ -428,7 +428,20 @@
 
 
                 if ( ! empty( $attributes ) ) {
-                    $el[ 'attributes' ]    = array_merge( $el[ 'attributes' ], $this->to_attributes( $attributes ) );
+
+                    $temp_settings = array();
+                    $settings      = (array) $this->get_element( $tag, '_upb_settings' );
+
+                    foreach ( $settings as $setting ) {
+                        if ( isset( $attributes[ $setting[ 'id' ] ] ) ) {
+
+                            $temp_settings[] = $this->props->filterOptions( array_merge( $setting, array(
+                                'value' => $attributes[ $setting[ 'id' ] ]
+                            ) ) );
+                        }
+                    }
+
+                    $el[ 'attributes' ]    = array_merge( $el[ 'attributes' ], $this->to_attributes( $temp_settings ) );
                     $el[ '_upb_settings' ] = array_merge( $el[ '_upb_settings' ], $el[ 'attributes' ] );
                 }
 
@@ -469,8 +482,12 @@
 
                 // Always new attribute
                 foreach ( $settings as $key => $value ) {
+
+                    //$settings[ $key ][ 'value' ] = NULL;
+                    //if ( isset( $attributes[ $value[ 'id' ] ] ) ) {
                     $settings[ $key ][ 'value' ] = $attributes[ $value[ 'id' ] ];
-                    $settings[ $key ]            = $this->props->filterOptions( $settings[ $key ] );
+                    //}
+                    $settings[ $key ] = $this->props->filterOptions( $settings[ $key ] );
                 }
 
                 return $settings;

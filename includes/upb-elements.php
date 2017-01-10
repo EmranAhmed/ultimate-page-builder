@@ -85,6 +85,8 @@
 
         array_push( $attributes, upb_responsive_hidden_input() );
 
+        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
+
         $contents = array();
 
         $_upb_options = array(
@@ -94,7 +96,7 @@
             ),
             'meta'    => array(
                 'contents' => apply_filters( 'upb_section_contents_panel_meta', array(
-                    'help' => '<h2>Now what?</h2><p>Create your layout column. Or click on mini column to add elements.</p>',
+                    'help' => '<p>Create new row, generate columns for large, medium, small and extra small devices.</p>',
                 ) ),
                 'settings' => apply_filters( 'upb_section_settings_panel_meta', array(
                     'help' => '<h2>Section Settings?</h2><p>section settings</p>',
@@ -120,6 +122,7 @@
 
         array_push( $attributes, upb_responsive_hidden_input() );
 
+        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
 
         $contents = '<p>Put Contents</p>';
 
@@ -168,6 +171,8 @@
         array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
 
         array_push( $attributes, upb_responsive_hidden_input() );
+
+        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
 
         array_push( $attributes, array(
             'id'          => 'id',
@@ -293,9 +298,11 @@
 
         array_push( $attributes, upb_responsive_hidden_input() );
 
+        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
+
         $contents = array(
-            upb_elements()->generate_element( 'upb-accordion-item', '<p>Authoritatively formulate one-to-one interfaces with sustainable information. Collaboratively impact value-added meta-services rather than superior growth.</p>', array( 'active' => array( 'type' => 'toggle', 'value' => TRUE ), 'title' => array( 'type' => 'text', 'value' => esc_html__( 'Accordion Item 1', 'ultimate-page-builder' ) ) ) ),
-            upb_elements()->generate_element( 'upb-accordion-item', '<p>Holisticly customize top-line leadership skills for wireless solutions. Appropriately actualize principle-centered products rather than sustainable.</p>', array( 'active' => array( 'type' => 'toggle', 'value' => FALSE ), 'title' => array( 'type' => 'text', 'value' => esc_html__( 'Accordion Item 2', 'ultimate-page-builder' ) ) ) )
+            upb_elements()->generate_element( 'upb-accordion-item', '<p>Authoritatively formulate one-to-one interfaces with sustainable information. Collaboratively impact value-added meta-services rather than superior growth.</p>', array( 'active' => TRUE, 'title' => esc_html__( 'Accordion Item 1', 'ultimate-page-builder' ) ) ),
+            upb_elements()->generate_element( 'upb-accordion-item', '<p>Holisticly customize top-line leadership skills for wireless solutions. Appropriately actualize principle-centered products rather than sustainable.</p>', array( 'active' => FALSE, 'title' => esc_html__( 'Accordion Item 2', 'ultimate-page-builder' ) ) )
         );
 
         $_upb_options = array(
@@ -312,7 +319,7 @@
                         'title'  => esc_html__( 'Add New', 'ultimate-page-builder' ),
                         'icon'   => 'mdi mdi-shape-plus',
                         'action' => 'addNew',
-                        'data'   => apply_filters( 'upb_new_accordion_item', upb_elements()->generate_element( 'upb-accordion-item', '<p>Accordion Item</p>', array( 'title' => array( 'type' => 'text', 'value' => esc_html__( 'Accordion Item %s', 'ultimate-page-builder' ) ) ) ) )
+                        'data'   => apply_filters( 'upb_new_accordion_item', upb_elements()->generate_element( 'upb-accordion-item', '<p>Accordion Item</p>', array( 'title' => esc_html__( 'Accordion Item %s', 'ultimate-page-builder' ) ) ) )
                     ),
                     array(
                         'id'     => 'accordion-setting',
