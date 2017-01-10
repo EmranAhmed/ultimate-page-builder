@@ -11,29 +11,3 @@
     background-position : var(--background-position);
     background-repeat   : no-repeat;
     }
-
-.upb-accordion {
-    background-color    : var(--background-color);
-    background-image    : var(--background-image);
-    background-position : var(--background-position);
-    background-repeat   : no-repeat;
-    }
-
-.upb-accordion-toggle {
-    cursor           : pointer;
-    background-color : #E2E2E2;
-    border-bottom    : 1px solid #9E9E9E;
-    text-decoration  : none;
-    display          : block;
-    padding          : 10px;
-    }
-
-.upb-accordion-content {
-    display : none;
-    border  : 1px solid #E2E2E2;
-    padding : 10px;
-    }
-
-.upb-accordion-content.active {
-    display : block;
-    }

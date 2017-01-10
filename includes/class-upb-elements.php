@@ -92,6 +92,10 @@
                     $_upb_options[ 'assets' ][ 'shortcode' ][ 'js' ] = FALSE;
                 }
 
+                if ( ! isset( $_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_js' ] ) ) {
+                    $_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_js' ] = FALSE;
+                }
+
                 if ( ! isset( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ) ) {
                     $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] = FALSE;
                 }
@@ -310,6 +314,10 @@
 
                         if ( ! empty( $_upb_options[ 'assets' ][ 'shortcode' ][ 'js' ] ) ) {
                             wp_register_script( sprintf( 'upb-element-%s', $tag ), esc_url( $_upb_options[ 'assets' ][ 'shortcode' ][ 'js' ] ), array(), FALSE, TRUE );
+                        }
+
+                        if ( ! empty( $_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_js' ] ) ) {
+                            wp_add_inline_script( sprintf( 'upb-element-%s', $tag ), $_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_js' ] );
                         }
 
                         add_shortcode( $tag, function ( $attrs, $contents = NULL ) use ( $tag, $_upb_options ) {

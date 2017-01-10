@@ -1,4 +1,4 @@
-;($ => {
+;(function ($) {
     $.fn.upbAccordion = function (settings) {
 
         let options = $.extend({}, $.fn.upbAccordion.defaults, settings);

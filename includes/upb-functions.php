@@ -471,20 +471,20 @@
 
         if ( isset( $attributes[ 'background-type' ] ) ) {
             if ( $attributes[ 'background-type' ] == 'both' ) {
-                printf( 'background-color: %s', esc_attr( $attributes[ 'background-color' ] ) );
-                printf( 'background-image: %s', sprintf( "url('%s')", esc_url( $attributes[ 'background-image' ] ) ) );
-                printf( 'background-position: %s', esc_attr( $attributes[ 'background-position' ] ) );
-                printf( 'background-repeat: %s', 'no-repeat' );
+                printf( 'background-color: %s;', esc_attr( $attributes[ 'background-color' ] ) );
+                printf( 'background-image: %s;', sprintf( "url('%s')", esc_url( $attributes[ 'background-image' ] ) ) );
+                printf( 'background-position: %s;', esc_attr( $attributes[ 'background-position' ] ) );
+                printf( 'background-repeat: %s;', 'no-repeat' );
             }
 
             if ( $attributes[ 'background-type' ] == 'color' ) {
-                printf( 'background-color: %s', esc_attr( $attributes[ 'background-color' ] ) );
+                printf( 'background-color: %s;', esc_attr( $attributes[ 'background-color' ] ) );
             }
 
             if ( $attributes[ 'background-type' ] == 'image' ) {
-                printf( 'background-image: %s', sprintf( "url('%s')", esc_url( $attributes[ 'background-image' ] ) ) );
-                printf( 'background-position: %s', esc_attr( $attributes[ 'background-position' ] ) );
-                printf( 'background-repeat: %s', 'no-repeat' );
+                printf( 'background-image: %s;', sprintf( "url('%s')", esc_url( $attributes[ 'background-image' ] ) ) );
+                printf( 'background-position: %s;', esc_attr( $attributes[ 'background-position' ] ) );
+                printf( 'background-repeat: %s;', 'no-repeat' );
             }
         }
     }
