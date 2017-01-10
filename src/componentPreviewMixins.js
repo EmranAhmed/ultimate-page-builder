@@ -2,62 +2,55 @@ import store from './store'
 
 export default{
 
-    'upb-section' : {
-        /*created(){
-         this.$watch('model.contents', function (newVal, oldVal) {
-         this.addClass();
-         })
-         },
-
-         mounted(){
-         this.addClass();
-         },*/
-
-        /*methods : {
-         addClass(){
-         // No Content Class Added
-         if (this.hasContents) {
-         this.$el.classList.remove('upb-preview-element-no-contents')
-         }
-         else {
-         this.$el.classList.add('upb-preview-element-no-contents')
-         }
-         }
-         }*/
-    },
-
     'upb-row' : {
         computed : {
-            containerClass(){
-                return this.model.attributes.container;
-            },
-
-            rowClass(){
+            rowGroupClass(){
                 return store.grid.groupClass;
             }
         },
 
         methods : {
 
-            addClass(){
+            containerClass(){
 
-                // We Have container wrapped
-                let element = this.$el.firstChild;
+                let cssClasses = [];
 
-                // Generated Grid Classes
-                let rowClass = [this.rowClass];
+                cssClasses.push(this.model.attributes.container);
 
-                // New Grid Added
-                rowClass.map(className=>element.classList.add(className));
+                if (!_.isUndefined(this.model.attributes['element_class'])) {
+                    cssClasses.push(this.model.attributes.element_class);
+                }
 
-                // No Content Class Added
+                if (this.hiddenDeviceClasses) {
+                    cssClasses.push(this.hiddenDeviceClasses);
+                }
+
+                return cssClasses.join(' ');
+            },
+
+            addClass(hasToolbar = true){
+
+                let cssClasses = [];
+
+                cssClasses.push(`upb-preview-element`);
+
+                cssClasses.push(`${this.model.tag}-preview`);
+
+                if (this.model._upb_options.hasMiniToolbar) {
+                    cssClasses.push(`upb-has-mini-toolbar`);
+                }
+
+                cssClasses.push(this.rowGroupClass);
+
                 if (!this.model._upb_options.core) {
-                    this.$el.classList.add('upb-preview-element-non-core');
+                    cssClasses.push(`upb-preview-element-non-core`);
                 }
 
                 if (_.isArray(this.model.contents)) {
-                    this.$el.classList.add('upb-preview-element-type-container');
+                    cssClasses.push(`upb-preview-element-type-container`);
                 }
+
+                return cssClasses.join(' ');
             }
         }
     },
@@ -66,52 +59,43 @@ export default{
 
         methods : {
 
-            isElementRegistered(tag){
-                return store.elements.includes(tag);
-            },
+            addClass(hasToolbar = true){
 
-            addClass(){
+                let cssClasses = [];
 
-                // Generated Grid Classes
-                let gridClass = this.columnClass();
+                cssClasses.push(`upb-preview-element`);
 
-                //let prefixClassLength = store.grid.prefixClass.length + store.grid.separator.length;
-                let prefixClass = `${store.grid.prefixClass}${store.grid.separator}`;
+                cssClasses.push(`${this.model.tag}-preview`);
 
-                // Take Existing Grid Class
-                let removableClass = [];
+                if (this.model._upb_options.hasMiniToolbar) {
+                    cssClasses.push(`upb-has-mini-toolbar`);
+                }
 
-                // or [...this.$el.classList].map()
-                Array.from(this.$el.classList, className=> {
-                    if (className.substr(0, prefixClass.length) === prefixClass) {
-                        removableClass.push(className)
-                    }
-                });
+                if (!_.isUndefined(this.model.attributes['element_class'])) {
+                    cssClasses.push(this.model.attributes.element_class);
+                }
 
-                // Remove Existing Grid Class
-                removableClass.map(className=>this.$el.classList.remove(className));
+                cssClasses.push(...this.generateColumnClass());
 
-                // New Grid Added
-                gridClass.map(className=>this.$el.classList.add(className));
+                cssClasses.push(this.hiddenDeviceClasses);
 
                 // No Content Class Added
-                if (this.hasContents) {
-                    this.$el.classList.remove('upb-preview-element-no-contents');
-                }
-                else {
-                    this.$el.classList.add('upb-preview-element-no-contents');
+                if (!this.hasContents) {
+                    cssClasses.push(`upb-preview-element-no-contents`);
                 }
 
                 if (!this.model._upb_options.core) {
-                    this.$el.classList.add('upb-preview-element-non-core');
+                    cssClasses.push(`upb-preview-element-non-core`);
                 }
 
                 if (_.isArray(this.model.contents)) {
-                    this.$el.classList.add('upb-preview-element-type-container');
+                    cssClasses.push(`upb-preview-element-type-container`);
                 }
+
+                return cssClasses.join(' ');
             },
 
-            columnClass(){
+            generateColumnClass(){
 
                 let grid = store.grid.devices.map((device)=> {
                     let gridValue = this.model.attributes[device.id].trim();
@@ -173,7 +157,7 @@ export default{
         methods : {
             getForm(id, title){
                 store.wpAjax('_upb_contact_form7_preview', {id, title}, contents=> {
-                    jQuery('.ajax-result', this.$el).html(contents);
+                    jQuery('.xhr-template', this.$el).html(contents);
                     //this.$el.querySelector('.ajax-result').innerHTML = contents;
                 });
             }

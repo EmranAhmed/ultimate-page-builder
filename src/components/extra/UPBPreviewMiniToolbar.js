@@ -1,8 +1,8 @@
 import store from '../../store'
 
 export default {
-    name  : 'upb-preview-mini-toolbar',
-    props : {
+    name     : 'upb-preview-mini-toolbar',
+    props    : {
         model      : {
             type : Object
         },
@@ -24,17 +24,17 @@ export default {
             l10n : store.l10n
         }
     },
-
-    deactivated(){
-        jQuery(this.$el).parent().removeClass('upb-has-mini-toolbar');
-    },
-    mounted(){
-        jQuery(this.$el).parent().addClass('upb-has-mini-toolbar');
-    },
-
     computed : {
 
         is_sidebar_expanded(){
+
+            if (this.$root.$data.store.sidebarExpanded) {
+                Vue.set(this.model._upb_options, 'hasMiniToolbar', true);
+            }
+            else {
+                Vue.set(this.model._upb_options, 'hasMiniToolbar', false);
+            }
+
             return this.$root.$data.store.sidebarExpanded
         },
 

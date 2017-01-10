@@ -1,16 +1,20 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' );
     
     // $attributes, $contents, $settings
+
+    if ( ! upb_is_shortcode_enabled( $attributes ) ) {
+        return;
+    }
 ?>
 
-<div class="upb-text">
+<div id="<?php upb_shortcode_id( $attributes ) ?>" class="<?php upb_shortcode_class( $attributes, 'upb-text' ) ?>">
     <style scoped>
         :scope {
-            background : <?php echo esc_attr($attributes['background']) ?>;
+        <?php upb_shortcode_scoped_style_background($attributes) ?>
             }
     </style>
 
-    <?php echo do_shortcode( $contents ) ?>
+    <div><?php echo do_shortcode( $contents ) ?></div>
 
 </div>
 

@@ -1,24 +1,14 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
-
     // $attributes, $contents, $settings
 
-
-    $grid = upb_grid_system();
-
+    if ( ! upb_is_shortcode_enabled( $attributes ) ) {
+        return;
+    }
 ?>
 
-
-<div class="<?php echo esc_attr( $attributes[ 'container' ] ) ?>">
-
-    <div class="<?php echo esc_attr( $grid[ 'groupClass' ] ) ?>">
-
-        <style scoped>
-            :scope {
-                background : <?php echo esc_attr($attributes['background']) ?>;
-                }
-        </style>
-
+<div class="<?php upb_shortcode_class( $attributes, $attributes[ 'container' ] ) ?>">
+    <div id="<?php upb_shortcode_id( $attributes ) ?>" class="<?php echo esc_attr( upb_grid_system( 'groupClass' ) ) ?>">
         <?php echo do_shortcode( $contents ) ?>
     </div>
 </div>

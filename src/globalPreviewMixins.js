@@ -24,16 +24,16 @@ export default{
     created(){
 
         this.$watch('sidebarExpanded', function (newVal, oldVal) {
-            this.addClass();
+            //this.addClass();
         });
 
         this.$watch('model.contents', function (newVal, oldVal) {
-            this.addClass();
+            //this.addClass();
             this.setPreviewData();
         });
 
         this.$watch('model.attributes', function (newVal, oldVal) {
-            this.addClass();
+            //this.addClass();
             this.setPreviewData();
             this.attributeWatch();
         }, {deep : true});
@@ -45,7 +45,6 @@ export default{
     },
 
     mounted(){
-        this.addClass();
         this.setPreviewData();
         this.loadScripts();
     },
@@ -68,14 +67,44 @@ export default{
             return this.model.contents;
         },
         isEnabled(){
-
             if (!_.isUndefined(this.model.attributes['enable'])) {
                 return this.model.attributes.enable;
             }
             else {
                 return true;
             }
+        },
 
+        hiddenDeviceClasses(){
+            if (!_.isUndefined(this.model.attributes['hidden-device'])) {
+                return this.model.attributes['hidden-device'].join(' ');
+            }
+            else {
+                return '';
+            }
+        },
+
+        backgroundVariables(){
+
+            let background = {};
+            if (!_.isUndefined(this.model.attributes['background-type'])) {
+
+                if (this.model.attributes['background-type'] == 'both') {
+                    background['--background-color']    = this.model.attributes['background-color'];
+                    background['--background-image']    = `url(${this.model.attributes['background-image']})`;
+                    background['--background-position'] = this.model.attributes['background-position']
+                }
+
+                if (this.model.attributes['background-type'] == 'color') {
+                    background['--background-color'] = this.model.attributes['background-color'];
+                }
+
+                if (this.model.attributes['background-type'] == 'image') {
+                    background['--background-image']    = `url(${this.model.attributes['background-image']})`;
+                    background['--background-position'] = this.model.attributes['background-position']
+                }
+            }
+            return background;
         },
 
         sidebarExpanded(){
@@ -90,6 +119,17 @@ export default{
     },
 
     methods : {
+        addID(){
+
+            if (!_.isUndefined(this.model.attributes['element_id'])) {
+                return this.model.attributes.element_id;
+            }
+            return null;
+        },
+
+        isElementRegistered(tag){
+            return store.elements.includes(tag);
+        },
 
         attributeWatch : _.debounce(function () {
             this.inlineScriptInit(true);
@@ -198,39 +238,50 @@ export default{
 
         addClass(){
 
-            // No Content Class Added
+            let cssClasses = [];
+
+            cssClasses.push(`upb-preview-element`);
+            cssClasses.push(`${this.model.tag}-preview`);
+
+            if (this.model._upb_options.hasMiniToolbar) {
+                cssClasses.push(`upb-has-mini-toolbar`);
+            }
+
+            if (!_.isUndefined(this.model.attributes['element_class'])) {
+                cssClasses.push(this.model.attributes.element_class);
+            }
+
+            if (this.hiddenDeviceClasses) {
+                cssClasses.push(this.hiddenDeviceClasses);
+            }
+
             if (this.sidebarExpanded) {
-                this.$el.classList.add('upb-sidebar-expanded');
-                this.$el.classList.remove('upb-sidebar-collapsed');
+                cssClasses.push(`upb-sidebar-expanded`);
             }
             else {
-                this.$el.classList.add('upb-sidebar-collapsed');
-                this.$el.classList.remove('upb-sidebar-expanded');
+                cssClasses.push(`upb-sidebar-collapsed`);
             }
 
             if (this.isEnabled) {
-                this.$el.classList.remove('upb-preview-element-disabled');
-                this.$el.classList.add('upb-preview-element-enabled');
+                cssClasses.push(`upb-preview-element-enabled`);
             }
             else {
-                this.$el.classList.add('upb-preview-element-disabled');
-                this.$el.classList.remove('upb-preview-element-enabled');
+                cssClasses.push(`upb-preview-element-disabled`);
             }
 
-            if (this.hasContents) {
-                this.$el.classList.remove('upb-preview-element-no-contents');
-            }
-            else {
-                this.$el.classList.add('upb-preview-element-no-contents');
+            if (!this.hasContents) {
+                cssClasses.push(`upb-preview-element-no-contents`);
             }
 
             if (!this.model._upb_options.core) {
-                this.$el.classList.add('upb-preview-element-non-core');
+                cssClasses.push(`upb-preview-element-non-core`);
             }
 
             if (_.isArray(this.model.contents)) {
-                this.$el.classList.add('upb-preview-element-type-container');
+                cssClasses.push(`upb-preview-element-type-container`);
             }
+
+            return cssClasses.join(' ');
         },
 
         openElementsPanel(){

@@ -217,6 +217,8 @@
 
         $data .= sprintf( "const _upb_preview_devices = %s;", wp_json_encode( upb_preview_devices() ) );
 
+        $data .= sprintf( "const _upb_responsive_hidden_devices = %s;", wp_json_encode( upb_responsive_hidden() ) );
+
         $data .= sprintf( "const _upb_grid_system = %s;", wp_json_encode( upb_grid_system() ) );
 
         $data .= sprintf( "const _upb_registered_elements = %s;", wp_json_encode( upb_elements()->getNamed() ) );

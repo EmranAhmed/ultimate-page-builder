@@ -1,5 +1,5 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' ); ?>
-<div v-preview-element v-droppable :style="{'--background-color':model.attributes.background}">
+<div v-preview-element v-droppable :class="addClass()">
 
     <upb-preview-mini-toolbar :model="model"></upb-preview-mini-toolbar>
 

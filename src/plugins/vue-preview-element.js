@@ -18,7 +18,7 @@ import { util } from 'vue';
 
             inserted : function (el, binding, vnode) {
 
-                $(el).addClass(`upb-preview-element`).addClass(`${vnode.context.model.tag}-preview`);
+                // $(el).addClass(`upb-preview-element`).addClass(`${vnode.context.model.tag}-preview`);
 
                 // No Contents Class
                 if (!_.isUndefined(vnode.context.model['contents']) && _.isEmpty(vnode.context.model.contents) && (_.isString(vnode.context.model.contents) || _.isArray(vnode.context.model.contents))) {
@@ -34,7 +34,6 @@ import { util } from 'vue';
                     event.stopPropagation();
                     vnode.context.model._upb_options.focus = false;
                 });
-
             }
         });
     };

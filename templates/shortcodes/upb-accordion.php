@@ -13,7 +13,8 @@
         <?php upb_shortcode_scoped_style_background($attributes) ?>
             }
     </style>
-    
-    <?php echo do_shortcode( $contents ) ?>
 
+    <div class="upb-accordion">
+        <?php echo do_shortcode( $contents ) ?>
+    </div>
 </div>

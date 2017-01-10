@@ -297,7 +297,7 @@
                 'title'   => esc_html__( 'Background Color', 'ultimate-page-builder' ),
                 'desc'    => esc_html__( 'Element background color', 'ultimate-page-builder' ),
                 'type'    => 'color',
-                'value'   => 'rgba(255,255,255,0)',
+                'value'   => '#ffffff',
                 'alpha'   => TRUE,
                 'require' => array(
                     array( 'background-type', '=', array( 'color', 'both' ) )
@@ -310,10 +310,10 @@
                 'desc'        => esc_html__( 'Element background image', 'ultimate-page-builder' ),
                 'type'        => 'background-image',
                 'value'       => '',
-                'use'         => 'background-image-position',
+                'use'         => 'background-position',
                 'placeholder' => esc_html__( 'Choose background image', 'ultimate-page-builder' ),
                 'buttons'     => array(
-                    'add'    => esc_html__( 'Add', 'ultimate-page-builder' ),
+                    'add'    => esc_html__( 'Add Background', 'ultimate-page-builder' ),
                     'remove' => esc_html__( 'Remove', 'ultimate-page-builder' ),
                     'choose' => esc_html__( 'Choose', 'ultimate-page-builder' ),
                 ),
@@ -323,7 +323,7 @@
             ),
 
             array(
-                'id'          => 'background-image-position',
+                'id'          => 'background-position',
                 'title'       => esc_html__( 'Background Image Position', 'ultimate-page-builder' ),
                 'desc'        => esc_html__( 'Change Background Image Position. You can move background image pointer to see preview.', 'ultimate-page-builder' ),
                 'type'        => 'background-image-position',
@@ -354,7 +354,7 @@
 
         return array(
             array(
-                'id'    => 'css_class',
+                'id'    => 'element_class',
                 'title' => esc_html__( 'Custom CSS Class', 'ultimate-page-builder' ),
                 'desc'  => esc_html__( 'Custom CSS Class. Separate classes with space', 'ultimate-page-builder' ),
                 'type'  => 'text',
@@ -362,7 +362,7 @@
             ),
 
             array(
-                'id'    => 'css_id',
+                'id'    => 'element_id',
                 'title' => esc_html__( 'Custom CSS ID', 'ultimate-page-builder' ),
                 'desc'  => esc_html__( 'CSS ID of an element should be unique.', 'ultimate-page-builder' ),
                 'type'  => 'text',
@@ -419,6 +419,76 @@
     // End Build-In Inputs
 
     // Helpers
+    function upb_is_shortcode_enabled( $attr ) {
+
+        if ( isset( $attr[ 'enable' ] ) ) {
+            return ! empty( $attr[ 'enable' ] );
+        }
+
+        return TRUE; // if not set then return true;
+
+    }
+
+    function upb_get_shortcode_class( $attributes, $extra = '' ) {
+
+        $classes = array();
+        if ( isset( $attributes[ 'hidden-device' ] ) ) {
+            $classes = array_merge( $classes, $attributes[ 'hidden-device' ] );
+        }
+
+        if ( isset( $attributes[ 'element_class' ] ) ) {
+            array_push( $classes, $attributes[ 'element_class' ] );
+        }
+
+        if ( ! empty( $extra ) ) {
+            array_push( $classes, $extra );
+        }
+
+        return implode( ' ', $classes );
+    }
+
+    function upb_get_shortcode_id( $attributes ) {
+        return isset( $attributes[ 'element_class' ] ) ? $attributes[ 'element_class' ] : FALSE;
+    }
+
+    function upb_shortcode_id( $attributes ) {
+        echo esc_attr( upb_get_shortcode_id( $attributes ) );
+    }
+
+    function upb_shortcode_class( $attributes, $extra = '' ) {
+        echo esc_attr( upb_get_shortcode_class( $attributes, $extra ) );
+    }
+
+    function upb_get_shortcode_title( $attributes ) {
+        return isset( $attributes[ 'title' ] ) ? $attributes[ 'title' ] : '';
+    }
+
+    function upb_shortcode_title( $attributes ) {
+        echo esc_html( upb_get_shortcode_title( $attributes ) );
+    }
+
+    function upb_shortcode_scoped_style_background( $attributes ) {
+
+        if ( isset( $attributes[ 'background-type' ] ) ) {
+            if ( $attributes[ 'background-type' ] == 'both' ) {
+                printf( 'background-color: %s', esc_attr( $attributes[ 'background-color' ] ) );
+                printf( 'background-image: %s', sprintf( "url('%s')", esc_url( $attributes[ 'background-image' ] ) ) );
+                printf( 'background-position: %s', esc_attr( $attributes[ 'background-position' ] ) );
+                printf( 'background-repeat: %s', 'no-repeat' );
+            }
+
+            if ( $attributes[ 'background-type' ] == 'color' ) {
+                printf( 'background-color: %s', esc_attr( $attributes[ 'background-color' ] ) );
+            }
+
+            if ( $attributes[ 'background-type' ] == 'image' ) {
+                printf( 'background-image: %s', sprintf( "url('%s')", esc_url( $attributes[ 'background-image' ] ) ) );
+                printf( 'background-position: %s', esc_attr( $attributes[ 'background-position' ] ) );
+                printf( 'background-repeat: %s', 'no-repeat' );
+            }
+        }
+    }
+
     function upb_enqueue_shortcode_assets() {
 
         if ( upb_is_enabled() ):
@@ -442,6 +512,7 @@
             }, upb_elements()->getAll() );
         endif;
     }
+
 
     // add_action upb_boilerplate_print_footer_scripts with upb_get_template
     function upb_add_script_template( $id, $contents ) {

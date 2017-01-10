@@ -10,6 +10,9 @@
 
         array_push( $attributes, upb_title_input( esc_html__( 'Column Title', 'ultimate-page-builder' ), '', esc_html__( 'Column 1', 'ultimate-page-builder' ) ) );
 
+        array_push( $attributes, upb_responsive_hidden_input() );
+
+        // upb_column_device_input is MUST field for column
         $attributes = array_merge( $attributes, upb_column_device_input() );
 
         $contents = array();
