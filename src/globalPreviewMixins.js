@@ -45,6 +45,10 @@ export default{
 
         this.setPreviewData();
 
+        this.$nextTick(function () {
+            this.loadScripts();
+        });
+
     },
 
     beforeDestroy(){
@@ -202,7 +206,6 @@ export default{
                 if (remove) {
                     this.removeInlineScript();
                 }
-
                 previewDocument.getElementsByTagName('body')[0].appendChild(script);
             }
         },
@@ -235,6 +238,7 @@ export default{
             // no main script but need to load inline script
             if (!this.model._upb_options.assets.preview.js && this.model._upb_options.assets.preview.inline_js) {
                 this.inlineScriptInit(true);
+                //console.log('no main script but need to load inline script')
             }
 
             // main script id added and inline_js
@@ -244,11 +248,13 @@ export default{
                 // Script loaded then call inline script.
                 previewDocument.getElementById(`${prefixJS}`).onload = _ => {
                     this.inlineScriptInit(true);
+                    //console.log('Script loaded then call inline script.');
                 };
 
                 // Script will not load because its already loaded
                 _.delay(_=> {
-                    this.inlineScriptInit(true)
+                    this.inlineScriptInit(true);
+                    //console.log('_.delay Script will not load because its already loaded');
                 }, 200);
 
             }
@@ -262,9 +268,13 @@ export default{
                 script.src    = this.model._upb_options.assets.preview.js;
                 script.async  = true;
                 script.onload = _ => {
+                    //console.log('preview js loaded')
                     this.inlineScriptInit(true);
                 };
                 previewDocument.getElementsByTagName('body')[0].appendChild(script);
+
+                //console.log('preview js added')
+
             }
         },
 
