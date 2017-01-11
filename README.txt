@@ -14,7 +14,7 @@ Ultimate Page Builder is efficiently crafted powerful drag and drop frontend Wor
 It offers WYSIWYG interface to build web page LIVE.
 Say goodbye the days to click back and forth between the clunky dashboard and site frontend while editing or building page.
 
-The powerful technology like Vue.js is powering the innovating website builder for WordPress which has make it possible to compose high-end page designs and unique layouts real-time without writing a single line of code.
+The powerful technology like Vue.js is powering the innovating website builder for WordPress which has made it possible to compose high-end page designs and unique layouts real-time without writing a single line of code.
 
 = Links =
 * [Facebook User Group](https://www.facebook.com/groups/UltimatePageBuilder/)
@@ -50,6 +50,12 @@ If you are unable to use any of the methods due to internet connectivity and fil
 7. Activate the plugin
 
 == Changelog ==
+
+= 1.0.0-beta.2 =
+
+- Background position required field fix for background-image
+- Change v-if directive to v-show.
+- Fix preview script loading issue
 
 = 1.0.0-beta.1 =
 
