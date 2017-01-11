@@ -1,7 +1,5 @@
 <template>
-    <li :class="typeClass()" v-if="isRequired">
-
-
+    <li :class="typeClass()" v-show="isRequired">
         <div class="form-group toggle">
             <span class="title" v-text="attributes.title"></span>
             <label class="switch">

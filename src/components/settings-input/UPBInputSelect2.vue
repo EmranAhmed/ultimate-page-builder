@@ -1,5 +1,5 @@
 <template>
-    <li :class="typeClass()" v-if="isRequired">
+    <li :class="typeClass()" v-show="isRequired">
         <div class="form-group">
 
             <label v-if="multiple">
