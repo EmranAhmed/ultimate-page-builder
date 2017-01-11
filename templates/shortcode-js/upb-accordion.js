@@ -14,7 +14,7 @@
                 $(this).next().slideToggle('fast').toggleClass('active');
 
                 //Hide the other panels
-                $(".upb-accordion-content").not($(this).next()).slideUp('fast').removeClass('active');
+                $(this).parent().parent().find(".upb-accordion-content").not($(this).next()).slideUp('fast').removeClass('active');
             });
         });
     };

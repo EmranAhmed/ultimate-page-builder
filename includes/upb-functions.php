@@ -330,7 +330,8 @@
                 'value'       => '0% 0%',
                 'placeholder' => '0% 0%',
                 'require'     => array(
-                    array( 'background-image', '!=', '' )
+                    array( 'background-image', '!=', '' ),
+                    array( 'background-type', '=', array( 'image', 'both' ) ),
                 )
             ),
         );
