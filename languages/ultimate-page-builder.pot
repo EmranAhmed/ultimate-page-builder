@@ -77,7 +77,7 @@ msgstr ""
 msgid "<h2>How to use?</h2><p>Drag and drop an element to the right column and customize them based on your need.</p>"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:116, includes/class-upb-elements.php:157, includes/class-upb-elements.php:177, includes/upb-elements.php:322
+#: includes/boilerplate/upb-boilerplate-hooks.php:116, includes/class-upb-elements.php:157, includes/class-upb-elements.php:177, includes/upb-elements.php:323
 msgid "Settings"
 msgstr ""
 
@@ -365,11 +365,11 @@ msgstr ""
 msgid "Section Enable / Disable"
 msgstr ""
 
-#: includes/upb-elements.php:122, includes/upb-elements.php:122, includes/upb-functions.php:341
+#: includes/upb-elements.php:122, includes/upb-elements.php:122, includes/upb-functions.php:342
 msgid "Title"
 msgstr ""
 
-#: includes/upb-elements.php:124, includes/upb-elements.php:174, includes/upb-elements.php:251, includes/upb-elements.php:293, includes/upb-functions.php:376, includes/upb-settings.php:10
+#: includes/upb-elements.php:124, includes/upb-elements.php:174, includes/upb-elements.php:251, includes/upb-elements.php:294, includes/upb-functions.php:377, includes/upb-settings.php:10
 msgid "Enable / Disable"
 msgstr ""
 
@@ -405,7 +405,7 @@ msgstr ""
 msgid "Accordion Item Title"
 msgstr ""
 
-#: includes/upb-elements.php:249, includes/upb-elements.php:300
+#: includes/upb-elements.php:249, includes/upb-elements.php:301
 msgid "Accordion Item 1"
 msgstr ""
 
@@ -417,27 +417,27 @@ msgstr ""
 msgid "Accordion Item"
 msgstr ""
 
-#: includes/upb-elements.php:291
+#: includes/upb-elements.php:292
 msgid "Accordion Title"
 msgstr ""
 
-#: includes/upb-elements.php:291, includes/upb-elements.php:307
+#: includes/upb-elements.php:292, includes/upb-elements.php:308
 msgid "Accordion"
 msgstr ""
 
-#: includes/upb-elements.php:301
+#: includes/upb-elements.php:302
 msgid "Accordion Item 2"
 msgstr ""
 
-#: includes/upb-elements.php:315
+#: includes/upb-elements.php:316
 msgid "Add New"
 msgstr ""
 
-#: includes/upb-elements.php:318
+#: includes/upb-elements.php:319
 msgid "Accordion Item %s"
 msgstr ""
 
-#: includes/upb-elements.php:339
+#: includes/upb-elements.php:340
 msgid "Add Accordion Item"
 msgstr ""
 
@@ -553,27 +553,27 @@ msgstr ""
 msgid "Change Background Image Position. You can move background image pointer to see preview."
 msgstr ""
 
-#: includes/upb-functions.php:358
+#: includes/upb-functions.php:359
 msgid "Custom CSS Class"
 msgstr ""
 
-#: includes/upb-functions.php:359
+#: includes/upb-functions.php:360
 msgid "Custom CSS Class. Separate classes with space"
 msgstr ""
 
-#: includes/upb-functions.php:366
+#: includes/upb-functions.php:367
 msgid "Custom CSS ID"
 msgstr ""
 
-#: includes/upb-functions.php:367
+#: includes/upb-functions.php:368
 msgid "CSS ID of an element should be unique."
 msgstr ""
 
-#: includes/upb-functions.php:377
+#: includes/upb-functions.php:378
 msgid "Enable or Disable Element"
 msgstr ""
 
-#: includes/upb-functions.php:413
+#: includes/upb-functions.php:414
 msgid "Container Type"
 msgstr ""
 
