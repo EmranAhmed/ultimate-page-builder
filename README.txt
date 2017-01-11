@@ -51,6 +51,10 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 == Changelog ==
 
+= 1.0.0-beta.3 =
+
+- Element Preview Inline Script
+
 = 1.0.0-beta.2 =
 
 - Background position required field fix for background-image
