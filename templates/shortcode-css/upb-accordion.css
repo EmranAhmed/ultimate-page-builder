@@ -11,8 +11,8 @@
     }
 
 .upb-accordion-item.active {
-    background-color : #222222;
-    color            : #FFFFFF;
+    background-color : #222222 !important;
+    color            : #FFFFFF !important;
     }
 
 .upb-accordion-content {

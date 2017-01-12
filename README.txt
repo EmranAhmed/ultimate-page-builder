@@ -51,6 +51,10 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 == Changelog ==
 
+= 1.0.0-beta.5 =
+
+- Accordion active style modified.
+
 = 1.0.0-beta.4 =
 
 - Range Input added
