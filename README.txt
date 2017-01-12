@@ -51,6 +51,13 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 == Changelog ==
 
+= 1.0.0-beta.4 =
+
+- Range Input added
+- Spacer added to make gape between sections
+- Tab Element Added
+- Update Preview Placeholder styles
+
 = 1.0.0-beta.3 =
 
 - Element Preview Inline Script
