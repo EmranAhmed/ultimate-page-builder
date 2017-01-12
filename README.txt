@@ -51,6 +51,10 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 == Changelog ==
 
+= 1.0.0-beta.6 =
+
+- Force added UPB TAB files to SVN
+
 = 1.0.0-beta.5 =
 
 - Accordion active style modified.
