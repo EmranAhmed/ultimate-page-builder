@@ -146,6 +146,14 @@ export default{
     },
 
     methods : {
+
+        inlineStyle(style = {}){
+
+            //console.log(extend(false, {}, this.backgroundVariables, style));
+
+            return extend(false, {}, this.backgroundVariables, style);
+        },
+
         addID(){
 
             if (!_.isUndefined(this.model.attributes['element_id'])) {

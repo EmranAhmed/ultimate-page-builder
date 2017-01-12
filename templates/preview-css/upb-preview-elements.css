@@ -2,6 +2,7 @@
     background-color    : var(--background-color);
     background-image    : var(--background-image);
     background-position : var(--background-position);
+    margin-bottom       : var(--margin-bottom);
     background-repeat   : no-repeat;
     }
 

@@ -361,10 +361,6 @@
                 // Override functionality
 
                 if ( ! empty( $_upb_options[ 'previews' ] ) ) {
-                    //print_r( $_upb_options[ 'previews' ] );
-                    //print_r( $_upb_options[ 'preview' ] );
-                    //die( __FILE__ );
-
                     foreach ( $_upb_options[ 'previews' ] as $preview ) {
                         $preview_template_fn = sprintf( 'upb_register_preview_%s', str_ireplace( '-', '_', esc_html( $preview[ 'template' ] ) ) );
 
@@ -389,33 +385,27 @@
                     }
                 }
 
+                $preview_template_fn = sprintf( 'upb_register_preview_%s', str_ireplace( '-', '_', esc_html( $_upb_options[ 'preview' ][ 'template' ] ) ) );
 
-                //else {
+                if ( is_callable( $preview_template_fn ) ) {
+                    add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', esc_html( $_upb_options[ 'preview' ][ 'template' ] ) ), $preview_template_fn );
+                } else {
+                    add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', esc_html( $_upb_options[ 'preview' ][ 'template' ] ) ), function () use ( $tag, $_upb_options ) {
 
+                        if ( ! current_user_can( 'customize' ) ) {
+                            wp_send_json_error( 'upb_not_allowed', 403 );
+                        }
 
-                    $preview_template_fn = sprintf( 'upb_register_preview_%s', str_ireplace( '-', '_', esc_html( $_upb_options[ 'preview' ][ 'template' ] ) ) );
+                        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+                            wp_send_json_error( 'bad_nonce', 400 );
+                        }
 
+                        ob_start();
+                        upb_get_template( sprintf( "previews/%s.php", esc_html( $_upb_options[ 'preview' ][ 'template' ] ) ), $_upb_options[ 'third_party_path' ] );
+                        wp_send_json_success( ob_get_clean() );
+                    } );
+                }
 
-                    if ( is_callable( $preview_template_fn ) ) {
-                        add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', esc_html( $_upb_options[ 'preview' ][ 'template' ] ) ), $preview_template_fn );
-                    }
-                    else {
-                        add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', esc_html( $_upb_options[ 'preview' ][ 'template' ] ) ), function () use ( $tag, $_upb_options ) {
-
-                            if ( ! current_user_can( 'customize' ) ) {
-                                wp_send_json_error( 'upb_not_allowed', 403 );
-                            }
-
-                            if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-                                wp_send_json_error( 'bad_nonce', 400 );
-                            }
-
-                            ob_start();
-                            upb_get_template( sprintf( "previews/%s.php", esc_html( $_upb_options[ 'preview' ][ 'template' ] ) ), $_upb_options[ 'third_party_path' ] );
-                            wp_send_json_success( ob_get_clean() );
-                        } );
-                    }
-                //}
             }
 
             public function get_elements() {

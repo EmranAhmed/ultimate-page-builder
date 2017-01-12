@@ -117,6 +117,20 @@
                                 'choose' => esc_html__( 'Select', 'ultimate-page-builder' ),
                             );
                         break;
+
+
+                    case 'range':
+
+                        if ( ! isset( $options[ 'options' ] ) ) {
+                            $options[ 'options' ] = array();
+                        }
+
+                        $options[ 'options' ][ 'min' ]    = isset( $options[ 'options' ][ 'min' ] ) ? (int) $options[ 'options' ][ 'min' ] : 0;
+                        $options[ 'options' ][ 'max' ]    = isset( $options[ 'options' ][ 'max' ] ) ? (int) $options[ 'options' ][ 'max' ] : 100;
+                        $options[ 'options' ][ 'step' ]   = isset( $options[ 'options' ][ 'step' ] ) ? $options[ 'options' ][ 'step' ] : '';
+                        $options[ 'options' ][ 'prefix' ] = isset( $options[ 'options' ][ 'prefix' ] ) ? esc_html( $options[ 'options' ][ 'prefix' ] ) : '';
+                        $options[ 'options' ][ 'suffix' ] = isset( $options[ 'options' ][ 'suffix' ] ) ? esc_html( $options[ 'options' ][ 'suffix' ] ) : '';
+                        break;
                 }
 
                 $this->settings[] = $options;
@@ -156,6 +170,10 @@
 
                     case 'textarea':
                         $options[ 'value' ] = ( $value === '' ) ? esc_textarea( $options[ 'default' ] ) : esc_textarea( $value );
+                        break;
+
+                    case 'range':
+                        $options[ 'value' ] = ( $value === '' ) ? (int) $options[ 'default' ] : (int) $value;
                         break;
 
                     default:

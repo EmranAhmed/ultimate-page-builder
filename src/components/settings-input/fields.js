@@ -24,7 +24,7 @@ const fieldsComponents = {
     'upb-input-background-image'          : require('./UPBInputBackgroundImage.vue'),
     'upb-input-background-image-position' : require('./UPBInputBackgroundImagePosition.vue'),
     'upb-input-radio-icon'                : require('./UPBInputRadioIcon.vue'),
-
+    'upb-input-range'                     : require('./UPBInputRange.vue')
 };
 
 Object.keys(fieldsComponents).map((key) => {
@@ -48,5 +48,3 @@ if (_.isArray(store.fields) && !_.isEmpty(store.fields)) {
 }
 
 export default fieldsComponents
-
-

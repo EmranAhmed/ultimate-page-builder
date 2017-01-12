@@ -12,7 +12,6 @@
                 $options[ 'default' ]     = isset( $options[ 'default' ] ) ? $options[ 'default' ] : '';
                 $options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : '';
 
-
                 if (
                     $options[ 'type' ] == 'select2'
                     || $options[ 'type' ] == 'icons'
@@ -55,6 +54,21 @@
                     case 'icon-ajax':
                     case 'ajax':
                         $options[ 'options' ] = apply_filters( $options[ 'hooks' ][ 'filter' ], $options[ 'value' ], $options );
+                        break;
+
+                    case 'range':
+
+                        if ( ! isset( $options[ 'options' ] ) ) {
+                            $options[ 'options' ] = array();
+                        }
+
+                        $options[ 'options' ][ 'min' ]    = isset( $options[ 'options' ][ 'min' ] ) ? (int) $options[ 'options' ][ 'min' ] : 0;
+                        $options[ 'options' ][ 'max' ]    = isset( $options[ 'options' ][ 'max' ] ) ? (int) $options[ 'options' ][ 'max' ] : 100;
+                        $options[ 'options' ][ 'step' ]   = isset( $options[ 'options' ][ 'step' ] ) ? $options[ 'options' ][ 'step' ] : '';
+                        $options[ 'options' ][ 'prefix' ] = isset( $options[ 'options' ][ 'prefix' ] ) ? esc_html( $options[ 'options' ][ 'prefix' ] ) : '';
+                        $options[ 'options' ][ 'suffix' ] = isset( $options[ 'options' ][ 'suffix' ] ) ? esc_html( $options[ 'options' ][ 'suffix' ] ) : '';
+
+                        $options[ 'value' ] = (int) $options[ 'value' ];
                         break;
 
                     case 'select':

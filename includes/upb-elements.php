@@ -24,12 +24,16 @@
             ),
             'meta'    => array(
                 'contents' => apply_filters( 'upb_column_contents_panel_meta', array(
-                    'help' => '<h2>Column contents?</h2><p>Choose a section and drag elements</p>',
+                    'help' => '<h2>Column contents?</h2><p>Open elements panel and drop into column</p>',
                 ) ),
 
                 'settings' => apply_filters( 'upb_column_settings_panel_meta', array(
-                    'help' => '<h2>Element Settings?</h2><p>section settings</p>',
-                ) )
+                    'help' => '<p>Change column settings and responsive options</p>',
+                ) ),
+
+                'messages' => array(
+                    'addElement' => esc_html__( 'Drop Element', 'ultimate-page-builder' )
+                )
             ),
         );
 
@@ -87,6 +91,20 @@
         array_push( $attributes, upb_enable_input( esc_html__( 'Section Enable / Disable', 'ultimate-page-builder' ), '' ) );
 
         array_push( $attributes, upb_responsive_hidden_input() );
+
+        array_push( $attributes, array(
+            'id'      => 'space',
+            'title'   => esc_html__( 'Spacer', 'ultimate-page-builder' ),
+            'desc'    => esc_html__( 'Space between two section', 'ultimate-page-builder' ),
+            'type'    => 'range',
+            'options' => array(
+                'min'    => 0,
+                'max'    => 200,
+                'step'   => 1,
+                'suffix' => 'px',
+            ),
+            'value'   => 0,
+        ) );
 
         $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
 
@@ -175,8 +193,6 @@
 
         array_push( $attributes, upb_responsive_hidden_input() );
 
-        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
-
         array_push( $attributes, array(
             'id'          => 'id',
             'type'        => 'ajax',
@@ -193,6 +209,8 @@
                 'allowClear' => TRUE
             )
         ) );
+
+        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
 
         $contents = FALSE;
 

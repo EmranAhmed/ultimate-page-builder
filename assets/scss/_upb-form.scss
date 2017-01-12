@@ -116,6 +116,10 @@ button:focus {
     line-height : 1;
     }
 
+  input[type="range"] {
+    height : 10px;
+    }
+
   input[type="checkbox"],
   input[type="radio"] {
     border             : 1px solid #B4B9BE;
@@ -446,11 +450,19 @@ button:focus {
    * Title
    *----------------*/
   .title {
-    font-size      : 11px;
+    font-size      : 12px;
     margin         : 0 0 10px;
     text-transform : uppercase;
     font-weight    : bold;
     display        : block;
+    }
+
+  .prefix, .suffix {
+    font-size      : 11px;
+    margin         : 0 0 15px;
+    text-transform : uppercase;
+    font-weight    : bold;
+    display        : inline-block;
     }
 
   /*----------------

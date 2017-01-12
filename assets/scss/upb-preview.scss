@@ -64,17 +64,31 @@
 
   &.upb-column-preview,
   &.upb-preview-element-non-core.upb-preview-element-type-container {
-    min-height : 105px;
+    min-height : 75px;
     }
 
-  > .upb-add-element-message {
-    position        : absolute !important;
-    padding         : 5px !important;
-    margin          : 10px 5px !important;
+  .upb-add-element-message {
+    position        : relative !important;
+    padding         : 0 30px !important;
+    text-decoration : none !important;
+    box-shadow      : none !important;
+    outline         : none !important;
+    display         : block !important;
+    color           : $upb-preview-element-highlight-color !important;
+    text-align      : center !important;
+    }
+
+  > .upb-add-element-message-regular {
+    position        : relative !important;
+    padding         : 20px 30px !important;
+    margin          : 15px 0 20px 0 !important;
     text-decoration : none !important;
     box-shadow      : none !important;
     outline         : none !important;
     color           : $upb-preview-element-highlight-color !important;
+    border          : 1px solid !important;
+    display         : block !important;
+    text-align      : center !important;
     }
 
   &.upb-preview-element-disabled {
