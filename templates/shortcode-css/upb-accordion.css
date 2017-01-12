@@ -9,6 +9,12 @@
     box-shadow       : none !important;
     }
 
+.upb-accordion-item.active {
+    background-color : #222222;
+    color            : #FFFFFF;
+    border-color     : #FFFFFF;
+    }
+
 .upb-accordion-content {
     display : none;
     border  : 1px solid #EDEDED;

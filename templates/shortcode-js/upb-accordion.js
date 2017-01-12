@@ -11,10 +11,14 @@
                 e.stopImmediatePropagation();
 
                 //Expand or collapse this panel
-                $(this).next().slideToggle('fast').toggleClass('active');
+                $(this).next().slideToggle('fast', function () {
+                    $(this).toggleClass('active');
+                }.bind(this)).toggleClass('active');
 
                 //Hide the other panels
                 $(this).parent().parent().find(".upb-accordion-content").not($(this).next()).slideUp('fast').removeClass('active');
+                $(this).parent().parent().find('.upb-accordion-item').not($(this)).removeClass('active');
+
             });
         });
     };

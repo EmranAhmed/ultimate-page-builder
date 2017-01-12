@@ -20,14 +20,16 @@
       position : relative;
       }
 
-    position  : absolute;
-    height    : 100%;
-    width     : 100%;
-    top       : 0;
-    left      : 0;
-    border    : transparent 1px solid;
-    z-index   : 0;
-    font-size : 14px;
+    position      : absolute;
+    height        : 100%;
+    width         : 100%;
+    top           : 0;
+    left          : 0;
+    z-index       : 0;
+    font-size     : 14px;
+    border        : transparent 1px dashed;
+    border-radius : 2px;
+    display       : block;
 
     > ul {
       list-style       : none;
@@ -86,9 +88,10 @@
     box-shadow      : none !important;
     outline         : none !important;
     color           : $upb-preview-element-highlight-color !important;
-    border          : 1px solid !important;
+    border          : 1px dotted !important;
     display         : block !important;
     text-align      : center !important;
+    border-radius   : 5px !important;
     }
 
   &.upb-preview-element-disabled {
