@@ -77,7 +77,7 @@ msgstr ""
 msgid "<h2>How to use?</h2><p>Drag and drop an element to the right column and customize them based on your need.</p>"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:116, includes/class-upb-elements.php:157, includes/class-upb-elements.php:177, includes/upb-elements.php:323
+#: includes/boilerplate/upb-boilerplate-hooks.php:116, includes/class-upb-elements.php:182, includes/class-upb-elements.php:202, includes/upb-elements.php:341, includes/upb-elements.php:464
 msgid "Settings"
 msgstr ""
 
@@ -225,7 +225,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:257, includes/class-upb-elements.php:223, includes/class-upb-elements.php:236
+#: includes/boilerplate/upb-boilerplate-hooks.php:257, includes/class-upb-elements.php:248, includes/class-upb-elements.php:261
 msgid "Search"
 msgstr ""
 
@@ -249,11 +249,11 @@ msgstr ""
 msgid "Expand"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:263, includes/class-upb-elements.php:139
+#: includes/boilerplate/upb-boilerplate-hooks.php:263, includes/class-upb-elements.php:164
 msgid "Disabled"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:264, includes/class-upb-elements.php:133
+#: includes/boilerplate/upb-boilerplate-hooks.php:264, includes/class-upb-elements.php:158
 msgid "Enabled"
 msgstr ""
 
@@ -285,19 +285,19 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: includes/class-upb-elements-props.php:34, includes/class-upb-settings.php:109
+#: includes/class-upb-elements-props.php:33, includes/class-upb-settings.php:109
 msgid "No Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:41, includes/class-upb-settings.php:115
+#: includes/class-upb-elements-props.php:40, includes/class-upb-settings.php:115
 msgid "Use Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:42, includes/class-upb-settings.php:116, includes/upb-functions.php:317
+#: includes/class-upb-elements-props.php:41, includes/class-upb-settings.php:116, includes/upb-functions.php:317
 msgid "Remove"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:43, includes/class-upb-settings.php:117
+#: includes/class-upb-elements-props.php:42, includes/class-upb-settings.php:117
 msgid "Select"
 msgstr ""
 
@@ -305,27 +305,27 @@ msgstr ""
 msgid "Ultimate page builder element \"%s\" already registered."
 msgstr ""
 
-#: includes/class-upb-elements.php:120
+#: includes/class-upb-elements.php:145
 msgid "Sort"
 msgstr ""
 
-#: includes/class-upb-elements.php:126
+#: includes/class-upb-elements.php:151
 msgid "Delete"
 msgstr ""
 
-#: includes/class-upb-elements.php:148, includes/class-upb-elements.php:193, includes/class-upb-elements.php:253
+#: includes/class-upb-elements.php:173, includes/class-upb-elements.php:218, includes/class-upb-elements.php:278
 msgid "Contents"
 msgstr ""
 
-#: includes/class-upb-elements.php:164
+#: includes/class-upb-elements.php:189
 msgid "Clone"
 msgstr ""
 
-#: includes/class-upb-elements.php:232
+#: includes/class-upb-elements.php:257
 msgid "%s Settings"
 msgstr ""
 
-#: includes/class-upb-elements.php:245
+#: includes/class-upb-elements.php:270
 msgid "Add Element"
 msgstr ""
 
@@ -341,104 +341,152 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
-#: includes/upb-elements.php:46
+#: includes/upb-elements.php:35
+msgid "Drop Element"
+msgstr ""
+
+#: includes/upb-elements.php:50
 msgid "Row Title"
 msgstr ""
 
-#: includes/upb-elements.php:46
+#: includes/upb-elements.php:50
 msgid "New Row 1"
 msgstr ""
 
-#: includes/upb-elements.php:48
+#: includes/upb-elements.php:52
 msgid "Row Enable / Disable"
 msgstr ""
 
-#: includes/upb-elements.php:83
+#: includes/upb-elements.php:87
 msgid "Section Title"
 msgstr ""
 
-#: includes/upb-elements.php:83
+#: includes/upb-elements.php:87
 msgid "New Section %s"
 msgstr ""
 
-#: includes/upb-elements.php:87
+#: includes/upb-elements.php:91
 msgid "Section Enable / Disable"
 msgstr ""
 
-#: includes/upb-elements.php:122, includes/upb-elements.php:122, includes/upb-functions.php:342
+#: includes/upb-elements.php:97
+msgid "Spacer"
+msgstr ""
+
+#: includes/upb-elements.php:98
+msgid "Space between two section"
+msgstr ""
+
+#: includes/upb-elements.php:140, includes/upb-elements.php:140, includes/upb-functions.php:342
 msgid "Title"
 msgstr ""
 
-#: includes/upb-elements.php:124, includes/upb-elements.php:174, includes/upb-elements.php:251, includes/upb-elements.php:294, includes/upb-functions.php:377, includes/upb-settings.php:10
+#: includes/upb-elements.php:142, includes/upb-elements.php:192, includes/upb-elements.php:269, includes/upb-elements.php:312, includes/upb-elements.php:392, includes/upb-elements.php:435, includes/upb-functions.php:377, includes/upb-settings.php:10
 msgid "Enable / Disable"
 msgstr ""
 
-#: includes/upb-elements.php:172
+#: includes/upb-elements.php:190
 msgid "Form Title"
 msgstr ""
 
-#: includes/upb-elements.php:172
+#: includes/upb-elements.php:190
 msgid "Contact form 1"
 msgstr ""
 
-#: includes/upb-elements.php:183
+#: includes/upb-elements.php:199
 msgid "Contact Form"
 msgstr ""
 
-#: includes/upb-elements.php:184
+#: includes/upb-elements.php:200
 msgid "Contact form list"
 msgstr ""
 
-#: includes/upb-elements.php:191
+#: includes/upb-elements.php:207
 msgid "Search contact form"
 msgstr ""
 
-#: includes/upb-elements.php:202
+#: includes/upb-elements.php:220
 msgid "Contact form 7"
 msgstr ""
 
-#: includes/upb-elements.php:217
+#: includes/upb-elements.php:235
 msgid "Choose a form from left panel"
 msgstr ""
 
-#: includes/upb-elements.php:249
+#: includes/upb-elements.php:267
 msgid "Accordion Item Title"
 msgstr ""
 
-#: includes/upb-elements.php:249, includes/upb-elements.php:301
+#: includes/upb-elements.php:267, includes/upb-elements.php:319
 msgid "Accordion Item 1"
 msgstr ""
 
-#: includes/upb-elements.php:253
+#: includes/upb-elements.php:271, includes/upb-elements.php:394
 msgid "Default Active"
 msgstr ""
 
-#: includes/upb-elements.php:260
+#: includes/upb-elements.php:278
 msgid "Accordion Item"
 msgstr ""
 
-#: includes/upb-elements.php:292
+#: includes/upb-elements.php:310
 msgid "Accordion Title"
 msgstr ""
 
-#: includes/upb-elements.php:292, includes/upb-elements.php:308
+#: includes/upb-elements.php:310, includes/upb-elements.php:326
 msgid "Accordion"
 msgstr ""
 
-#: includes/upb-elements.php:302
+#: includes/upb-elements.php:320
 msgid "Accordion Item 2"
 msgstr ""
 
-#: includes/upb-elements.php:316
+#: includes/upb-elements.php:334, includes/upb-elements.php:457
 msgid "Add New"
 msgstr ""
 
-#: includes/upb-elements.php:319
+#: includes/upb-elements.php:337
 msgid "Accordion Item %s"
 msgstr ""
 
-#: includes/upb-elements.php:340
+#: includes/upb-elements.php:358
 msgid "Add Accordion Item"
+msgstr ""
+
+#: includes/upb-elements.php:390
+msgid "Tab Item Title"
+msgstr ""
+
+#: includes/upb-elements.php:390
+msgid "Tab Item 1"
+msgstr ""
+
+#: includes/upb-elements.php:401
+msgid "Tab Item"
+msgstr ""
+
+#: includes/upb-elements.php:433
+msgid "Tab Title"
+msgstr ""
+
+#: includes/upb-elements.php:433, includes/upb-elements.php:449
+msgid "Tab"
+msgstr ""
+
+#: includes/upb-elements.php:442
+msgid "Tab 1"
+msgstr ""
+
+#: includes/upb-elements.php:443
+msgid "Tab 2"
+msgstr ""
+
+#: includes/upb-elements.php:460
+msgid "Tab Item %s"
+msgstr ""
+
+#: includes/upb-elements.php:481
+msgid "Add Tab Item"
 msgstr ""
 
 #: includes/upb-functions.php:106
