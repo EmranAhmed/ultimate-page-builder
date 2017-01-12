@@ -15,10 +15,40 @@ store.getAllUPBElements(elements => {
 
     elements.map(element=> {
 
+        if (element._upb_options.previews && ( _.isArray(element._upb_options.previews) || _.isObject(element._upb_options.previews) )) {
+
+            let previews = _.isObject(element._upb_options.previews) ? _.values(element._upb_options.previews) : element._upb_options.previews;
+
+            previews.map(el=> {
+
+                let template           = el.template;
+                //let component          = `upb-${element.tag}`;
+                let component          = el.component;
+                let componentMixins    = el.mixins;
+                //let upbComponentMixins = _.isEmpty(componentPreviewMixins[element.tag]) ? false : componentPreviewMixins[element.tag];
+                let upbComponentMixins = _.isEmpty(componentPreviewMixins[template]) ? false : componentPreviewMixins[template];
+
+                Vue.component(component, function (resolve, reject) {
+
+                    store.getShortCodePreviewTemplate(template, function (templateData) {
+
+                        resolve({
+                            name     : component,
+                            template : templateData,
+                            mixins   : [globalPreviewMixins, upbComponentMixins, componentMixins]
+                        });
+                    })
+                });
+
+            });
+        }
+        //else {
         let template           = element._upb_options.preview.template;
-        let component          = `upb-${element.tag}`;
+        //let component          = `upb-${element.tag}`;
+        let component          = element._upb_options.preview.component;
         let componentMixins    = element._upb_options.preview.mixins;
-        let upbComponentMixins = _.isEmpty(componentPreviewMixins[element.tag]) ? false : componentPreviewMixins[element.tag];
+        //let upbComponentMixins = _.isEmpty(componentPreviewMixins[element.tag]) ? false : componentPreviewMixins[element.tag];
+        let upbComponentMixins = _.isEmpty(componentPreviewMixins[template]) ? false : componentPreviewMixins[template];
 
         Vue.component(component, function (resolve, reject) {
 
@@ -31,6 +61,7 @@ store.getAllUPBElements(elements => {
                 });
             })
         });
+        //}
     });
 
 }, _=> {});

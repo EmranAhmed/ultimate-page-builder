@@ -449,7 +449,7 @@
     }
 
     function upb_get_shortcode_id( $attributes ) {
-        return isset( $attributes[ 'element_class' ] ) ? $attributes[ 'element_class' ] : FALSE;
+        return isset( $attributes[ 'element_id' ] ) ? $attributes[ 'element_id' ] : FALSE;
     }
 
     function upb_shortcode_id( $attributes ) {

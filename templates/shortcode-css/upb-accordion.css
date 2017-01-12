@@ -1,19 +1,17 @@
-
-.upb-accordion {
-    }
-
-.upb-accordion-toggle {
+.upb-accordion-item {
     cursor           : pointer;
-    background-color : #E2E2E2;
-    border-bottom    : 1px solid #9E9E9E;
+    background-color : #EDEDED;
+    border-bottom    : 1px solid #EDEDED;
     text-decoration  : none;
     display          : block;
     padding          : 10px;
+    color            : #222222;
+    box-shadow       : none !important;
     }
 
 .upb-accordion-content {
     display : none;
-    border  : 1px solid #E2E2E2;
+    border  : 1px solid #EDEDED;
     padding : 10px;
     }
 

@@ -11,3 +11,17 @@
     background-position : var(--background-position);
     background-repeat   : no-repeat;
     }
+
+.upb-accordion-preview {
+    background-color    : var(--background-color);
+    background-image    : var(--background-image);
+    background-position : var(--background-position);
+    background-repeat   : no-repeat;
+    }
+
+.upb-tab-preview {
+    background-color    : var(--background-color);
+    background-image    : var(--background-image);
+    background-position : var(--background-position);
+    background-repeat   : no-repeat;
+    }
