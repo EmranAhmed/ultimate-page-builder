@@ -13,9 +13,9 @@
      * Remove Element Example
      */
 
-    //add_action( 'upb_remove_elements', function () {
-    //    upb_elements()->remove( 'upb-tab' );
-    //} );
+    /*add_action( 'upb_remove_elements', function () {
+        upb_elements()->remove( 'upb-tab' );
+    } );*/
 
     function upb_remove_elements_action() {
         do_action( 'upb_remove_elements' );

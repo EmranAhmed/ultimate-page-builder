@@ -26,8 +26,14 @@
 
             public function remove( $tag ) {
                 if ( $this->has_element( $tag ) ) {
+
+                    $options = $this->get_element( $tag, '_upb_options' );
+
                     unset( $this->short_code_elements[ $tag ] );
-                    remove_shortcode( $tag );
+
+                    if ( ! $options[ 'predefined' ] ) {
+                        remove_shortcode( $tag );
+                    }
                 }
             }
 
@@ -40,6 +46,12 @@
                 $_upb_options[ 'focus' ] = FALSE;
 
                 $_upb_options[ 'core' ] = FALSE;
+
+                $_upb_options[ 'predefined' ] = FALSE;
+
+                if ( shortcode_exists( $tag ) ) {
+                    $_upb_options[ 'predefined' ] = TRUE;
+                }
 
                 if ( in_array( $tag, $this->core_elements ) ) {
                     $_upb_options[ 'core' ] = TRUE;
@@ -418,7 +430,6 @@
                         wp_send_json_success( ob_get_clean() );
                     } );
                 }
-
             }
 
             public function get_elements() {

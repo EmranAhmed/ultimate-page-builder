@@ -51,6 +51,12 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 == Changelog ==
 
+= 1.0.0-beta.7 =
+
+- Action `upb_remove_elements` added to remove element filter
+- Ajax Preview
+- Input Field Mixin
+
 = 1.0.0-beta.6 =
 
 - Force added UPB TAB files to SVN
