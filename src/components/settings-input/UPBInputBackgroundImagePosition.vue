@@ -14,9 +14,10 @@
 <script>
 
     import common from './common'
+    import userInputMixin from './user-mixins'
 
     export default {
         name   : 'upb-input-background-image-position',
-        mixins : [common],
+        mixins : [common, userInputMixin('background-image-position')]
     }
 </script>

@@ -5,12 +5,14 @@ import {sprintf} from 'sprintf-js';
 
 import Select2 from '../../plugins/vue-select2'
 
+import userInputMixin from './user-mixins'
+
 Vue.use(Select2);
 
 export default {
     name   : 'upb-input-ajax',
-    props  : ['index', 'target', 'model', 'attributes'], // model[target]
-    mixins : [common],
+
+    mixins : [common, userInputMixin('ajax')],
 
     computed : {
 

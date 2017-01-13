@@ -19,13 +19,10 @@
 <script>
 
     import common from './common'
+    import userInputMixin from './user-mixins'
 
     export default {
         name   : 'upb-input-range',
-        props  : ['index', 'target', 'model', 'attributes'], // model[target]
-        mixins : [common],
-        created(){
-            //   console.log(this.model, this.index, this.target, this.attributes)
-        }
+        mixins : [common, userInputMixin('range')]
     }
 </script>

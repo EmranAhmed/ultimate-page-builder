@@ -3,14 +3,15 @@ import common from './common'
 import extend from 'extend'
 import {sprintf} from 'sprintf-js';
 
+import userInputMixin from './user-mixins'
+
 import Select2 from '../../plugins/vue-select2'
 
 Vue.use(Select2);
 
 export default {
     name   : 'upb-input-icon-ajax',
-    props  : ['index', 'target', 'model', 'attributes'], // model[target]
-    mixins : [common],
+    mixins : [common, userInputMixin('icon-ajax')],
 
     computed : {
 
@@ -25,11 +26,10 @@ export default {
                         return {
                             action : this.attributes.hooks.ajax,
                             query  : params.term, // search query
-                            _nonce : store.getNonce(),
+                            _nonce : store.getNonce()
                         };
                     },
                     processResults : function (result, params) {
-
                         return {
                             results : result.data,
                         };

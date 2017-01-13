@@ -18,11 +18,10 @@
 <script>
 
     import common from './common'
-    //import store from '../../store'
+    import userInputMixin from './user-mixins'
 
     export default {
         name   : 'upb-input-device-hidden',
-        props  : ['index', 'target', 'model', 'attributes'], // model[target]
-        mixins : [common]
+        mixins : [common, userInputMixin('device-hidden')]
     }
 </script>

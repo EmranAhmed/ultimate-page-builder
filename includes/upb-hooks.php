@@ -8,6 +8,21 @@
 
     add_action( 'wp_loaded', 'upb_elements_register_action' );
 
+
+    /**
+     * Remove Element Example
+     */
+
+    //add_action( 'upb_remove_elements', function () {
+    //    upb_elements()->remove( 'upb-tab' );
+    //} );
+
+    function upb_remove_elements_action() {
+        do_action( 'upb_remove_elements' );
+    }
+
+    add_action( 'wp_loaded', 'upb_remove_elements_action', 20 );
+
     function upb_tabs_register_action() {
         do_action( 'upb_register_tab', upb_tabs() );
     }

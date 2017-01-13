@@ -24,16 +24,14 @@
 <script>
 
     import common from './common'
+    import userInputMixin from './user-mixins'
 
     import Select2 from '../../plugins/vue-select2'
 
     Vue.use(Select2);
 
     export default {
-        name   : 'upb-input-select2',
-        props  : ['index', 'target', 'model', 'attributes'], // model[target]
-        mixins : [common],
-
+        name    : 'upb-input-select2',
         methods : {
             onChange(data, e){
                 if (_.isUndefined(this.attributes['multiple'])) {
@@ -48,6 +46,7 @@
                     Vue.set(this, 'input', _.without(this.input, data.id));
                 }
             }
-        }
+        },
+        mixins  : [common, userInputMixin('select2')]
     }
 </script>

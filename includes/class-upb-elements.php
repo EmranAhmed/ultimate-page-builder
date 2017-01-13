@@ -24,6 +24,13 @@
                 return self::$instance;
             }
 
+            public function remove( $tag ) {
+                if ( $this->has_element( $tag ) ) {
+                    unset( $this->short_code_elements[ $tag ] );
+                    remove_shortcode( $tag );
+                }
+            }
+
             public function register( $tag, $settings = array(), $contents = FALSE, $_upb_options = array() ) {
 
                 if ( $this->has_element( $tag ) ) {
@@ -44,9 +51,11 @@
 
                 if ( ! isset( $_upb_options[ 'preview' ] ) ) {
                     $_upb_options[ 'preview' ] = array(
-                        //	'component' => 'upb-' . $tag,
-                        'template' => $tag,
-                        'mixins'   => '{}' // javascript object, like: { methods:{ abcd(){} } } or window.abcdMixins = {}
+                        'component' => 'upb-preview-' . $tag,
+                        'ajax'      => FALSE, // enable ajax preview contents.
+                        'ajax-hook' => sprintf( '_upb_%s_ajax_preview_contents', $tag ),
+                        'template'  => $tag,
+                        'mixins'    => '{}' // javascript object, like: { methods:{ abcd(){} } } or window.abcdMixins = {}
                     );
                 }
 
@@ -58,7 +67,6 @@
 
                 if ( is_array( $_upb_options[ 'previews' ] ) ) {
                     foreach ( $_upb_options[ 'previews' ] as $key => $previews ) {
-
 
                         if ( ! isset( $previews[ 'template' ] ) ) {
                             $_upb_options[ 'previews' ][ $key ][ 'template' ] = $previews[ 'component' ];
@@ -72,11 +80,16 @@
                     }
                 }
 
-
-                if ( isset( $_upb_options[ 'preview' ][ 'component' ] ) && is_string( $_upb_options[ 'preview' ][ 'component' ] ) ) {
-                    $_upb_options[ 'preview' ][ 'component' ] = 'upb-preview-' . esc_html( $_upb_options[ 'preview' ][ 'component' ] );
-                } else {
+                if ( ! isset( $_upb_options[ 'preview' ][ 'component' ] ) ) {
                     $_upb_options[ 'preview' ][ 'component' ] = 'upb-preview-' . $tag;
+                }
+
+                if ( ! isset( $_upb_options[ 'preview' ][ 'ajax' ] ) ) {
+                    $_upb_options[ 'preview' ][ 'ajax' ] = FALSE;
+                }
+
+                if ( ! isset( $_upb_options[ 'preview' ][ 'ajax-hook' ] ) ) {
+                    $_upb_options[ 'preview' ][ 'ajax-hook' ] = sprintf( '_upb_%s_preview_contents', $tag );
                 }
 
                 if ( ! isset( $_upb_options[ 'preview' ][ 'mixins' ] ) ) {

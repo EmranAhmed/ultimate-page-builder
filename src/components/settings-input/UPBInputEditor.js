@@ -1,11 +1,11 @@
 import common from './common'
 import store from '../../store'
 import extend from 'extend'
+import userInputMixin from './user-mixins'
 
 export default {
     name   : 'upb-input-editor',
-    props  : ['index', 'target', 'model', 'attributes', 'item'], // model[target]
-    mixins : [common],
+    mixins : [common, userInputMixin('editor')],
     data(){
         return {
             l10n : store.l10n

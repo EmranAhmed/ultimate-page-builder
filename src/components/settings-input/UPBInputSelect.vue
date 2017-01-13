@@ -22,10 +22,10 @@
 <script>
 
     import common from './common'
+    import userInputMixin from './user-mixins'
 
     export default {
         name   : 'upb-input-select',
-        props  : ['index', 'target', 'model', 'attributes'], // model[target]
-        mixins : [common],
+        mixins : [common, userInputMixin('select')]
     }
 </script>

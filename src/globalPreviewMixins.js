@@ -3,10 +3,9 @@ import extend from 'extend'
 
 export default{
     props : {
-        index : {
+        index  : {
             type : Number
         },
-
         model  : {
             type : Object
         },
@@ -17,7 +16,8 @@ export default{
 
     data(){
         return {
-            l10n : store.l10n
+            l10n        : store.l10n,
+            xhrContents : ''
         }
     },
 
@@ -33,6 +33,7 @@ export default{
 
             if (_.isArray(newVal)) {
                 //this.setPreviewData();
+                this.getAjaxContents();
                 this.attributeWatch();
             }
         });
@@ -41,6 +42,7 @@ export default{
             //this.addClass();
             this.setPreviewData();
             this.attributeWatch();
+            this.getAjaxContents();
         }, {deep : true});
 
         this.setPreviewData();
@@ -53,6 +55,8 @@ export default{
             }, 100)
 
         });
+
+        this.getAjaxContents();
 
     },
 
@@ -70,6 +74,10 @@ export default{
     },
 
     computed : {
+
+        ajaxContents(){
+            return this.xhrContents;
+        },
 
         hasContents(){
             if (_.isArray(this.model['contents'])) {
@@ -147,10 +155,26 @@ export default{
 
     methods : {
 
+        getAjaxContents(){
+            if (this.model._upb_options.preview.ajax) {
+                store.wpAjax(this.model._upb_options.preview['ajax-hook'], this.attributes, contents=> {
+
+                    //this.$nextTick(function () {
+                    Vue.set(this, 'xhrContents', contents)
+                    //});
+                }, error=> {
+
+                    if (error == 0) {
+                        console.info(`You need to implement "${this.model._upb_options.preview['ajax-hook']}" with wp ajax: "wp_ajax_${this.model._upb_options.preview['ajax-hook']}".`)
+                    }
+                    else {
+                        console.info(error);
+                    }
+                });
+            }
+        },
+
         inlineStyle(style = {}){
-
-            //console.log(extend(false, {}, this.backgroundVariables, style));
-
             return extend(false, {}, this.backgroundVariables, style);
         },
 

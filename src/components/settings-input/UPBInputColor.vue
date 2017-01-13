@@ -14,15 +14,14 @@
 <script>
 
     import common from './common'
-
     import ColorPicker from '../../plugins/vue-colorpicker'
+    import userInputMixin from './user-mixins'
 
     Vue.use(ColorPicker);
 
     export default {
         name    : 'upb-input-color',
-        props   : ['index', 'target', 'model', 'attributes'], // model[target]
-        mixins  : [common],
+        mixins  : [common, userInputMixin('color')],
         methods : {
             onColorChange(color){
                 this.input = color;

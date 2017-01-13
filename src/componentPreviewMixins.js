@@ -140,27 +140,4 @@ export default{
             }
         }
     },
-
-    'contact-form-7' : {
-
-        created(){
-
-            this.$watch('model.attributes', (attributes, oldVal)=> {
-                this.getForm(attributes.id, attributes.title);
-            }, {deep : true});
-
-            if (this.model.attributes.id) {
-                this.getForm(this.model.attributes.id, this.model.attributes.title);
-            }
-        },
-
-        methods : {
-            getForm(id, title){
-                store.wpAjax('_upb_contact_form7_preview', {id, title}, contents=> {
-                    jQuery('.xhr-template', this.$el).html(contents);
-                    //this.$el.querySelector('.ajax-result').innerHTML = contents;
-                });
-            }
-        }
-    }
 }

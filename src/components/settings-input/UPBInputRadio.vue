@@ -15,12 +15,11 @@
     </li>
 </template>
 <script>
-
     import common from './common'
+    import userInputMixin from './user-mixins'
 
     export default {
         name   : 'upb-input-radio',
-        props  : ['index', 'target', 'model', 'attributes'], // model[target]
-        mixins : [common],
+        mixins : [common, userInputMixin('radio')]
     }
 </script>

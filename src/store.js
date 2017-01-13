@@ -4,10 +4,11 @@ import sanitizeHtml from 'sanitize-html'
 class store {
 
     constructor() {
-        this.tabs   = _upb_tabs;
-        this.status = _upb_status;
-        this.routes = _upb_routes || [];
-        this.fields = _upb_fields || [];
+        this.tabs                  = _upb_tabs;
+        this.status                = _upb_status;
+        this.routes                = _upb_routes || [];
+        this.fields                = _upb_fields || [];
+        this.upb_user_inputs_mixin = _upb_user_inputs_mixin || {};
 
         this.l10n            = _upb_l10n;
         this.router_config   = _upb_router_config;

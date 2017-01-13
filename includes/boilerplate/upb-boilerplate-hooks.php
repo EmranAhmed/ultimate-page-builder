@@ -132,6 +132,17 @@
         );
         $tab->register( 'layouts', $data, FALSE );
 
+
+        /*$data = array(
+            'title'    => esc_html__( 'Extra Panel', 'ultimate-page-builder' ),
+            'search'   => esc_html__( 'Search in Extra Panel', 'ultimate-page-builder' ),
+            'help'     => wp_kses_post( __( '<p>Extra Panel Help Text</p>', 'ultimate-page-builder' ) ),
+            'tools'    => apply_filters( 'upb_tab_extra_panel_tools', array() ), // add section | load section | layouts
+            'icon'     => 'mdi mdi-food',
+            'contents' => apply_filters( 'upb_tab_extra_panel_contents', array() ),
+        );
+        $tab->register( 'extra', $data, FALSE );*/
+
     } );
 
     // Backend Scripts
@@ -200,17 +211,21 @@
 
         $data .= sprintf( "const _upb_routes = %s;\n", wp_json_encode( apply_filters( 'upb_routes', array(
             array(
-                'name'      => 'logical',
-                'path'      => '/:tab(logical)',
-                'component' => 'LogicalPanel',
-            ) // you should register a tab before add router
+                //    'name'      => 'extra',
+                //    'path'      => '/:tab(extra)',
+                //    'component' => 'ExtraPanel',
+            ) // you should register a tab before add routes
         ) ) ) );
 
         $data .= sprintf( "const _upb_fields = %s;\n", wp_json_encode( apply_filters( 'upb_fields', array(
             array(
-                'name'      => 'extra',
-                'component' => 'upbExtraInput',
+                //'name'      => 'extra',
+                //'component' => 'exampleExtraInput',
             )
+        ) ) ) );
+
+        $data .= sprintf( "const _upb_user_inputs_mixin = %s;\n", wp_json_encode( apply_filters( 'upb_user_inputs_mixin', array(
+            // 'text' => 'textInputMixinExample',
         ) ) ) );
 
         $data .= sprintf( "const _upb_status = %s;\n", wp_json_encode( array( 'dirty' => FALSE, '_nonce' => wp_create_nonce( '_upb' ), '_id' => get_the_ID() ) ) );
@@ -282,12 +297,20 @@
 
     add_action( 'upb_boilerplate_print_footer_scripts', function () {
         //$tabs = upb_tabs()->getAll();
-        print( "<script>
-const LogicalPanel = {
-  template: '<span> Logical Panel Template </span>',
-  // template: '#template',
-  props:[]
-}
+        print( "<script type='text/javascript'>
+
+//var textInputMixinExample = {
+//    created: function(){
+//        console.log('Text Input mixin example.')
+//    }
+//};
+
+
+//var ExtraPanel = {
+//  template: '<span> Extra Panel Template </span>',
+//  // template: '#template',
+//  props:[]
+//}
 </script>" );
 
         print( '<script type="text/x-template" id="extra-input-template">
@@ -302,13 +325,13 @@ const LogicalPanel = {
 </li>
 </script>' );
 
-        print( "<script>
-const upbExtraInput = {
+        print( "<script type='text/javascript'>
+//var exampleExtraInput = {
   // template: '<span> Input Extra </span>',
-   template: '#extra-input-template',
-   created(){
-   //console.log(this.attributes)
-    },
-}
+//   template: '#extra-input-template',
+//   created(){
+//   console.log(this.attributes)
+//    },
+//}
 </script>" );
     } );

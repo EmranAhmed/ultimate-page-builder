@@ -16,13 +16,11 @@
     </li>
 </template>
 <script>
-
     import common from './common'
-    //import store from '../../store'
+    import userInputMixin from './user-mixins'
 
     export default {
         name   : 'upb-input-radio-icon',
-        props  : ['index', 'target', 'model', 'attributes'], // model[target]
-        mixins : [common]
+        mixins : [common, userInputMixin('radio-icon')]
     }
 </script>

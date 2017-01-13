@@ -55,6 +55,7 @@ export default{
     },
 
     created(){
+        // console.log('Common mixin', this.$options._componentTag)
         this.checkRequired();
     },
 

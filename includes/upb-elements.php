@@ -106,6 +106,14 @@
             'value'   => 0,
         ) );
 
+        /*array_push( $attributes, array(
+            'id'    => 'extraInputExample',
+            'title' => esc_html__( 'Extra Input Example', 'ultimate-page-builder' ),
+            'desc'  => esc_html__( 'An example of extra input', 'ultimate-page-builder' ),
+            'type'  => 'extra',
+            'value' => 0,
+        ) );*/
+
         $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
 
         $contents = array();
@@ -181,7 +189,6 @@
 
     } );
 
-
     // CF7
     add_action( 'upb_register_element', function ( $element ) {
 
@@ -216,9 +223,14 @@
 
         $_upb_options = array(
 
+            'preview' => array(
+                'ajax' => TRUE,
+            ),
+
             'element' => array(
-                'name' => esc_html__( 'Contact form 7', 'ultimate-page-builder' ),
-                'icon' => 'mdi mdi-newspaper'
+                'name'         => esc_html__( 'Contact form 7', 'ultimate-page-builder' ),
+                'icon'         => 'mdi mdi-newspaper',
+                'ajax-preview' => TRUE,
             ),
 
             'meta' => array(

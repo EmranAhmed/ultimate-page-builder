@@ -37,8 +37,17 @@ if (_.isArray(store.fields) && !_.isEmpty(store.fields)) {
     store.fields.map(input=> {
 
         if (!_.isUndefined(input['component']) && !_.isUndefined(input['name'])) {
+
+            // Input mixin
+            let userInputMixin = {};
+            let mixinName      = store.upb_user_inputs_mixin[input.name];
+
+            if (!_.isUndefined(store.upb_user_inputs_mixin[input.name]) && _.isObject(window[mixinName])) {
+                userInputMixin = extend(true, {}, window[mixinName]);
+            }
+
             fieldsComponents[`upb-input-${input.name}`] = extend(true, {
-                mixins : [common]
+                mixins : [common, userInputMixin]
             }, window[input.component] || {});
         }
 

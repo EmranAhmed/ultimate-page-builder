@@ -1,5 +1,6 @@
 import store from '../../store'
 import common from './common'
+import userInputMixin from './user-mixins'
 
 import ImageMedia from '../../plugins/vue-image-media'
 
@@ -7,8 +8,9 @@ Vue.use(ImageMedia)
 
 export default {
     name   : 'upb-input-image',
-    props  : ['index', 'target', 'model', 'attributes'], // model[target] v-model="input"
-    mixins : [common],
+
+    mixins : [common, userInputMixin('image')],
+
     data(){
         return {
             src : ''
