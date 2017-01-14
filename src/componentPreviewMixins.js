@@ -28,13 +28,21 @@ export default{
                 return cssClasses.join(' ');
             },
 
-            addClass(hasToolbar = true){
+            addClass(extra = false){
 
                 let cssClasses = [];
 
                 cssClasses.push(`upb-preview-element`);
 
                 cssClasses.push(`${this.model.tag}-preview`);
+
+                if (extra && _.isString(extra)) {
+                    cssClasses.push(extra);
+                }
+
+                if (extra && _.isArray(extra)) {
+                    cssClasses.push(...extra);
+                }
 
                 if (this.model._upb_options.hasMiniToolbar) {
                     cssClasses.push(`upb-has-mini-toolbar`);
@@ -59,13 +67,21 @@ export default{
 
         methods : {
 
-            addClass(hasToolbar = true){
+            addClass(extra = false){
 
                 let cssClasses = [];
 
                 cssClasses.push(`upb-preview-element`);
 
                 cssClasses.push(`${this.model.tag}-preview`);
+
+                if (extra && _.isString(extra)) {
+                    cssClasses.push(extra);
+                }
+
+                if (extra && _.isArray(extra)) {
+                    cssClasses.push(...extra);
+                }
 
                 if (this.model._upb_options.hasMiniToolbar) {
                     cssClasses.push(`upb-has-mini-toolbar`);
@@ -113,7 +129,7 @@ export default{
                 });
 
                 // added extra grid class to control gutter
-                grid.unshift(store.grid.prefixClass);
+                grid.unshift(store.grid.allGridClass);
                 return _.compact(grid);
             },
 

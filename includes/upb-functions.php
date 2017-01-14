@@ -105,6 +105,7 @@
         $grid = apply_filters( 'upb_grid_system', array(
             'name'              => esc_html__( 'UPB Grid', 'ultimate-page-builder' ),
             'simplifiedRatio'   => esc_html__( 'Its recommended to use simplified form of column grid ratio like: %s', 'ultimate-page-builder' ),
+            'allGridClass'      => 'upb-col',
             'prefixClass'       => 'upb-col',
             'separator'         => '-', // col- deviceId - grid class
             'groupClass'        => 'upb-row',
@@ -251,7 +252,7 @@
         foreach ( $attributes as $name => $value ) {
             if ( in_array( $name, $devices ) && ! empty( $value ) ) {
                 $col       = explode( ':', $value );
-                $columns[] = $grid[ 'prefixClass' ] . $grid[ 'separator' ] . $name . $grid[ 'separator' ] . ( ( absint( $grid[ 'totalGrid' ] ) / absint( $col[ 1 ] ) ) * absint( $col[ 0 ] ) );
+                $columns[] = ( ( $grid[ 'allGridClass' ] ) ? $grid[ 'allGridClass' ] . ' ' : '' ) . $grid[ 'prefixClass' ] . $grid[ 'separator' ] . $name . $grid[ 'separator' ] . ( ( absint( $grid[ 'totalGrid' ] ) / absint( $col[ 1 ] ) ) * absint( $col[ 0 ] ) );
             }
         }
 
