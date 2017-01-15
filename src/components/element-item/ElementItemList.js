@@ -113,7 +113,11 @@ export default {
         },
 
         itemClass(){
-            return [this.model.attributes.enable ? 'item-enabled' : 'item-disabled', this.model._upb_options.focus ? 'item-focused' : 'item-unfocused'].join(' ');
+
+            // If not enable found default class will be true
+            let isEnable = (_.isUndefined(this.model.attributes['enable']) || this.model.attributes.enable) ? true : false;
+
+            return [isEnable ? 'item-enabled' : 'item-disabled', this.model._upb_options.focus ? 'item-focused' : 'item-unfocused'].join(' ');
         }
     }
 }

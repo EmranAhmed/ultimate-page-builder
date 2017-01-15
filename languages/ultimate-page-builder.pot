@@ -77,7 +77,7 @@ msgstr ""
 msgid "<h2>How to use?</h2><p>Drag and drop an element to the right column and customize them based on your need.</p>"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:116, includes/class-upb-elements.php:207, includes/class-upb-elements.php:227, includes/upb-elements.php:353, includes/upb-elements.php:476
+#: includes/boilerplate/upb-boilerplate-hooks.php:116, includes/class-upb-elements.php:207, includes/class-upb-elements.php:227, includes/upb-elements.php:348, includes/upb-elements.php:468
 msgid "Settings"
 msgstr ""
 
@@ -305,7 +305,7 @@ msgstr ""
 msgid "Use Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:41, includes/class-upb-settings.php:116, includes/upb-functions.php:317
+#: includes/class-upb-elements-props.php:41, includes/class-upb-settings.php:116, includes/upb-functions.php:318
 msgid "Remove"
 msgstr ""
 
@@ -357,155 +357,155 @@ msgstr ""
 msgid "Drop Element"
 msgstr ""
 
-#: includes/upb-elements.php:50
+#: includes/upb-elements.php:49
 msgid "Row Title"
 msgstr ""
 
-#: includes/upb-elements.php:50
+#: includes/upb-elements.php:49
 msgid "New Row 1"
 msgstr ""
 
-#: includes/upb-elements.php:52
+#: includes/upb-elements.php:51
 msgid "Row Enable / Disable"
 msgstr ""
 
-#: includes/upb-elements.php:87
+#: includes/upb-elements.php:85
 msgid "Section Title"
 msgstr ""
 
-#: includes/upb-elements.php:87
+#: includes/upb-elements.php:85
 msgid "New Section %s"
 msgstr ""
 
-#: includes/upb-elements.php:91
+#: includes/upb-elements.php:89
 msgid "Section Enable / Disable"
 msgstr ""
 
-#: includes/upb-elements.php:97
+#: includes/upb-elements.php:95
 msgid "Spacer"
 msgstr ""
 
-#: includes/upb-elements.php:98
+#: includes/upb-elements.php:96
 msgid "Space between two section"
 msgstr ""
 
-#: includes/upb-elements.php:111
+#: includes/upb-elements.php:109
 msgid "Extra Input Example"
 msgstr ""
 
-#: includes/upb-elements.php:112
+#: includes/upb-elements.php:110
 msgid "An example of extra input"
 msgstr ""
 
-#: includes/upb-elements.php:148, includes/upb-elements.php:148, includes/upb-functions.php:342
+#: includes/upb-elements.php:144, includes/upb-elements.php:144, includes/upb-functions.php:343
 msgid "Title"
 msgstr ""
 
-#: includes/upb-elements.php:150, includes/upb-elements.php:199, includes/upb-elements.php:281, includes/upb-elements.php:324, includes/upb-elements.php:404, includes/upb-elements.php:447, includes/upb-functions.php:377, includes/upb-settings.php:10
+#: includes/upb-elements.php:146, includes/upb-elements.php:195, includes/upb-elements.php:276, includes/upb-elements.php:319, includes/upb-elements.php:439, includes/upb-functions.php:378, includes/upb-settings.php:10
 msgid "Enable / Disable"
 msgstr ""
 
-#: includes/upb-elements.php:197
+#: includes/upb-elements.php:193
 msgid "Form Title"
 msgstr ""
 
-#: includes/upb-elements.php:197
+#: includes/upb-elements.php:193
 msgid "Contact form 1"
 msgstr ""
 
-#: includes/upb-elements.php:206
+#: includes/upb-elements.php:202
 msgid "Contact Form"
 msgstr ""
 
-#: includes/upb-elements.php:207
+#: includes/upb-elements.php:203
 msgid "Contact form list"
 msgstr ""
 
-#: includes/upb-elements.php:214
+#: includes/upb-elements.php:210
 msgid "Search contact form"
 msgstr ""
 
-#: includes/upb-elements.php:231
+#: includes/upb-elements.php:227
 msgid "Contact form 7"
 msgstr ""
 
-#: includes/upb-elements.php:247
+#: includes/upb-elements.php:243
 msgid "Choose a form from left panel"
 msgstr ""
 
-#: includes/upb-elements.php:279
+#: includes/upb-elements.php:274
 msgid "Accordion Item Title"
 msgstr ""
 
-#: includes/upb-elements.php:279, includes/upb-elements.php:331
+#: includes/upb-elements.php:274, includes/upb-elements.php:326
 msgid "Accordion Item 1"
 msgstr ""
 
-#: includes/upb-elements.php:283, includes/upb-elements.php:406
+#: includes/upb-elements.php:278, includes/upb-elements.php:398
 msgid "Default Active"
 msgstr ""
 
-#: includes/upb-elements.php:290
+#: includes/upb-elements.php:285
 msgid "Accordion Item"
 msgstr ""
 
-#: includes/upb-elements.php:322
+#: includes/upb-elements.php:317
 msgid "Accordion Title"
 msgstr ""
 
-#: includes/upb-elements.php:322, includes/upb-elements.php:338
+#: includes/upb-elements.php:317, includes/upb-elements.php:333
 msgid "Accordion"
 msgstr ""
 
-#: includes/upb-elements.php:332
+#: includes/upb-elements.php:327
 msgid "Accordion Item 2"
 msgstr ""
 
-#: includes/upb-elements.php:346, includes/upb-elements.php:469
+#: includes/upb-elements.php:341, includes/upb-elements.php:461
 msgid "Add New"
 msgstr ""
 
-#: includes/upb-elements.php:349
+#: includes/upb-elements.php:344
 msgid "Accordion Item %s"
 msgstr ""
 
-#: includes/upb-elements.php:370
+#: includes/upb-elements.php:365
 msgid "Add Accordion Item"
 msgstr ""
 
-#: includes/upb-elements.php:402
+#: includes/upb-elements.php:396
 msgid "Tab Item Title"
 msgstr ""
 
-#: includes/upb-elements.php:402
+#: includes/upb-elements.php:396
 msgid "Tab Item 1"
 msgstr ""
 
-#: includes/upb-elements.php:413
+#: includes/upb-elements.php:405
 msgid "Tab Item"
 msgstr ""
 
-#: includes/upb-elements.php:445
+#: includes/upb-elements.php:437
 msgid "Tab Title"
 msgstr ""
 
-#: includes/upb-elements.php:445, includes/upb-elements.php:461
+#: includes/upb-elements.php:437, includes/upb-elements.php:453
 msgid "Tab"
 msgstr ""
 
-#: includes/upb-elements.php:454
+#: includes/upb-elements.php:446
 msgid "Tab 1"
 msgstr ""
 
-#: includes/upb-elements.php:455
+#: includes/upb-elements.php:447
 msgid "Tab 2"
 msgstr ""
 
-#: includes/upb-elements.php:472
+#: includes/upb-elements.php:464
 msgid "Tab Item %s"
 msgstr ""
 
-#: includes/upb-elements.php:493
+#: includes/upb-elements.php:485
 msgid "Add Tab Item"
 msgstr ""
 
@@ -517,131 +517,131 @@ msgstr ""
 msgid "Its recommended to use simplified form of column grid ratio like: %s"
 msgstr ""
 
-#: includes/upb-functions.php:112
+#: includes/upb-functions.php:113
 msgid "Fluid Container"
 msgstr ""
 
-#: includes/upb-functions.php:113
+#: includes/upb-functions.php:114
 msgid "Fluid Container without gutter"
 msgstr ""
 
-#: includes/upb-functions.php:114
+#: includes/upb-functions.php:115
 msgid "Fixed Container"
 msgstr ""
 
-#: includes/upb-functions.php:115
+#: includes/upb-functions.php:116
 msgid "Fixed Container without gutter"
 msgstr ""
 
-#: includes/upb-functions.php:118
+#: includes/upb-functions.php:119
 msgid "Screen Sizes"
 msgstr ""
 
-#: includes/upb-functions.php:122
+#: includes/upb-functions.php:123
 msgid "Sorry, UPB Grid doesn't support %s grid column."
 msgstr ""
 
-#: includes/upb-functions.php:137, includes/upb-functions.php:217
+#: includes/upb-functions.php:138, includes/upb-functions.php:218
 msgid "Large"
 msgstr ""
 
-#: includes/upb-functions.php:144, includes/upb-functions.php:222
+#: includes/upb-functions.php:145, includes/upb-functions.php:223
 msgid "Medium"
 msgstr ""
 
-#: includes/upb-functions.php:151, includes/upb-functions.php:227
+#: includes/upb-functions.php:152, includes/upb-functions.php:228
 msgid "Small"
 msgstr ""
 
-#: includes/upb-functions.php:158, includes/upb-functions.php:232
+#: includes/upb-functions.php:159, includes/upb-functions.php:233
 msgid "Extra Small"
 msgstr ""
 
-#: includes/upb-functions.php:264
+#: includes/upb-functions.php:265
 msgid "Hide on device"
 msgstr ""
 
-#: includes/upb-functions.php:265
+#: includes/upb-functions.php:266
 msgid "Hide element on specific media device"
 msgstr ""
 
-#: includes/upb-functions.php:282
+#: includes/upb-functions.php:283
 msgid "Background type"
 msgstr ""
 
-#: includes/upb-functions.php:283
+#: includes/upb-functions.php:284
 msgid "Choose your element background type"
 msgstr ""
 
-#: includes/upb-functions.php:287
+#: includes/upb-functions.php:288
 msgid "No background"
 msgstr ""
 
-#: includes/upb-functions.php:288, includes/upb-functions.php:297
+#: includes/upb-functions.php:289, includes/upb-functions.php:298
 msgid "Background Color"
 msgstr ""
 
-#: includes/upb-functions.php:289, includes/upb-functions.php:309
+#: includes/upb-functions.php:290, includes/upb-functions.php:310
 msgid "Background Image"
 msgstr ""
 
-#: includes/upb-functions.php:290
+#: includes/upb-functions.php:291
 msgid "Background Image and Color"
 msgstr ""
 
-#: includes/upb-functions.php:291
+#: includes/upb-functions.php:292
 msgid "Background Video"
 msgstr ""
 
-#: includes/upb-functions.php:298
+#: includes/upb-functions.php:299
 msgid "Element background color"
 msgstr ""
 
-#: includes/upb-functions.php:310
+#: includes/upb-functions.php:311
 msgid "Element background image"
 msgstr ""
 
-#: includes/upb-functions.php:314
+#: includes/upb-functions.php:315
 msgid "Choose background image"
 msgstr ""
 
-#: includes/upb-functions.php:316
+#: includes/upb-functions.php:317
 msgid "Add Background"
 msgstr ""
 
-#: includes/upb-functions.php:318
+#: includes/upb-functions.php:319
 msgid "Choose"
 msgstr ""
 
-#: includes/upb-functions.php:327
+#: includes/upb-functions.php:328
 msgid "Background Image Position"
 msgstr ""
 
-#: includes/upb-functions.php:328
+#: includes/upb-functions.php:329
 msgid "Change Background Image Position. You can move background image pointer to see preview."
 msgstr ""
 
-#: includes/upb-functions.php:359
+#: includes/upb-functions.php:360
 msgid "Custom CSS Class"
 msgstr ""
 
-#: includes/upb-functions.php:360
+#: includes/upb-functions.php:361
 msgid "Custom CSS Class. Separate classes with space"
 msgstr ""
 
-#: includes/upb-functions.php:367
+#: includes/upb-functions.php:368
 msgid "Custom CSS ID"
 msgstr ""
 
-#: includes/upb-functions.php:368
+#: includes/upb-functions.php:369
 msgid "CSS ID of an element should be unique."
 msgstr ""
 
-#: includes/upb-functions.php:378
+#: includes/upb-functions.php:379
 msgid "Enable or Disable Element"
 msgstr ""
 
-#: includes/upb-functions.php:414
+#: includes/upb-functions.php:415
 msgid "Container Type"
 msgstr ""
 

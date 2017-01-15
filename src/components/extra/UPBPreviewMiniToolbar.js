@@ -21,10 +21,14 @@ export default {
     },
     data(){
         return {
-            l10n : store.l10n
+            l10n : store.l10n,
         }
     },
     computed : {
+
+        is_movable(){
+            return !this.model._upb_options.core && !this.model._upb_options.element.child;
+        },
 
         is_sidebar_expanded(){
 

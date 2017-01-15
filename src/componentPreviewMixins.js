@@ -58,6 +58,8 @@ export default{
                     cssClasses.push(`upb-preview-element-type-container`);
                 }
 
+                cssClasses.push(`element-id-${this.unique_id}`);
+
                 return cssClasses.join(' ');
             }
         }
@@ -108,6 +110,8 @@ export default{
                     cssClasses.push(`upb-preview-element-type-container`);
                 }
 
+                cssClasses.push(`element-id-${this.unique_id}`);
+
                 return cssClasses.join(' ');
             },
 
@@ -139,7 +143,9 @@ export default{
 
             afterDrop(content, accepted = false){
                 if (accepted) {
+
                     this.model.contents.push(content);
+
                     store.stateChanged();
 
                     this.$nextTick(function () {

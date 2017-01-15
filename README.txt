@@ -51,6 +51,10 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 == Changelog ==
 
+= 1.0.0-beta.8 =
+
+- Elements sortable from column preview
+
 = 1.0.0-beta.7 =
 
 - Action `upb_remove_elements` added to remove element filter

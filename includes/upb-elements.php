@@ -41,7 +41,6 @@
 
     } );
 
-
     // Row ( Section have row dependency that's why we should reg row before section )
     add_action( 'upb_register_element', function ( $element ) {
 
@@ -76,7 +75,6 @@
         $element->register( 'upb-row', $attributes, $contents, $_upb_options );
 
     } );
-
 
     // Section
     add_action( 'upb_register_element', function ( $element ) {
@@ -137,9 +135,7 @@
 
     } );
 
-
     //  NON CORE
-
     // Text
     add_action( 'upb_register_element', function ( $element ) {
 
@@ -268,7 +264,6 @@
 
     } );
 
-
     // Accordion
     add_action( 'upb_register_element', function ( $element ) {
 
@@ -391,7 +386,6 @@
 
     } );
 
-
     // Tab
     add_action( 'upb_register_element', function ( $element ) {
 
@@ -400,8 +394,6 @@
         $attributes = array();
 
         array_push( $attributes, upb_title_input( esc_html__( 'Tab Item Title', 'ultimate-page-builder' ), '', esc_html__( 'Tab Item 1', 'ultimate-page-builder' ) ) );
-
-        array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
 
         array_push( $attributes, array( 'id' => 'active', 'title' => esc_html__( 'Default Active', 'ultimate-page-builder' ), 'type' => 'toggle', 'value' => FALSE ) );
 
@@ -499,7 +491,6 @@
                     'css'       => upb_templates_uri( 'shortcode-css/upb-tab.css' ),
                     'js'        => upb_templates_uri( 'shortcode-js/upb-tab.js' ),
                     'inline_js' => ';(function ($, upb) { $(".upb-tab-item").upbTab()  }(jQuery, _UPB_PREVIEW_DATA[upbComponentId]));',
-
                 ),
                 'shortcode' => array(
                     'css'       => upb_templates_uri( 'shortcode-css/upb-tab.css' ),
@@ -510,5 +501,4 @@
         );
 
         $element->register( 'upb-tab', $attributes, $contents, $_upb_options );
-
     } );

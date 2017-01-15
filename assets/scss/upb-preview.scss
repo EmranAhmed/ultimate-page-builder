@@ -31,6 +31,10 @@
     border-radius : 2px;
     display       : block;
 
+    .upb-move-element {
+      cursor : move;
+      }
+
     > ul {
       list-style       : none;
       position         : absolute;

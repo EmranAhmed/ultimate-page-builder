@@ -508,7 +508,8 @@
                 }
 
                 if ( ! empty( $contents ) && is_string( $contents ) ) {
-                    $el[ 'contents' ] = wp_kses_post( $contents );
+                    $el[ 'contents' ]                  = wp_kses_post( $contents );
+                    $el[ 'attributes' ][ '_contents' ] = wp_kses_post( $contents );
                 }
 
 

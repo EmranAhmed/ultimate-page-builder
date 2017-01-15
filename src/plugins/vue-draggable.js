@@ -13,11 +13,11 @@ import store from '../store';
 
             },
 
-            update : function (newValue, oldValue, vnode) {
+            update : function (el, binding, vnode) {
 
             },
 
-            unbind : function (el) {
+            unbind : function (el, binding, vnode) {
                 el.setAttribute("draggable", false);
             },
 
@@ -53,5 +53,4 @@ import store from '../store';
         window.vDraggable = vDraggable;
         Vue.use(vDraggable)
     }
-
 }

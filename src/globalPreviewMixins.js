@@ -16,8 +16,8 @@ export default{
 
     data(){
         return {
-            l10n        : store.l10n,
-            xhrContents : ''
+            l10n         : store.l10n,
+            xhrContents  : ''
         }
     },
 
@@ -74,6 +74,10 @@ export default{
     },
 
     computed : {
+
+        cssClasses(){
+
+        },
 
         ajaxContents(){
             return this.xhrContents;
@@ -369,6 +373,8 @@ export default{
             if (_.isArray(this.model.contents)) {
                 cssClasses.push(`upb-preview-element-type-container`);
             }
+
+            cssClasses.push(`element-id-${this.unique_id}`);
 
             return cssClasses.join(' ');
         },

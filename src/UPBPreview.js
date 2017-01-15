@@ -11,6 +11,15 @@ Vue.component('upb-preview-mini-toolbar', UPBPreviewMiniToolbar);
 Vue.use(PreviewElement);
 Vue.use(Droppable);
 
+import UIDroppable from './plugins/vue-ui-droppable'
+Vue.use(UIDroppable);
+
+import UIDraggable from './plugins/vue-ui-draggable'
+Vue.use(UIDraggable);
+
+import ElementSortable from './plugins/vue-element-sortable'
+Vue.use(ElementSortable);
+
 store.getAllUPBElements(elements => {
 
     elements.map(element=> {
@@ -104,6 +113,7 @@ export default {
 
         addKeyIndex(){
             this.model.contents.map((m, i) => {
+                m._upb_options['focus']     = false;
                 m._upb_options['_keyIndex'] = i;
                 this.addIndexAttribute(m, m.attributes, m.contents);
             });
@@ -113,6 +123,7 @@ export default {
             if (_.isArray(contents)) {
                 contents.map((m, i) => {
                     if (store.isElementRegistered(m.tag)) {
+                        m._upb_options['focus']     = false;
                         m._upb_options['_keyIndex'] = `${model._upb_options._keyIndex}/${i}`;
                         this.addIndexAttribute(m, m.attributes, m.contents);
                     }
