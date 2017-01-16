@@ -32,7 +32,7 @@
                 ) ),
 
                 'messages' => array(
-                    'addElement' => esc_html__( 'Drop Element', 'ultimate-page-builder' )
+                    'addElement' => esc_html__( 'Add Element', 'ultimate-page-builder' )
                 )
             ),
         );

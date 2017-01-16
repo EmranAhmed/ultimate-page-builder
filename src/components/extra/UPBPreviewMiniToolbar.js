@@ -95,8 +95,11 @@ export default {
         removeElement(){
             if (this.showDelete) {
                 if (confirm(sprintf(this.l10n.delete, this.model._upb_options.element.name))) {
+
                     let index = this.model._upb_options._keyIndex.split('/').pop();
                     this.parent.contents.splice(index, 1);
+
+                    this.$router.replace(`/sections`);
                 }
             }
         },

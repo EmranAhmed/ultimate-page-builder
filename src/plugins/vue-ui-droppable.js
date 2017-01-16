@@ -13,20 +13,20 @@ import extend from 'extend'
 
         Vue.directive('ui-droppable', {
 
-            bind : function (el, binding, vnode) {
+            bind (el, binding, vnode) {
             },
 
-            update : function (el, binding, vnode) {
+            update (el, binding, vnode) {
             },
 
-            unbind : function (el) {
+            unbind(el) {
                 $('.upb-add-element-message-regular', el).droppable("destroy");
             },
 
-            componentUpdated : function (el, binding, vnode) {
+            componentUpdated (el, binding, vnode) {
             },
 
-            inserted : function (el, binding, vnode) {
+            inserted (el, binding, vnode) {
 
                 $('.upb-add-element-message-regular', el).droppable({
                     hoverClass  : "ui-droppable-hover",
@@ -48,6 +48,10 @@ import extend from 'extend'
                         else {
                             let getIndex = draggable.model._upb_options._keyIndex.split('/').pop();
                             let contents = extend(true, {}, draggable.$parent.model.contents.splice(getIndex, 1).pop());
+
+                            //delete contents._upb_options._keyIndex;
+                            contents._upb_options.focus = false;
+
                             vnode.context.afterDrop(contents, true);
                         }
                     }

@@ -92,7 +92,6 @@ export default {
     },
 
     updated(){
-
         if (this.model.contents) {
             this.addKeyIndex();
         }
@@ -104,30 +103,43 @@ export default {
     },
 
     created(){
+
         this.addKeyIndex();
 
         this.$watch('model.contents', _=> {
-            this.addKeyIndex();
+            // ELEMENTS POSITION changes then create element
+            //    this.addKeyIndex();
         }, {deep : true});
+
     },
 
     methods : {
 
-        addKeyIndex(){
-            this.model.contents.map((m, i) => {
-                m._upb_options['focus']     = false;
-                m._upb_options['_keyIndex'] = i;
-                this.addIndexAttribute(m, m.attributes, m.contents);
-            });
+        addKeyIndex(regenerate = false){
+            if (_.isArray(this.model.contents)) {
+                this.model.contents.map((m, i) => {
+                    m._upb_options['_keyIndex'] = `${i}`;
+
+                    //this.addIndexAttribute(m, m.attributes, m.contents, regenerate);
+                });
+            }
         },
 
-        addIndexAttribute(model, attrs, contents){
+        addIndexAttribute(model, attrs, contents, regenerate = false){
             if (_.isArray(contents)) {
                 contents.map((m, i) => {
                     if (store.isElementRegistered(m.tag)) {
-                        m._upb_options['focus']     = false;
+                        //m._upb_options['focus']     = false;
+
+                        //if (regenerate) {
+                        //    m._upb_options['_keyIndex'] = `${model._upb_options._keyIndex}/${i}`;
+                        //}
+
+                        //if (_.isUndefined(m._upb_options['_keyIndex'])) {
                         m._upb_options['_keyIndex'] = `${model._upb_options._keyIndex}/${i}`;
-                        this.addIndexAttribute(m, m.attributes, m.contents);
+                        //}
+
+                        this.addIndexAttribute(m, m.attributes, m.contents, regenerate);
                     }
                 })
             }

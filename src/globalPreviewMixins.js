@@ -26,6 +26,7 @@ export default{
         this.$watch('model.contents', function (contents) {
 
             this.setPreviewData();
+            this.addKeyIndex(this.model._upb_options._keyIndex);
 
             if (_.isArray(contents)) {
                 //this.setPreviewData();
@@ -44,11 +45,12 @@ export default{
         this.setPreviewData();
 
         this.$nextTick(function () {
-
             // First create
             _.delay(_=> {
                 this.loadScripts();
-            }, 100)
+            }, 100);
+
+            this.addKeyIndex(this.model._upb_options._keyIndex);
         });
 
         this.getAjaxContents();
@@ -148,6 +150,17 @@ export default{
     },
 
     methods : {
+
+        addKeyIndex(keyindex){
+            if (_.isArray(this.model.contents)) {
+
+                //console.log(this.model.tag, this.model.contents);
+
+                this.model.contents.map((m, i) => {
+                    m._upb_options['_keyIndex'] = `${keyindex}/${i}`;
+                });
+            }
+        },
 
         getAjaxContents(){
             if (this.model._upb_options.preview.ajax) {
