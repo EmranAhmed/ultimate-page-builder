@@ -16,22 +16,18 @@ export default{
 
     data(){
         return {
-            l10n         : store.l10n,
-            xhrContents  : ''
+            l10n        : store.l10n,
+            xhrContents : ''
         }
     },
 
     created(){
 
-        this.$watch('sidebarExpanded', function (newVal, oldVal) {
-            //this.addClass();
-        });
-
-        this.$watch('model.contents', function (newVal, oldVal) {
+        this.$watch('model.contents', function (contents) {
 
             this.setPreviewData();
 
-            if (_.isArray(newVal)) {
+            if (_.isArray(contents)) {
                 //this.setPreviewData();
                 this.getAjaxContents();
                 this.attributeWatch();
@@ -53,11 +49,9 @@ export default{
             _.delay(_=> {
                 this.loadScripts();
             }, 100)
-
         });
 
         this.getAjaxContents();
-
     },
 
     beforeDestroy(){
@@ -74,10 +68,6 @@ export default{
     },
 
     computed : {
-
-        cssClasses(){
-
-        },
 
         ajaxContents(){
             return this.xhrContents;

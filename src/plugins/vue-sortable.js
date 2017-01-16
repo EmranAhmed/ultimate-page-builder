@@ -12,10 +12,9 @@ import { util } from 'vue';
         Vue.directive('sortable', {
 
             bind : function (el, binding, vnode) {
-
             },
 
-            update : function (newValue, oldValue, vnode) {
+            update : function (el, binding, vnode) {
 
             },
 
@@ -23,7 +22,8 @@ import { util } from 'vue';
                 $(el).sortable("destroy");
             },
 
-            componentUpdated : function () {},
+            componentUpdated : function (el, binding, vnode) {
+            },
 
             inserted : function (el, binding, vnode) {
 

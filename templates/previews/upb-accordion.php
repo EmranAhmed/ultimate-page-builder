@@ -2,7 +2,7 @@
 
 <div v-show="isEnabled" :id="addID()" :class="addClass()" v-ui-draggable v-preview-element :style="backgroundVariables">
 
-    <upb-preview-mini-toolbar :model="model"></upb-preview-mini-toolbar>
+    <upb-preview-mini-toolbar :parent="parent" :model="model"></upb-preview-mini-toolbar>
 
     <div class="upb-accordion">
         <component v-for="(content, index) in model.contents" v-if="isElementRegistered(content.tag)" :parent="model" :index="index" :model="content" :is="content._upb_options.preview.component"></component>

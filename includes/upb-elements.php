@@ -224,9 +224,8 @@
             ),
 
             'element' => array(
-                'name'         => esc_html__( 'Contact form 7', 'ultimate-page-builder' ),
-                'icon'         => 'mdi mdi-newspaper',
-                'ajax-preview' => TRUE,
+                'name' => esc_html__( 'Contact form 7', 'ultimate-page-builder' ),
+                'icon' => 'mdi mdi-newspaper'
             ),
 
             'meta' => array(
@@ -259,7 +258,7 @@
         );
 
         if ( shortcode_exists( 'contact-form-7' ) ) {
-            $element->register( 'contact-form-7', $attributes, $contents, $_upb_options );
+            $element->register( 'upb-contact-form-7', $attributes, $contents, $_upb_options );
         }
 
     } );

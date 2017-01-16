@@ -26,12 +26,15 @@ import store from '../store'
             componentUpdated : function (el, binding, vnode) {},
 
             inserted : function (el, binding, vnode) {
+
                 $(el).draggable({
+                    //iframeFix  : true,
+                    //helper     : 'clone',
                     opacity    : 0.35,
                     revert     : "invalid",
                     handle     : ".upb-preview-mini-toolbar li.upb-move-element",
                     addClasses : false,
-                    stop       : function (event, ui) {
+                    stop       : (event, ui) => {
                         ui.helper.attr('style', '');
                     }
                 });

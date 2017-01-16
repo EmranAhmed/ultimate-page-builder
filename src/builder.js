@@ -30,27 +30,25 @@ const upbBuilder = new Vue({
 
 const previewWindow = {
 
-    mount(){
-        let settings = {};
+    upbBuilderPreview : null,
 
-        store.tabs.filter(function (content) {
-            return content.id == 'settings' ? content : false;
-        }).pop().contents.map(function (data) {
-            if (data.metaId == 'enable' || data.metaId == 'position') {
-                settings[data.metaId] = data.metaValue;
-            }
-        });
+    destroy(){
+        if (this.upbBuilderPreview) {
+            this.upbBuilderPreview.$destroy();
+        }
+    },
+
+    mount(){
 
         store.panel = upbBuilder
 
-        if (settings.enable) {
-            new Vue({
-                //router,
+        if (store.getSetting('enable')) {
+            this.upbBuilderPreview = new Vue({
                 data   : {
                     store
                 },
                 render : createElement => createElement(UPBPreview)
-            }).$mount(store.previewDocument().getElementById(settings.position))
+            }).$mount(store.previewDocument().getElementById(store.getSetting('position')));
         }
     },
 
@@ -60,11 +58,10 @@ const previewWindow = {
 };
 
 window.addEventListener('load', _=> {
-    //console.log('Sidebar loaded');
     previewWindow.setUrl();
 });
 
 document.getElementById("upb-preview-frame").addEventListener('load', _=> {
-    //console.log('Preview loaded');
+    previewWindow.destroy();
     previewWindow.mount();
 });

@@ -155,7 +155,7 @@
         wp_register_style( 'select2', UPB_PLUGIN_ASSETS_URI . "css/select2$suffix.css" );
         wp_register_script( 'select2', UPB_PLUGIN_ASSETS_URI . "js/select2$suffix.js", array( 'jquery' ), FALSE, TRUE );
 
-        wp_register_script( 'iris', admin_url( "/js/iris.min.js" ), array( 'jquery-ui-draggable', 'jquery-ui-droppable','jquery-ui-slider', 'jquery-touch-punch' ), FALSE, TRUE );
+        wp_register_script( 'iris', admin_url( "/js/iris.min.js" ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), FALSE, TRUE );
         wp_register_script( 'wp-color-picker', admin_url( "/js/color-picker$suffix.js" ), array( 'iris' ), FALSE, TRUE );
         wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', array(
             'clear'         => esc_html__( 'Clear', 'ultimate-page-builder' ),
@@ -199,7 +199,7 @@
         wp_enqueue_script( 'wp-color-picker-alpha' );
         wp_enqueue_script( 'select2' );
 
-        wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URI . "js/upb-builder$suffix.js", array( 'jquery-ui-sortable', 'wp-util', 'wp-color-picker', "shortcode" ), '', TRUE );
+        wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URI . "js/upb-builder$suffix.js", array( 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable', 'wp-util', 'wp-color-picker', 'shortcode' ), '', TRUE );
 
         wp_enqueue_script( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URI . "js/upb-boilerplate$suffix.js", array( 'jquery', 'upb-builder' ), '', TRUE );
 
@@ -224,8 +224,7 @@
             )
         ) ) ) );
 
-        $data .= sprintf( "const _upb_user_inputs_mixin = %s;\n", wp_json_encode( apply_filters( 'upb_user_inputs_mixin', array(
-            // 'text' => 'textInputMixinExample',
+        $data .= sprintf( "const _upb_user_inputs_mixin = %s;\n", wp_json_encode( apply_filters( 'upb_user_inputs_mixin', array(// 'text' => 'textInputMixinExample',
         ) ) ) );
 
         $data .= sprintf( "const _upb_status = %s;\n", wp_json_encode( array( 'dirty' => FALSE, '_nonce' => wp_create_nonce( '_upb' ), '_id' => get_the_ID() ) ) );

@@ -1,8 +1,13 @@
 import store from '../../store'
+import {sprintf} from 'sprintf-js'
 
 export default {
     name     : 'upb-preview-mini-toolbar',
     props    : {
+        parent     : {
+            type     : Object,
+            required : true
+        },
         model      : {
             type : Object
         },
@@ -17,11 +22,15 @@ export default {
         onlyBorder : {
             type    : Boolean,
             default : false
+        },
+        showDelete : {
+            type    : Boolean,
+            default : true
         }
     },
     data(){
         return {
-            l10n : store.l10n,
+            l10n : store.l10n
         }
     },
     computed : {
@@ -81,6 +90,15 @@ export default {
                 let path = `/sections/%/contents`.replace('%', this.model._upb_options._keyIndex);
                 this.$router.replace(path);
             })
+        },
+
+        removeElement(){
+            if (this.showDelete) {
+                if (confirm(sprintf(this.l10n.delete, this.model._upb_options.element.name))) {
+                    let index = this.model._upb_options._keyIndex.split('/').pop();
+                    this.parent.contents.splice(index, 1);
+                }
+            }
         },
 
         openSettingsPanel(){

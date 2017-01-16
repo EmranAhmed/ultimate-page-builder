@@ -296,7 +296,7 @@
 
 
     // Contact form 7 Post
-    add_action( 'wp_ajax__upb_contact-form-7_preview_contents', function () {
+    add_action( 'wp_ajax__upb_upb-contact-form-7_preview_contents', function () {
         if ( ! current_user_can( 'customize' ) ) {
             wp_send_json_error( 'upb_not_allowed', 403 );
         }

@@ -3,13 +3,14 @@ import store from './store'
 import globalPreviewMixins from './globalPreviewMixins';
 import componentPreviewMixins from './componentPreviewMixins';
 import Droppable from './plugins/vue-droppable'
+Vue.use(Droppable);
+
 import PreviewElement from './plugins/vue-preview-element'
+Vue.use(PreviewElement);
+
 import UPBPreviewMiniToolbar from './components/extra/UPBPreviewMiniToolbar.vue'
 
 Vue.component('upb-preview-mini-toolbar', UPBPreviewMiniToolbar);
-
-Vue.use(PreviewElement);
-Vue.use(Droppable);
 
 import UIDroppable from './plugins/vue-ui-droppable'
 Vue.use(UIDroppable);
@@ -17,8 +18,8 @@ Vue.use(UIDroppable);
 import UIDraggable from './plugins/vue-ui-draggable'
 Vue.use(UIDraggable);
 
-import ElementSortable from './plugins/vue-element-sortable'
-Vue.use(ElementSortable);
+//import ElementSortable from './plugins/vue-element-sortable'
+//Vue.use(ElementSortable);
 
 store.getAllUPBElements(elements => {
 
@@ -44,11 +45,11 @@ store.getAllUPBElements(elements => {
                         resolve({
                             name     : component,
                             template : templateData,
-                            mixins   : [globalPreviewMixins, upbComponentMixins, componentMixins]
+                            mixins   : [globalPreviewMixins, upbComponentMixins, componentMixins],
+
                         });
                     })
                 });
-
             });
         }
         //else {
@@ -82,19 +83,16 @@ export default {
     },
     computed : {
         model(){
-            return this.$root.$data.store.tabs.filter(function (data) {
-                return data.id == 'sections' ? data : false;
-            }).pop()
+            return store.getContentsOfTab('sections').pop();
         },
         settings(){
-            let settings = this.$root.$data.store.tabs.filter(function (data) {
-                return data.id == 'settings' ? data : false;
-            }).pop();
+            let settings = store.getContentsOfTab('settings').pop();
             return settings['contents'] ? settings.contents : [];
         }
     },
 
     updated(){
+
         if (this.model.contents) {
             this.addKeyIndex();
         }
@@ -107,6 +105,10 @@ export default {
 
     created(){
         this.addKeyIndex();
+
+        this.$watch('model.contents', _=> {
+            this.addKeyIndex();
+        }, {deep : true});
     },
 
     methods : {
