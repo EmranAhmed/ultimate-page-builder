@@ -6,6 +6,7 @@
 
     <component v-for="(content, index) in model.contents" v-if="isElementRegistered(content.tag)" :index="index" :parent="model" :model="content" :is="content._upb_options.preview.component"></component>
 
-    <a href="#" v-if="sidebarExpanded" @click.prevent="openElementsPanel()" class="upb-add-element-message-regular" v-text="model._upb_options.meta.messages.addElement"></a>
-
+    <div v-show="sidebarExpanded">
+        <a href="#" @click.prevent="openElementsPanel()" class="upb-add-element-message-regular" v-text="model._upb_options.meta.messages.addElement"></a>
+    </div>
 </div>

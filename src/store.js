@@ -27,15 +27,20 @@ class store {
     }
 
     previewDocument() {
-        return window.frames[this.preview].contentWindow.document;
+        return window.frames[this.preview].contentWindow ? window.frames[this.preview].contentWindow.document : window.frames[this.preview].document;
     }
 
     previewWindow() {
-        return window.frames[this.preview].contentWindow;
+        return window.frames[this.preview].contentWindow ? window.frames[this.preview].contentWindow : window.frames[this.preview];
     }
 
     reloadPreview() {
-        window.frames[this.preview].contentWindow.location.reload();
+        if (window.frames[this.preview].contentWindow) {
+            window.frames[this.preview].contentWindow.location.reload();
+        }
+        else {
+            window.frames[this.preview].location.reload();
+        }
     }
 
     getTabs() {

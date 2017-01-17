@@ -40,9 +40,11 @@ import extend from 'extend'
                         let draggable = ui.draggable.context.__vue__;
                         let droppable = vnode.context;
 
+                        //console.log(draggable);
+
                         // console.log('from ', draggable.$parent.model._upb_options._keyIndex, 'to ', droppable.model._upb_options._keyIndex)
 
-                        if (draggable.$parent.model._upb_options._keyIndex == droppable.model._upb_options._keyIndex) {
+                        if (!draggable || draggable.$parent.model._upb_options._keyIndex == droppable.model._upb_options._keyIndex) {
                             //console.log(`You cannot do this :)`);
                         }
                         else {

@@ -36,7 +36,6 @@
     }
 
     function upb_get_preview_link() {
-
         //$query = array( 'upb-preview' => TRUE, 'rand' => time() );
         $query = array( 'upb-preview' => TRUE );
 

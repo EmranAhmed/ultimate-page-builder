@@ -7,6 +7,12 @@
   &.upb-has-mini-toolbar {
     min-height  : 50px;
     padding-top : 25px;
+
+    &.upb-column-preview,
+    &.upb-preview-element-non-core.upb-preview-element-type-container {
+      min-height : 75px;
+      }
+
     }
 
   &.upb-sidebar-collapsed {
@@ -43,7 +49,7 @@
       margin           : 0;
       padding          : 0;
       visibility       : hidden;
-      background-color : $upb-preview-element-highlight-color;
+      background-color : $upb-preview-element-hover-color;
       color            : $upb-preview-element-toolbar-color;
       li {
         display : inline-block;
@@ -53,25 +59,20 @@
       }
 
     &:hover {
-      border-color : $upb-preview-element-highlight-color;
+      border-color : $upb-preview-element-hover-color;
       > ul {
         visibility : visible;
         }
       }
 
     &.highlight {
-      border-color : $upb-preview-element-highlight-color;
+      border-color : $upb-preview-element-focus-color;
       }
     }
 
   /*&.upb-column-preview {
     border : none;
     }*/
-
-  &.upb-column-preview,
-  &.upb-preview-element-non-core.upb-preview-element-type-container {
-    min-height : 75px;
-    }
 
   .upb-add-element-message {
     position        : relative !important;
@@ -80,18 +81,18 @@
     box-shadow      : none !important;
     outline         : none !important;
     display         : block !important;
-    color           : $upb-preview-element-highlight-color !important;
+    color           : $upb-preview-element-hover-color !important;
     text-align      : center !important;
     }
 
-  > .upb-add-element-message-regular {
+  .upb-add-element-message-regular {
     position        : relative !important;
     padding         : 20px 30px !important;
     margin          : 15px 0 20px 0 !important;
     text-decoration : none !important;
     box-shadow      : none !important;
     outline         : none !important;
-    color           : $upb-preview-element-highlight-color !important;
+    color           : $upb-preview-element-hover-color !important;
     border          : 1px dotted !important;
     display         : block !important;
     text-align      : center !important;
@@ -124,6 +125,10 @@
     }
 
   &.upb-preview-element-no-contents > .upb-preview-mini-toolbar {
-    border-color : $upb-preview-element-highlight-color !important;
+    border-color : $upb-preview-element-hover-color !important;
+    &.highlight {
+      border-color : $upb-preview-element-focus-color !important;
+      border-style : solid;
+      }
     }
   }

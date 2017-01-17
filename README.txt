@@ -51,9 +51,22 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 == Changelog ==
 
+= 1.0.0-beta.9 =
+
+- Fixed ui draggable issue after hide sidebar.
+- Fixed column sorting draggable issue.
+- Disable builder on posts page, woocommerce_shop_page, cart page, checkout page, pay_page, thank you page
+myaccount_page etc.
+- `upb_non_allowed_pages` filter added to customize those page ids.
+- Remove tab from admin editor tabs and add media button to open builder
+- Fixed front page loading issue.
+
 = 1.0.0-beta.8 =
 
-- Elements sortable from column preview
+- Move Elements from one column to another from preview panel
+- Delete functionality added on preview toolbar
+- Css class added to use each grid column for more control
+- Destroy and Remount preview elements when changes page builder elements position
 
 = 1.0.0-beta.7 =
 

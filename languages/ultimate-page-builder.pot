@@ -305,7 +305,7 @@ msgstr ""
 msgid "Use Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:41, includes/class-upb-settings.php:116, includes/upb-functions.php:318
+#: includes/class-upb-elements-props.php:41, includes/class-upb-settings.php:116, includes/upb-functions.php:317
 msgid "Remove"
 msgstr ""
 
@@ -393,11 +393,11 @@ msgstr ""
 msgid "An example of extra input"
 msgstr ""
 
-#: includes/upb-elements.php:144, includes/upb-elements.php:144, includes/upb-functions.php:343
+#: includes/upb-elements.php:144, includes/upb-elements.php:144, includes/upb-functions.php:342
 msgid "Title"
 msgstr ""
 
-#: includes/upb-elements.php:146, includes/upb-elements.php:195, includes/upb-elements.php:275, includes/upb-elements.php:318, includes/upb-elements.php:438, includes/upb-functions.php:378, includes/upb-settings.php:10
+#: includes/upb-elements.php:146, includes/upb-elements.php:195, includes/upb-elements.php:275, includes/upb-elements.php:318, includes/upb-elements.php:438, includes/upb-functions.php:377, includes/upb-settings.php:10
 msgid "Enable / Disable"
 msgstr ""
 
@@ -505,143 +505,143 @@ msgstr ""
 msgid "Add Tab Item"
 msgstr ""
 
-#: includes/upb-functions.php:106
+#: includes/upb-functions.php:105
 msgid "UPB Grid"
 msgstr ""
 
-#: includes/upb-functions.php:107
+#: includes/upb-functions.php:106
 msgid "Its recommended to use simplified form of column grid ratio like: %s"
 msgstr ""
 
-#: includes/upb-functions.php:113
+#: includes/upb-functions.php:112
 msgid "Fluid Container"
 msgstr ""
 
-#: includes/upb-functions.php:114
+#: includes/upb-functions.php:113
 msgid "Fluid Container without gutter"
 msgstr ""
 
-#: includes/upb-functions.php:115
+#: includes/upb-functions.php:114
 msgid "Fixed Container"
 msgstr ""
 
-#: includes/upb-functions.php:116
+#: includes/upb-functions.php:115
 msgid "Fixed Container without gutter"
 msgstr ""
 
-#: includes/upb-functions.php:119
+#: includes/upb-functions.php:118
 msgid "Screen Sizes"
 msgstr ""
 
-#: includes/upb-functions.php:123
+#: includes/upb-functions.php:122
 msgid "Sorry, UPB Grid doesn't support %s grid column."
 msgstr ""
 
-#: includes/upb-functions.php:138, includes/upb-functions.php:218
+#: includes/upb-functions.php:137, includes/upb-functions.php:217
 msgid "Large"
 msgstr ""
 
-#: includes/upb-functions.php:145, includes/upb-functions.php:223
+#: includes/upb-functions.php:144, includes/upb-functions.php:222
 msgid "Medium"
 msgstr ""
 
-#: includes/upb-functions.php:152, includes/upb-functions.php:228
+#: includes/upb-functions.php:151, includes/upb-functions.php:227
 msgid "Small"
 msgstr ""
 
-#: includes/upb-functions.php:159, includes/upb-functions.php:233
+#: includes/upb-functions.php:158, includes/upb-functions.php:232
 msgid "Extra Small"
 msgstr ""
 
-#: includes/upb-functions.php:265
+#: includes/upb-functions.php:264
 msgid "Hide on device"
 msgstr ""
 
-#: includes/upb-functions.php:266
+#: includes/upb-functions.php:265
 msgid "Hide element on specific media device"
 msgstr ""
 
-#: includes/upb-functions.php:283
+#: includes/upb-functions.php:282
 msgid "Background type"
 msgstr ""
 
-#: includes/upb-functions.php:284
+#: includes/upb-functions.php:283
 msgid "Choose your element background type"
 msgstr ""
 
-#: includes/upb-functions.php:288
+#: includes/upb-functions.php:287
 msgid "No background"
 msgstr ""
 
-#: includes/upb-functions.php:289, includes/upb-functions.php:298
+#: includes/upb-functions.php:288, includes/upb-functions.php:297
 msgid "Background Color"
 msgstr ""
 
-#: includes/upb-functions.php:290, includes/upb-functions.php:310
+#: includes/upb-functions.php:289, includes/upb-functions.php:309
 msgid "Background Image"
 msgstr ""
 
-#: includes/upb-functions.php:291
+#: includes/upb-functions.php:290
 msgid "Background Image and Color"
 msgstr ""
 
-#: includes/upb-functions.php:292
+#: includes/upb-functions.php:291
 msgid "Background Video"
 msgstr ""
 
-#: includes/upb-functions.php:299
+#: includes/upb-functions.php:298
 msgid "Element background color"
 msgstr ""
 
-#: includes/upb-functions.php:311
+#: includes/upb-functions.php:310
 msgid "Element background image"
 msgstr ""
 
-#: includes/upb-functions.php:315
+#: includes/upb-functions.php:314
 msgid "Choose background image"
 msgstr ""
 
-#: includes/upb-functions.php:317
+#: includes/upb-functions.php:316
 msgid "Add Background"
 msgstr ""
 
-#: includes/upb-functions.php:319
+#: includes/upb-functions.php:318
 msgid "Choose"
 msgstr ""
 
-#: includes/upb-functions.php:328
+#: includes/upb-functions.php:327
 msgid "Background Image Position"
 msgstr ""
 
-#: includes/upb-functions.php:329
+#: includes/upb-functions.php:328
 msgid "Change Background Image Position. You can move background image pointer to see preview."
 msgstr ""
 
-#: includes/upb-functions.php:360
+#: includes/upb-functions.php:359
 msgid "Custom CSS Class"
 msgstr ""
 
-#: includes/upb-functions.php:361
+#: includes/upb-functions.php:360
 msgid "Custom CSS Class. Separate classes with space"
 msgstr ""
 
-#: includes/upb-functions.php:368
+#: includes/upb-functions.php:367
 msgid "Custom CSS ID"
 msgstr ""
 
-#: includes/upb-functions.php:369
+#: includes/upb-functions.php:368
 msgid "CSS ID of an element should be unique."
 msgstr ""
 
-#: includes/upb-functions.php:379
+#: includes/upb-functions.php:378
 msgid "Enable or Disable Element"
 msgstr ""
 
-#: includes/upb-functions.php:415
+#: includes/upb-functions.php:414
 msgid "Container Type"
 msgstr ""
 
-#: includes/upb-hooks.php:118, ultimate-page-builder.php:135, ultimate-page-builder.php:143
+#: includes/upb-hooks.php:118, ultimate-page-builder.php:123, ultimate-page-builder.php:180, ultimate-page-builder.php:189
 msgid "Edit with Ultimate Page Builder"
 msgstr ""
 
@@ -677,10 +677,10 @@ msgstr ""
 msgid "Ultimate page builder try to load \"%s\" but template \"%s\" not found."
 msgstr ""
 
-#: ultimate-page-builder.php:118
+#: ultimate-page-builder.php:135
 msgid "Please check PHP version requirement."
 msgstr ""
 
-#: ultimate-page-builder.php:120
+#: ultimate-page-builder.php:137
 msgid "<strong>Ultimate Page Builder</strong> require PHP 5.4 or above."
 msgstr ""

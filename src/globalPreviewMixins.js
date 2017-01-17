@@ -137,15 +137,15 @@ export default{
         },
 
         sidebarExpanded(){
-            return this.$root.$data.store.sidebarExpanded
+            return store.sidebarExpanded
         },
 
         $router(){
-            return this.$root.$data.store.panel._router;
+            return store.panel._router;
         },
 
         $route(){
-            return this.$root.$data.store.panel._route;
+            return store.panel._route;
         }
     },
 
