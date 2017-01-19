@@ -77,7 +77,7 @@ msgstr ""
 msgid "<h2>How to use?</h2><p>Drag and drop an element to the right column and customize them based on your need.</p>"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:116, includes/class-upb-elements.php:207, includes/class-upb-elements.php:227, includes/upb-elements.php:347, includes/upb-elements.php:467
+#: includes/boilerplate/upb-boilerplate-hooks.php:116, includes/class-upb-elements.php:207, includes/class-upb-elements.php:227, includes/upb-elements.php:347, includes/upb-elements.php:466
 msgid "Settings"
 msgstr ""
 
@@ -397,7 +397,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: includes/upb-elements.php:146, includes/upb-elements.php:195, includes/upb-elements.php:275, includes/upb-elements.php:318, includes/upb-elements.php:438, includes/upb-functions.php:373, includes/upb-settings.php:10
+#: includes/upb-elements.php:146, includes/upb-elements.php:195, includes/upb-elements.php:275, includes/upb-elements.php:318, includes/upb-elements.php:437, includes/upb-functions.php:373, includes/upb-settings.php:10
 msgid "Enable / Disable"
 msgstr ""
 
@@ -437,7 +437,7 @@ msgstr ""
 msgid "Accordion Item 1"
 msgstr ""
 
-#: includes/upb-elements.php:277, includes/upb-elements.php:397
+#: includes/upb-elements.php:277, includes/upb-elements.php:396
 msgid "Default Active"
 msgstr ""
 
@@ -457,7 +457,7 @@ msgstr ""
 msgid "Accordion Item 2"
 msgstr ""
 
-#: includes/upb-elements.php:340, includes/upb-elements.php:460
+#: includes/upb-elements.php:340, includes/upb-elements.php:459
 msgid "Add New"
 msgstr ""
 
@@ -469,39 +469,39 @@ msgstr ""
 msgid "Add Accordion Item"
 msgstr ""
 
-#: includes/upb-elements.php:395
+#: includes/upb-elements.php:394
 msgid "Tab Item Title"
 msgstr ""
 
-#: includes/upb-elements.php:395
+#: includes/upb-elements.php:394
 msgid "Tab Item 1"
 msgstr ""
 
-#: includes/upb-elements.php:404
+#: includes/upb-elements.php:403
 msgid "Tab Item"
 msgstr ""
 
-#: includes/upb-elements.php:436
+#: includes/upb-elements.php:435
 msgid "Tab Title"
 msgstr ""
 
-#: includes/upb-elements.php:436, includes/upb-elements.php:452
+#: includes/upb-elements.php:435, includes/upb-elements.php:451
 msgid "Tab"
 msgstr ""
 
-#: includes/upb-elements.php:445
+#: includes/upb-elements.php:444
 msgid "Tab 1"
 msgstr ""
 
-#: includes/upb-elements.php:446
+#: includes/upb-elements.php:445
 msgid "Tab 2"
 msgstr ""
 
-#: includes/upb-elements.php:463
+#: includes/upb-elements.php:462
 msgid "Tab Item %s"
 msgstr ""
 
-#: includes/upb-elements.php:484
+#: includes/upb-elements.php:483
 msgid "Add Tab Item"
 msgstr ""
 

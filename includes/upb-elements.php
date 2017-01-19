@@ -371,7 +371,6 @@
                     'js'        => upb_templates_uri( 'shortcode-js/upb-accordion.js' ),
                     //'inline_js' => ';(function ($, upb) { $(".upb-accordion-toggle", upb).upbAccordion()  }(jQuery, _UPB_PREVIEW_DATA[upbComponentId]));',
                     'inline_js' => ';(function ($, upb) { $(".upb-accordion-item").upbAccordion()  }(jQuery, _UPB_PREVIEW_DATA[upbComponentId]));',
-
                 ),
                 'shortcode' => array(
                     'css'       => upb_templates_uri( 'shortcode-css/upb-accordion.css' ),

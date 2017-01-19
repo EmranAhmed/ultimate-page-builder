@@ -57,11 +57,11 @@ export default{
     },
 
     mounted(){
-        this.$nextTick(function () {
-            _.delay(_=> {
-                this.loadScripts();
-            }, 100)
-        });
+        this.loadScripts();
+    },
+
+    updated(){
+        this.loadScripts();
     },
 
     computed : {
@@ -265,7 +265,7 @@ export default{
             let prefixJS       = `upb_preview_assets_${this.model.tag}-js`;
             let prefixCSS      = `upb_preview_assets_${this.model.tag}-css`;
 
-            // JS Already Loaded re-init InlineJS
+            // JS Already Loaded Re-Init InlineJS
             if ((this.model._upb_options.assets.preview.js && previewDocument.querySelectorAll(`#${prefixJS}`).length > 0) && this.model._upb_options.assets.preview.inline_js) {
                 _.delay(()=> {
                     this.inlineScriptInit(true);
@@ -296,9 +296,7 @@ export default{
                 // Load InlineJS
                 if (this.model._upb_options.assets.preview.inline_js) {
                     script.onload = () => {
-                        _.delay(()=> {
-                            this.inlineScriptInit();
-                        }, 200);
+                        this.inlineScriptInit(true);
                     }
                 }
                 previewDocument.getElementsByTagName('body')[0].appendChild(script);
