@@ -45,11 +45,6 @@ export default{
         this.setPreviewData();
 
         this.$nextTick(function () {
-            // First create
-            _.delay(_=> {
-                this.loadScripts();
-            }, 100);
-
             this.addKeyIndex(this.model._upb_options._keyIndex);
         });
 
@@ -236,7 +231,12 @@ export default{
             // NOTE: If inline_js wrapped with <script> tag. then appendChild cannot execute script
             // So don't add <script> tag with inline_js
 
+            if (remove) {
+                this.removeInlineScript();
+            }
+
             if (this.model._upb_options.assets.preview.inline_js) {
+
                 let previewDocument = store.previewDocument();
                 let script          = document.createElement('script');
                 //let prefixInlineJS  = `upb_preview_assets_${this.unique_id}-inline-js`;
@@ -244,14 +244,14 @@ export default{
 
                 script.id        = prefixInlineJS;
                 script.type      = 'text/javascript';
-                // script.innerHTML    =  ;
                 script.innerHTML = `;(function(upbComponentId){
-                try{ ${this.model._upb_options.assets.preview.inline_js} }catch(e){ console.info(e.message, upbComponentId) }
-                }( '${this.unique_id}' ));`;
+                    try{
+                        ${this.model._upb_options.assets.preview.inline_js}
+                    }catch(e){
+                        console.info(e.message, upbComponentId)
+                    }
+                    }('${this.unique_id}'));`;
 
-                if (remove) {
-                    this.removeInlineScript();
-                }
                 previewDocument.getElementsByTagName('body')[0].appendChild(script);
             }
         },
@@ -264,6 +264,13 @@ export default{
             let prefixInlineJS = `upb_preview_assets_${this.model.tag}-inline-js`;
             let prefixJS       = `upb_preview_assets_${this.model.tag}-js`;
             let prefixCSS      = `upb_preview_assets_${this.model.tag}-css`;
+
+            // JS Already Loaded re-init InlineJS
+            if ((this.model._upb_options.assets.preview.js && previewDocument.querySelectorAll(`#${prefixJS}`).length > 0) && this.model._upb_options.assets.preview.inline_js) {
+                _.delay(()=> {
+                    this.inlineScriptInit(true);
+                }, 200);
+            }
 
             // Load CSS
             if (this.model._upb_options.assets.preview.css && previewDocument.querySelectorAll(`#${prefixCSS}`).length < 1) {
@@ -278,49 +285,29 @@ export default{
             }
 
             // Load JS
-
-            // NOTE: If inline_js wrapped with <script> tag. then appendChild cannot execute script
-
-            // no main script but need to load inline script
-            if (!this.model._upb_options.assets.preview.js && this.model._upb_options.assets.preview.inline_js) {
-                this.inlineScriptInit(true);
-                //console.log('no main script but need to load inline script')
-            }
-
-            // main script id added and inline_js
-            // When user add new element or same element on other place
-            if ((this.model._upb_options.assets.preview.js && previewDocument.querySelectorAll(`#${prefixJS}`).length > 0) && this.model._upb_options.assets.preview.inline_js) {
-
-                // Script loaded then call inline script.
-                previewDocument.getElementById(`${prefixJS}`).onload = _ => {
-                    this.inlineScriptInit(true);
-                    //console.log('Script loaded then call inline script.');
-                };
-
-                // Script will not load because its already loaded
-                _.delay(_=> {
-                    this.inlineScriptInit(true);
-                    //console.log('_.delay Script will not load because its already loaded');
-                }, 200);
-
-            }
-
-            // New element
             if (this.model._upb_options.assets.preview.js && previewDocument.querySelectorAll(`#${prefixJS}`).length < 1) {
 
-                let script    = document.createElement('script');
-                script.id     = prefixJS;
-                script.type   = 'text/javascript';
-                script.src    = this.model._upb_options.assets.preview.js;
-                script.async  = true;
-                script.onload = _ => {
-                    //console.log('preview js loaded')
-                    this.inlineScriptInit(true);
-                };
+                let script   = document.createElement('script');
+                script.id    = prefixJS;
+                script.type  = 'text/javascript';
+                script.src   = this.model._upb_options.assets.preview.js;
+                script.async = true;
+
+                // Load InlineJS
+                if (this.model._upb_options.assets.preview.inline_js) {
+                    script.onload = () => {
+                        _.delay(()=> {
+                            this.inlineScriptInit();
+                        }, 200);
+                    }
+                }
                 previewDocument.getElementsByTagName('body')[0].appendChild(script);
+            }
 
-                //console.log('preview js added')
-
+            // NOTE: If inline_js wrapped with <script> tag. then appendChild cannot execute script
+            // No JS but have InlineJS
+            if (!this.model._upb_options.assets.preview.js && this.model._upb_options.assets.preview.inline_js) {
+                this.inlineScriptInit(true);
             }
         },
 

@@ -5,6 +5,8 @@
 
         return this.each(function () {
 
+            //console.log('EXECUTED tab');
+
             $(this).on('click', function (e) {
 
                 e.preventDefault();

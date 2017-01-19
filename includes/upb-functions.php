@@ -76,22 +76,19 @@
     }
 
     function upb_is_preview() {
-
-        if ( upb_is_buildable() && isset( $_GET[ 'upb-preview' ] ) && $_GET[ 'upb-preview' ] == '1' && is_user_logged_in() ) {
-            return TRUE;
-        }
-
-        return FALSE;
+        return ( upb_is_buildable() && isset( $_GET[ 'upb-preview' ] ) && $_GET[ 'upb-preview' ] == '1' && is_user_logged_in() );
     }
 
     function upb_is_boilerplate() {
+        return ( upb_is_buildable() && isset( $_GET[ 'upb' ] ) && $_GET[ 'upb' ] == '1' && is_user_logged_in() );
+    }
 
-        if ( upb_is_buildable() && isset( $_GET[ 'upb' ] ) && $_GET[ 'upb' ] == '1' && is_user_logged_in() ) {
-            return TRUE;
-        }
+    function upb_is_preview_request() {
+        return ( isset( $_GET[ 'upb-preview' ] ) && $_GET[ 'upb-preview' ] == '1' && is_user_logged_in() );
+    }
 
-        return FALSE;
-
+    function upb_is_boilerplate_request() {
+        return ( isset( $_GET[ 'upb' ] ) && $_GET[ 'upb' ] == '1' && is_user_logged_in() );
     }
 
     function upb_is_enabled() {
@@ -258,25 +255,25 @@
         return implode( ' ', $columns );
     }
 
-    // Some Build-In Inputs
+    // Build-In Inputs
     function upb_responsive_hidden_input( $id = 'hidden-device', $title = '', $desc = '', $default = array() ) {
 
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Hide on device', 'ultimate-page-builder' );
         $desc  = trim( $desc ) ? trim( $desc ) : esc_html__( 'Hide element on specific media device', 'ultimate-page-builder' );
 
-        return array(
+        return apply_filters( 'upb_responsive_hidden_input', array(
             'id'      => esc_attr( $id ),
             'title'   => esc_html( $title ),
             'desc'    => wp_kses_post( $desc ),
             'type'    => 'device-hidden',
             'value'   => $default,
             'options' => upb_responsive_hidden()
-        );
+        ) );
     }
 
     function upb_background_input_group() {
-        return array(
 
+        return apply_filters( 'upb_background_input_group', array(
             array(
                 'id'      => 'background-type',
                 'title'   => esc_html__( 'Background type', 'ultimate-page-builder' ),
@@ -334,7 +331,7 @@
                     array( 'background-type', '=', array( 'image', 'both' ) ),
                 )
             ),
-        );
+        ) );
     }
 
     function upb_title_input( $title = '', $desc = '', $default = 'New %s' ) {
@@ -342,18 +339,17 @@
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Title', 'ultimate-page-builder' );
         $desc  = trim( $desc ) ? trim( $desc ) : FALSE;
 
-        return array(
+        return apply_filters( 'upb_title_input', array(
             'id'    => 'title',
             'title' => esc_html( $title ),
             'desc'  => wp_kses_post( $desc ),
             'type'  => 'text',
             'value' => esc_attr( $default ),
-        );
+        ) );
     }
 
     function upb_css_class_id_input_group( $default_class = '', $default_id = '' ) {
-
-        return array(
+        return apply_filters( 'upb_css_class_id_input_group', array(
             array(
                 'id'    => 'element_class',
                 'title' => esc_html__( 'Custom CSS Class', 'ultimate-page-builder' ),
@@ -369,7 +365,7 @@
                 'type'  => 'text',
                 'value' => esc_attr( $default_id ),
             )
-        );
+        ) );
     }
 
     function upb_enable_input( $title = '', $desc = '', $default = TRUE ) {
@@ -377,13 +373,13 @@
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Enable / Disable', 'ultimate-page-builder' );
         $desc  = trim( $desc ) ? trim( $desc ) : esc_html__( 'Enable or Disable Element', 'ultimate-page-builder' );
 
-        return array(
+        return apply_filters( 'upb_enable_input', array(
             'id'    => 'enable',
             'title' => esc_html( $title ),
             'desc'  => wp_kses_post( $desc ),
             'type'  => 'toggle',
             'value' => (bool) $default,
-        );
+        ) );
     }
 
     function upb_column_device_input( $defaults = array() ) {
@@ -411,23 +407,18 @@
         if ( $groups ):
             $default = array_keys( $groups );
 
-            return array( 'id' => 'container', 'title' => esc_html__( 'Container Type', 'ultimate-page-builder' ), 'type' => 'radio', 'value' => $default[ 0 ], 'options' => $groups );
+            return apply_filters( 'upb_row_wrapper_input', array( 'id' => 'container', 'title' => esc_html__( 'Container Type', 'ultimate-page-builder' ), 'type' => 'radio', 'value' => $default[ 0 ], 'options' => $groups ) );
         endif;
 
-        return array();
+        return apply_filters( 'upb_row_wrapper_input', array() );
     }
 
     // End Build-In Inputs
 
     // Helpers
-    function upb_is_shortcode_enabled( $attr ) {
-
-        if ( isset( $attr[ 'enable' ] ) ) {
-            return ! empty( $attr[ 'enable' ] );
-        }
-
-        return TRUE; // if not set then return true;
-
+    function upb_is_shortcode_enabled( $attributes ) {
+        // if not set then return true;
+        return isset( $attributes[ 'enable' ] ) ? ! empty( $attributes[ 'enable' ] ) : TRUE;
     }
 
     function upb_get_shortcode_class( $attributes, $extra = '' ) {
@@ -445,11 +436,11 @@
             array_push( $classes, $extra );
         }
 
-        return implode( ' ', $classes );
+        return implode( ' ', apply_filters( 'upb_get_shortcode_class', $classes ) );
     }
 
     function upb_get_shortcode_id( $attributes ) {
-        return isset( $attributes[ 'element_id' ] ) ? $attributes[ 'element_id' ] : FALSE;
+        return isset( $attributes[ 'element_id' ] ) ? apply_filters( 'upb_get_shortcode_id', $attributes[ 'element_id' ] ) : FALSE;
     }
 
     function upb_shortcode_id( $attributes ) {
@@ -461,7 +452,7 @@
     }
 
     function upb_get_shortcode_title( $attributes ) {
-        return isset( $attributes[ 'title' ] ) ? $attributes[ 'title' ] : '';
+        return isset( $attributes[ 'title' ] ) ? apply_filters( 'upb_get_shortcode_title', $attributes[ 'title' ] ) : '';
     }
 
     function upb_shortcode_title( $attributes ) {
@@ -488,6 +479,8 @@
                 printf( 'background-repeat: %s;', 'no-repeat' );
             }
         }
+
+        do_action( 'upb_shortcode_scoped_style_background', $attributes );
     }
 
     function upb_enqueue_shortcode_assets() {
@@ -513,7 +506,6 @@
             }, upb_elements()->getAll() );
         endif;
     }
-
 
     // add_action upb_boilerplate_print_footer_scripts with upb_get_template
     function upb_add_script_template( $id, $contents ) {

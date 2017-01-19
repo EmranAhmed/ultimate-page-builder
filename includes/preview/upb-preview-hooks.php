@@ -3,10 +3,6 @@
     defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
     add_action( 'upb_preview_loaded', function () {
-        add_filter( 'show_admin_bar', '__return_false' );
-    } );
-
-    add_action( 'upb_preview_loaded', function () {
         add_filter( 'body_class', function ( $classes ) {
             array_push( $classes, 'ultimate-page-builder-preview' );
 
@@ -20,7 +16,6 @@
         }
     } );
 
-
     add_action( 'wp_head', function () {
         if ( upb_is_preview() ) {
             do_action( 'upb_preview_wp_head' );
@@ -30,7 +25,6 @@
             echo '</script>';
         }
     } );
-
 
     add_action( 'after_setup_theme', function () {
         if ( upb_is_preview() ) {

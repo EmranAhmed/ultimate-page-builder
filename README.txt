@@ -51,6 +51,12 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 == Changelog ==
 
+= 1.0.0-beta.10 =
+
+- Function `upb_is_preview_request` and `upb_is_boilerplate_request` added.
+- Filter added to each builtin input to more control.
+- Fixed Debug Bar Console JS loading issue.
+
 = 1.0.0-beta.9 =
 
 - Fixed ui draggable issue after hide sidebar.

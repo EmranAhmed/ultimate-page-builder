@@ -4,7 +4,7 @@
      * Plugin URI: https://wordpress.org/plugins/ultimate-page-builder/
      * Description: An Incredibly easiest and highly customizable drag and drop page builder helps create professional websites without writing a line of code.
      * Author: Emran Ahmed
-     * Version: 1.0.0-beta.9
+     * Version: 1.0.0-beta.10
      * Domain Path: /languages
      * Text Domain: ultimate-page-builder
      * Author URI: https://themehippo.com/
@@ -102,12 +102,23 @@
                     add_filter( 'page_row_actions', array( $this, 'add_row_actions' ), 10, 2 );
                     add_filter( 'post_row_actions', array( $this, 'add_row_actions' ), 10, 2 );
 
-                    // Admin Script
-                    //add_action( 'admin_print_scripts-post-new.php', array( $this, 'load_admin_scripts' ) );
-                    //add_action( 'admin_print_scripts-post.php', array( $this, 'load_admin_scripts' ) );
-
                     // Show UPB Button
                     add_action( 'media_buttons', array( $this, 'action_media_buttons' ) );
+
+                    add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
+                }
+            }
+
+            public function after_setup_theme() {
+                if ( upb_is_preview_request() || upb_is_boilerplate_request() ) {
+                    show_admin_bar( FALSE );
+                }
+
+                if ( upb_is_preview_request() ) {
+                    do_action( 'after_setup_theme_preview' );
+                }
+                if ( upb_is_boilerplate_request() ) {
+                    do_action( 'after_setup_theme_boilerplate' );
                 }
             }
 
@@ -166,21 +177,6 @@
                 }
 
                 return TRUE;
-            }
-
-            public function load_admin_scripts() {
-                global $post_type, $post;
-
-                if ( $this->is_page_allowed( $post ) && in_array( $post_type, $this->get_allowed_post_types() ) ) {
-                    $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-                    wp_enqueue_script( 'upb-admin-editor', UPB_PLUGIN_ASSETS_URI . "js/admin-editor-tab$suffix.js", array( 'jquery' ), FALSE, TRUE );
-
-                    wp_localize_script( 'upb-admin-editor', '_upb_admin_editor', array(
-                        'edit_link' => upb_get_edit_link(),
-                        'edit_text' => esc_html__( 'Edit with Ultimate Page Builder', 'ultimate-page-builder' )
-                    ) );
-                }
-
             }
 
             public function add_row_actions( $actions, $post ) {
