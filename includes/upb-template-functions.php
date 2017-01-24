@@ -5,13 +5,13 @@
      * Load Template from theme directory, If not found then load from plugin template
      * directory.
      *
-     * @param      $template_name
-     * @param bool $third_party_default_path
+     * @param        $template_name
+     * @param string $third_party_path
      *
      * @return mixed|void
      */
 
-    function upb_locate_template( $template_name, $third_party_path = FALSE ) {
+    function upb_locate_template( $template_name, $third_party_path = '' ) {
 
         $template_path = UPB()->template_dir();
         $default_path  = UPB()->template_path();

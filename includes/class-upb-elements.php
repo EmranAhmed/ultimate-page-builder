@@ -29,6 +29,9 @@
 
                     $options = $this->get_element( $tag, '_upb_options' );
 
+                    if ( $options[ 'core' ] ) {
+                        return;
+                    }
                     unset( $this->short_code_elements[ $tag ] );
 
                     if ( ! $options[ 'predefined' ] ) {
@@ -333,7 +336,7 @@
                         $settings[ $key ][ 'use' ] = FALSE;
                     }
 
-                    $settings[ $key ] = $this->props->filterOptions( $settings[ $key ] );
+                    $settings[ $key ] = $this->props->filterOptions( $settings[ $key ], $tag );
 
                     $settings[ $key ][ '_id' ] = $setting[ 'id' ];
 
@@ -343,7 +346,7 @@
                 $this->short_code_elements[ $tag ] = array(
                     'tag'           => $tag,
                     'contents'      => $contents,
-                    'attributes'    => ( empty( $settings ) ? FALSE : $this->to_attributes( $settings ) ),
+                    'attributes'    => ( empty( $settings ) ? FALSE : $this->to_attributes( $settings, $tag ) ),
                     '_upb_settings' => ( empty( $settings ) ? FALSE : $settings ),
                     '_upb_options'  => $_upb_options
                 );
@@ -376,7 +379,7 @@
                             // $options   = upb_elements()->get_element( $tag, '_upb_options' );
 
                             ob_start();
-                            upb_get_template( sprintf( "shortcodes/%s.php", $tag ), compact( 'attributes', 'contents', 'settings' ), $_upb_options[ 'third_party_path' ] );
+                            upb_get_template( sprintf( "shortcodes/%s.php", $tag ), compact( 'attributes', 'contents', 'settings', 'tag' ), $_upb_options[ 'third_party_path' ] );
 
                             return ob_get_clean();
                         } );
@@ -403,7 +406,7 @@
                                 }
 
                                 ob_start();
-                                upb_get_template( sprintf( "previews/%s.php", esc_html( $preview[ 'template' ] ) ), $_upb_options[ 'third_party_path' ] );
+                                upb_get_template( sprintf( "previews/%s.php", esc_html( $preview[ 'template' ] ) ), array(), $_upb_options[ 'third_party_path' ] );
                                 wp_send_json_success( ob_get_clean() );
                             } );
                         }
@@ -426,7 +429,7 @@
                         }
 
                         ob_start();
-                        upb_get_template( sprintf( "previews/%s.php", esc_html( $_upb_options[ 'preview' ][ 'template' ] ) ), $_upb_options[ 'third_party_path' ] );
+                        upb_get_template( sprintf( "previews/%s.php", esc_html( $_upb_options[ 'preview' ][ 'template' ] ) ), array(), $_upb_options[ 'third_party_path' ] );
                         wp_send_json_success( ob_get_clean() );
                     } );
                 }
@@ -476,7 +479,7 @@
                         }
                     }
 
-                    $attributes = $this->to_attributes( $settings );
+                    $attributes = $this->to_attributes( $settings, $tag );
 
                     if ( isset( $attributes[ '_contents' ] ) ) {
                         unset( $attributes[ '_contents' ] );
@@ -523,11 +526,11 @@
 
                             $temp_settings[] = $this->props->filterOptions( array_merge( $setting, array(
                                 'value' => $attributes[ $setting[ 'id' ] ]
-                            ) ) );
+                            ) ), $tag );
                         }
                     }
 
-                    $el[ 'attributes' ]    = array_merge( $el[ 'attributes' ], $this->to_attributes( $temp_settings ) );
+                    $el[ 'attributes' ]    = array_merge( $el[ 'attributes' ], $this->to_attributes( $temp_settings, $tag ) );
                     $el[ '_upb_settings' ] = array_merge( $el[ '_upb_settings' ], $el[ 'attributes' ] );
                 }
 
@@ -538,12 +541,12 @@
                 return isset( $this->short_code_elements[ $tag ] );
             }
 
-            public function to_attributes( $attributes ) {
+            public function to_attributes( $attributes, $tag = '' ) {
 
                 $new_attributes = array();
                 foreach ( $attributes as $index => $attribute ) {
 
-                    $attribute = $this->props->filterOptions( $attribute );
+                    $attribute = $this->props->filterOptions( $attribute, $tag );
 
                     // NEW ATTRIBUTE
                     if ( isset( $attribute[ 'id' ] ) ) {
@@ -573,7 +576,7 @@
                     //if ( isset( $attributes[ $value[ 'id' ] ] ) ) {
                     $settings[ $key ][ 'value' ] = $attributes[ $value[ 'id' ] ];
                     //}
-                    $settings[ $key ] = $this->props->filterOptions( $settings[ $key ] );
+                    $settings[ $key ] = $this->props->filterOptions( $settings[ $key ], $tag );
                 }
 
                 return $settings;
@@ -596,7 +599,7 @@
 
 
                     $contents[ $index ][ '_upb_settings' ] = $this->to_settings( $content[ 'tag' ], $content[ 'attributes' ] );
-                    $contents[ $index ][ 'attributes' ]    = $this->to_attributes( $contents[ $index ][ '_upb_settings' ] );
+                    $contents[ $index ][ 'attributes' ]    = $this->to_attributes( $contents[ $index ][ '_upb_settings' ], $content[ 'tag' ] );
 
 
                     //}
@@ -627,7 +630,7 @@
 
                     //if ( ! isset( $contents[ $index ][ '_upb_settings' ] ) ) {
                     $contents[ $index ][ '_upb_settings' ] = $this->to_settings( $content[ 'tag' ], $content[ 'attributes' ] );
-                    $contents[ $index ][ 'attributes' ]    = $this->to_attributes( $contents[ $index ][ '_upb_settings' ] );
+                    $contents[ $index ][ 'attributes' ]    = $this->to_attributes( $contents[ $index ][ '_upb_settings' ], $content[ 'tag' ] );
 
                     // print_r($contents[ $index ][ 'attributes' ]);
                     //}

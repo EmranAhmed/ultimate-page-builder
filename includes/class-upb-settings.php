@@ -145,7 +145,27 @@
                     case 'ajax':
                     case 'icon-ajax':
                         $options[ 'value' ]   = empty( $value ) ? $options[ 'default' ] : $value;
-                        $options[ 'options' ] = apply_filters( $options[ 'hooks' ][ 'filter' ], $options[ 'value' ], $options );
+                        $options[ 'options' ] = array();
+
+                        if ( ! isset( $options[ 'hooks' ] ) ) {
+                            $options[ 'hooks' ] = array();
+                        }
+
+                        // _upb_setting_[ID]_search
+                        // _upb_setting_[ID]_load
+
+                        // wp_ajax__upb_setting_[ID]_search
+                        // wp_ajax__upb_setting_[ID]_load
+
+
+                        if ( ! isset( $options[ 'hooks' ][ 'search' ] ) ) {
+                            $options[ 'hooks' ][ 'search' ] = sprintf( '_upb_setting_%s_search', $id );
+                        }
+
+                        if ( ! isset( $options[ 'hooks' ][ 'load' ] ) ) {
+                            $options[ 'hooks' ][ 'load' ] = sprintf( '_upb_setting_%s_load', $id );
+                        }
+
                         break;
 
                     case 'color':
@@ -173,6 +193,7 @@
                         break;
 
                     case 'range':
+                    case 'number':
                         $options[ 'value' ] = ( $value === '' ) ? (int) $options[ 'default' ] : (int) $value;
                         break;
 
@@ -181,7 +202,7 @@
                         break;
                 endswitch;
 
-                return apply_filters( 'upb_settings_options', $options, $value );
+                return apply_filters( 'upb_setting_filter_options', $options, $options[ 'type' ] );
 
             }
 

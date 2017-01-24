@@ -99,6 +99,8 @@ export default {
                     let index = this.model._upb_options._keyIndex.split('/').pop();
                     this.parent.contents.splice(index, 1);
 
+                    store.stateChanged();
+
                     this.$router.replace(`/sections`);
                 }
             }
@@ -106,7 +108,7 @@ export default {
 
         openSettingsPanel(){
             this.$router.replace(`/sections`);
-            this.$nextTick(_=> {
+            this.$nextTick(()=> {
                 let path = `/sections/%/settings`.replace('%', this.model._upb_options._keyIndex);
                 this.$router.replace(path);
             })

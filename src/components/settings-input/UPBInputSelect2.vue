@@ -5,14 +5,14 @@
             <label v-if="multiple">
                 <span class="title" v-text="attributes.title"></span>
                 <select class="select2-multiple-input" multiple v-model="input" style="width: 100%" v-select2="attributes.settings" :id="attributes._id">
-                    <option v-for="(option, value) in attributes.options" :value="value" v-text="option"></option>
+                    <option v-for="(option, value) in attributes.options" :value="value" :title="option" v-text="option"></option>
                 </select>
             </label>
 
             <label v-else>
                 <span class="title" v-text="attributes.title"></span>
                 <select class="select2-input" v-model="input" style="width: 100%" v-select2="attributes.settings" :id="attributes._id">
-                    <option v-for="(option, value) in attributes.options" :value="value" v-text="option"></option>
+                    <option v-for="(option, value) in attributes.options" :value="value" :title="option" v-text="option"></option>
                 </select>
             </label>
 
@@ -32,21 +32,24 @@
 
     export default {
         name    : 'upb-input-select2',
+        mixins  : [common, userInputMixin('select2')],
         methods : {
             onChange(data, e){
-                if (_.isUndefined(this.attributes['multiple'])) {
-                    this.input = data.id;
+
+                if (this.multiple) {
+                    let id = _.isNumber(data.id) ? data.id.toString() : data.id;
+                    this.input.push(id);
                 }
                 else {
-                    this.input.push(data.id)
+                    Vue.set(this, 'input', data.id.toString());
                 }
             },
             onRemove(data){
-                if (!_.isUndefined(this.attributes['multiple'])) {
-                    Vue.set(this, 'input', _.without(this.input, data.id));
+                if (this.multiple) {
+                    let id = _.isNumber(data.id) ? data.id.toString() : data.id;
+                    Vue.set(this, 'input', _.without(this.input, id));
                 }
             }
-        },
-        mixins  : [common, userInputMixin('select2')]
+        }
     }
 </script>

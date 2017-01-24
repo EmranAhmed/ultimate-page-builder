@@ -24,8 +24,9 @@ export default {
                     dataType       : 'json',
                     data           : params => {
                         return {
-                            action : this.attributes.hooks.ajax,
+                            action : this.attributes.hooks.search,
                             query  : params.term, // search query
+                            search : params.term, // search query
                             _nonce : store.getNonce()
                         };
                     },
@@ -41,10 +42,24 @@ export default {
                 templateSelection : state => this.template(state),
                 escapeMarkup      : markup => markup,
             };
-
             return extend(true, settings, this.attributes.settings);
+        },
 
+        options(){
+            return this.attributes.options
         }
+    },
+
+    created(){
+        store.wpAjax(this.attributes.hooks.load, {
+            id   : this.input,
+            ids  : this.input,
+            load : this.input
+        }, options=> {
+            Vue.set(this.attributes, 'options', extend(true, {}, options));
+        }, e => {
+            console.log(`Did you add "${this.attributes.hooks.load}" action?`, e);
+        })
     },
 
     methods : {
@@ -56,10 +71,9 @@ export default {
             }
 
             // Template format should be like: "<span class="select2-icon-input"><i class="%(id)s"></i>  %(title)s</div>"
-            // And always should an id not ID ( capital )
+            // And always should an id ( small ) not ID ( capital )
 
             // return jQuery(`<span class="select2-icon-input"><i class="${state.element.value}"></i> &nbsp; ${state.text}</span>`);
-
             if (_.isUndefined(this.attributes['template'])) {
                 return `<span class="select2-icon-input"><i class="${data.id}"></i>  ${data.title}</span>`;
             }
@@ -69,19 +83,11 @@ export default {
         },
 
         onChange(data, e){
-            this.input = data.id;
-
-            // this.attributes.options.id    = data.id;
-            this.attributes.options.title = data.title;
-            this.attributes.options.text  = data.text;
+            Vue.set(this, 'input', data.id.toString());
         },
 
         onRemove(data){
             Vue.set(this, 'input', '');
-
-            // this.attributes.options.id    = '';
-            this.attributes.options.title = '';
-            this.attributes.options.text  = '';
         }
     }
 }

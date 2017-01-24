@@ -10,7 +10,7 @@ import userInputMixin from './user-mixins'
 Vue.use(Select2);
 
 export default {
-    name   : 'upb-input-ajax',
+    name : 'upb-input-ajax',
 
     mixins : [common, userInputMixin('ajax')],
 
@@ -19,19 +19,21 @@ export default {
         settings(){
 
             let settings = {
+                multiple           : this.multiple,
                 ajax               : {
                     cache          : true,
                     url            : this.l10n.ajaxUrl,
                     dataType       : 'json',
                     data           : params => {
                         return {
-                            action : this.attributes.hooks.ajax,
-                            query  : params.term, // search query
-                            _nonce : store.getNonce(),
+                            action   : this.attributes.hooks.search,
+                            query    : params.term, // search query
+                            search   : params.term, // search query
+                            multiple : this.multiple,
+                            _nonce   : store.getNonce(),
                         };
                     },
                     processResults : function (result, params) {
-
                         return {
                             results : result.data,
                         };
@@ -45,8 +47,32 @@ export default {
             };
 
             return extend(true, settings, this.attributes.settings);
+        },
 
+        options(){
+            return this.attributes.options
         }
+    },
+
+    created(){
+
+        store.wpAjax(this.attributes.hooks.load, {
+            id       : this.input,
+            ids      : this.input,
+            load     : this.input,
+            multiple : this.multiple,
+        }, options=> {
+
+            if (this.multiple) {
+                Vue.set(this.attributes, 'options', extend(true, [], options));
+            }
+            else {
+                Vue.set(this.attributes, 'options', extend(true, {}, options));
+            }
+
+        }, e => {
+            console.log(`Did you add "${this.attributes.hooks.load}" action?`, e);
+        })
     },
 
     methods : {
@@ -58,7 +84,7 @@ export default {
             }
 
             // Template format should be like: "<div> ID# %(id)s - %(title)s</div>"
-            // And always should an id not ID ( capital )
+            // And always should an id ( small ) not ID ( capital )
 
             if (_.isUndefined(this.attributes['template'])) {
                 return `<div> ID# ${data.id} - ${data.title}</div>`;
@@ -69,19 +95,35 @@ export default {
         },
 
         onChange(data, e){
-            this.input = data.id;
 
-            this.attributes.options.id    = data.id;
-            this.attributes.options.title = data.title;
-            this.attributes.options.text  = data.text;
+            if (this.multiple) {
+                let id = _.isNumber(data.id) ? data.id.toString() : data.id;
+                this.input.push(id);
+            }
+            else {
+                Vue.set(this, 'input', data.id.toString());
+            }
         },
 
-        onRemove(data){
-            Vue.set(this, 'input', '');
+        onRemove(data, event){
 
-            this.attributes.options.id    = '';
-            this.attributes.options.title = '';
-            this.attributes.options.text  = '';
+            if (this.multiple) {
+
+                // Need this hack to remove already select item for multiple select2 item
+                this.$nextTick(()=> {
+                    jQuery(this.$el).find('select > option').each(function (el) {
+                        if (jQuery(this).val() == data.id) {
+                            jQuery(this).remove();
+                        }
+                    });
+                })
+
+                let id = _.isNumber(data.id) ? data.id.toString() : data.id;
+                Vue.set(this, 'input', _.without(this.input, id));
+            }
+            else {
+                Vue.set(this, 'input', '');
+            }
         }
     }
 }

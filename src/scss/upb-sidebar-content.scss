@@ -9,6 +9,8 @@
   &:after {
     clear : both;
     }
+
+  clear : both;
   }
 
 // Input Reset
@@ -643,6 +645,11 @@ input[type="search"]::-webkit-search-decoration {
     color       : $upb-sidebar-panel-content-description-color;
     margin      : 5px 0 0;
     font-size   : 12px;
+    @include clearfix;
+    }
+
+  .clear {
+    @include clearfix;
     }
 
   /* ----------------

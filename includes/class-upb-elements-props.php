@@ -6,7 +6,7 @@
 
         class UPB_Elements_Props {
 
-            public function filterOptions( $options ) {
+            public function filterOptions( $options, $tag = '' ) {
 
                 $options[ 'desc' ]        = isset( $options[ 'desc' ] ) ? $options[ 'desc' ] : FALSE;
                 $options[ 'default' ]     = isset( $options[ 'default' ] ) ? $options[ 'default' ] : '';
@@ -53,10 +53,43 @@
 
                     case 'icon-ajax':
                     case 'ajax':
-                        $options[ 'options' ] = apply_filters( $options[ 'hooks' ][ 'filter' ], $options[ 'value' ], $options );
+
+                        $options[ 'options' ] = array();
+
+                        if ( isset( $options[ 'multiple' ] ) && $options[ 'multiple' ] ) {
+                            $options[ 'delimiter' ] = isset( $options[ 'delimiter' ] ) ? $options[ 'delimiter' ] : ',';
+
+                            // Processing saved attributes
+                            if ( is_null( $options[ 'value' ] ) ) {
+                                $options[ 'value' ] = $options[ 'default' ];
+                            }
+
+                            if ( ! is_array( $options[ 'value' ] ) ) {
+                                $options[ 'value' ] = explode( $options[ 'delimiter' ], $options[ 'value' ] );
+                            }
+                        }
+
+                        if ( ! isset( $options[ 'hooks' ] ) ) {
+                            $options[ 'hooks' ] = array();
+                        }
+
+                        // _upb_element_[tag]_[id]_search
+                        // _upb_element_[tag]_[id]_load
+
+                        // wp_ajax__upb_element_[tag]_[id]_search
+                        // wp_ajax__upb_element_[tag]_[id]_load
+
+                        if ( ! isset( $options[ 'hooks' ][ 'search' ] ) ) {
+                            $options[ 'hooks' ][ 'search' ] = sprintf( '_upb_element_%s_%s_search', $tag, $options[ 'id' ] );
+                        }
+
+                        if ( ! isset( $options[ 'hooks' ][ 'load' ] ) ) {
+                            $options[ 'hooks' ][ 'load' ] = sprintf( '_upb_element_%s_%s_load', $tag, $options[ 'id' ] );
+                        }
                         break;
 
                     case 'range':
+                    case 'number':
 
                         if ( ! isset( $options[ 'options' ] ) ) {
                             $options[ 'options' ] = array();
@@ -106,6 +139,13 @@
                         $options[ 'value' ] = empty( $options[ 'value' ] ) ? esc_textarea( $options[ 'default' ] ) : esc_textarea( $options[ 'value' ] );
                         break;
 
+                    case 'message':
+                        $options[ 'value' ] = NULL;
+                        if ( ! isset( $options[ 'style' ] ) ) {
+                            $options[ 'style' ] = 'info';
+                        }
+                        break;
+
                     default:
                         if ( is_null( $options[ 'value' ] ) ) {
                             $options[ 'value' ] = esc_html( $options[ 'default' ] );
@@ -113,7 +153,7 @@
                         break;
                 }
 
-                return $options;
+                return apply_filters( 'upb_elements_filter_option', $options, $tag );
             }
         }
     endif;

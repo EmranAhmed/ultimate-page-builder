@@ -591,6 +591,17 @@ button:focus {
       color      : #FFFFFF;
       }
     }
+
+  &.number-field-wrapper, &.toggle-field-wrapper {
+    .title {
+      float      : left;
+      margin-top : 3px;
+      }
+
+    .number-input-group, .toggle-input-group {
+      float : right;
+      }
+    }
   }
 
 /*-----------------------

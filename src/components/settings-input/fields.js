@@ -20,11 +20,14 @@ const fieldsComponents = {
     'upb-input-image'                     : require('./UPBInputImage.vue'),
     'upb-input-image-select'              : require('./UPBInputImageSelect.vue'),
     'upb-input-checkbox'                  : require('./UPBInputCheckbox.vue'),
+    'upb-input-checkbox-icon'             : require('./UPBInputCheckboxIcon.vue'),
     'upb-input-device-hidden'             : require('./UPBInputHiddenDevice.vue'),
     'upb-input-background-image'          : require('./UPBInputBackgroundImage.vue'),
     'upb-input-background-image-position' : require('./UPBInputBackgroundImagePosition.vue'),
     'upb-input-radio-icon'                : require('./UPBInputRadioIcon.vue'),
-    'upb-input-range'                     : require('./UPBInputRange.vue')
+    'upb-input-range'                     : require('./UPBInputRange.vue'),
+    'upb-input-number'                    : require('./UPBInputNumber.vue'),
+    'upb-input-message'                   : require('./UPBInputMessage.vue'),
 };
 
 Object.keys(fieldsComponents).map((key) => {

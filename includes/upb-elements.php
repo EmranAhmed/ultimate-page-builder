@@ -99,6 +99,22 @@
                 'min'    => 0,
                 'max'    => 200,
                 'step'   => 1,
+                'prefix' => 'px',
+                'suffix' => 'px',
+            ),
+            'value'   => 0,
+        ) );
+
+        array_push( $attributes, array(
+            'id'      => 'spacex',
+            'title'   => esc_html__( 'Number test', 'ultimate-page-builder' ),
+            'desc'    => esc_html__( 'Space between two section', 'ultimate-page-builder' ),
+            'type'    => 'number',
+            'options' => array(
+                'min'    => 0,
+                'max'    => 200,
+                'step'   => 1,
+                'prefix' => 'px',
                 'suffix' => 'px',
             ),
             'value'   => 0,
@@ -202,16 +218,36 @@
             'title'       => esc_html__( 'Contact Form', 'ultimate-page-builder' ),
             'desc'        => esc_html__( 'Contact form list', 'ultimate-page-builder' ),
             'value'       => '',
-            'hooks'       => array(
-                'ajax'   => '_upb_search_contact_form7', // wp_ajax hook
-                'filter' => '_upb_get_contact_form7', // filter hook
-            ),
             'template'    => '<div> ID# %(id)s - %(title)s </div>',
             'placeholder' => esc_html__( 'Search contact form', 'ultimate-page-builder' ),
             'settings'    => array(
                 'allowClear' => TRUE
             )
         ) );
+
+        array_push( $attributes, array(
+            'id'    => 'msg',
+            'type'  => 'message',
+            'title' => esc_html__( 'Contact Form', 'ultimate-page-builder' ),
+            'desc'  => esc_html__( 'Contact form list', 'ultimate-page-builder' ),
+            'style' => 'info'
+        ) );
+
+
+        // Example
+        /*array_push( $attributes, array(
+            'id'          => 'idx',
+            'type'        => 'ajax',
+            'title'       => esc_html__( 'Contact Form 2', 'ultimate-page-builder' ),
+            'desc'        => esc_html__( 'Contact form list 2', 'ultimate-page-builder' ),
+            'value'       => array(),
+            'multiple'    => TRUE,
+            'template'    => '%(title)s',
+            'placeholder' => esc_html__( 'Search contact form', 'ultimate-page-builder' ),
+            'settings'    => array(
+                'allowClear' => TRUE
+            )
+        ) );*/
 
         $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
 
@@ -260,7 +296,6 @@
         if ( shortcode_exists( 'contact-form-7' ) ) {
             $element->register( 'upb-contact-form-7', $attributes, $contents, $_upb_options );
         }
-
     } );
 
     // Accordion
@@ -428,11 +463,11 @@
         $element->register( 'upb-tab-item', $attributes, $contents, $_upb_options );
 
 
-        // Tab
+        // Tabs
 
         $attributes = array();
 
-        array_push( $attributes, upb_title_input( esc_html__( 'Tab Title', 'ultimate-page-builder' ), '', esc_html__( 'Tab', 'ultimate-page-builder' ) ) );
+        array_push( $attributes, upb_title_input( esc_html__( 'Tabs Title', 'ultimate-page-builder' ), '', esc_html__( 'Tab', 'ultimate-page-builder' ) ) );
 
         array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
 
@@ -448,7 +483,7 @@
         $_upb_options = array(
 
             'element' => array(
-                'name' => esc_html__( 'Tab', 'ultimate-page-builder' ),
+                'name' => esc_html__( 'Tabs', 'ultimate-page-builder' ),
                 'icon' => 'mdi mdi-tab'
             ),
 

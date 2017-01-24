@@ -7,38 +7,59 @@ import { util } from 'vue';
         util.warn('select2 is not installed or found globally to use `vue-select2` directive..', this);
     }
 
+    vSelect2.init = function (el, binding, vnode, init = true) {
+        $(el).select2($.extend(true, {}, binding.value));
+
+        if (init) {
+
+            $(el).on("select2:select", (e) => {
+
+                if (!vnode.context.onChange) {
+                    util.warn('You need to implement the `onChange` method', vnode.context);
+                }
+
+                vnode.context.onChange(e.params.data, e);
+
+                //$(el).trigger('change.select2');
+
+            });
+
+            $(el).on("select2:unselect", (e) => {
+
+                if (!vnode.context.onRemove) {
+                    util.warn('You need to implement the `onRemove` method', vnode.context);
+                }
+
+                vnode.context.onRemove(e.params.data, e);
+
+                //$(el).trigger('change.select2');
+
+            });
+        }
+    };
+
     vSelect2.install = function (Vue, options) {
 
         Vue.directive('select2', {
 
-            unbind : function (el) {
+            unbind(el) {
                 $(el).select2("destroy");
             },
 
-            inserted : function (el, binding, vnode) {
+            update(el, binding, vnode){
 
-                $(el).select2($.extend(true, {}, binding.value));
+                if (!_.isUndefined(binding.value['ajax'])) {
+                    $(el).select2("destroy");
 
-                $(el).on("select2:select", (e) => {
+                    vnode.context.$nextTick(()=> {
+                        vSelect2.init(el, binding, vnode, false);
+                    })
 
-                    if (!vnode.context.onChange) {
-                        util.warn('You need to implement the `onChange` method', vnode.context);
-                    }
+                }
+            },
 
-                    vnode.context.onChange(e.params.data, e);
-
-                });
-
-                $(el).on("select2:unselect", (e) => {
-
-                    if (!vnode.context.onRemove) {
-                        util.warn('You need to implement the `onRemove` method', vnode.context);
-                    }
-
-                    vnode.context.onRemove(e.params.data, e);
-
-                });
-
+            inserted(el, binding, vnode) {
+                vSelect2.init(el, binding, vnode);
             }
         });
     };

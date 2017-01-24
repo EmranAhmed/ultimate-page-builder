@@ -137,7 +137,7 @@
             }
 
             public function has_required_php_version() {
-                return version_compare( PHP_VERSION, '5.4' ) >= 0;
+                return version_compare( PHP_VERSION, '5.5' ) >= 0;
             }
 
             public function php_requirement_notice() {
@@ -145,7 +145,7 @@
                     $class   = 'notice notice-error';
                     $text    = esc_html__( 'Please check PHP version requirement.', 'ultimate-page-builder' );
                     $link    = esc_url( 'https://wordpress.org/about/requirements/' );
-                    $message = wp_kses( __( "<strong>Ultimate Page Builder</strong> require PHP 5.4 or above.", 'ultimate-page-builder' ), array( 'strong' => array() ) );
+                    $message = wp_kses( __( "<strong>Ultimate Page Builder</strong> require PHP 5.5 or above.", 'ultimate-page-builder' ), array( 'strong' => array() ) );
 
                     printf( '<div class="%1$s"><p>%2$s <a target="_blank" href="%3$s">%4$s</a></p></div>', $class, $message, $link, $text );
                 }
