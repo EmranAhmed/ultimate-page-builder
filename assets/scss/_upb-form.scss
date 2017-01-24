@@ -602,6 +602,31 @@ button:focus {
       float : right;
       }
     }
+
+  &.message-field-wrapper {
+    .upb-input-message {
+      border     : 1px solid;
+      padding    : 10px;
+      text-align : center;
+      }
+
+    .info {
+      color            : #00529B;
+      background-color : #BDE5F8;
+      }
+    .success {
+      color            : #4F8A10;
+      background-color : #DFF2BF;
+      }
+    .warning {
+      color            : #9F6000;
+      background-color : #FEEFB3;
+      }
+    .error {
+      color            : #D8000C;
+      background-color : #FFBABA;
+      }
+    }
   }
 
 /*-----------------------

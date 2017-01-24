@@ -157,6 +157,9 @@
                         // wp_ajax__upb_setting_[ID]_search
                         // wp_ajax__upb_setting_[ID]_load
 
+                        if ( ! isset( $options[ 'hooks' ][ 'ajaxOptions' ] ) ) {
+                            $options[ 'hooks' ][ 'ajaxOptions' ] = NULL;
+                        }
 
                         if ( ! isset( $options[ 'hooks' ][ 'search' ] ) ) {
                             $options[ 'hooks' ][ 'search' ] = sprintf( '_upb_setting_%s_search', $id );

@@ -172,6 +172,8 @@ export default{
                     else {
                         console.info(error);
                     }
+                }, {
+                    cache : true,
                 });
             }
         },

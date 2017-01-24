@@ -71,8 +71,17 @@ export default {
             }
 
         }, e => {
-            console.log(`Did you add "${this.attributes.hooks.load}" action?`, e);
-        })
+
+            if (error == 0) {
+                console.info(`You need to implement wp ajax: "wp_ajax_${this.attributes.hooks.load}" action.`)
+            }
+            else {
+                console.info(error);
+            }
+        }, this.attributes.hooks.ajaxOptions || {
+                cache : true,
+                type  : 'GET'
+            })
     },
 
     methods : {

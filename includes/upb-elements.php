@@ -225,13 +225,12 @@
             )
         ) );
 
-        array_push( $attributes, array(
+        /*array_push( $attributes, array(
             'id'    => 'msg',
             'type'  => 'message',
             'title' => esc_html__( 'Contact Form', 'ultimate-page-builder' ),
-            'desc'  => esc_html__( 'Contact form list', 'ultimate-page-builder' ),
-            'style' => 'info'
-        ) );
+            'style' => 'info' // info, success, warning, error
+        ) );*/
 
 
         // Example

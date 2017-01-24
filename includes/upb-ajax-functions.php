@@ -236,7 +236,7 @@
             wp_send_json_error( 'bad_nonce', 400 );
         }
 
-        $ids = array_map( 'esc_attr', $_POST[ 'id' ] );
+        $ids = array_map( 'esc_attr', $_GET[ 'id' ] );
 
 
         if ( empty( $ids ) ) {
@@ -275,7 +275,7 @@
             wp_send_json_error( 'bad_nonce', 400 );
         }
 
-        $id = absint( $_POST[ 'id' ] );
+        $id = absint( $_GET[ 'id' ] );
 
         if ( empty( $ids ) ) {
             wp_send_json_success( array() );
@@ -339,7 +339,7 @@
             wp_send_json_error( 'bad_nonce', 400 );
         }
 
-        $ids = array_map( 'esc_attr', $_POST[ 'id' ] );
+        $ids = array_map( 'esc_attr', $_GET[ 'id' ] );
 
 
         if ( empty( $ids ) ) {
@@ -378,7 +378,7 @@
             wp_send_json_error( 'bad_nonce', 400 );
         }
 
-        $id = absint( $_POST[ 'id' ] );
+        $id = absint( $_GET[ 'id' ] );
 
         if ( empty( $ids ) ) {
             wp_send_json_success( array() );
@@ -436,11 +436,11 @@
             wp_send_json_error( 'bad_nonce', 400 );
         }
 
-        if ( empty( $_GET[ 'query' ] ) ) {
-            wp_send_json_error( 'no_search_term', 400 );
+        if ( empty( $_GET[ 'id' ] ) ) {
+            wp_send_json_success( array() );
         }
 
-        $query = esc_html( $_GET[ 'load' ] );
+        $query = esc_html( $_GET[ 'id' ] );
 
         $icons = upb_material_design_icons();
 
@@ -518,7 +518,7 @@
             wp_send_json_error( 'bad_nonce', 400 );
         }
 
-        $id = absint( $_POST[ 'id' ] );
+        $id = absint( $_GET[ 'id' ] );
 
         if ( empty( $id ) ) {
             wp_send_json_success( array() );
@@ -581,7 +581,7 @@
             wp_send_json_error( 'bad_nonce', 400 );
         }
 
-        $ids = array_map( 'esc_attr', $_POST[ 'id' ] );
+        $ids = array_map( 'esc_attr', $_GET[ 'id' ] );
 
 
         if ( empty( $ids ) ) {

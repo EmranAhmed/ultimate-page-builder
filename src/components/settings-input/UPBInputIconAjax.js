@@ -14,7 +14,6 @@ export default {
     mixins : [common, userInputMixin('icon-ajax')],
 
     computed : {
-
         settings(){
 
             let settings = {
@@ -58,8 +57,16 @@ export default {
         }, options=> {
             Vue.set(this.attributes, 'options', extend(true, {}, options));
         }, e => {
-            console.log(`Did you add "${this.attributes.hooks.load}" action?`, e);
-        })
+            if (error == 0) {
+                console.info(`You need to implement wp ajax: "wp_ajax_${this.attributes.hooks.load}" action.`)
+            }
+            else {
+                console.info(error);
+            }
+        }, this.attributes.hooks.ajaxOptions || {
+                cache : true,
+                type  : 'GET'
+            })
     },
 
     methods : {

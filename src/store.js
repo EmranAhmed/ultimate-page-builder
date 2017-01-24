@@ -215,7 +215,8 @@ class store {
             error   : error,
             data    : {
                 _nonce : this.status._nonce
-            }
+            },
+            cache   : true,
         });
     }
 
@@ -250,7 +251,8 @@ class store {
             error   : error,
             data    : {
                 _nonce : this.status._nonce
-            }
+            },
+            cache   : true,
         });
     }
 
@@ -262,7 +264,8 @@ class store {
             data    : {
                 _nonce : this.status._nonce,
                 id     : this.status._id
-            }
+            },
+            cache   : true,
         });
     }
 
@@ -296,15 +299,17 @@ class store {
         });
     }
 
-    wpAjax(action, query, success, error) {
-        wp.ajax.send(action, {
+    wpAjax(action, query, success, error, options = {}) {
+        wp.ajax.send(action, extend(true, {
             success : success,
             error   : error,
             data    : extend(true, {
                 _nonce  : this.status._nonce,
                 post_id : this.status._id,
             }, query)
-        });
+            //,cache   : true,
+            //type    : 'GET'
+        }, options));
     }
 }
 

@@ -79,6 +79,10 @@
                         // wp_ajax__upb_element_[tag]_[id]_search
                         // wp_ajax__upb_element_[tag]_[id]_load
 
+                        if ( ! isset( $options[ 'hooks' ][ 'ajaxOptions' ] ) ) {
+                            $options[ 'hooks' ][ 'ajaxOptions' ] = NULL;
+                        }
+
                         if ( ! isset( $options[ 'hooks' ][ 'search' ] ) ) {
                             $options[ 'hooks' ][ 'search' ] = sprintf( '_upb_element_%s_%s_search', $tag, $options[ 'id' ] );
                         }
