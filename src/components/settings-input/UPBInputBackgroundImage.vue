@@ -4,12 +4,9 @@
             <label>
                 <span class="title" v-text="attributes.title"></span>
             </label>
-
             <div v-image-media class="attachment-media-view">
                 <div v-show="input" class="preview background-preview">
-
                     <div class="pointer" v-background-position="useAttributeValue"></div>
-
                     <img :src="input" alt="" draggable="false">
                 </div>
 
@@ -18,12 +15,10 @@
                 <div class="actions">
                     <button v-show="input" type="button" class="button remove-button" v-text="attributes.buttons.remove"></button>
                     <button type="button" class="button new-button" v-text="attributes.buttons.choose"></button>
-                    <div class="clearfix"></div>
+                    <div class="clear"></div>
                 </div>
             </div>
-
             <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
-
         </div>
     </li>
 </template>

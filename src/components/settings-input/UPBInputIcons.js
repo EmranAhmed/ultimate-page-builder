@@ -1,9 +1,8 @@
 import common from './common'
 import extend from 'extend'
+import userInputMixin from './user-mixins'
 
 import Select2 from '../../plugins/vue-select2'
-
-import userInputMixin from './user-mixins'
 
 Vue.use(Select2);
 
@@ -31,7 +30,7 @@ export default {
         },
 
         onChange(data, e){
-            this.input = data.id;
+            Vue.set(this, 'input', data.id.toString());
         },
 
         onRemove(data){

@@ -62,11 +62,11 @@ export default{
     methods : {
 
         checkRequired(){
-            if (this.attributes.require) {
+            if (this.attributes.required) {
 
                 // console.log(this.attributes.title);
 
-                this.showInput = this.attributes.require.every((request)=> {
+                this.showInput = this.attributes.required.every((request)=> {
 
                     let [id, operator, desireValue] = request;
                     let currentValue = _.isNull(this.getValueOf(id)) ? '' : this.getValueOf(id);

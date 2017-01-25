@@ -274,6 +274,7 @@
     function upb_background_input_group() {
 
         return apply_filters( 'upb_background_input_group', array(
+
             array(
                 'id'      => 'background-type',
                 'title'   => esc_html__( 'Background type', 'ultimate-page-builder' ),
@@ -290,13 +291,13 @@
             ),
 
             array(
-                'id'      => 'background-color',
-                'title'   => esc_html__( 'Background Color', 'ultimate-page-builder' ),
-                'desc'    => esc_html__( 'Element background color', 'ultimate-page-builder' ),
-                'type'    => 'color',
-                'value'   => '#ffffff',
-                'alpha'   => TRUE,
-                'require' => array(
+                'id'       => 'background-color',
+                'title'    => esc_html__( 'Background Color', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Element background color', 'ultimate-page-builder' ),
+                'type'     => 'color',
+                'value'    => '#ffffff',
+                'alpha'    => TRUE,
+                'required' => array(
                     array( 'background-type', '=', array( 'color', 'both' ) )
                 )
             ),
@@ -314,7 +315,7 @@
                     'remove' => esc_html__( 'Remove', 'ultimate-page-builder' ),
                     'choose' => esc_html__( 'Choose', 'ultimate-page-builder' ),
                 ),
-                'require'     => array(
+                'required'    => array(
                     array( 'background-type', '=', array( 'image', 'both' ) )
                 )
             ),
@@ -326,7 +327,7 @@
                 'type'        => 'background-image-position',
                 'value'       => '0% 0%',
                 'placeholder' => '0% 0%',
-                'require'     => array(
+                'required'    => array(
                     array( 'background-image', '!=', '' ),
                     array( 'background-type', '=', array( 'image', 'both' ) ),
                 )

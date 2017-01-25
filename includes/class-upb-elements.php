@@ -70,7 +70,7 @@
                         'ajax'      => FALSE, // enable ajax preview contents.
                         'ajax-hook' => sprintf( '_upb_%s_ajax_preview_contents', $tag ),
                         'template'  => $tag,
-                        'mixins'    => '{}' // javascript object, like: { methods:{ abcd(){} } } or window.abcdMixins = {}
+                        'mixins'    => '{}' // javascript object, like: { methods:{ methodName(){} } } or window.abcdMixins = {}
                     );
                 }
 
@@ -299,8 +299,9 @@
                 }
 
                 // WP Hooks
-                $settings     = apply_filters( "upb_element_{$tag}_settings", $settings );
-                $_upb_options = apply_filters( "upb_element_{$tag}_options", $_upb_options );
+                $settings     = apply_filters( "upb_element_{$tag}_attributes", $settings );
+                $_upb_options = apply_filters( "upb_element_{$tag}_upb_options", $_upb_options );
+                $contents     = apply_filters( "upb_element_{$tag}_contents", $contents );
 
                 if ( is_string( $contents ) ) {
                     $settings[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', esc_html__( 'Contents', 'ultimate-page-builder' ) ), 'type' => 'contents', 'value' => wp_kses_post( $contents ) );
@@ -310,7 +311,7 @@
 
                     // Require
                     //===================
-                    // require=>array(
+                    // required=>array(
                     // array('title', '!=', '' ),
                     // array( 'title', '=', 'xxx')
                     // array( 'title', '=', array('xxx', 'yyy'))
@@ -318,8 +319,8 @@
                     //
                     // array( array('title', '!=', '') ) // if depended value is array check length or check text
 
-                    if ( ! isset( $settings[ $key ][ 'require' ] ) || ! is_array( $settings[ $key ][ 'require' ] ) ) {
-                        $settings[ $key ][ 'require' ] = FALSE;
+                    if ( ! isset( $settings[ $key ][ 'required' ] ) || ! is_array( $settings[ $key ][ 'required' ] ) ) {
+                        $settings[ $key ][ 'required' ] = FALSE;
                     }
 
                     // Have Default but no value
@@ -440,14 +441,26 @@
             }
 
             public function getAll() {
+                return $this->get_all();
+            }
+
+            public function get_all() {
                 return array_values( $this->short_code_elements );
             }
 
             public function getNamed() {
+                return $this->get_names();
+            }
+
+            public function get_names() {
                 return array_keys( $this->short_code_elements );
             }
 
             public function getNonCore() {
+                return $this->get_non_core();
+            }
+
+            public function get_non_core() {
                 return array_filter( array_values( $this->short_code_elements ), function ( $tag ) {
                     return ! in_array( $tag[ 'tag' ], $this->core_elements );
                 } );

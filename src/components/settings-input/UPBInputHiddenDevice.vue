@@ -16,10 +16,8 @@
     </li>
 </template>
 <script>
-
     import common from './common'
     import userInputMixin from './user-mixins'
-
     export default {
         name   : 'upb-input-device-hidden',
         mixins : [common, userInputMixin('device-hidden')]

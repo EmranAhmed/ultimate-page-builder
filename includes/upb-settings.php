@@ -17,17 +17,17 @@
 
 
         $options = array(
-            'type'    => 'select',
-            'title'   => esc_html__( 'Elements Position', 'ultimate-page-builder' ),
-            'desc'    => esc_html__( 'Choose where you want to show page builder elements based on main contents', 'ultimate-page-builder' ),
-            'default' => 'upb-after-contents',
-            'reload'  => TRUE,
-            'options' => array(
+            'type'     => 'select',
+            'title'    => esc_html__( 'Elements Position', 'ultimate-page-builder' ),
+            'desc'     => esc_html__( 'Choose where you want to show page builder elements based on main contents', 'ultimate-page-builder' ),
+            'default'  => 'upb-after-contents',
+            'reload'   => TRUE,
+            'options'  => array(
                 'upb-before-contents' => esc_html__( 'Before Contents', 'ultimate-page-builder' ),
                 'upb-on-contents'     => esc_html__( 'Instead of Contents', 'ultimate-page-builder' ),
                 'upb-after-contents'  => esc_html__( 'After Contents', 'ultimate-page-builder' ),
             ),
-            'require' => array(
+            'required' => array(
                 array( 'enable', '=', TRUE )
             )
         );

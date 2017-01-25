@@ -120,6 +120,137 @@
             'value'   => 0,
         ) );
 
+        array_push( $attributes, array(
+            'id'      => 'checkboxicon',
+            'title'   => esc_html__( 'Number test', 'ultimate-page-builder' ),
+            'desc'    => esc_html__( 'Space between two section', 'ultimate-page-builder' ),
+            'type'    => 'checkbox-icon',
+            'options' => array(
+                'left'   => array(
+                    'title' => esc_html__( 'Left Align', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-align-left',
+                ),
+                'center' => array(
+                    'title' => esc_html__( 'Center Align', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-align-center',
+                ),
+                'right'  => array(
+                    'title' => esc_html__( 'Right Align', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-align-right',
+                ),
+            ),
+            'value'   => array( 'left' ),
+        ) );
+
+        array_push( $attributes, array(
+            'id'      => 'radioicon',
+            'title'   => esc_html__( 'Number test', 'ultimate-page-builder' ),
+            'desc'    => esc_html__( 'Space between two section', 'ultimate-page-builder' ),
+            'type'    => 'radio-icon',
+            'options' => array(
+                'left'   => array(
+                    'title' => esc_html__( 'Left Align', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-align-left',
+                ),
+                'center' => array(
+                    'title' => esc_html__( 'Center Align', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-align-center',
+                ),
+                'right'  => array(
+                    'title' => esc_html__( 'Right Align', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-align-right',
+                ),
+            ),
+            'value'   => 'left',
+        ) );
+
+        array_push( $attributes, array(
+            'id'      => 'image-select',
+            'title'   => esc_html__( 'Number test', 'ultimate-page-builder' ),
+            'desc'    => esc_html__( 'Space between two section', 'ultimate-page-builder' ),
+            'type'    => 'image-select',
+            'options' => array(
+                '1' => array(
+                    'title' => esc_html__( 'Left Align', 'ultimate-page-builder' ),
+                    'url'   => upb_assets_uri( 'images/1col.png' ),
+                ),
+                '2' => array(
+                    'title' => esc_html__( 'Center Align', 'ultimate-page-builder' ),
+                    'url'   => upb_assets_uri( 'images/2cl.png' ),
+                ),
+                '3' => array(
+                    'title' => esc_html__( 'Right Align', 'ultimate-page-builder' ),
+                    'url'   => upb_assets_uri( 'images/3cl.png' ),
+                ),
+            ),
+            'value'   => '1',
+        ) );
+
+        array_push( $attributes, array(
+            'id'    => 'msgexample',
+            'type'  => 'message',
+            'title' => esc_html__( "Completely leverage other's innovative e-services after 24/7.", 'ultimate-page-builder' ),
+            'style' => 'info' // info, success, warning, error
+        ) );
+
+
+        // Example
+        array_push( $attributes, array(
+            'id'          => 'ajaxsinglesearch',
+            'type'        => 'ajax',
+            'title'       => esc_html__( 'Search Post', 'ultimate-page-builder' ),
+            'desc'        => esc_html__( 'Search post by ajax', 'ultimate-page-builder' ),
+            'value'       => array(),
+            'hooks'       => array(
+                'search' => '_upb_search_posts',
+                'load'   => '_upb_load_post',
+            ),
+            'template'    => '%(title)s',
+            'placeholder' => esc_html__( 'Search contact form', 'ultimate-page-builder' ),
+            /*'settings'    => array(
+                'allowClear' => TRUE
+            )*/
+        ) );
+
+
+        array_push( $attributes, array(
+            'id'       => 'ajaxmultisearch',
+            'type'     => 'ajax',
+            'title'    => esc_html__( 'Search Post', 'ultimate-page-builder' ),
+            'desc'     => esc_html__( 'Search post by ajax', 'ultimate-page-builder' ),
+            'value'    => array(),
+            'hooks'    => array(
+                'search' => '_upb_search_posts',
+                'load'   => '_upb_load_posts',
+            ),
+            'multiple' => TRUE,
+            'template' => '%(title)s',
+
+            'placeholder' => esc_html__( 'Search contact form', 'ultimate-page-builder' ),
+            /*'settings'    => array(
+                'allowClear' => TRUE
+            )*/
+        ) );
+
+        array_push( $attributes, array(
+            'id'    => 'ajaxicon',
+            'type'  => 'icon-ajax',
+            'title' => esc_html__( 'Search Icon', 'ultimate-page-builder' ),
+            'desc'  => esc_html__( 'Search post by ajax', 'ultimate-page-builder' ),
+            'value' => array(),
+            'hooks' => array(
+                'search' => '_upb_material_icon_search',
+                'load'   => '_upb_material_icon_load',
+            ),
+            //'multiple' => TRUE,
+            //'template' => '%(title)s',
+
+            'placeholder' => esc_html__( 'Search contact form', 'ultimate-page-builder' ),
+            /*'settings'    => array(
+                'allowClear' => TRUE
+            )*/
+        ) );
+
         /*array_push( $attributes, array(
             'id'    => 'extraInputExample',
             'title' => esc_html__( 'Extra Input Example', 'ultimate-page-builder' ),
@@ -224,29 +355,6 @@
                 'allowClear' => TRUE
             )
         ) );
-
-        /*array_push( $attributes, array(
-            'id'    => 'msg',
-            'type'  => 'message',
-            'title' => esc_html__( 'Contact Form', 'ultimate-page-builder' ),
-            'style' => 'info' // info, success, warning, error
-        ) );*/
-
-
-        // Example
-        /*array_push( $attributes, array(
-            'id'          => 'idx',
-            'type'        => 'ajax',
-            'title'       => esc_html__( 'Contact Form 2', 'ultimate-page-builder' ),
-            'desc'        => esc_html__( 'Contact form list 2', 'ultimate-page-builder' ),
-            'value'       => array(),
-            'multiple'    => TRUE,
-            'template'    => '%(title)s',
-            'placeholder' => esc_html__( 'Search contact form', 'ultimate-page-builder' ),
-            'settings'    => array(
-                'allowClear' => TRUE
-            )
-        ) );*/
 
         $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
 

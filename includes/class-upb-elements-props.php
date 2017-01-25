@@ -67,6 +67,10 @@
                             if ( ! is_array( $options[ 'value' ] ) ) {
                                 $options[ 'value' ] = explode( $options[ 'delimiter' ], $options[ 'value' ] );
                             }
+                        } else {
+                            if ( ! isset( $options[ 'settings' ] ) || ! isset( $options[ 'settings' ][ 'allowClear' ] ) ) {
+                                $options[ 'settings' ][ 'allowClear' ] = TRUE;
+                            }
                         }
 
                         if ( ! isset( $options[ 'hooks' ] ) ) {
@@ -121,10 +125,15 @@
                             if ( ! is_array( $options[ 'value' ] ) ) {
                                 $options[ 'value' ] = explode( $options[ 'delimiter' ], $options[ 'value' ] );
                             }
+                        } else {
+                            if ( ! isset( $options[ 'settings' ] ) || ! isset( $options[ 'settings' ][ 'allowClear' ] ) ) {
+                                $options[ 'settings' ][ 'allowClear' ] = TRUE;
+                            }
                         }
                         break;
 
                     case 'checkbox':
+                    case 'checkbox-icon':
                     case 'device-hidden':
 
                         $options[ 'delimiter' ] = isset( $options[ 'delimiter' ] ) ? $options[ 'delimiter' ] : ',';
@@ -146,7 +155,7 @@
                     case 'message':
                         $options[ 'value' ] = NULL;
                         if ( ! isset( $options[ 'style' ] ) ) {
-                            $options[ 'style' ] = 'info';
+                            $options[ 'style' ] = 'info'; // info, success, warning, error
                         }
                         break;
 

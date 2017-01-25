@@ -277,7 +277,7 @@
 
         $id = absint( $_GET[ 'id' ] );
 
-        if ( empty( $ids ) ) {
+        if ( empty( $id ) ) {
             wp_send_json_success( array() );
         } else {
             $post   = get_post( $id );
@@ -380,7 +380,7 @@
 
         $id = absint( $_GET[ 'id' ] );
 
-        if ( empty( $ids ) ) {
+        if ( empty( $id ) ) {
             wp_send_json_success( array() );
         } else {
             $post   = get_post( $id );
