@@ -6,7 +6,6 @@
         return;
     }
 
-
 ?>
 
 <div id="<?php upb_shortcode_id( $attributes ) ?>" class="<?php upb_shortcode_class( $attributes, 'upb-section' ) ?>">

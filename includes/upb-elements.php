@@ -12,7 +12,7 @@
 
         array_push( $attributes, upb_responsive_hidden_input() );
 
-        // upb_column_device_input is MUST field for column
+        // upb_column_device_input is MUST HAVE field for column
         $attributes = array_merge( $attributes, upb_column_device_input() );
 
         $contents = array();
@@ -78,7 +78,6 @@
 
     // Section
     add_action( 'upb_register_element', function ( $element ) {
-
 
         $attributes = array();
 
@@ -205,7 +204,7 @@
                 'search' => '_upb_search_posts',
                 'load'   => '_upb_load_post',
             ),
-            'template'    => '%(title)s',
+            'template'    => '#%(id)s - %(title)s',
             'placeholder' => esc_html__( 'Search contact form', 'ultimate-page-builder' ),
             /*'settings'    => array(
                 'allowClear' => TRUE
@@ -224,7 +223,7 @@
                 'load'   => '_upb_load_posts',
             ),
             'multiple' => TRUE,
-            'template' => '%(title)s',
+            'template' => '#%(id)s - %(title)s',
 
             'placeholder' => esc_html__( 'Search contact form', 'ultimate-page-builder' ),
             /*'settings'    => array(
@@ -233,22 +232,18 @@
         ) );
 
         array_push( $attributes, array(
-            'id'    => 'ajaxicon',
-            'type'  => 'icon-ajax',
-            'title' => esc_html__( 'Search Icon', 'ultimate-page-builder' ),
-            'desc'  => esc_html__( 'Search post by ajax', 'ultimate-page-builder' ),
-            'value' => array(),
-            'hooks' => array(
+            'id'          => 'ajaxicon',
+            'type'        => 'icon-ajax',
+            'title'       => esc_html__( 'Search Icon', 'ultimate-page-builder' ),
+            'desc'        => esc_html__( 'Search post by ajax', 'ultimate-page-builder' ),
+            'value'       => '',
+            'hooks'       => array(
                 'search' => '_upb_material_icon_search',
                 'load'   => '_upb_material_icon_load',
             ),
-            //'multiple' => TRUE,
-            //'template' => '%(title)s',
-
             'placeholder' => esc_html__( 'Search contact form', 'ultimate-page-builder' ),
-            /*'settings'    => array(
-                'allowClear' => TRUE
-            )*/
+            'settings'    => array(//'allowClear' => FALSE
+            )
         ) );
 
         /*array_push( $attributes, array(

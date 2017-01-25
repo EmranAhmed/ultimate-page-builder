@@ -286,7 +286,6 @@
         }
     } );
 
-
     // Page
     add_action( 'wp_ajax__upb_search_pages', function () {
         if ( ! current_user_can( 'customize' ) ) {
@@ -389,7 +388,6 @@
         }
     } );
 
-
     // Material Design Icon Ajax
     add_action( 'wp_ajax__upb_material_icon_search', function () {
         if ( ! current_user_can( 'customize' ) ) {
@@ -409,7 +407,7 @@
         $icons = upb_material_design_icons();
 
         $finds = array_filter( $icons, function ( $icon ) use ( $query ) {
-            $p = strpos( $icon, $query );
+            $p = strpos( strtolower( $icon ), $query );
 
             if ( $p === FALSE ) {
                 return FALSE;
@@ -443,6 +441,65 @@
         $query = esc_html( $_GET[ 'id' ] );
 
         $icons = upb_material_design_icons();
+
+        $result = array( 'id' => $query, 'title' => esc_html( $icons[ $query ] ), 'text' => esc_html( $icons[ $query ] ) );
+
+        wp_send_json_success( $result );
+    } );
+
+    // FontAwesome Icon Ajax
+    add_action( 'wp_ajax__upb_font_awesome_icon_search', function () {
+        if ( ! current_user_can( 'customize' ) ) {
+            wp_send_json_error( 'upb_not_allowed', 403 );
+        }
+
+        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+            wp_send_json_error( 'bad_nonce', 400 );
+        }
+
+        if ( empty( $_GET[ 'query' ] ) ) {
+            wp_send_json_error( 'no_search_term', 400 );
+        }
+
+        $query = esc_html( $_GET[ 'query' ] );
+
+        $icons = upb_font_awesome_icons();
+
+        $finds = array_filter( $icons, function ( $icon ) use ( $query ) {
+            $p = strpos( strtolower( $icon ), $query );
+
+            if ( $p === FALSE ) {
+                return FALSE;
+            } else {
+                return TRUE;
+            }
+        } );
+
+        $result = array_values( array_map( function ( $icon, $key ) {
+
+            return array( 'id' => $key, 'title' => $icon, 'text' => $icon );
+
+        }, $finds, array_keys( $finds ) ) );
+
+        wp_send_json_success( $result );
+    } );
+
+    add_action( 'wp_ajax__upb_font_awesome_icon_load', function () {
+        if ( ! current_user_can( 'customize' ) ) {
+            wp_send_json_error( 'upb_not_allowed', 403 );
+        }
+
+        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+            wp_send_json_error( 'bad_nonce', 400 );
+        }
+
+        if ( empty( $_GET[ 'id' ] ) ) {
+            wp_send_json_success( array() );
+        }
+
+        $query = esc_html( $_GET[ 'id' ] );
+
+        $icons = upb_font_awesome_icons();
 
         $result = array( 'id' => $query, 'title' => esc_html( $icons[ $query ] ), 'text' => esc_html( $icons[ $query ] ) );
 

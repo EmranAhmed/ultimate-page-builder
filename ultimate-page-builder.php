@@ -58,6 +58,7 @@
                 if ( $this->has_required_php_version() ) {
                     // Common
                     require_once UPB_PLUGIN_INCLUDE_PATH . "upb-functions.php";
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "upb-icon-functions.php";
                     require_once UPB_PLUGIN_INCLUDE_PATH . "upb-template-functions.php";
 
                     // Defines
