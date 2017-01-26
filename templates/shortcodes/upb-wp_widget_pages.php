@@ -20,7 +20,7 @@
             $instance = wp_parse_args( array(
                                            'title'   => sanitize_text_field( upb_get_shortcode_title( $attributes ) ),
                                            'sortby'  => sanitize_text_field( $attributes[ 'sortby' ] ),
-                                           'exclude' => implode( ',', array_map( 'absint', $_POST[ 'exclude' ] ) ),
+                                           'exclude' => implode( ',', array_map( 'absint', $attributes[ 'exclude' ] ) ),
                                        ), array(
                                            'title'   => '',
                                            'sortby'  => 'menu_order',
