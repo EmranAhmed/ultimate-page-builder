@@ -661,6 +661,7 @@ input[type="search"]::-webkit-search-decoration {
       display        : inline-block;
       vertical-align : top;
       text-align     : center;
+      min-height     : 95px;
 
       > div {
         font-size : 14px !important;

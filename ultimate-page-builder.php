@@ -44,6 +44,9 @@
                 define( 'UPB_PLUGIN_ASSETS_URI', trailingslashit( plugin_dir_url( __FILE__ ) . 'assets' ) );
                 define( 'UPB_PLUGIN_VENDOR_URI', trailingslashit( plugin_dir_url( __FILE__ ) . 'vendor' ) );
 
+                define( 'UPB_PLUGIN_ELEMENTS_PATH', trailingslashit( plugin_dir_path( __FILE__ ) . 'elements' ) );
+                define( 'UPB_PLUGIN_ELEMENTS_URI', trailingslashit( plugin_dir_url( __FILE__ ) . 'elements' ) );
+
                 define( 'UPB_PLUGIN_INCLUDE_PATH', trailingslashit( plugin_dir_path( __FILE__ ) . 'includes' ) );
                 define( 'UPB_PLUGIN_TEMPLATES_PATH', trailingslashit( plugin_dir_path( __FILE__ ) . 'templates' ) );
                 define( 'UPB_PLUGIN_TEMPLATES_URI', trailingslashit( plugin_dir_url( __FILE__ ) . 'templates' ) );

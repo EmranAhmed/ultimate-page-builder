@@ -15,6 +15,14 @@
         return UPB_PLUGIN_PATH . untrailingslashit( $path );
     }
 
+    function upb_elements_path( $path = '' ) {
+        return UPB_PLUGIN_ELEMENTS_PATH . untrailingslashit( $path );
+    }
+
+    function upb_elements_uri( $path = '' ) {
+        return UPB_PLUGIN_ELEMENTS_URI . untrailingslashit( $path );
+    }
+
     function upb_include_path( $path = '' ) {
         return UPB_PLUGIN_INCLUDE_PATH . untrailingslashit( $path );
     }
@@ -93,6 +101,18 @@
 
     function upb_is_enabled() {
         return UPB()->is_enabled();
+    }
+
+    function upb_check_ajax_access() {
+        if ( ! current_user_can( 'customize' ) ) {
+            wp_send_json_error( 'upb_not_allowed', 403 );
+        }
+
+        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
+            wp_send_json_error( 'bad_nonce', 400 );
+        }
+
+        do_action( 'upb_check_ajax_access' );
     }
 
     // Grid

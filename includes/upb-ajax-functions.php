@@ -2,189 +2,10 @@
 
     defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
-    // AJAX Requests
-    add_action( 'wp_ajax__upb_save', function () {
+    // Core Ajax Functions
+    require_once upb_include_path( 'upb-ajax-core-functions.php' );
 
-        // Should have edit_pages cap :)
-        if ( ! current_user_can( 'edit_pages' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
-
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
-
-        if ( ! is_array( $_POST[ 'states' ] ) ) {
-            wp_send_json_error( 'missing_contents', 400 );
-        }
-
-        // SAVE ON PAGE META :D
-
-        $post_id = absint( $_POST[ 'id' ] );
-
-        if ( ! empty( $_POST[ 'shortcode' ] ) ) {
-
-            $sections   = wp_kses_post_deep( $_POST[ 'states' ][ 'sections' ] );
-            $shortcodes = wp_kses_post( trim( $_POST[ 'shortcode' ] ) );
-
-            update_post_meta( $post_id, '_upb_sections', $sections );
-            update_post_meta( $post_id, '_upb_shortcodes', $shortcodes );
-        } else {
-            delete_post_meta( $post_id, '_upb_sections' );
-            delete_post_meta( $post_id, '_upb_shortcodes' );
-        }
-
-        $settings = wp_kses_post_deep( $_POST[ 'states' ][ 'settings' ] );
-        upb_settings()->set_settings( $settings );
-
-        wp_send_json_success( TRUE );
-
-    } );
-
-    // Section Template Save
-    add_action( 'wp_ajax__save_section', function () {
-
-        // Should have manage_options cap :)
-        if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
-
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
-
-        if ( empty( $_POST[ 'contents' ] ) || ! is_array( $_POST[ 'contents' ] ) ) {
-            wp_send_json_error( 'missing_contents', 400 );
-        }
-
-        $sections   = (array) get_option( '_upb_saved_sections', array() );
-        $sections[] = wp_kses_post_deep( stripslashes_deep( $_POST[ 'contents' ] ) );
-
-        $update = update_option( '_upb_saved_sections', $sections, FALSE );
-
-        wp_send_json_success( $update );
-    } );
-
-    // Modify Saved Template
-    add_action( 'wp_ajax__save_section_all', function () {
-
-        if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
-
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
-
-        if ( empty( $_POST[ 'contents' ] ) ) {
-            $update = update_option( '_upb_saved_sections', array(), FALSE );
-        } else {
-            $sections = (array) wp_kses_post_deep( $_POST[ 'contents' ] );
-            $update   = update_option( '_upb_saved_sections', $sections, FALSE );
-        }
-
-        wp_send_json_success( $update );
-    } );
-
-    // Panel Contents
-    add_action( 'wp_ajax__get_upb_sections_panel_contents', function () {
-
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
-
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
-
-        $post_id = absint( $_POST[ 'id' ] );
-
-        $sections = get_post_meta( $post_id, '_upb_sections', TRUE );
-
-        wp_send_json_success( upb_elements()->set_upb_options_recursive( $sections ) );
-
-    } );
-
-    add_action( 'wp_ajax__get_upb_settings_panel_contents', function () {
-
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
-
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
-
-        // return get_post_meta( get_the_ID(), '_upb_settings', TRUE );
-
-        wp_send_json_success( upb_settings()->getAll() );
-    } );
-
-    add_action( 'wp_ajax__get_upb_elements_panel_contents', function () {
-
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
-
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
-
-        //wp_send_json_success( upb_elements()->getNonCore() );
-        wp_send_json_success( upb_elements()->getAll() );
-    } );
-
-    add_action( 'wp_ajax__get_upb_layouts_panel_contents', function () {
-
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
-
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
-
-        wp_send_json_success( upb_layouts()->getAll() );
-    } );
-
-    // Get Saved Section
-    add_action( 'wp_ajax__get_saved_sections', function () {
-
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
-
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
-
-        $saved_sections = (array) get_option( '_upb_saved_sections', array() );
-
-        $saved_sections = upb_elements()->set_upb_options_recursive( wp_kses_post_deep( stripslashes_deep( $saved_sections ) ) );
-
-        wp_send_json_success( $saved_sections );
-    } );
-
-    add_action( 'wp_ajax__add_upb_options', function () {
-
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
-
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
-
-        if ( empty( $_POST[ 'contents' ] ) ) {
-            wp_send_json_error( 'no_contents', 400 );
-        }
-
-        $contents = upb_elements()->set_upb_options_recursive( wp_kses_post_deep( stripslashes_deep( $_POST[ 'contents' ] ) ) );
-
-        wp_send_json_success( $contents );
-    } );
-
-    // Post
+    // Posts
     add_action( 'wp_ajax__upb_search_posts', function () {
         if ( ! current_user_can( 'customize' ) ) {
             wp_send_json_error( 'upb_not_allowed', 403 );
@@ -286,7 +107,7 @@
         }
     } );
 
-    // Page
+    // Pages
     add_action( 'wp_ajax__upb_search_pages', function () {
         if ( ! current_user_can( 'customize' ) ) {
             wp_send_json_error( 'upb_not_allowed', 403 );
@@ -586,7 +407,7 @@
         }
     } );
 
-    // Contact form 7 multi demo Ajax
+    // Contact form 7 multiple demo Ajax example
     add_action( 'wp_ajax__upb_element_upb-contact-form-7_idx_search', function () {
         if ( ! current_user_can( 'customize' ) ) {
             wp_send_json_error( 'upb_not_allowed', 403 );
@@ -666,4 +487,208 @@
 
             wp_send_json_success( $data );
         }
+    } );
+
+    // WP_Widget_Archives
+    add_action( 'wp_ajax__upb_upb-wp_widget_archives_preview_contents', function () {
+
+        upb_check_ajax_access();
+
+        // Check /wp-includes/widgets/class-wp-widget-archives.php line#135
+        $instance = wp_parse_args( array(
+                                       'title'    => sanitize_text_field( $_POST[ 'title' ] ),
+                                       'dropdown' => filter_var( $_POST[ 'dropdown' ], FILTER_VALIDATE_BOOLEAN ),
+                                       'count'    => filter_var( $_POST[ 'count' ], FILTER_VALIDATE_BOOLEAN )
+                                   ), array(
+                                       'title'    => '',
+                                       'count'    => 0,
+                                       'dropdown' => ''
+                                   ) );
+
+        $args = apply_filters( 'upb-element-wp-widget-args', array(
+            'before_widget' => '<div class="widget %s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2 class="widgettitle widget-title">',
+            'after_title'   => '</h2>'
+        ), 'WP_Widget_Archives', $instance );
+
+        ob_start();
+        the_widget( 'WP_Widget_Archives', $instance, $args );
+        $contents = ob_get_clean();
+        wp_send_json_success( str_ireplace( 'onchange=', 'data-onchange=', $contents ) );
+    } );
+
+    // WP_Nav_Menu_Widget
+    add_action( 'wp_ajax__upb_upb-wp_nav_menu_widget_preview_contents', function () {
+
+        upb_check_ajax_access();
+
+        // Check /wp-includes/widgets/class-wp-nav-menu-widget.php line#95
+        $instance = wp_parse_args( array(
+                                       'title'    => sanitize_text_field( $_POST[ 'title' ] ),
+                                       'nav_menu' => absint( $_POST[ 'nav_menu' ] ),
+                                   ), array(
+                                       'title'    => '',
+                                       'nav_menu' => 0
+                                   ) );
+
+        $args = apply_filters( 'upb-element-wp-widget-args', array(
+            'before_widget' => '<div class="widget %s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2 class="widgettitle widget-title">',
+            'after_title'   => '</h2>'
+        ), 'WP_Nav_Menu_Widget', $instance );
+
+        ob_start();
+        the_widget( 'WP_Nav_Menu_Widget', $instance, $args );
+        $contents = ob_get_clean();
+        wp_send_json_success( $contents );
+    } );
+
+    // WP_Widget_Calendar
+    add_action( 'wp_ajax__upb_upb-wp_widget_calendar_preview_contents', function () {
+
+        upb_check_ajax_access();
+
+        // Check /wp-includes/widgets/class-wp-widget-calendar.php line#54
+        $instance = wp_parse_args( array(
+                                       'title' => sanitize_text_field( $_POST[ 'title' ] )
+                                   ),
+                                   array(
+                                       'title' => ''
+                                   ) );
+
+        $args = apply_filters( 'upb-element-wp-widget-args', array(
+            'before_widget' => '<div class="widget %s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2 class="widgettitle widget-title">',
+            'after_title'   => '</h2>'
+        ), 'WP_Widget_Calendar', $instance );
+
+        ob_start();
+        the_widget( 'WP_Widget_Calendar', $instance, $args );
+        $contents = ob_get_clean();
+        wp_send_json_success( $contents );
+    } );
+
+    // WP_Widget_Categories
+    add_action( 'wp_ajax__upb_upb-wp_widget_categories_preview_contents', function () {
+
+        upb_check_ajax_access();
+
+        // Check /wp-includes/widgets/class-wp-widget-categories.php line#44
+        $instance = wp_parse_args( array(
+                                       'title'        => sanitize_text_field( $_POST[ 'title' ] ),
+                                       'dropdown'     => filter_var( $_POST[ 'dropdown' ], FILTER_VALIDATE_BOOLEAN ),
+                                       'count'        => filter_var( $_POST[ 'count' ], FILTER_VALIDATE_BOOLEAN ),
+                                       'hierarchical' => filter_var( $_POST[ 'hierarchical' ], FILTER_VALIDATE_BOOLEAN ),
+                                   ), array(
+                                       'title'        => esc_html__( 'Categories', 'ultimate-page-builder' ),
+                                       'dropdown'     => FALSE,
+                                       'count'        => FALSE,
+                                       'hierarchical' => FALSE,
+                                   ) );
+
+
+        $args = apply_filters( 'upb-element-wp-widget-args', array(
+            'before_widget' => '<div class="widget %s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2 class="widgettitle widget-title">',
+            'after_title'   => '</h2>'
+        ), 'WP_Widget_Categories', $instance );
+
+        ob_start();
+        the_widget( 'WP_Widget_Categories', $instance, $args );
+        $contents = ob_get_clean();
+        wp_send_json_success( $contents );
+    } );
+
+    // WP_Widget_Categories
+    add_action( 'wp_ajax__upb_upb-wp_widget_links_preview_contents', function () {
+
+        upb_check_ajax_access();
+
+        // Check /wp-includes/widgets/class-wp-widget-categories.php line#44
+        $instance = wp_parse_args( array(
+                                       'title'       => sanitize_text_field( $_POST[ 'title' ] ),
+                                       'category'    => absint( $_POST[ 'category' ] ),
+                                       'orderby'     => sanitize_text_field( $_POST[ 'orderby' ] ),
+                                       'images'      => filter_var( $_POST[ 'images' ], FILTER_VALIDATE_BOOLEAN ),
+                                       'name'        => filter_var( $_POST[ 'name' ], FILTER_VALIDATE_BOOLEAN ),
+                                       'description' => filter_var( $_POST[ 'description' ], FILTER_VALIDATE_BOOLEAN ),
+                                       'rating'      => filter_var( $_POST[ 'rating' ], FILTER_VALIDATE_BOOLEAN ),
+                                       'limit'       => sanitize_text_field( $_POST[ 'limit' ] ),
+                                   ),
+                                   array(
+                                       'title'       => esc_html__( 'Links', 'ultimate-page-builder' ),
+                                       'category'    => '',
+                                       'orderby'     => 'name',
+                                       'images'      => 0,
+                                       'name'        => 0,
+                                       'description' => 0,
+                                       'rating'      => 0,
+                                       'limit'       => '-1',
+                                   ) );
+
+        $args = apply_filters( 'upb-element-wp-widget-args', array(
+            'before_widget' => '<div class="widget %s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2 class="widgettitle widget-title">',
+            'after_title'   => '</h2>'
+        ), 'WP_Widget_Categories', $instance );
+
+        ob_start();
+        the_widget( 'WP_Widget_Links', $instance, $args );
+        $contents = ob_get_clean();
+        wp_send_json_success( $contents );
+    } );
+
+    // WP_Widget_Meta
+    add_action( 'wp_ajax__upb_upb-wp_widget_meta_preview_contents', function () {
+
+        upb_check_ajax_access();
+
+        // Check /wp-includes/widgets/class-wp-widget-calendar.php line#54
+        $instance = wp_parse_args( array( 'title' => sanitize_text_field( $_POST[ 'title' ] ) ), array( 'title' => '' ) );
+
+        $args = apply_filters( 'upb-element-wp-widget-args', array(
+            'before_widget' => '<div class="widget %s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2 class="widgettitle widget-title">',
+            'after_title'   => '</h2>'
+        ), 'WP_Widget_Meta', $instance );
+
+        ob_start();
+        the_widget( 'WP_Widget_Meta', $instance, $args );
+        $contents = ob_get_clean();
+        wp_send_json_success( $contents );
+    } );
+
+    // WP_Widget_Pages
+    add_action( 'wp_ajax__upb_upb-wp_widget_pages_preview_contents', function () {
+
+        upb_check_ajax_access();
+
+        $instance = wp_parse_args( array(
+                                       'title'   => sanitize_text_field( $_POST[ 'title' ] ),
+                                       'sortby'  => sanitize_text_field( $_POST[ 'sortby' ] ),
+                                       'exclude' => implode( ',', array_map( 'absint', $_POST[ 'exclude' ] ) ),
+                                   ),
+                                   array(
+                                       'title'   => '',
+                                       'sortby'  => 'menu_order',
+                                       'exclude' => '',
+                                   ) );
+
+        $args = apply_filters( 'upb-element-wp-widget-args', array(
+            'before_widget' => '<div class="widget %s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2 class="widgettitle widget-title">',
+            'after_title'   => '</h2>'
+        ), 'WP_Widget_Pages', $instance );
+
+        ob_start();
+        the_widget( 'WP_Widget_Pages', $instance, $args );
+        $contents = ob_get_clean();
+        wp_send_json_success( $contents );
     } );
