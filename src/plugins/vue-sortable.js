@@ -11,21 +11,17 @@ import { util } from 'vue';
 
         Vue.directive('sortable', {
 
-            bind : function (el, binding, vnode) {
-            },
+            bind (el, binding, vnode) {},
 
-            update : function (el, binding, vnode) {
+            update (el, binding, vnode) {},
 
-            },
-
-            unbind : function (el) {
+            unbind (el) {
                 $(el).sortable("destroy");
             },
 
-            componentUpdated : function (el, binding, vnode) {
-            },
+            componentUpdated (el, binding, vnode) {},
 
-            inserted : function (el, binding, vnode) {
+            inserted (el, binding, vnode) {
 
                 const values = {oldIndex : 0, newIndex : 0};
 
@@ -71,5 +67,4 @@ import { util } from 'vue';
         window.vSortable = vSortable;
         Vue.use(vSortable)
     }
-
 })(window.jQuery);

@@ -11,11 +11,11 @@ import { util } from 'vue';
 
         Vue.directive('image-media', {
 
-            unbind : function (el) {
+            unbind (el) {
 
             },
 
-            inserted : function (el, binding, vnode) {
+            inserted (el, binding, vnode) {
 
                 let frame;
 

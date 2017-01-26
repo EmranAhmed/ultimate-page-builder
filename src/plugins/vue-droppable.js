@@ -2,26 +2,21 @@ import { util } from 'vue';
 import store from '../store';
 
 {
-
     const vDroppable = {};
 
     vDroppable.install = function (Vue, options) {
 
         Vue.directive('droppable', {
 
-            bind : function (el, binding, vnode) {
+            bind(el, binding, vnode) {},
 
-            },
+            update(newValue, oldValue, vnode) {},
 
-            update : function (newValue, oldValue, vnode) {
+            unbind (el) {},
 
-            },
+            componentUpdated () {},
 
-            unbind : function (el) {},
-
-            componentUpdated : function () {},
-
-            inserted : function (el, binding, vnode) {
+            inserted (el, binding, vnode) {
 
                 el.addEventListener('dragover', function (event) {
                     event.preventDefault();
@@ -48,13 +43,8 @@ import store from '../store';
                         else {
                             vnode.context.afterDrop(content, false);
                         }
-
-                        // vnode.context.model.contents.push(content);
-
-                        // store.stateChanged();
-
                     } catch (e) {
-                        console.log('Some thing was wrong on drop', e)
+                        console.info('Some thing was wrong on drop', e)
                     }
                 });
             }

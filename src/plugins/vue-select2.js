@@ -54,7 +54,6 @@ import { util } from 'vue';
                     vnode.context.$nextTick(()=> {
                         vSelect2.init(el, binding, vnode, false);
                     })
-
                 }
             },
 

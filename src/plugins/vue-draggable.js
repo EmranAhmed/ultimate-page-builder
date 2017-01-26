@@ -9,21 +9,21 @@ import store from '../store';
 
         Vue.directive('draggable', {
 
-            bind : function (el, binding, vnode) {
+            bind (el, binding, vnode) {
 
             },
 
-            update : function (el, binding, vnode) {
+            update (el, binding, vnode) {
 
             },
 
-            unbind : function (el, binding, vnode) {
+            unbind (el, binding, vnode) {
                 el.setAttribute("draggable", false);
             },
 
-            componentUpdated : function () {},
+            componentUpdated () {},
 
-            inserted : function (el, binding, vnode) {
+            inserted (el, binding, vnode) {
 
                 el.setAttribute("draggable", true);
 

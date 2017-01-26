@@ -11,21 +11,21 @@ import { util } from 'vue';
 
         Vue.directive('element-sortable', {
 
-            bind : function (el, binding, vnode) {
+            bind (el, binding, vnode) {
 
             },
 
-            update : function (newValue, oldValue, vnode) {
+            update (newValue, oldValue, vnode) {
 
             },
 
-            unbind : function (el) {
+            unbind (el) {
                 $(el).sortable("destroy");
             },
 
             componentUpdated : function () {},
 
-            inserted : function (el, binding, vnode) {
+            inserted (el, binding, vnode) {
 
                 const values = {
                     oldIndex : 0,

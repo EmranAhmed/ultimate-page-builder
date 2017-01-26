@@ -8,15 +8,15 @@ import { util } from 'vue';
 
         Vue.directive('preview-element', {
 
-            bind : function (el, binding, vnode) {},
+            bind  (el, binding, vnode) {},
 
-            update : function (newValue, oldValue, vnode) {},
+            update (newValue, oldValue, vnode) {},
 
-            unbind : function (el) {},
+            unbind  (el) {},
 
-            componentUpdated : function () {},
+            componentUpdated  () {},
 
-            inserted : function (el, binding, vnode) {
+            inserted  (el, binding, vnode) {
 
                 // $(el).addClass(`upb-preview-element`).addClass(`${vnode.context.model.tag}-preview`);
 
@@ -52,4 +52,3 @@ import { util } from 'vue';
     }
 
 })(window.jQuery);
-

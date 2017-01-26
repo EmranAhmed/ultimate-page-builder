@@ -1,6 +1,6 @@
 import { util } from 'vue';
 
-( $ => {
+($ => {
     const vColorPicker = {};
 
     if (!$().wpColorPicker) {
@@ -10,14 +10,15 @@ import { util } from 'vue';
     vColorPicker.install = function (Vue, options) {
 
         Vue.directive('colorpicker', {
-            inserted : function (el, binding, vnode) {
+            inserted (el, binding, vnode) {
+
                 const options = {
                     change(event, ui){
                         if (!vnode.context.onColorChange) {
                             util.warn('You need to implement the `onColorChange` method', vnode.context);
                         }
 
-                        vnode.context.onColorChange(ui.color.toString());
+                        vnode.context.onColorChange(ui.color);
                     }
                 };
 

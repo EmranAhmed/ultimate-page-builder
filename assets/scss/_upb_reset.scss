@@ -4,6 +4,33 @@
   margin     : 0;
   }
 
+::-webkit-scrollbar {
+  width  : 5px;
+  height : 5px;
+  }
+
+::-webkit-scrollbar-thumb {
+  background    : #BBBBBB;
+  border-radius : 1px;
+  border        : 1px solid $upb-sidebar-background-color;
+  }
+
+::-webkit-scrollbar-thumb:hover {
+  background : #333333;
+  }
+
+::-webkit-scrollbar-thumb:active {
+  background : #333333;
+  }
+
+::-webkit-scrollbar-track {
+  background : $upb-sidebar-background-color;
+  }
+
+::-webkit-scrollbar-corner {
+  background : transparent;
+  }
+
 html {
   -webkit-text-size-adjust : 100%; // 2
   -ms-text-size-adjust     : 100%; // 2

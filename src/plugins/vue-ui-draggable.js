@@ -12,20 +12,20 @@ import store from '../store'
 
         Vue.directive('ui-draggable', {
 
-            bind : function (el, binding, vnode) {
+            bind (el, binding, vnode) {
 
             },
 
-            update : function (el, binding, vnode) {
+            update (el, binding, vnode) {
             },
 
-            unbind : function (el) {
+            unbind (el) {
                 $(el).draggable("destroy");
             },
 
-            componentUpdated : function (el, binding, vnode) {},
+            componentUpdated (el, binding, vnode) {},
 
-            inserted : function (el, binding, vnode) {
+            inserted (el, binding, vnode) {
 
                 $(el).draggable({
                     //iframeFix  : true,

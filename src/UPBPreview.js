@@ -39,14 +39,11 @@ store.getAllUPBElements(elements => {
                 let upbComponentMixins = _.isEmpty(componentPreviewMixins[template]) ? false : componentPreviewMixins[template];
 
                 Vue.component(component, function (resolve, reject) {
-
                     store.getShortCodePreviewTemplate(template, function (templateData) {
-
                         resolve({
                             name     : component,
                             template : templateData,
                             mixins   : [globalPreviewMixins, upbComponentMixins, componentMixins],
-
                         });
                     })
                 });

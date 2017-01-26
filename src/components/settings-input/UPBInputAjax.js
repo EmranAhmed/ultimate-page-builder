@@ -54,7 +54,7 @@ export default {
         }
     },
 
-    created(){
+    mounted(){
 
         store.wpAjax(this.attributes.hooks.load, {
             id       : this.input,

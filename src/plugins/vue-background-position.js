@@ -11,27 +11,26 @@ import { util } from 'vue';
 
         Vue.directive('background-position', {
 
-            bind : function (el, binding, vnode) {
+            bind (el, binding, vnode) {
 
             },
 
-            update : function (el, binding, vnode) {
+            update (el, binding, vnode) {
             },
 
-            unbind : function (el) {
+            unbind (el) {
                 $(el).draggable("destroy");
             },
 
-            componentUpdated : function (el, binding, vnode) {
+            componentUpdated(el, binding, vnode) {
 
                 let [left, top] = binding.value.split(' ');
 
                 $(el).css('left', left.trim());
                 $(el).css('top', top.trim());
-
             },
 
-            inserted : function (el, binding, vnode) {
+            inserted (el, binding, vnode) {
 
                 let [left, top] = binding.value.split(' ');
 

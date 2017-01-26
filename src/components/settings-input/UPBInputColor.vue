@@ -3,7 +3,7 @@
         <div class="form-group">
             <label>
                 <span class="title" v-text="attributes.title"></span>
-                <input class="color-input" v-colorpicker :data-alpha="attributes.alpha" type="text" :data-default-color="attributes.value" :value="attributes.value" :id="attributes._id" :placeholder="attributes.placeholder">
+                <input class="color-input" v-colorpicker :data-alpha="attributes.alpha" type="text" :data-default-color="attributes.value" :value="attributes.value" :placeholder="attributes.placeholder">
             </label>
 
             <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
@@ -24,8 +24,7 @@
         mixins  : [common, userInputMixin('color')],
         methods : {
             onColorChange(color){
-                this.input = color;
-                //this.attributes.value   = color;
+                Vue.set(this, 'input', color.toString());
             }
         }
     }
