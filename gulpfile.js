@@ -63,6 +63,7 @@ gulp.task('bundle', _=> {
     let copyfrom  = path.resolve(__dirname);
     let copyto    = path.resolve(bundledir);
     let includes  = ['assets',
+                     'elements',
                      'includes',
                      'languages',
                      'templates',
