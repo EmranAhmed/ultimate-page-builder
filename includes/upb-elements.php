@@ -6,7 +6,6 @@
 
     include_once upb_elements_path( 'with-upb.php' );
 
-    include_once upb_elements_path( 'widget-based.php' );
-
     include_once upb_elements_path( '3rd-party.php' );
 
+    include_once upb_elements_path( 'widget-based.php' );

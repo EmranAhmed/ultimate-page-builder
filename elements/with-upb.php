@@ -287,3 +287,85 @@
 
         $element->register( 'upb-tab', $attributes, $contents, $_upb_options );
     } );
+
+    // Headings
+    add_action( 'upb_register_element', function ( $element ) {
+
+        $attributes = array();
+
+        //array_push( $attributes, upb_title_input( esc_html__( 'Title', 'ultimate-page-builder' ), '', esc_html__( 'Text Title', 'ultimate-page-builder' ) ) );
+
+        array_push( $attributes, array(
+            'id'      => 'type',
+            'title'   => esc_html__( 'Heading type', 'ultimate-page-builder' ),
+            'type'    => 'select',
+            'value'   => 'h1',
+            'options' => array(
+                'h1' => esc_html__( 'Heading 1', 'ultimate-page-builder' ),
+                'h2' => esc_html__( 'Heading 2', 'ultimate-page-builder' ),
+                'h3' => esc_html__( 'Heading 3', 'ultimate-page-builder' ),
+                'h4' => esc_html__( 'Heading 4', 'ultimate-page-builder' ),
+                'h5' => esc_html__( 'Heading 5', 'ultimate-page-builder' ),
+                'h6' => esc_html__( 'Heading 6', 'ultimate-page-builder' ),
+            )
+        ) );
+
+        array_push( $attributes, array(
+            'id'      => 'align',
+            'title'   => esc_html__( 'Heading align', 'ultimate-page-builder' ),
+            'type'    => 'radio-icon',
+            'value'   => 'left',
+            'options' => array(
+                'left'   => array(
+                    'title' => esc_html__( 'Left Align', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-align-left',
+                ),
+                'center' => array(
+                    'title' => esc_html__( 'Center Align', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-align-center',
+                ),
+                'right'  => array(
+                    'title' => esc_html__( 'Right Align', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-align-right',
+                ),
+            ),
+        ) );
+
+        array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
+
+        array_push( $attributes, upb_responsive_hidden_input() );
+
+        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
+
+        $contents = 'Heading';
+
+        $_upb_options = array(
+
+            'element' => array(
+                'name' => 'UPB Heading',
+                'icon' => 'mdi mdi-format-header-pound'
+            ),
+
+            'meta' => array(
+                'settings' => apply_filters( 'upb_heading_settings_panel_meta', array(
+                    'help' => '<h2>Heading Settings?</h2><p>section settings</p>',
+                ) ),
+            ),
+
+            'assets' => array(
+                'preview'   => array(
+                    //'css' => upb_templates_uri( 'preview-css/sections.css' ),
+                    //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                    //'inline_js' => 'console.log( upbComponentId );',
+                ),
+                'shortcode' => array(
+                    //'css' => upb_templates_uri( 'preview-css/sections.css' ),
+                    //'js'  => upb_templates_uri( 'preview-js/sections.js' ),
+                )
+            )
+        );
+
+        $element->register( 'upb-heading', $attributes, $contents, $_upb_options );
+
+    } );
+
