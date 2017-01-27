@@ -51,6 +51,19 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 == Changelog ==
 
+= 1.0.0-beta.11 =
+
+- WordPress core widgets added
+- Ajax MultiSelect, Single select Option added
+- Searchable Icon added with ajax feature
+- Heading added
+- Updated section background options
+- Number Input added
+- Iconic Checkbox added
+- Iconic Radio added
+- Iconic SelectBox added
+- Message input added to show messages
+
 = 1.0.0-beta.10 =
 
 - Function `upb_is_preview_request` and `upb_is_boilerplate_request` added.

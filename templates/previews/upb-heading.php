@@ -1,6 +1,6 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' ); ?>
 
-<div v-show="isEnabled" :id="addID()" :class="addClass()" v-ui-draggable v-preview-element :style="inlineStyle({ 'text-align': attributes.align })">
+<div v-show="isEnabled" v-ui-draggable v-preview-element :id="addID()" :class="addClass()" :style="inlineStyle({ 'text-align': attributes.align })">
 
     <upb-preview-mini-toolbar :parent="parent" :model="model"></upb-preview-mini-toolbar>
 

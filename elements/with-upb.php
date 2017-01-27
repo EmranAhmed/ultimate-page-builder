@@ -293,20 +293,39 @@
 
         $attributes = array();
 
-        //array_push( $attributes, upb_title_input( esc_html__( 'Title', 'ultimate-page-builder' ), '', esc_html__( 'Text Title', 'ultimate-page-builder' ) ) );
-
         array_push( $attributes, array(
-            'id'      => 'type',
-            'title'   => esc_html__( 'Heading type', 'ultimate-page-builder' ),
-            'type'    => 'select',
-            'value'   => 'h1',
-            'options' => array(
-                'h1' => esc_html__( 'Heading 1', 'ultimate-page-builder' ),
-                'h2' => esc_html__( 'Heading 2', 'ultimate-page-builder' ),
-                'h3' => esc_html__( 'Heading 3', 'ultimate-page-builder' ),
-                'h4' => esc_html__( 'Heading 4', 'ultimate-page-builder' ),
-                'h5' => esc_html__( 'Heading 5', 'ultimate-page-builder' ),
-                'h6' => esc_html__( 'Heading 6', 'ultimate-page-builder' ),
+            'id'       => 'type',
+            'title'    => esc_html__( 'Heading type', 'ultimate-page-builder' ),
+            'type'     => 'select-box-icon',
+            'value'    => 'h1',
+            'options'  => array(
+                'h1' => array(
+                    'title' => esc_html__( 'Heading 1', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-header-1',
+                ),
+                'h2' => array(
+                    'title' => esc_html__( 'Heading 2', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-header-2',
+                ),
+                'h3' => array(
+                    'title' => esc_html__( 'Heading 3', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-header-3',
+                ),
+                'h4' => array(
+                    'title' => esc_html__( 'Heading 4', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-header-4',
+                ),
+                'h5' => array(
+                    'title' => esc_html__( 'Heading 5', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-header-5',
+                ),
+                'h6' => array(
+                    'title' => esc_html__( 'Heading 6', 'ultimate-page-builder' ),
+                    'icon'  => 'mdi mdi-format-header-6',
+                ),
+            ),
+            'settings' => array(
+                'allowClear' => FALSE
             )
         ) );
 
@@ -368,4 +387,3 @@
         $element->register( 'upb-heading', $attributes, $contents, $_upb_options );
 
     } );
-

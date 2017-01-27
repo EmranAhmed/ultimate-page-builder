@@ -7,9 +7,8 @@ import Select2 from '../../plugins/vue-select2'
 Vue.use(Select2);
 
 export default {
-    name   : 'upb-input-icons',
-    mixins : [common, userInputMixin('icons')],
-
+    name     : 'upb-input-select-box-icon',
+    mixins   : [common, userInputMixin('select-box-icon')],
     computed : {
         settings(){
             let settings = {
@@ -20,18 +19,17 @@ export default {
             return extend(true, settings, this.attributes.settings);
         }
     },
-
-    methods : {
+    methods  : {
 
         template(data){
             if (!data.id) {
-                return data.text;
+                return data.title;
             }
 
-            data.icon = data.element.value;
+            data.icon = data.element.dataset.icon;
 
             if (_.isUndefined(this.attributes['template'])) {
-                return `<span class="select2-icon-input"><i class="${data.icon}"></i> ${data.text}</span>`;
+                return `<span class="select2-icon-input"><i class="${data.icon}"></i> ${data.title}</span>`;
             }
             else {
                 return sprintf(this.attributes.template, data);
@@ -39,11 +37,20 @@ export default {
         },
 
         onChange(data, e){
-            Vue.set(this, 'input', data.id.toString());
-        },
 
+            if (this.multiple) {
+                let id = _.isNumber(data.id) ? data.id.toString() : data.id;
+                this.input.push(id);
+            }
+            else {
+                Vue.set(this, 'input', data.id.toString());
+            }
+        },
         onRemove(data){
-            Vue.set(this, 'input', '');
+            if (this.multiple) {
+                let id = _.isNumber(data.id) ? data.id.toString() : data.id;
+                Vue.set(this, 'input', _.without(this.input, id));
+            }
         }
     }
 }

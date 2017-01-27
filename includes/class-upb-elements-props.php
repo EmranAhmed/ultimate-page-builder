@@ -16,6 +16,7 @@
                     || $options[ 'type' ] == 'icons'
                     || $options[ 'type' ] == 'ajax'
                     || $options[ 'type' ] == 'icon-ajax'
+                    || $options[ 'type' ] == 'select-box-icon'
                 ) {
                     $options[ 'settings' ][ 'placeholder' ] = $options[ 'placeholder' ];
                 }
@@ -114,6 +115,7 @@
 
                     case 'select':
                     case 'select2':
+                    case 'select-box-icon':
                         if ( isset( $options[ 'multiple' ] ) && $options[ 'multiple' ] ) {
                             $options[ 'delimiter' ] = isset( $options[ 'delimiter' ] ) ? $options[ 'delimiter' ] : ',';
 

@@ -1,10 +1,8 @@
-import store from '../../store'
-import common from './common'
 import extend from 'extend'
 import {sprintf} from 'sprintf-js';
-
+import store from '../../store'
+import common from './common'
 import Select2 from '../../plugins/vue-select2'
-
 import userInputMixin from './user-mixins'
 
 Vue.use(Select2);
