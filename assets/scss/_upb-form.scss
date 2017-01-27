@@ -592,13 +592,24 @@ button:focus {
       }
     }
 
-  &.number-field-wrapper, &.toggle-field-wrapper {
+  &.toggle-field-wrapper {
     .title {
       float      : left;
-      margin-top : 3px;
+      margin-top : 5px;
       }
 
-    .number-input-group, .toggle-input-group {
+    .toggle-input-group {
+      float : right;
+      }
+    }
+
+  &.number-field-wrapper {
+    .title {
+      float      : left;
+      margin-top : 8px;
+      }
+
+    .number-input-group {
       float : right;
       }
     }

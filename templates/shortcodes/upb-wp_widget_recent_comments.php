@@ -7,7 +7,7 @@
     }
 ?>
 
-<div id="<?php upb_shortcode_id( $attributes ) ?>" class="<?php upb_shortcode_class( $attributes, 'upb-wp_widget_pages' ) ?>">
+<div id="<?php upb_shortcode_id( $attributes ) ?>" class="<?php upb_shortcode_class( $attributes, 'upb-wp_widget_recent_comments' ) ?>">
     <style scoped>
         :scope {
         <?php upb_shortcode_scoped_style_background($attributes) ?>
@@ -18,13 +18,11 @@
         <?php
 
             $instance = wp_parse_args( array(
-                                           'title'   => sanitize_text_field( upb_get_shortcode_title( $attributes ) ),
-                                           'sortby'  => sanitize_text_field( $attributes[ 'sortby' ] ),
-                                           'exclude' => implode( ',', array_map( 'absint', $attributes[ 'exclude' ] ) ),
+                                           'title'  => sanitize_text_field( upb_get_shortcode_title( $attributes ) ),
+                                           'number' => absint( $attributes[ 'number' ] ),
                                        ), array(
-                                           'title'   => '',
-                                           'sortby'  => 'menu_order',
-                                           'exclude' => '',
+                                           'title'  => '',
+                                           'number' => 5,
                                        ) );
 
             $args = apply_filters( 'upb-element-wp-widget-args', array(
@@ -32,9 +30,9 @@
                 'after_widget'  => '</div>',
                 'before_title'  => '<h2 class="widgettitle widget-title">',
                 'after_title'   => '</h2>'
-            ), 'WP_Widget_Pages', $attributes );
+            ), 'WP_Widget_Recent_Comments', $attributes );
 
-            the_widget( 'WP_Widget_Pages', $instance, $args );
+            the_widget( 'WP_Widget_Recent_Comments', $instance, $args );
         ?>
     </div>
 </div>

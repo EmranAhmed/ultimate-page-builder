@@ -1,28 +1,10 @@
 .upb-section-preview {
-    background-color    : var(--background-color);
-    background-image    : var(--background-image);
-    background-position : var(--background-position);
-    margin-bottom       : var(--margin-bottom);
-    background-repeat   : no-repeat;
-    }
-
-.upb-text-preview {
-    background-color    : var(--background-color);
-    background-image    : var(--background-image);
-    background-position : var(--background-position);
-    background-repeat   : no-repeat;
-    }
-
-.upb-accordion-preview {
-    background-color    : var(--background-color);
-    background-image    : var(--background-image);
-    background-position : var(--background-position);
-    background-repeat   : no-repeat;
-    }
-
-.upb-tab-preview {
-    background-color    : var(--background-color);
-    background-image    : var(--background-image);
-    background-position : var(--background-position);
-    background-repeat   : no-repeat;
+    background-color      : var(--background-color);
+    background-image      : var(--background-image);
+    background-position   : var(--background-position);
+    background-repeat     : var(--background-repeat);
+    background-attachment : var(--background-attachment);
+    background-origin     : var(--background-origin);
+    background-size       : var(--background-size);
+    margin-bottom         : var(--margin-bottom);
     }

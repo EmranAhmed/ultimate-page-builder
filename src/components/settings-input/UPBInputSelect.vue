@@ -3,14 +3,14 @@
         <div class="form-group">
             <label v-if="multiple">
                 <span class="title" v-text="attributes.title"></span>
-                <select class="select-multiple-input" v-model="input" :id="attributes._id" multiple>
+                <select class="select-multiple-input" v-model="input" multiple>
                     <option v-for="(option, value) in attributes.options" :value="value" v-text="option"></option>
                 </select>
             </label>
 
             <label v-else>
                 <span class="title" v-text="attributes.title"></span>
-                <select class="select-input" v-model="input" :id="attributes._id">
+                <select class="select-input" v-model="input">
                     <option v-for="(option, value) in attributes.options" :value="value" v-text="option"></option>
                 </select>
             </label>

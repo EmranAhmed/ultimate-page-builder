@@ -15,10 +15,10 @@ export default {
 
     methods : {
         onSelect(e, id, src){
-            this.input = src;
+            Vue.set(this, 'input', src);
         },
         onRemove(e){
-            this.input = null;
+            Vue.set(this, 'input', null);
         },
 
         pointerMovedTo(position){

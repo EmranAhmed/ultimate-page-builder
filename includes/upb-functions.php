@@ -103,6 +103,7 @@
         return UPB()->is_enabled();
     }
 
+    // Check valid ajax request
     function upb_check_ajax_access() {
         if ( ! current_user_can( 'customize' ) ) {
             wp_send_json_error( 'upb_not_allowed', 403 );
@@ -390,6 +391,84 @@
                     array( 'background-type', '=', array( 'image', 'both' ) ),
                 )
             ),
+
+            array(
+                'id'       => 'background-repeat',
+                'title'    => esc_html__( 'Background Image repeat', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Change Background Image repeat.', 'ultimate-page-builder' ),
+                'type'     => 'select',
+                'value'    => 'repeat',
+                'options'  => array(
+                    'repeat'    => esc_html__( 'Repeat', 'ultimate-page-builder' ),
+                    'no-repeat' => esc_html__( 'No Repeat', 'ultimate-page-builder' ),
+                    'repeat-x'  => esc_html__( 'Repeat Horizontally', 'ultimate-page-builder' ),
+                    'repeat-y'  => esc_html__( 'Repeat Vertically', 'ultimate-page-builder' ),
+                    'initial'   => esc_html__( 'Initial', 'ultimate-page-builder' ),
+                    'inherit'   => esc_html__( 'Inherit from parent element', 'ultimate-page-builder' ),
+                ),
+                'required' => array(
+                    array( 'background-image', '!=', '' ),
+                    array( 'background-type', '=', array( 'image', 'both' ) ),
+                )
+            ),
+
+            array(
+                'id'       => 'background-attachment',
+                'title'    => esc_html__( 'Background Attachment', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Change Background Image Attachment.', 'ultimate-page-builder' ),
+                'type'     => 'select',
+                'value'    => 'scroll',
+                'options'  => array(
+                    'scroll'  => esc_html__( 'Scroll', 'ultimate-page-builder' ),
+                    'fixed'   => esc_html__( 'Fixed', 'ultimate-page-builder' ),
+                    'local'   => esc_html__( 'Local', 'ultimate-page-builder' ),
+                    'initial' => esc_html__( 'Initial', 'ultimate-page-builder' ),
+                    'inherit' => esc_html__( 'Inherit from parent element', 'ultimate-page-builder' ),
+                ),
+                'required' => array(
+                    array( 'background-image', '!=', '' ),
+                    array( 'background-type', '=', array( 'image', 'both' ) ),
+                )
+            ),
+
+            array(
+                'id'       => 'background-origin',
+                'title'    => esc_html__( 'Background origin', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Change Background Image origin.', 'ultimate-page-builder' ),
+                'type'     => 'select',
+                'value'    => 'padding-box',
+                'options'  => array(
+                    'padding-box' => esc_html__( 'Padding Box', 'ultimate-page-builder' ),
+                    'border-box'  => esc_html__( 'Border Box', 'ultimate-page-builder' ),
+                    'content-box' => esc_html__( 'Content Box', 'ultimate-page-builder' ),
+                    'initial'     => esc_html__( 'Initial', 'ultimate-page-builder' ),
+                    'inherit'     => esc_html__( 'Inherits from parent element', 'ultimate-page-builder' ),
+                ),
+                'required' => array(
+                    array( 'background-image', '!=', '' ),
+                    array( 'background-type', '=', array( 'image', 'both' ) ),
+                )
+            ),
+
+            array(
+                'id'       => 'background-size',
+                'title'    => esc_html__( 'Background size', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Change Background Image size.', 'ultimate-page-builder' ),
+                'type'     => 'select',
+                'value'    => 'auto',
+                'options'  => array(
+                    'auto'    => esc_html__( 'Auto', 'ultimate-page-builder' ),
+                    'cover'   => esc_html__( 'Cover', 'ultimate-page-builder' ),
+                    'contain' => esc_html__( 'Contain', 'ultimate-page-builder' ),
+                    'initial' => esc_html__( 'Initial', 'ultimate-page-builder' ),
+                    'inherit' => esc_html__( 'Inherits from parent element', 'ultimate-page-builder' ),
+                ),
+                'required' => array(
+                    array( 'background-image', '!=', '' ),
+                    array( 'background-type', '=', array( 'image', 'both' ) ),
+                )
+            ),
+
         ) );
     }
 
@@ -522,21 +601,18 @@
     function upb_shortcode_scoped_style_background( $attributes ) {
 
         if ( isset( $attributes[ 'background-type' ] ) ) {
-            if ( $attributes[ 'background-type' ] == 'both' ) {
-                printf( 'background-color: %s;', esc_attr( $attributes[ 'background-color' ] ) );
-                printf( 'background-image: %s;', sprintf( "url('%s')", esc_url( $attributes[ 'background-image' ] ) ) );
-                printf( 'background-position: %s;', esc_attr( $attributes[ 'background-position' ] ) );
-                printf( 'background-repeat: %s;', 'no-repeat' );
-            }
 
-            if ( $attributes[ 'background-type' ] == 'color' ) {
+            if ( $attributes[ 'background-type' ] == 'both' || $attributes[ 'background-type' ] == 'color' ) {
                 printf( 'background-color: %s;', esc_attr( $attributes[ 'background-color' ] ) );
             }
 
-            if ( $attributes[ 'background-type' ] == 'image' ) {
+            if ( $attributes[ 'background-type' ] == 'both' || $attributes[ 'background-type' ] == 'image' ) {
                 printf( 'background-image: %s;', sprintf( "url('%s')", esc_url( $attributes[ 'background-image' ] ) ) );
                 printf( 'background-position: %s;', esc_attr( $attributes[ 'background-position' ] ) );
-                printf( 'background-repeat: %s;', 'no-repeat' );
+                printf( 'background-repeat: %s;', esc_attr( $attributes[ 'background-repeat' ] ) );
+                printf( 'background-attachment: %s;', esc_attr( $attributes[ 'background-attachment' ] ) );
+                printf( 'background-origin: %s;', esc_attr( $attributes[ 'background-origin' ] ) );
+                printf( 'background-size: %s;', esc_attr( $attributes[ 'background-size' ] ) );
             }
         }
 

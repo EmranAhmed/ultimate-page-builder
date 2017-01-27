@@ -692,3 +692,30 @@
         $contents = ob_get_clean();
         wp_send_json_success( $contents );
     } );
+
+    // WP_Widget_Recent_Comments
+    add_action( 'wp_ajax__upb_upb-wp_widget_recent_comments_preview_contents', function () {
+
+        upb_check_ajax_access();
+
+        $instance = wp_parse_args( array(
+                                       'title'  => sanitize_text_field( $_POST[ 'title' ] ),
+                                       'number' => absint( $_POST[ 'number' ] ),
+                                   ),
+                                   array(
+                                       'title'  => '',
+                                       'number' => 5,
+                                   ) );
+
+        $args = apply_filters( 'upb-element-wp-widget-args', array(
+            'before_widget' => '<div class="widget %s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2 class="widgettitle widget-title">',
+            'after_title'   => '</h2>'
+        ), 'WP_Widget_Recent_Comments', $instance );
+
+        ob_start();
+        the_widget( 'WP_Widget_Recent_Comments', $instance, $args );
+        $contents = ob_get_clean();
+        wp_send_json_success( $contents );
+    } );

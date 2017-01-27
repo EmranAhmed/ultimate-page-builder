@@ -90,6 +90,10 @@ export default{
             return this.model.contents;
         },
 
+        tag(){
+            return this.model.tag;
+        },
+
         isEnabled(){
             if (!_.isUndefined(this.model.attributes['enable'])) {
                 return this.model.attributes.enable;
@@ -113,19 +117,17 @@ export default{
             let background = {};
             if (!_.isUndefined(this.model.attributes['background-type'])) {
 
-                if (this.model.attributes['background-type'] == 'both') {
-                    background['--background-color']    = this.model.attributes['background-color'];
-                    background['--background-image']    = `url(${this.model.attributes['background-image']})`;
-                    background['--background-position'] = this.model.attributes['background-position']
-                }
-
-                if (this.model.attributes['background-type'] == 'color') {
+                if (this.model.attributes['background-type'] == 'both' || this.model.attributes['background-type'] == 'color') {
                     background['--background-color'] = this.model.attributes['background-color'];
                 }
 
-                if (this.model.attributes['background-type'] == 'image') {
-                    background['--background-image']    = `url(${this.model.attributes['background-image']})`;
-                    background['--background-position'] = this.model.attributes['background-position']
+                if (this.model.attributes['background-type'] == 'both' || this.model.attributes['background-type'] == 'image') {
+                    background['--background-image']      = `url(${this.model.attributes['background-image']})`;
+                    background['--background-position']   = this.model.attributes['background-position'];
+                    background['--background-repeat']     = this.model.attributes['background-repeat'];
+                    background['--background-attachment'] = this.model.attributes['background-attachment'];
+                    background['--background-origin']     = this.model.attributes['background-origin'];
+                    background['--background-size']       = this.model.attributes['background-size'];
                 }
             }
             return background;

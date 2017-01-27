@@ -1,6 +1,6 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' );
     
-    // $attributes, $contents, $settings
+    // $attributes, $contents, $settings, $tag
 
     if ( ! upb_is_shortcode_enabled( $attributes ) ) {
         return;

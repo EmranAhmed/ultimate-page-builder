@@ -403,3 +403,52 @@
 
         $element->register( 'upb-wp_widget_pages', $attributes, $contents, $_upb_options );
     } );
+
+    // Recent Comments
+    add_action( 'upb_register_element', function ( $element ) {
+
+        $attributes = array();
+
+        array_push( $attributes, upb_title_input( esc_html__( 'Title', 'ultimate-page-builder' ), '', esc_html__( 'Recent Comments', 'ultimate-page-builder' ) ) );
+
+        array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
+
+        array_push( $attributes, array(
+            'id'      => 'number',
+            'title'   => esc_html__( 'Number of comments', 'ultimate-page-builder' ),
+            'desc'    => esc_html__( 'Number of comments to show.', 'ultimate-page-builder' ),
+            'type'    => 'number',
+            'value'   => 5,
+            'options' => array(
+                'min'  => 1,
+                'step' => 1,
+                'size' => 3,
+            )
+        ) );
+
+        array_push( $attributes, upb_responsive_hidden_input() );
+
+        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
+
+        $contents = FALSE;
+
+        $_upb_options = array(
+
+            'preview' => array(
+                'ajax' => TRUE,
+            ),
+
+            'element' => array(
+                'name' => esc_html__( 'Recent Comments', 'ultimate-page-builder' ),
+                'icon' => 'mdi mdi-wordpress'
+            ),
+
+            'meta' => array(
+                'settings' => apply_filters( 'upb-wp_widget_recent_comments_settings_panel_meta', array(
+                    'help' => '<h2>WordPress Pages Widget</h2><p>A list of your site&#8217;s Pages.</p>',
+                ) )
+            )
+        );
+
+        $element->register( 'upb-wp_widget_recent_comments', $attributes, $contents, $_upb_options );
+    } );

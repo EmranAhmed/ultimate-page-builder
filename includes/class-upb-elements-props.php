@@ -103,8 +103,9 @@
                         }
 
                         $options[ 'options' ][ 'min' ]    = isset( $options[ 'options' ][ 'min' ] ) ? (int) $options[ 'options' ][ 'min' ] : 0;
-                        $options[ 'options' ][ 'max' ]    = isset( $options[ 'options' ][ 'max' ] ) ? (int) $options[ 'options' ][ 'max' ] : 100;
-                        $options[ 'options' ][ 'step' ]   = isset( $options[ 'options' ][ 'step' ] ) ? $options[ 'options' ][ 'step' ] : '';
+                        $options[ 'options' ][ 'max' ]    = isset( $options[ 'options' ][ 'max' ] ) ? (int) $options[ 'options' ][ 'max' ] : 999;
+                        $options[ 'options' ][ 'step' ]   = isset( $options[ 'options' ][ 'step' ] ) ? $options[ 'options' ][ 'step' ] : 1;
+                        $options[ 'options' ][ 'size' ]   = isset( $options[ 'options' ][ 'size' ] ) ? $options[ 'options' ][ 'size' ] : 3;
                         $options[ 'options' ][ 'prefix' ] = isset( $options[ 'options' ][ 'prefix' ] ) ? esc_html( $options[ 'options' ][ 'prefix' ] ) : '';
                         $options[ 'options' ][ 'suffix' ] = isset( $options[ 'options' ][ 'suffix' ] ) ? esc_html( $options[ 'options' ][ 'suffix' ] ) : '';
 
@@ -125,6 +126,11 @@
                                 $options[ 'value' ] = explode( $options[ 'delimiter' ], $options[ 'value' ] );
                             }
                         } else {
+
+                            if ( is_null( $options[ 'value' ] ) ) {
+                                $options[ 'value' ] = $options[ 'default' ];
+                            }
+
                             if ( ! isset( $options[ 'settings' ] ) || ! isset( $options[ 'settings' ][ 'allowClear' ] ) ) {
                                 $options[ 'settings' ][ 'allowClear' ] = TRUE;
                             }
