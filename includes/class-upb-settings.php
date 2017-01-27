@@ -184,7 +184,7 @@
 
                     case 'toggle':
                         $options[ 'value' ] = ( $value === '' ) ? $options[ 'default' ] : $value;
-                        $options[ 'value' ] = filter_var( $options[ 'value' ], FILTER_VALIDATE_BOOLEAN );
+                        $options[ 'value' ] = upb_return_boolean( $options[ 'value' ] );
                         break;
 
                     case 'editor':

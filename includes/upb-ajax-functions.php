@@ -497,8 +497,8 @@
         // Check /wp-includes/widgets/class-wp-widget-archives.php line#135
         $instance = wp_parse_args( array(
                                        'title'    => sanitize_text_field( $_POST[ 'title' ] ),
-                                       'dropdown' => filter_var( $_POST[ 'dropdown' ], FILTER_VALIDATE_BOOLEAN ),
-                                       'count'    => filter_var( $_POST[ 'count' ], FILTER_VALIDATE_BOOLEAN )
+                                       'dropdown' => upb_return_boolean( $_POST[ 'dropdown' ] ),
+                                       'count'    => upb_return_boolean( $_POST[ 'count' ] )
                                    ), array(
                                        'title'    => '',
                                        'count'    => 0,
@@ -579,9 +579,9 @@
         // Check /wp-includes/widgets/class-wp-widget-categories.php line#44
         $instance = wp_parse_args( array(
                                        'title'        => sanitize_text_field( $_POST[ 'title' ] ),
-                                       'dropdown'     => filter_var( $_POST[ 'dropdown' ], FILTER_VALIDATE_BOOLEAN ),
-                                       'count'        => filter_var( $_POST[ 'count' ], FILTER_VALIDATE_BOOLEAN ),
-                                       'hierarchical' => filter_var( $_POST[ 'hierarchical' ], FILTER_VALIDATE_BOOLEAN ),
+                                       'dropdown'     => upb_return_boolean( $_POST[ 'dropdown' ] ),
+                                       'count'        => upb_return_boolean( $_POST[ 'count' ] ),
+                                       'hierarchical' => upb_return_boolean( $_POST[ 'hierarchical' ] ),
                                    ), array(
                                        'title'        => esc_html__( 'Categories', 'ultimate-page-builder' ),
                                        'dropdown'     => FALSE,
@@ -613,10 +613,10 @@
                                        'title'       => sanitize_text_field( $_POST[ 'title' ] ),
                                        'category'    => absint( $_POST[ 'category' ] ),
                                        'orderby'     => sanitize_text_field( $_POST[ 'orderby' ] ),
-                                       'images'      => filter_var( $_POST[ 'images' ], FILTER_VALIDATE_BOOLEAN ),
-                                       'name'        => filter_var( $_POST[ 'name' ], FILTER_VALIDATE_BOOLEAN ),
-                                       'description' => filter_var( $_POST[ 'description' ], FILTER_VALIDATE_BOOLEAN ),
-                                       'rating'      => filter_var( $_POST[ 'rating' ], FILTER_VALIDATE_BOOLEAN ),
+                                       'images'      => upb_return_boolean( $_POST[ 'images' ] ),
+                                       'name'        => upb_return_boolean( $_POST[ 'name' ] ),
+                                       'description' => upb_return_boolean( $_POST[ 'description' ] ),
+                                       'rating'      => upb_return_boolean( $_POST[ 'rating' ] ),
                                        'limit'       => sanitize_text_field( $_POST[ 'limit' ] ),
                                    ),
                                    array(
@@ -699,12 +699,14 @@
         upb_check_ajax_access();
 
         $instance = wp_parse_args( array(
-                                       'title'  => sanitize_text_field( $_POST[ 'title' ] ),
-                                       'number' => absint( $_POST[ 'number' ] ),
+                                       'title'     => sanitize_text_field( $_POST[ 'title' ] ),
+                                       'number'    => absint( $_POST[ 'number' ] ),
+                                       'show_date' => upb_return_boolean( $_POST[ 'show_date' ] ),
                                    ),
                                    array(
-                                       'title'  => '',
-                                       'number' => 5,
+                                       'title'     => '',
+                                       'number'    => 5,
+                                       'show_date' => FALSE
                                    ) );
 
         $args = apply_filters( 'upb-element-wp-widget-args', array(
@@ -712,10 +714,67 @@
             'after_widget'  => '</div>',
             'before_title'  => '<h2 class="widgettitle widget-title">',
             'after_title'   => '</h2>'
-        ), 'WP_Widget_Recent_Comments', $instance );
+        ), 'WP_Widget_Recent_Posts', $instance );
 
         ob_start();
-        the_widget( 'WP_Widget_Recent_Comments', $instance, $args );
+        the_widget( 'WP_Widget_Recent_Posts', $instance, $args );
         $contents = ob_get_clean();
         wp_send_json_success( $contents );
     } );
+
+    // WP_Widget_Search
+    add_action( 'wp_ajax__upb_upb-wp_widget_search_preview_contents', function () {
+
+        upb_check_ajax_access();
+
+        $instance = wp_parse_args( array(
+                                       'title' => sanitize_text_field( $_POST[ 'title' ] ),
+                                   ),
+                                   array(
+                                       'title' => '',
+                                   ) );
+
+        $args = apply_filters( 'upb-element-wp-widget-args', array(
+            'before_widget' => '<div class="widget %s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2 class="widgettitle widget-title">',
+            'after_title'   => '</h2>'
+        ), 'WP_Widget_Search', $instance );
+
+        ob_start();
+        the_widget( 'WP_Widget_Search', $instance, $args );
+        $contents = ob_get_clean();
+        wp_send_json_success( $contents );
+    } );
+
+
+    // WP_Widget_Text
+    add_action( 'wp_ajax__upb_upb-wp_widget_text_preview_contents', function () {
+
+        upb_check_ajax_access();
+
+        $instance = wp_parse_args( array(
+                                       'title'  => sanitize_text_field( $_POST[ 'title' ] ),
+                                       'text'   => upb_return_boolean( $_POST[ 'filter' ] ) ? wp_kses_post( $_POST[ 'text' ] ) : esc_textarea( $_POST[ 'text' ] ),
+                                       'filter' => upb_return_boolean( $_POST[ 'filter' ] ),
+                                   ),
+                                   array(
+                                       'title'  => '',
+                                       'text'   => '',
+                                       'filter' => FALSE
+                                   ) );
+
+        $args = apply_filters( 'upb-element-wp-widget-args', array(
+            'before_widget' => '<div class="widget %s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2 class="widgettitle widget-title">',
+            'after_title'   => '</h2>'
+        ), 'WP_Widget_Search', $instance );
+
+        ob_start();
+        the_widget( 'WP_Widget_Text', $instance, $args );
+        $contents = ob_get_clean();
+        wp_send_json_success( $contents );
+    } );
+
+

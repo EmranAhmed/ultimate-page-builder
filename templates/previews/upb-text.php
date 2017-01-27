@@ -4,5 +4,5 @@
 
     <upb-preview-mini-toolbar :parent="parent" :model="model"></upb-preview-mini-toolbar>
     <!--  send ajax req and get it :) -->
-    <div v-html="model.contents"></div>
+    <div v-html="contents"></div>
 </div>

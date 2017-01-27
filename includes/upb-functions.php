@@ -555,6 +555,11 @@
 
     // Helpers
 
+    // Returns TRUE for "1", "true", "on" and "yes". Returns FALSE otherwise.
+    function upb_return_boolean( $data ) {
+        return filter_var( $data, FILTER_VALIDATE_BOOLEAN );
+    }
+
     function upb_is_shortcode_enabled( $attributes ) {
         // if not set then return true;
         return isset( $attributes[ 'enable' ] ) ? ! empty( $attributes[ 'enable' ] ) : TRUE;

@@ -2,7 +2,6 @@
 
     defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
-
     // Archives
     add_action( 'upb_register_element', function ( $element ) {
 
@@ -223,7 +222,7 @@
             'title'   => esc_html__( 'Select Link Category', 'ultimate-page-builder' ),
             'desc'    => esc_html__( 'Get list from link_category term', 'ultimate-page-builder' ),
             'type'    => 'select',
-            'value'   => '0',
+            'value'   => 0,
             'options' => $categories
         ) );
 
@@ -331,7 +330,7 @@
             ),
 
             'meta' => array(
-                'settings' => apply_filters( 'upb-wp_widget_calendar_settings_panel_meta', array(
+                'settings' => apply_filters( 'upb-wp_widget_meta_settings_panel_meta', array(
                     'help' => '<h2>WordPress Meta Widget</h2><p>Login, RSS, &amp; WordPress.org links.</p>',
                 ) )
             )
@@ -445,10 +444,157 @@
 
             'meta' => array(
                 'settings' => apply_filters( 'upb-wp_widget_recent_comments_settings_panel_meta', array(
-                    'help' => '<h2>WordPress Pages Widget</h2><p>A list of your site&#8217;s Pages.</p>',
+                    'help' => '<h2>WordPress Recent Comments Widget</h2><p>Your site&#8217;s most recent comments.</p>',
                 ) )
             )
         );
 
         $element->register( 'upb-wp_widget_recent_comments', $attributes, $contents, $_upb_options );
     } );
+
+    // Recent Posts
+    add_action( 'upb_register_element', function ( $element ) {
+
+        $attributes = array();
+
+        array_push( $attributes, upb_title_input( esc_html__( 'Title', 'ultimate-page-builder' ), '', esc_html__( 'Recent Comments', 'ultimate-page-builder' ) ) );
+
+        array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
+
+        array_push( $attributes, array(
+            'id'      => 'number',
+            'title'   => esc_html__( 'Number of posts', 'ultimate-page-builder' ),
+            'desc'    => esc_html__( 'Number of posts to show.', 'ultimate-page-builder' ),
+            'type'    => 'number',
+            'value'   => 5,
+            'options' => array(
+                'min'  => 1,
+                'step' => 1,
+                'size' => 3,
+            )
+        ) );
+
+        array_push( $attributes, array(
+            'id'    => 'show_date',
+            'title' => esc_html__( 'Display post date?', 'ultimate-page-builder' ),
+            'desc'  => esc_html__( 'Show or Hide post date.', 'ultimate-page-builder' ),
+            'type'  => 'toggle',
+            'value' => FALSE,
+        ) );
+
+        array_push( $attributes, upb_responsive_hidden_input() );
+
+        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
+
+        $contents = FALSE;
+
+        $_upb_options = array(
+
+            'preview' => array(
+                'ajax' => TRUE,
+            ),
+
+            'element' => array(
+                'name' => esc_html__( 'Recent Posts', 'ultimate-page-builder' ),
+                'icon' => 'mdi mdi-wordpress'
+            ),
+
+            'meta' => array(
+                'settings' => apply_filters( 'upb-wp_widget_recent_posts_settings_panel_meta', array(
+                    'help' => '<h2>WordPress Recent Posts Widget</h2><p>Your site&#8217;s most recent Posts.</p>',
+                ) )
+            )
+        );
+
+        $element->register( 'upb-wp_widget_recent_posts', $attributes, $contents, $_upb_options );
+    } );
+
+    // Search
+    add_action( 'upb_register_element', function ( $element ) {
+
+        $attributes = array();
+
+        array_push( $attributes, upb_title_input( esc_html__( 'Title', 'ultimate-page-builder' ), '', esc_html_x( 'Search', 'Search widget', 'ultimate-page-builder' ) ) );
+
+        array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
+
+        array_push( $attributes, upb_responsive_hidden_input() );
+
+        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
+
+        $contents = FALSE;
+
+        $_upb_options = array(
+
+            'preview' => array(
+                'ajax' => TRUE,
+            ),
+
+            'element' => array(
+                'name' => esc_html__( 'Search Widget', 'ultimate-page-builder' ),
+                'icon' => 'mdi mdi-wordpress'
+            ),
+
+            'meta' => array(
+                'settings' => apply_filters( 'upb-wp_widget_search_settings_panel_meta', array(
+                    'help' => '<h2>WordPress Search Widget</h2><p>A search form for your site.</p>',
+                ) )
+            )
+        );
+
+        $element->register( 'upb-wp_widget_search', $attributes, $contents, $_upb_options );
+
+    } );
+
+    // Text
+    add_action( 'upb_register_element', function ( $element ) {
+
+        $attributes = array();
+
+        array_push( $attributes, upb_title_input( esc_html__( 'Title', 'ultimate-page-builder' ), '', esc_html__( 'Text widget', 'ultimate-page-builder' ) ) );
+
+        array_push( $attributes, array(
+            'id'    => 'text',
+            'title' => esc_html__( 'Content', 'ultimate-page-builder' ),
+            'type'  => 'textarea',
+            'value' => ''
+        ) );
+
+        array_push( $attributes, array(
+            'id'    => 'filter',
+            'title' => esc_html__( 'Add paragraphs', 'ultimate-page-builder' ),
+            'desc'  => esc_html__( 'Automatically add paragraphs', 'ultimate-page-builder' ),
+            'type'  => 'toggle',
+            'value' => FALSE
+        ) );
+
+        array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
+
+        array_push( $attributes, upb_responsive_hidden_input() );
+
+        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
+
+        $contents = FALSE;
+
+        $_upb_options = array(
+
+            'preview' => array(
+                'ajax' => TRUE,
+            ),
+
+            'element' => array(
+                'name' => esc_html__( 'Text Widget', 'ultimate-page-builder' ),
+                'icon' => 'mdi mdi-wordpress'
+            ),
+
+            'meta' => array(
+                'settings' => apply_filters( 'upb-wp_widget_text_settings_panel_meta', array(
+                    'help' => '<h2>WordPress Search Widget</h2><p>A search form for your site.</p>',
+                ) )
+            )
+        );
+
+        $element->register( 'upb-wp_widget_text', $attributes, $contents, $_upb_options );
+
+    } );
+

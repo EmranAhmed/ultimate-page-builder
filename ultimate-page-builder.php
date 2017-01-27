@@ -254,7 +254,7 @@
 
             public function upb_enabled() {
 
-                $enable = filter_var( get_post_meta( get_the_ID(), '_upb_settings_page_enable', TRUE ), FILTER_VALIDATE_BOOLEAN );
+                $enable = upb_return_boolean( get_post_meta( get_the_ID(), '_upb_settings_page_enable', TRUE ) );
 
                 if ( ! upb_is_preview() && $enable && $this->is_post_type_allowed() ) {
                     $this->_enabled = TRUE;

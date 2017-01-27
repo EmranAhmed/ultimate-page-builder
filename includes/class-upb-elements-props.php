@@ -47,7 +47,7 @@
                         break;
 
                     case 'toggle':
-                        $options[ 'value' ] = filter_var( $options[ 'value' ], FILTER_VALIDATE_BOOLEAN );
+                        $options[ 'value' ] = upb_return_boolean( $options[ 'value' ] );
                         break;
 
                     case 'icon-ajax':
@@ -155,6 +155,12 @@
 
                     case 'textarea':
                         $options[ 'value' ] = empty( $options[ 'value' ] ) ? esc_textarea( $options[ 'default' ] ) : esc_textarea( $options[ 'value' ] );
+
+                        if ( ! isset( $options[ 'options' ] ) ) {
+                            $options[ 'options' ][ 'rows' ] = 5;
+                            //$options[ 'options' ][ 'cols' ] = 5;
+                            $options[ 'options' ][ 'wrap' ] = 'soft'; // soft, hard
+                        }
                         break;
 
                     case 'message':

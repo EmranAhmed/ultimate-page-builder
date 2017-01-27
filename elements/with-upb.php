@@ -6,7 +6,7 @@
 
         $attributes = array();
 
-        array_push( $attributes, upb_title_input( esc_html__( 'Title', 'ultimate-page-builder' ), '', esc_html__( 'Title', 'ultimate-page-builder' ) ) );
+        array_push( $attributes, upb_title_input( esc_html__( 'Title', 'ultimate-page-builder' ), '', esc_html__( 'Text Title', 'ultimate-page-builder' ) ) );
 
         array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
 
@@ -14,12 +14,12 @@
 
         $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
 
-        $contents = '<p>Put Contents</p>';
+        $contents = '<p>Text Contents</p>';
 
         $_upb_options = array(
 
             'element' => array(
-                'name' => 'Text',
+                'name' => 'UPB Text (Editor)',
                 'icon' => 'mdi mdi-format-text'
             ),
 
@@ -116,7 +116,7 @@
         $_upb_options = array(
 
             'element' => array(
-                'name' => esc_html__( 'Accordion', 'ultimate-page-builder' ),
+                'name' => esc_html__( 'UPB Accordion', 'ultimate-page-builder' ),
                 'icon' => 'mdi mdi-view-day'
             ),
 
@@ -235,7 +235,7 @@
         $_upb_options = array(
 
             'element' => array(
-                'name' => esc_html__( 'Tabs', 'ultimate-page-builder' ),
+                'name' => esc_html__( 'UPB Tabs', 'ultimate-page-builder' ),
                 'icon' => 'mdi mdi-tab'
             ),
 
