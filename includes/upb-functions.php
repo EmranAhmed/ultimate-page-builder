@@ -331,7 +331,6 @@
     }
 
     function upb_background_input_group() {
-
         return apply_filters( 'upb_background_input_group', array(
 
             array(
@@ -468,7 +467,6 @@
                     array( 'background-type', '=', array( 'image', 'both' ) ),
                 )
             ),
-
         ) );
     }
 

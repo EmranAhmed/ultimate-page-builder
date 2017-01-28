@@ -11,7 +11,7 @@
   "dependencies" : {
     "copy-to-clipboard" : "^3.0.5",
     "extend" : "^3.0.0",
-    "mdi" : "^1.7.22",
+    "mdi" : "^1.8.36",
     "sanitize-html" : "^1.13.0",
     "vue" : "^2.0.1",
     "vue-router" : "^2.0.3"

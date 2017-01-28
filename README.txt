@@ -55,6 +55,7 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 - Refactor input fields
 - Fix Recent Posts widget element
+- Updated material design icons
 
 = 1.0.0-beta.11 =
 
