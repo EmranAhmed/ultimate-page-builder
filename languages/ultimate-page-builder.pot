@@ -25,7 +25,7 @@ msgstr ""
 msgid "Contact form 1"
 msgstr ""
 
-#: elements/3rd-party.php:11, elements/widget-based.php:12, elements/widget-based.php:63, elements/widget-based.php:118, elements/widget-based.php:155, elements/widget-based.php:214, elements/widget-based.php:313, elements/widget-based.php:350, elements/widget-based.php:413, elements/widget-based.php:462, elements/widget-based.php:519, elements/widget-based.php:571, elements/with-upb.php:11, elements/with-upb.php:62, elements/with-upb.php:105, elements/with-upb.php:224, elements/with-upb.php:353, includes/upb-functions.php:511, includes/upb-settings.php:10
+#: elements/3rd-party.php:11, elements/widget-based.php:12, elements/widget-based.php:63, elements/widget-based.php:118, elements/widget-based.php:155, elements/widget-based.php:214, elements/widget-based.php:315, elements/widget-based.php:352, elements/widget-based.php:415, elements/widget-based.php:464, elements/widget-based.php:521, elements/widget-based.php:573, elements/with-upb.php:11, elements/with-upb.php:62, elements/with-upb.php:105, elements/with-upb.php:224, elements/with-upb.php:353, includes/upb-functions.php:511, includes/upb-settings.php:10
 msgid "Enable / Disable"
 msgstr ""
 
@@ -105,7 +105,7 @@ msgstr ""
 msgid "An example of extra input"
 msgstr ""
 
-#: elements/widget-based.php:10, elements/widget-based.php:61, elements/widget-based.php:116, elements/widget-based.php:153, elements/widget-based.php:212, elements/widget-based.php:311, elements/widget-based.php:348, elements/widget-based.php:411, elements/widget-based.php:460, elements/widget-based.php:517, elements/widget-based.php:554, elements/with-upb.php:9, includes/upb-functions.php:477
+#: elements/widget-based.php:10, elements/widget-based.php:61, elements/widget-based.php:116, elements/widget-based.php:153, elements/widget-based.php:212, elements/widget-based.php:313, elements/widget-based.php:350, elements/widget-based.php:413, elements/widget-based.php:462, elements/widget-based.php:519, elements/widget-based.php:556, elements/with-upb.php:9, includes/upb-functions.php:477
 msgid "Title"
 msgstr ""
 
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Get list from link_category term"
 msgstr ""
 
-#: elements/widget-based.php:231, elements/widget-based.php:354
+#: elements/widget-based.php:231, elements/widget-based.php:356
 msgid "Sort by"
 msgstr ""
 
@@ -221,108 +221,108 @@ msgstr ""
 msgid "Number of links to show"
 msgstr ""
 
-#: elements/widget-based.php:291
+#: elements/widget-based.php:293
 msgid "Links Widget"
 msgstr ""
 
-#: elements/widget-based.php:311
+#: elements/widget-based.php:313
 msgid "Meta"
 msgstr ""
 
-#: elements/widget-based.php:328
+#: elements/widget-based.php:330
 msgid "Meta Widget"
 msgstr ""
 
-#: elements/widget-based.php:348
+#: elements/widget-based.php:350
 msgid "Pages"
 msgstr ""
 
-#: elements/widget-based.php:358
+#: elements/widget-based.php:360
 msgid "Page title"
 msgstr ""
 
-#: elements/widget-based.php:359
+#: elements/widget-based.php:361
 msgid "Page order"
 msgstr ""
 
-#: elements/widget-based.php:360
+#: elements/widget-based.php:362
 msgid "Page ID"
 msgstr ""
 
-#: elements/widget-based.php:368
+#: elements/widget-based.php:370
 msgid "Exclude"
 msgstr ""
 
-#: elements/widget-based.php:369
+#: elements/widget-based.php:371
 msgid "Exclude Pages"
 msgstr ""
 
-#: elements/widget-based.php:376
+#: elements/widget-based.php:378
 msgid "Search page to exclude"
 msgstr ""
 
-#: elements/widget-based.php:392
+#: elements/widget-based.php:394
 msgid "Pages Widget"
 msgstr ""
 
-#: elements/widget-based.php:411, elements/widget-based.php:441, elements/widget-based.php:460
+#: elements/widget-based.php:413, elements/widget-based.php:443
 msgid "Recent Comments"
 msgstr ""
 
-#: elements/widget-based.php:417
+#: elements/widget-based.php:419
 msgid "Number of comments"
 msgstr ""
 
-#: elements/widget-based.php:418
+#: elements/widget-based.php:420
 msgid "Number of comments to show."
 msgstr ""
 
-#: elements/widget-based.php:466
-msgid "Number of posts"
-msgstr ""
-
-#: elements/widget-based.php:467
-msgid "Number of posts to show."
-msgstr ""
-
-#: elements/widget-based.php:479
-msgid "Display post date?"
-msgstr ""
-
-#: elements/widget-based.php:480
-msgid "Show or Hide post date."
-msgstr ""
-
-#: elements/widget-based.php:498
+#: elements/widget-based.php:462, elements/widget-based.php:500
 msgid "Recent Posts"
 msgstr ""
 
-#: elements/widget-based.php:517
+#: elements/widget-based.php:468
+msgid "Number of posts"
+msgstr ""
+
+#: elements/widget-based.php:469
+msgid "Number of posts to show."
+msgstr ""
+
+#: elements/widget-based.php:481
+msgid "Display post date?"
+msgstr ""
+
+#: elements/widget-based.php:482
+msgid "Show or Hide post date."
+msgstr ""
+
+#: elements/widget-based.php:519
 msgctxt "Search widget"
 msgid "Search"
 msgstr ""
 
-#: elements/widget-based.php:534
+#: elements/widget-based.php:536
 msgid "Search Widget"
 msgstr ""
 
-#: elements/widget-based.php:554
+#: elements/widget-based.php:556
 msgid "Text widget"
 msgstr ""
 
-#: elements/widget-based.php:558
+#: elements/widget-based.php:560
 msgid "Content"
 msgstr ""
 
-#: elements/widget-based.php:565
+#: elements/widget-based.php:567
 msgid "Add paragraphs"
 msgstr ""
 
-#: elements/widget-based.php:566
+#: elements/widget-based.php:568
 msgid "Automatically add paragraphs"
 msgstr ""
 
-#: elements/widget-based.php:586
+#: elements/widget-based.php:588
 msgid "Text Widget"
 msgstr ""
 
@@ -734,19 +734,19 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: includes/class-upb-elements-props.php:33, includes/class-upb-settings.php:109
+#: includes/class-upb-elements-props.php:33, includes/class-upb-settings.php:113
 msgid "No Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:40, includes/class-upb-settings.php:115
+#: includes/class-upb-elements-props.php:39, includes/class-upb-settings.php:119
 msgid "Use Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:41, includes/class-upb-settings.php:116, includes/upb-functions.php:374
+#: includes/class-upb-elements-props.php:40, includes/class-upb-settings.php:120, includes/upb-functions.php:374
 msgid "Remove"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:42, includes/class-upb-settings.php:117
+#: includes/class-upb-elements-props.php:41, includes/class-upb-settings.php:121
 msgid "Select"
 msgstr ""
 
