@@ -102,7 +102,7 @@
             ),
             'value'   => 0,
         ) );
-
+        
         /*array_push( $attributes, array(
             'id'    => 'extraInputExample',
             'title' => esc_html__( 'Extra Input Example', 'ultimate-page-builder' ),
