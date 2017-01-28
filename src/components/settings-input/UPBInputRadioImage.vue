@@ -19,7 +19,7 @@
     import userInputMixin from './user-mixins'
 
     export default {
-        name   : 'upb-input-image-select',
-        mixins : [common, userInputMixin('image-select')]
+        name   : 'upb-input-radio-image',
+        mixins : [common, userInputMixin('radio-image')]
     }
 </script>

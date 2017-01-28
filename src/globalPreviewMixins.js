@@ -104,8 +104,8 @@ export default{
         },
 
         hiddenDeviceClasses(){
-            if (!_.isUndefined(this.model.attributes['hidden-device'])) {
-                return this.model.attributes['hidden-device'].join(' ');
+            if (!_.isUndefined(this.model.attributes['device-hidden'])) {
+                return this.model.attributes['device-hidden'].join(' ');
             }
             else {
                 return '';

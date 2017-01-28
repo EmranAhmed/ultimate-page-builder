@@ -51,6 +51,10 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 == Changelog ==
 
+= 1.0.0-beta.12 =
+
+- Refactor input fields
+
 = 1.0.0-beta.11 =
 
 - WordPress core widgets added

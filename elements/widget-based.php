@@ -271,8 +271,10 @@
         array_push( $attributes, array(
             'id'    => 'limit',
             'title' => esc_html__( 'Number of links to show', 'ultimate-page-builder' ),
-            'type'  => 'text',
-            'value' => '-1',
+            'type'  => 'number',
+            'value' => - 1,
+            'min'   => - 1,
+            'max'   => 99,
         ) );
 
         array_push( $attributes, upb_responsive_hidden_input() );
@@ -363,7 +365,7 @@
 
         array_push( $attributes, array(
             'id'          => 'exclude',
-            'type'        => 'ajax',
+            'type'        => 'ajax-select',
             'multiple'    => TRUE,
             'title'       => esc_html__( 'Exclude', 'ultimate-page-builder' ),
             'desc'        => esc_html__( 'Exclude Pages', 'ultimate-page-builder' ),
@@ -421,7 +423,7 @@
             'options' => array(
                 'min'  => 1,
                 'step' => 1,
-                'size' => 3,
+                'size' => 2,
             )
         ) );
 
@@ -457,7 +459,7 @@
 
         $attributes = array();
 
-        array_push( $attributes, upb_title_input( esc_html__( 'Title', 'ultimate-page-builder' ), '', esc_html__( 'Recent Comments', 'ultimate-page-builder' ) ) );
+        array_push( $attributes, upb_title_input( esc_html__( 'Title', 'ultimate-page-builder' ), '', esc_html__( 'Recent Posts', 'ultimate-page-builder' ) ) );
 
         array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
 

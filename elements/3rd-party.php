@@ -14,7 +14,7 @@
 
         array_push( $attributes, array(
             'id'          => 'id',
-            'type'        => 'ajax',
+            'type'        => 'ajax-select',
             'title'       => esc_html__( 'Contact Form', 'ultimate-page-builder' ),
             'desc'        => esc_html__( 'Contact form list', 'ultimate-page-builder' ),
             'value'       => '',

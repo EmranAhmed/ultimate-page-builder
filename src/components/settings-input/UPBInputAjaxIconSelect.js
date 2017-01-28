@@ -10,8 +10,8 @@ import Select2 from '../../plugins/vue-select2'
 Vue.use(Select2);
 
 export default {
-    name   : 'upb-input-icon-ajax',
-    mixins : [common, userInputMixin('icon-ajax')],
+    name   : 'upb-input-ajax-icon-select',
+    mixins : [common, userInputMixin('ajax-icon-select')],
 
     computed : {
         settings(){

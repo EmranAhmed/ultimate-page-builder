@@ -8,9 +8,9 @@ import userInputMixin from './user-mixins'
 Vue.use(Select2);
 
 export default {
-    name : 'upb-input-ajax',
+    name : 'upb-input-ajax-select',
 
-    mixins : [common, userInputMixin('ajax')],
+    mixins : [common, userInputMixin('ajax-select')],
 
     computed : {
 

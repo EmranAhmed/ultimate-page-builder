@@ -13,4 +13,4 @@
     </li>
 </template>
 
-<script src="./UPBInputIconAjax.js"></script>
+<script src="./UPBInputAjaxIconSelect.js"></script>

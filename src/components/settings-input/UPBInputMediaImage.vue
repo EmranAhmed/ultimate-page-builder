@@ -15,13 +15,11 @@
                 <div class="actions">
                     <button v-show="input" type="button" class="button remove-button" v-text="attributes.buttons.remove"></button>
                     <button type="button" class="button new-button" v-text="attributes.buttons.choose"></button>
-                    <div class="clearfix"></div>
+                    <div class="clear"></div>
                 </div>
             </div>
-
             <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
-
         </div>
     </li>
 </template>
-<script src="./UPBInputImage.js"></script>
+<script src="./UPBInputMediaImage.js"></script>

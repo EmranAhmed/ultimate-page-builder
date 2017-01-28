@@ -13,10 +13,10 @@
 
                 if (
                     $options[ 'type' ] == 'select2'
-                    || $options[ 'type' ] == 'icons'
-                    || $options[ 'type' ] == 'ajax'
-                    || $options[ 'type' ] == 'icon-ajax'
-                    || $options[ 'type' ] == 'select-box-icon'
+                    || $options[ 'type' ] == 'icon-select'
+                    || $options[ 'type' ] == 'select-icon'
+                    || $options[ 'type' ] == 'ajax-icon-select'
+                    || $options[ 'type' ] == 'ajax-select'
                 ) {
                     $options[ 'settings' ][ 'placeholder' ] = $options[ 'placeholder' ];
                 }
@@ -28,13 +28,12 @@
                         }
                         break;
 
-                    case 'image':
+                    case 'media-image':
                     case 'background-image':
                         $options[ 'placeholder' ] = ! empty( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : esc_html__( 'No Image', 'ultimate-page-builder' );
                         $options[ 'size' ]        = isset( $options[ 'size' ] ) ? $options[ 'size' ] : 'full'; // ‘thumbnail’, ‘medium’, ‘large’, ‘full’
                         $options[ 'attribute' ]   = isset( $options[ 'attribute' ] ) ? $options[ 'attribute' ] : 'id'; // id, src
-
-                        $options[ 'buttons' ] = isset( $options[ 'buttons' ] )
+                        $options[ 'buttons' ]     = isset( $options[ 'buttons' ] )
                             ? $options[ 'buttons' ]
                             : array(
                                 'add'    => esc_html__( 'Use Image', 'ultimate-page-builder' ),
@@ -51,8 +50,8 @@
                         $options[ 'value' ] = upb_return_boolean( $options[ 'value' ] );
                         break;
 
-                    case 'icon-ajax':
-                    case 'ajax':
+                    case 'ajax-icon-select':
+                    case 'ajax-select':
 
                         $options[ 'options' ] = array();
 
@@ -115,7 +114,7 @@
 
                     case 'select':
                     case 'select2':
-                    case 'select-box-icon':
+                    case 'select-icon':
                         if ( isset( $options[ 'multiple' ] ) && $options[ 'multiple' ] ) {
                             $options[ 'delimiter' ] = isset( $options[ 'delimiter' ] ) ? $options[ 'delimiter' ] : ',';
 

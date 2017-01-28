@@ -81,9 +81,10 @@
 
                 if (
                     $options[ 'type' ] == 'select2'
-                    || $options[ 'type' ] == 'icons'
-                    || $options[ 'type' ] == 'ajax'
-                    || $options[ 'type' ] == 'icon-ajax'
+                    || $options[ 'type' ] == 'icon-select'
+                    || $options[ 'type' ] == 'select-icon'
+                    || $options[ 'type' ] == 'ajax-icon-select'
+                    || $options[ 'type' ] == 'ajax-select'
                 ) {
                     $options[ 'settings' ][ 'placeholder' ] = $options[ 'placeholder' ];
                 }
@@ -91,12 +92,15 @@
                 switch ( $options[ 'type' ] ) {
                     case 'select':
                     case 'select2':
+                    case 'select-icon':
                         if ( isset( $options[ 'multiple' ] ) && $options[ 'multiple' ] && ! is_array( $options[ 'default' ] ) ) {
                             $options[ 'default' ] = array();
                         }
                         break;
 
                     case 'checkbox':
+                    case 'checkbox-icon':
+                    case 'device-hidden':
 
                         if ( ! is_array( $options[ 'default' ] ) ) {
                             $options[ 'default' ] = array();
@@ -104,7 +108,7 @@
 
                         break;
 
-                    case 'image':
+                    case 'media-image':
                     case 'background-image':
                         $options[ 'placeholder' ] = ! empty( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : esc_html__( 'No Image', 'ultimate-page-builder' );
                         $options[ 'size' ]        = isset( $options[ 'size' ] ) ? $options[ 'size' ] : 'full'; //  ‘thumbnail’, ‘medium’, ‘large’, ‘full’
@@ -120,6 +124,7 @@
 
 
                     case 'range':
+                    case 'number':
 
                         if ( ! isset( $options[ 'options' ] ) ) {
                             $options[ 'options' ] = array();
@@ -128,6 +133,7 @@
                         $options[ 'options' ][ 'min' ]    = isset( $options[ 'options' ][ 'min' ] ) ? (int) $options[ 'options' ][ 'min' ] : 0;
                         $options[ 'options' ][ 'max' ]    = isset( $options[ 'options' ][ 'max' ] ) ? (int) $options[ 'options' ][ 'max' ] : 100;
                         $options[ 'options' ][ 'step' ]   = isset( $options[ 'options' ][ 'step' ] ) ? $options[ 'options' ][ 'step' ] : '';
+                        $options[ 'options' ][ 'size' ]   = isset( $options[ 'options' ][ 'size' ] ) ? $options[ 'options' ][ 'size' ] : 3;
                         $options[ 'options' ][ 'prefix' ] = isset( $options[ 'options' ][ 'prefix' ] ) ? esc_html( $options[ 'options' ][ 'prefix' ] ) : '';
                         $options[ 'options' ][ 'suffix' ] = isset( $options[ 'options' ][ 'suffix' ] ) ? esc_html( $options[ 'options' ][ 'suffix' ] ) : '';
                         break;
@@ -142,8 +148,8 @@
 
                 switch ( $options[ 'type' ] ):
 
-                    case 'ajax':
-                    case 'icon-ajax':
+                    case 'ajax-icon-select':
+                    case 'ajax-select':
                         $options[ 'value' ]   = empty( $value ) ? $options[ 'default' ] : $value;
                         $options[ 'options' ] = array();
 
@@ -179,6 +185,9 @@
                     case 'select':
                     case 'select2':
                     case 'checkbox':
+                    case 'select-icon':
+                    case 'icon-select':
+                    case 'checkbox-icon':
                         $options[ 'value' ] = empty( $value ) ? $options[ 'default' ] : $value;
                         break;
 

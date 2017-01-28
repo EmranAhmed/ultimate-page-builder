@@ -101,7 +101,7 @@ export default {
 
                     store.stateChanged();
 
-                    this.$router.replace(`/sections`);
+                    this.$router.replace(`/elements`);
                 }
             }
         },

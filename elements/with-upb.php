@@ -296,7 +296,7 @@
         array_push( $attributes, array(
             'id'       => 'type',
             'title'    => esc_html__( 'Heading type', 'ultimate-page-builder' ),
-            'type'     => 'select-box-icon',
+            'type'     => 'select2-icon',
             'value'    => 'h1',
             'options'  => array(
                 'h1' => array(

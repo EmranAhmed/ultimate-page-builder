@@ -283,7 +283,7 @@
         $desc  = trim( $desc ) ? trim( $desc ) : esc_html__( 'Hide element on specific media device', 'ultimate-page-builder' );
 
         return apply_filters( 'upb_responsive_hidden_input', array(
-            'id'      => 'hidden-device',
+            'id'      => 'device-hidden',
             'title'   => esc_html( $title ),
             'desc'    => wp_kses_post( $desc ),
             'type'    => 'device-hidden',
@@ -301,7 +301,7 @@
             'id'          => esc_attr( $id ),
             'title'       => esc_html( $title ),
             'desc'        => wp_kses_post( $desc ),
-            'type'        => 'icon-ajax',
+            'type'        => 'ajax-icon-select',
             'value'       => $default,
             'hooks'       => array(
                 'search' => '_upb_material_icon_search',
@@ -320,7 +320,7 @@
             'id'          => esc_attr( $id ),
             'title'       => esc_html( $title ),
             'desc'        => wp_kses_post( $desc ),
-            'type'        => 'icon-ajax',
+            'type'        => 'ajax-icon-select',
             'value'       => $default,
             'hooks'       => array(
                 'search' => '_upb_font_awesome_icon_search',

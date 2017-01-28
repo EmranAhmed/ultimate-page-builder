@@ -7,9 +7,9 @@ import ImageMedia from '../../plugins/vue-image-media'
 Vue.use(ImageMedia)
 
 export default {
-    name   : 'upb-input-image',
+    name : 'upb-input-media-image',
 
-    mixins : [common, userInputMixin('image')],
+    mixins : [common, userInputMixin('media-image')],
 
     data(){
         return {
