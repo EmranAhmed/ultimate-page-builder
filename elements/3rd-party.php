@@ -19,10 +19,7 @@
             'desc'        => esc_html__( 'Contact form list', 'ultimate-page-builder' ),
             'value'       => '',
             'template'    => '<div> ID# %(id)s - %(title)s </div>',
-            'placeholder' => esc_html__( 'Search contact form', 'ultimate-page-builder' ),
-            'settings'    => array(
-                'allowClear' => TRUE
-            )
+            'placeholder' => esc_html__( 'Search contact form', 'ultimate-page-builder' )
         ) );
 
         $attributes = array_merge( $attributes, upb_css_class_id_input_group() );

@@ -1,7 +1,7 @@
 === Ultimate Page Builder ===
 Contributors: EmranAhmed, wpeshaan, webdzainer
 Tags: page builder, drag and drop page builder, front-end builder, home page builder, landing page builder, layout builder, page, page builder, page builder plugin, site-builder, template builder, visual page builder, website builder, wysiwyg builder
-Requires at least: 4.3
+Requires at least: 4.5
 Tested up to: 4.7
 Stable tag: trunk
 License: GPLv2 or later
@@ -56,6 +56,7 @@ If you are unable to use any of the methods due to internet connectivity and fil
 - Element Panel title fix
 - Media Image select support for add_image_size
 - Preview class and element class function separated
+- Shortcode Preview feature added
 
 = 1.0.0-beta.12 =
 

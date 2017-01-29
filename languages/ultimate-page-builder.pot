@@ -41,11 +41,11 @@ msgstr ""
 msgid "Search contact form"
 msgstr ""
 
-#: elements/3rd-party.php:39
+#: elements/3rd-party.php:36
 msgid "Contact form 7"
 msgstr ""
 
-#: elements/3rd-party.php:54
+#: elements/3rd-party.php:51
 msgid "Choose a form from left panel"
 msgstr ""
 

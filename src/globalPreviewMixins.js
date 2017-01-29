@@ -81,6 +81,10 @@ export default{
             return `upb-${this._uid}`;
         },
 
+        uniqueId(){
+            return `upb-${this._uid}`;
+        },
+
         attributes(){
             return this.model.attributes;
         },
@@ -93,13 +97,21 @@ export default{
             return this.model.tag;
         },
 
-        isEnabled(){
+        enabled(){
             if (!_.isUndefined(this.model.attributes['enable'])) {
                 return this.model.attributes.enable;
             }
             else {
                 return true;
             }
+        },
+
+        active(){
+            return this.model.attributes.active;
+        },
+
+        title(){
+            return this.model.attributes.title;
         },
 
         deviceHiddenClasses(){
@@ -133,11 +145,7 @@ export default{
         },
 
         elementID(){
-
-            if (!_.isUndefined(this.model.attributes['element_id'])) {
-                return this.model.attributes.element_id;
-            }
-            return null;
+            return this.model.attributes.element_id;
         },
 
         elementClass(){
@@ -149,6 +157,10 @@ export default{
 
         sidebarExpanded(){
             return store.sidebarExpanded
+        },
+
+        keyIndex(){
+            return this.model._upb_options._keyIndex
         },
 
         messages(){
@@ -167,9 +179,6 @@ export default{
     methods : {
         addKeyIndex(keyindex){
             if (_.isArray(this.model.contents)) {
-
-                //console.log(this.model.tag, this.model.contents);
-
                 this.model.contents.map((m, i) => {
                     m._upb_options['_keyIndex'] = `${keyindex}/${i}`;
                 });
@@ -185,11 +194,11 @@ export default{
                         },
                         contents=> {
                             //this.$nextTick(function () {
-                            if (_.isEmpty(contents.trim())) {
-                                console.info(`Empty contents returned. Did you create shortcode template. "shortcodes/${this.tag}.php"?`)
+                            if (_.isEmpty(contents)) {
+                                console.info(`Empty contents returned. Did you create shortcode template like: "shortcodes/${this.tag}.php" file?`)
                             }
 
-                            Vue.set(this, 'xhrContents', contents.trim())
+                            Vue.set(this, 'xhrContents', contents)
                             //});
                         },
                         error=> {
@@ -200,18 +209,15 @@ export default{
                             else {
                                 console.info(error);
                             }
+                        }, {
+                            cache : true
                         });
                 }
                 else {
                     store.wpAjax(this.model._upb_options.preview['ajax-hook'], this.attributes,
                         contents=> {
                             //this.$nextTick(function () {
-
-                            if (_.isEmpty(contents.trim())) {
-                                console.info(`Empty contents returned. Did you create shortcode template. "shortcodes/${this.tag}.php"?`)
-                            }
-
-                            Vue.set(this, 'xhrContents', contents.trim());
+                            Vue.set(this, 'xhrContents', contents);
                             //});
                         },
                         error=> {
@@ -222,6 +228,9 @@ export default{
                             else {
                                 console.info(error);
                             }
+                        },
+                        {
+                            cache : true
                         });
                 }
             }
@@ -391,7 +400,7 @@ export default{
                 cssClasses.push(`upb-sidebar-collapsed`);
             }
 
-            if (this.isEnabled) {
+            if (this.enabled) {
                 cssClasses.push(`upb-preview-element-enabled`);
             }
             else {
@@ -446,6 +455,14 @@ export default{
             this.$router.replace(`/elements`);
         },
 
+        openSettingsPanel(){
+            this.$router.replace(`/settings`);
+        },
+
+        openLayoutsPanel(){
+            this.$router.replace(`/layouts`);
+        },
+
         // Alias of openElementItemsPanel
         openElementsItemPanel(path){
             this.openElementItemsPanel(path);
@@ -453,6 +470,10 @@ export default{
 
         openElementItemsPanel(path){
             this.$router.replace(`/sections/${path}/contents`);
+        },
+
+        openElementSettingsPanel(path){
+            this.$router.replace(`/sections/${path}/settings`);
         }
     }
 }

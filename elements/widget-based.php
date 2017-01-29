@@ -599,4 +599,3 @@
         $element->register( 'upb-wp_widget_text', $attributes, $contents, $_upb_options );
 
     } );
-
