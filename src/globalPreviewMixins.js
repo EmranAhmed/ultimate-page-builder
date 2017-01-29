@@ -140,6 +140,7 @@ export default{
             }
             return null;
         },
+
         elementClass(){
             if (!_.isUndefined(this.model.attributes['element_class'])) {
                 return this.model.attributes.element_class;
@@ -175,22 +176,49 @@ export default{
 
         getAjaxContents(){
             if (this.model._upb_options.preview.ajax) {
-                store.wpAjax(this.model._upb_options.preview['ajax-hook'], this.attributes, contents=> {
+                if (this.model._upb_options.preview.shortcode) {
+                    store.wpAjax(this.model._upb_options.preview['ajax-hook'], {
+                            attributes : this.attributes,
+                            shortcode  : store.generateShortcode(this.tag, this.attributes, this.contents)
+                        },
+                        contents=> {
+                            //this.$nextTick(function () {
+                            Vue.set(this, 'xhrContents', contents)
+                            //});
+                        },
+                        error=> {
 
-                    //this.$nextTick(function () {
-                    Vue.set(this, 'xhrContents', contents)
-                    //});
-                }, error=> {
+                            if (error == 0) {
+                                console.info(`You need to implement "${this.model._upb_options.preview['ajax-hook']}" with wp ajax: "wp_ajax_${this.model._upb_options.preview['ajax-hook']}".`)
+                            }
+                            else {
+                                console.info(error);
+                            }
+                        },
+                        {
+                            cache : true,
+                        });
+                }
+                else {
+                    store.wpAjax(this.model._upb_options.preview['ajax-hook'], this.attributes,
+                        contents=> {
+                            //this.$nextTick(function () {
+                            Vue.set(this, 'xhrContents', contents)
+                            //});
+                        },
+                        error=> {
 
-                    if (error == 0) {
-                        console.info(`You need to implement "${this.model._upb_options.preview['ajax-hook']}" with wp ajax: "wp_ajax_${this.model._upb_options.preview['ajax-hook']}".`)
-                    }
-                    else {
-                        console.info(error);
-                    }
-                }, {
-                    cache : true,
-                });
+                            if (error == 0) {
+                                console.info(`You need to implement "${this.model._upb_options.preview['ajax-hook']}" with wp ajax: "wp_ajax_${this.model._upb_options.preview['ajax-hook']}".`)
+                            }
+                            else {
+                                console.info(error);
+                            }
+                        },
+                        {
+                            cache : true,
+                        });
+                }
             }
         },
 

@@ -805,4 +805,32 @@
         wp_send_json_success( $contents );
     } );
 
+    // Ajax Shortcode
+    add_action( 'wp_ajax__upb_ajax_default_preview_contents', function () {
+
+        upb_check_ajax_access();
+
+        // Check /wp-includes/widgets/class-wp-widget-archives.php line#135
+        $instance = wp_parse_args( array(
+                                       'title'    => sanitize_text_field( $_POST[ 'title' ] ),
+                                       'dropdown' => upb_return_boolean( $_POST[ 'dropdown' ] ),
+                                       'count'    => upb_return_boolean( $_POST[ 'count' ] )
+                                   ), array(
+                                       'title'    => '',
+                                       'count'    => 0,
+                                       'dropdown' => ''
+                                   ) );
+
+        $args = apply_filters( 'upb-element-wp-widget-args', array(
+            'before_widget' => '<div class="widget %s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2 class="widgettitle widget-title">',
+            'after_title'   => '</h2>'
+        ), 'WP_Widget_Archives', $instance );
+
+        ob_start();
+        the_widget( 'WP_Widget_Archives', $instance, $args );
+        $contents = ob_get_clean();
+        wp_send_json_success( str_ireplace( 'onchange=', 'data-onchange=', $contents ) );
+    } );
 

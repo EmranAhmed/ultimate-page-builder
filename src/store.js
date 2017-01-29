@@ -184,6 +184,14 @@ class store {
         }).join('');
     }
 
+    generateShortcode(tag, attrs, content = null) {
+        return wp.shortcode.string({
+            tag     : tag,
+            attrs   : attrs,
+            content : this.getShortcodeContent(content)
+        })
+    }
+
     getShortcodeContent(content) {
 
         if (_.isArray(content)) {

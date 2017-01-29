@@ -103,6 +103,16 @@
                     $_upb_options[ 'preview' ][ 'ajax' ] = FALSE;
                 }
 
+                if ( ! isset( $_upb_options[ 'preview' ][ 'shortcode' ] ) ) {
+                    $_upb_options[ 'preview' ][ 'shortcode' ] = FALSE;
+                }
+
+                // If shortcode code preview insted of vue then ajax will be true
+                if ( $_upb_options[ 'preview' ][ 'shortcode' ] ) {
+                    $_upb_options[ 'preview' ][ 'ajax' ] = TRUE;
+                }
+
+
                 if ( ! isset( $_upb_options[ 'preview' ][ 'ajax-hook' ] ) ) {
                     $_upb_options[ 'preview' ][ 'ajax-hook' ] = sprintf( '_upb_%s_preview_contents', $tag );
                 }
@@ -420,15 +430,7 @@
                     add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', esc_html( $_upb_options[ 'preview' ][ 'template' ] ) ), $preview_template_fn );
                 } else {
                     add_action( sprintf( 'wp_ajax__get_upb_shortcode_preview_%s', esc_html( $_upb_options[ 'preview' ][ 'template' ] ) ), function () use ( $tag, $_upb_options ) {
-
-                        if ( ! current_user_can( 'customize' ) ) {
-                            wp_send_json_error( 'upb_not_allowed', 403 );
-                        }
-
-                        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-                            wp_send_json_error( 'bad_nonce', 400 );
-                        }
-
+                        upb_check_ajax_access();
                         ob_start();
                         upb_get_template( sprintf( "previews/%s.php", esc_html( $_upb_options[ 'preview' ][ 'template' ] ) ), array(), $_upb_options[ 'third_party_path' ] );
                         wp_send_json_success( ob_get_clean() );

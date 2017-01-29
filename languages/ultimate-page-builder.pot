@@ -61,7 +61,7 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
-#: elements/core.php:35, includes/class-upb-elements.php:298
+#: elements/core.php:35, includes/class-upb-elements.php:308
 msgid "Add Element"
 msgstr ""
 
@@ -370,7 +370,7 @@ msgstr ""
 msgid "Accordion Item %s"
 msgstr ""
 
-#: elements/with-upb.php:134, elements/with-upb.php:253, includes/boilerplate/upb-boilerplate-hooks.php:116, includes/class-upb-elements.php:210, includes/class-upb-elements.php:230
+#: elements/with-upb.php:134, elements/with-upb.php:253, includes/boilerplate/upb-boilerplate-hooks.php:116, includes/class-upb-elements.php:220, includes/class-upb-elements.php:240
 msgid "Settings"
 msgstr ""
 
@@ -674,7 +674,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:271, includes/class-upb-elements.php:276, includes/class-upb-elements.php:289
+#: includes/boilerplate/upb-boilerplate-hooks.php:271, includes/class-upb-elements.php:286, includes/class-upb-elements.php:299
 msgid "Search"
 msgstr ""
 
@@ -698,11 +698,11 @@ msgstr ""
 msgid "Expand"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:277, includes/class-upb-elements.php:192
+#: includes/boilerplate/upb-boilerplate-hooks.php:277, includes/class-upb-elements.php:202
 msgid "Disabled"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:278, includes/class-upb-elements.php:186
+#: includes/boilerplate/upb-boilerplate-hooks.php:278, includes/class-upb-elements.php:196
 msgid "Enabled"
 msgstr ""
 
@@ -754,23 +754,23 @@ msgstr ""
 msgid "Ultimate page builder element \"%s\" already registered."
 msgstr ""
 
-#: includes/class-upb-elements.php:173
+#: includes/class-upb-elements.php:183
 msgid "Sort"
 msgstr ""
 
-#: includes/class-upb-elements.php:179
+#: includes/class-upb-elements.php:189
 msgid "Delete"
 msgstr ""
 
-#: includes/class-upb-elements.php:201, includes/class-upb-elements.php:246, includes/class-upb-elements.php:307
+#: includes/class-upb-elements.php:211, includes/class-upb-elements.php:256, includes/class-upb-elements.php:317
 msgid "Contents"
 msgstr ""
 
-#: includes/class-upb-elements.php:217
+#: includes/class-upb-elements.php:227
 msgid "Clone"
 msgstr ""
 
-#: includes/class-upb-elements.php:285
+#: includes/class-upb-elements.php:295
 msgid "%s Settings"
 msgstr ""
 
