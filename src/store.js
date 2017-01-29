@@ -176,18 +176,26 @@ class store {
 
     getShortcode(shortcodes) {
         return shortcodes.map((shortcode)=> {
+
+            let attributes = extend(true, {}, shortcode.attributes);
+            delete attributes._contents;
+
             return wp.shortcode.string({
                 tag     : shortcode.tag,
-                attrs   : shortcode.attributes,
+                attrs   : attributes,
                 content : this.getShortcodeContent(shortcode.contents)
             });
         }).join('');
     }
 
     generateShortcode(tag, attrs, content = null) {
+
+        let attributes = extend(true, {}, attrs);
+        delete attributes._contents;
+
         return wp.shortcode.string({
             tag     : tag,
-            attrs   : attrs,
+            attrs   : attributes,
             content : this.getShortcodeContent(content)
         })
     }

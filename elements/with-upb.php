@@ -387,3 +387,112 @@
         $element->register( 'upb-heading', $attributes, $contents, $_upb_options );
 
     } );
+
+
+/*    add_action( 'upb_register_element', function ( $element ) {
+
+
+        $attributes = array();
+
+        array_push( $attributes, upb_title_input( esc_html__( 'Title', 'ultimate-page-builder' ), '', esc_html__( 'Text Title', 'ultimate-page-builder' ) ) );
+
+        array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
+
+        array_push( $attributes,
+
+                    array(
+                        'id'    => 'image',
+                        'title' => esc_html__( 'Label', 'ultimate-page-builder' ),
+                        'desc'  => wp_kses_post( __( 'Description', 'ultimate-page-builder' ) ),
+                        'type'  => 'media-image',
+                        'value' => '',
+                        // 'attribute'=>'id' // id, src
+                        // 'size'=>'full' // large, medium, thumbnail etc...
+                    )
+
+        );
+
+        array_push( $attributes, upb_responsive_hidden_input() );
+
+        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
+
+        $contents = NULL;
+
+        $_upb_options = array(
+
+            'element' => array(
+                'name'  => 'UPB Child',
+                'icon'  => 'mdi mdi-format-text',
+                'child' => TRUE
+            ),
+
+            'meta' => array(
+                'contents' => array(
+                    'help' => '<h2>Want to add contents?</h2><p>Choose a section and drag elements</p>',
+                ),
+
+                'settings' => array(
+                    'help' => '<h2>Text Settings?</h2><p>section settings</p>',
+                ),
+            )
+        );
+
+        $element->register( 'upb-child', $attributes, $contents, $_upb_options );
+
+
+        $attributes = array();
+
+        array_push( $attributes, upb_title_input( esc_html__( 'Title', 'ultimate-page-builder' ), '', esc_html__( 'Text Title', 'ultimate-page-builder' ) ) );
+
+        array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
+
+        array_push( $attributes, upb_responsive_hidden_input() );
+
+        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
+
+        $contents = array();
+
+        $_upb_options = array(
+
+            'preview' => array(
+                'shortcode' => TRUE,
+            ),
+
+            'element' => array(
+                'name' => 'UPB Parent',
+                'icon' => 'mdi mdi-format-text'
+            ),
+
+            'meta' => array(
+                'contents' => array(
+                    'help' => '<h2>Want to add contents?</h2><p>Choose a section and drag elements</p>',
+                ),
+
+                'settings' => array(
+                    'help' => '<h2>Text Settings?</h2><p>section settings</p>',
+                ),
+            ),
+
+            'tools' => array(
+                'contents' => array(
+                    array(
+                        'id'     => 'new',
+                        'title'  => esc_html__( 'Add New', 'ultimate-page-builder' ),
+                        'icon'   => 'mdi mdi-shape-plus',
+                        'action' => 'addNew',
+                        'data'   => upb_elements()->generate_element( 'upb-child', FALSE, array( 'title' => esc_html__( 'Item %s', 'ultimate-page-builder' ) ) )
+                    ),
+                    array(
+                        'id'     => 'setting',
+                        'title'  => esc_html__( 'Settings', 'ultimate-page-builder' ),
+                        'icon'   => 'mdi mdi-settings',
+                        'action' => 'showSettingsPanel'
+                    )
+                ),
+            ),
+        );
+
+        $element->register( 'upb-parent', $attributes, $contents, $_upb_options );
+
+    } );*/
+

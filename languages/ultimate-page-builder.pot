@@ -25,7 +25,7 @@ msgstr ""
 msgid "Contact form 1"
 msgstr ""
 
-#: elements/3rd-party.php:11, elements/widget-based.php:12, elements/widget-based.php:63, elements/widget-based.php:118, elements/widget-based.php:155, elements/widget-based.php:214, elements/widget-based.php:315, elements/widget-based.php:352, elements/widget-based.php:415, elements/widget-based.php:464, elements/widget-based.php:521, elements/widget-based.php:573, elements/with-upb.php:11, elements/with-upb.php:62, elements/with-upb.php:105, elements/with-upb.php:224, elements/with-upb.php:353, includes/upb-functions.php:509, includes/upb-settings.php:10
+#: elements/3rd-party.php:11, elements/widget-based.php:12, elements/widget-based.php:63, elements/widget-based.php:118, elements/widget-based.php:155, elements/widget-based.php:214, elements/widget-based.php:315, elements/widget-based.php:352, elements/widget-based.php:415, elements/widget-based.php:464, elements/widget-based.php:521, elements/widget-based.php:573, elements/with-upb.php:11, elements/with-upb.php:62, elements/with-upb.php:105, elements/with-upb.php:224, elements/with-upb.php:353, elements/with-upb.php:399, elements/with-upb.php:447, includes/upb-functions.php:509, includes/upb-settings.php:10
 msgid "Enable / Disable"
 msgstr ""
 
@@ -61,7 +61,7 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
-#: elements/core.php:35, includes/class-upb-elements.php:308
+#: elements/core.php:35, includes/class-upb-elements.php:318
 msgid "Add Element"
 msgstr ""
 
@@ -105,7 +105,7 @@ msgstr ""
 msgid "An example of extra input"
 msgstr ""
 
-#: elements/widget-based.php:10, elements/widget-based.php:61, elements/widget-based.php:116, elements/widget-based.php:153, elements/widget-based.php:212, elements/widget-based.php:313, elements/widget-based.php:350, elements/widget-based.php:413, elements/widget-based.php:462, elements/widget-based.php:519, elements/widget-based.php:556, elements/with-upb.php:9, includes/upb-functions.php:475
+#: elements/widget-based.php:10, elements/widget-based.php:61, elements/widget-based.php:116, elements/widget-based.php:153, elements/widget-based.php:212, elements/widget-based.php:313, elements/widget-based.php:350, elements/widget-based.php:413, elements/widget-based.php:462, elements/widget-based.php:519, elements/widget-based.php:556, elements/with-upb.php:9, elements/with-upb.php:397, elements/with-upb.php:445, includes/upb-functions.php:475
 msgid "Title"
 msgstr ""
 
@@ -326,7 +326,7 @@ msgstr ""
 msgid "Text Widget"
 msgstr ""
 
-#: elements/with-upb.php:9
+#: elements/with-upb.php:9, elements/with-upb.php:397, elements/with-upb.php:445
 msgid "Text Title"
 msgstr ""
 
@@ -362,7 +362,7 @@ msgstr ""
 msgid "UPB Accordion"
 msgstr ""
 
-#: elements/with-upb.php:127, elements/with-upb.php:246
+#: elements/with-upb.php:127, elements/with-upb.php:246, elements/with-upb.php:480
 msgid "Add New"
 msgstr ""
 
@@ -370,7 +370,7 @@ msgstr ""
 msgid "Accordion Item %s"
 msgstr ""
 
-#: elements/with-upb.php:134, elements/with-upb.php:253, includes/boilerplate/upb-boilerplate-hooks.php:116, includes/class-upb-elements.php:220, includes/class-upb-elements.php:240
+#: elements/with-upb.php:134, elements/with-upb.php:253, elements/with-upb.php:487, includes/boilerplate/upb-boilerplate-hooks.php:116, includes/class-upb-elements.php:230, includes/class-upb-elements.php:250
 msgid "Settings"
 msgstr ""
 
@@ -460,6 +460,18 @@ msgstr ""
 
 #: elements/with-upb.php:347
 msgid "Right Align"
+msgstr ""
+
+#: elements/with-upb.php:405
+msgid "Label"
+msgstr ""
+
+#: elements/with-upb.php:406
+msgid "Description"
+msgstr ""
+
+#: elements/with-upb.php:483
+msgid "Item %s"
 msgstr ""
 
 #: includes/boilerplate/upb-boilerplate-hooks.php:9
@@ -674,7 +686,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:271, includes/class-upb-elements.php:286, includes/class-upb-elements.php:299
+#: includes/boilerplate/upb-boilerplate-hooks.php:271, includes/class-upb-elements.php:296, includes/class-upb-elements.php:309
 msgid "Search"
 msgstr ""
 
@@ -698,11 +710,11 @@ msgstr ""
 msgid "Expand"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:277, includes/class-upb-elements.php:202
+#: includes/boilerplate/upb-boilerplate-hooks.php:277, includes/class-upb-elements.php:212
 msgid "Disabled"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:278, includes/class-upb-elements.php:196
+#: includes/boilerplate/upb-boilerplate-hooks.php:278, includes/class-upb-elements.php:206
 msgid "Enabled"
 msgstr ""
 
@@ -754,23 +766,23 @@ msgstr ""
 msgid "Ultimate page builder element \"%s\" already registered."
 msgstr ""
 
-#: includes/class-upb-elements.php:183
+#: includes/class-upb-elements.php:193
 msgid "Sort"
 msgstr ""
 
-#: includes/class-upb-elements.php:189
+#: includes/class-upb-elements.php:199
 msgid "Delete"
 msgstr ""
 
-#: includes/class-upb-elements.php:211, includes/class-upb-elements.php:256, includes/class-upb-elements.php:317
+#: includes/class-upb-elements.php:221, includes/class-upb-elements.php:266, includes/class-upb-elements.php:327
 msgid "Contents"
 msgstr ""
 
-#: includes/class-upb-elements.php:227
+#: includes/class-upb-elements.php:237
 msgid "Clone"
 msgstr ""
 
-#: includes/class-upb-elements.php:295
+#: includes/class-upb-elements.php:305
 msgid "%s Settings"
 msgstr ""
 

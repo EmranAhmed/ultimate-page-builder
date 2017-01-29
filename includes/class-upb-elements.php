@@ -68,6 +68,7 @@
                     $_upb_options[ 'preview' ] = array(
                         'component' => 'upb-preview-' . $tag,
                         'ajax'      => FALSE, // enable ajax preview contents.
+                        'shortcode' => FALSE, // enable ajax shortcode preview contents.
                         'ajax-hook' => sprintf( '_upb_%s_ajax_preview_contents', $tag ),
                         'template'  => $tag,
                         'mixins'    => '{}' // javascript object, like: { methods:{ methodName(){} } } or window.abcdMixins = {}
@@ -95,6 +96,24 @@
                     }
                 }
 
+                ///////
+
+                // Shortcode Preview
+                if ( isset( $_upb_options[ 'preview' ][ 'shortcode' ] ) && $_upb_options[ 'preview' ][ 'shortcode' ] ) {
+
+                    $_upb_options[ 'preview' ][ 'ajax' ] = TRUE;
+                    if ( ! isset( $_upb_options[ 'preview' ][ 'template' ] ) ) {
+                        $_upb_options[ 'preview' ][ 'template' ] = 'upb-shortcode-preview';
+                    }
+                    if ( ! isset( $_upb_options[ 'preview' ][ 'ajax-hook' ] ) ) {
+                        $_upb_options[ 'preview' ][ 'ajax-hook' ] = '_upb_shortcode_preview_contents';
+                    }
+                }
+
+
+                //////
+
+
                 if ( ! isset( $_upb_options[ 'preview' ][ 'component' ] ) ) {
                     $_upb_options[ 'preview' ][ 'component' ] = 'upb-preview-' . $tag;
                 }
@@ -102,16 +121,6 @@
                 if ( ! isset( $_upb_options[ 'preview' ][ 'ajax' ] ) ) {
                     $_upb_options[ 'preview' ][ 'ajax' ] = FALSE;
                 }
-
-                if ( ! isset( $_upb_options[ 'preview' ][ 'shortcode' ] ) ) {
-                    $_upb_options[ 'preview' ][ 'shortcode' ] = FALSE;
-                }
-
-                // If shortcode code preview insted of vue then ajax will be true
-                if ( $_upb_options[ 'preview' ][ 'shortcode' ] ) {
-                    $_upb_options[ 'preview' ][ 'ajax' ] = TRUE;
-                }
-
 
                 if ( ! isset( $_upb_options[ 'preview' ][ 'ajax-hook' ] ) ) {
                     $_upb_options[ 'preview' ][ 'ajax-hook' ] = sprintf( '_upb_%s_preview_contents', $tag );
@@ -124,6 +133,7 @@
                 if ( ! isset( $_upb_options[ 'preview' ][ 'template' ] ) ) {
                     $_upb_options[ 'preview' ][ 'template' ] = $tag;
                 }
+
 
                 // Assets
                 if ( ! isset( $_upb_options[ 'assets' ] ) ) {
@@ -496,9 +506,9 @@
 
                     $attributes = $this->to_attributes( $settings, $tag );
 
-                    if ( isset( $attributes[ '_contents' ] ) ) {
+                    /*if ( isset( $attributes[ '_contents' ] ) ) {
                         unset( $attributes[ '_contents' ] );
-                    }
+                    }*/
 
                     return $attributes;
                 }

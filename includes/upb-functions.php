@@ -563,7 +563,7 @@
         return isset( $attributes[ 'enable' ] ) ? ! empty( $attributes[ 'enable' ] ) : TRUE;
     }
 
-    function upb_get_shortcode_class( $attributes, $extra = '' ) {
+    function upb_get_shortcode_class( $attributes, $extra = FALSE ) {
 
         $classes = array();
         if ( isset( $attributes[ 'hidden-device' ] ) ) {
@@ -574,11 +574,15 @@
             array_push( $classes, $attributes[ 'element_class' ] );
         }
 
-        if ( ! empty( $extra ) ) {
+        if ( ! empty( $extra ) && is_string( $extra ) ) {
             array_push( $classes, $extra );
         }
 
-        return implode( ' ', apply_filters( 'upb_get_shortcode_class', $classes ) );
+        if ( ! empty( $extra ) && is_array( $extra ) ) {
+            $classes = array_merge( $classes, $extra );
+        }
+
+        return implode( ' ', apply_filters( 'upb_get_shortcode_class', array_unique( $classes ) ) );
     }
 
     function upb_get_shortcode_id( $attributes ) {
@@ -589,7 +593,7 @@
         echo esc_attr( upb_get_shortcode_id( $attributes ) );
     }
 
-    function upb_shortcode_class( $attributes, $extra = '' ) {
+    function upb_shortcode_class( $attributes, $extra = FALSE ) {
         echo esc_attr( upb_get_shortcode_class( $attributes, $extra ) );
     }
 

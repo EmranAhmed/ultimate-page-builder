@@ -30,24 +30,23 @@ export default{
 
             if (_.isArray(contents)) {
                 //this.setPreviewData();
-                this.getAjaxContents();
+                this.getAjaxContentsDebounce();
                 this.attributeWatch();
             }
-        });
+        }, {deep : this.model._upb_options.preview.shortcode});
 
         this.$watch('model.attributes', function (newVal, oldVal) {
             //this.addClass();
             this.setPreviewData();
             this.attributeWatch();
-            this.getAjaxContents();
+            this.getAjaxContentsDebounce();
         }, {deep : true});
-
-        this.setPreviewData();
 
         this.$nextTick(function () {
             this.addKeyIndex(this.model._upb_options._keyIndex);
         });
 
+        this.setPreviewData();
         this.getAjaxContents();
     },
 
@@ -152,6 +151,10 @@ export default{
             return store.sidebarExpanded
         },
 
+        messages(){
+            return this.model._upb_options.meta.messages;
+        },
+
         $router(){
             return store.panel._router;
         },
@@ -162,7 +165,6 @@ export default{
     },
 
     methods : {
-
         addKeyIndex(keyindex){
             if (_.isArray(this.model.contents)) {
 
@@ -183,7 +185,11 @@ export default{
                         },
                         contents=> {
                             //this.$nextTick(function () {
-                            Vue.set(this, 'xhrContents', contents)
+                            if (_.isEmpty(contents.trim())) {
+                                console.info(`Empty contents returned. Did you create shortcode template. "shortcodes/${this.tag}.php"?`)
+                            }
+
+                            Vue.set(this, 'xhrContents', contents.trim())
                             //});
                         },
                         error=> {
@@ -194,16 +200,18 @@ export default{
                             else {
                                 console.info(error);
                             }
-                        },
-                        {
-                            cache : true,
                         });
                 }
                 else {
                     store.wpAjax(this.model._upb_options.preview['ajax-hook'], this.attributes,
                         contents=> {
                             //this.$nextTick(function () {
-                            Vue.set(this, 'xhrContents', contents)
+
+                            if (_.isEmpty(contents.trim())) {
+                                console.info(`Empty contents returned. Did you create shortcode template. "shortcodes/${this.tag}.php"?`)
+                            }
+
+                            Vue.set(this, 'xhrContents', contents.trim());
                             //});
                         },
                         error=> {
@@ -214,13 +222,14 @@ export default{
                             else {
                                 console.info(error);
                             }
-                        },
-                        {
-                            cache : true,
                         });
                 }
             }
         },
+
+        getAjaxContentsDebounce : _.debounce(function () {
+            this.getAjaxContents();
+        }, 300),
 
         inlineStyle(style = {}){
             return extend(false, {}, this.backgroundVariables, style);
@@ -441,6 +450,7 @@ export default{
         openElementsItemPanel(path){
             this.openElementItemsPanel(path);
         },
+
         openElementItemsPanel(path){
             this.$router.replace(`/sections/${path}/contents`);
         }
