@@ -1075,5 +1075,5 @@ msgid "Please check PHP version requirement."
 msgstr ""
 
 #: ultimate-page-builder.php:152
-msgid "<strong>Ultimate Page Builder</strong> require PHP 5.5 or above."
+msgid "<strong>Ultimate Page Builder</strong> require PHP 5.3 or above."
 msgstr ""

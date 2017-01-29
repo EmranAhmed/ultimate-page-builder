@@ -51,6 +51,12 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 == Changelog ==
 
+= 1.0.0-beta.13 =
+
+- Element Panel title fix
+- Media Image select support for add_image_size
+- Preview class and element class function separated
+
 = 1.0.0-beta.12 =
 
 - Refactor input fields

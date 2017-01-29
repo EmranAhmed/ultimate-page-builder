@@ -4,7 +4,7 @@
      * Plugin URI: https://wordpress.org/plugins/ultimate-page-builder/
      * Description: An Incredibly easiest and highly customizable drag and drop page builder helps create professional websites without writing a line of code.
      * Author: Emran Ahmed
-     * Version: 1.0.0-beta.12
+     * Version: 1.0.0-beta.13
      * Domain Path: /languages
      * Text Domain: ultimate-page-builder
      * Author URI: https://themehippo.com/
@@ -141,7 +141,7 @@
             }
 
             public function has_required_php_version() {
-                return version_compare( PHP_VERSION, '5.5' ) >= 0;
+                return version_compare( PHP_VERSION, '5.3' ) >= 0;
             }
 
             public function php_requirement_notice() {
@@ -149,7 +149,7 @@
                     $class   = 'notice notice-error';
                     $text    = esc_html__( 'Please check PHP version requirement.', 'ultimate-page-builder' );
                     $link    = esc_url( 'https://wordpress.org/about/requirements/' );
-                    $message = wp_kses( __( "<strong>Ultimate Page Builder</strong> require PHP 5.5 or above.", 'ultimate-page-builder' ), array( 'strong' => array() ) );
+                    $message = wp_kses( __( "<strong>Ultimate Page Builder</strong> require PHP 5.3 or above.", 'ultimate-page-builder' ), array( 'strong' => array() ) );
 
                     printf( '<div class="%1$s"><p>%2$s <a target="_blank" href="%3$s">%4$s</a></p></div>', $class, $message, $link, $text );
                 }

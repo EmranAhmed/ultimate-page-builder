@@ -50,10 +50,10 @@ export default {
     },
 
     computed : {
-
         panelTitle(){
             if (this.item['_upb_options']) {
-                return sprintf(this.item._upb_options.meta.contents.title, this.item.attributes.title)
+                let title = this.item.attributes['title'] ? this.item.attributes.title : this.item._upb_options.element.name;
+                return sprintf(this.item._upb_options.meta.contents.title, title)
             }
             else {
                 return false;
@@ -61,25 +61,21 @@ export default {
         },
 
         panelMetaHelp(){
-
             if (this.item['_upb_options']) {
                 return this.item._upb_options.meta.contents.help
             }
             else {
                 return false;
             }
-
         },
 
         panelMetaSearch(){
-
             if (this.item['_upb_options']) {
                 return this.item._upb_options.meta.contents.search
             }
             else {
                 return false;
             }
-
         },
 
         panelMetaTools(){

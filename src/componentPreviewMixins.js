@@ -21,8 +21,8 @@ export default{
                     cssClasses.push(this.model.attributes.element_class);
                 }
 
-                if (this.hiddenDeviceClasses) {
-                    cssClasses.push(this.hiddenDeviceClasses);
+                if (this.deviceHiddenClasses) {
+                    cssClasses.push(this.deviceHiddenClasses);
                 }
 
                 return cssClasses.join(' ');
@@ -32,9 +32,7 @@ export default{
 
                 let cssClasses = [];
 
-                cssClasses.push(`upb-preview-element`);
-
-                cssClasses.push(`${this.model.tag}-preview`);
+                cssClasses.push(this.addPreviewClass());
 
                 if (extra && _.isString(extra)) {
                     cssClasses.push(extra);
@@ -44,21 +42,7 @@ export default{
                     cssClasses.push(...extra);
                 }
 
-                if (this.model._upb_options.hasMiniToolbar) {
-                    cssClasses.push(`upb-has-mini-toolbar`);
-                }
-
                 cssClasses.push(this.rowGroupClass);
-
-                if (!this.model._upb_options.core) {
-                    cssClasses.push(`upb-preview-element-non-core`);
-                }
-
-                if (_.isArray(this.model.contents)) {
-                    cssClasses.push(`upb-preview-element-type-container`);
-                }
-
-                cssClasses.push(`element-id-${this.unique_id}`);
 
                 return cssClasses.join(' ');
             }
@@ -73,9 +57,7 @@ export default{
 
                 let cssClasses = [];
 
-                cssClasses.push(`upb-preview-element`);
-
-                cssClasses.push(`${this.model.tag}-preview`);
+                cssClasses.push(this.addPreviewClass());
 
                 if (extra && _.isString(extra)) {
                     cssClasses.push(extra);
@@ -85,32 +67,13 @@ export default{
                     cssClasses.push(...extra);
                 }
 
-                if (this.model._upb_options.hasMiniToolbar) {
-                    cssClasses.push(`upb-has-mini-toolbar`);
-                }
-
                 if (!_.isUndefined(this.model.attributes['element_class'])) {
                     cssClasses.push(this.model.attributes.element_class);
                 }
 
                 cssClasses.push(...this.generateColumnClass());
 
-                cssClasses.push(this.hiddenDeviceClasses);
-
-                // No Content Class Added
-                if (!this.hasContents) {
-                    cssClasses.push(`upb-preview-element-no-contents`);
-                }
-
-                if (!this.model._upb_options.core) {
-                    cssClasses.push(`upb-preview-element-non-core`);
-                }
-
-                if (_.isArray(this.model.contents)) {
-                    cssClasses.push(`upb-preview-element-type-container`);
-                }
-
-                cssClasses.push(`element-id-${this.unique_id}`);
+                cssClasses.push(this.deviceHiddenClasses);
 
                 return cssClasses.join(' ');
             },

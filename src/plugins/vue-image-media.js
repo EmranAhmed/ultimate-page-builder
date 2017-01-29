@@ -45,13 +45,15 @@ import { util } from 'vue';
                     frame.on('select', function () {
                         let selection = frame.state().get('selection');
 
+                        // console.log(selection.toJSON());
+
                         if (!selection) return;
 
                         // loop through the selected files
                         selection.each(function (attachment) {
 
                             if (_.isUndefined(attachment.attributes.sizes[vnode.context.attributes.size])) {
-                                console.warn(`Media Image size "${vnode.context.attributes.size}" is not available, try re-generate thumbnails. Using full sized for fallback. Available sizes are:`)
+                                console.warn(`Media Image size "${vnode.context.attributes.size}" is not available, try re-generate thumbnails. Did you add your image size with "image_size_names_choose" filter? Now Using full sized for fallback. Available sizes are:`)
                                 console.table(attachment.attributes.sizes);
                                 vnode.context.attributes.size = 'full';
                             }

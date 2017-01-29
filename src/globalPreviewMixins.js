@@ -103,7 +103,7 @@ export default{
             }
         },
 
-        hiddenDeviceClasses(){
+        deviceHiddenClasses(){
             if (!_.isUndefined(this.model.attributes['device-hidden'])) {
                 return this.model.attributes['device-hidden'].join(' ');
             }
@@ -131,6 +131,20 @@ export default{
                 }
             }
             return background;
+        },
+
+        elementID(){
+
+            if (!_.isUndefined(this.model.attributes['element_id'])) {
+                return this.model.attributes.element_id;
+            }
+            return null;
+        },
+        elementClass(){
+            if (!_.isUndefined(this.model.attributes['element_class'])) {
+                return this.model.attributes.element_class;
+            }
+            return '';
         },
 
         sidebarExpanded(){
@@ -313,11 +327,12 @@ export default{
             }
         },
 
-        addClass(extra = false){
+        addPreviewClass(extra = false){
 
             let cssClasses = [];
 
             cssClasses.push(`upb-preview-element`);
+
             cssClasses.push(`${this.model.tag}-preview`);
 
             if (extra && _.isString(extra)) {
@@ -330,14 +345,6 @@ export default{
 
             if (this.model._upb_options.hasMiniToolbar) {
                 cssClasses.push(`upb-has-mini-toolbar`);
-            }
-
-            if (!_.isUndefined(this.model.attributes['element_class'])) {
-                cssClasses.push(this.model.attributes.element_class);
-            }
-
-            if (this.hiddenDeviceClasses) {
-                cssClasses.push(this.hiddenDeviceClasses);
             }
 
             if (this.sidebarExpanded) {
@@ -367,6 +374,33 @@ export default{
             }
 
             cssClasses.push(`element-id-${this.unique_id}`);
+
+            return cssClasses.join(' ');
+        },
+
+        addClass(extra = false, combinePreview = true){
+
+            let cssClasses = [];
+
+            if (extra && _.isString(extra)) {
+                cssClasses.push(extra);
+            }
+
+            if (extra && _.isArray(extra)) {
+                cssClasses.push(...extra);
+            }
+
+            if (combinePreview) {
+                cssClasses.push(this.addPreviewClass());
+            }
+
+            if (!_.isUndefined(this.model.attributes['element_class'])) {
+                cssClasses.push(this.model.attributes.element_class);
+            }
+
+            if (this.deviceHiddenClasses) {
+                cssClasses.push(this.deviceHiddenClasses);
+            }
 
             return cssClasses.join(' ');
         },

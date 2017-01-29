@@ -33,9 +33,7 @@ export default {
 
         panelTitle(){
             if (this.item['_upb_options']) {
-
                 let title = this.item.attributes['title'] ? this.item.attributes.title : this.item._upb_options.element.name;
-
                 return sprintf(this.item._upb_options.meta.settings.title, title)
             }
             else {
@@ -44,25 +42,21 @@ export default {
         },
 
         panelMetaHelp(){
-
             if (this.item['_upb_options']) {
                 return this.item._upb_options.meta.settings.help
             }
             else {
                 return false;
             }
-
         },
 
         panelMetaTools(){
-
             if (this.item['_upb_options']) {
                 return this.item._upb_options.tools.settings;
             }
             else {
                 return false;
             }
-
         },
 
         contents(){

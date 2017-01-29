@@ -179,7 +179,7 @@
                         'title' => esc_html__( 'Delete', 'ultimate-page-builder' ),
                     );
 
-                    if ( in_array( 'enable', array_column( $settings, 'id' ) ) ) {
+                    if ( in_array( 'enable', wp_list_pluck( $settings, 'id' ) ) ) {
                         $list_toolbar[ 'enable' ] = array(
                             'id'    => 'enable',
                             'icon'  => 'mdi mdi-eye',
