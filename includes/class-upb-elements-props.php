@@ -172,6 +172,12 @@
                         break;
 
                     default:
+
+
+                        if ( !isset($options[ 'value' ]) ) {
+                            $options[ 'value' ] = NULL;
+                        }
+
                         if ( is_null( $options[ 'value' ] ) ) {
                             $options[ 'value' ] = esc_html( $options[ 'default' ] );
                         }

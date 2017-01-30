@@ -51,6 +51,9 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 == Changelog ==
 
+= 1.0.0-beta.14 =
+- Custom menu widget base error fixed
+
 = 1.0.0-beta.13 =
 
 - Element Panel title fix

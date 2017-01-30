@@ -104,17 +104,6 @@ export default{
                 return true;
             },
 
-            addKeyIndex(keyindex){
-                if (_.isArray(this.model.contents)) {
-
-                    //console.log(this.model.tag, this.model.contents);
-
-                    this.model.contents.map((m, i) => {
-                        m._upb_options['_keyIndex'] = `${keyindex}/${i}`;
-                    });
-                }
-            },
-
             afterDrop(content, accepted = false){
                 if (accepted) {
 

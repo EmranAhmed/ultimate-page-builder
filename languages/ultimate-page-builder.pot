@@ -25,7 +25,7 @@ msgstr ""
 msgid "Contact form 1"
 msgstr ""
 
-#: elements/3rd-party.php:11, elements/widget-based.php:12, elements/widget-based.php:63, elements/widget-based.php:118, elements/widget-based.php:155, elements/widget-based.php:214, elements/widget-based.php:315, elements/widget-based.php:352, elements/widget-based.php:415, elements/widget-based.php:464, elements/widget-based.php:521, elements/widget-based.php:573, elements/with-upb.php:11, elements/with-upb.php:62, elements/with-upb.php:105, elements/with-upb.php:224, elements/with-upb.php:353, elements/with-upb.php:399, elements/with-upb.php:447, includes/upb-functions.php:509, includes/upb-settings.php:10
+#: elements/3rd-party.php:11, elements/widget-based.php:12, elements/widget-based.php:63, elements/widget-based.php:129, elements/widget-based.php:166, elements/widget-based.php:225, elements/widget-based.php:326, elements/widget-based.php:363, elements/widget-based.php:426, elements/widget-based.php:475, elements/widget-based.php:532, elements/widget-based.php:584, elements/with-upb.php:11, elements/with-upb.php:62, elements/with-upb.php:105, elements/with-upb.php:224, elements/with-upb.php:353, elements/with-upb.php:399, elements/with-upb.php:447, includes/upb-functions.php:509, includes/upb-settings.php:10
 msgid "Enable / Disable"
 msgstr ""
 
@@ -105,7 +105,7 @@ msgstr ""
 msgid "An example of extra input"
 msgstr ""
 
-#: elements/widget-based.php:10, elements/widget-based.php:61, elements/widget-based.php:116, elements/widget-based.php:153, elements/widget-based.php:212, elements/widget-based.php:313, elements/widget-based.php:350, elements/widget-based.php:413, elements/widget-based.php:462, elements/widget-based.php:519, elements/widget-based.php:556, elements/with-upb.php:9, elements/with-upb.php:397, elements/with-upb.php:445, includes/upb-functions.php:475
+#: elements/widget-based.php:10, elements/widget-based.php:61, elements/widget-based.php:127, elements/widget-based.php:164, elements/widget-based.php:223, elements/widget-based.php:324, elements/widget-based.php:361, elements/widget-based.php:424, elements/widget-based.php:473, elements/widget-based.php:530, elements/widget-based.php:567, elements/with-upb.php:9, elements/with-upb.php:397, elements/with-upb.php:445, includes/upb-functions.php:475
 msgid "Title"
 msgstr ""
 
@@ -113,11 +113,11 @@ msgstr ""
 msgid "Archives"
 msgstr ""
 
-#: elements/widget-based.php:16, elements/widget-based.php:159
+#: elements/widget-based.php:16, elements/widget-based.php:170
 msgid "Display as dropdown"
 msgstr ""
 
-#: elements/widget-based.php:23, elements/widget-based.php:166
+#: elements/widget-based.php:23, elements/widget-based.php:177
 msgid "Show post counts"
 msgstr ""
 
@@ -129,200 +129,204 @@ msgstr ""
 msgid "Custom Menu"
 msgstr ""
 
-#: elements/widget-based.php:69
+#: elements/widget-based.php:72
 msgid "-- Select --"
 msgstr ""
 
-#: elements/widget-based.php:73
-msgid "Select Menu"
+#: elements/widget-based.php:76
+msgid "Choose Menu"
 msgstr ""
 
-#: elements/widget-based.php:93
+#: elements/widget-based.php:85
+msgid "No Menu available. %sCreate a menu first%s"
+msgstr ""
+
+#: elements/widget-based.php:104
 msgid "Custom Menu Widget"
 msgstr ""
 
-#: elements/widget-based.php:102
+#: elements/widget-based.php:113
 msgid "Choose a menu from left panel"
 msgstr ""
 
-#: elements/widget-based.php:116
+#: elements/widget-based.php:127
 msgid "Calendar"
 msgstr ""
 
-#: elements/widget-based.php:133
+#: elements/widget-based.php:144
 msgid "Calendar Widget"
 msgstr ""
 
-#: elements/widget-based.php:153, includes/upb-ajax-functions.php:586
+#: elements/widget-based.php:164, includes/upb-ajax-functions.php:586
 msgid "Categories"
 msgstr ""
 
-#: elements/widget-based.php:173
+#: elements/widget-based.php:184
 msgid "Show hierarchy"
 msgstr ""
 
-#: elements/widget-based.php:192
+#: elements/widget-based.php:203
 msgid "Categories Widget"
 msgstr ""
 
-#: elements/widget-based.php:212, includes/upb-ajax-functions.php:623
+#: elements/widget-based.php:223, includes/upb-ajax-functions.php:623
 msgid "Links"
 msgstr ""
 
-#: elements/widget-based.php:217
+#: elements/widget-based.php:228
 msgid "All Links"
 msgstr ""
 
-#: elements/widget-based.php:222
+#: elements/widget-based.php:233
 msgid "Select Link Category"
 msgstr ""
 
-#: elements/widget-based.php:223
+#: elements/widget-based.php:234
 msgid "Get list from link_category term"
 msgstr ""
 
-#: elements/widget-based.php:231, elements/widget-based.php:356
+#: elements/widget-based.php:242, elements/widget-based.php:367
 msgid "Sort by"
 msgstr ""
 
-#: elements/widget-based.php:235
+#: elements/widget-based.php:246
 msgid "Link title"
 msgstr ""
 
-#: elements/widget-based.php:236
+#: elements/widget-based.php:247
 msgid "Link rating"
 msgstr ""
 
-#: elements/widget-based.php:237
+#: elements/widget-based.php:248
 msgid "Link ID"
 msgstr ""
 
-#: elements/widget-based.php:238
+#: elements/widget-based.php:249
 msgid "Random"
 msgstr ""
 
-#: elements/widget-based.php:245
+#: elements/widget-based.php:256
 msgid "Show Link Image"
 msgstr ""
 
-#: elements/widget-based.php:252
+#: elements/widget-based.php:263
 msgid "Show Link Name"
 msgstr ""
 
-#: elements/widget-based.php:259
+#: elements/widget-based.php:270
 msgid "Show Link Description"
 msgstr ""
 
-#: elements/widget-based.php:266
+#: elements/widget-based.php:277
 msgid "Show Link Rating"
 msgstr ""
 
-#: elements/widget-based.php:273
+#: elements/widget-based.php:284
 msgid "Number of links to show"
 msgstr ""
 
-#: elements/widget-based.php:293
+#: elements/widget-based.php:304
 msgid "Links Widget"
 msgstr ""
 
-#: elements/widget-based.php:313
+#: elements/widget-based.php:324
 msgid "Meta"
 msgstr ""
 
-#: elements/widget-based.php:330
+#: elements/widget-based.php:341
 msgid "Meta Widget"
 msgstr ""
 
-#: elements/widget-based.php:350
+#: elements/widget-based.php:361
 msgid "Pages"
 msgstr ""
 
-#: elements/widget-based.php:360
+#: elements/widget-based.php:371
 msgid "Page title"
 msgstr ""
 
-#: elements/widget-based.php:361
+#: elements/widget-based.php:372
 msgid "Page order"
 msgstr ""
 
-#: elements/widget-based.php:362
+#: elements/widget-based.php:373
 msgid "Page ID"
 msgstr ""
 
-#: elements/widget-based.php:370
+#: elements/widget-based.php:381
 msgid "Exclude"
 msgstr ""
 
-#: elements/widget-based.php:371
+#: elements/widget-based.php:382
 msgid "Exclude Pages"
 msgstr ""
 
-#: elements/widget-based.php:378
+#: elements/widget-based.php:389
 msgid "Search page to exclude"
 msgstr ""
 
-#: elements/widget-based.php:394
+#: elements/widget-based.php:405
 msgid "Pages Widget"
 msgstr ""
 
-#: elements/widget-based.php:413, elements/widget-based.php:443
+#: elements/widget-based.php:424, elements/widget-based.php:454
 msgid "Recent Comments"
 msgstr ""
 
-#: elements/widget-based.php:419
+#: elements/widget-based.php:430
 msgid "Number of comments"
 msgstr ""
 
-#: elements/widget-based.php:420
+#: elements/widget-based.php:431
 msgid "Number of comments to show."
 msgstr ""
 
-#: elements/widget-based.php:462, elements/widget-based.php:500
+#: elements/widget-based.php:473, elements/widget-based.php:511
 msgid "Recent Posts"
 msgstr ""
 
-#: elements/widget-based.php:468
+#: elements/widget-based.php:479
 msgid "Number of posts"
 msgstr ""
 
-#: elements/widget-based.php:469
+#: elements/widget-based.php:480
 msgid "Number of posts to show."
 msgstr ""
 
-#: elements/widget-based.php:481
+#: elements/widget-based.php:492
 msgid "Display post date?"
 msgstr ""
 
-#: elements/widget-based.php:482
+#: elements/widget-based.php:493
 msgid "Show or Hide post date."
 msgstr ""
 
-#: elements/widget-based.php:519
+#: elements/widget-based.php:530
 msgctxt "Search widget"
 msgid "Search"
 msgstr ""
 
-#: elements/widget-based.php:536
+#: elements/widget-based.php:547
 msgid "Search Widget"
 msgstr ""
 
-#: elements/widget-based.php:556
+#: elements/widget-based.php:567
 msgid "Text widget"
 msgstr ""
 
-#: elements/widget-based.php:560
+#: elements/widget-based.php:571
 msgid "Content"
 msgstr ""
 
-#: elements/widget-based.php:567
+#: elements/widget-based.php:578
 msgid "Add paragraphs"
 msgstr ""
 
-#: elements/widget-based.php:568
+#: elements/widget-based.php:579
 msgid "Automatically add paragraphs"
 msgstr ""
 
-#: elements/widget-based.php:588
+#: elements/widget-based.php:599
 msgid "Text Widget"
 msgstr ""
 

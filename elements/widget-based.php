@@ -62,18 +62,29 @@
 
         array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
 
-        if ( ! empty( wp_get_nav_menus() ) ):
 
-            $menus = wp_list_pluck( wp_get_nav_menus(), 'name', 'term_id' );
+        $nav_menus = wp_get_nav_menus();
+
+        if ( ! empty( $nav_menus ) ):
+
+            $menus = wp_list_pluck( $nav_menus, 'name', 'term_id' );
             ksort( $menus );
             $menus[ 0 ] = esc_attr__( '-- Select --', 'ultimate-page-builder' );
 
             array_push( $attributes, array(
                 'id'      => 'nav_menu',
-                'title'   => esc_html__( 'Select Menu', 'ultimate-page-builder' ),
+                'title'   => esc_html__( 'Choose Menu', 'ultimate-page-builder' ),
                 'type'    => 'select',
                 'value'   => FALSE,
                 'options' => $menus
+            ) );
+
+        else:
+            array_push( $attributes, array(
+                'id'    => 'message',
+                'title' => sprintf(esc_html__( 'No Menu available. %sCreate a menu first%s', 'ultimate-page-builder' ), '<a target="_blank" href="'.esc_url(admin_url('nav-menus.php')).'">', '</a>'),
+                'type'  => 'message',
+                'style' => 'warning'
             ) );
         endif;
 
