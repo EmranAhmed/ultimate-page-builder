@@ -130,7 +130,8 @@
                 'upb-container-fluid'           => esc_html__( 'Fluid Container', 'ultimate-page-builder' ),
                 'upb-container-fluid-no-gutter' => esc_html__( 'Fluid Container without gutter', 'ultimate-page-builder' ),
                 'upb-container'                 => esc_html__( 'Fixed Container', 'ultimate-page-builder' ),
-                'upb-container-no-gutter'       => esc_html__( 'Fixed Container without gutter', 'ultimate-page-builder' )
+                'upb-container-no-gutter'       => esc_html__( 'Fixed Container without gutter', 'ultimate-page-builder' ),
+                'upb-no-container'              => esc_html__( 'No Container', 'ultimate-page-builder' ),
             ),
             'defaultDeviceId'   => 'xs', // We should set default column element attributes as like defaultDeviceId, If xs then [column xs='...']
             'deviceSizeTitle'   => esc_html__( 'Screen Sizes', 'ultimate-page-builder' ),

@@ -64,6 +64,22 @@
                     $_upb_options[ 'element' ][ 'child' ] = FALSE;
                 }
 
+                if ( ! isset( $_upb_options[ 'element' ][ 'tag' ] ) ) {
+                    $_upb_options[ 'element' ][ 'tag' ] = FALSE;
+                } else {
+
+                    // Support: New, Soon, Theme, WooCommerce, WordPress
+                    $_upb_options[ 'element' ][ 'tagClass' ] = strtolower( $_upb_options[ 'element' ][ 'tag' ] );
+                }
+
+                if ( ! isset( $_upb_options[ 'element' ][ 'icon' ] ) ) {
+                    $_upb_options[ 'element' ][ 'icon' ] = 'mdi mdi-emoticon-poop';
+                }
+
+                if ( ! isset( $_upb_options[ 'element' ][ 'name' ] ) ) {
+                    $_upb_options[ 'element' ][ 'name' ] = esc_html__( 'Anonymous', 'ultimate-page-builder' );
+                }
+
                 if ( ! isset( $_upb_options[ 'preview' ] ) ) {
                     $_upb_options[ 'preview' ] = array(
                         'component' => 'upb-preview-' . $tag,

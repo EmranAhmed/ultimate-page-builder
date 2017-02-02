@@ -4,7 +4,6 @@ import store from '../../store'
 import Draggable from '../../plugins/vue-draggable'
 Vue.use(Draggable);
 
-
 // import UIDraggable from '../../plugins/vue-ui-draggable'
 // Vue.use(UIDraggable);
 
@@ -22,7 +21,11 @@ export default {
         }
     },
 
-    computed : {},
+    computed : {
+        elementTagClass(){
+            return [this.model._upb_options.element.tagClass, 'element-tag-ribbon']
+        }
+    },
 
     methods : {
 

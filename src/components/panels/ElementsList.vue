@@ -1,21 +1,10 @@
 <template>
-    <li :class="itemClass()" v-draggable>
+    <li :class="itemClass()" v-draggable="model._upb_options.element.tag">
+        <div v-if="model._upb_options.element.tag" :class="elementTagClass" v-text="model._upb_options.element.tag"></div>
         <div class="icon-wrapper">
             <i :class="model._upb_options.element.icon"></i>
         </div>
-        <div v-text="model._upb_options.element.name"></div>
+        <div class="element-name" v-text="model._upb_options.element.name"></div>
     </li>
-
-    <!--<li :class="itemClass()" v-draggable>
-        <div class="icon-wrapper">
-            <i :class="model._upb_options.element.icon"></i>
-        </div>
-
-        <div v-text="model._upb_options.element.name"></div>
-
-    </li>-->
 </template>
-<style>
-
-</style>
 <script src="./ElementsList.js"></script>

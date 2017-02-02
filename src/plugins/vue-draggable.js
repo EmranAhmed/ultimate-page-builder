@@ -25,7 +25,12 @@ import store from '../store';
 
             inserted (el, binding, vnode) {
 
-                el.setAttribute("draggable", true);
+                if (binding.value == 'soon') {
+                    el.setAttribute("draggable", false);
+                }
+                else {
+                    el.setAttribute("draggable", true);
+                }
 
                 el.classList.add('upb-draggable-element');
 

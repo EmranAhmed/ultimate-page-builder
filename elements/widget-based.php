@@ -38,7 +38,7 @@
             ),
 
             'element' => array(
-                'name' => esc_html__( 'Archives Widget', 'ultimate-page-builder' ),
+                'name' => esc_html__( 'Archives', 'ultimate-page-builder' ),
                 'icon' => 'mdi mdi-wordpress'
             ),
 
@@ -62,7 +62,6 @@
 
         array_push( $attributes, upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' ) );
 
-
         $nav_menus = wp_get_nav_menus();
 
         if ( ! empty( $nav_menus ) ):
@@ -82,7 +81,7 @@
         else:
             array_push( $attributes, array(
                 'id'    => 'message',
-                'title' => sprintf(esc_html__( 'No Menu available. %sCreate a menu first%s', 'ultimate-page-builder' ), '<a target="_blank" href="'.esc_url(admin_url('nav-menus.php')).'">', '</a>'),
+                'title' => sprintf( esc_html__( 'No Menu available. %sCreate a menu first%s', 'ultimate-page-builder' ), '<a target="_blank" href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">', '</a>' ),
                 'type'  => 'message',
                 'style' => 'warning'
             ) );
@@ -101,7 +100,7 @@
             ),
 
             'element' => array(
-                'name' => esc_html__( 'Custom Menu Widget', 'ultimate-page-builder' ),
+                'name' => esc_html__( 'Custom Menu', 'ultimate-page-builder' ),
                 'icon' => 'mdi mdi-wordpress'
             ),
 
@@ -141,7 +140,7 @@
             ),
 
             'element' => array(
-                'name' => esc_html__( 'Calendar Widget', 'ultimate-page-builder' ),
+                'name' => esc_html__( 'Calendar', 'ultimate-page-builder' ),
                 'icon' => 'mdi mdi-wordpress'
             ),
 
@@ -200,7 +199,7 @@
             ),
 
             'element' => array(
-                'name' => esc_html__( 'Categories Widget', 'ultimate-page-builder' ),
+                'name' => esc_html__( 'Categories', 'ultimate-page-builder' ),
                 'icon' => 'mdi mdi-wordpress'
             ),
 
@@ -301,7 +300,7 @@
             ),
 
             'element' => array(
-                'name' => esc_html__( 'Links Widget', 'ultimate-page-builder' ),
+                'name' => esc_html__( 'Links', 'ultimate-page-builder' ),
                 'icon' => 'mdi mdi-wordpress'
             ),
 
@@ -338,7 +337,7 @@
             ),
 
             'element' => array(
-                'name' => esc_html__( 'Meta Widget', 'ultimate-page-builder' ),
+                'name' => esc_html__( 'Meta', 'ultimate-page-builder' ),
                 'icon' => 'mdi mdi-wordpress'
             ),
 
@@ -402,7 +401,7 @@
             ),
 
             'element' => array(
-                'name' => esc_html__( 'Pages Widget', 'ultimate-page-builder' ),
+                'name' => esc_html__( 'Pages', 'ultimate-page-builder' ),
                 'icon' => 'mdi mdi-wordpress'
             ),
 
@@ -451,7 +450,7 @@
             ),
 
             'element' => array(
-                'name' => esc_html__( 'Recent Comments', 'ultimate-page-builder' ),
+                'name' => esc_html__( 'Recent comment', 'ultimate-page-builder' ),
                 'icon' => 'mdi mdi-wordpress'
             ),
 
@@ -544,7 +543,7 @@
             ),
 
             'element' => array(
-                'name' => esc_html__( 'Search Widget', 'ultimate-page-builder' ),
+                'name' => esc_html__( 'Search', 'ultimate-page-builder' ),
                 'icon' => 'mdi mdi-wordpress'
             ),
 

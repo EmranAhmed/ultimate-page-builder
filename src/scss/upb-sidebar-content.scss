@@ -661,10 +661,12 @@ input[type="search"]::-webkit-search-decoration {
       display        : inline-block;
       vertical-align : top;
       text-align     : center;
-      min-height     : 95px;
+      margin-bottom  : 4px !important;
+      position       : relative;
+      overflow       : hidden;
 
       > div {
-        font-size : 14px !important;
+        font-size : 13px !important;
         }
 
       .icon-wrapper {
@@ -672,15 +674,54 @@ input[type="search"]::-webkit-search-decoration {
         padding-bottom : 0;
         }
 
+      .element-name {
+        padding : 10px 2px;
+        }
+
+      .element-tag-ribbon {
+        position         : absolute;
+        right            : -20px;
+        top              : 6px;
+        z-index          : 1;
+        overflow         : hidden;
+        width            : 70px;
+        height           : 20px;
+        text-align       : center;
+        transform        : rotate(45deg);
+        padding          : 1px;
+        font-size        : 10px !important;
+        background-color : #607D8B;
+        color            : #FFFFFF;
+        text-transform   : uppercase;
+        display          : block;
+        &.new {
+          background-color : #478E4A;
+          }
+        &.soon {
+          background-color : #E91E63;
+          }
+        &.wp {
+          background-color : #2525DA;
+          }
+        &.wc, &.woo {
+          background-color : #673AB7;
+          }
+        &.theme {
+          background-color : #9C27B0;
+          }
+        &.plugin {
+          background-color : #8BC34A;
+          }
+        }
+
       &:nth-child(odd) {
-        margin-right : 1%;
+        margin-right : 2px;
         }
       &:nth-child(even) {
-        margin-left : 1%;
+        margin-left : 2px;
         }
       }
     }
-
   }
 
 /*-----------------------
