@@ -243,6 +243,7 @@
             'sectionSaving'        => esc_attr__( 'Section Saving...', 'ultimate-page-builder' ),
             'sectionSaved'         => esc_attr__( 'Section Saved.', 'ultimate-page-builder' ),
             'sectionNotSaved'      => esc_attr__( "Section Can't Save.", 'ultimate-page-builder' ),
+            'elementNotRegistered' => esc_attr__( '"%s" is not registered.', 'ultimate-page-builder' ),
             'sectionDeleted'       => esc_attr__( "Section Removed.", 'ultimate-page-builder' ),
             'sectionAdded'         => esc_attr__( "%s Section Added.", 'ultimate-page-builder' ),
             'saving'               => esc_attr__( 'Saving', 'ultimate-page-builder' ),

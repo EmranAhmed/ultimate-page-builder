@@ -137,6 +137,7 @@ export default {
         },
 
         back(){
+            //console.log(this.$route.path.split('/').slice(1, -2));
             this.$router.go(-1);
         },
 

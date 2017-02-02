@@ -183,21 +183,23 @@ class store {
             return wp.shortcode.string({
                 tag     : shortcode.tag,
                 attrs   : attributes,
+                type    : this.filterBoolean(shortcode.contents) ? 'self-closing' : 'closed',
                 content : this.getShortcodeContent(shortcode.contents)
             });
         }).join('');
     }
 
     generateShortcode(tag, attrs, content = null) {
-
-        let attributes = extend(true, {}, attrs);
-        delete attributes._contents;
-
         return wp.shortcode.string({
             tag     : tag,
-            attrs   : attributes,
+            attrs   : attrs,
+            type    : this.filterBoolean(content) ? 'self-closing' : 'closed',
             content : this.getShortcodeContent(content)
         })
+    }
+
+    filterBoolean(value) {
+        return _.isString(value) && ['true', 'false', '0', '1', 'null', 'undefined', '-0'].includes(value.trim().toLowerCase());
     }
 
     getShortcodeContent(content) {

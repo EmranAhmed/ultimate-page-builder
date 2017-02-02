@@ -1,5 +1,6 @@
 import store from './store'
 import extend from 'extend'
+import {sprintf} from 'sprintf-js'
 
 export default{
     props : {
@@ -178,9 +179,17 @@ export default{
 
     methods : {
         addKeyIndex(keyindex){
-            if (_.isArray(this.model.contents)) {
-                this.model.contents.map((m, i) => {
-                    m._upb_options['_keyIndex'] = `${keyindex}/${i}`;
+            if (_.isArray(this.contents)) {
+                this.contents.map((m, i) => {
+                    if (this.isElementRegistered(m.tag)) {
+                        m._upb_options['_keyIndex'] = `${keyindex}/${i}`;
+                    }
+                    else {
+                        console.info(`%c Element "${m.tag}" is used but not registered. It's going to remove...`, 'color:red; font-size:18px');
+                        this.model.contents.splice(i, 1);
+                        store.stateChanged();
+                        this.$toast.warning(sprintf(this.l10n.elementNotRegistered, m.tag));
+                    }
                 });
             }
         },
@@ -195,16 +204,16 @@ export default{
                         contents=> {
                             //this.$nextTick(function () {
                             if (_.isEmpty(contents)) {
-                                console.info(`Empty contents returned. Did you create shortcode template like: "shortcodes/${this.tag}.php" file?`)
+                                console.info(`%c Empty content returns. Is your "${this.tag}" shortcode template available on: "shortcodes/${this.tag}.php" path?`, 'color:red; font-size:18px')
                             }
 
-                            Vue.set(this, 'xhrContents', contents)
+                            this.$set(this, 'xhrContents', contents)
                             //});
                         },
                         error=> {
 
                             if (error == 0) {
-                                console.info(`You need to implement "${this.model._upb_options.preview['ajax-hook']}" with wp ajax: "wp_ajax_${this.model._upb_options.preview['ajax-hook']}".`)
+                                console.info(`%c You should add "${this.model._upb_options.preview['ajax-hook']}" wp ajax hook. like: "wp_ajax_${this.model._upb_options.preview['ajax-hook']}".`, 'color:red; font-size:18px')
                             }
                             else {
                                 console.info(error);
@@ -217,13 +226,13 @@ export default{
                     store.wpAjax(this.model._upb_options.preview['ajax-hook'], this.attributes,
                         contents=> {
                             //this.$nextTick(function () {
-                            Vue.set(this, 'xhrContents', contents);
+                            this.$set(this, 'xhrContents', contents)
                             //});
                         },
                         error=> {
 
                             if (error == 0) {
-                                console.info(`You need to implement "${this.model._upb_options.preview['ajax-hook']}" with wp ajax: "wp_ajax_${this.model._upb_options.preview['ajax-hook']}".`)
+                                console.info(`%c You need to implement "${this.model._upb_options.preview['ajax-hook']}" with wp ajax: "wp_ajax_${this.model._upb_options.preview['ajax-hook']}".`, 'color:red; font-size:18px')
                             }
                             else {
                                 console.info(error);
@@ -246,14 +255,14 @@ export default{
 
         addID(){
 
-            if (!_.isUndefined(this.model.attributes['element_id'])) {
-                return this.model.attributes.element_id;
+            if (!_.isUndefined(this.attributes['element_id'])) {
+                return this.attributes.element_id;
             }
             return null;
         },
 
         isElementRegistered(tag){
-            return store.elements.includes(tag);
+            return store.isElementRegistered(tag);
         },
 
         attributeWatch : _.debounce(function () {
@@ -379,7 +388,7 @@ export default{
 
             cssClasses.push(`upb-preview-element`);
 
-            cssClasses.push(`${this.model.tag}-preview`);
+            cssClasses.push(`${this.tag}-preview`);
 
             if (extra && _.isString(extra)) {
                 cssClasses.push(extra);

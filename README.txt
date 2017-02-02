@@ -51,6 +51,11 @@ If you are unable to use any of the methods due to internet connectivity and fil
 
 == Changelog ==
 
+= 1.0.0-beta.15 =
+- Self-Close Shortcode generate if no content available
+- Auto remove un registered or un available elements.
+- Developer friendly error message for preview and console
+
 = 1.0.0-beta.14 =
 - Custom menu widget base error fixed
 

@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import store from './store'
+import {sprintf} from 'sprintf-js';
+
 import globalPreviewMixins from './globalPreviewMixins';
 import componentPreviewMixins from './componentPreviewMixins';
 import Droppable from './plugins/vue-droppable'
@@ -58,12 +60,15 @@ store.getAllUPBElements(elements => {
         let upbComponentMixins = _.isEmpty(componentPreviewMixins[template]) ? false : componentPreviewMixins[template];
 
         Vue.component(component, function (resolve, reject) {
-
             store.getShortCodePreviewTemplate(template, function (templateData) {
+
+                if (_.isEmpty(templateData)) {
+                    console.info(`%c "${element.tag}" preview file "previews/${template}.php" is not available or empty.`, 'color:red; font-size:18px')
+                }
 
                 resolve({
                     name     : component,
-                    template : templateData,
+                    template : templateData || `<div style="color: red">"${element.tag}" preview file "previews/${template}.php" is not available or empty.</div>`,
                     mixins   : [globalPreviewMixins, upbComponentMixins, componentMixins]
                 });
             })
@@ -137,6 +142,12 @@ export default {
                         //}
 
                         this.addIndexAttribute(m, m.attributes, m.contents, regenerate);
+                    }
+                    else {
+                        console.info(`%c Element "${m.tag}" is used but not registered. It's going to remove...`, 'color:red; font-size:18px');
+                        this.model.contents.splice(i, 1);
+                        store.stateChanged();
+                        this.$toast.warning(sprintf(this.l10n.elementNotRegistered, m.tag));
                     }
                 })
             }
