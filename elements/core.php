@@ -15,6 +15,8 @@
         // upb_column_device_input is MUST HAVE field for column
         $attributes = array_merge( $attributes, upb_column_device_input() );
 
+        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
+
         $contents = array();
 
         $_upb_options = array(
@@ -53,6 +55,8 @@
         array_push( $attributes, upb_responsive_hidden_input() );
 
         array_push( $attributes, upb_row_wrapper_input() );
+
+        $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
 
         $contents = array();
 

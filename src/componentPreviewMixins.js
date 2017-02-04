@@ -6,79 +6,29 @@ export default{
         computed : {
             rowGroupClass(){
                 return store.grid.groupClass;
-            }
-        },
-
-        methods : {
-
+            },
             containerClass(){
-
                 let cssClasses = [];
 
                 cssClasses.push(this.model.attributes.container);
 
-                if (!_.isUndefined(this.model.attributes['element_class'])) {
-                    cssClasses.push(this.model.attributes.element_class);
+                if (this.elementClass) {
+                    cssClasses.push(this.elementClass);
                 }
 
                 if (this.deviceHiddenClasses) {
                     cssClasses.push(this.deviceHiddenClasses);
                 }
 
-                return cssClasses.join(' ');
-            },
-
-            addClass(extra = false){
-
-                let cssClasses = [];
-
-                cssClasses.push(this.addPreviewClass());
-
-                if (extra && _.isString(extra)) {
-                    cssClasses.push(extra);
-                }
-
-                if (extra && _.isArray(extra)) {
-                    cssClasses.push(...extra);
-                }
-
-                cssClasses.push(this.rowGroupClass);
-
-                return cssClasses.join(' ');
+                return cssClasses;
             }
         }
     },
 
     'upb-column' : {
 
-        methods : {
-
-            addClass(extra = false){
-
-                let cssClasses = [];
-
-                cssClasses.push(this.addPreviewClass());
-
-                if (extra && _.isString(extra)) {
-                    cssClasses.push(extra);
-                }
-
-                if (extra && _.isArray(extra)) {
-                    cssClasses.push(...extra);
-                }
-
-                if (!_.isUndefined(this.model.attributes['element_class'])) {
-                    cssClasses.push(this.model.attributes.element_class);
-                }
-
-                cssClasses.push(...this.generateColumnClass());
-
-                cssClasses.push(this.deviceHiddenClasses);
-
-                return cssClasses.join(' ');
-            },
-
-            generateColumnClass(){
+        computed : {
+            generatedColumnClass(){
 
                 let grid = store.grid.devices.map((device)=> {
                     let gridValue = this.model.attributes[device.id].trim();
@@ -98,7 +48,10 @@ export default{
                 // added extra grid class to control gutter
                 grid.unshift(store.grid.allGridClass);
                 return _.compact(grid);
-            },
+            }
+        },
+
+        methods : {
 
             dropAccept(content){
                 return true;

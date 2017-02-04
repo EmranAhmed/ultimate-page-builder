@@ -9,10 +9,13 @@
     padding-top : 25px;
 
     &.upb-column-preview,
-    &.upb-preview-element-non-core.upb-preview-element-type-container {
+    &.upb-preview-element-non-core.upb-preview-element-type-container.upb-preview-element-no-contents {
       min-height : 75px;
       }
 
+    &.upb-column-preview.upb-preview-element-no-contents {
+      min-height : 130px;
+      }
     }
 
   &.upb-sidebar-collapsed {

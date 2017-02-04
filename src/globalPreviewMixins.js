@@ -146,14 +146,18 @@ export default{
         },
 
         elementID(){
-            return this.model.attributes.element_id;
+            
+            if (!_.isUndefined(this.model.attributes['element_id'])) {
+                return this.model.attributes.element_id;
+            }
+            return false;
         },
 
         elementClass(){
             if (!_.isUndefined(this.model.attributes['element_class'])) {
                 return this.model.attributes.element_class;
             }
-            return '';
+            return false;
         },
 
         sidebarExpanded(){
@@ -449,8 +453,8 @@ export default{
                 cssClasses.push(this.addPreviewClass());
             }
 
-            if (!_.isUndefined(this.model.attributes['element_class'])) {
-                cssClasses.push(this.model.attributes.element_class);
+            if (this.elementClass) {
+                cssClasses.push(this.elementClass);
             }
 
             if (this.deviceHiddenClasses) {

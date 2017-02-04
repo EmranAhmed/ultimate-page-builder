@@ -1,6 +1,6 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' ); ?>
 
-<div v-preview-element v-droppable v-ui-droppable :class="addClass()">
+<div v-preview-element v-droppable v-ui-droppable :id="elementID" :class="addClass(generatedColumnClass)">
 
     <upb-preview-mini-toolbar :showDelete="false" :parent="parent" :model="model"></upb-preview-mini-toolbar>
 
