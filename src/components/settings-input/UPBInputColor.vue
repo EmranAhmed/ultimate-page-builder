@@ -6,7 +6,13 @@
                     <i v-if="attributes.deviceIcon" :class="deviceClass" :title="attributes.deviceTitle"></i>
                     <span class="title" v-text="attributes.title"></span>
                 </div>
-                <input class="color-input" v-colorpicker :data-alpha="attributes.alpha" type="text" :data-default-color="attributes.value" :value="attributes.value" :placeholder="attributes.placeholder">
+                <!--
+
+                // palettes : ['rgba(0,0,0,0.45)', '#000'] or false
+                // http://automattic.github.io/Iris/
+
+                -->
+                <input class="color-input" v-colorpicker="attributes.options" :data-alpha="attributes.options.alpha" type="text" :data-default-color="attributes.value" :value="attributes.value" :placeholder="attributes.placeholder">
             </label>
 
             <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>

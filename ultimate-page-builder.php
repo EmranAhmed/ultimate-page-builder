@@ -4,7 +4,7 @@
      * Plugin URI: https://wordpress.org/plugins/ultimate-page-builder/
      * Description: An Incredibly easiest and highly customizable drag and drop page builder helps create professional websites without writing a line of code.
      * Author: Emran Ahmed
-     * Version: 1.0.0-beta.15
+     * Version: 1.0.0-beta.16
      * Domain Path: /languages
      * Text Domain: ultimate-page-builder
      * Author URI: https://themehippo.com/
@@ -114,6 +114,9 @@
 
                     add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
                 }
+
+                add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
+                add_filter( 'plugin_action_links_' . UPB_PLUGIN_BASENAME, array( $this, 'plugin_action_links' ) );
             }
 
             public function after_setup_theme() {
@@ -129,7 +132,7 @@
                 }
             }
 
-            public function action_media_buttons( $editor_id ) {
+            public function action_media_buttons() {
 
                 global $post_type, $post;
 
@@ -294,6 +297,26 @@
 
             public function plugin_uri() {
                 return untrailingslashit( plugins_url( '/', __FILE__ ) );
+            }
+
+            public function plugin_row_meta( $links, $file ) {
+                if ( $file == UPB_PLUGIN_BASENAME ) {
+                    $row_meta = array(
+                        'documentation' => '<a href="' . esc_url( apply_filters( 'upb_documentation_url', 'https://upb-guide.themehippo.com/' ) ) . '" title="' . esc_attr( esc_html__( 'View Documentation', 'ultimate-page-builder' ) ) . '">' . esc_html__( 'Documentation', 'ultimate-page-builder' ) . '</a>',
+                        'support'       => '<a href="' . esc_url( apply_filters( 'upb_support_url', 'https://wordpress.org/support/plugin/ultimate-page-builder/' ) ) . '" title="' . esc_attr( esc_html__( 'Support', 'ultimate-page-builder' ) ) . '">' . esc_html__( 'Support', 'ultimate-page-builder' ) . '</a>',
+                    );
+
+                    return array_merge( $links, $row_meta );
+                }
+
+                return (array) $links;
+            }
+
+            public function plugin_action_links( $links ) {
+                $action_links = array(//    'settings' => '<a href="' . admin_url( 'admin.php?page=upb-settings' ) . '" title="' . esc_attr__( 'View Settings', 'ultimate-page-builder' ) . '">' . esc_html__( 'Settings', 'ultimate-page-builder' ) . '</a>',
+                );
+
+                return array_merge( $action_links, $links );
             }
         }
 

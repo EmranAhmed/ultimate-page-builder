@@ -421,7 +421,9 @@
                 'desc'     => esc_html__( 'Element background color', 'ultimate-page-builder' ),
                 'type'     => 'color',
                 'value'    => '#ffffff',
-                'alpha'    => TRUE,
+                'options'  => array(
+                    'alpha' => TRUE,
+                ),
                 'required' => array(
                     array( 'background-type', '=', array( 'color', 'both' ) )
                 )

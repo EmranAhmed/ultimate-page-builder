@@ -178,8 +178,11 @@
                         break;
 
                     case 'color':
-                        $options[ 'alpha' ] = isset( $options[ 'alpha' ] ) ? $options[ 'alpha' ] : FALSE;
-                        $options[ 'value' ] = empty( $value ) ? $options[ 'default' ] : $value;
+                        if ( ! isset( $options[ 'options' ] ) ) {
+                            $options[ 'options' ] = array();
+                        }
+                        $options[ 'options' ][ 'alpha' ] = isset( $options[ 'options' ][ 'alpha' ] ) ? $options[ 'options' ][ 'alpha' ] : FALSE;
+                        $options[ 'value' ]              = empty( $value ) ? $options[ 'default' ] : $value;
                         break;
 
                     case 'select':

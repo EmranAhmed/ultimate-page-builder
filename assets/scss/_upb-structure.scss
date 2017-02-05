@@ -1,3 +1,17 @@
+.woocommerce-icon::before {
+  font-family             : WooCommerce !important;
+  content                 : "\e03d";
+  font-weight             : normal;
+  font-style              : normal;
+  display                 : inline-block;
+  font-size               : inherit;
+  text-rendering          : auto;
+  line-height             : inherit;
+  -webkit-font-smoothing  : antialiased;
+  -moz-osx-font-smoothing : grayscale;
+  transform               : translate(0, 0);
+  speak                   : none;
+  }
 
 .upb-boilerplate {
   position : relative;
@@ -12,12 +26,12 @@
   width      : 100%;
   height     : 100%;
   > div {
-    position : absolute;
-    top      : 50%;
-    left     : 50%;
-    color    : white;
-    width    : auto;
-    transform: translateX(-50%);
+    position  : absolute;
+    top       : 50%;
+    left      : 50%;
+    color     : white;
+    width     : auto;
+    transform : translateX(-50%);
     }
   &.loaded {
     display : none;

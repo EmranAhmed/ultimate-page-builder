@@ -10,6 +10,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 An Incredibly easiest and highly customizable drag and drop page builder helps create professional websites without writing a line of code.
 
 == Description ==
+
+[youtube http://www.youtube.com/watch?v=LTSmCs5eRSY]
+
 Ultimate Page Builder is efficiently crafted powerful drag and drop frontend WordPress page builder.
 It offers WYSIWYG interface to build web page LIVE.
 Say goodbye the days to click back and forth between the clunky dashboard and site frontend while editing or building page.
@@ -17,8 +20,7 @@ Say goodbye the days to click back and forth between the clunky dashboard and si
 The powerful technology like Vue.JS is powering the innovating website builder for WordPress which has made it possible to compose high-end page designs and unique layouts real-time without writing a single line of code.
 
 = Links =
-* [Facebook User Group](https://www.facebook.com/groups/UltimatePageBuilder/)
-* [Website](https://themehippo.com/?utm_source=wordpress.org&utm_campaign=Ultimate+Page+Builder)
+[Facebook User Group](https://www.facebook.com/groups/UltimatePageBuilder/) | [Website](https://themehippo.com/?utm_source=wordpress.org&utm_campaign=Ultimate+Page+Builder) | [Documentation](https://upb-guide.themehippo.com/?utm_source=wordpress.org&utm_campaign=Ultimate+Page+Builder)
 
 == Installation ==
 
@@ -50,6 +52,11 @@ If you are unable to use any of the methods due to internet connectivity and fil
 7. Activate the plugin
 
 == Changelog ==
+
+= 1.0.0-beta.16 =
+- Media based element attributes
+- Spacing field for margin and padding input
+- Color input palettes option added
 
 = 1.0.0-beta.15 =
 - Self-Close Shortcode generate if no content available

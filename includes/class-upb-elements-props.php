@@ -43,7 +43,18 @@
                         break;
 
                     case 'color':
-                        $options[ 'alpha' ] = isset( $options[ 'alpha' ] ) ? $options[ 'alpha' ] : FALSE;
+
+                        if ( ! isset( $options[ 'options' ] ) ) {
+                            $options[ 'options' ] = array();
+                        }
+                        $options[ 'options' ][ 'alpha' ] = isset( $options[ 'options' ][ 'alpha' ] ) ? $options[ 'options' ][ 'alpha' ] : FALSE;
+
+                        $palettes = apply_filters( 'upb_color_input_option_palettes', array( '#000', '#fff', '#d33', '#d93', '#ee2', '#81d742', '#1e73be', '#8224e3' ) );
+
+                        $options[ 'options' ][ 'palettes' ] = isset( $options[ 'options' ][ 'palettes' ] ) ? $options[ 'options' ][ 'palettes' ] : $palettes;
+
+                        // Example:
+                        // $options[ 'options' ][ 'palettes' ] = array('rgba(0,0,0,0.45)', '#000')
                         break;
 
                     case 'toggle':
@@ -209,12 +220,9 @@
                         break;
 
                     default:
-
-
                         if ( ! isset( $options[ 'value' ] ) ) {
                             $options[ 'value' ] = NULL;
                         }
-
                         if ( is_null( $options[ 'value' ] ) ) {
                             $options[ 'value' ] = esc_html( $options[ 'default' ] );
                         }

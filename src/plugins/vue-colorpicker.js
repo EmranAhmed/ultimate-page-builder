@@ -19,7 +19,11 @@ import { util } from 'vue';
                         }
 
                         vnode.context.onColorChange(ui.color);
-                    }
+                    },
+
+                    // palettes : ['rgba(0,0,0,0.45)', '#000'] or false
+                    // http://automattic.github.io/Iris/
+
                 };
 
                 $(el).wpColorPicker($.extend(true, options, binding.value || {}));

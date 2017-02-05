@@ -39,6 +39,7 @@
 
             'element' => array(
                 'name' => esc_html__( 'Archives', 'ultimate-page-builder' ),
+                //'icon' => 'woocommerce-icon',
                 'icon' => 'mdi mdi-wordpress'
             ),
 

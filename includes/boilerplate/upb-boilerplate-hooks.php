@@ -152,6 +152,11 @@
         // Color
         wp_register_style( 'dashicon', includes_url( "/css/dashicons$suffix.css" ) );
         wp_register_style( 'select2', UPB_PLUGIN_ASSETS_URI . "css/select2$suffix.css" );
+
+        if ( function_exists( 'WC' ) ):
+            wp_register_style( 'woocommerce_admin_menu_styles', WC()->plugin_url() . '/assets/css/menu.css', array() );
+        endif;
+
         wp_register_script( 'select2', UPB_PLUGIN_ASSETS_URI . "js/select2$suffix.js", array( 'jquery' ), FALSE, TRUE );
 
         wp_register_script( 'iris', admin_url( "/js/iris.min.js" ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), FALSE, TRUE );
@@ -173,13 +178,14 @@
 
         // ref: /wp-includes/script-loader.php
         // to Clean Slate We did not use wp_head hook on boilerplate template
-        // that's why default registared scripts / styles will not load without re-registering :)
+        // that's why default registered scripts / styles does not load without re-registering :)
         // Only Admin CSS will load
         wp_enqueue_style( 'dashicon' );
         wp_enqueue_style( 'common' );
         wp_enqueue_style( 'buttons' );
         wp_enqueue_style( 'wp-color-picker' );
         wp_enqueue_style( 'select2' );
+        wp_enqueue_style( 'woocommerce_admin_menu_styles' );
 
         wp_enqueue_style( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URI . "css/upb-boilerplate$suffix.css" );
 
@@ -187,7 +193,6 @@
             // In Production Mode :)
             wp_enqueue_style( 'upb-style', UPB_PLUGIN_ASSETS_URI . "css/upb-style$suffix.css" );
         }
-
     } );
 
     add_action( 'upb_boilerplate_enqueue_scripts', function () {
