@@ -1,6 +1,6 @@
 === Ultimate Page Builder ===
 Contributors: EmranAhmed, wpeshaan, webdzainer
-Tags: page builder, drag and drop page builder, front-end builder, home page builder, landing page builder, layout builder, page, page builder, page builder plugin, site-builder, template builder, visual page builder, website builder, wysiwyg builder
+Tags: ultimate builder, page builder, drag and drop page builder, front-end builder, home page builder, landing page builder, layout builder, page, page builder, page builder plugin, site-builder, template builder, visual page builder, website builder, wysiwyg builder
 Requires at least: 4.5
 Tested up to: 4.7
 Stable tag: trunk
@@ -19,7 +19,7 @@ Say goodbye the days to click back and forth between the clunky dashboard and si
 
 The powerful technology like Vue.JS is powering the innovating website builder for WordPress which has made it possible to compose high-end page designs and unique layouts real-time without writing a single line of code.
 
-= Links =
+= Useful Links =
 [Facebook User Group](https://www.facebook.com/groups/UltimatePageBuilder/) | [Website](https://themehippo.com/?utm_source=wordpress.org&utm_campaign=Ultimate+Page+Builder) | [Documentation](https://upb-guide.themehippo.com/?utm_source=wordpress.org&utm_campaign=Ultimate+Page+Builder)
 
 == Installation ==
@@ -50,6 +50,49 @@ If you are unable to use any of the methods due to internet connectivity and fil
 5. Log in to your WordPress dashboard.
 6. Navigate to Plugins -> Installed
 7. Activate the plugin
+
+
+== Frequently Asked Questions ==
+
+= How to add section? =
+
+Edit a page with **Ultimate Page Builder**, Click on **SECTION** tab and click on **ADD SECTION** button to add new tab.
+
+= How to disable builder on specific page? =
+
+Go to **Settings Panel** and you will find **ENABLE / DISABLE** toggle option to enable or disable page builder on specific page.
+
+= Does it show short codes on page when uninstalled or disabled plugin? =
+
+No, It doesn't.
+
+= Is it possible to extend? =
+
+Yes, Ultimate Page Builder is easily extend able.
+
+= I am a theme developer, Can I save my pre build templates for my clients? =
+
+Yes, you can save your generated template contents.
+
+= Is it possible to save section for future use? =
+
+Yes, it is possible to save section and re-use on any of your page with page builder.
+
+= As a theme developer I use Twitter Bootstrap to develop my theme. Is it possible to use Bootstrap with Ultimate Page Builder? =
+
+Yes.
+
+
+== Screenshots ==
+
+1. Sections panel to add new section.
+2. Settings panel to enable or disable page builder on specific page or change element position display.
+3. Elements panel.
+4. Row and Column panel of a section.
+5. Section settings fields
+6. Show notice to use grid column simplified form and generate a simplified ratio.
+7. Saved Section
+7. Contact form 7 settings
 
 == Changelog ==
 

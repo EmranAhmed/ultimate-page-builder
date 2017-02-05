@@ -109,8 +109,8 @@
             'value'   => 0,
         ) );
 
-        array_push( $attributes, array(
-            'id'      => 'padding',
+        /*array_push( $attributes, array(
+            'id'      => 'margin',
             'title'   => esc_html__( 'Margin', 'ultimate-page-builder' ),
             'desc'    => esc_html__( 'Margin between two section', 'ultimate-page-builder' ),
             'type'    => 'spacing',
@@ -121,7 +121,7 @@
                 'bottom' => TRUE,
                 'left'   => FALSE,
             )
-        ) );
+        ) );*/
 
         /*$attributes = array_merge( $attributes,
                                    upb_media_query_based_input_group( array(
