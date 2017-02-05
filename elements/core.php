@@ -15,6 +15,8 @@
         // upb_column_device_input is MUST HAVE field for column
         $attributes = array_merge( $attributes, upb_column_device_input() );
 
+        // array_push( $attributes, upb_column_clearfix_input() );
+
         $attributes = array_merge( $attributes, upb_css_class_id_input_group() );
 
         $contents = array();
@@ -106,6 +108,35 @@
             ),
             'value'   => 0,
         ) );
+
+        array_push( $attributes, array(
+            'id'      => 'padding',
+            'title'   => esc_html__( 'Margin', 'ultimate-page-builder' ),
+            'desc'    => esc_html__( 'Margin between two section', 'ultimate-page-builder' ),
+            'type'    => 'spacing',
+            'value'   => array( 10, '', 10, '' ),
+            'options' => array(
+                'top'    => TRUE,
+                'right'  => FALSE,
+                'bottom' => TRUE,
+                'left'   => FALSE,
+            )
+        ) );
+
+        /*$attributes = array_merge( $attributes,
+                                   upb_media_query_based_input_group( array(
+                                                                          'id'      => 'margin',
+                                                                          'title'   => esc_html__( 'Margin', 'ultimate-page-builder' ),
+                                                                          'desc'    => esc_html__( 'Space between two section', 'ultimate-page-builder' ),
+                                                                          'type'    => 'range',
+                                                                          'options' => array(
+                                                                              'min'    => 0,
+                                                                              'max'    => 200,
+                                                                              'step'   => 1,
+                                                                              'suffix' => 'px',
+                                                                          ),
+                                                                          'value'   => 0,
+                                                                      ) ) );*/
 
         /*array_push( $attributes, array(
             'id'    => 'extraInputExample',

@@ -3,6 +3,6 @@
     // $attributes, $contents, $settings, $tag
 ?>
 
-<div class="<?php upb_shortcode_class( $attributes, esc_attr( upb_make_column_class( $attributes, 'upb-col' ) ) ) ?>">
+<div id="<?php upb_shortcode_id( $attributes ) ?>" class="<?php upb_shortcode_class( $attributes, esc_attr( upb_make_column_class( $attributes, 'upb-col' ) ) ) ?>">
     <?php echo do_shortcode( $contents ) ?>
 </div>

@@ -1,7 +1,10 @@
 <template>
     <li :class="typeClass()" v-show="isRequired">
         <div class="form-group">
-            <span class="title" v-text="attributes.title"></span>
+            <div class="title-wrapper">
+                <i v-if="attributes.deviceIcon" :class="deviceClass" :title="attributes.deviceTitle"></i>
+                <span class="title" v-text="attributes.title"></span>
+            </div>
             <div class="device-hidden-input">
                 <label v-for="(option, value) in attributes.options">
                     <input class="device-hidden-input" type="checkbox" :value="value" v-model="input">

@@ -2,7 +2,10 @@
     <li :class="typeClass()" v-show="isRequired">
         <div class="form-group">
             <label>
-                <span class="title" v-text="attributes.title"></span>
+                <div class="title-wrapper">
+                    <i v-if="attributes.deviceIcon" :class="deviceClass" :title="attributes.deviceTitle"></i>
+                    <span class="title" v-text="attributes.title"></span>
+                </div>
                 <input class="color-input" v-colorpicker :data-alpha="attributes.alpha" type="text" :data-default-color="attributes.value" :value="attributes.value" :placeholder="attributes.placeholder">
             </label>
 

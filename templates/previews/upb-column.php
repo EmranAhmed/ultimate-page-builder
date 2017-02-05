@@ -10,3 +10,6 @@
         <a href="#" @click.prevent="openElementsPanel()" class="upb-add-element-message-regular" v-text="messages.addElement"></a>
     </div>
 </div>
+<!--
+<div v-for="device in attributes.clear" :class="['clearfix', `visible-${device}-block`]"></div>
+-->

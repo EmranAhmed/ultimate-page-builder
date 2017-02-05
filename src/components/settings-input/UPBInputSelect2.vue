@@ -3,14 +3,20 @@
         <div class="form-group">
 
             <label v-if="multiple">
-                <span class="title" v-text="attributes.title"></span>
+                <div class="title-wrapper">
+                    <i v-if="attributes.deviceIcon" :class="deviceClass" :title="attributes.deviceTitle"></i>
+                    <span class="title" v-text="attributes.title"></span>
+                </div>
                 <select class="select2-multiple-input" multiple v-model="input" style="width: 100%" v-select2="attributes.settings" :id="attributes._id">
                     <option v-for="(option, value) in attributes.options" :value="value" :title="option" v-text="option"></option>
                 </select>
             </label>
 
             <label v-else>
-                <span class="title" v-text="attributes.title"></span>
+                <div class="title-wrapper">
+                    <i v-if="attributes.deviceIcon" :class="deviceClass" :title="attributes.deviceTitle"></i>
+                    <span class="title" v-text="attributes.title"></span>
+                </div>
                 <select class="select2-input" v-model="input" style="width: 100%" v-select2="attributes.settings" :id="attributes._id">
                     <option v-for="(option, value) in attributes.options" :value="value" :title="option" v-text="option"></option>
                 </select>

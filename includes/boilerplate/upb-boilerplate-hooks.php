@@ -57,7 +57,6 @@
         return $toolbar;
     } );
 
-
     // Register Tabs
     add_action( 'upb_register_tab', function ( $tab ) {
 

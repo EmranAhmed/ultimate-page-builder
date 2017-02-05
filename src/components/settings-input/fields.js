@@ -22,6 +22,7 @@ const fieldsComponents = {
     'upb-input-radio-icon'                : require('./UPBInputRadioIcon.vue'),
     'upb-input-radio-image'               : require('./UPBInputRadioImage.vue'),
     'upb-input-range'                     : require('./UPBInputRange.vue'),
+    'upb-input-spacing'                   : require('./UPBInputSpacing.vue'),
     'upb-input-select'                    : require('./UPBInputSelect.vue'),
     'upb-input-select2'                   : require('./UPBInputSelect2.vue'),
     'upb-input-select2-icon'              : require('./UPBInputSelect2Icon.vue'),

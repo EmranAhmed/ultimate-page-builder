@@ -17,6 +17,10 @@ export default{
             return store;
         },
 
+        deviceClass(){
+            return this.attributes.device ? [this.attributes.deviceIcon, `device-icon`, (this.attributes.device == this.store.currentPreviewDevice) ? 'active' : 'inactive'] : [this.attributes.deviceIcon, `device-icon`, `active`];
+        },
+
         multiple(){
             return (!_.isUndefined(this.attributes['multiple']) && this.attributes.multiple) ? true : false;
         },

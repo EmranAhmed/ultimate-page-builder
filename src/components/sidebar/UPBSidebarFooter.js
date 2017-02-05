@@ -65,6 +65,8 @@ export default {
                 document.getElementById('upb-wrapper').classList.remove(`preview-${d.id}`);
             });
 
+            store.currentPreviewDevice = device.id;
+
             document.getElementById('upb-wrapper').classList.add(`preview-${device.id}`);
 
             if (device['width']) {

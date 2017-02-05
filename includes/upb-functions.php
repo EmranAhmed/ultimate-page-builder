@@ -230,30 +230,18 @@
     }
 
     function upb_responsive_hidden() {
-        $devices = apply_filters( 'upb_responsive_hidden', array(
-            array(
-                'id'    => 'hidden-lg',
-                'title' => esc_html__( 'Large', 'ultimate-page-builder' ),
-                'icon'  => 'mdi mdi-desktop-mac',
-            ),
-            array(
-                'id'    => 'hidden-md',
-                'title' => esc_html__( 'Medium', 'ultimate-page-builder' ),
-                'icon'  => 'mdi mdi-laptop-mac'
-            ),
-            array(
-                'id'    => 'hidden-sm',
-                'title' => esc_html__( 'Small', 'ultimate-page-builder' ),
-                'icon'  => 'mdi mdi-tablet-ipad'
-            ),
-            array(
-                'id'    => 'hidden-xs',
-                'title' => esc_html__( 'Extra Small', 'ultimate-page-builder' ),
-                'icon'  => 'mdi mdi-cellphone-iphone'
-            ),
-        ) );
 
-        return array_values( $devices );
+        $devices = upb_devices();
+
+        $hidden_devices = apply_filters( 'upb_responsive_hidden', array_map( function ( $device ) {
+            return array(
+                'id'    => sprintf( 'hidden-%s', $device[ 'id' ] ),
+                'title' => $device[ 'title' ],
+                'icon'  => $device[ 'icon' ],
+            );
+        }, $devices ) );
+
+        return array_values( $hidden_devices );
     }
 
     function upb_make_column_class( $attributes, $extra = FALSE ) {
@@ -278,6 +266,56 @@
     }
 
     // Build-In Inputs
+
+
+    function upb_media_query_based_input_group( $input ) {
+        /*array(
+            'id'      => 'space',
+            'title'   => esc_html__( 'Spacer', 'ultimate-page-builder' ),
+            'desc'    => esc_html__( 'Space between two section', 'ultimate-page-builder' ),
+            'type'    => 'range',
+            'options' => array(
+                'min'    => 0,
+                'max'    => 200,
+                'step'   => 1,
+                'suffix' => 'px',
+            ),
+            'value'   => 0,
+        )*/
+
+        $get_devices = upb_devices();
+
+        $options = array_map( function ( $device ) {
+            return array(
+                'id'    => $device[ 'id' ],
+                'title' => $device[ 'title' ],
+                'icon'  => $device[ 'icon' ],
+            );
+        }, $get_devices );
+
+        array_unshift( $options, array(
+            'id'    => '',
+            'title' => esc_html__( 'Global', 'ultimate-page-builder' ),
+            'icon'  => 'mdi mdi-earth',
+        ) );
+
+        $devices = upb_list_pluck( $options, array( 'title', 'icon' ), 'id' );
+
+        $inputs = array_map( function ( $device, $key ) use ( $input, $options ) {
+
+            $input[ 'id' ]          = empty( $key ) ? $input[ 'id' ] : sprintf( '%s-%s', $input[ 'id' ], $key );
+            $input[ 'title' ]       = empty( $key ) ? $input[ 'title' ] : sprintf( esc_html__( '%s for %s device', 'ultimate-page-builder' ), $input[ 'title' ], $device[ 'title' ] );
+            $input[ 'device' ]      = empty( $key ) ? '' : $key;
+            $input[ 'deviceIcon' ]  = $device[ 'icon' ];
+            $input[ 'deviceTitle' ] = $device[ 'title' ];
+
+            return $input;
+
+        }, $devices, array_keys( $devices ) );
+
+        return $inputs;
+    }
+
     function upb_responsive_hidden_input( $title = '', $desc = '', $default = array() ) {
 
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Hide on device', 'ultimate-page-builder' );
@@ -290,6 +328,34 @@
             'type'    => 'device-hidden',
             'value'   => $default,
             'options' => upb_responsive_hidden()
+        ) );
+    }
+
+    function upb_column_clearfix_input( $id = 'clearfix', $title = '', $desc = '', $default = array() ) {
+
+        $title = trim( $title ) ? trim( $title ) : esc_html__( 'Clearfix', 'ultimate-page-builder' );
+        $desc  = trim( $desc ) ? trim( $desc ) : esc_html__( 'Show Clearfix element between columns', 'ultimate-page-builder' );
+
+        $devices = upb_devices();
+
+        $options = array_map( function ( $device ) {
+            return array(
+                'id'    => $device[ 'id' ],
+                'title' => $device[ 'title' ],
+                'icon'  => $device[ 'icon' ],
+            );
+        }, $devices );
+
+        $options = upb_list_pluck( $options, array( 'title', 'icon' ), 'id' );
+
+
+        return apply_filters( 'upb_column_clearfix_input', array(
+            'id'      => esc_attr( $id ),
+            'title'   => esc_html( $title ),
+            'desc'    => wp_kses_post( $desc ),
+            'type'    => 'checkbox-icon',
+            'value'   => $default,
+            'options' => $options
         ) );
     }
 
@@ -554,7 +620,29 @@
 
     // Helpers
 
+    /**
+     * Pluck a certain field out of each object in a list.
+     *
+     * This has the same functionality and prototype of
+     * array_column() (PHP 5.5) but also supports objects and multiple field.
+     *
+     * @param array            $list      List of objects or arrays
+     * @param int|string|array $field     Field from the object to place instead of the entire object
+     * @param int|string       $index_key Optional. Field from the object to use as keys for the new array.
+     *                                    Default null.
+     *
+     * @return array Array of found values. If `$index_key` is set, an array of found values with keys
+     *               corresponding to `$index_key`. If `$index_key` is null, array keys from the original
+     *               `$list` will be preserved in the results.
+     */
+    function upb_list_pluck( $list, $field, $index_key = NULL ) {
+        $util = new UPB_List_Util( $list );
+
+        return $util->pluck( $field, $index_key );
+    }
+
     // Returns TRUE for "1", "true", "on" and "yes". Returns FALSE otherwise.
+
     function upb_return_boolean( $data ) {
         return filter_var( $data, FILTER_VALIDATE_BOOLEAN );
     }

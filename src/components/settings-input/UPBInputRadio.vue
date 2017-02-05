@@ -2,7 +2,10 @@
     <li :class="typeClass()" v-show="isRequired">
 
         <div class="form-group">
-            <span class="title" v-text="attributes.title"></span>
+            <div class="title-wrapper">
+                <i v-if="attributes.deviceIcon" :class="deviceClass" :title="attributes.deviceTitle"></i>
+                <span class="title" v-text="attributes.title"></span>
+            </div>
             <div v-for="(option, value) in attributes.options">
                 <input class="radio-input" type="radio" :id="value" :value="value" v-model="input">
                 <label :for="value" v-text="option"></label>

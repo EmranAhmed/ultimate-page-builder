@@ -50,6 +50,43 @@
                         $options[ 'value' ] = upb_return_boolean( $options[ 'value' ] );
                         break;
 
+                    case 'spacing':
+
+                        $options[ 'delimiter' ] = isset( $options[ 'delimiter' ] ) ? $options[ 'delimiter' ] : ',';
+                        $options[ 'unit' ]      = isset( $options[ 'unit' ] ) ? $options[ 'unit' ] : esc_html__( 'px', 'ultimate-page-builder' );
+
+                        // Should maintain serial: 1. top, 2. right, 3. bottom, 4. left
+                        $options[ 'options' ] = isset( $options[ 'options' ] )
+                            ? $options[ 'options' ]
+                            : array(
+                                'top'    => TRUE,
+                                'right'  => TRUE,
+                                'bottom' => TRUE,
+                                'left'   => TRUE
+                            );
+
+                        $options[ 'titles' ] = isset( $options[ 'titles' ] )
+                            ? $options[ 'titles' ]
+                            : array(
+                                'top'    => esc_html__( 'Top', 'ultimate-page-builder' ),
+                                'right'  => esc_html__( 'Right', 'ultimate-page-builder' ),
+                                'bottom' => esc_html__( 'Bottom', 'ultimate-page-builder' ),
+                                'left'   => esc_html__( 'Left', 'ultimate-page-builder' ),
+                            );
+
+
+                        // Processing saved attributes
+                        if ( is_null( $options[ 'value' ] ) ) {
+                            $options[ 'value' ] = $options[ 'default' ];
+                        }
+
+                        if ( ! is_array( $options[ 'value' ] ) ) {
+                            $options[ 'value' ] = explode( $options[ 'delimiter' ], $options[ 'value' ] );
+                        }
+
+                        $options[ 'value' ] = array_map( 'strval', $options[ 'value' ] );
+                        break;
+
                     case 'ajax-icon-select':
                     case 'ajax-select':
 
@@ -174,7 +211,7 @@
                     default:
 
 
-                        if ( !isset($options[ 'value' ]) ) {
+                        if ( ! isset( $options[ 'value' ] ) ) {
                             $options[ 'value' ] = NULL;
                         }
 

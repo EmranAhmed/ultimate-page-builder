@@ -1,7 +1,10 @@
 <template>
     <li :class="typeClass()" v-show="isRequired">
         <div class="form-group toggle">
-            <span class="title" v-text="attributes.title"></span>
+            <div class="title-wrapper">
+                <i v-if="attributes.deviceIcon" :class="deviceClass" :title="attributes.deviceTitle"></i>
+                <span class="title" v-text="attributes.title"></span>
+            </div>
             <label class="switch toggle-input-group">
                 <input class="toggle-input" v-model="input" type="checkbox">
                 <div class="slider round"></div>

@@ -108,10 +108,10 @@ export default {
 
         this.addKeyIndex();
 
-        this.$watch('model.contents', _=> {
-            // ELEMENTS POSITION changes then create element
-            //    this.addKeyIndex();
-        }, {deep : true});
+        /*this.$watch('model.contents', _=> {
+         // ELEMENTS POSITION changes then create element
+         //    this.addKeyIndex();
+         }, {deep : true});*/
 
     },
 

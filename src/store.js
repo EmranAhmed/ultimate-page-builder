@@ -10,16 +10,17 @@ class store {
         this.fields                = _upb_fields || [];
         this.upb_user_inputs_mixin = _upb_user_inputs_mixin || {};
 
-        this.l10n            = _upb_l10n;
-        this.router_config   = _upb_router_config;
-        this.devices         = _upb_preview_devices;
-        this.hidden_devices  = _upb_responsive_hidden_devices;
-        this.grid            = _upb_grid_system;
-        this.elements        = _upb_registered_elements;
-        this.preview         = 'upb-preview-frame';
-        this.panel           = '';
-        this.subpanel        = '';
-        this.sidebarExpanded = true;
+        this.l10n                 = _upb_l10n;
+        this.router_config        = _upb_router_config;
+        this.devices              = _upb_preview_devices;
+        this.hidden_devices       = _upb_responsive_hidden_devices;
+        this.grid                 = _upb_grid_system;
+        this.elements             = _upb_registered_elements;
+        this.preview              = 'upb-preview-frame';
+        this.panel                = '';
+        this.subpanel             = '';
+        this.sidebarExpanded      = true;
+        this.currentPreviewDevice = ''
     }
 
     isElementRegistered(tag) {

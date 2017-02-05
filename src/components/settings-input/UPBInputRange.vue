@@ -2,7 +2,12 @@
     <li :class="typeClass()" v-show="isRequired">
         <div class="form-group">
             <label>
-                <span class="title" v-text="attributes.title"></span>
+
+                <div class="title-wrapper">
+                    <i v-if="attributes.deviceIcon" :class="deviceClass" :title="attributes.deviceTitle"></i>
+                    <span class="title" v-text="attributes.title"></span>
+                </div>
+
                 <div class="range-input-group">
                     <span class="prefix" v-text="attributes.options.prefix"></span>
                     <input class="range-input" v-model="input" type="range" :min="attributes.options.min" :max="attributes.options.max" :step="attributes.options.step">

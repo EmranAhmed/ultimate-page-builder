@@ -69,6 +69,9 @@
                     require_once UPB_PLUGIN_INCLUDE_PATH . "upb-settings.php";
                     require_once UPB_PLUGIN_INCLUDE_PATH . "upb-layouts.php";
 
+                    // Util
+                    require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-list-util.php";
+
                     // TABS
                     require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-tabs.php";
 
