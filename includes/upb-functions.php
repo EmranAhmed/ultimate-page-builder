@@ -401,13 +401,10 @@
                 )
             ),
 
-
-            ////
-
             array(
                 'id'       => 'gradient-position',
                 'title'    => esc_html__( 'Gradient Position', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Element gradient background position', 'ultimate-page-builder' ),
+                'desc'     => sprintf( __( 'Element gradient background position. <a target="_blank" href="%s">%s</a>', 'ultimate-page-builder' ), esc_url( 'https://uigradients.com/' ), esc_html__( 'Gradients examples', 'ultimate-page-builder' ) ),
                 'type'     => 'radio-icon',
                 'value'    => 'to left',
                 'options'  => array(
@@ -449,6 +446,7 @@
                 )
             ),
 
+            ///
             array(
                 'id'       => 'gradient-start-color',
                 'title'    => esc_html__( 'Gradient Start Color', 'ultimate-page-builder' ),
@@ -477,6 +475,7 @@
                     array( 'background-type', '=', 'gradient' )
                 )
             ),
+            ///
 
             array(
                 'id'       => 'gradient-end-color',
@@ -506,10 +505,6 @@
                     array( 'background-type', '=', 'gradient' )
                 )
             ),
-
-
-            ////
-
 
             array(
                 'id'       => 'background-color',
