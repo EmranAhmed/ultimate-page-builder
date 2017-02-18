@@ -96,13 +96,17 @@ Yes.
 
 == Changelog ==
 
+= 1.0.0-beta.17 =
+
+- `upb_hook_info` function
+
 = 1.0.0-beta.16 =
 - Media based element attributes
 - Spacing field for margin and padding input
 - Color input palettes option added
 
 = 1.0.0-beta.15 =
-- Self-Close Shortcode generate if no content available
+- Self-Close ShortCode generate if no content available
 - Auto remove un registered or un available elements.
 - Developer friendly error message for preview and console
 - Tag added to show: New, Soon, Plugin, Theme, Woo, WP

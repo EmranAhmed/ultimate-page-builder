@@ -16,7 +16,6 @@
             }
 
             public function __construct() {
-
                 $this->includes();
                 $this->hooks();
 
@@ -35,7 +34,7 @@
             public function boilerplate_template( $_template ) {
 
                 if ( upb_is_boilerplate() ) {
-                    return UPB_PLUGIN_INCLUDE_PATH . "boilerplate/upb-boilerplate-template.php";
+                    return upb_include_path( "boilerplate/upb-boilerplate-template.php" );
                 }
 
                 return $_template;

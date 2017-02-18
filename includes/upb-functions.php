@@ -67,7 +67,6 @@
         return UPB_Layouts::getInstance();
     }
 
-
     // Conditional
     function upb_is_ios() {
         return wp_is_mobile() && preg_match( '/iPad|iPod|iPhone/', $_SERVER[ 'HTTP_USER_AGENT' ] );
@@ -267,21 +266,7 @@
 
     // Build-In Inputs
 
-
     function upb_media_query_based_input_group( $input ) {
-        /*array(
-            'id'      => 'space',
-            'title'   => esc_html__( 'Spacer', 'ultimate-page-builder' ),
-            'desc'    => esc_html__( 'Space between two section', 'ultimate-page-builder' ),
-            'type'    => 'range',
-            'options' => array(
-                'min'    => 0,
-                'max'    => 200,
-                'step'   => 1,
-                'suffix' => 'px',
-            ),
-            'value'   => 0,
-        )*/
 
         $get_devices = upb_devices();
 
@@ -407,13 +392,124 @@
                 'type'    => 'radio-icon',
                 'value'   => 'none',
                 'options' => array(
-                    'none'  => array( 'title' => esc_html__( 'No background', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-close-octagon-outline' ),
-                    'color' => array( 'title' => esc_html__( 'Background Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-format-color-fill' ),
-                    'image' => array( 'title' => esc_html__( 'Background Image', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-image' ),
-                    'both'  => array( 'title' => esc_html__( 'Background Image and Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-folder-multiple-image' ),
+                    'none'     => array( 'title' => esc_html__( 'No background', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-close-octagon-outline' ),
+                    'gradient' => array( 'title' => esc_html__( 'Gradient background', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-gradient' ),
+                    'color'    => array( 'title' => esc_html__( 'Background Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-format-color-fill' ),
+                    'image'    => array( 'title' => esc_html__( 'Background Image', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-image' ),
+                    'both'     => array( 'title' => esc_html__( 'Background Image and Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-folder-multiple-image' ),
                     // 'video' => array( 'title' => esc_html__( 'Background Video', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-file-video' )
                 )
             ),
+
+
+            ////
+
+            array(
+                'id'       => 'gradient-position',
+                'title'    => esc_html__( 'Gradient Position', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Element gradient background position', 'ultimate-page-builder' ),
+                'type'     => 'radio-icon',
+                'value'    => 'to left',
+                'options'  => array(
+                    'to left'         => array(
+                        'title' => esc_html__( 'Left', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-left'
+                    ),
+                    'to right'        => array(
+                        'title' => esc_html__( 'Right', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-right'
+                    ),
+                    'to top'          => array(
+                        'title' => esc_html__( 'Top', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-up'
+                    ),
+                    'to bottom'       => array(
+                        'title' => esc_html__( 'Bottom', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-down'
+                    ),
+                    'to top left'     => array(
+                        'title' => esc_html__( 'Top Left', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-top-left'
+                    ),
+                    'to top right'    => array(
+                        'title' => esc_html__( 'Top Right', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-top-right'
+                    ),
+                    'to bottom left'  => array(
+                        'title' => esc_html__( 'Bottom Left', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-bottom-left'
+                    ),
+                    'to bottom right' => array(
+                        'title' => esc_html__( 'Bottom Right', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-bottom-right'
+                    ),
+                ),
+                'required' => array(
+                    array( 'background-type', '=', 'gradient' )
+                )
+            ),
+
+            array(
+                'id'       => 'gradient-start-color',
+                'title'    => esc_html__( 'Gradient Start Color', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Element gradient background start color', 'ultimate-page-builder' ),
+                'type'     => 'color',
+                'value'    => '#ffffff',
+                'options'  => array(
+                    'alpha' => TRUE,
+                ),
+                'required' => array(
+                    array( 'background-type', '=', 'gradient' )
+                )
+            ),
+
+            array(
+                'id'       => 'gradient-start-location',
+                'title'    => esc_html__( 'Gradient Start Location', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Element gradient background start color location', 'ultimate-page-builder' ),
+                'type'     => 'range',
+                'value'    => '0',
+                'options'  => array(
+                    'suffix' => '%',
+                    'max'    => '100',
+                ),
+                'required' => array(
+                    array( 'background-type', '=', 'gradient' )
+                )
+            ),
+
+            array(
+                'id'       => 'gradient-end-color',
+                'title'    => esc_html__( 'Gradient End Color', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Element gradient background end color', 'ultimate-page-builder' ),
+                'type'     => 'color',
+                'value'    => '#000000',
+                'options'  => array(
+                    'alpha' => TRUE,
+                ),
+                'required' => array(
+                    array( 'background-type', '=', 'gradient' )
+                )
+            ),
+
+            array(
+                'id'       => 'gradient-end-location',
+                'title'    => esc_html__( 'Gradient End Location', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Element gradient background end color location', 'ultimate-page-builder' ),
+                'type'     => 'range',
+                'value'    => '100',
+                'options'  => array(
+                    'suffix' => '%',
+                    'max'    => '100',
+                ),
+                'required' => array(
+                    array( 'background-type', '=', 'gradient' )
+                )
+            ),
+
+
+            ////
+
 
             array(
                 'id'       => 'background-color',
@@ -643,6 +739,53 @@
         return $util->pluck( $field, $index_key );
     }
 
+    /**
+     * Action Hook Information
+     *
+     * @param $hook_name
+     */
+    function upb_hook_info( $hook_name ) {
+        global $wp_filter;
+        $docs     = array();
+        $template = "\t - %s Priority - %s.\n\tin file %s #%s\n\n";
+        echo '<pre>';
+        echo "\t# Hook Name \"" . $hook_name . "\"";
+        echo "\n\n";
+        if ( isset( $wp_filter[ $hook_name ] ) ) {
+            foreach ( $wp_filter[ $hook_name ] as $pri => $fn ) {
+                foreach ( $fn as $fnname => $fnargs ) {
+                    if ( is_array( $fnargs[ 'function' ] ) ) {
+                        $reflClass = new ReflectionClass( $fnargs[ 'function' ][ 0 ] );
+                        $reflFunc  = $reflClass->getMethod( $fnargs[ 'function' ][ 1 ] );
+                        $class     = $reflClass->getName();
+                        $function  = $reflFunc->name;
+                    } else {
+                        $reflFunc  = new ReflectionFunction( $fnargs[ 'function' ] );
+                        $class     = FALSE;
+                        $function  = $reflFunc->name;
+                        $isClosure = (bool) $reflFunc->isClosure();
+                    }
+                    if ( $class ) {
+                        $functionName = sprintf( 'Class "%s::%s"', $class, $function );
+                    } else {
+                        $functionName = ( $isClosure ) ? "Anonymous Function $function" : "Function \"$function\"";
+                    }
+                    printf( $template, $functionName, $pri, str_ireplace( ABSPATH, '', $reflFunc->getFileName() ), $reflFunc->getStartLine() );
+                    $docs[] = array( $functionName, $pri );
+                }
+            }
+            echo "\tAction Hook Commenting\n\t----------------------\n\n";
+            echo "\t/**\n\t* " . $hook_name . " hook\n\t*\n";
+            foreach ( $docs as $doc ) {
+                echo "\t* @hooked " . $doc[ 0 ] . " - " . $doc[ 1 ] . "\n";
+            }
+            echo "\t*/";
+            echo "\n\n";
+            echo "\tdo_action( '" . $hook_name . "' );";
+        }
+        echo '</pre>';
+    }
+
     // Returns TRUE for "1", "true", "on" and "yes". Returns FALSE otherwise.
 
     function upb_return_boolean( $data ) {
@@ -737,13 +880,13 @@
                         wp_enqueue_style( sprintf( 'upb-element-%s', $element[ 'tag' ] ) );
                     }
                 }
-            }, upb_elements()->getAll() );
+            }, upb_elements()->get_all() );
         endif;
     }
 
     // add_action upb_boilerplate_print_footer_scripts with upb_get_template
     function upb_add_script_template( $id, $contents ) {
-        echo '<script type="text/x-template" id="upb-' . $id . '-template">';
+        echo '<script type="text/x-template" id="' . upb_get_script_template_id( $id ) . '">';
         echo $contents;
         echo '</script>';
     }

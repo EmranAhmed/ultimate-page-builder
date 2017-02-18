@@ -13,7 +13,7 @@
 
     function upb_locate_template( $template_name, $third_party_path = '' ) {
 
-        $template_path = UPB()->template_dir();
+        $template_path = UPB()->template_lookup_dir();
         $default_path  = UPB()->template_path();
 
         if ( $third_party_path ) {
@@ -57,7 +57,7 @@
 
     function upb_get_theme_file_path( $file, $third_party_path = FALSE ) {
 
-        $template_dir = UPB()->template_dir();
+        $template_dir = UPB()->template_lookup_dir();
         $default_path = UPB()->template_path();
 
         if ( $third_party_path ) {
@@ -77,7 +77,7 @@
 
     function upb_get_theme_file_uri( $file, $third_party_uri = FALSE ) {
 
-        $template_dir = UPB()->template_dir();
+        $template_dir = UPB()->template_lookup_dir();
         $default_uri  = UPB()->template_uri();
 
         if ( $third_party_uri ) {

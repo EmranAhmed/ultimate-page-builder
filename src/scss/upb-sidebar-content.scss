@@ -759,8 +759,12 @@ input[type="search"]::-webkit-search-decoration {
 FORM CODE
 */
 
-.attachment-media-view {
+.wp-color-result {
+  box-shadow    : none;
+  border-radius : 0;
+  }
 
+.attachment-media-view {
   .placeholder {
     width       : 100%;
     position    : relative;
@@ -785,10 +789,11 @@ FORM CODE
     width            : 2px;
     height           : 2px;
     padding          : 5px;
-    background-color : #000000;
+    background-color : transparent;
     border           : 3px solid #FFFFFF;
     border-radius    : 50%;
     position         : absolute;
+    box-shadow       : 0 0 30px #000000;
     }
 
   .actions {

@@ -27,8 +27,12 @@
                 return absint( $_POST[ 'id' ] );
             }
 
+            public function get_all() {
+                return apply_filters( 'get_upb_layouts', $this->layouts );
+            }
+
             public function getAll() {
-                return $this->layouts;
+                return $this->get_all();
             }
 
             public function getID() {

@@ -489,7 +489,7 @@
             }
 
             public function get_non_core() {
-                return array_filter( array_values( $this->short_code_elements ), function ( $tag ) {
+                return array_filter( $this->get_all(), function ( $tag ) {
                     return ! in_array( $tag[ 'tag' ], $this->core_elements );
                 } );
             }

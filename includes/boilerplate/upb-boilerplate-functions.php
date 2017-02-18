@@ -30,7 +30,6 @@
         echo sprintf( '%s &rightarrow; %s', esc_html( 'Ultimate Page Builder' ), esc_html( get_the_title() ) );
     }
 
-
     function upb_editor_allow_br_tags( $init ) {
         $init[ 'forced_root_block' ] = FALSE;
 
@@ -78,7 +77,6 @@
         return ob_get_clean();
     }
 
-
     function upb_wp_editor_template() {
         return upb_load_wp_editor();
     }
@@ -97,5 +95,3 @@
 
         return $attrs;
     }
-
-
