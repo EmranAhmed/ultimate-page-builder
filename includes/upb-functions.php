@@ -404,7 +404,7 @@
             array(
                 'id'       => 'gradient-position',
                 'title'    => esc_html__( 'Gradient Position', 'ultimate-page-builder' ),
-                'desc'     => sprintf( __( 'Element gradient background position. <a target="_blank" href="%s">%s</a>', 'ultimate-page-builder' ), esc_url( 'https://uigradients.com/' ), esc_html__( 'Gradients examples', 'ultimate-page-builder' ) ),
+                'desc'     => sprintf( __( 'Element gradient background position. <a target="_blank" href="%s">%s</a> or <a target="_blank" href="%s">%s</a>', 'ultimate-page-builder' ), esc_url( 'https://uigradients.com/' ), 'uiGradients', esc_url( 'https://webgradients.com/' ), 'webGradients' ),
                 'type'     => 'radio-icon',
                 'value'    => 'to left',
                 'options'  => array(
@@ -446,11 +446,11 @@
                 )
             ),
 
-            ///
+
             array(
                 'id'       => 'gradient-start-color',
                 'title'    => esc_html__( 'Gradient Start Color', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Element gradient background start color', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Element gradient background start color. If you have only one color to start use start color on color top 1 also.', 'ultimate-page-builder' ),
                 'type'     => 'color',
                 'value'    => '#ffffff',
                 'options'  => array(
@@ -475,6 +475,36 @@
                     array( 'background-type', '=', 'gradient' )
                 )
             ),
+            ///
+            array(
+                'id'       => 'gradient-color-stop-1',
+                'title'    => esc_html__( 'Color Stop 1', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Element gradient color stop 1. If you have only one color to start use start color on color top 1 also.', 'ultimate-page-builder' ),
+                'type'     => 'color',
+                'value'    => '#ffffff',
+                'options'  => array(
+                    'alpha' => TRUE,
+                ),
+                'required' => array(
+                    array( 'background-type', '=', 'gradient' )
+                )
+            ),
+
+            array(
+                'id'       => 'gradient-color-stop-1-location',
+                'title'    => esc_html__( 'Color Stop 1 Location', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Element gradient color stop 1 location', 'ultimate-page-builder' ),
+                'type'     => 'range',
+                'value'    => '0',
+                'options'  => array(
+                    'suffix' => '%',
+                    'max'    => '100',
+                ),
+                'required' => array(
+                    array( 'background-type', '=', 'gradient' )
+                )
+            ),
+
             ///
 
             array(
@@ -850,6 +880,20 @@
                 printf( 'background-origin: %s;', esc_attr( $attributes[ 'background-origin' ] ) );
                 printf( 'background-size: %s;', esc_attr( $attributes[ 'background-size' ] ) );
             }
+
+            if ( $attributes[ 'background-type' ] == 'gradient' ) {
+                printf( 'background-image: %s;', sprintf(
+                    "linear-gradient(%s, %s %s, %s %s, %s %s)",
+                    esc_attr( $attributes[ 'gradient-position' ] ),
+                    esc_attr( $attributes[ 'gradient-start-color' ] ),
+                    esc_attr( $attributes[ 'gradient-start-location' ] ) . '%',
+                    esc_attr( $attributes[ 'gradient-color-stop-1' ] ),
+                    esc_attr( $attributes[ 'gradient-color-stop-1-location' ] ) . '%',
+                    esc_attr( $attributes[ 'gradient-end-color' ] ),
+                    esc_attr( $attributes[ 'gradient-end-location' ] ) . '%'
+                ) );
+            }
+
         }
 
         do_action( 'upb_shortcode_scoped_style_background', $attributes );

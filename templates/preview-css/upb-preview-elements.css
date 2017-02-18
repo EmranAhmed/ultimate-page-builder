@@ -10,5 +10,10 @@
     }
 
 .upb-section-preview.gradient {
-    background-image : linear-gradient(var(--gradient-position), var(--gradient-start-color) var(--gradient-start-location), var(--gradient-end-color) var(--gradient-end-location));
+    background-image : linear-gradient(
+            var(--gradient-position),
+            var(--gradient-start-color) var(--gradient-start-location),
+            var(--gradient-color-stop-1) var(--gradient-color-stop-1-location),
+            var(--gradient-end-color) var(--gradient-end-location)
+    );
     }

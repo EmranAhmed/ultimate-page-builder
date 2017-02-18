@@ -143,11 +143,16 @@ export default{
                 }
 
                 if (this.model.attributes['background-type'] == 'gradient') {
-                    background['--gradient-position']       = this.model.attributes['gradient-position'];
+                    background['--gradient-position'] = this.model.attributes['gradient-position'];
+
                     background['--gradient-start-color']    = this.model.attributes['gradient-start-color'];
                     background['--gradient-start-location'] = this.model.attributes['gradient-start-location'] + '%';
-                    background['--gradient-end-color']      = this.model.attributes['gradient-end-color'];
-                    background['--gradient-end-location']   = this.model.attributes['gradient-end-location'] + '%';
+
+                    background['--gradient-color-stop-1']          = this.model.attributes['gradient-color-stop-1'];
+                    background['--gradient-color-stop-1-location'] = this.model.attributes['gradient-color-stop-1-location'] + '%';
+
+                    background['--gradient-end-color']    = this.model.attributes['gradient-end-color'];
+                    background['--gradient-end-location'] = this.model.attributes['gradient-end-location'] + '%';
                 }
             }
             return background;
