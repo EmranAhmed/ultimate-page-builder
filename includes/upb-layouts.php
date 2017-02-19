@@ -4,6 +4,8 @@
 
     add_action( 'upb_register_layout', function ( $layout ) {
 
+        // $layout->reset(); // Reset All previous layouts and add new :)
+
         $template = array(
             'title'    => 'Two Column Simple',
             'desc'     => 'Simple Two Column Layout',

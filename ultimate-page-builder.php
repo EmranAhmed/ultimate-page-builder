@@ -69,7 +69,7 @@
                     require_once UPB_PLUGIN_INCLUDE_PATH . "upb-settings.php";
                     require_once UPB_PLUGIN_INCLUDE_PATH . "upb-layouts.php";
 
-                    // Util
+                    // List Utility
                     require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-list-util.php";
 
                     // TABS
@@ -87,7 +87,6 @@
 
                     // Boilerplate
                     require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-boilerplate.php";
-
 
                     // Preview
                     require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-preview.php";
@@ -111,7 +110,6 @@
 
                     // Show UPB Button
                     add_action( 'media_buttons', array( $this, 'action_media_buttons' ) );
-
                     add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
                 }
 
@@ -137,7 +135,7 @@
                 global $post_type, $post;
 
                 if ( $this->is_page_allowed( $post ) && in_array( $post_type, $this->get_allowed_post_types() ) ) {
-                    printf( '<a href="%s" class="button load-ultimate-page-builder">' .
+                    printf( '<a href="%s" class="button load-ultimate-page-builder ultimate-page-builder-button">' .
                             '<span class="wp-media-buttons-icon dashicons dashicons-hammer"></span> %s' .
                             '</a>',
                             upb_get_edit_link(),
@@ -165,23 +163,23 @@
 
                 if ( is_object( $post ) ) {
 
-                    $posts = array_unique( array(
-                                               get_option( 'page_for_posts' ),
-                                               get_option( 'woocommerce_shop_page_id' ),
-                                               get_option( 'woocommerce_cart_page_id' ),
-                                               get_option( 'woocommerce_checkout_page_id' ),
-                                               get_option( 'woocommerce_pay_page_id' ),
-                                               get_option( 'woocommerce_thanks_page_id' ),
-                                               get_option( 'woocommerce_myaccount_page_id' ),
-                                               get_option( 'woocommerce_edit_address_page_id' ),
-                                               get_option( 'woocommerce_view_order_page_id' ),
-                                               get_option( 'woocommerce_terms_page_id' ),
-                                           ) );
+                    $non_allowed_posts = array_unique( array(
+                                                           get_option( 'page_for_posts' ),
+                                                           get_option( 'woocommerce_shop_page_id' ),
+                                                           get_option( 'woocommerce_cart_page_id' ),
+                                                           get_option( 'woocommerce_checkout_page_id' ),
+                                                           get_option( 'woocommerce_pay_page_id' ),
+                                                           get_option( 'woocommerce_thanks_page_id' ),
+                                                           get_option( 'woocommerce_myaccount_page_id' ),
+                                                           get_option( 'woocommerce_edit_address_page_id' ),
+                                                           get_option( 'woocommerce_view_order_page_id' ),
+                                                           get_option( 'woocommerce_terms_page_id' ),
+                                                       ) );
 
-                    $non_allowed_post_ids = apply_filters( 'upb_non_allowed_pages', $posts );
+                    $non_allowed_posts_id = apply_filters( 'upb_non_allowed_posts_id', $non_allowed_posts );
+                    $post_id              = absint( $post->ID );
 
-                    //print_r($non_allowed_post_ids);
-                    if ( in_array( $post->ID, $non_allowed_post_ids ) ) {
+                    if ( in_array( $post_id, $non_allowed_posts_id ) ) {
                         return FALSE;
                     }
                 }
@@ -291,8 +289,8 @@
                 return plugin_basename( __FILE__ );
             }
 
-            public function template_lookup_dir() {
-                return apply_filters( 'upb_template_lookup_dir', 'ultimate-page-builder' );
+            public function template_override_dir() {
+                return apply_filters( 'upb_template_override_dir', 'ultimate-page-builder' );
             }
 
             public function plugin_uri() {

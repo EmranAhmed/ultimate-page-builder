@@ -11,13 +11,13 @@
      * @return mixed|void
      */
 
-    function upb_locate_template( $template_name, $third_party_path = '' ) {
+    function upb_locate_template( $template_name, $third_party_path = FALSE ) {
 
-        $template_path = UPB()->template_lookup_dir();
+        $template_path = UPB()->template_override_dir();
         $default_path  = UPB()->template_path();
 
-        if ( $third_party_path ) {
-            $default_path = $third_party_path;
+        if ( $third_party_path && is_string( $third_party_path ) ) {
+            $default_path = untrailingslashit( $third_party_path );
         }
 
         // Look within passed path within the theme - this is priority.
@@ -57,11 +57,11 @@
 
     function upb_get_theme_file_path( $file, $third_party_path = FALSE ) {
 
-        $template_dir = UPB()->template_lookup_dir();
+        $template_dir = UPB()->template_override_dir();
         $default_path = UPB()->template_path();
 
-        if ( $third_party_path ) {
-            $default_path = $third_party_path;
+        if ( $third_party_path && is_string( $third_party_path ) ) {
+            $default_path = untrailingslashit( $third_party_path );
         }
 
         if ( file_exists( get_stylesheet_directory() . '/' . $template_dir . '/' . $file ) ) {
@@ -77,11 +77,11 @@
 
     function upb_get_theme_file_uri( $file, $third_party_uri = FALSE ) {
 
-        $template_dir = UPB()->template_lookup_dir();
+        $template_dir = UPB()->template_override_dir();
         $default_uri  = UPB()->template_uri();
 
-        if ( $third_party_uri ) {
-            $default_uri = $third_party_uri;
+        if ( $third_party_uri && is_string( $third_party_uri ) ) {
+            $default_uri = untrailingslashit( $third_party_uri );
         }
 
         if ( file_exists( get_stylesheet_directory() . '/' . $template_dir . '/' . $file ) ) {

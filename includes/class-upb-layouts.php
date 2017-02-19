@@ -39,6 +39,10 @@
                 return get_the_ID();
             }
 
+            public function reset() {
+                $this->layouts = apply_filters( 'upb_reset_layouts', array() );
+            }
+
             public function register( $layouts ) {
 
                 // title, desc, preview, template

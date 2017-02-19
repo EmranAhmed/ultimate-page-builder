@@ -4,6 +4,9 @@
 
     // Icon array generated from: https://emranahmed.github.io/vue-generate-php-font-array/
 
+    // https://cdn.materialdesignicons.com/1.8.36/
+    // http://fontawesome.io/icons/ - 4.7
+
     function upb_material_design_icons() {
 
         // https://cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.css

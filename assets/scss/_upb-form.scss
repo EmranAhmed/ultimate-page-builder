@@ -106,6 +106,7 @@ button:focus {
   input[type="number"] {
     height      : 28px;
     line-height : 1;
+    max-width   : 55px;
     }
 
   input[type="range"] {
@@ -133,7 +134,6 @@ button:focus {
       }*/
 
     &::-webkit-slider-thumb {
-      box-shadow         : 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(13, 13, 13, 0);
       height             : 15px;
       width              : 15px;
       border-radius      : 50px;

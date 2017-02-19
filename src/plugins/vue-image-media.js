@@ -4,16 +4,12 @@ import { util } from 'vue';
     const vImageMedia = {};
 
     if (_.isUndefined(wp) || _.isUndefined(wp.media)) {
-        util.warn('wp.media is not loaded or found globally to use `vue-image-select` directive..', this);
+        util.warn(`"wp.media" is not loaded or found globally to use "vue-image-select" directive..`, this);
     }
 
     vImageMedia.install = function (Vue, options) {
 
         Vue.directive('image-media', {
-
-            unbind (el) {
-
-            },
 
             inserted (el, binding, vnode) {
 
@@ -29,6 +25,18 @@ import { util } from 'vue';
                         return;
                     }
 
+                    let insertImage = wp.media.controller.Library.extend({
+                        defaults : _.defaults({
+                            //id:        'insert-image',
+                            //title:      'Insert Image Url',
+                            //allowLocalEdits     : true,
+                            displaySettings : true,
+                            //displayUserSettings : true,
+                            //multiple            : false,
+                            type            : 'image' //audio, video, application/pdf, ... etc
+                        }, wp.media.controller.Library.prototype.defaults)
+                    });
+
                     // set our settings
                     frame = wp.media({
                         title    : vnode.context.attributes.title,
@@ -39,13 +47,14 @@ import { util } from 'vue';
                         button   : {
                             text : vnode.context.attributes.buttons.add
                         }
+                        //states   : [
+                        //    new insertImage()
+                        //]
                     });
 
                     // set up our select handler
                     frame.on('select', function () {
                         let selection = frame.state().get('selection');
-
-                        // console.log(selection.toJSON());
 
                         if (!selection) return;
 
@@ -62,7 +71,7 @@ import { util } from 'vue';
                             let id  = attachment.id;
 
                             if (!vnode.context.onSelect) {
-                                util.warn('You need to implement the `onSelect` method', vnode.context);
+                                util.warn(`You need to implement the "onSelect" method`, vnode.context);
                             }
 
                             vnode.context.onSelect(event, id, src);
@@ -72,7 +81,6 @@ import { util } from 'vue';
 
                     // open the frame
                     frame.open();
-
                 });
 
                 $(el).find('.remove-button').on('click', function (event) {
@@ -80,7 +88,7 @@ import { util } from 'vue';
                     event.preventDefault();
 
                     if (!vnode.context.onRemove) {
-                        util.warn('You need to implement the `onRemove` method', vnode.context);
+                        util.warn(`You need to implement the "onRemove" method`, vnode.context);
                     }
 
                     vnode.context.onRemove(event);
@@ -102,5 +110,4 @@ import { util } from 'vue';
         window.vImageMedia = vImageMedia;
         Vue.use(vImageMedia)
     }
-
 })(jQuery);

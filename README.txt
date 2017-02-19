@@ -98,10 +98,13 @@ Yes.
 
 = 1.0.0-beta.17 =
 
+- Template Overriding directory changed from `upb-templates` to `ultimate-page-builder`
 - `upb_hook_info` function
+- Pre-build layout reset function
+- CSS3 Gradient background added
 
 = 1.0.0-beta.16 =
-- Media based element attributes
+- Media based element attributes added
 - Spacing field for margin and padding input
 - Color input palettes option added
 

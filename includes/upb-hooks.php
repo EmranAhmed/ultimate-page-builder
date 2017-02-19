@@ -8,7 +8,6 @@
 
     add_action( 'wp_loaded', 'upb_elements_register_action' );
 
-
     /**
      * Remove Element Example
      */
@@ -136,5 +135,3 @@
         endif;
 
     } );
-
-

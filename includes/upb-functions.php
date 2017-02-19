@@ -347,7 +347,7 @@
     function upb_material_icon_input( $id, $title = '', $desc = '', $default = '' ) {
 
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Material Icons', 'ultimate-page-builder' );
-        $desc  = trim( $desc ) ? trim( $desc ) : esc_html__( 'Search material icons and use it.', 'ultimate-page-builder' );
+        $desc  = trim( $desc ) ? trim( $desc ) : sprintf( __( 'Search material design icons. Using <a target="_blank" href="%s">%s</a>', 'ultimate-page-builder' ), 'https://cdn.materialdesignicons.com/1.8.36/', esc_html__( 'Material Design Icons - 1.8.36', 'ultimate-page-builder' ) );
 
         return apply_filters( 'upb_material_icon_input', array(
             'id'          => esc_attr( $id ),
@@ -359,14 +359,14 @@
                 'search' => '_upb_material_icon_search',
                 'load'   => '_upb_material_icon_load',
             ),
-            'placeholder' => esc_html__( 'Search material icons', 'ultimate-page-builder' ),
+            'placeholder' => esc_html__( 'Search Material Design Icons', 'ultimate-page-builder' ),
         ) );
     }
 
     function upb_font_awesome_icon_input( $id, $title = '', $desc = '', $default = '' ) {
 
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'FontAwesome Icons', 'ultimate-page-builder' );
-        $desc  = trim( $desc ) ? trim( $desc ) : esc_html__( 'Search FontAwesome icons and use it.', 'ultimate-page-builder' );
+        $desc  = trim( $desc ) ? trim( $desc ) : sprintf( __( 'Search FontAwesome icons. Using <a target="_blank" href="%s">%s</a>', 'ultimate-page-builder' ), 'http://fontawesome.io/icons/', esc_html__( 'Font Awesome Icons - 4.7', 'ultimate-page-builder' ) );
 
         return apply_filters( 'upb_font_awesome_icon_input', array(
             'id'          => esc_attr( $id ),
@@ -378,7 +378,7 @@
                 'search' => '_upb_font_awesome_icon_search',
                 'load'   => '_upb_font_awesome_icon_load',
             ),
-            'placeholder' => esc_html__( 'Search FontAwesome icons', 'ultimate-page-builder' ),
+            'placeholder' => esc_html__( 'Search FontAwesome Icons', 'ultimate-page-builder' ),
         ) );
     }
 
@@ -450,7 +450,7 @@
             array(
                 'id'       => 'gradient-start-color',
                 'title'    => esc_html__( 'Gradient Start Color', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Element gradient background start color. If you have only one color to start use start color on color top 1 also.', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Element gradient background start color. If you have only one color to start use start color on color stop 1 also.', 'ultimate-page-builder' ),
                 'type'     => 'color',
                 'value'    => '#ffffff',
                 'options'  => array(
@@ -479,7 +479,7 @@
             array(
                 'id'       => 'gradient-color-stop-1',
                 'title'    => esc_html__( 'Color Stop 1', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Element gradient color stop 1. If you have only one color to start use start color on color top 1 also.', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Element gradient color stop 1. If you have only one color to start use start color on color stop 1 also.', 'ultimate-page-builder' ),
                 'type'     => 'color',
                 'value'    => '#ffffff',
                 'options'  => array(
