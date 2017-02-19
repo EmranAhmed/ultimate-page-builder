@@ -136,10 +136,10 @@
 
                 if ( $this->is_page_allowed( $post ) && in_array( $post_type, $this->get_allowed_post_types() ) ) {
                     printf( '<a href="%s" class="button load-ultimate-page-builder ultimate-page-builder-button">' .
-                            '<span class="wp-media-buttons-icon dashicons dashicons-hammer"></span> %s' .
+                            '<span class="wp-media-buttons-icon dashicons dashicons-art"></span> %s' .
                             '</a>',
                             upb_get_edit_link(),
-                            esc_html__( 'Edit with Ultimate Page Builder', 'ultimate-page-builder' )
+                            __( 'Edit with <strong>Ultimate Page Builder</strong>', 'ultimate-page-builder' )
                     );
                 }
             }
