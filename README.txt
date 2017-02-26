@@ -96,6 +96,10 @@ Yes.
 
 == Changelog ==
 
+= 1.0.0-beta.18 =
+
+- Image Size added to popup
+
 = 1.0.0-beta.17 =
 
 - Template Overriding directory changed from `upb-templates` to `ultimate-page-builder`

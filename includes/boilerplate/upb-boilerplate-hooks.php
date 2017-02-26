@@ -299,6 +299,11 @@
         ) ) );
     } );
 
+    // Media Manager Extend
+    add_action( 'upb_boilerplate_print_footer_scripts', function () {
+        include upb_templates_path( 'upb_media_display_settings.php' );
+    } );
+
     add_action( 'upb_boilerplate_print_footer_scripts', function () {
         //$tabs = upb_tabs()->getAll();
         print( "<script type='text/javascript'>

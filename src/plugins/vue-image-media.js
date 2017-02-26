@@ -25,12 +25,13 @@ import { util } from 'vue';
                         return;
                     }
 
-                    let insertImage = wp.media.controller.Library.extend({
+                    /*let insertImage = wp.media.controller.Library.extend({
                         defaults : _.defaults({
                             //id:        'insert-image',
-                            //title:      'Insert Image Url',
+                            //title:      vnode.context.attributes.title,
                             //allowLocalEdits     : true,
                             displaySettings : true,
+                            date            : false,
                             //displayUserSettings : true,
                             //multiple            : false,
                             type            : 'image' //audio, video, application/pdf, ... etc
@@ -38,7 +39,7 @@ import { util } from 'vue';
                     });
 
                     // set our settings
-                    frame = wp.media({
+                    var frame2 = wp.media({
                         title    : vnode.context.attributes.title,
                         multiple : false,
                         library  : {
@@ -46,28 +47,55 @@ import { util } from 'vue';
                         },
                         button   : {
                             text : vnode.context.attributes.buttons.add
-                        }
-                        //states   : [
-                        //    new insertImage()
-                        //]
+                        },
+                        states   : [
+                            new insertImage()
+                        ]
+                    });*/
+
+                    frame = wp.media({
+                        button : {
+                            text : vnode.context.attributes.buttons.add
+                        },
+                        state  : 'insert-image',
+                        states : [
+                            new wp.media.controller.Library({
+                                id              : 'insert-image',
+                                title           : vnode.context.attributes.title,
+                                library         : wp.media.query({type : 'image'}),
+                                multiple        : false,
+                                date            : false,
+                                displaySettings : true, // to display ATTACHMENT DISPLAY SETTINGS,
+                            })
+                        ]
                     });
 
                     // set up our select handler
                     frame.on('select', function () {
+
+                        // http://stackoverflow.com/questions/21540951/custom-wp-media-with-arguments-support
+
                         let selection = frame.state().get('selection');
+
+                        let state = frame.state('insert-image');
 
                         if (!selection) return;
 
                         // loop through the selected files
                         selection.each(function (attachment) {
 
-                            if (_.isUndefined(attachment.attributes.sizes[vnode.context.attributes.size])) {
-                                console.warn(`Media Image size "${vnode.context.attributes.size}" is not available, try re-generate thumbnails. Did you add your image size with "image_size_names_choose" filter? Now Using full sized for fallback. Available sizes are:`)
-                                console.table(attachment.attributes.sizes);
-                                vnode.context.attributes.size = 'full';
-                            }
+                            let display        = state.display(attachment).toJSON();
+                            let obj_attachment = attachment.toJSON();
 
-                            let src = attachment.attributes.sizes[vnode.context.attributes.size].url;
+                            display = wp.media.string.props(display, obj_attachment);
+
+                            /*if (_.isUndefined(attachment.attributes.sizes[vnode.context.attributes.size])) {
+                             console.warn(`Media Image size "${vnode.context.attributes.size}" is not available, try re-generate thumbnails. Did you add your image size with "image_size_names_choose" filter? Now Using full sized for fallback. Available sizes are:`)
+                             console.table(attachment.attributes.sizes);
+                             vnode.context.attributes.size = 'full';
+                             }*/
+
+                            let src = display.src;
                             let id  = attachment.id;
 
                             if (!vnode.context.onSelect) {
