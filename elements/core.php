@@ -109,6 +109,14 @@
             'value'   => 0,
         ) );
 
+        array_push( $attributes, array(
+            'id'      => 'chooseicon',
+            'title'   => esc_html__( 'Icon Popup', 'ultimate-page-builder' ),
+            'desc'    => esc_html__( 'Space between two section', 'ultimate-page-builder' ),
+            'type'    => 'icon-popup',
+            'value'   => '',
+        ) );
+
         /*array_push( $attributes, array(
             'id'      => 'margin',
             'title'   => esc_html__( 'Margin', 'ultimate-page-builder' ),

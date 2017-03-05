@@ -103,7 +103,7 @@
 
             wp_enqueue_script( 'upb-scoped-css-polyfill' );
 
-            // Load Shortcodes Styles
+            // Load ShortCodes Assets
             upb_enqueue_shortcode_assets();
         endif;
     } );

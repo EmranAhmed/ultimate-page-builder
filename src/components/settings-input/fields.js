@@ -15,6 +15,7 @@ const fieldsComponents = {
     'upb-input-editor'                    : require('./UPBInputEditor.vue'),
     'upb-input-hidden'                    : require('./UPBInputHidden.vue'),
     'upb-input-icon-select'               : require('./UPBInputIconSelect.vue'),
+    'upb-input-icon-popup'                : require('./UPBInputIconPopup.vue'),
     'upb-input-media-image'               : require('./UPBInputMediaImage.vue'),
     'upb-input-message'                   : require('./UPBInputMessage.vue'),
     'upb-input-number'                    : require('./UPBInputNumber.vue'),

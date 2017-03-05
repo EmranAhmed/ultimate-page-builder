@@ -911,6 +911,8 @@
 
                 if ( has_shortcode( $shortcodes, $element[ 'tag' ] ) ) {
 
+                    // upb_elements()->get_element();
+
                     if ( ! empty( $element[ '_upb_options' ][ 'assets' ][ 'shortcode' ][ 'js' ] ) ) {
                         wp_enqueue_script( sprintf( 'upb-element-%s', $element[ 'tag' ] ) );
                     }

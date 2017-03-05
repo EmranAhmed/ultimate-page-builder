@@ -397,8 +397,14 @@
                 } else {
                     if ( ! shortcode_exists( $tag ) ) {
 
-                        if ( ! empty( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ) ) {
+                        $this->_register_shortcode_assets( $tag, $_upb_options[ 'assets' ] );
+
+                        /*if ( ! empty( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ) && is_string( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ) ) {
                             wp_register_style( sprintf( 'upb-element-%s', $tag ), esc_url( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ), array(), FALSE );
+                        }
+
+                        if ( ! empty( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ) && is_array( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ) ) {
+                            // wp_register_style( sprintf( 'upb-element-%s', $tag ), esc_url( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ), array(), FALSE );
                         }
 
                         if ( ! empty( $_upb_options[ 'assets' ][ 'shortcode' ][ 'js' ] ) ) {
@@ -407,7 +413,7 @@
 
                         if ( ! empty( $_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_js' ] ) ) {
                             wp_add_inline_script( sprintf( 'upb-element-%s', $tag ), $_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_js' ] );
-                        }
+                        }*/
 
                         add_shortcode( $tag, function ( $attrs, $contents = NULL ) use ( $tag, $_upb_options ) {
 
@@ -462,6 +468,44 @@
                         wp_send_json_success( ob_get_clean() );
                     } );
                 }
+            }
+
+            private function _register_shortcode_assets( $tag, $assets ) {
+
+                // CSS
+                if ( ! empty( $assets[ 'shortcode' ][ 'css' ] ) && is_string( $assets[ 'shortcode' ][ 'css' ] ) ) {
+                    wp_register_style( sprintf( 'upb-element-%s', $tag ), esc_url( $assets[ 'shortcode' ][ 'css' ] ), array(), FALSE );
+                }
+
+                if ( ! empty( $assets[ 'shortcode' ][ 'css' ] ) && is_array( $assets[ 'shortcode' ][ 'css' ] ) ) {
+
+                    foreach ( $assets[ 'shortcode' ][ 'css' ] as $name => $css ) {
+                        wp_register_style( sprintf( 'upb-element-%s-%s', $tag, $name ), esc_url( $css ), array(), FALSE );
+                    }
+                }
+
+                // JS
+
+                $handle = sprintf( 'upb-element-%s', $tag );;
+
+                if ( ! empty( $assets[ 'shortcode' ][ 'js' ] ) && is_string( $assets[ 'shortcode' ][ 'js' ] ) ) {
+                    wp_register_script( $handle, esc_url( $assets[ 'shortcode' ][ 'js' ] ), array(), FALSE );
+                }
+
+                if ( ! empty( $assets[ 'shortcode' ][ 'js' ] ) && is_array( $assets[ 'shortcode' ][ 'js' ] ) ) {
+
+                    foreach ( $assets[ 'shortcode' ][ 'js' ] as $name => $css ) {
+                        $handle = sprintf( 'upb-element-%s-%s', $tag, $name );
+                        wp_register_script( $handle, esc_url( $css ), array(), FALSE );
+                    }
+                }
+
+                //
+
+                if ( ! empty( $assets[ 'shortcode' ][ 'inline_js' ] ) ) {
+                    wp_add_inline_script( $handle, $assets[ 'shortcode' ][ 'inline_js' ] );
+                }
+
             }
 
             public function get_elements() {
