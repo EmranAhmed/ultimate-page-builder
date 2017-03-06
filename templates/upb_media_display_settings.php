@@ -123,7 +123,7 @@
                 if ('upb-image-media' == upb_state) {
                     templateId = 'upb-attachment-details';
                 }
-                
+
                 return wp.media.template(templateId)(view);
             }
         })
