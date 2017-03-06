@@ -4,7 +4,7 @@ import { util } from 'vue';
     const vImageMedia = {};
 
     if (_.isUndefined(wp) || _.isUndefined(wp.media)) {
-        util.warn(`"wp.media" is not loaded or found globally to use "vue-image-select" directive..`, this);
+        util.warn(`"wp.media" is not loaded or found globally to use "vue-image-media" directive..`, this);
     }
 
     vImageMedia.install = function (Vue, options) {
@@ -26,41 +26,41 @@ import { util } from 'vue';
                     }
 
                     /*let insertImage = wp.media.controller.Library.extend({
-                        defaults : _.defaults({
-                            //id:        'insert-image',
-                            //title:      vnode.context.attributes.title,
-                            //allowLocalEdits     : true,
-                            displaySettings : true,
-                            date            : false,
-                            //displayUserSettings : true,
-                            //multiple            : false,
-                            type            : 'image' //audio, video, application/pdf, ... etc
-                        }, wp.media.controller.Library.prototype.defaults)
-                    });
+                     defaults : _.defaults({
+                     //id:        'insert-image',
+                     //title:      vnode.context.attributes.title,
+                     //allowLocalEdits     : true,
+                     displaySettings : true,
+                     date            : false,
+                     //displayUserSettings : true,
+                     //multiple            : false,
+                     type            : 'image' //audio, video, application/pdf, ... etc
+                     }, wp.media.controller.Library.prototype.defaults)
+                     });
 
-                    // set our settings
-                    var frame2 = wp.media({
-                        title    : vnode.context.attributes.title,
-                        multiple : false,
-                        library  : {
-                            type : 'image'
-                        },
-                        button   : {
-                            text : vnode.context.attributes.buttons.add
-                        },
-                        states   : [
-                            new insertImage()
-                        ]
-                    });*/
+                     // set our settings
+                     var frame2 = wp.media({
+                     title    : vnode.context.attributes.title,
+                     multiple : false,
+                     library  : {
+                     type : 'image'
+                     },
+                     button   : {
+                     text : vnode.context.attributes.buttons.add
+                     },
+                     states   : [
+                     new insertImage()
+                     ]
+                     });*/
 
                     frame = wp.media({
                         button : {
                             text : vnode.context.attributes.buttons.add
                         },
-                        state  : 'insert-image',
+                        state  : 'upb-image-media',
                         states : [
                             new wp.media.controller.Library({
-                                id              : 'insert-image',
+                                id              : 'upb-image-media',
                                 title           : vnode.context.attributes.title,
                                 library         : wp.media.query({type : 'image'}),
                                 multiple        : false,
@@ -77,7 +77,7 @@ import { util } from 'vue';
 
                         let selection = frame.state().get('selection');
 
-                        let state = frame.state('insert-image');
+                        let state = frame.state('upb-image-media');
 
                         if (!selection) return;
 

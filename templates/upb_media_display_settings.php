@@ -38,17 +38,19 @@
         <?php _e( 'Attachment Details' ); ?>
         <span class="settings-save-status">
 				<span class="spinner"></span>
-				<span class="saved"><?php esc_html_e('Saved.'); ?></span>
+				<span class="saved"><?php esc_html_e( 'Saved.' ); ?></span>
 			</span>
     </h2>
     <div class="attachment-info">
         <div class="thumbnail thumbnail-{{ data.type }}">
             <# if ( data.uploading ) { #>
-                <div class="media-progress-bar"><div></div></div>
+                <div class="media-progress-bar">
+                    <div></div>
+                </div>
                 <# } else if ( 'image' === data.type && data.sizes ) { #>
-                    <img src="{{ data.size.url }}" draggable="false" alt="" />
+                    <img src="{{ data.size.url }}" draggable="false" alt=""/>
                     <# } else { #>
-                        <img src="{{ data.icon }}" class="icon" draggable="false" alt="" />
+                        <img src="{{ data.icon }}" class="icon" draggable="false" alt=""/>
                         <# } #>
         </div>
         <div class="details">
@@ -91,23 +93,38 @@
     </div>
 
     <label class="setting" data-setting="url">
-        <span class="name"><?php _e('URL'); ?></span>
-        <input type="text" value="{{ data.url }}" readonly />
+        <span class="name"><?php _e( 'URL' ); ?></span>
+        <input type="text" value="{{ data.url }}" readonly/>
     </label>
 </script>
-
 
 <script type="text/javascript">
     jQuery(document).ready(function () {
         wp.media.view.Settings.AttachmentDisplay = wp.media.view.Settings.AttachmentDisplay.extend({
             template : function (view) {
-                return wp.media.template('upb-attachment-display-settings')(view);
+
+                let upb_state  = this.controller.state().id;
+                let templateId = 'attachment-display-settings';
+
+                if ('upb-image-media' == upb_state) {
+                    templateId = 'upb-attachment-display-settings';
+                }
+
+                return wp.media.template(templateId)(view);
             }
         });
 
         wp.media.view.Attachment.Details = wp.media.view.Attachment.Details.extend({
             template : function (view) {
-                return wp.media.template('upb-attachment-details')(view);
+
+                let upb_state  = this.controller.state().id;
+                let templateId = 'attachment-details';
+
+                if ('upb-image-media' == upb_state) {
+                    templateId = 'upb-attachment-details';
+                }
+                
+                return wp.media.template(templateId)(view);
             }
         })
     });
