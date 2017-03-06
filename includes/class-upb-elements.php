@@ -43,7 +43,7 @@
             public function register( $tag, $settings = array(), $contents = FALSE, $_upb_options = array() ) {
 
                 if ( $this->has_element( $tag ) ) {
-                    trigger_error( sprintf( esc_html__( 'Ultimate page builder element "%s" already registered.', 'ultimate-page-builder' ), $tag ), E_USER_WARNING );
+                    trigger_error( sprintf( esc_html__( 'Ultimate Page Builder element "%s" already registered.', 'ultimate-page-builder' ), $tag ), E_USER_WARNING );
                 }
 
                 $_upb_options[ 'focus' ] = FALSE;
@@ -93,8 +93,6 @@
 
                 if ( ! isset( $_upb_options[ 'previews' ] ) ) {
                     $_upb_options[ 'previews' ] = FALSE;
-
-                    // previews=array( array('component'=>'', 'template'=>'') )
                 }
 
                 if ( is_array( $_upb_options[ 'previews' ] ) ) {
@@ -112,8 +110,6 @@
                     }
                 }
 
-                ///////
-
                 // Shortcode Preview
                 if ( isset( $_upb_options[ 'preview' ][ 'shortcode' ] ) && $_upb_options[ 'preview' ][ 'shortcode' ] ) {
 
@@ -125,9 +121,6 @@
                         $_upb_options[ 'preview' ][ 'ajax-hook' ] = '_upb_shortcode_preview_contents';
                     }
                 }
-
-
-                //////
 
 
                 if ( ! isset( $_upb_options[ 'preview' ][ 'component' ] ) ) {
@@ -472,40 +465,23 @@
 
             private function _register_shortcode_assets( $tag, $assets ) {
 
+
+                $handle = sprintf( 'upb-element-%s', $tag );
+
                 // CSS
-                if ( ! empty( $assets[ 'shortcode' ][ 'css' ] ) && is_string( $assets[ 'shortcode' ][ 'css' ] ) ) {
-                    wp_register_style( sprintf( 'upb-element-%s', $tag ), esc_url( $assets[ 'shortcode' ][ 'css' ] ), array(), FALSE );
-                }
-
-                if ( ! empty( $assets[ 'shortcode' ][ 'css' ] ) && is_array( $assets[ 'shortcode' ][ 'css' ] ) ) {
-
-                    foreach ( $assets[ 'shortcode' ][ 'css' ] as $name => $css ) {
-                        wp_register_style( sprintf( 'upb-element-%s-%s', $tag, $name ), esc_url( $css ), array(), FALSE );
-                    }
+                if ( ! empty( $assets[ 'shortcode' ][ 'css' ] ) ) {
+                    wp_register_style( $handle, esc_url( $assets[ 'shortcode' ][ 'css' ] ), array(), FALSE );
                 }
 
                 // JS
-
-                $handle = sprintf( 'upb-element-%s', $tag );;
-
-                if ( ! empty( $assets[ 'shortcode' ][ 'js' ] ) && is_string( $assets[ 'shortcode' ][ 'js' ] ) ) {
+                if ( ! empty( $assets[ 'shortcode' ][ 'js' ] ) ) {
                     wp_register_script( $handle, esc_url( $assets[ 'shortcode' ][ 'js' ] ), array(), FALSE );
                 }
 
-                if ( ! empty( $assets[ 'shortcode' ][ 'js' ] ) && is_array( $assets[ 'shortcode' ][ 'js' ] ) ) {
-
-                    foreach ( $assets[ 'shortcode' ][ 'js' ] as $name => $css ) {
-                        $handle = sprintf( 'upb-element-%s-%s', $tag, $name );
-                        wp_register_script( $handle, esc_url( $css ), array(), FALSE );
-                    }
-                }
-
-                //
-
+                // Inline JS
                 if ( ! empty( $assets[ 'shortcode' ][ 'inline_js' ] ) ) {
                     wp_add_inline_script( $handle, $assets[ 'shortcode' ][ 'inline_js' ] );
                 }
-
             }
 
             public function get_elements() {

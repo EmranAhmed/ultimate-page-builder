@@ -54,7 +54,7 @@
             wp_register_style( 'upb-preview-elements', upb_get_theme_file_uri( 'preview-css/upb-preview-elements.css' ) );
             wp_enqueue_style( 'upb-preview-elements' );
 
-            do_action( 'upb_preview_wp_enqueue_scripts' );
+            do_action( 'upb_preview_enqueue_scripts' );
         }
     } );
 

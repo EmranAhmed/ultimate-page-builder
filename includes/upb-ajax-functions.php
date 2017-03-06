@@ -278,6 +278,55 @@
         wp_send_json_success( $result );
     } );
 
+    // DashIcons Icon Ajax
+    add_action( 'wp_ajax__upb_dashicons_icon_search', function () {
+
+        upb_check_ajax_access();
+
+        if ( empty( $_GET[ 'query' ] ) ) {
+            wp_send_json_error( 'no_search_term', 400 );
+        }
+
+        $query = esc_html( $_GET[ 'query' ] );
+
+        $icons = upb_dash_icon_icons();
+
+        $finds = array_filter( $icons, function ( $icon ) use ( $query ) {
+            $p = strpos( strtolower( $icon ), $query );
+
+            if ( $p === FALSE ) {
+                return FALSE;
+            } else {
+                return TRUE;
+            }
+        } );
+
+        $result = array_values( array_map( function ( $icon, $key ) {
+
+            return array( 'id' => $key, 'title' => $icon, 'text' => $icon );
+
+        }, $finds, array_keys( $finds ) ) );
+
+        wp_send_json_success( $result );
+    } );
+
+    add_action( 'wp_ajax__upb_dashicons_icon_load', function () {
+
+        upb_check_ajax_access();
+
+        if ( empty( $_GET[ 'id' ] ) ) {
+            wp_send_json_success( array() );
+        }
+
+        $query = esc_html( $_GET[ 'id' ] );
+
+        $icons = upb_dash_icon_icons();
+
+        $result = array( 'id' => $query, 'title' => esc_html( $icons[ $query ] ), 'text' => esc_html( $icons[ $query ] ) );
+
+        wp_send_json_success( $result );
+    } );
+
     // Contact form 7 Ajax
     add_action( 'wp_ajax__upb_upb-contact-form-7_preview_contents', function () {
 

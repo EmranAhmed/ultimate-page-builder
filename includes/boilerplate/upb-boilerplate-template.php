@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) or die( 'Keep Silent' );
 if ( ! current_user_can( 'customize' ) ) :
     wp_die(
         '<h1>' . esc_html__( 'Cheatin&#8217; uh?', 'ultimate-page-builder' ) . '</h1>' .
-        '<p>' . esc_html__( 'Sorry, you are not allowed to build this page with Ultimate page builder', 'ultimate-page-builder' ) . '</p>',
+        '<p>' . esc_html__( 'Sorry, you are not allowed to build this page with Ultimate Page Builder', 'ultimate-page-builder' ) . '</p>',
         403
     );
 endif;

@@ -98,18 +98,20 @@ Yes.
 
 = 1.0.0-beta.18 =
 
-- Image Size added to popup
+- Image Size media popup
+- Dashicon Icons Added
+- `icon-popup` input type Added
 
 = 1.0.0-beta.17 =
 
 - Template Overriding directory changed from `upb-templates` to `ultimate-page-builder`
-- `upb_hook_info` function
+- `upb_hook_info` function added.
 - Pre-build layout reset function
-- CSS3 Gradient background added
+- CSS3 Gradient Background Support
 
 = 1.0.0-beta.16 =
 - Media based element attributes added
-- Spacing field for margin and padding input
+- `spacing` field for margin and padding input
 - Color input palettes option added
 
 = 1.0.0-beta.15 =

@@ -382,6 +382,25 @@
         ) );
     }
 
+    function upb_dashicons_icon_input( $id, $title = '', $desc = '', $default = '' ) {
+
+        $title = trim( $title ) ? trim( $title ) : esc_html__( 'Dashicons Icon', 'ultimate-page-builder' );
+        $desc  = trim( $desc ) ? trim( $desc ) : sprintf( __( 'Search Dashicons icon. Using <a target="_blank" href="%s">%s</a>', 'ultimate-page-builder' ), 'https://developer.wordpress.org/resource/dashicons/', esc_html__( 'Dashicons', 'ultimate-page-builder' ) );
+
+        return apply_filters( 'upb_dashicons_icon_input', array(
+            'id'          => esc_attr( $id ),
+            'title'       => esc_html( $title ),
+            'desc'        => wp_kses_post( $desc ),
+            'type'        => 'ajax-icon-select',
+            'value'       => $default,
+            'hooks'       => array(
+                'search' => '_upb_dashicons_icon_search',
+                'load'   => '_upb_dashicons_icon_load',
+            ),
+            'placeholder' => esc_html__( 'Search Dashicons Icon', 'ultimate-page-builder' ),
+        ) );
+    }
+
     function upb_background_input_group() {
         return apply_filters( 'upb_background_input_group', array(
 
@@ -739,6 +758,19 @@
         return apply_filters( 'upb_row_wrapper_input', array() );
     }
 
+    function upb_icon_providers() {
+        return apply_filters( 'upb_icon_providers', array(
+            array(
+                'id'    => 'materialdesign',
+                'title' => esc_html__( 'Material Design', 'ultimate-page-builder' )
+            ),
+            array(
+                'id'    => 'dashicons',
+                'title' => esc_html__( 'DashIcons Icon', 'ultimate-page-builder' )
+            )
+        ) );
+    }
+
 
     // End Build-In Inputs
 
@@ -912,14 +944,14 @@
 
                 if ( has_shortcode( $shortcodes, $element[ 'tag' ] ) ) {
 
-                    // upb_elements()->get_element();
+                    $handle = sprintf( 'upb-element-%s', $element[ 'tag' ] );
 
                     if ( ! empty( $element[ '_upb_options' ][ 'assets' ][ 'shortcode' ][ 'js' ] ) ) {
-                        wp_enqueue_script( sprintf( 'upb-element-%s', $element[ 'tag' ] ) );
+                        wp_enqueue_script( $handle );
                     }
 
                     if ( ! empty( $element[ '_upb_options' ][ 'assets' ][ 'shortcode' ][ 'css' ] ) ) {
-                        wp_enqueue_style( sprintf( 'upb-element-%s', $element[ 'tag' ] ) );
+                        wp_enqueue_style( $handle );
                     }
                 }
             }, upb_elements()->get_all() );

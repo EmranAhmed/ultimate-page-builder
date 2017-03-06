@@ -51,18 +51,7 @@
                                 'choose' => esc_html__( 'Choose Icon', 'ultimate-page-builder' ),
                             );
 
-                        $options[ 'providers' ] = isset( $options[ 'providers' ] )
-                            ? $options[ 'providers' ]
-                            : array(
-                                array(
-                                    'id'    => 'materialdesign',
-                                    'title' => esc_html__( 'Material Design', 'ultimate-page-builder' )
-                                ),
-                                array(
-                                    'id'    => 'dashicons',
-                                    'title' => esc_html__( 'Dashicons Icon', 'ultimate-page-builder' )
-                                ),
-                            );
+                        $options[ 'providers' ] = isset( $options[ 'providers' ] ) ? $options[ 'providers' ] : upb_icon_providers();
                         break;
 
                     case 'color':
