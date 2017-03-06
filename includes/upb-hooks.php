@@ -40,6 +40,27 @@
 
     add_action( 'wp_loaded', 'upb_layouts_register_action' );
 
+
+    add_filter( 'upb_icon_popup_icons', function ( $icons, $provider ) {
+
+        switch ( $provider ) {
+            case 'materialdesign':
+                $icons = upb_material_design_icons();
+                break;
+
+            case 'fontawesome':
+                $icons = upb_font_awesome_icons();
+                break;
+
+            case 'dashicons':
+                $icons = upb_dash_icon_icons();
+                break;
+        }
+
+        return $icons;
+
+    }, 10, 2 );
+
     // Content Load
 
     add_filter( 'upb-before-contents', function ( $contents, $shortcodes ) {

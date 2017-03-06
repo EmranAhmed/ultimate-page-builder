@@ -812,6 +812,31 @@ FORM CODE
     }
   }
 
+.attachment-icon-view {
+
+  .placeholder, .preview {
+    text-align  : center;
+    line-height : 100%;
+    font-size   : 3em;
+    float       : left;
+    i {
+      width     : inherit !important;
+      height    : inherit !important;
+      font-size : inherit !important;
+      }
+    }
+
+  .placeholder {
+    border : 1px dashed #B4B9BE;
+    width  : 48px;
+    height : 48px;
+    }
+  .actions {
+    float  : left;
+    margin : 8px 5px;
+    }
+  }
+
 /*----------------------
  * Transition
  *----------------------*/

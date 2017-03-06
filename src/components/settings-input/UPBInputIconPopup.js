@@ -14,29 +14,23 @@ export default {
 
     data(){
         return {
-            show      : false,
-            providers : [
-                {
-                    id    : 'fontawesome',
-                    title : 'Font Awesome'
-                },
-                {
-                    id    : 'materialdesign',
-                    title : 'Material Design'
-                },
-                {
-                    id    : 'dashicon',
-                    title : 'DashIcons'
-                }
-            ],
+            show : false
         }
     },
 
-    computed : {},
+    computed : {
+        providers(){
+            return this.attributes.providers
+        }
+    },
 
     methods : {
-        iconSelected(e){
-            console.log(e);
+        iconSelected(selected){
+            Vue.set(this, 'input', selected.id);
+        },
+
+        removeIcon(){
+            Vue.set(this, 'input', null);
         },
 
         closePopup(){

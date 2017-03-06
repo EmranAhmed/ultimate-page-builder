@@ -32,7 +32,7 @@ import { util } from 'vue';
                     newIndex : 0
                 };
 
-                console.log('hello sortable');
+                //console.log('hello sortable');
 
                 $(el).sortable({
                     //connectWith : ".upb-column-preview",

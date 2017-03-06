@@ -41,6 +41,29 @@
                                 'choose' => esc_html__( 'Select', 'ultimate-page-builder' ),
                             );
                         break;
+                    case 'icon-popup':
+                        //$options[ 'attribute' ]   = isset( $options[ 'attribute' ] ) ? $options[ 'attribute' ] : 'src'; // id, src
+                        $options[ 'buttons' ] = isset( $options[ 'buttons' ] )
+                            ? $options[ 'buttons' ]
+                            : array(
+                                'add'    => esc_html__( 'Add Icon', 'ultimate-page-builder' ),
+                                'remove' => esc_html__( 'Remove', 'ultimate-page-builder' ),
+                                'choose' => esc_html__( 'Choose Icon', 'ultimate-page-builder' ),
+                            );
+
+                        $options[ 'providers' ] = isset( $options[ 'providers' ] )
+                            ? $options[ 'providers' ]
+                            : array(
+                                array(
+                                    'id'    => 'materialdesign',
+                                    'title' => esc_html__( 'Material Design', 'ultimate-page-builder' )
+                                ),
+                                array(
+                                    'id'    => 'dashicons',
+                                    'title' => esc_html__( 'Dashicons Icon', 'ultimate-page-builder' )
+                                ),
+                            );
+                        break;
 
                     case 'color':
 

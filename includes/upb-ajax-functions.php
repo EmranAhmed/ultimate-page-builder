@@ -7,13 +7,8 @@
 
     // Posts
     add_action( 'wp_ajax__upb_search_posts', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         if ( empty( $_GET[ 'query' ] ) ) {
             wp_send_json_error( 'no_search_term', 400 );
@@ -49,13 +44,8 @@
     } );
 
     add_action( 'wp_ajax__upb_load_posts', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         $ids = array_map( 'esc_attr', $_GET[ 'id' ] );
 
@@ -88,13 +78,8 @@
     } );
 
     add_action( 'wp_ajax__upb_load_post', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         $id = absint( $_GET[ 'id' ] );
 
@@ -109,13 +94,8 @@
 
     // Pages
     add_action( 'wp_ajax__upb_search_pages', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         if ( empty( $_GET[ 'query' ] ) ) {
             wp_send_json_error( 'no_search_term', 400 );
@@ -151,13 +131,8 @@
     } );
 
     add_action( 'wp_ajax__upb_load_pages', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         $ids = array_map( 'esc_attr', $_GET[ 'id' ] );
 
@@ -190,13 +165,8 @@
     } );
 
     add_action( 'wp_ajax__upb_load_page', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         $id = absint( $_GET[ 'id' ] );
 
@@ -209,15 +179,11 @@
         }
     } );
 
+
     // Material Design Icon Ajax
     add_action( 'wp_ajax__upb_material_icon_search', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         if ( empty( $_GET[ 'query' ] ) ) {
             wp_send_json_error( 'no_search_term', 400 );
@@ -247,13 +213,8 @@
     } );
 
     add_action( 'wp_ajax__upb_material_icon_load', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         if ( empty( $_GET[ 'id' ] ) ) {
             wp_send_json_success( array() );
@@ -270,13 +231,8 @@
 
     // FontAwesome Icon Ajax
     add_action( 'wp_ajax__upb_font_awesome_icon_search', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         if ( empty( $_GET[ 'query' ] ) ) {
             wp_send_json_error( 'no_search_term', 400 );
@@ -306,13 +262,8 @@
     } );
 
     add_action( 'wp_ajax__upb_font_awesome_icon_load', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         if ( empty( $_GET[ 'id' ] ) ) {
             wp_send_json_success( array() );
@@ -329,13 +280,8 @@
 
     // Contact form 7 Ajax
     add_action( 'wp_ajax__upb_upb-contact-form-7_preview_contents', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         if ( ! empty( $_POST[ 'id' ] ) ) {
             $short_code = do_shortcode( sprintf( '[contact-form-7 id="%d" title="%s"]', absint( $_POST[ 'id' ] ), esc_html( $_POST[ 'title' ] ) ) );
@@ -346,13 +292,8 @@
     } );
 
     add_action( 'wp_ajax__upb_element_upb-contact-form-7_id_search', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         if ( empty( $_GET[ 'query' ] ) ) {
             wp_send_json_error( 'no_search_term', 400 );
@@ -388,13 +329,8 @@
     } );
 
     add_action( 'wp_ajax__upb_element_upb-contact-form-7_id_load', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         $id = absint( $_GET[ 'id' ] );
 
@@ -409,13 +345,8 @@
 
     // Contact form 7 multiple demo Ajax example
     add_action( 'wp_ajax__upb_element_upb-contact-form-7_idx_search', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         if ( empty( $_GET[ 'query' ] ) ) {
             wp_send_json_error( 'no_search_term', 400 );
@@ -451,13 +382,8 @@
     } );
 
     add_action( 'wp_ajax__upb_element_upb-contact-form-7_idx_load', function () {
-        if ( ! current_user_can( 'customize' ) ) {
-            wp_send_json_error( 'upb_not_allowed', 403 );
-        }
 
-        if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
-            wp_send_json_error( 'bad_nonce', 400 );
-        }
+        upb_check_ajax_access();
 
         $ids = array_map( 'esc_attr', $_GET[ 'id' ] );
 
@@ -816,5 +742,63 @@
 
         $contents = do_shortcode( wp_kses_post( stripslashes( $_POST[ 'shortcode' ] ) ) );
         wp_send_json_success( $contents );
+    } );
+
+    add_action( 'wp_ajax__upb_icon_popup_load', function () {
+
+        upb_check_ajax_access();
+
+        if ( empty( $_GET[ 'provider' ] ) ) {
+            wp_send_json_error( 'no_provider', 204 );
+        }
+
+        if ( empty( $_GET[ 'start' ] ) ) {
+            $start = 0;
+        } else {
+            $start = absint( $_GET[ 'start' ] );
+        }
+
+        if ( empty( $_GET[ 'limit' ] ) ) {
+            $limit = 160;
+        } else {
+            $limit = absint( $_GET[ 'limit' ] );
+        }
+
+        if ( isset( $_GET[ 'search' ] ) && ! empty( $_GET[ 'search' ] ) ) {
+            $search = strtolower( trim( $_GET[ 'search' ] ) );
+        } else {
+            $search = FALSE;
+        }
+
+        $all_icons = apply_filters( 'upb_icon_popup_icons', array(), strtolower( $_GET[ 'provider' ] ) );
+
+        if ( $search ) {
+            // Search Icon
+            $all_icons = array_filter( $all_icons, function ( $icon ) use ( $search ) {
+                $p = strpos( strtolower( $icon ), $search );
+
+                if ( $p === FALSE ) {
+                    return FALSE;
+                } else {
+                    return TRUE;
+                }
+            } );
+        }
+
+        // Icon Object
+        $icons = array_values( array_map( function ( $icon, $key ) {
+            return array( 'id' => $key, 'name' => $icon );
+        }, $all_icons, array_keys( $all_icons ) ) );
+
+
+        $icons = array(
+            'total' => count( $icons ),
+            'start' => $start,
+            'limit' => $limit,
+            'icons' => array_slice( $icons, $start, $limit ),
+        );
+
+        wp_send_json_success( $icons );
+
     } );
 
