@@ -495,11 +495,27 @@ export default{
         },
 
         openElementItemsPanel(path){
-            this.$router.replace(`/sections/${path}/contents`);
+
+            if (path.split('/').length > 1) {
+                let previousPath = path.split('/').slice(0, -1).join('/');
+                this.$router.replace(`/sections/${previousPath}/contents`);
+            }
+
+            this.$nextTick(()=> {
+                this.$router.replace(`/sections/${path}/contents`);
+            })
         },
 
         openElementSettingsPanel(path){
-            this.$router.replace(`/sections/${path}/settings`);
+
+            if (path.split('/').length > 1) {
+                let previousPath = path.split('/').slice(0, -1).join('/');
+                this.$router.replace(`/sections/${previousPath}/contents`);
+            }
+
+            this.$nextTick(()=> {
+                this.$router.replace(`/sections/${path}/settings`);
+            })
         }
     }
 }

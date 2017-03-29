@@ -51,7 +51,6 @@ If you are unable to use any of the methods due to internet connectivity and fil
 6. Navigate to Plugins -> Installed
 7. Activate the plugin
 
-
 == Frequently Asked Questions ==
 
 = How to add section? =
@@ -68,20 +67,23 @@ No, It doesn't.
 
 = Is it possible to extend? =
 
-Yes, Ultimate Page Builder is easily extend able.
+Yes, **Ultimate Page Builder** is easily extendable.
 
-= I am a theme developer, Can I save my pre build templates for my clients? =
+= How to add more elements / shortcodes? =
+
+[Documentation about adding more elements / modify existing elements](https://upb-guide.themehippo.com/registering-new-element.html)
+
+= I am a theme developer, Can I save my pre-build templates for my clients? =
 
 Yes, you can save your generated template contents.
 
-= Is it possible to save section for future use? =
+= Is it possible to save section for future usages? =
 
 Yes, it is possible to save section and re-use on any of your page with page builder.
 
-= As a theme developer I use Twitter Bootstrap to develop my theme. Is it possible to use Bootstrap with Ultimate Page Builder? =
+= As a theme developer I use Twitter Bootstrap to develop my themes. Is it possible to use Bootstrap with Ultimate Page Builder? =
 
 Yes.
-
 
 == Screenshots ==
 
@@ -95,6 +97,10 @@ Yes.
 7. Contact form 7 settings
 
 == Changelog ==
+
+= 1.0.0-beta.19 =
+
+- Click to open UPB Tab and UPB Accordion settings panel.
 
 = 1.0.0-beta.18 =
 

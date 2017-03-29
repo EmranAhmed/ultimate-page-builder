@@ -86,7 +86,7 @@ export default {
 
         openContentsPanel(){
             this.$router.replace(`/sections`);
-            this.$nextTick(_=> {
+            this.$nextTick(()=> {
                 let path = `/sections/%/contents`.replace('%', this.model._upb_options._keyIndex);
                 this.$router.replace(path);
             })
