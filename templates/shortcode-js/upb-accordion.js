@@ -5,7 +5,7 @@
 
         return this.each(function () {
 
-            //console.log('EXECUTED accordion');
+            // console.log('EXECUTED accordion');
 
             $(this).on('click', function (e) {
 

@@ -266,7 +266,7 @@
 
     // Build-In Inputs
 
-    function upb_media_query_based_input_group( $input ) {
+    function upb_media_query_based_input_group( $input, $with_global = TRUE ) {
 
         $get_devices = upb_devices();
 
@@ -278,11 +278,13 @@
             );
         }, $get_devices );
 
-        array_unshift( $options, array(
-            'id'    => '',
-            'title' => esc_html__( 'Global', 'ultimate-page-builder' ),
-            'icon'  => 'mdi mdi-earth',
-        ) );
+        if ( $with_global ) {
+            array_unshift( $options, array(
+                'id'    => '',
+                'title' => esc_html__( 'Global', 'ultimate-page-builder' ),
+                'icon'  => 'mdi mdi-earth',
+            ) );
+        }
 
         $devices = upb_list_pluck( $options, array( 'title', 'icon' ), 'id' );
 
@@ -290,6 +292,7 @@
 
             $input[ 'id' ]          = empty( $key ) ? $input[ 'id' ] : sprintf( '%s-%s', $input[ 'id' ], $key );
             $input[ 'title' ]       = empty( $key ) ? $input[ 'title' ] : sprintf( esc_html__( '%s for %s device', 'ultimate-page-builder' ), $input[ 'title' ], $device[ 'title' ] );
+            $input[ 'value' ]       = empty( $key ) ? $input[ 'value' ] : ( ( $input[ 'device-value' ] && isset( $input[ 'device-value' ][ $key ] ) ) ? $input[ 'device-value' ][ $key ] : $input[ 'value' ] );
             $input[ 'device' ]      = empty( $key ) ? '' : $key;
             $input[ 'deviceIcon' ]  = $device[ 'icon' ];
             $input[ 'deviceTitle' ] = $device[ 'title' ];
@@ -332,7 +335,6 @@
         }, $devices );
 
         $options = upb_list_pluck( $options, array( 'title', 'icon' ), 'id' );
-
 
         return apply_filters( 'upb_column_clearfix_input', array(
             'id'      => esc_attr( $id ),
@@ -402,6 +404,7 @@
     }
 
     function upb_background_input_group() {
+
         return apply_filters( 'upb_background_input_group', array(
 
             array(
@@ -465,17 +468,17 @@
                 )
             ),
 
-
             array(
-                'id'       => 'gradient-start-color',
-                'title'    => esc_html__( 'Gradient Start Color', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Element gradient background start color. If you have only one color to start use start color on color stop 1 also.', 'ultimate-page-builder' ),
-                'type'     => 'color',
-                'value'    => '#ffffff',
-                'options'  => array(
+                'id'          => 'gradient-start-color',
+                'title'       => esc_html__( 'Gradient Start Color', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Element gradient background start color. If you have only one color to start use start color on color stop 1 also.', 'ultimate-page-builder' ),
+                'placeholder' => esc_html__( 'RGBA Color', 'ultimate-page-builder' ),
+                'type'        => 'color',
+                'value'       => '#ffffff',
+                'options'     => array(
                     'alpha' => TRUE,
                 ),
-                'required' => array(
+                'required'    => array(
                     array( 'background-type', '=', 'gradient' )
                 )
             ),
@@ -494,17 +497,18 @@
                     array( 'background-type', '=', 'gradient' )
                 )
             ),
-            ///
+
             array(
-                'id'       => 'gradient-color-stop-1',
-                'title'    => esc_html__( 'Color Stop 1', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Element gradient color stop 1. If you have only one color to start use start color on color stop 1 also.', 'ultimate-page-builder' ),
-                'type'     => 'color',
-                'value'    => '#ffffff',
-                'options'  => array(
+                'id'          => 'gradient-color-stop-1',
+                'title'       => esc_html__( 'Color Stop 1', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Element gradient color stop 1. If you have only one color to start use start color on color stop 1 also.', 'ultimate-page-builder' ),
+                'placeholder' => esc_html__( 'RGBA Color', 'ultimate-page-builder' ),
+                'type'        => 'color',
+                'value'       => '#ffffff',
+                'options'     => array(
                     'alpha' => TRUE,
                 ),
-                'required' => array(
+                'required'    => array(
                     array( 'background-type', '=', 'gradient' )
                 )
             ),
@@ -524,18 +528,17 @@
                 )
             ),
 
-            ///
-
             array(
-                'id'       => 'gradient-end-color',
-                'title'    => esc_html__( 'Gradient End Color', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Element gradient background end color', 'ultimate-page-builder' ),
-                'type'     => 'color',
-                'value'    => '#000000',
-                'options'  => array(
+                'id'          => 'gradient-end-color',
+                'title'       => esc_html__( 'Gradient End Color', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Element gradient background end color', 'ultimate-page-builder' ),
+                'placeholder' => esc_html__( 'RGBA Color', 'ultimate-page-builder' ),
+                'type'        => 'color',
+                'value'       => '#000000',
+                'options'     => array(
                     'alpha' => TRUE,
                 ),
-                'required' => array(
+                'required'    => array(
                     array( 'background-type', '=', 'gradient' )
                 )
             ),
@@ -556,15 +559,16 @@
             ),
 
             array(
-                'id'       => 'background-color',
-                'title'    => esc_html__( 'Background Color', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Element background color', 'ultimate-page-builder' ),
-                'type'     => 'color',
-                'value'    => '#ffffff',
-                'options'  => array(
+                'id'          => 'background-color',
+                'title'       => esc_html__( 'Background Color', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Element background color', 'ultimate-page-builder' ),
+                'placeholder' => esc_html__( 'RGBA Color', 'ultimate-page-builder' ),
+                'type'        => 'color',
+                'value'       => '#ffffff',
+                'options'     => array(
                     'alpha' => TRUE,
                 ),
-                'required' => array(
+                'required'    => array(
                     array( 'background-type', '=', array( 'color', 'both' ) )
                 )
             ),
@@ -850,6 +854,42 @@
         return filter_var( $data, FILTER_VALIDATE_BOOLEAN );
     }
 
+    /**
+     * Usages:
+     *
+     * add_filter('upb_element_{$tag}_attributes', function($attributes){
+     *
+     * return upb_remove_element_attribute('margin', $attributes);
+     * })
+     *
+     * OR
+     *
+     *  add_filter('upb_element_{$tag}_attributes', function($attributes){
+     *
+     * return upb_remove_element_attribute(array('margin', 'padding'), $attributes);
+     * })
+     */
+    function upb_remove_element_attribute( $id, $attributes ) {
+
+        if ( empty( $attributes ) ) {
+            return $attributes;
+        } else {
+            $new_attributes = array();
+            foreach ( (array) $attributes as $attribute ) {
+
+                if ( is_string( $id ) && $attribute[ 'id' ] == $id ) {
+                    // Skip
+                } elseif ( is_array( $id ) && in_array( $attribute[ 'id' ], $id ) ) {
+                    // Skip
+                } else {
+                    array_push( $new_attributes, $attribute );
+                }
+            }
+
+            return $new_attributes;
+        }
+    }
+
     function upb_is_shortcode_enabled( $attributes ) {
         // if not set then return true;
         return isset( $attributes[ 'enable' ] ) ? ! empty( $attributes[ 'enable' ] ) : TRUE;
@@ -926,7 +966,6 @@
                     esc_attr( $attributes[ 'gradient-end-location' ] ) . '%'
                 ) );
             }
-
         }
 
         do_action( 'upb_shortcode_scoped_style_background', $attributes );
@@ -967,4 +1006,39 @@
 
     function upb_get_script_template_id( $id ) {
         return 'upb-' . $id . '-template">';
+    }
+
+    function upb_hex2RGB( $hex, $opacity = FALSE ) {
+        $hex = str_replace( "#", "", $hex );
+
+        if ( strlen( $hex ) == 3 ) {
+            $r = hexdec( substr( $hex, 0, 1 ) . substr( $hex, 0, 1 ) );
+            $g = hexdec( substr( $hex, 1, 1 ) . substr( $hex, 1, 1 ) );
+            $b = hexdec( substr( $hex, 2, 1 ) . substr( $hex, 2, 1 ) );
+        } else {
+            $r = hexdec( substr( $hex, 0, 2 ) );
+            $g = hexdec( substr( $hex, 2, 2 ) );
+            $b = hexdec( substr( $hex, 4, 2 ) );
+        }
+        $rgb = array( $r, $g, $b );
+
+        if ( $opacity ) {
+            if ( abs( $opacity ) > 1 ) {
+                $opacity = 1.0;
+            }
+            $output = 'rgba(' . implode( ",", $rgb ) . ',' . $opacity . ')';
+        } else {
+            $output = 'rgb(' . implode( ",", $rgb ) . ')';
+        }
+
+        return $output;
+    }
+
+    function upb_rgb2HEX( $rgb ) {
+        $hex = "#";
+        $hex .= str_pad( dechex( $rgb[ 0 ] ), 2, "0", STR_PAD_LEFT );
+        $hex .= str_pad( dechex( $rgb[ 1 ] ), 2, "0", STR_PAD_LEFT );
+        $hex .= str_pad( dechex( $rgb[ 2 ] ), 2, "0", STR_PAD_LEFT );
+
+        return $hex;
     }

@@ -98,6 +98,14 @@ Yes.
 
 == Changelog ==
 
+= 1.0.0-beta.20 =
+
+- `spacing` input type modified with unit
+- `toHEX()` `toRGB()` for JS and `upb_hex2RGB()` `upb_rgb2HEX()` for PHP functions added to convert colors.
+- `device-value` for individual media query device value option added to use `upb_media_query_based_input_group()`.
+- split `builder` and `vendor` scripts.
+- `upb_remove_element_attribute` helper function added to simply remove element attributes.
+
 = 1.0.0-beta.19 =
 
 - Click to open UPB Tab and UPB Accordion settings panel.

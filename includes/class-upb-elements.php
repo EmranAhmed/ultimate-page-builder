@@ -338,7 +338,7 @@
 
                 foreach ( $settings as $key => $setting ) {
 
-                    // Require
+                    // Required
                     //===================
                     // required=>array(
                     // array('title', '!=', '' ),
@@ -464,8 +464,7 @@
             }
 
             private function _register_shortcode_assets( $tag, $assets ) {
-
-
+                
                 $handle = sprintf( 'upb-element-%s', $tag );
 
                 // CSS
@@ -475,7 +474,7 @@
 
                 // JS
                 if ( ! empty( $assets[ 'shortcode' ][ 'js' ] ) ) {
-                    wp_register_script( $handle, esc_url( $assets[ 'shortcode' ][ 'js' ] ), array(), FALSE );
+                    wp_register_script( $handle, esc_url( $assets[ 'shortcode' ][ 'js' ] ), array(), FALSE, TRUE );
                 }
 
                 // Inline JS

@@ -25,7 +25,7 @@ msgstr ""
 msgid "Contact form 1"
 msgstr ""
 
-#: elements/3rd-party.php:11, elements/widget-based.php:12, elements/widget-based.php:64, elements/widget-based.php:129, elements/widget-based.php:166, elements/widget-based.php:225, elements/widget-based.php:326, elements/widget-based.php:363, elements/widget-based.php:426, elements/widget-based.php:475, elements/widget-based.php:532, elements/widget-based.php:584, elements/with-upb.php:11, elements/with-upb.php:63, elements/with-upb.php:106, elements/with-upb.php:225, elements/with-upb.php:354, elements/with-upb.php:400, elements/with-upb.php:448, includes/upb-functions.php:718, includes/upb-settings.php:10
+#: elements/3rd-party.php:11, elements/widget-based.php:12, elements/widget-based.php:64, elements/widget-based.php:129, elements/widget-based.php:166, elements/widget-based.php:225, elements/widget-based.php:326, elements/widget-based.php:363, elements/widget-based.php:426, elements/widget-based.php:475, elements/widget-based.php:532, elements/widget-based.php:584, elements/with-upb.php:11, elements/with-upb.php:63, elements/with-upb.php:106, elements/with-upb.php:225, elements/with-upb.php:354, elements/with-upb.php:400, elements/with-upb.php:448, includes/upb-functions.php:722, includes/upb-settings.php:10
 msgid "Enable / Disable"
 msgstr ""
 
@@ -93,31 +93,31 @@ msgstr ""
 msgid "Spacer"
 msgstr ""
 
-#: elements/core.php:101, elements/core.php:115, elements/core.php:138
+#: elements/core.php:101, elements/core.php:117, elements/core.php:141
 msgid "Space between two section"
 msgstr ""
 
-#: elements/core.php:114
+#: elements/core.php:116
 msgid "Icon Popup"
 msgstr ""
 
-#: elements/core.php:122, elements/core.php:137
+#: elements/core.php:124, elements/core.php:140, elements/core.php:155
 msgid "Margin"
 msgstr ""
 
-#: elements/core.php:123
+#: elements/core.php:125, elements/core.php:156
 msgid "Margin between two section"
 msgstr ""
 
-#: elements/core.php:151
+#: elements/core.php:176
 msgid "Extra Input Example"
 msgstr ""
 
-#: elements/core.php:152
+#: elements/core.php:177
 msgid "An example of extra input"
 msgstr ""
 
-#: elements/widget-based.php:10, elements/widget-based.php:62, elements/widget-based.php:127, elements/widget-based.php:164, elements/widget-based.php:223, elements/widget-based.php:324, elements/widget-based.php:361, elements/widget-based.php:424, elements/widget-based.php:473, elements/widget-based.php:530, elements/widget-based.php:567, elements/with-upb.php:9, elements/with-upb.php:398, elements/with-upb.php:446, includes/upb-functions.php:684
+#: elements/widget-based.php:10, elements/widget-based.php:62, elements/widget-based.php:127, elements/widget-based.php:164, elements/widget-based.php:223, elements/widget-based.php:324, elements/widget-based.php:361, elements/widget-based.php:424, elements/widget-based.php:473, elements/widget-based.php:530, elements/widget-based.php:567, elements/with-upb.php:9, elements/with-upb.php:398, elements/with-upb.php:446, includes/upb-functions.php:688
 msgid "Title"
 msgstr ""
 
@@ -294,7 +294,7 @@ msgctxt "Search widget"
 msgid "Search"
 msgstr ""
 
-#: elements/widget-based.php:547, includes/boilerplate/upb-boilerplate-hooks.php:277, includes/class-upb-elements.php:305, includes/class-upb-elements.php:318
+#: elements/widget-based.php:547, includes/boilerplate/upb-boilerplate-hooks.php:276, includes/class-upb-elements.php:305, includes/class-upb-elements.php:318
 msgid "Search"
 msgstr ""
 
@@ -566,163 +566,163 @@ msgstr ""
 msgid "Current Color"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:248
+#: includes/boilerplate/upb-boilerplate-hooks.php:247
 msgid "Section Saving..."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:249
+#: includes/boilerplate/upb-boilerplate-hooks.php:248
 msgid "Section Saved."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:250
+#: includes/boilerplate/upb-boilerplate-hooks.php:249
 msgid "Section Can't Save."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:251
+#: includes/boilerplate/upb-boilerplate-hooks.php:250
 msgid "\"%s\" is not registered."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:252
+#: includes/boilerplate/upb-boilerplate-hooks.php:251
 msgid "Section Removed."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:253
+#: includes/boilerplate/upb-boilerplate-hooks.php:252
 msgid "%s Section Added."
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:254
+#: includes/boilerplate/upb-boilerplate-hooks.php:253
 msgid "Saving"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:255
+#: includes/boilerplate/upb-boilerplate-hooks.php:254
 msgid "Saved"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:256
+#: includes/boilerplate/upb-boilerplate-hooks.php:255
 msgid "Problem on Saving"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:257
+#: includes/boilerplate/upb-boilerplate-hooks.php:256
 msgid "Add"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:258
+#: includes/boilerplate/upb-boilerplate-hooks.php:257
 msgid "%s data copied to clipboard"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:259
+#: includes/boilerplate/upb-boilerplate-hooks.php:258
 msgid "Search saved section"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:260
+#: includes/boilerplate/upb-boilerplate-hooks.php:259
 msgid "%s layout copied to clipboard"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:261
+#: includes/boilerplate/upb-boilerplate-hooks.php:260
 msgid "Nothing to copy"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:262
+#: includes/boilerplate/upb-boilerplate-hooks.php:261
 msgid "%s Layout added"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:263
+#: includes/boilerplate/upb-boilerplate-hooks.php:262
 msgid "Use this layout"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:264
+#: includes/boilerplate/upb-boilerplate-hooks.php:263
 msgid "Paste JSON Contents"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:265
+#: includes/boilerplate/upb-boilerplate-hooks.php:264
 msgid "Save"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:266
+#: includes/boilerplate/upb-boilerplate-hooks.php:265
 msgid "Copy"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:267
+#: includes/boilerplate/upb-boilerplate-hooks.php:266
 msgid "Create"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:268
+#: includes/boilerplate/upb-boilerplate-hooks.php:267
 msgid "Are you sure to delete %s?"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:269
+#: includes/boilerplate/upb-boilerplate-hooks.php:268
 msgid "Manual"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:270
+#: includes/boilerplate/upb-boilerplate-hooks.php:269
 msgid "Columns Layout of - %s"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:271
+#: includes/boilerplate/upb-boilerplate-hooks.php:270
 msgid "Column Order"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:272
+#: includes/boilerplate/upb-boilerplate-hooks.php:271
 msgid "Column layout"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:273
+#: includes/boilerplate/upb-boilerplate-hooks.php:272
 msgid "Drag to sort column or click to open contents panel"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:274
+#: includes/boilerplate/upb-boilerplate-hooks.php:273
 msgid "Close"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:275
+#: includes/boilerplate/upb-boilerplate-hooks.php:274
 msgid "Clone of %s"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:276
+#: includes/boilerplate/upb-boilerplate-hooks.php:275
 msgid "Help"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:278
+#: includes/boilerplate/upb-boilerplate-hooks.php:277
 msgid "Back"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:279
+#: includes/boilerplate/upb-boilerplate-hooks.php:278
 msgid "You are on"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:280
+#: includes/boilerplate/upb-boilerplate-hooks.php:279
 msgid "Skeleton preview"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:281
+#: includes/boilerplate/upb-boilerplate-hooks.php:280
 msgid "Collapse"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:282
+#: includes/boilerplate/upb-boilerplate-hooks.php:281
 msgid "Expand"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:283, includes/class-upb-elements.php:221
+#: includes/boilerplate/upb-boilerplate-hooks.php:282, includes/class-upb-elements.php:221
 msgid "Disabled"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:284, includes/class-upb-elements.php:215
+#: includes/boilerplate/upb-boilerplate-hooks.php:283, includes/class-upb-elements.php:215
 msgid "Enabled"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:285
+#: includes/boilerplate/upb-boilerplate-hooks.php:284
 msgid "Show %s device column layouts"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:286
+#: includes/boilerplate/upb-boilerplate-hooks.php:285
 msgid "Click to enable %s device screen layout"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:287
+#: includes/boilerplate/upb-boilerplate-hooks.php:286
 msgid "Click to disable %s device screen layout"
 msgstr ""
 
-#: includes/boilerplate/upb-boilerplate-hooks.php:288
+#: includes/boilerplate/upb-boilerplate-hooks.php:287
 msgid "%s device column layouts should be same as other enabled device column layout"
 msgstr ""
 
@@ -738,47 +738,43 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: includes/class-upb-elements-props.php:33, includes/class-upb-settings.php:113
+#: includes/class-upb-elements-props.php:34, includes/class-upb-settings.php:113
 msgid "No Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:39, includes/class-upb-settings.php:119
+#: includes/class-upb-elements-props.php:40, includes/class-upb-settings.php:119
 msgid "Use Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:40, includes/class-upb-elements-props.php:50, includes/class-upb-settings.php:120, includes/upb-functions.php:582
+#: includes/class-upb-elements-props.php:41, includes/class-upb-elements-props.php:51, includes/class-upb-settings.php:120, includes/upb-functions.php:586
 msgid "Remove"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:41, includes/class-upb-settings.php:121
+#: includes/class-upb-elements-props.php:42, includes/class-upb-settings.php:121
 msgid "Select"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:49
+#: includes/class-upb-elements-props.php:50
 msgid "Add Icon"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:51
+#: includes/class-upb-elements-props.php:52
 msgid "Choose Icon"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:79
-msgid "px"
-msgstr ""
-
-#: includes/class-upb-elements-props.php:94, includes/upb-functions.php:439
+#: includes/class-upb-elements-props.php:96, includes/upb-functions.php:442
 msgid "Top"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:95, includes/upb-functions.php:435
+#: includes/class-upb-elements-props.php:97, includes/upb-functions.php:438
 msgid "Right"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:96, includes/upb-functions.php:443
+#: includes/class-upb-elements-props.php:98, includes/upb-functions.php:446
 msgid "Bottom"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:97, includes/upb-functions.php:431
+#: includes/class-upb-elements-props.php:99, includes/upb-functions.php:434
 msgid "Left"
 msgstr ""
 
@@ -866,335 +862,339 @@ msgstr ""
 msgid "Extra Small"
 msgstr ""
 
-#: includes/upb-functions.php:283
+#: includes/upb-functions.php:284
 msgid "Global"
 msgstr ""
 
-#: includes/upb-functions.php:292
+#: includes/upb-functions.php:294
 msgid "%s for %s device"
 msgstr ""
 
-#: includes/upb-functions.php:306
+#: includes/upb-functions.php:309
 msgid "Hide on device"
 msgstr ""
 
-#: includes/upb-functions.php:307
+#: includes/upb-functions.php:310
 msgid "Hide element on specific media device"
 msgstr ""
 
-#: includes/upb-functions.php:321
+#: includes/upb-functions.php:324
 msgid "Clearfix"
 msgstr ""
 
-#: includes/upb-functions.php:322
+#: includes/upb-functions.php:325
 msgid "Show Clearfix element between columns"
 msgstr ""
 
-#: includes/upb-functions.php:349
+#: includes/upb-functions.php:351
 msgid "Material Icons"
 msgstr ""
 
-#: includes/upb-functions.php:350
+#: includes/upb-functions.php:352
 msgid "Search material design icons. Using <a target=\"_blank\" href=\"%s\">%s</a>"
 msgstr ""
 
-#: includes/upb-functions.php:350
+#: includes/upb-functions.php:352
 msgid "Material Design Icons - 1.8.36"
 msgstr ""
 
-#: includes/upb-functions.php:362
+#: includes/upb-functions.php:364
 msgid "Search Material Design Icons"
 msgstr ""
 
-#: includes/upb-functions.php:368
+#: includes/upb-functions.php:370
 msgid "FontAwesome Icons"
 msgstr ""
 
-#: includes/upb-functions.php:369
+#: includes/upb-functions.php:371
 msgid "Search FontAwesome icons. Using <a target=\"_blank\" href=\"%s\">%s</a>"
 msgstr ""
 
-#: includes/upb-functions.php:369
+#: includes/upb-functions.php:371
 msgid "Font Awesome Icons - 4.7"
 msgstr ""
 
-#: includes/upb-functions.php:381
+#: includes/upb-functions.php:383
 msgid "Search FontAwesome Icons"
 msgstr ""
 
-#: includes/upb-functions.php:387
+#: includes/upb-functions.php:389
 msgid "Dashicons Icon"
 msgstr ""
 
-#: includes/upb-functions.php:388
+#: includes/upb-functions.php:390
 msgid "Search Dashicons icon. Using <a target=\"_blank\" href=\"%s\">%s</a>"
 msgstr ""
 
-#: includes/upb-functions.php:388
+#: includes/upb-functions.php:390
 msgid "Dashicons"
 msgstr ""
 
-#: includes/upb-functions.php:400
+#: includes/upb-functions.php:402
 msgid "Search Dashicons Icon"
 msgstr ""
 
-#: includes/upb-functions.php:409
+#: includes/upb-functions.php:412
 msgid "Background type"
 msgstr ""
 
-#: includes/upb-functions.php:410
+#: includes/upb-functions.php:413
 msgid "Choose your element background type"
 msgstr ""
 
-#: includes/upb-functions.php:414
+#: includes/upb-functions.php:417
 msgid "No background"
 msgstr ""
 
-#: includes/upb-functions.php:415
+#: includes/upb-functions.php:418
 msgid "Gradient background"
 msgstr ""
 
-#: includes/upb-functions.php:416, includes/upb-functions.php:560
+#: includes/upb-functions.php:419, includes/upb-functions.php:563
 msgid "Background Color"
 msgstr ""
 
-#: includes/upb-functions.php:417, includes/upb-functions.php:574
+#: includes/upb-functions.php:420, includes/upb-functions.php:578
 msgid "Background Image"
 msgstr ""
 
-#: includes/upb-functions.php:418
+#: includes/upb-functions.php:421
 msgid "Background Image and Color"
 msgstr ""
 
-#: includes/upb-functions.php:419
+#: includes/upb-functions.php:422
 msgid "Background Video"
 msgstr ""
 
-#: includes/upb-functions.php:425
+#: includes/upb-functions.php:428
 msgid "Gradient Position"
 msgstr ""
 
-#: includes/upb-functions.php:426
+#: includes/upb-functions.php:429
 msgid "Element gradient background position. <a target=\"_blank\" href=\"%s\">%s</a> or <a target=\"_blank\" href=\"%s\">%s</a>"
 msgstr ""
 
-#: includes/upb-functions.php:447
+#: includes/upb-functions.php:450
 msgid "Top Left"
 msgstr ""
 
-#: includes/upb-functions.php:451
+#: includes/upb-functions.php:454
 msgid "Top Right"
 msgstr ""
 
-#: includes/upb-functions.php:455
+#: includes/upb-functions.php:458
 msgid "Bottom Left"
 msgstr ""
 
-#: includes/upb-functions.php:459
+#: includes/upb-functions.php:462
 msgid "Bottom Right"
 msgstr ""
 
-#: includes/upb-functions.php:471
+#: includes/upb-functions.php:473
 msgid "Gradient Start Color"
 msgstr ""
 
-#: includes/upb-functions.php:472
+#: includes/upb-functions.php:474
 msgid "Element gradient background start color. If you have only one color to start use start color on color stop 1 also."
 msgstr ""
 
-#: includes/upb-functions.php:485
+#: includes/upb-functions.php:475, includes/upb-functions.php:505, includes/upb-functions.php:535, includes/upb-functions.php:565
+msgid "RGBA Color"
+msgstr ""
+
+#: includes/upb-functions.php:488
 msgid "Gradient Start Location"
 msgstr ""
 
-#: includes/upb-functions.php:486
+#: includes/upb-functions.php:489
 msgid "Element gradient background start color location"
 msgstr ""
 
-#: includes/upb-functions.php:500
+#: includes/upb-functions.php:503
 msgid "Color Stop 1"
 msgstr ""
 
-#: includes/upb-functions.php:501
+#: includes/upb-functions.php:504
 msgid "Element gradient color stop 1. If you have only one color to start use start color on color stop 1 also."
 msgstr ""
 
-#: includes/upb-functions.php:514
+#: includes/upb-functions.php:518
 msgid "Color Stop 1 Location"
 msgstr ""
 
-#: includes/upb-functions.php:515
+#: includes/upb-functions.php:519
 msgid "Element gradient color stop 1 location"
 msgstr ""
 
-#: includes/upb-functions.php:531
+#: includes/upb-functions.php:533
 msgid "Gradient End Color"
 msgstr ""
 
-#: includes/upb-functions.php:532
+#: includes/upb-functions.php:534
 msgid "Element gradient background end color"
 msgstr ""
 
-#: includes/upb-functions.php:545
+#: includes/upb-functions.php:548
 msgid "Gradient End Location"
 msgstr ""
 
-#: includes/upb-functions.php:546
+#: includes/upb-functions.php:549
 msgid "Element gradient background end color location"
 msgstr ""
 
-#: includes/upb-functions.php:561
+#: includes/upb-functions.php:564
 msgid "Element background color"
 msgstr ""
 
-#: includes/upb-functions.php:575
+#: includes/upb-functions.php:579
 msgid "Element background image"
 msgstr ""
 
-#: includes/upb-functions.php:579
+#: includes/upb-functions.php:583
 msgid "Choose background image"
 msgstr ""
 
-#: includes/upb-functions.php:581
+#: includes/upb-functions.php:585
 msgid "Add Background"
 msgstr ""
 
-#: includes/upb-functions.php:583
+#: includes/upb-functions.php:587
 msgid "Choose"
 msgstr ""
 
-#: includes/upb-functions.php:592
+#: includes/upb-functions.php:596
 msgid "Background Image Position"
 msgstr ""
 
-#: includes/upb-functions.php:593
+#: includes/upb-functions.php:597
 msgid "Change Background Image Position. You can move background image pointer to see preview."
 msgstr ""
 
-#: includes/upb-functions.php:605
+#: includes/upb-functions.php:609
 msgid "Background Image repeat"
 msgstr ""
 
-#: includes/upb-functions.php:606
+#: includes/upb-functions.php:610
 msgid "Change Background Image repeat."
 msgstr ""
 
-#: includes/upb-functions.php:610
+#: includes/upb-functions.php:614
 msgid "Repeat"
 msgstr ""
 
-#: includes/upb-functions.php:611
+#: includes/upb-functions.php:615
 msgid "No Repeat"
 msgstr ""
 
-#: includes/upb-functions.php:612
+#: includes/upb-functions.php:616
 msgid "Repeat Horizontally"
 msgstr ""
 
-#: includes/upb-functions.php:613
+#: includes/upb-functions.php:617
 msgid "Repeat Vertically"
 msgstr ""
 
-#: includes/upb-functions.php:614, includes/upb-functions.php:633, includes/upb-functions.php:652, includes/upb-functions.php:671
+#: includes/upb-functions.php:618, includes/upb-functions.php:637, includes/upb-functions.php:656, includes/upb-functions.php:675
 msgid "Initial"
 msgstr ""
 
-#: includes/upb-functions.php:615, includes/upb-functions.php:634
+#: includes/upb-functions.php:619, includes/upb-functions.php:638
 msgid "Inherit from parent element"
 msgstr ""
 
-#: includes/upb-functions.php:625
+#: includes/upb-functions.php:629
 msgid "Background Attachment"
 msgstr ""
 
-#: includes/upb-functions.php:626
+#: includes/upb-functions.php:630
 msgid "Change Background Image Attachment."
 msgstr ""
 
-#: includes/upb-functions.php:630
+#: includes/upb-functions.php:634
 msgid "Scroll"
 msgstr ""
 
-#: includes/upb-functions.php:631
+#: includes/upb-functions.php:635
 msgid "Fixed"
 msgstr ""
 
-#: includes/upb-functions.php:632
+#: includes/upb-functions.php:636
 msgid "Local"
 msgstr ""
 
-#: includes/upb-functions.php:644
+#: includes/upb-functions.php:648
 msgid "Background origin"
 msgstr ""
 
-#: includes/upb-functions.php:645
+#: includes/upb-functions.php:649
 msgid "Change Background Image origin."
 msgstr ""
 
-#: includes/upb-functions.php:649
+#: includes/upb-functions.php:653
 msgid "Padding Box"
 msgstr ""
 
-#: includes/upb-functions.php:650
+#: includes/upb-functions.php:654
 msgid "Border Box"
 msgstr ""
 
-#: includes/upb-functions.php:651
+#: includes/upb-functions.php:655
 msgid "Content Box"
 msgstr ""
 
-#: includes/upb-functions.php:653, includes/upb-functions.php:672
+#: includes/upb-functions.php:657, includes/upb-functions.php:676
 msgid "Inherits from parent element"
 msgstr ""
 
-#: includes/upb-functions.php:663
+#: includes/upb-functions.php:667
 msgid "Background size"
 msgstr ""
 
-#: includes/upb-functions.php:664
+#: includes/upb-functions.php:668
 msgid "Change Background Image size."
 msgstr ""
 
-#: includes/upb-functions.php:668
+#: includes/upb-functions.php:672
 msgid "Auto"
 msgstr ""
 
-#: includes/upb-functions.php:669
+#: includes/upb-functions.php:673
 msgid "Cover"
 msgstr ""
 
-#: includes/upb-functions.php:670
+#: includes/upb-functions.php:674
 msgid "Contain"
 msgstr ""
 
-#: includes/upb-functions.php:700
+#: includes/upb-functions.php:704
 msgid "Custom CSS Class"
 msgstr ""
 
-#: includes/upb-functions.php:701
+#: includes/upb-functions.php:705
 msgid "Custom CSS Class. Separate classes with space"
 msgstr ""
 
-#: includes/upb-functions.php:708
+#: includes/upb-functions.php:712
 msgid "Custom CSS ID"
 msgstr ""
 
-#: includes/upb-functions.php:709
+#: includes/upb-functions.php:713
 msgid "CSS ID of an element should be unique."
 msgstr ""
 
-#: includes/upb-functions.php:719
+#: includes/upb-functions.php:723
 msgid "Enable or Disable Element"
 msgstr ""
 
-#: includes/upb-functions.php:755
+#: includes/upb-functions.php:759
 msgid "Container Type"
 msgstr ""
 
-#: includes/upb-functions.php:765
+#: includes/upb-functions.php:769
 msgid "Material Design"
 msgstr ""
 
-#: includes/upb-functions.php:769
+#: includes/upb-functions.php:773
 msgid "DashIcons Icon"
 msgstr ""
 

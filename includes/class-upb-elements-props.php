@@ -7,9 +7,10 @@
 
             public function filterOptions( $options, $tag = '' ) {
 
-                $options[ 'desc' ]        = isset( $options[ 'desc' ] ) ? $options[ 'desc' ] : FALSE;
-                $options[ 'default' ]     = isset( $options[ 'default' ] ) ? $options[ 'default' ] : '';
-                $options[ 'placeholder' ] = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : '';
+                $options[ 'desc' ]         = isset( $options[ 'desc' ] ) ? $options[ 'desc' ] : FALSE;
+                $options[ 'default' ]      = isset( $options[ 'default' ] ) ? $options[ 'default' ] : '';
+                $options[ 'placeholder' ]  = isset( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : '';
+                $options[ 'device-value' ] = isset( $options[ 'device-value' ] ) ? $options[ 'device-value' ] : FALSE;
 
                 if (
                     $options[ 'type' ] == 'select2'
@@ -76,7 +77,8 @@
                     case 'spacing':
 
                         $options[ 'delimiter' ] = isset( $options[ 'delimiter' ] ) ? $options[ 'delimiter' ] : ',';
-                        $options[ 'unit' ]      = isset( $options[ 'unit' ] ) ? $options[ 'unit' ] : esc_html__( 'px', 'ultimate-page-builder' );
+                        $options[ 'unit' ]      = isset( $options[ 'unit' ] ) ? $options[ 'unit' ] : 'px';
+                        $options[ 'initial' ]   = isset( $options[ 'initial' ] ) ? $options[ 'initial' ] : 'initial'; // initial, auto, inherit
 
                         // Should maintain serial: 1. top, 2. right, 3. bottom, 4. left
                         $options[ 'options' ] = isset( $options[ 'options' ] )
@@ -105,6 +107,14 @@
 
                         if ( ! is_array( $options[ 'value' ] ) ) {
                             $options[ 'value' ] = explode( $options[ 'delimiter' ], $options[ 'value' ] );
+                        }
+
+                        $i = 0;
+                        foreach ( $options[ 'options' ] as $key => $isTrue ) {
+                            if ( ! $options[ 'options' ][ $key ] && ( $options[ 'value' ][ $i ] == '' ) ) {
+                                $options[ 'value' ][ $i ] = $options[ 'initial' ];
+                            }
+                            $i ++;
                         }
 
                         $options[ 'value' ] = array_map( 'strval', $options[ 'value' ] );
@@ -168,6 +178,7 @@
                         $options[ 'options' ][ 'size' ]   = isset( $options[ 'options' ][ 'size' ] ) ? $options[ 'options' ][ 'size' ] : 3;
                         $options[ 'options' ][ 'prefix' ] = isset( $options[ 'options' ][ 'prefix' ] ) ? esc_html( $options[ 'options' ][ 'prefix' ] ) : '';
                         $options[ 'options' ][ 'suffix' ] = isset( $options[ 'options' ][ 'suffix' ] ) ? esc_html( $options[ 'options' ][ 'suffix' ] ) : '';
+                        // $options[ 'options' ][ 'unit' ]   = isset( $options[ 'options' ][ 'unit' ] ) ? esc_html( $options[ 'options' ][ 'unit' ] ) : '';
 
                         $options[ 'value' ] = (int) $options[ 'value' ];
                         break;

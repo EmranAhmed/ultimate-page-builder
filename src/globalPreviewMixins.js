@@ -516,6 +516,29 @@ export default{
             this.$nextTick(()=> {
                 this.$router.replace(`/sections/${path}/settings`);
             })
+        },
+
+        // Color Functions
+        // toRGB('ffffff'), toRGB('#ffffff'), toRGB('#ffffff', 0.3)
+        toRGB(hexColor, opacity) {
+
+            let hex = hexColor.replace('#', '');
+            let h   = hex.match(new RegExp('(.{' + hex.length / 3 + '})', 'g'));
+
+            for (var i = 0; i < h.length; i++) h[i] = parseInt(h[i].length == 1 ? h[i] + h[i] : h[i], 16);
+
+            if (typeof opacity != 'undefined') {
+                h.push(opacity);
+                return 'rgba(' + h.join(',') + ')';
+            }
+
+            return 'rgb(' + h.join(',') + ')';
+        },
+
+        // toHEX('rgb(255,255,255)'), toHEX('rgba(255,255,255, 0.2)'
+        toHEX(rgbColor){
+            let rgb = rgbColor.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+            return (rgb && rgb.length === 4) ? "#" + ("0" + parseInt(rgb[1], 10).toString(16)).slice(-2) + ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) + ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
         }
     }
 }

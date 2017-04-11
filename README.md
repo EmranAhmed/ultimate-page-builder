@@ -15,17 +15,17 @@
 
 ### Development
 - `yarn install`
-- `yarn run dev`
+- `yarn dev`
 - Check [Yarn Usage](https://yarnpkg.com/en/docs/usage)
 - Check [Yarn Documentation](https://yarnpkg.com/en/docs/cli/)
 
 ### Build
-- `yarn run build`
+- `yarn build`
 
 ### Bundle
 
 - Remove CSS / JS from `assets/css` and `assets/js`
-- `yarn run bundle`
+- `yarn bundle`
 
 ### Add package
 

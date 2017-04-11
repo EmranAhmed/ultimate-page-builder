@@ -203,9 +203,8 @@
         wp_enqueue_media();
         wp_enqueue_script( 'wp-color-picker-alpha' );
         wp_enqueue_script( 'select2' );
-
-        wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URI . "js/upb-builder$suffix.js", array( 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable', 'wp-util', 'wp-color-picker', 'shortcode' ), '', TRUE );
-
+        wp_enqueue_script( 'upb-vendor', UPB_PLUGIN_ASSETS_URI . "js/upb-vendor$suffix.js", array(), '', TRUE );
+        wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URI . "js/upb-builder$suffix.js", array( 'upb-vendor', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable', 'wp-util', 'wp-color-picker', 'shortcode' ), '', TRUE );
         wp_enqueue_script( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URI . "js/upb-boilerplate$suffix.js", array( 'jquery', 'upb-builder' ), '', TRUE );
 
         $data = sprintf( "const _upb_tabs = %s;\n", upb_tabs()->getJSON() );

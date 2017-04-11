@@ -5,8 +5,8 @@
   "private" : true,
   "scripts" : {
     "dev" : "cross-env NODE_ENV=development gulp dev",
-    "build" : "cross-env NODE_ENV=production webpack --config webpack.config.js && gulp build",
-    "bundle" : "cross-env NODE_ENV=production webpack --config webpack.config.js && gulp build && gulp bundle"
+    "build" : "cross-env NODE_ENV=production webpack --progress --hide-modules --config webpack.config.js && gulp build",
+    "bundle" : "cross-env NODE_ENV=production webpack --progress --hide-modules --config webpack.config.js && gulp build && gulp bundle"
   },
   "dependencies" : {
     "copy-to-clipboard" : "^3.0.5",

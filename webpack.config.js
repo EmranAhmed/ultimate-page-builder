@@ -61,6 +61,7 @@ module.exports = {
     devtool   : '#eval-source-map',
     entry     : {
         builder : path.resolve(__dirname, './src/builder.js'),
+        vendor  : ['vue', 'vue-router', 'extend']
     },
     output    : {
         path       : path.resolve(__dirname, './assets'),
@@ -109,7 +110,8 @@ module.exports = {
         alias : {
             //    'scss-loader' : 'sass-loader' // to use lang="scss" instead of lang="sass" :)
         }
-    }
+    },
+
 };
 
 if (process.env.NODE_ENV === 'production') {
@@ -143,6 +145,11 @@ if (process.env.NODE_ENV === 'production') {
 }
 else {
     module.exports.plugins = [
+
+        new webpack.optimize.CommonsChunkPlugin({
+            names : ['vendor']
+        }),
+
         new webpack.ProvidePlugin({
             Vue          : 'vue',
             'window.Vue' : 'vue',
