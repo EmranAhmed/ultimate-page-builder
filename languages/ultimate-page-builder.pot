@@ -25,7 +25,7 @@ msgstr ""
 msgid "Contact form 1"
 msgstr ""
 
-#: elements/3rd-party.php:11, elements/widget-based.php:12, elements/widget-based.php:64, elements/widget-based.php:129, elements/widget-based.php:166, elements/widget-based.php:225, elements/widget-based.php:326, elements/widget-based.php:363, elements/widget-based.php:426, elements/widget-based.php:475, elements/widget-based.php:532, elements/widget-based.php:584, elements/with-upb.php:11, elements/with-upb.php:63, elements/with-upb.php:106, elements/with-upb.php:225, elements/with-upb.php:354, elements/with-upb.php:400, elements/with-upb.php:448, includes/upb-functions.php:722, includes/upb-settings.php:10
+#: elements/3rd-party.php:11, elements/widget-based.php:12, elements/widget-based.php:64, elements/widget-based.php:129, elements/widget-based.php:166, elements/widget-based.php:225, elements/widget-based.php:326, elements/widget-based.php:363, elements/widget-based.php:426, elements/widget-based.php:475, elements/widget-based.php:532, elements/widget-based.php:584, elements/with-upb.php:11, elements/with-upb.php:63, elements/with-upb.php:106, elements/with-upb.php:225, elements/with-upb.php:354, elements/with-upb.php:400, elements/with-upb.php:448, includes/upb-functions.php:725, includes/upb-settings.php:10
 msgid "Enable / Disable"
 msgstr ""
 
@@ -93,27 +93,39 @@ msgstr ""
 msgid "Spacer"
 msgstr ""
 
-#: elements/core.php:101, elements/core.php:117, elements/core.php:141
+#: elements/core.php:101, elements/core.php:146, elements/core.php:170
 msgid "Space between two section"
 msgstr ""
 
 #: elements/core.php:116
+msgid "AJAX"
+msgstr ""
+
+#: elements/core.php:117, elements/with-upb.php:407
+msgid "Description"
+msgstr ""
+
+#: elements/core.php:118
+msgid "Search Posts"
+msgstr ""
+
+#: elements/core.php:145
 msgid "Icon Popup"
 msgstr ""
 
-#: elements/core.php:124, elements/core.php:140, elements/core.php:155
+#: elements/core.php:153, elements/core.php:169, elements/core.php:184, includes/upb-functions.php:939
 msgid "Margin"
 msgstr ""
 
-#: elements/core.php:125, elements/core.php:156
+#: elements/core.php:154, elements/core.php:185, includes/upb-functions.php:940
 msgid "Margin between two section"
 msgstr ""
 
-#: elements/core.php:176
+#: elements/core.php:205
 msgid "Extra Input Example"
 msgstr ""
 
-#: elements/core.php:177
+#: elements/core.php:206
 msgid "An example of extra input"
 msgstr ""
 
@@ -157,7 +169,7 @@ msgstr ""
 msgid "Calendar"
 msgstr ""
 
-#: elements/widget-based.php:164, elements/widget-based.php:203, includes/upb-ajax-functions.php:561
+#: elements/widget-based.php:164, elements/widget-based.php:203, includes/upb-ajax-functions.php:564
 msgid "Categories"
 msgstr ""
 
@@ -165,7 +177,7 @@ msgstr ""
 msgid "Show hierarchy"
 msgstr ""
 
-#: elements/widget-based.php:223, elements/widget-based.php:304, includes/upb-ajax-functions.php:598
+#: elements/widget-based.php:223, elements/widget-based.php:304, includes/upb-ajax-functions.php:601
 msgid "Links"
 msgstr ""
 
@@ -458,10 +470,6 @@ msgstr ""
 msgid "Label"
 msgstr ""
 
-#: elements/with-upb.php:407
-msgid "Description"
-msgstr ""
-
 #: elements/with-upb.php:484
 msgid "Item %s"
 msgstr ""
@@ -738,43 +746,43 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: includes/class-upb-elements-props.php:34, includes/class-upb-settings.php:113
+#: includes/class-upb-elements-props.php:35, includes/class-upb-settings.php:113
 msgid "No Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:40, includes/class-upb-settings.php:119
+#: includes/class-upb-elements-props.php:41, includes/class-upb-settings.php:119
 msgid "Use Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:41, includes/class-upb-elements-props.php:51, includes/class-upb-settings.php:120, includes/upb-functions.php:586
+#: includes/class-upb-elements-props.php:42, includes/class-upb-elements-props.php:52, includes/class-upb-settings.php:120, includes/upb-functions.php:586
 msgid "Remove"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:42, includes/class-upb-settings.php:121
+#: includes/class-upb-elements-props.php:43, includes/class-upb-settings.php:121
 msgid "Select"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:50
+#: includes/class-upb-elements-props.php:51
 msgid "Add Icon"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:52
+#: includes/class-upb-elements-props.php:53
 msgid "Choose Icon"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:96, includes/upb-functions.php:442
+#: includes/class-upb-elements-props.php:97, includes/upb-functions.php:442
 msgid "Top"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:97, includes/upb-functions.php:438
+#: includes/class-upb-elements-props.php:98, includes/upb-functions.php:438
 msgid "Right"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:98, includes/upb-functions.php:446
+#: includes/class-upb-elements-props.php:99, includes/upb-functions.php:446
 msgid "Bottom"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:99, includes/upb-functions.php:434
+#: includes/class-upb-elements-props.php:100, includes/upb-functions.php:434
 msgid "Left"
 msgstr ""
 
@@ -1166,35 +1174,47 @@ msgstr ""
 msgid "Contain"
 msgstr ""
 
-#: includes/upb-functions.php:704
-msgid "Custom CSS Class"
+#: includes/upb-functions.php:694
+msgid "Element Title"
 msgstr ""
 
 #: includes/upb-functions.php:705
+msgid "Custom CSS Class"
+msgstr ""
+
+#: includes/upb-functions.php:706
+msgid "CSS Class Name"
+msgstr ""
+
+#: includes/upb-functions.php:707
 msgid "Custom CSS Class. Separate classes with space"
 msgstr ""
 
-#: includes/upb-functions.php:712
+#: includes/upb-functions.php:714
 msgid "Custom CSS ID"
 msgstr ""
 
-#: includes/upb-functions.php:713
+#: includes/upb-functions.php:715
+msgid "Unique ID"
+msgstr ""
+
+#: includes/upb-functions.php:716
 msgid "CSS ID of an element should be unique."
 msgstr ""
 
-#: includes/upb-functions.php:723
+#: includes/upb-functions.php:726
 msgid "Enable or Disable Element"
 msgstr ""
 
-#: includes/upb-functions.php:759
+#: includes/upb-functions.php:762
 msgid "Container Type"
 msgstr ""
 
-#: includes/upb-functions.php:769
+#: includes/upb-functions.php:772
 msgid "Material Design"
 msgstr ""
 
-#: includes/upb-functions.php:773
+#: includes/upb-functions.php:776
 msgid "DashIcons Icon"
 msgstr ""
 

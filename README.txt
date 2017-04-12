@@ -98,6 +98,15 @@ Yes.
 
 == Changelog ==
 
+= 1.0.0-beta.21 =
+
+- Set default image size on `media-image` and `background-image` popup display settings.
+- `upb_replace_element_attribute` helper function added to replace specific element attribute
+- `upb_add_attribute_after` helper function added to add element attribute after specific attribute
+- Improve `toHEX()` `toRGB()` functions
+- Fix UPB Tab and UPB Accordion Shortcode JS Issue
+- Option to add Extra Query on `ajax-select` and `ajax-icon-select`
+
 = 1.0.0-beta.20 =
 
 - `spacing` input type modified with unit

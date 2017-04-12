@@ -18,7 +18,7 @@ export default {
             Vue.set(this, 'input', src);
         },
         onRemove(e){
-            Vue.set(this, 'input', null);
+            Vue.set(this, 'input', '');
         },
 
         pointerMovedTo(position){

@@ -49,7 +49,6 @@
 
         $ids = array_map( 'esc_attr', $_GET[ 'id' ] );
 
-
         if ( empty( $ids ) ) {
             wp_send_json_success( array() );
         } else {
@@ -87,7 +86,11 @@
             wp_send_json_success( array() );
         } else {
             $post   = get_post( $id );
-            $result = array( 'id' => $post->ID, 'title' => esc_html( $post->post_title ), 'text' => esc_html( $post->post_title ) );
+            $result = array(
+                'id'    => $post->ID,
+                'title' => esc_html( $post->post_title ),
+                'text'  => esc_html( $post->post_title )
+            );
             wp_send_json_success( $result );
         }
     } );

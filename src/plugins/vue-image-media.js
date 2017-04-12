@@ -54,11 +54,14 @@ import { util } from 'vue';
                      });*/
 
                     frame = wp.media({
-                        button : {
+                        button     : {
                             text : vnode.context.attributes.buttons.add
                         },
-                        state  : 'upb-image-media',
-                        states : [
+                        upbOptions : {
+                            size : vnode.context.attributes.size
+                        },
+                        state      : 'upb-image-media',
+                        states     : [
                             new wp.media.controller.Library({
                                 id              : 'upb-image-media',
                                 title           : vnode.context.attributes.title,

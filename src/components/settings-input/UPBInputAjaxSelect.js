@@ -25,6 +25,7 @@ export default {
                     data           : params => {
                         return {
                             action   : this.attributes.hooks.search,
+                            extra    : this.attributes.extra,
                             query    : params.term, // search query
                             search   : params.term, // search query
                             multiple : this.multiple,
@@ -59,6 +60,7 @@ export default {
             ids      : this.input,
             load     : this.input,
             multiple : this.multiple,
+            extra    : this.attributes.extra
         }, options=> {
 
             if (this.multiple) {
@@ -68,7 +70,7 @@ export default {
                 Vue.set(this.attributes, 'options', extend(true, {}, options));
             }
 
-        }, e => {
+        }, error => {
 
             if (error == 0) {
                 console.info(`You need to implement wp ajax: "wp_ajax_${this.attributes.hooks.load}" action.`)
@@ -123,7 +125,7 @@ export default {
                             jQuery(this).remove();
                         }
                     });
-                })
+                });
 
                 let id = _.isNumber(data.id) ? data.id.toString() : data.id;
                 Vue.set(this, 'input', _.without(this.input, id));

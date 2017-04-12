@@ -31,6 +31,7 @@
 
                     case 'media-image':
                     case 'background-image':
+                        // $options[ 'placeholder-image' ] = ! empty( $options[ 'placeholder-image' ] ) ? $options[ 'placeholder-image' ] : FALSE;
                         $options[ 'placeholder' ] = ! empty( $options[ 'placeholder' ] ) ? $options[ 'placeholder' ] : esc_html__( 'No Image', 'ultimate-page-builder' );
                         $options[ 'size' ]        = isset( $options[ 'size' ] ) ? $options[ 'size' ] : 'full'; // ‘thumbnail’, ‘medium’, ‘large’, ‘full’
                         $options[ 'attribute' ]   = isset( $options[ 'attribute' ] ) ? $options[ 'attribute' ] : 'src'; // id, src
@@ -154,6 +155,10 @@
 
                         if ( ! isset( $options[ 'hooks' ][ 'ajaxOptions' ] ) ) {
                             $options[ 'hooks' ][ 'ajaxOptions' ] = NULL;
+                        }
+
+                        if ( ! isset( $options[ 'extra' ] ) ) {
+                            $options[ 'extra' ] = FALSE;
                         }
 
                         if ( ! isset( $options[ 'hooks' ][ 'search' ] ) ) {

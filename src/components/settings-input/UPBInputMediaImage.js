@@ -34,7 +34,9 @@ export default {
                         this.src = image.sizes[this.attributes.size].url;
                     }
                 },
-                _ => { console.log(`Image Not Found by ID# ${this.input}`) }
+                error => {
+                    console.info(`Image Not Found by ID# ${this.input}`, error)
+                }
             );
         }
         else {
@@ -54,8 +56,8 @@ export default {
             this.src = src;
         },
         onRemove(e){
-            this.input = null;
-            this.src   = null;
+            this.input = '';
+            this.src   = '';
         }
     }
 }

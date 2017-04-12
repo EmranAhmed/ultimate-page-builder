@@ -112,6 +112,35 @@
         // EXAMPLES:
 
         /*        array_push( $attributes, array(
+                    'id'          => 'ajaxselect',
+                    'title'       => esc_html__( 'AJAX', 'ultimate-page-builder' ),
+                    'desc'        => wp_kses_post( __( 'Description', 'ultimate-page-builder' ) ),
+                    'placeholder' => wp_kses_post( __( 'Search Posts', 'ultimate-page-builder' ) ),
+                    'type'        => 'ajax-select',
+                    // 'multiple'=>true,
+                    'value'       => '',
+
+                    'extra' => array(
+                        'links' => TRUE
+                    ),
+
+                    'template' => '<div> ID# %(id)s - %(title)s</div>',
+
+                    'hooks'    => array(
+                        'search' => '_upb_search_posts', // wp_ajax__search_hook
+                        'load'   => '_upb_load_post'      // wp_ajax__load_hook
+                    ),
+                    'settings' => array(
+                        'allowClear' => TRUE,
+                    ),
+
+                    'ajaxOptions' => array(
+                        'type'  => 'GET', // POST
+                        'cache' => TRUE
+                    )
+                ) );*/
+
+        /*        array_push( $attributes, array(
                     'id'      => 'chooseicon',
                     'title'   => esc_html__( 'Icon Popup', 'ultimate-page-builder' ),
                     'desc'    => esc_html__( 'Space between two section', 'ultimate-page-builder' ),

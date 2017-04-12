@@ -30,7 +30,7 @@ export default {
         },
 
         removeIcon(){
-            Vue.set(this, 'input', null);
+            Vue.set(this, 'input', '');
         },
 
         closePopup(){

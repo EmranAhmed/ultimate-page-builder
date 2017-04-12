@@ -24,6 +24,7 @@ export default {
                     data           : params => {
                         return {
                             action : this.attributes.hooks.search,
+                            extra  : this.attributes.extra,
                             query  : params.term, // search query
                             search : params.term, // search query
                             _nonce : store.getNonce()
@@ -51,12 +52,13 @@ export default {
 
     mounted(){
         store.wpAjax(this.attributes.hooks.load, {
-            id   : this.input,
-            ids  : this.input,
-            load : this.input
+            id    : this.input,
+            ids   : this.input,
+            load  : this.input,
+            extra : this.attributes.extra
         }, options=> {
             Vue.set(this.attributes, 'options', extend(true, {}, options));
-        }, e => {
+        }, error => {
             if (error == 0) {
                 console.info(`You need to implement wp ajax: "wp_ajax_${this.attributes.hooks.load}" action.`)
             }

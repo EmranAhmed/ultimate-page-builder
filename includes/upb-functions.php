@@ -319,7 +319,7 @@
         ) );
     }
 
-    function upb_column_clearfix_input( $id = 'clearfix', $title = '', $desc = '', $default = array() ) {
+    function upb_column_clearfix_input( $title = '', $desc = '', $default = array() ) {
 
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Clearfix', 'ultimate-page-builder' );
         $desc  = trim( $desc ) ? trim( $desc ) : esc_html__( 'Show Clearfix element between columns', 'ultimate-page-builder' );
@@ -337,7 +337,7 @@
         $options = upb_list_pluck( $options, array( 'title', 'icon' ), 'id' );
 
         return apply_filters( 'upb_column_clearfix_input', array(
-            'id'      => esc_attr( $id ),
+            'id'      => 'clearfix', // esc_attr( $id ),
             'title'   => esc_html( $title ),
             'desc'    => wp_kses_post( $desc ),
             'type'    => 'checkbox-icon',
@@ -689,30 +689,33 @@
         $desc  = trim( $desc ) ? trim( $desc ) : FALSE;
 
         return apply_filters( 'upb_title_input', array(
-            'id'    => 'title',
-            'title' => esc_html( $title ),
-            'desc'  => wp_kses_post( $desc ),
-            'type'  => 'text',
-            'value' => esc_attr( $default ),
+            'id'          => 'title',
+            'title'       => esc_html( $title ),
+            'placeholder' => esc_html__( 'Element Title', 'ultimate-page-builder' ),
+            'desc'        => wp_kses_post( $desc ),
+            'type'        => 'text',
+            'value'       => esc_attr( $default ),
         ) );
     }
 
     function upb_css_class_id_input_group( $default_class = '', $default_id = '' ) {
         return apply_filters( 'upb_css_class_id_input_group', array(
             array(
-                'id'    => 'element_class',
-                'title' => esc_html__( 'Custom CSS Class', 'ultimate-page-builder' ),
-                'desc'  => esc_html__( 'Custom CSS Class. Separate classes with space', 'ultimate-page-builder' ),
-                'type'  => 'text',
-                'value' => esc_attr( $default_class )
+                'id'          => 'element_class',
+                'title'       => esc_html__( 'Custom CSS Class', 'ultimate-page-builder' ),
+                'placeholder' => esc_html__( 'CSS Class Name', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Custom CSS Class. Separate classes with space', 'ultimate-page-builder' ),
+                'type'        => 'text',
+                'value'       => esc_attr( $default_class )
             ),
 
             array(
-                'id'    => 'element_id',
-                'title' => esc_html__( 'Custom CSS ID', 'ultimate-page-builder' ),
-                'desc'  => esc_html__( 'CSS ID of an element should be unique.', 'ultimate-page-builder' ),
-                'type'  => 'text',
-                'value' => esc_attr( $default_id ),
+                'id'          => 'element_id',
+                'title'       => esc_html__( 'Custom CSS ID', 'ultimate-page-builder' ),
+                'placeholder' => esc_html__( 'Unique ID', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'CSS ID of an element should be unique.', 'ultimate-page-builder' ),
+                'type'        => 'text',
+                'value'       => esc_attr( $default_id ),
             )
         ) );
     }
@@ -860,15 +863,16 @@
      * add_filter('upb_element_{$tag}_attributes', function($attributes){
      *
      * return upb_remove_element_attribute('margin', $attributes);
-     * })
+     * });
      *
      * OR
      *
      *  add_filter('upb_element_{$tag}_attributes', function($attributes){
      *
      * return upb_remove_element_attribute(array('margin', 'padding'), $attributes);
-     * })
+     * });
      */
+
     function upb_remove_element_attribute( $id, $attributes ) {
 
         if ( empty( $attributes ) ) {
@@ -882,6 +886,79 @@
                 } elseif ( is_array( $id ) && in_array( $attribute[ 'id' ], $id ) ) {
                     // Skip
                 } else {
+                    array_push( $new_attributes, $attribute );
+                }
+            }
+
+            return $new_attributes;
+        }
+    }
+
+    /**
+     * Usages:
+     *
+     * add_filter('upb_element_{$tag}_attributes', function($attributes){
+     *
+     * return upb_replace_element_attribute('margin', array(
+     *      'id'=>'margin',
+     *      'type'=>'spacing',
+     *      'title'=>'title'
+     *      ...
+     *      ...
+     * ), $attributes);
+     * });
+     *
+     */
+
+    function upb_replace_element_attribute( $id, $attribute, $attributes ) {
+
+        if ( empty( $attributes ) ) {
+            return $attributes;
+        } else {
+            $new_attributes = array();
+            foreach ( (array) $attributes as $attr ) {
+
+                if ( is_string( $id ) && $attr[ 'id' ] == $id ) {
+                    array_push( $new_attributes, $attribute );
+                } else {
+                    array_push( $new_attributes, $attr );
+                }
+            }
+
+            return $new_attributes;
+        }
+    }
+
+    /**
+     * Usages:
+     *
+     * add_filter( 'upb_element_{$tag}_attributes', function ( $attributes ) {
+     *
+     * return upb_add_attribute_after( 'space', array(
+     *      'id'      => 'margin',
+     *      'title'   => esc_html__( 'Margin', 'ultimate-page-builder' ),
+     *      'desc'    => esc_html__( 'Margin between two section', 'ultimate-page-builder' ),
+     *      'type'    => 'spacing',
+     *      'value'   => array( '10px', 'initial', '10px', 'auto' ),
+     *      'unit'    => 'px',
+     *      'options' => array(
+     *          'top'    => TRUE,
+     *          'right'  => FALSE,
+     *          'bottom' => TRUE,
+     *          'left'   => FALSE,
+     *      )
+     * ), $attributes );
+     * } );*/
+
+    function upb_add_attribute_after( $id, $attribute, $attributes ) {
+
+        if ( empty( $attributes ) ) {
+            return $attributes;
+        } else {
+            $new_attributes = array();
+            foreach ( (array) $attributes as $attr ) {
+                array_push( $new_attributes, $attr );
+                if ( is_string( $id ) && $attr[ 'id' ] == $id ) {
                     array_push( $new_attributes, $attribute );
                 }
             }
@@ -1009,6 +1086,11 @@
     }
 
     function upb_hex2RGB( $hex, $opacity = FALSE ) {
+
+        if ( substr( strtolower( $hex ), 0, 3 ) == 'rgb' ) {
+            return $hex;
+        }
+
         $hex = str_replace( "#", "", $hex );
 
         if ( strlen( $hex ) == 3 ) {
@@ -1035,6 +1117,11 @@
     }
 
     function upb_rgb2HEX( $rgb ) {
+
+        if ( substr( strtolower( $rgb ), 0, 1 ) == '#' ) {
+            return $rgb;
+        }
+
         $hex = "#";
         $hex .= str_pad( dechex( $rgb[ 0 ] ), 2, "0", STR_PAD_LEFT );
         $hex .= str_pad( dechex( $rgb[ 1 ] ), 2, "0", STR_PAD_LEFT );
