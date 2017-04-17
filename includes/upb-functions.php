@@ -269,45 +269,7 @@
     }
 
     // Build-In Inputs
-
-    function upb_media_query_based_input_group( $input, $with_global = TRUE ) {
-
-        $get_devices = upb_devices();
-
-        $options = array_map( function ( $device ) {
-            return array(
-                'id'    => $device[ 'id' ],
-                'title' => $device[ 'title' ],
-                'icon'  => $device[ 'icon' ],
-            );
-        }, $get_devices );
-
-        if ( $with_global ) {
-            array_unshift( $options, array(
-                'id'    => '',
-                'title' => esc_html__( 'Global', 'ultimate-page-builder' ),
-                'icon'  => 'mdi mdi-earth',
-            ) );
-        }
-
-        $devices = upb_list_pluck( $options, array( 'title', 'icon' ), 'id' );
-
-        $inputs = array_map( function ( $device, $key ) use ( $input, $options ) {
-
-            $input[ 'id' ]          = empty( $key ) ? $input[ 'id' ] : sprintf( '%s-%s', $input[ 'id' ], $key );
-            $input[ 'title' ]       = empty( $key ) ? $input[ 'title' ] : sprintf( esc_html__( '%s for %s device', 'ultimate-page-builder' ), $input[ 'title' ], $device[ 'title' ] );
-            $input[ 'value' ]       = empty( $key ) ? $input[ 'value' ] : ( ( $input[ 'device-value' ] && isset( $input[ 'device-value' ][ $key ] ) ) ? $input[ 'device-value' ][ $key ] : $input[ 'value' ] );
-            $input[ 'device' ]      = empty( $key ) ? '' : $key;
-            $input[ 'deviceIcon' ]  = $device[ 'icon' ];
-            $input[ 'deviceTitle' ] = $device[ 'title' ];
-
-            return $input;
-
-        }, $devices, array_keys( $devices ) );
-
-        return $inputs;
-    }
-
+    
     function upb_responsive_hidden_input( $title = '', $desc = '', $default = array() ) {
 
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Hide on device', 'ultimate-page-builder' );
@@ -407,286 +369,6 @@
         ) );
     }
 
-    function upb_background_input_group() {
-
-        return apply_filters( 'upb_background_input_group', array(
-
-            array(
-                'id'      => 'background-type',
-                'title'   => esc_html__( 'Background type', 'ultimate-page-builder' ),
-                'desc'    => esc_html__( 'Choose your element background type', 'ultimate-page-builder' ),
-                'type'    => 'radio-icon',
-                'value'   => 'none',
-                'options' => array(
-                    'none'     => array( 'title' => esc_html__( 'No background', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-close-octagon-outline' ),
-                    'gradient' => array( 'title' => esc_html__( 'Gradient background', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-gradient' ),
-                    'color'    => array( 'title' => esc_html__( 'Background Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-format-color-fill' ),
-                    'image'    => array( 'title' => esc_html__( 'Background Image', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-image' ),
-                    'both'     => array( 'title' => esc_html__( 'Background Image and Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-folder-multiple-image' ),
-                    // 'video' => array( 'title' => esc_html__( 'Background Video', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-file-video' )
-                )
-            ),
-
-            array(
-                'id'       => 'gradient-position',
-                'title'    => esc_html__( 'Gradient Position', 'ultimate-page-builder' ),
-                'desc'     => sprintf( __( 'Element gradient background position. <a target="_blank" href="%s">%s</a> or <a target="_blank" href="%s">%s</a>', 'ultimate-page-builder' ), esc_url( 'https://uigradients.com/' ), 'uiGradients', esc_url( 'https://webgradients.com/' ), 'webGradients' ),
-                'type'     => 'radio-icon',
-                'value'    => 'to left',
-                'options'  => array(
-                    'to left'         => array(
-                        'title' => esc_html__( 'Left', 'ultimate-page-builder' ),
-                        'icon'  => 'mdi mdi-arrow-left'
-                    ),
-                    'to right'        => array(
-                        'title' => esc_html__( 'Right', 'ultimate-page-builder' ),
-                        'icon'  => 'mdi mdi-arrow-right'
-                    ),
-                    'to top'          => array(
-                        'title' => esc_html__( 'Top', 'ultimate-page-builder' ),
-                        'icon'  => 'mdi mdi-arrow-up'
-                    ),
-                    'to bottom'       => array(
-                        'title' => esc_html__( 'Bottom', 'ultimate-page-builder' ),
-                        'icon'  => 'mdi mdi-arrow-down'
-                    ),
-                    'to top left'     => array(
-                        'title' => esc_html__( 'Top Left', 'ultimate-page-builder' ),
-                        'icon'  => 'mdi mdi-arrow-top-left'
-                    ),
-                    'to top right'    => array(
-                        'title' => esc_html__( 'Top Right', 'ultimate-page-builder' ),
-                        'icon'  => 'mdi mdi-arrow-top-right'
-                    ),
-                    'to bottom left'  => array(
-                        'title' => esc_html__( 'Bottom Left', 'ultimate-page-builder' ),
-                        'icon'  => 'mdi mdi-arrow-bottom-left'
-                    ),
-                    'to bottom right' => array(
-                        'title' => esc_html__( 'Bottom Right', 'ultimate-page-builder' ),
-                        'icon'  => 'mdi mdi-arrow-bottom-right'
-                    ),
-                ),
-                'required' => array(
-                    array( 'background-type', '=', 'gradient' )
-                )
-            ),
-
-            array(
-                'id'          => 'gradient-start-color',
-                'title'       => esc_html__( 'Gradient Start Color', 'ultimate-page-builder' ),
-                'desc'        => esc_html__( 'Element gradient background start color. If you have only one color to start use start color on color stop 1 also.', 'ultimate-page-builder' ),
-                'placeholder' => esc_html__( 'RGBA Color', 'ultimate-page-builder' ),
-                'type'        => 'color',
-                'value'       => '#ffffff',
-                'options'     => array(
-                    'alpha' => TRUE,
-                ),
-                'required'    => array(
-                    array( 'background-type', '=', 'gradient' )
-                )
-            ),
-
-            array(
-                'id'       => 'gradient-start-location',
-                'title'    => esc_html__( 'Gradient Start Location', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Element gradient background start color location', 'ultimate-page-builder' ),
-                'type'     => 'range',
-                'value'    => '0',
-                'options'  => array(
-                    'suffix' => '%',
-                    'max'    => '100',
-                ),
-                'required' => array(
-                    array( 'background-type', '=', 'gradient' )
-                )
-            ),
-
-            array(
-                'id'          => 'gradient-color-stop-1',
-                'title'       => esc_html__( 'Color Stop 1', 'ultimate-page-builder' ),
-                'desc'        => esc_html__( 'Element gradient color stop 1. If you have only one color to start use start color on color stop 1 also.', 'ultimate-page-builder' ),
-                'placeholder' => esc_html__( 'RGBA Color', 'ultimate-page-builder' ),
-                'type'        => 'color',
-                'value'       => '#ffffff',
-                'options'     => array(
-                    'alpha' => TRUE,
-                ),
-                'required'    => array(
-                    array( 'background-type', '=', 'gradient' )
-                )
-            ),
-
-            array(
-                'id'       => 'gradient-color-stop-1-location',
-                'title'    => esc_html__( 'Color Stop 1 Location', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Element gradient color stop 1 location', 'ultimate-page-builder' ),
-                'type'     => 'range',
-                'value'    => '0',
-                'options'  => array(
-                    'suffix' => '%',
-                    'max'    => '100',
-                ),
-                'required' => array(
-                    array( 'background-type', '=', 'gradient' )
-                )
-            ),
-
-            array(
-                'id'          => 'gradient-end-color',
-                'title'       => esc_html__( 'Gradient End Color', 'ultimate-page-builder' ),
-                'desc'        => esc_html__( 'Element gradient background end color', 'ultimate-page-builder' ),
-                'placeholder' => esc_html__( 'RGBA Color', 'ultimate-page-builder' ),
-                'type'        => 'color',
-                'value'       => '#000000',
-                'options'     => array(
-                    'alpha' => TRUE,
-                ),
-                'required'    => array(
-                    array( 'background-type', '=', 'gradient' )
-                )
-            ),
-
-            array(
-                'id'       => 'gradient-end-location',
-                'title'    => esc_html__( 'Gradient End Location', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Element gradient background end color location', 'ultimate-page-builder' ),
-                'type'     => 'range',
-                'value'    => '100',
-                'options'  => array(
-                    'suffix' => '%',
-                    'max'    => '100',
-                ),
-                'required' => array(
-                    array( 'background-type', '=', 'gradient' )
-                )
-            ),
-
-            array(
-                'id'          => 'background-color',
-                'title'       => esc_html__( 'Background Color', 'ultimate-page-builder' ),
-                'desc'        => esc_html__( 'Element background color', 'ultimate-page-builder' ),
-                'placeholder' => esc_html__( 'RGBA Color', 'ultimate-page-builder' ),
-                'type'        => 'color',
-                'value'       => '#ffffff',
-                'options'     => array(
-                    'alpha' => TRUE,
-                ),
-                'required'    => array(
-                    array( 'background-type', '=', array( 'color', 'both' ) )
-                )
-            ),
-
-            array(
-                'id'          => 'background-image',
-                'title'       => esc_html__( 'Background Image', 'ultimate-page-builder' ),
-                'desc'        => esc_html__( 'Element background image', 'ultimate-page-builder' ),
-                'type'        => 'background-image',
-                'value'       => '',
-                'use'         => 'background-position',
-                'placeholder' => esc_html__( 'Choose background image', 'ultimate-page-builder' ),
-                'buttons'     => array(
-                    'add'    => esc_html__( 'Add Background', 'ultimate-page-builder' ),
-                    'remove' => esc_html__( 'Remove', 'ultimate-page-builder' ),
-                    'choose' => esc_html__( 'Choose', 'ultimate-page-builder' ),
-                ),
-                'required'    => array(
-                    array( 'background-type', '=', array( 'image', 'both' ) )
-                )
-            ),
-
-            array(
-                'id'          => 'background-position',
-                'title'       => esc_html__( 'Background Image Position', 'ultimate-page-builder' ),
-                'desc'        => esc_html__( 'Change Background Image Position. You can move background image pointer to see preview.', 'ultimate-page-builder' ),
-                'type'        => 'background-image-position',
-                'value'       => '0% 0%',
-                'placeholder' => '0% 0%',
-                'required'    => array(
-                    array( 'background-image', '!=', '' ),
-                    array( 'background-type', '=', array( 'image', 'both' ) ),
-                )
-            ),
-
-            array(
-                'id'       => 'background-repeat',
-                'title'    => esc_html__( 'Background Image repeat', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Change Background Image repeat.', 'ultimate-page-builder' ),
-                'type'     => 'select',
-                'value'    => 'repeat',
-                'options'  => array(
-                    'repeat'    => esc_html__( 'Repeat', 'ultimate-page-builder' ),
-                    'no-repeat' => esc_html__( 'No Repeat', 'ultimate-page-builder' ),
-                    'repeat-x'  => esc_html__( 'Repeat Horizontally', 'ultimate-page-builder' ),
-                    'repeat-y'  => esc_html__( 'Repeat Vertically', 'ultimate-page-builder' ),
-                    'initial'   => esc_html__( 'Initial', 'ultimate-page-builder' ),
-                    'inherit'   => esc_html__( 'Inherit from parent element', 'ultimate-page-builder' ),
-                ),
-                'required' => array(
-                    array( 'background-image', '!=', '' ),
-                    array( 'background-type', '=', array( 'image', 'both' ) ),
-                )
-            ),
-
-            array(
-                'id'       => 'background-attachment',
-                'title'    => esc_html__( 'Background Attachment', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Change Background Image Attachment.', 'ultimate-page-builder' ),
-                'type'     => 'select',
-                'value'    => 'scroll',
-                'options'  => array(
-                    'scroll'  => esc_html__( 'Scroll', 'ultimate-page-builder' ),
-                    'fixed'   => esc_html__( 'Fixed', 'ultimate-page-builder' ),
-                    'local'   => esc_html__( 'Local', 'ultimate-page-builder' ),
-                    'initial' => esc_html__( 'Initial', 'ultimate-page-builder' ),
-                    'inherit' => esc_html__( 'Inherit from parent element', 'ultimate-page-builder' ),
-                ),
-                'required' => array(
-                    array( 'background-image', '!=', '' ),
-                    array( 'background-type', '=', array( 'image', 'both' ) ),
-                )
-            ),
-
-            array(
-                'id'       => 'background-origin',
-                'title'    => esc_html__( 'Background origin', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Change Background Image origin.', 'ultimate-page-builder' ),
-                'type'     => 'select',
-                'value'    => 'padding-box',
-                'options'  => array(
-                    'padding-box' => esc_html__( 'Padding Box', 'ultimate-page-builder' ),
-                    'border-box'  => esc_html__( 'Border Box', 'ultimate-page-builder' ),
-                    'content-box' => esc_html__( 'Content Box', 'ultimate-page-builder' ),
-                    'initial'     => esc_html__( 'Initial', 'ultimate-page-builder' ),
-                    'inherit'     => esc_html__( 'Inherits from parent element', 'ultimate-page-builder' ),
-                ),
-                'required' => array(
-                    array( 'background-image', '!=', '' ),
-                    array( 'background-type', '=', array( 'image', 'both' ) ),
-                )
-            ),
-
-            array(
-                'id'       => 'background-size',
-                'title'    => esc_html__( 'Background size', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Change Background Image size.', 'ultimate-page-builder' ),
-                'type'     => 'select',
-                'value'    => 'auto',
-                'options'  => array(
-                    'auto'    => esc_html__( 'Auto', 'ultimate-page-builder' ),
-                    'cover'   => esc_html__( 'Cover', 'ultimate-page-builder' ),
-                    'contain' => esc_html__( 'Contain', 'ultimate-page-builder' ),
-                    'initial' => esc_html__( 'Initial', 'ultimate-page-builder' ),
-                    'inherit' => esc_html__( 'Inherits from parent element', 'ultimate-page-builder' ),
-                ),
-                'required' => array(
-                    array( 'background-image', '!=', '' ),
-                    array( 'background-type', '=', array( 'image', 'both' ) ),
-                )
-            ),
-        ) );
-    }
-
     function upb_title_input( $title = '', $desc = '', $default = 'New %s' ) {
 
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Title', 'ultimate-page-builder' );
@@ -699,28 +381,6 @@
             'desc'        => wp_kses_post( $desc ),
             'type'        => 'text',
             'value'       => esc_attr( $default ),
-        ) );
-    }
-
-    function upb_css_class_id_input_group( $default_class = '', $default_id = '' ) {
-        return apply_filters( 'upb_css_class_id_input_group', array(
-            array(
-                'id'          => 'element_class',
-                'title'       => esc_html__( 'Custom CSS Class', 'ultimate-page-builder' ),
-                'placeholder' => esc_html__( 'CSS Class Name', 'ultimate-page-builder' ),
-                'desc'        => esc_html__( 'Custom CSS Class. Separate classes with space', 'ultimate-page-builder' ),
-                'type'        => 'text',
-                'value'       => esc_attr( $default_class )
-            ),
-
-            array(
-                'id'          => 'element_id',
-                'title'       => esc_html__( 'Custom CSS ID', 'ultimate-page-builder' ),
-                'placeholder' => esc_html__( 'Unique ID', 'ultimate-page-builder' ),
-                'desc'        => esc_html__( 'CSS ID of an element should be unique.', 'ultimate-page-builder' ),
-                'type'        => 'text',
-                'value'       => esc_attr( $default_id ),
-            )
         ) );
     }
 
@@ -767,6 +427,379 @@
         endif;
 
         return apply_filters( 'upb_row_wrapper_input', array() );
+    }
+
+    function upb_background_input_group( $args = array() ) {
+
+        $defaults = array(
+            'gradient' => TRUE,
+            'color'    => TRUE,
+            'image'    => TRUE,
+            'both'     => TRUE,
+        );
+
+        $args = wp_parse_args( $args, $defaults );
+
+        $options           = array();
+        $options[ 'none' ] = array( 'title' => esc_html__( 'No background', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-close-octagon-outline' );
+
+        if ( $args[ 'gradient' ] ) {
+            $options[ 'gradient' ] = array( 'title' => esc_html__( 'Gradient background', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-gradient' );
+        }
+
+        if ( $args[ 'color' ] ) {
+            $options[ 'color' ] = array( 'title' => esc_html__( 'Background Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-format-color-fill' );
+        }
+
+        if ( $args[ 'image' ] ) {
+            $options[ 'image' ] = array( 'title' => esc_html__( 'Background Image', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-image' );
+        }
+
+        if ( $args[ 'both' ] ) {
+
+            $args[ 'color' ] = TRUE;
+            $args[ 'image' ] = TRUE;
+
+            $options[ 'both' ] = array( 'title' => esc_html__( 'Background Image and Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-folder-multiple-image' );
+        }
+
+        $inputs = array();
+
+        array_push( $inputs, array(
+            'id'      => 'background-type',
+            'title'   => esc_html__( 'Background type', 'ultimate-page-builder' ),
+            'desc'    => esc_html__( 'Choose your element background type', 'ultimate-page-builder' ),
+            'type'    => 'radio-icon',
+            'value'   => 'none',
+            'options' => $options
+        ) );
+
+        if ( $args[ 'gradient' ] ) {
+
+            array_push( $inputs, array(
+                'id'       => 'gradient-position',
+                'title'    => esc_html__( 'Gradient Position', 'ultimate-page-builder' ),
+                'desc'     => sprintf( __( 'Element gradient background position. <a target="_blank" href="%s">%s</a> or <a target="_blank" href="%s">%s</a>', 'ultimate-page-builder' ), esc_url( 'https://uigradients.com/' ), 'uiGradients', esc_url( 'https://webgradients.com/' ), 'webGradients' ),
+                'type'     => 'radio-icon',
+                'value'    => 'to left',
+                'options'  => array(
+                    'to left'         => array(
+                        'title' => esc_html__( 'Left', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-left'
+                    ),
+                    'to right'        => array(
+                        'title' => esc_html__( 'Right', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-right'
+                    ),
+                    'to top'          => array(
+                        'title' => esc_html__( 'Top', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-up'
+                    ),
+                    'to bottom'       => array(
+                        'title' => esc_html__( 'Bottom', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-down'
+                    ),
+                    'to top left'     => array(
+                        'title' => esc_html__( 'Top Left', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-top-left'
+                    ),
+                    'to top right'    => array(
+                        'title' => esc_html__( 'Top Right', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-top-right'
+                    ),
+                    'to bottom left'  => array(
+                        'title' => esc_html__( 'Bottom Left', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-bottom-left'
+                    ),
+                    'to bottom right' => array(
+                        'title' => esc_html__( 'Bottom Right', 'ultimate-page-builder' ),
+                        'icon'  => 'mdi mdi-arrow-bottom-right'
+                    ),
+                ),
+                'required' => array(
+                    array( 'background-type', '=', 'gradient' )
+                )
+            ) );
+
+            array_push( $inputs, array(
+                'id'          => 'gradient-start-color',
+                'title'       => esc_html__( 'Gradient Start Color', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Element gradient background start color. If you have only one color to start use start color on color stop 1 also.', 'ultimate-page-builder' ),
+                'placeholder' => esc_html__( 'RGBA Color', 'ultimate-page-builder' ),
+                'type'        => 'color',
+                'value'       => '#ffffff',
+                'options'     => array(
+                    'alpha' => TRUE,
+                ),
+                'required'    => array(
+                    array( 'background-type', '=', 'gradient' )
+                )
+            ) );
+
+            array_push( $inputs, array(
+                'id'       => 'gradient-start-location',
+                'title'    => esc_html__( 'Gradient Start Location', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Element gradient background start color location', 'ultimate-page-builder' ),
+                'type'     => 'range',
+                'value'    => '0',
+                'options'  => array(
+                    'suffix' => '%',
+                    'max'    => '100',
+                ),
+                'required' => array(
+                    array( 'background-type', '=', 'gradient' )
+                )
+            ) );
+
+            array_push( $inputs, array(
+                'id'          => 'gradient-color-stop-1',
+                'title'       => esc_html__( 'Color Stop 1', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Element gradient color stop 1. If you have only one color to start use start color on color stop 1 also.', 'ultimate-page-builder' ),
+                'placeholder' => esc_html__( 'RGBA Color', 'ultimate-page-builder' ),
+                'type'        => 'color',
+                'value'       => '#ffffff',
+                'options'     => array(
+                    'alpha' => TRUE,
+                ),
+                'required'    => array(
+                    array( 'background-type', '=', 'gradient' )
+                )
+            ) );
+
+            array_push( $inputs, array(
+                'id'       => 'gradient-color-stop-1-location',
+                'title'    => esc_html__( 'Color Stop 1 Location', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Element gradient color stop 1 location', 'ultimate-page-builder' ),
+                'type'     => 'range',
+                'value'    => '0',
+                'options'  => array(
+                    'suffix' => '%',
+                    'max'    => '100',
+                ),
+                'required' => array(
+                    array( 'background-type', '=', 'gradient' )
+                )
+            ) );
+
+            array_push( $inputs, array(
+                'id'          => 'gradient-end-color',
+                'title'       => esc_html__( 'Gradient End Color', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Element gradient background end color', 'ultimate-page-builder' ),
+                'placeholder' => esc_html__( 'RGBA Color', 'ultimate-page-builder' ),
+                'type'        => 'color',
+                'value'       => '#000000',
+                'options'     => array(
+                    'alpha' => TRUE,
+                ),
+                'required'    => array(
+                    array( 'background-type', '=', 'gradient' )
+                )
+            ) );
+
+            array_push( $inputs, array(
+                'id'       => 'gradient-end-location',
+                'title'    => esc_html__( 'Gradient End Location', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Element gradient background end color location', 'ultimate-page-builder' ),
+                'type'     => 'range',
+                'value'    => '100',
+                'options'  => array(
+                    'suffix' => '%',
+                    'max'    => '100',
+                ),
+                'required' => array(
+                    array( 'background-type', '=', 'gradient' )
+                )
+            ) );
+        }
+
+        if ( $args[ 'color' ] ) {
+            array_push( $inputs, array(
+                'id'          => 'background-color',
+                'title'       => esc_html__( 'Background Color', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Element background color', 'ultimate-page-builder' ),
+                'placeholder' => esc_html__( 'RGBA Color', 'ultimate-page-builder' ),
+                'type'        => 'color',
+                'value'       => '#ffffff',
+                'options'     => array(
+                    'alpha' => TRUE,
+                ),
+                'required'    => array(
+                    array( 'background-type', '=', array( 'color', 'both' ) )
+                )
+            ) );
+        }
+
+        if ( $args[ 'image' ] ) {
+            array_push( $inputs, array(
+                'id'          => 'background-image',
+                'title'       => esc_html__( 'Background Image', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Element background image', 'ultimate-page-builder' ),
+                'type'        => 'background-image',
+                'value'       => '',
+                'use'         => 'background-position',
+                'placeholder' => esc_html__( 'Choose background image', 'ultimate-page-builder' ),
+                'buttons'     => array(
+                    'add'    => esc_html__( 'Add Background', 'ultimate-page-builder' ),
+                    'remove' => esc_html__( 'Remove', 'ultimate-page-builder' ),
+                    'choose' => esc_html__( 'Choose', 'ultimate-page-builder' ),
+                ),
+                'required'    => array(
+                    array( 'background-type', '=', array( 'image', 'both' ) )
+                )
+            ) );
+
+            array_push( $inputs, array(
+                'id'          => 'background-position',
+                'title'       => esc_html__( 'Background Image Position', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Change Background Image Position. You can move background image pointer to see preview.', 'ultimate-page-builder' ),
+                'type'        => 'background-image-position',
+                'value'       => '0% 0%',
+                'placeholder' => '0% 0%',
+                'required'    => array(
+                    array( 'background-image', '!=', '' ),
+                    array( 'background-type', '=', array( 'image', 'both' ) ),
+                )
+            ) );
+
+            array_push( $inputs, array(
+                'id'       => 'background-repeat',
+                'title'    => esc_html__( 'Background Image repeat', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Change Background Image repeat.', 'ultimate-page-builder' ),
+                'type'     => 'select',
+                'value'    => 'repeat',
+                'options'  => array(
+                    'repeat'    => esc_html__( 'Repeat', 'ultimate-page-builder' ),
+                    'no-repeat' => esc_html__( 'No Repeat', 'ultimate-page-builder' ),
+                    'repeat-x'  => esc_html__( 'Repeat Horizontally', 'ultimate-page-builder' ),
+                    'repeat-y'  => esc_html__( 'Repeat Vertically', 'ultimate-page-builder' ),
+                    'initial'   => esc_html__( 'Initial', 'ultimate-page-builder' ),
+                    'inherit'   => esc_html__( 'Inherit from parent element', 'ultimate-page-builder' ),
+                ),
+                'required' => array(
+                    array( 'background-image', '!=', '' ),
+                    array( 'background-type', '=', array( 'image', 'both' ) ),
+                )
+            ) );
+
+            array_push( $inputs, array(
+                'id'       => 'background-attachment',
+                'title'    => esc_html__( 'Background Attachment', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Change Background Image Attachment.', 'ultimate-page-builder' ),
+                'type'     => 'select',
+                'value'    => 'scroll',
+                'options'  => array(
+                    'scroll'  => esc_html__( 'Scroll', 'ultimate-page-builder' ),
+                    'fixed'   => esc_html__( 'Fixed', 'ultimate-page-builder' ),
+                    'local'   => esc_html__( 'Local', 'ultimate-page-builder' ),
+                    'initial' => esc_html__( 'Initial', 'ultimate-page-builder' ),
+                    'inherit' => esc_html__( 'Inherit from parent element', 'ultimate-page-builder' ),
+                ),
+                'required' => array(
+                    array( 'background-image', '!=', '' ),
+                    array( 'background-type', '=', array( 'image', 'both' ) ),
+                )
+            ) );
+
+            array_push( $inputs, array(
+                'id'       => 'background-origin',
+                'title'    => esc_html__( 'Background origin', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Change Background Image origin.', 'ultimate-page-builder' ),
+                'type'     => 'select',
+                'value'    => 'padding-box',
+                'options'  => array(
+                    'padding-box' => esc_html__( 'Padding Box', 'ultimate-page-builder' ),
+                    'border-box'  => esc_html__( 'Border Box', 'ultimate-page-builder' ),
+                    'content-box' => esc_html__( 'Content Box', 'ultimate-page-builder' ),
+                    'initial'     => esc_html__( 'Initial', 'ultimate-page-builder' ),
+                    'inherit'     => esc_html__( 'Inherits from parent element', 'ultimate-page-builder' ),
+                ),
+                'required' => array(
+                    array( 'background-image', '!=', '' ),
+                    array( 'background-type', '=', array( 'image', 'both' ) ),
+                )
+            ) );
+
+            array_push( $inputs, array(
+                'id'       => 'background-size',
+                'title'    => esc_html__( 'Background size', 'ultimate-page-builder' ),
+                'desc'     => esc_html__( 'Change Background Image size.', 'ultimate-page-builder' ),
+                'type'     => 'select',
+                'value'    => 'auto',
+                'options'  => array(
+                    'auto'    => esc_html__( 'Auto', 'ultimate-page-builder' ),
+                    'cover'   => esc_html__( 'Cover', 'ultimate-page-builder' ),
+                    'contain' => esc_html__( 'Contain', 'ultimate-page-builder' ),
+                    'initial' => esc_html__( 'Initial', 'ultimate-page-builder' ),
+                    'inherit' => esc_html__( 'Inherits from parent element', 'ultimate-page-builder' ),
+                ),
+                'required' => array(
+                    array( 'background-image', '!=', '' ),
+                    array( 'background-type', '=', array( 'image', 'both' ) ),
+                )
+            ) );
+        }
+
+        return apply_filters( 'upb_background_input_group', $inputs );
+    }
+
+    function upb_css_class_id_input_group( $default_class = '', $default_id = '' ) {
+        return apply_filters( 'upb_css_class_id_input_group', array(
+            array(
+                'id'          => 'element_class',
+                'title'       => esc_html__( 'Custom CSS Class', 'ultimate-page-builder' ),
+                'placeholder' => esc_html__( 'CSS Class Name', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'Custom CSS Class. Separate classes with space', 'ultimate-page-builder' ),
+                'type'        => 'text',
+                'value'       => esc_attr( $default_class )
+            ),
+
+            array(
+                'id'          => 'element_id',
+                'title'       => esc_html__( 'Custom CSS ID', 'ultimate-page-builder' ),
+                'placeholder' => esc_html__( 'Unique ID', 'ultimate-page-builder' ),
+                'desc'        => esc_html__( 'CSS ID of an element should be unique.', 'ultimate-page-builder' ),
+                'type'        => 'text',
+                'value'       => esc_attr( $default_id ),
+            )
+        ) );
+    }
+
+    function upb_media_query_based_input_group( $input, $with_global = TRUE ) {
+
+        $get_devices = upb_devices();
+
+        $options = array_map( function ( $device ) {
+            return array(
+                'id'    => $device[ 'id' ],
+                'title' => $device[ 'title' ],
+                'icon'  => $device[ 'icon' ],
+            );
+        }, $get_devices );
+
+        if ( $with_global ) {
+            array_unshift( $options, array(
+                'id'    => '',
+                'title' => esc_html__( 'Global', 'ultimate-page-builder' ),
+                'icon'  => 'mdi mdi-earth',
+            ) );
+        }
+
+        $devices = upb_list_pluck( $options, array( 'title', 'icon' ), 'id' );
+
+        $inputs = array_map( function ( $device, $key ) use ( $input, $options ) {
+
+            $input[ 'id' ]          = empty( $key ) ? $input[ 'id' ] : sprintf( '%s-%s', $input[ 'id' ], $key );
+            $input[ 'title' ]       = empty( $key ) ? $input[ 'title' ] : sprintf( esc_html__( '%s for %s device', 'ultimate-page-builder' ), $input[ 'title' ], $device[ 'title' ] );
+            $input[ 'value' ]       = empty( $key ) ? $input[ 'value' ] : ( ( $input[ 'device-value' ] && isset( $input[ 'device-value' ][ $key ] ) ) ? $input[ 'device-value' ][ $key ] : $input[ 'value' ] );
+            $input[ 'device' ]      = empty( $key ) ? '' : $key;
+            $input[ 'deviceIcon' ]  = $device[ 'icon' ];
+            $input[ 'deviceTitle' ] = $device[ 'title' ];
+
+            return $input;
+
+        }, $devices, array_keys( $devices ) );
+
+        return $inputs;
     }
 
     function upb_icon_providers() {
