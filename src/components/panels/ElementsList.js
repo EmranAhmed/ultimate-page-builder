@@ -23,7 +23,7 @@ export default {
 
     computed : {
         elementTagClass(){
-            return [this.model._upb_options.element.tagClass, 'element-tag-ribbon']
+            return [this.model._upb_options.element.tag.toLowerCase(), 'element-tag-ribbon']
         }
     },
 

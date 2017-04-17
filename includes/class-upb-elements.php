@@ -65,12 +65,12 @@
                 }
 
                 if ( ! isset( $_upb_options[ 'element' ][ 'tag' ] ) ) {
-                    $_upb_options[ 'element' ][ 'tag' ] = FALSE;
-                } else {
+                    $_upb_options[ 'element' ][ 'tag' ] = FALSE; // // Support: New, Soon, Theme, WooCommerce, WordPress
+                } /*else {
 
                     // Support: New, Soon, Theme, WooCommerce, WordPress
                     $_upb_options[ 'element' ][ 'tagClass' ] = strtolower( $_upb_options[ 'element' ][ 'tag' ] );
-                }
+                }*/
 
                 if ( ! isset( $_upb_options[ 'element' ][ 'icon' ] ) ) {
                     $_upb_options[ 'element' ][ 'icon' ] = 'mdi mdi-emoticon-poop';
@@ -246,7 +246,7 @@
                         'title' => esc_html__( 'Clone', 'ultimate-page-builder' ),
                     );
 
-                    $_upb_options[ 'tools' ][ 'list' ] = apply_filters( "upb_{$tag}_list_toolbar", $list_toolbar );
+                    $_upb_options[ 'tools' ][ 'list' ] = apply_filters( "upb_element_{$tag}_tools_list", $list_toolbar );
                 }
 
                 // Contents Toolbar
@@ -390,7 +390,7 @@
                 } else {
                     if ( ! shortcode_exists( $tag ) ) {
 
-                        $this->_register_shortcode_assets( $tag, $_upb_options[ 'assets' ] );
+                        $this->register_shortcode_assets( $tag, $_upb_options[ 'assets' ] );
 
                         /*if ( ! empty( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ) && is_string( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ) ) {
                             wp_register_style( sprintf( 'upb-element-%s', $tag ), esc_url( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ), array(), FALSE );
@@ -463,7 +463,8 @@
                 }
             }
 
-            private function _register_shortcode_assets( $tag, $assets ) {
+            public function register_shortcode_assets( $tag, $assets ) {
+
                 
                 $handle = sprintf( 'upb-element-%s', $tag );
 
@@ -474,12 +475,25 @@
 
                 // JS
                 if ( ! empty( $assets[ 'shortcode' ][ 'js' ] ) ) {
-                    wp_register_script( $handle, esc_url( $assets[ 'shortcode' ][ 'js' ] ), array(), FALSE, TRUE );
+                    if ( upb_is_valid_url( $assets[ 'shortcode' ][ 'js' ] ) ) {
+                        wp_register_script( $handle, esc_url( $assets[ 'shortcode' ][ 'js' ] ), array(), FALSE, TRUE );
+                    } else {
+                        $handle = esc_html( $assets[ 'shortcode' ][ 'js' ] );
+                    }
                 }
 
                 // Inline JS
                 if ( ! empty( $assets[ 'shortcode' ][ 'inline_js' ] ) ) {
-                    wp_add_inline_script( $handle, $assets[ 'shortcode' ][ 'inline_js' ] );
+
+                    if ( ! empty( $assets[ 'shortcode' ][ 'js' ] ) ) {
+                        wp_add_inline_script( $handle, sprintf( 'try{ %s }catch(error){ console.error(error.message, "On \"%s\" Shortcode Inline JS."); }', $assets[ 'shortcode' ][ 'inline_js' ], $tag ) );
+                    } else {
+                        add_action( 'wp_footer', function () use ( $tag, $assets ) {
+                            echo "<script type='text/javascript'>";
+                            printf( 'try{ %s }catch(error){ console.error(error.message, "On \"%s\" Shortcode Inline JS."); }', $assets[ 'shortcode' ][ 'inline_js' ], $tag );
+                            echo "</script>";
+                        } );
+                    }
                 }
             }
 

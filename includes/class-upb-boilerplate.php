@@ -18,8 +18,6 @@
             public function __construct() {
                 $this->includes();
                 $this->hooks();
-
-                do_action( 'upb_boilerplate_init', $this );
             }
 
             public function includes() {
@@ -29,10 +27,14 @@
 
             public function hooks() {
                 add_filter( 'template_include', array( $this, 'boilerplate_template' ), 99 );
+                add_action( 'after_setup_theme', array( $this, 'plugin_loaded' ) );
+            }
+
+            public function plugin_loaded() {
+                do_action( 'upb_boilerplate_init', $this );
             }
 
             public function boilerplate_template( $_template ) {
-
                 if ( upb_is_boilerplate() ) {
                     return upb_include_path( "boilerplate/upb-boilerplate-template.php" );
                 }

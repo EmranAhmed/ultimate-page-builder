@@ -98,6 +98,15 @@ Yes.
 
 == Changelog ==
 
+= 1.0.0-beta.22 =
+
+- Improve Shortcode Inline JS loading.
+- `upb_is_valid_url()` function added.
+- Element Tag Class Improved.
+- Meta Generator Added
+- `upb_enqueue_shortcode_scripts` action added to enqueue scripts / styles for specific shortcode.
+- Improved `upb_add_attribute_after` function
+
 = 1.0.0-beta.21 =
 
 - Set default image size on `media-image` and `background-image` popup display settings.
@@ -105,7 +114,7 @@ Yes.
 - `upb_add_attribute_after` helper function added to add element attribute after specific attribute
 - Improve `toHEX()` `toRGB()` functions
 - Fix UPB Tab and UPB Accordion Shortcode JS Issue
-- Option to add Extra Query on `ajax-select` and `ajax-icon-select`
+- Extra Query Option Added on `ajax-select` and `ajax-icon-select`
 
 = 1.0.0-beta.20 =
 

@@ -97,17 +97,19 @@
 
         array_push( $attributes, array(
             'id'      => 'space',
-            'title'   => esc_html__( 'Spacer', 'ultimate-page-builder' ),
-            'desc'    => esc_html__( 'Space between two section', 'ultimate-page-builder' ),
-            'type'    => 'range',
+            'title'   => esc_html__( 'Section Gap', 'ultimate-page-builder' ),
+            'desc'    => esc_html__( 'Gap between two section', 'ultimate-page-builder' ),
+            'type'    => 'spacing',
+            'value'   => array( '0px', 'auto', '0px', 'auto' ),
+            'unit'    => 'px',
             'options' => array(
-                'min'    => 0,
-                'max'    => 200,
-                'step'   => 1,
-                'suffix' => 'px',
-            ),
-            'value'   => 0,
+                'top'    => TRUE,
+                'right'  => FALSE,
+                'bottom' => TRUE,
+                'left'   => FALSE,
+            )
         ) );
+
 
         // EXAMPLES:
 

@@ -332,6 +332,8 @@ export default{
                 //let prefixInlineJS  = `upb_preview_assets_${this.unique_id}-inline-js`;
                 let prefixInlineJS  = `upb_preview_assets_${this.model.tag}-inline-js`;
 
+
+                // ;(function ($, upb) { $(".upb-accordion-item").upbAccordion()  }(jQuery, _UPB_PREVIEW_DATA[upbComponentId]));
                 script.id        = prefixInlineJS;
                 script.type      = 'text/javascript';
                 script.innerHTML = `;(function(upbComponentId){
@@ -341,6 +343,8 @@ export default{
                         console.info(e.message, upbComponentId)
                     }
                     }('${this.unique_id}'));`;
+
+
 
                 previewDocument.getElementsByTagName('body')[0].appendChild(script);
             }

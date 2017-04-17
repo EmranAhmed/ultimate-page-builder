@@ -125,9 +125,10 @@
             wp_enqueue_script( 'upb-scoped-css-polyfill' );
 
             // Load ShortCodes Assets
-            upb_enqueue_shortcode_assets();
+            upb_enqueue_shortcode_scripts();
+
         endif;
-    } );
+    }, 20 ); // 20 Priority.
 
     // Add Toolbar Menus
     add_action( 'wp_before_admin_bar_render', function () {

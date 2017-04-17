@@ -102,6 +102,10 @@
         return UPB()->is_enabled();
     }
 
+    function upb_is_valid_url( $url ) {
+        return filter_var( $url, FILTER_VALIDATE_URL ) !== FALSE;
+    }
+
     // Check valid ajax request
     function upb_check_ajax_access() {
         if ( ! current_user_can( 'customize' ) ) {
@@ -929,7 +933,14 @@
         }
     }
 
+
     /**
+     * @param $id
+     * @param $attribute
+     * @param $attributes
+     *
+     * @return array
+     *
      * Usages:
      *
      * add_filter( 'upb_element_{$tag}_attributes', function ( $attributes ) {
@@ -948,8 +959,8 @@
      *          'left'   => FALSE,
      *      )
      * ), $attributes );
-     * } );*/
-
+     * } );
+     */
     function upb_add_attribute_after( $id, $attribute, $attributes ) {
 
         if ( empty( $attributes ) ) {
@@ -959,7 +970,16 @@
             foreach ( (array) $attributes as $attr ) {
                 array_push( $new_attributes, $attr );
                 if ( is_string( $id ) && $attr[ 'id' ] == $id ) {
-                    array_push( $new_attributes, $attribute );
+
+                    if ( isset( $attribute[ 'id' ] ) ) {
+                        array_push( $new_attributes, $attribute );
+                    } else {
+                        foreach ( (array) $attribute as $attrs ) {
+                            if ( is_array( $attrs ) ) {
+                                array_push( $new_attributes, $attrs );
+                            }
+                        }
+                    }
                 }
             }
 
@@ -1000,6 +1020,13 @@
 
     function upb_shortcode_id( $attributes ) {
         echo esc_attr( upb_get_shortcode_id( $attributes ) );
+    }
+
+    function upb_shortcode_attribute_id( $attributes ) {
+        $id = trim( esc_attr( upb_get_shortcode_id( $attributes ) ) );
+        if ( ! empty( $id ) ) {
+            echo 'id="' . esc_attr( upb_get_shortcode_id( $attributes ) ) . '"';
+        }
     }
 
     function upb_shortcode_class( $attributes, $extra = FALSE ) {
@@ -1048,7 +1075,7 @@
         do_action( 'upb_shortcode_scoped_style_background', $attributes );
     }
 
-    function upb_enqueue_shortcode_assets() {
+    function upb_enqueue_shortcode_scripts() {
 
         if ( upb_is_enabled() ):
 
@@ -1057,6 +1084,8 @@
             $shortcodes = get_post_meta( $post_ID, '_upb_shortcodes', TRUE );
 
             array_map( function ( $element ) use ( $shortcodes ) {
+
+                upb_elements()->register_shortcode_assets( $element[ 'tag' ], $element[ '_upb_options' ][ 'assets' ] );
 
                 if ( has_shortcode( $shortcodes, $element[ 'tag' ] ) ) {
 
@@ -1069,12 +1098,23 @@
                     if ( ! empty( $element[ '_upb_options' ][ 'assets' ][ 'shortcode' ][ 'css' ] ) ) {
                         wp_enqueue_style( $handle );
                     }
+
+                    do_action( 'upb_enqueue_shortcode_scripts', $element[ 'tag' ] );
                 }
             }, upb_elements()->get_all() );
         endif;
     }
 
-    // add_action upb_boilerplate_print_footer_scripts with upb_get_template
+    /**
+     * Example:
+     *
+     * add_action('upb_boilerplate_print_footer_scripts', function(){
+     *     ob_start();
+     *     upb_get_template('x-template.php');
+     *     $contents = ob_get_clean();
+     *     upb_add_script_template('template-id', $contents);
+     * });
+     */
     function upb_add_script_template( $id, $contents ) {
         echo '<script type="text/x-template" id="' . upb_get_script_template_id( $id ) . '">';
         echo $contents;

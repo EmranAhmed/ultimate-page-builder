@@ -113,7 +113,7 @@ export default {
             let totalOptions = usingOptions.length;
 
             if (totalOptions <= 1) {
-                console.info(`%c Better use type 'number' instead of 'spacing' for single spacing value.`, 'color:red; font-size:18px');
+                console.info(`%c Better use type 'number' or 'range' instead of 'spacing' for single spacing value.`, 'color:red; font-size:18px');
             }
 
             let totalValues = usingOptions.reduce((total, option)=> {

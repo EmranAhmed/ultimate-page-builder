@@ -4,7 +4,7 @@
      * Plugin URI: https://wordpress.org/plugins/ultimate-page-builder/
      * Description: An Incredibly easiest and highly customizable drag and drop page builder helps create professional websites without writing a line of code.
      * Author: Emran Ahmed
-     * Version: 1.0.0-beta.21
+     * Version: 1.0.0-beta.22
      * Domain Path: /languages
      * Text Domain: ultimate-page-builder
      * Author URI: https://themehippo.com/
@@ -15,6 +15,8 @@
     if ( ! class_exists( 'Ultimate_Page_Builder' ) ):
 
         final class Ultimate_Page_Builder {
+
+            public $version = '1.0.0-beta.22';
 
             protected static $_instance = NULL;
 
@@ -33,11 +35,11 @@
                 $this->constants();
                 $this->includes();
                 $this->hooks();
-
-                do_action( 'ultimate_page_builder_loaded', $this );
             }
 
             public function constants() {
+
+                define( 'UPB_VERSION', esc_attr( $this->version ) );
                 define( 'UPB_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
                 define( 'UPB_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
@@ -115,6 +117,23 @@
 
                 add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
                 add_filter( 'plugin_action_links_' . UPB_PLUGIN_BASENAME, array( $this, 'plugin_action_links' ) );
+
+                add_action( 'wp_head', array( $this, 'add_meta_generator' ), 9 );
+                add_action( 'after_setup_theme', array( $this, 'plugin_loaded' ) );
+            }
+
+            public function plugin_loaded() {
+                do_action( 'ultimate_page_builder_loaded', $this );
+            }
+
+            public function add_meta_generator() {
+
+                // Use "ultimate_page_builder_loaded" hook to remove generator.
+                // Example:
+                // add_action('ultimate_page_builder_loaded', function($upb){
+                //    remove_action('wp_head', array( $upb, 'add_meta_generator' ), 9 );
+                //});
+                echo '<meta name="generator" content="Ultimate Page Builder - ' . esc_attr( UPB_VERSION ) . '"/>' . "\n";
             }
 
             public function after_setup_theme() {
@@ -145,7 +164,7 @@
             }
 
             public function has_required_php_version() {
-                return version_compare( PHP_VERSION, '5.3' ) >= 0;
+                return version_compare( PHP_VERSION, '5.4' ) >= 0;
             }
 
             public function php_requirement_notice() {
@@ -153,7 +172,7 @@
                     $class   = 'notice notice-error';
                     $text    = esc_html__( 'Please check PHP version requirement.', 'ultimate-page-builder' );
                     $link    = esc_url( 'https://wordpress.org/about/requirements/' );
-                    $message = wp_kses( __( "<strong>Ultimate Page Builder</strong> require PHP 5.3 or above.", 'ultimate-page-builder' ), array( 'strong' => array() ) );
+                    $message = wp_kses( __( "<strong>Ultimate Page Builder</strong> require PHP 5.4 or above.", 'ultimate-page-builder' ), array( 'strong' => array() ) );
 
                     printf( '<div class="%1$s"><p>%2$s <a target="_blank" href="%3$s">%4$s</a></p></div>', $class, $message, $link, $text );
                 }
