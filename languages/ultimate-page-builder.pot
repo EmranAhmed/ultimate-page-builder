@@ -25,7 +25,7 @@ msgstr ""
 msgid "Contact form 1"
 msgstr ""
 
-#: elements/3rd-party.php:11, elements/widget-based.php:12, elements/widget-based.php:64, elements/widget-based.php:129, elements/widget-based.php:166, elements/widget-based.php:225, elements/widget-based.php:326, elements/widget-based.php:363, elements/widget-based.php:426, elements/widget-based.php:475, elements/widget-based.php:532, elements/widget-based.php:584, elements/with-upb.php:11, elements/with-upb.php:63, elements/with-upb.php:106, elements/with-upb.php:225, elements/with-upb.php:354, elements/with-upb.php:400, elements/with-upb.php:448, includes/upb-functions.php:729, includes/upb-settings.php:10
+#: elements/3rd-party.php:11, elements/widget-based.php:12, elements/widget-based.php:64, elements/widget-based.php:129, elements/widget-based.php:166, elements/widget-based.php:225, elements/widget-based.php:326, elements/widget-based.php:363, elements/widget-based.php:426, elements/widget-based.php:475, elements/widget-based.php:532, elements/widget-based.php:584, elements/with-upb.php:11, elements/with-upb.php:63, elements/with-upb.php:106, elements/with-upb.php:225, elements/with-upb.php:354, elements/with-upb.php:400, elements/with-upb.php:448, includes/upb-functions.php:389, includes/upb-settings.php:10
 msgid "Enable / Disable"
 msgstr ""
 
@@ -90,46 +90,50 @@ msgid "Section Enable / Disable"
 msgstr ""
 
 #: elements/core.php:100
-msgid "Spacer"
+msgid "Section Gap"
 msgstr ""
 
-#: elements/core.php:101, elements/core.php:146, elements/core.php:170
-msgid "Space between two section"
-msgstr ""
-
-#: elements/core.php:116
-msgid "AJAX"
-msgstr ""
-
-#: elements/core.php:117, elements/with-upb.php:407
-msgid "Description"
+#: elements/core.php:101
+msgid "Gap between two section"
 msgstr ""
 
 #: elements/core.php:118
+msgid "AJAX"
+msgstr ""
+
+#: elements/core.php:119, elements/with-upb.php:407
+msgid "Description"
+msgstr ""
+
+#: elements/core.php:120
 msgid "Search Posts"
 msgstr ""
 
-#: elements/core.php:145
+#: elements/core.php:147
 msgid "Icon Popup"
 msgstr ""
 
-#: elements/core.php:153, elements/core.php:169, elements/core.php:184, includes/upb-functions.php:943
+#: elements/core.php:148, elements/core.php:172
+msgid "Space between two section"
+msgstr ""
+
+#: elements/core.php:155, elements/core.php:171, elements/core.php:186, includes/upb-functions.php:983
 msgid "Margin"
 msgstr ""
 
-#: elements/core.php:154, elements/core.php:185, includes/upb-functions.php:944
+#: elements/core.php:156, elements/core.php:187, includes/upb-functions.php:984
 msgid "Margin between two section"
 msgstr ""
 
-#: elements/core.php:205
+#: elements/core.php:207
 msgid "Extra Input Example"
 msgstr ""
 
-#: elements/core.php:206
+#: elements/core.php:208
 msgid "An example of extra input"
 msgstr ""
 
-#: elements/widget-based.php:10, elements/widget-based.php:62, elements/widget-based.php:127, elements/widget-based.php:164, elements/widget-based.php:223, elements/widget-based.php:324, elements/widget-based.php:361, elements/widget-based.php:424, elements/widget-based.php:473, elements/widget-based.php:530, elements/widget-based.php:567, elements/with-upb.php:9, elements/with-upb.php:398, elements/with-upb.php:446, includes/upb-functions.php:692
+#: elements/widget-based.php:10, elements/widget-based.php:62, elements/widget-based.php:127, elements/widget-based.php:164, elements/widget-based.php:223, elements/widget-based.php:324, elements/widget-based.php:361, elements/widget-based.php:424, elements/widget-based.php:473, elements/widget-based.php:530, elements/widget-based.php:567, elements/with-upb.php:9, elements/with-upb.php:398, elements/with-upb.php:446, includes/upb-functions.php:374
 msgid "Title"
 msgstr ""
 
@@ -754,7 +758,7 @@ msgstr ""
 msgid "Use Image"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:42, includes/class-upb-elements-props.php:52, includes/class-upb-settings.php:120, includes/upb-functions.php:590
+#: includes/class-upb-elements-props.php:42, includes/class-upb-elements-props.php:52, includes/class-upb-settings.php:120, includes/upb-functions.php:643
 msgid "Remove"
 msgstr ""
 
@@ -770,19 +774,19 @@ msgstr ""
 msgid "Choose Icon"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:97, includes/upb-functions.php:446
+#: includes/class-upb-elements-props.php:97, includes/upb-functions.php:495
 msgid "Top"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:98, includes/upb-functions.php:442
+#: includes/class-upb-elements-props.php:98, includes/upb-functions.php:491
 msgid "Right"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:99, includes/upb-functions.php:450
+#: includes/class-upb-elements-props.php:99, includes/upb-functions.php:499
 msgid "Bottom"
 msgstr ""
 
-#: includes/class-upb-elements-props.php:100, includes/upb-functions.php:438
+#: includes/class-upb-elements-props.php:100, includes/upb-functions.php:487
 msgid "Left"
 msgstr ""
 
@@ -870,351 +874,347 @@ msgstr ""
 msgid "Extra Small"
 msgstr ""
 
-#: includes/upb-functions.php:288
-msgid "Global"
-msgstr ""
-
-#: includes/upb-functions.php:298
-msgid "%s for %s device"
-msgstr ""
-
-#: includes/upb-functions.php:313
+#: includes/upb-functions.php:275
 msgid "Hide on device"
 msgstr ""
 
-#: includes/upb-functions.php:314
+#: includes/upb-functions.php:276
 msgid "Hide element on specific media device"
 msgstr ""
 
-#: includes/upb-functions.php:328
+#: includes/upb-functions.php:290
 msgid "Clearfix"
 msgstr ""
 
-#: includes/upb-functions.php:329
+#: includes/upb-functions.php:291
 msgid "Show Clearfix element between columns"
 msgstr ""
 
-#: includes/upb-functions.php:355
+#: includes/upb-functions.php:317
 msgid "Material Icons"
 msgstr ""
 
-#: includes/upb-functions.php:356
+#: includes/upb-functions.php:318
 msgid "Search material design icons. Using <a target=\"_blank\" href=\"%s\">%s</a>"
 msgstr ""
 
-#: includes/upb-functions.php:356
+#: includes/upb-functions.php:318
 msgid "Material Design Icons - 1.8.36"
 msgstr ""
 
-#: includes/upb-functions.php:368
+#: includes/upb-functions.php:330
 msgid "Search Material Design Icons"
 msgstr ""
 
-#: includes/upb-functions.php:374
+#: includes/upb-functions.php:336
 msgid "FontAwesome Icons"
 msgstr ""
 
-#: includes/upb-functions.php:375
+#: includes/upb-functions.php:337
 msgid "Search FontAwesome icons. Using <a target=\"_blank\" href=\"%s\">%s</a>"
 msgstr ""
 
-#: includes/upb-functions.php:375
+#: includes/upb-functions.php:337
 msgid "Font Awesome Icons - 4.7"
 msgstr ""
 
-#: includes/upb-functions.php:387
+#: includes/upb-functions.php:349
 msgid "Search FontAwesome Icons"
 msgstr ""
 
-#: includes/upb-functions.php:393
+#: includes/upb-functions.php:355
 msgid "Dashicons Icon"
 msgstr ""
 
-#: includes/upb-functions.php:394
+#: includes/upb-functions.php:356
 msgid "Search Dashicons icon. Using <a target=\"_blank\" href=\"%s\">%s</a>"
 msgstr ""
 
-#: includes/upb-functions.php:394
+#: includes/upb-functions.php:356
 msgid "Dashicons"
 msgstr ""
 
-#: includes/upb-functions.php:406
+#: includes/upb-functions.php:368
 msgid "Search Dashicons Icon"
 msgstr ""
 
-#: includes/upb-functions.php:416
-msgid "Background type"
-msgstr ""
-
-#: includes/upb-functions.php:417
-msgid "Choose your element background type"
-msgstr ""
-
-#: includes/upb-functions.php:421
-msgid "No background"
-msgstr ""
-
-#: includes/upb-functions.php:422
-msgid "Gradient background"
-msgstr ""
-
-#: includes/upb-functions.php:423, includes/upb-functions.php:567
-msgid "Background Color"
-msgstr ""
-
-#: includes/upb-functions.php:424, includes/upb-functions.php:582
-msgid "Background Image"
-msgstr ""
-
-#: includes/upb-functions.php:425
-msgid "Background Image and Color"
-msgstr ""
-
-#: includes/upb-functions.php:426
-msgid "Background Video"
-msgstr ""
-
-#: includes/upb-functions.php:432
-msgid "Gradient Position"
-msgstr ""
-
-#: includes/upb-functions.php:433
-msgid "Element gradient background position. <a target=\"_blank\" href=\"%s\">%s</a> or <a target=\"_blank\" href=\"%s\">%s</a>"
-msgstr ""
-
-#: includes/upb-functions.php:454
-msgid "Top Left"
-msgstr ""
-
-#: includes/upb-functions.php:458
-msgid "Top Right"
-msgstr ""
-
-#: includes/upb-functions.php:462
-msgid "Bottom Left"
-msgstr ""
-
-#: includes/upb-functions.php:466
-msgid "Bottom Right"
-msgstr ""
-
-#: includes/upb-functions.php:477
-msgid "Gradient Start Color"
-msgstr ""
-
-#: includes/upb-functions.php:478
-msgid "Element gradient background start color. If you have only one color to start use start color on color stop 1 also."
-msgstr ""
-
-#: includes/upb-functions.php:479, includes/upb-functions.php:509, includes/upb-functions.php:539, includes/upb-functions.php:569
-msgid "RGBA Color"
-msgstr ""
-
-#: includes/upb-functions.php:492
-msgid "Gradient Start Location"
-msgstr ""
-
-#: includes/upb-functions.php:493
-msgid "Element gradient background start color location"
-msgstr ""
-
-#: includes/upb-functions.php:507
-msgid "Color Stop 1"
-msgstr ""
-
-#: includes/upb-functions.php:508
-msgid "Element gradient color stop 1. If you have only one color to start use start color on color stop 1 also."
-msgstr ""
-
-#: includes/upb-functions.php:522
-msgid "Color Stop 1 Location"
-msgstr ""
-
-#: includes/upb-functions.php:523
-msgid "Element gradient color stop 1 location"
-msgstr ""
-
-#: includes/upb-functions.php:537
-msgid "Gradient End Color"
-msgstr ""
-
-#: includes/upb-functions.php:538
-msgid "Element gradient background end color"
-msgstr ""
-
-#: includes/upb-functions.php:552
-msgid "Gradient End Location"
-msgstr ""
-
-#: includes/upb-functions.php:553
-msgid "Element gradient background end color location"
-msgstr ""
-
-#: includes/upb-functions.php:568
-msgid "Element background color"
-msgstr ""
-
-#: includes/upb-functions.php:583
-msgid "Element background image"
-msgstr ""
-
-#: includes/upb-functions.php:587
-msgid "Choose background image"
-msgstr ""
-
-#: includes/upb-functions.php:589
-msgid "Add Background"
-msgstr ""
-
-#: includes/upb-functions.php:591
-msgid "Choose"
-msgstr ""
-
-#: includes/upb-functions.php:600
-msgid "Background Image Position"
-msgstr ""
-
-#: includes/upb-functions.php:601
-msgid "Change Background Image Position. You can move background image pointer to see preview."
-msgstr ""
-
-#: includes/upb-functions.php:613
-msgid "Background Image repeat"
-msgstr ""
-
-#: includes/upb-functions.php:614
-msgid "Change Background Image repeat."
-msgstr ""
-
-#: includes/upb-functions.php:618
-msgid "Repeat"
-msgstr ""
-
-#: includes/upb-functions.php:619
-msgid "No Repeat"
-msgstr ""
-
-#: includes/upb-functions.php:620
-msgid "Repeat Horizontally"
-msgstr ""
-
-#: includes/upb-functions.php:621
-msgid "Repeat Vertically"
-msgstr ""
-
-#: includes/upb-functions.php:622, includes/upb-functions.php:641, includes/upb-functions.php:660, includes/upb-functions.php:679
-msgid "Initial"
-msgstr ""
-
-#: includes/upb-functions.php:623, includes/upb-functions.php:642
-msgid "Inherit from parent element"
-msgstr ""
-
-#: includes/upb-functions.php:633
-msgid "Background Attachment"
-msgstr ""
-
-#: includes/upb-functions.php:634
-msgid "Change Background Image Attachment."
-msgstr ""
-
-#: includes/upb-functions.php:638
-msgid "Scroll"
-msgstr ""
-
-#: includes/upb-functions.php:639
-msgid "Fixed"
-msgstr ""
-
-#: includes/upb-functions.php:640
-msgid "Local"
-msgstr ""
-
-#: includes/upb-functions.php:652
-msgid "Background origin"
-msgstr ""
-
-#: includes/upb-functions.php:653
-msgid "Change Background Image origin."
-msgstr ""
-
-#: includes/upb-functions.php:657
-msgid "Padding Box"
-msgstr ""
-
-#: includes/upb-functions.php:658
-msgid "Border Box"
-msgstr ""
-
-#: includes/upb-functions.php:659
-msgid "Content Box"
-msgstr ""
-
-#: includes/upb-functions.php:661, includes/upb-functions.php:680
-msgid "Inherits from parent element"
-msgstr ""
-
-#: includes/upb-functions.php:671
-msgid "Background size"
-msgstr ""
-
-#: includes/upb-functions.php:672
-msgid "Change Background Image size."
-msgstr ""
-
-#: includes/upb-functions.php:676
-msgid "Auto"
-msgstr ""
-
-#: includes/upb-functions.php:677
-msgid "Cover"
-msgstr ""
-
-#: includes/upb-functions.php:678
-msgid "Contain"
-msgstr ""
-
-#: includes/upb-functions.php:698
+#: includes/upb-functions.php:380
 msgid "Element Title"
 msgstr ""
 
-#: includes/upb-functions.php:709
-msgid "Custom CSS Class"
-msgstr ""
-
-#: includes/upb-functions.php:710
-msgid "CSS Class Name"
-msgstr ""
-
-#: includes/upb-functions.php:711
-msgid "Custom CSS Class. Separate classes with space"
-msgstr ""
-
-#: includes/upb-functions.php:718
-msgid "Custom CSS ID"
-msgstr ""
-
-#: includes/upb-functions.php:719
-msgid "Unique ID"
-msgstr ""
-
-#: includes/upb-functions.php:720
-msgid "CSS ID of an element should be unique."
-msgstr ""
-
-#: includes/upb-functions.php:730
+#: includes/upb-functions.php:390
 msgid "Enable or Disable Element"
 msgstr ""
 
-#: includes/upb-functions.php:766
+#: includes/upb-functions.php:426
 msgid "Container Type"
 msgstr ""
 
-#: includes/upb-functions.php:776
+#: includes/upb-functions.php:444
+msgid "No background"
+msgstr ""
+
+#: includes/upb-functions.php:447
+msgid "Gradient background"
+msgstr ""
+
+#: includes/upb-functions.php:455
+msgid "Background Image and Color"
+msgstr ""
+
+#: includes/upb-functions.php:459, includes/upb-functions.php:618
+msgid "Background Color"
+msgstr ""
+
+#: includes/upb-functions.php:463, includes/upb-functions.php:635
+msgid "Background Image"
+msgstr ""
+
+#: includes/upb-functions.php:470
+msgid "Background type"
+msgstr ""
+
+#: includes/upb-functions.php:471
+msgid "Choose your element background type"
+msgstr ""
+
+#: includes/upb-functions.php:481
+msgid "Gradient Position"
+msgstr ""
+
+#: includes/upb-functions.php:482
+msgid "Element gradient background position. <a target=\"_blank\" href=\"%s\">%s</a> or <a target=\"_blank\" href=\"%s\">%s</a>"
+msgstr ""
+
+#: includes/upb-functions.php:503
+msgid "Top Left"
+msgstr ""
+
+#: includes/upb-functions.php:507
+msgid "Top Right"
+msgstr ""
+
+#: includes/upb-functions.php:511
+msgid "Bottom Left"
+msgstr ""
+
+#: includes/upb-functions.php:515
+msgid "Bottom Right"
+msgstr ""
+
+#: includes/upb-functions.php:526
+msgid "Gradient Start Color"
+msgstr ""
+
+#: includes/upb-functions.php:527
+msgid "Element gradient background start color. If you have only one color to start use start color on color stop 1 also."
+msgstr ""
+
+#: includes/upb-functions.php:528, includes/upb-functions.php:558, includes/upb-functions.php:588, includes/upb-functions.php:620
+msgid "RGBA Color"
+msgstr ""
+
+#: includes/upb-functions.php:541
+msgid "Gradient Start Location"
+msgstr ""
+
+#: includes/upb-functions.php:542
+msgid "Element gradient background start color location"
+msgstr ""
+
+#: includes/upb-functions.php:556
+msgid "Color Stop 1"
+msgstr ""
+
+#: includes/upb-functions.php:557
+msgid "Element gradient color stop 1. If you have only one color to start use start color on color stop 1 also."
+msgstr ""
+
+#: includes/upb-functions.php:571
+msgid "Color Stop 1 Location"
+msgstr ""
+
+#: includes/upb-functions.php:572
+msgid "Element gradient color stop 1 location"
+msgstr ""
+
+#: includes/upb-functions.php:586
+msgid "Gradient End Color"
+msgstr ""
+
+#: includes/upb-functions.php:587
+msgid "Element gradient background end color"
+msgstr ""
+
+#: includes/upb-functions.php:601
+msgid "Gradient End Location"
+msgstr ""
+
+#: includes/upb-functions.php:602
+msgid "Element gradient background end color location"
+msgstr ""
+
+#: includes/upb-functions.php:619
+msgid "Element background color"
+msgstr ""
+
+#: includes/upb-functions.php:636
+msgid "Element background image"
+msgstr ""
+
+#: includes/upb-functions.php:640
+msgid "Choose background image"
+msgstr ""
+
+#: includes/upb-functions.php:642
+msgid "Add Background"
+msgstr ""
+
+#: includes/upb-functions.php:644
+msgid "Choose"
+msgstr ""
+
+#: includes/upb-functions.php:653
+msgid "Background Image Position"
+msgstr ""
+
+#: includes/upb-functions.php:654
+msgid "Change Background Image Position. You can move background image pointer to see preview."
+msgstr ""
+
+#: includes/upb-functions.php:666
+msgid "Background Image repeat"
+msgstr ""
+
+#: includes/upb-functions.php:667
+msgid "Change Background Image repeat."
+msgstr ""
+
+#: includes/upb-functions.php:671
+msgid "Repeat"
+msgstr ""
+
+#: includes/upb-functions.php:672
+msgid "No Repeat"
+msgstr ""
+
+#: includes/upb-functions.php:673
+msgid "Repeat Horizontally"
+msgstr ""
+
+#: includes/upb-functions.php:674
+msgid "Repeat Vertically"
+msgstr ""
+
+#: includes/upb-functions.php:675, includes/upb-functions.php:694, includes/upb-functions.php:713, includes/upb-functions.php:732
+msgid "Initial"
+msgstr ""
+
+#: includes/upb-functions.php:676, includes/upb-functions.php:695
+msgid "Inherit from parent element"
+msgstr ""
+
+#: includes/upb-functions.php:686
+msgid "Background Attachment"
+msgstr ""
+
+#: includes/upb-functions.php:687
+msgid "Change Background Image Attachment."
+msgstr ""
+
+#: includes/upb-functions.php:691
+msgid "Scroll"
+msgstr ""
+
+#: includes/upb-functions.php:692
+msgid "Fixed"
+msgstr ""
+
+#: includes/upb-functions.php:693
+msgid "Local"
+msgstr ""
+
+#: includes/upb-functions.php:705
+msgid "Background origin"
+msgstr ""
+
+#: includes/upb-functions.php:706
+msgid "Change Background Image origin."
+msgstr ""
+
+#: includes/upb-functions.php:710
+msgid "Padding Box"
+msgstr ""
+
+#: includes/upb-functions.php:711
+msgid "Border Box"
+msgstr ""
+
+#: includes/upb-functions.php:712
+msgid "Content Box"
+msgstr ""
+
+#: includes/upb-functions.php:714, includes/upb-functions.php:733
+msgid "Inherits from parent element"
+msgstr ""
+
+#: includes/upb-functions.php:724
+msgid "Background size"
+msgstr ""
+
+#: includes/upb-functions.php:725
+msgid "Change Background Image size."
+msgstr ""
+
+#: includes/upb-functions.php:729
+msgid "Auto"
+msgstr ""
+
+#: includes/upb-functions.php:730
+msgid "Cover"
+msgstr ""
+
+#: includes/upb-functions.php:731
+msgid "Contain"
+msgstr ""
+
+#: includes/upb-functions.php:749
+msgid "Custom CSS Class"
+msgstr ""
+
+#: includes/upb-functions.php:750
+msgid "CSS Class Name"
+msgstr ""
+
+#: includes/upb-functions.php:751
+msgid "Custom CSS Class. Separate classes with space"
+msgstr ""
+
+#: includes/upb-functions.php:758
+msgid "Custom CSS ID"
+msgstr ""
+
+#: includes/upb-functions.php:759
+msgid "Unique ID"
+msgstr ""
+
+#: includes/upb-functions.php:760
+msgid "CSS ID of an element should be unique."
+msgstr ""
+
+#: includes/upb-functions.php:782
+msgid "Global"
+msgstr ""
+
+#: includes/upb-functions.php:792
+msgid "%s for %s device"
+msgstr ""
+
+#: includes/upb-functions.php:809
 msgid "Material Design"
 msgstr ""
 
-#: includes/upb-functions.php:780
+#: includes/upb-functions.php:813
 msgid "DashIcons Icon"
 msgstr ""
 
