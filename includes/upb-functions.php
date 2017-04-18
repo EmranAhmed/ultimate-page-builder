@@ -269,7 +269,7 @@
     }
 
     // Build-In Inputs
-    
+
     function upb_responsive_hidden_input( $title = '', $desc = '', $default = array() ) {
 
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Hide on device', 'ultimate-page-builder' );
@@ -447,14 +447,6 @@
             $options[ 'gradient' ] = array( 'title' => esc_html__( 'Gradient background', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-gradient' );
         }
 
-        if ( $args[ 'color' ] ) {
-            $options[ 'color' ] = array( 'title' => esc_html__( 'Background Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-format-color-fill' );
-        }
-
-        if ( $args[ 'image' ] ) {
-            $options[ 'image' ] = array( 'title' => esc_html__( 'Background Image', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-image' );
-        }
-
         if ( $args[ 'both' ] ) {
 
             $args[ 'color' ] = TRUE;
@@ -463,6 +455,14 @@
             $options[ 'both' ] = array( 'title' => esc_html__( 'Background Image and Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-folder-multiple-image' );
         }
 
+        if ( $args[ 'color' ] ) {
+            $options[ 'color' ] = array( 'title' => esc_html__( 'Background Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-format-color-fill' );
+        }
+
+        if ( $args[ 'image' ] ) {
+            $options[ 'image' ] = array( 'title' => esc_html__( 'Background Image', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-image' );
+        }
+        
         $inputs = array();
 
         array_push( $inputs, array(
