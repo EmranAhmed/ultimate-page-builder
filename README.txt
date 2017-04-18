@@ -98,6 +98,11 @@ Yes.
 
 == Changelog ==
 
+= 1.0.0-beta.23 =
+
+- Fix Preview InlineJS attributes value.
+- `upb_background_input_group` argument added.
+
 = 1.0.0-beta.22 =
 
 - Improve Shortcode Inline JS loading.

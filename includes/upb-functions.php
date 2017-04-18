@@ -462,7 +462,7 @@
         if ( $args[ 'image' ] ) {
             $options[ 'image' ] = array( 'title' => esc_html__( 'Background Image', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-image' );
         }
-        
+
         $inputs = array();
 
         array_push( $inputs, array(

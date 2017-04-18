@@ -296,6 +296,13 @@ export default{
                         contents   : this.contents
                     });
                 }
+                else {
+                    store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id] = extend(true, store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id], {
+                        element    : this.$el,
+                        attributes : this.attributes,
+                        contents   : this.contents
+                    });
+                }
             }
         },
 
@@ -332,7 +339,6 @@ export default{
                 //let prefixInlineJS  = `upb_preview_assets_${this.unique_id}-inline-js`;
                 let prefixInlineJS  = `upb_preview_assets_${this.model.tag}-inline-js`;
 
-
                 // ;(function ($, upb) { $(".upb-accordion-item").upbAccordion()  }(jQuery, _UPB_PREVIEW_DATA[upbComponentId]));
                 script.id        = prefixInlineJS;
                 script.type      = 'text/javascript';
@@ -343,8 +349,6 @@ export default{
                         console.info(e.message, upbComponentId)
                     }
                     }('${this.unique_id}'));`;
-
-
 
                 previewDocument.getElementsByTagName('body')[0].appendChild(script);
             }
