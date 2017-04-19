@@ -854,3 +854,13 @@
 
     } );
 
+    //  Example: Section title generatedAttributes
+/*    add_action( 'wp_ajax__upb_generate_attribute_upb-section_title', function () {
+        upb_check_ajax_access();
+
+        if ( empty( $_POST[ 'attribute_value' ] ) ) {
+            wp_send_json_success( '#' );
+        }
+        wp_send_json_success( esc_html( "%% {$_POST[ 'attribute_value' ]} %%" ) );
+
+    } );*/

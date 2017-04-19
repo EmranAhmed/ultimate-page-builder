@@ -98,6 +98,10 @@ Yes.
 
 == Changelog ==
 
+= 1.0.0-beta.24 =
+
+- Add specific attribute generated content.
+
 = 1.0.0-beta.23 =
 
 - Fix Preview InlineJS attributes value.

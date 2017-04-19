@@ -17,8 +17,9 @@ export default{
 
     data(){
         return {
-            l10n        : store.l10n,
-            xhrContents : ''
+            l10n                    : store.l10n,
+            xhrContents             : '',
+            generatedAjaxAttributes : {}
         }
     },
 
@@ -46,6 +47,19 @@ export default{
         this.$nextTick(function () {
             this.addKeyIndex(this.model._upb_options._keyIndex);
         });
+
+        if (this.getGeneratedAttributes()) {
+            this.getGeneratedAttributes().map((attribute_id)=> {
+
+                let action = `_upb_generate_attribute_${this.tag}_${attribute_id}`;
+
+                this.setGeneratedAttributes(attribute_id, '');
+
+                this.$watch(`model.attributes.${attribute_id}`, function (value) {
+                    this.getGeneratedAttributeContents(action, attribute_id, {attribute_id : `${attribute_id}`, attribute_value : value});
+                }, {deep : true, immediate : true});
+            });
+        }
 
         this.setPreviewData();
         this.getAjaxContents();
@@ -84,6 +98,10 @@ export default{
 
         uniqueId(){
             return `upb-${this._uid}`;
+        },
+
+        generatedAttributes(){
+            return this.generatedAjaxAttributes;
         },
 
         attributes(){
@@ -195,6 +213,15 @@ export default{
     },
 
     methods : {
+
+        getGeneratedAttributes(){
+            return this.model._upb_options.element.generatedAttributes;
+        },
+
+        setGeneratedAttributes(id, value){
+            Vue.set(this.generatedAjaxAttributes, id, value);
+        },
+
         addKeyIndex(keyindex){
             if (_.isArray(this.contents)) {
                 this.contents.map((m, i) => {
@@ -264,6 +291,24 @@ export default{
 
         getAjaxContentsDebounce : _.debounce(function () {
             this.getAjaxContents();
+        }, 300),
+
+        getAttributeContentsAjax(action, id, data){
+            store.wpAjax(action, data, contents=> this.setGeneratedAttributes(id, contents),
+                (error)=> {
+                    if (error == 0) {
+                        console.info(`%c You are using "generatedAttributes" on "${this.tag}" element. So you should add "${action}" wp ajax hook. like: "wp_ajax_${action}" to get generated attribute contents.`, 'color:red; font-size:18px')
+                    }
+                    else {
+                        console.info(error);
+                    }
+                }, {
+                    cache : true
+                });
+        },
+
+        getGeneratedAttributeContents : _.debounce(function (action, id, data) {
+            this.getAttributeContentsAjax(action, id, data);
         }, 300),
 
         inlineStyle(style = {}){

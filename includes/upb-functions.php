@@ -1118,8 +1118,6 @@
 
             array_map( function ( $element ) use ( $shortcodes ) {
 
-                upb_elements()->register_shortcode_assets( $element[ 'tag' ], $element[ '_upb_options' ][ 'assets' ] );
-
                 if ( has_shortcode( $shortcodes, $element[ 'tag' ] ) ) {
 
                     $handle = sprintf( 'upb-element-%s', $element[ 'tag' ] );

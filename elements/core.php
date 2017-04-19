@@ -217,7 +217,8 @@
         $_upb_options = array(
             'element' => array(
                 'name' => 'Section',
-                //'icon' => 'mdi mdi-format-text'
+                // 'icon' => 'mdi mdi-format-text',
+                // 'generatedAttributes' => array( 'title' ) // generate attribute for preview "generatedAttributes".
             ),
             'meta'    => array(
                 'contents' => apply_filters( 'upb_section_contents_panel_meta', array(
