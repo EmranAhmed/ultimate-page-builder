@@ -156,32 +156,44 @@
         return apply_filters( 'upb_preview_devices', array(
             array(
                 'id'     => 'lg',
+                //'class'  => 'col-lg-',
                 'title'  => esc_html__( 'Large', 'ultimate-page-builder' ),
                 'icon'   => 'mdi mdi-desktop-mac',
-                'width'  => '100%',
+                'width'  => '100%', // @media (min-width: 1200px) where col-lg-12 width is 100%
                 'active' => TRUE
             ),
             array(
                 'id'     => 'md',
+                //'class'  => 'col-md-',
                 'title'  => esc_html__( 'Medium', 'ultimate-page-builder' ),
                 'icon'   => 'mdi mdi-laptop-mac',
-                'width'  => '992px',
+                'width'  => '992px', // @media (min-width: 992px) where col-md-12 width is 100%
                 'active' => FALSE
             ),
             array(
                 'id'     => 'sm',
+                //'class'  => 'col-sm-',
                 'title'  => esc_html__( 'Small', 'ultimate-page-builder' ),
                 'icon'   => 'mdi mdi-tablet-ipad',
-                'width'  => '768px',
+                'width'  => '768px', // @media (min-width: 768px) where col-sm-12 width is 100%
                 'active' => FALSE
             ),
             array(
                 'id'     => 'xs',
+                //'class'  => 'col-xs-',
                 'title'  => esc_html__( 'Extra Small', 'ultimate-page-builder' ),
                 'icon'   => 'mdi mdi-cellphone-iphone',
                 'width'  => '480px',
                 'active' => FALSE
             ),
+            /*array(
+                'id'     => 'xxs',
+                //'class'  => 'col-xs-',
+                'title'  => esc_html__( 'Extra Small', 'ultimate-page-builder' ),
+                'icon'   => 'mdi mdi-cellphone-basic',
+                'width'  => '480px',
+                'active' => FALSE
+            ),*/
         ) );
     }
 
@@ -194,7 +206,7 @@
             return array_values( $devices );
         } else {
             return array_map( function ( $device ) use ( $key ) {
-                return $device[ $key ];
+                return isset( $device[ $key ] ) ? $device[ $key ] : FALSE;
             }, array_values( $devices ) );
         }
     }
@@ -244,13 +256,15 @@
             );
         }, $devices ) );
 
-        return array_values( $hidden_devices );
+        return apply_filters( 'upb_responsive_hidden_output', array_values( $hidden_devices ) );
     }
 
     function upb_make_column_class( $attributes, $extra = FALSE ) {
 
         $grid    = upb_grid_system();
         $devices = upb_devices( 'id' );
+
+        $classes = upb_list_pluck( upb_devices(), array( 'class' ), 'id' );
 
         $columns = array();
 
@@ -260,8 +274,15 @@
 
         foreach ( $attributes as $name => $value ) {
             if ( in_array( $name, $devices ) && ! empty( $value ) ) {
-                $col       = explode( ':', $value );
-                $columns[] = ( ( $grid[ 'allGridClass' ] ) ? $grid[ 'allGridClass' ] . ' ' : '' ) . $grid[ 'prefixClass' ] . $grid[ 'separator' ] . $name . $grid[ 'separator' ] . ( ( absint( $grid[ 'totalGrid' ] ) / absint( $col[ 1 ] ) ) * absint( $col[ 0 ] ) );
+                $col = explode( ':', $value );
+
+                $class = isset( $classes[ $name ] ) ? $classes[ $name ][ 'class' ] : FALSE;
+
+                if ( $class ) {
+                    $columns[] = ( ( $grid[ 'allGridClass' ] ) ? $grid[ 'allGridClass' ] . ' ' : '' ) . $class . ( ( absint( $grid[ 'totalGrid' ] ) / absint( $col[ 1 ] ) ) * absint( $col[ 0 ] ) );
+                } else {
+                    $columns[] = ( ( $grid[ 'allGridClass' ] ) ? $grid[ 'allGridClass' ] . ' ' : '' ) . $grid[ 'prefixClass' ] . $grid[ 'separator' ] . $name . $grid[ 'separator' ] . ( ( absint( $grid[ 'totalGrid' ] ) / absint( $col[ 1 ] ) ) * absint( $col[ 0 ] ) );
+                }
             }
         }
 

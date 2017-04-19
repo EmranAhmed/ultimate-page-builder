@@ -58,18 +58,18 @@
                         if ( isset( $value->$index_key ) ) {
                             if ( is_array( $field ) ) {
                                 foreach ( $field as $val ) {
-                                    $newlist[ $value->$index_key ][ $val ] = $value->$val;
+                                    $newlist[ $value->$index_key ][ $val ] = isset( $value->$val ) ? $value->$val : NULL;
                                 }
                             } else {
-                                $newlist[ $value->$index_key ] = $value->$field;
+                                $newlist[ $value->$index_key ] = isset( $value->$field ) ? $value->$field : NULL;
                             }
                         } else {
                             if ( is_array( $field ) ) {
                                 foreach ( $field as $val ) {
-                                    $newlist[][ $val ] = $value->$val;
+                                    $newlist[][ $val ] = isset( $value->$val ) ? $value->$val : NULL;
                                 }
                             } else {
-                                $newlist[] = $value->$field;
+                                $newlist[] = isset( $value->$field ) ? $value->$field : NULL;
                             }
                         }
                     } else {
@@ -77,19 +77,19 @@
 
                             if ( is_array( $field ) ) {
                                 foreach ( $field as $val ) {
-                                    $newlist[ $value[ $index_key ] ][ $val ] = $value[ $val ];
+                                    $newlist[ $value[ $index_key ] ][ $val ] = isset( $value[ $val ] ) ? $value[ $val ] : NULL;
                                 }
                             } else {
-                                $newlist[ $value[ $index_key ] ] = $value[ $field ];
+                                $newlist[ $value[ $index_key ] ] = isset( $value[ $field ] ) ? $value[ $field ] : NULL;
                             }
 
                         } else {
                             if ( is_array( $field ) ) {
                                 foreach ( $value[ $field ] as $val ) {
-                                    $newlist[][ $val ] = $value[ $val ];
+                                    $newlist[][ $val ] = isset( $value[ $val ] ) ? $value[ $val ] : NULL;
                                 }
                             } else {
-                                $newlist[] = $value[ $field ];
+                                $newlist[] = isset( $value[ $field ] ) ? $value[ $field ] : NULL;
                             }
                         }
                     }

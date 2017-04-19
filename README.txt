@@ -98,6 +98,12 @@ Yes.
 
 == Changelog ==
 
+= 1.0.0-beta.25 =
+
+- Improve `upb_list_pluck` function.
+- More Flexible grid option for Twitter Bootstrap 3 and Twitter Bootstrap 4 Grid System
+- `upb_responsive_hidden_output` filter added to modify Responsive Hidden Input Options
+
 = 1.0.0-beta.24 =
 
 - Add specific attribute generated content.
@@ -135,7 +141,7 @@ Yes.
 
 = 1.0.0-beta.19 =
 
-- Click to open UPB Tab and UPB Accordion settings panel.
+- Click to open UPB Tab and UPB Accordion Settings Panel from Preview Panel.
 
 = 1.0.0-beta.18 =
 

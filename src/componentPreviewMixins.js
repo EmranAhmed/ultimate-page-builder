@@ -35,10 +35,15 @@ export default{
 
                     if (gridValue) {
                         let [col, t] = gridValue.split(':');
-                        //let t   = parseInt(gridValue.split(':')[1]);
+
                         let g = Math.round((store.grid.totalGrid / parseInt(t)) * parseInt(col));
 
-                        return `${store.grid.prefixClass}${store.grid.separator}${device.id}${store.grid.separator}${g}`
+                        if (_.isUndefined(device.class)) {
+                            return `${store.grid.prefixClass}${store.grid.separator}${device.id}${store.grid.separator}${g}`
+                        }
+                        else {
+                            return `${device.class}${g}`
+                        }
                     }
                     else {
                         return '';
