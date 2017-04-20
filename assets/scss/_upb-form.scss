@@ -568,6 +568,15 @@ button:focus {
       background      : #FFFFFF;
       border          : 1px solid #DDDDDD;
       border-radius   : 2px;
+      flex-wrap       : wrap;
+
+      > div {
+        width   : 100%;
+        display : flex;
+        &:nth-child(even) {
+          border-top : 1px solid #DDDDDD;
+          }
+        }
 
       label {
         position     : relative;
@@ -591,12 +600,25 @@ button:focus {
           line-height : 30px;
           }
         }
+
+      .device-symbol {
+        position  : absolute;
+        right     : 10px;
+        font-size : 16px;
+        }
       }
 
-    input:checked + i {
+    input:disabled ~ * {
+      background     : #FFFFFF;
+      color          : #CCCCCC;
+      pointer-events : none;
+      }
+
+    input:checked ~ * {
       background : #EEEEEE;
       color      : #999999;
       }
+
     }
 
   /*-----------------------

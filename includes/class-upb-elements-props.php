@@ -224,6 +224,14 @@
                             $options[ 'value' ] = $options[ 'default' ];
                         }
 
+                        if ( ! isset( $options[ 'suffix' ] ) ) {
+                            $options[ 'suffix' ] = array( '' => '&equals;' );
+                        }
+
+                        if ( ! isset( $options[ 'disable' ] ) ) {
+                            $options[ 'disable' ] = array();
+                        }
+
                         if ( ! is_array( $options[ 'value' ] ) ) {
                             $options[ 'value' ] = explode( $options[ 'delimiter' ], $options[ 'value' ] );
                         }
