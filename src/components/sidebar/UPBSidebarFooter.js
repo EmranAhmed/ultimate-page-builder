@@ -8,7 +8,11 @@ export default {
             l10n            : store.l10n,
             devices         : store.devices,
             sidebarExpand   : true,
-            skeletonPreview : false
+            skeletonPreview : false,
+            deviceWidths    : {},
+            actualDevice    : '',
+            deviceSwitched  : false,
+            currentDevices  : []
         }
     },
 
@@ -22,10 +26,51 @@ export default {
         }
     },
 
+    created(){
+
+        this.deviceWidths = this.devices.reduce((widths, device) => {
+            widths[device.id] = parseFloat(device.width);
+            return widths;
+        }, {});
+
+        this.windowResize();
+
+        window.addEventListener('resize', ()=> this.windowResize());
+    },
+
     methods : {
 
-        currentDevice(device){
-            return this.devicePreview == device;
+        windowResize : _.debounce(function () {
+            // console.log(window.innerWidth); // 1400
+
+            this.deviceSwitched = false;
+
+            this.currentDevices = Object.keys(this.deviceWidths).filter((deviceId)=> {
+                return (window.innerWidth >= this.deviceWidths[deviceId]);
+            });
+
+            let lastDevice = _.last(Object.keys(this.deviceWidths));
+
+            if (this.currentDevices.length == 0) {
+                this.currentDevices.push(lastDevice);
+            }
+
+            this.actualDevice = this.currentDevices[0];
+
+            this.devices.map((d) => {
+                d.active = (d.id == this.actualDevice);
+            });
+
+            this.toggleResponsivePreviewWidth(this.actualDevice);
+
+        }, 300),
+
+        deviceAvailable(deviceId){
+            return this.currentDevices.includes(deviceId);
+        },
+
+        currentDevice(deviceId){
+            return this.devicePreview == deviceId;
         },
 
         collapseSidebar(){
@@ -34,6 +79,7 @@ export default {
             store.subpanel        = '';
             document.getElementById('upb-wrapper').classList.remove('expanded');
             document.getElementById('upb-wrapper').classList.add('collapsed');
+            //this.windowResize();
         },
 
         expandSidebar(){
@@ -41,6 +87,7 @@ export default {
             store.sidebarExpanded = true;
             document.getElementById('upb-wrapper').classList.remove('collapsed');
             document.getElementById('upb-wrapper').classList.add('expanded');
+            //this.windowResize();
         },
 
         toggleSkeletonPreview(){
@@ -58,26 +105,34 @@ export default {
             }
         },
 
-        toggleResponsivePreview(device){
+        toggleResponsivePreviewWidth(deviceId){
+
+            document.getElementById('upb-wrapper').classList.add(`preview-${deviceId}`);
+
+            // console.log('clicked: ', deviceId, 'actual: ', this.actualDevice);
+
+            if (this.actualDevice == deviceId) {
+                document.getElementById('upb-preview-wrapper').style.width = '100%';
+            }
+            else {
+                if (this.deviceWidths[deviceId]) {
+                    document.getElementById('upb-preview-wrapper').style.width = `${this.deviceWidths[deviceId]}px`;
+                }
+            }
+        },
+
+        toggleResponsivePreview(deviceId){
 
             this.devices.map((d) => {
-                d.active = (d.id == device.id);
+                d.active = (d.id == deviceId);
                 document.getElementById('upb-wrapper').classList.remove(`preview-${d.id}`);
             });
 
-            store.currentPreviewDevice = device.id;
+            this.deviceSwitched = true;
 
-            document.getElementById('upb-wrapper').classList.add(`preview-${device.id}`);
+            store.currentPreviewDevice = deviceId;
 
-            if (device['width']) {
-                document.getElementById('upb-preview-wrapper').style.width = device.width;
-            }
-            if (device['height']) {
-                document.getElementById('upb-preview-wrapper').style.height = device.height;
-            }
-            else {
-                document.getElementById('upb-preview-wrapper').style.height = '100%';
-            }
+            this.toggleResponsivePreviewWidth(deviceId);
         }
     }
 }

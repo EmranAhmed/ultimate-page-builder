@@ -155,45 +155,41 @@
     function upb_preview_devices() {
         return apply_filters( 'upb_preview_devices', array(
             array(
-                'id'     => 'lg',
+                'id'        => 'lg',
                 //'class'  => 'col-lg-',
-                'title'  => esc_html__( 'Large', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-desktop-mac',
-                'width'  => '100%', // @media (min-width: 1200px) where col-lg-12 width is 100%
-                'active' => TRUE
+                'title'     => esc_html__( 'Large', 'ultimate-page-builder' ),
+                'icon'      => 'mdi mdi-desktop-mac',
+                'width'     => '1200px', // @media (min-width: 1200px) where col-lg-12 width is 100%
+                'active'    => TRUE,
+                'utilities' => 'hidden-%id', // array('hidden-%id-up', 'hidden-%id-up')
             ),
             array(
-                'id'     => 'md',
+                'id'        => 'md',
                 //'class'  => 'col-md-',
-                'title'  => esc_html__( 'Medium', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-laptop-mac',
-                'width'  => '992px', // @media (min-width: 992px) where col-md-12 width is 100%
-                'active' => FALSE
+                'title'     => esc_html__( 'Medium', 'ultimate-page-builder' ),
+                'icon'      => 'mdi mdi-laptop-mac',
+                'width'     => '992px', // @media (min-width: 992px) where col-md-12 width is 100%
+                'active'    => FALSE,
+                'utilities' => 'hidden-%id', // array('hidden-%id-up', 'hidden-%id-up')
             ),
             array(
-                'id'     => 'sm',
+                'id'        => 'sm',
                 //'class'  => 'col-sm-',
-                'title'  => esc_html__( 'Small', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-tablet-ipad',
-                'width'  => '768px', // @media (min-width: 768px) where col-sm-12 width is 100%
-                'active' => FALSE
+                'title'     => esc_html__( 'Small', 'ultimate-page-builder' ),
+                'icon'      => 'mdi mdi-tablet-ipad',
+                'width'     => '768px', // @media (min-width: 768px) where col-sm-12 width is 100%
+                'active'    => FALSE,
+                'utilities' => 'hidden-%id', // array('hidden-%id-up', 'hidden-%id-up')
             ),
             array(
-                'id'     => 'xs',
+                'id'        => 'xs',
                 //'class'  => 'col-xs-',
-                'title'  => esc_html__( 'Extra Small', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-cellphone-iphone',
-                'width'  => '480px',
-                'active' => FALSE
-            ),
-            /*array(
-                'id'     => 'xxs',
-                //'class'  => 'col-xs-',
-                'title'  => esc_html__( 'Extra Small', 'ultimate-page-builder' ),
-                'icon'   => 'mdi mdi-cellphone-basic',
-                'width'  => '480px',
-                'active' => FALSE
-            ),*/
+                'title'     => esc_html__( 'Extra Small', 'ultimate-page-builder' ),
+                'icon'      => 'mdi mdi-cellphone-iphone',
+                'width'     => '480px',
+                'active'    => FALSE,
+                'utilities' => 'hidden-%id', // array('hidden-%id-up', 'hidden-%id-up')
+            )
         ) );
     }
 
@@ -244,19 +240,25 @@
         ) );
     }
 
-    function upb_responsive_hidden() {
+    function upb_responsive_utilities( $suffix = FALSE ) {
 
         $devices = upb_devices();
 
-        $hidden_devices = apply_filters( 'upb_responsive_hidden', array_map( function ( $device ) {
-            return array(
-                'id'    => sprintf( 'hidden-%s', $device[ 'id' ] ),
-                'title' => $device[ 'title' ],
-                'icon'  => $device[ 'icon' ],
-            );
+        $hidden_devices = apply_filters( 'upb_responsive_utilities', array_map( function ( $device ) use ( $suffix ) {
+
+            if ( empty( $suffix ) || ! is_array( $suffix ) ) {
+                return array(
+                    'id'    => sprintf( 'hidden-%s', $device[ 'id' ] ),
+                    'title' => $device[ 'title' ],
+                    'icon'  => $device[ 'icon' ],
+                );
+            } else {
+
+
+            }
         }, $devices ) );
 
-        return apply_filters( 'upb_responsive_hidden_output', array_values( $hidden_devices ) );
+        return apply_filters( 'upb_responsive_utilities_output', array_values( $hidden_devices ) );
     }
 
     function upb_make_column_class( $attributes, $extra = FALSE ) {
@@ -296,13 +298,13 @@
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Hide on device', 'ultimate-page-builder' );
         $desc  = trim( $desc ) ? trim( $desc ) : esc_html__( 'Hide element on specific media device', 'ultimate-page-builder' );
 
-        return apply_filters( 'upb_responsive_hidden_input', array(
+        return apply_filters( 'upb_responsive_utilities_input', array(
             'id'      => 'device-hidden',
             'title'   => esc_html( $title ),
             'desc'    => wp_kses_post( $desc ),
             'type'    => 'device-hidden',
             'value'   => $default,
-            'options' => upb_responsive_hidden()
+            'options' => upb_responsive_utilities()
         ) );
     }
 
