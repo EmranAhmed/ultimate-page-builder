@@ -5,15 +5,23 @@
     background-attachment : var(--background-attachment);
     background-origin     : var(--background-origin);
     background-size       : var(--background-size);
-    margin                : var(--sections-gap);
+    margin                : var(--section-margin);
     background-image      : var(--background-image);
     }
 
-.upb-section-preview.gradient {
+.upb-section-preview.has-gradient.with-color-stop {
     background-image : linear-gradient(
             var(--gradient-position),
             var(--gradient-start-color) var(--gradient-start-location),
             var(--gradient-color-stop-1) var(--gradient-color-stop-1-location),
+            var(--gradient-end-color) var(--gradient-end-location)
+    );
+    }
+
+.upb-section-preview.has-gradient.without-color-stop {
+    background-image : linear-gradient(
+            var(--gradient-position),
+            var(--gradient-start-color) var(--gradient-start-location),
             var(--gradient-end-color) var(--gradient-end-location)
     );
     }

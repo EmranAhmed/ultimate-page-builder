@@ -1,6 +1,6 @@
 <?php defined( 'ABSPATH' ) or die( 'Keep Silent' ); ?>
 
-<div v-show="enabled" :id="addID()" :class="addClass(attributes['background-type']=='gradient'?'gradient':'')" v-preview-element :style="inlineStyle({'--sections-gap': attributes.space.join(' ') })">
+<div v-show="enabled" :id="addID()" :class="addClass(gradientBackgroundClass)" v-preview-element :style="inlineStyle({'--section-margin': attributes.space.join(' ') })">
     <upb-preview-mini-toolbar :parent="parent" :model="model"></upb-preview-mini-toolbar>
         <!--<pre>
          {{ generatedAttributes }}

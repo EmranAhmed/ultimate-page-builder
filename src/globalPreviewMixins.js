@@ -19,7 +19,8 @@ export default{
         return {
             l10n                    : store.l10n,
             xhrContents             : '',
-            generatedAjaxAttributes : {}
+            generatedAjaxAttributes : {},
+            debounceWaitTime        : 300
         }
     },
 
@@ -35,7 +36,7 @@ export default{
                 this.getAjaxContentsDebounce();
                 this.attributeWatch();
             }
-        }, {deep : this.model._upb_options.preview.shortcode});
+        }, {deep : this.model._upb_options.preview.shortcode}); // Content Have Shortcode Also
 
         this.$watch('model.attributes', function (newVal, oldVal) {
             //this.addClass();
@@ -147,27 +148,46 @@ export default{
             let background = {};
             if (!_.isUndefined(this.model.attributes['background-type'])) {
 
-                if (this.model.attributes['background-type'] == 'both' || this.model.attributes['background-type'] == 'color') {
+                if (['both', 'color'].includes(this.model.attributes['background-type'])) {
                     background['--background-color'] = this.model.attributes['background-color'];
                 }
 
-                if (this.model.attributes['background-type'] == 'both' || this.model.attributes['background-type'] == 'image') {
-                    background['--background-image']      = `url(${this.model.attributes['background-image']})`;
-                    background['--background-position']   = this.model.attributes['background-position'];
-                    background['--background-repeat']     = this.model.attributes['background-repeat'];
-                    background['--background-attachment'] = this.model.attributes['background-attachment'];
-                    background['--background-origin']     = this.model.attributes['background-origin'];
-                    background['--background-size']       = this.model.attributes['background-size'];
+                if (['both', 'image'].includes(this.model.attributes['background-type'])) {
+                    if (this.model.attributes['background-image']) {
+                        background['--background-image'] = `url(${this.model.attributes['background-image']})`;
+
+                        if (!_.isUndefined(this.model.attributes['background-position'])) {
+                            background['--background-position'] = this.model.attributes['background-position'];
+                        }
+
+                        if (!_.isUndefined(this.model.attributes['background-repeat'])) {
+                            background['--background-repeat'] = this.model.attributes['background-repeat'];
+                        }
+
+                        if (!_.isUndefined(this.model.attributes['background-attachment'])) {
+                            background['--background-attachment'] = this.model.attributes['background-attachment'];
+                        }
+
+                        if (!_.isUndefined(this.model.attributes['background-origin'])) {
+                            background['--background-origin'] = this.model.attributes['background-origin'];
+                        }
+
+                        if (!_.isUndefined(this.model.attributes['background-size'])) {
+                            background['--background-size'] = this.model.attributes['background-size'];
+                        }
+                    }
                 }
 
-                if (this.model.attributes['background-type'] == 'gradient') {
+                if (['gradient'].includes(this.model.attributes['background-type'])) {
                     background['--gradient-position'] = this.model.attributes['gradient-position'];
 
                     background['--gradient-start-color']    = this.model.attributes['gradient-start-color'];
                     background['--gradient-start-location'] = this.model.attributes['gradient-start-location'] + '%';
 
-                    background['--gradient-color-stop-1']          = this.model.attributes['gradient-color-stop-1'];
-                    background['--gradient-color-stop-1-location'] = this.model.attributes['gradient-color-stop-1-location'] + '%';
+                    if (!_.isUndefined(this.model.attributes['gradient-color-stop-1']) && !_.isUndefined(this.model.attributes['gradient-color-stop-1-location'])) {
+                        background['--gradient-color-stop-1']          = this.model.attributes['gradient-color-stop-1'];
+                        background['--gradient-color-stop-1-location'] = this.model.attributes['gradient-color-stop-1-location'] + '%';
+                    }
 
                     background['--gradient-end-color']    = this.model.attributes['gradient-end-color'];
                     background['--gradient-end-location'] = this.model.attributes['gradient-end-location'] + '%';
@@ -209,10 +229,46 @@ export default{
 
         $route(){
             return store.panel._route;
-        }
+        },
+
+        gradientBackgroundClass(){
+
+            let classes = [];
+
+            if (this.hasGradientBackground()) {
+                classes.push('has-gradient');
+            }
+
+            if (this.hasGradientBackgroundWithOutColorStop()) {
+                classes.push('without-color-stop');
+            }
+
+            if (this.hasGradientBackgroundWithColorStop()) {
+                classes.push('with-color-stop');
+            }
+
+            return classes.join(' ');
+        },
+
     },
 
     methods : {
+
+        hasGradientBackground(){
+            return ['gradient'].includes(this.model.attributes['background-type']);
+        },
+
+        hasGradientBackgroundWithColorStop(){
+            return ['gradient'].includes(this.model.attributes['background-type']) && (!_.isUndefined(this.model.attributes['gradient-color-stop-1']) || !_.isUndefined(this.model.attributes['gradient-color-stop-1-location']) );
+        },
+
+        hasGradientBackgroundWithOutColorStop(){
+            return ['gradient'].includes(this.model.attributes['background-type']) && (_.isUndefined(this.model.attributes['gradient-color-stop-1']) || _.isUndefined(this.model.attributes['gradient-color-stop-1-location']) );
+        },
+
+        getAttribute(attribute, defaultValue = ''){
+            return this.model.attributes[attribute] ? this.model.attributes[attribute] : defaultValue;
+        },
 
         getGeneratedAttributes(){
             return this.model._upb_options.element.generatedAttributes;
@@ -291,7 +347,7 @@ export default{
 
         getAjaxContentsDebounce : _.debounce(function () {
             this.getAjaxContents();
-        }, 300),
+        }, this.debounceWaitTime),
 
         getAttributeContentsAjax(action, id, data){
             store.wpAjax(action, data, contents=> this.setGeneratedAttributes(id, contents),
@@ -309,7 +365,7 @@ export default{
 
         getGeneratedAttributeContents : _.debounce(function (action, id, data) {
             this.getAttributeContentsAjax(action, id, data);
-        }, 300),
+        }, this.debounceWaitTime),
 
         inlineStyle(style = {}){
             return extend(false, {}, this.backgroundVariables, style);
@@ -329,7 +385,7 @@ export default{
 
         attributeWatch : _.debounce(function () {
             this.inlineScriptInit(true);
-        }, 300),
+        }, this.debounceWaitTime),
 
         setPreviewData(){
             if (this.model._upb_options.assets.preview.inline_js) {
@@ -412,7 +468,7 @@ export default{
             if ((this.model._upb_options.assets.preview.js && previewDocument.querySelectorAll(`#${prefixJS}`).length > 0) && this.model._upb_options.assets.preview.inline_js) {
                 _.delay(()=> {
                     this.inlineScriptInit(true);
-                }, 200);
+                }, this.debounceWaitTime);
             }
 
             // Load CSS

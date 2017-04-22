@@ -61,7 +61,7 @@ module.exports = {
     devtool   : '#eval-source-map',
     entry     : {
         builder : path.resolve(__dirname, './src/builder.js'),
-        vendor  : ['vue', 'vue-router', 'extend']
+        vendor  : ['vue', 'vue-router', 'extend', 'sprintf-js']
     },
     output    : {
         path       : path.resolve(__dirname, './assets'),

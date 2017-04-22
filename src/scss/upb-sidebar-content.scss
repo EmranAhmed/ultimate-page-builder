@@ -314,6 +314,11 @@ input[type="search"]::-webkit-search-decoration {
               }
             }
 
+          // Active
+          &.active {
+            pointer-events : none;
+            }
+
           }
 
         }

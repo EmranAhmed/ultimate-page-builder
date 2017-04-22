@@ -201,6 +201,7 @@
                     $_upb_options[ 'tools' ] = array();
                 }
 
+                // List Toolbar
                 if ( ! isset( $_upb_options[ 'tools' ][ 'list' ] ) ) {
                     $list_toolbar = array();
 
@@ -210,6 +211,16 @@
                         'class' => 'handle',
                         'title' => esc_html__( 'Sort', 'ultimate-page-builder' ),
                     );
+
+                    if ( in_array( 'active', wp_list_pluck( $settings, 'id' ) ) && $_upb_options[ 'element' ][ 'child' ] ) {
+                        $list_toolbar[ 'active' ] = array(
+                            'id'     => 'active',
+                            'icon'   => 'mdi mdi-star',
+                            'action' => FALSE,
+                            'title'  => esc_html__( 'Default Active', 'ultimate-page-builder' ),
+                        );
+                    }
+
 
                     $list_toolbar[ 'delete' ] = array(
                         'id'    => 'delete',
@@ -459,7 +470,6 @@
 
             public function register_assets( $tag, $assets ) {
 
-                
                 $handle = sprintf( 'upb-element-%s', $tag );
 
                 // CSS

@@ -457,11 +457,14 @@
 
     function upb_background_input_group( $args = array() ) {
 
+        // Plan: Background Video, Youtube/Vimeo Video, Gradient Overlay over image / video
+
         $defaults = array(
-            'gradient' => TRUE,
-            'color'    => TRUE,
-            'image'    => TRUE,
-            'both'     => TRUE,
+            'gradient'            => TRUE,
+            'gradient-color-stop' => TRUE,
+            'color'               => TRUE,
+            'image'               => TRUE,
+            'both'                => TRUE,
         );
 
         $args = wp_parse_args( $args, $defaults );
@@ -577,35 +580,37 @@
                 )
             ) );
 
-            array_push( $inputs, array(
-                'id'          => 'gradient-color-stop-1',
-                'title'       => esc_html__( 'Color Stop 1', 'ultimate-page-builder' ),
-                'desc'        => esc_html__( 'Element gradient color stop 1. If you have only one color to start use start color on color stop 1 also.', 'ultimate-page-builder' ),
-                'placeholder' => esc_html__( 'RGBA Color', 'ultimate-page-builder' ),
-                'type'        => 'color',
-                'value'       => '#ffffff',
-                'options'     => array(
-                    'alpha' => TRUE,
-                ),
-                'required'    => array(
-                    array( 'background-type', '=', 'gradient' )
-                )
-            ) );
+            if ( $args[ 'gradient-color-stop' ] ) {
+                array_push( $inputs, array(
+                    'id'          => 'gradient-color-stop-1',
+                    'title'       => esc_html__( 'Color Stop 1', 'ultimate-page-builder' ),
+                    'desc'        => esc_html__( 'Element gradient color stop 1. If you have only one color to start use start color on color stop 1 also.', 'ultimate-page-builder' ),
+                    'placeholder' => esc_html__( 'RGBA Color', 'ultimate-page-builder' ),
+                    'type'        => 'color',
+                    'value'       => '#ffffff',
+                    'options'     => array(
+                        'alpha' => TRUE,
+                    ),
+                    'required'    => array(
+                        array( 'background-type', '=', 'gradient' )
+                    )
+                ) );
 
-            array_push( $inputs, array(
-                'id'       => 'gradient-color-stop-1-location',
-                'title'    => esc_html__( 'Color Stop 1 Location', 'ultimate-page-builder' ),
-                'desc'     => esc_html__( 'Element gradient color stop 1 location', 'ultimate-page-builder' ),
-                'type'     => 'range',
-                'value'    => '0',
-                'options'  => array(
-                    'suffix' => '%',
-                    'max'    => '100',
-                ),
-                'required' => array(
-                    array( 'background-type', '=', 'gradient' )
-                )
-            ) );
+                array_push( $inputs, array(
+                    'id'       => 'gradient-color-stop-1-location',
+                    'title'    => esc_html__( 'Color Stop 1 Location', 'ultimate-page-builder' ),
+                    'desc'     => esc_html__( 'Element gradient color stop 1 location', 'ultimate-page-builder' ),
+                    'type'     => 'range',
+                    'value'    => '0',
+                    'options'  => array(
+                        'suffix' => '%',
+                        'max'    => '100',
+                    ),
+                    'required' => array(
+                        array( 'background-type', '=', 'gradient' )
+                    )
+                ) );
+            }
 
             array_push( $inputs, array(
                 'id'          => 'gradient-end-color',
@@ -683,7 +688,7 @@
                 'placeholder' => '0% 0%',
                 'required'    => array(
                     array( 'background-image', '!=', '' ),
-                    array( 'background-type', '=', array( 'image', 'both' ) ),
+                    array( 'background-type', '=', array( 'image', 'both' ) )
                 )
             ) );
 
@@ -703,7 +708,7 @@
                 ),
                 'required' => array(
                     array( 'background-image', '!=', '' ),
-                    array( 'background-type', '=', array( 'image', 'both' ) ),
+                    array( 'background-type', '=', array( 'image', 'both' ) )
                 )
             ) );
 
@@ -722,7 +727,7 @@
                 ),
                 'required' => array(
                     array( 'background-image', '!=', '' ),
-                    array( 'background-type', '=', array( 'image', 'both' ) ),
+                    array( 'background-type', '=', array( 'image', 'both' ) )
                 )
             ) );
 
@@ -741,7 +746,7 @@
                 ),
                 'required' => array(
                     array( 'background-image', '!=', '' ),
-                    array( 'background-type', '=', array( 'image', 'both' ) ),
+                    array( 'background-type', '=', array( 'image', 'both' ) )
                 )
             ) );
 
@@ -760,7 +765,7 @@
                 ),
                 'required' => array(
                     array( 'background-image', '!=', '' ),
-                    array( 'background-type', '=', array( 'image', 'both' ) ),
+                    array( 'background-type', '=', array( 'image', 'both' ) )
                 )
             ) );
         }
@@ -1104,30 +1109,60 @@
 
         if ( isset( $attributes[ 'background-type' ] ) ) {
 
-            if ( $attributes[ 'background-type' ] == 'both' || $attributes[ 'background-type' ] == 'color' ) {
+            if ( in_array( $attributes[ 'background-type' ], array( 'both', 'color' ) ) ) {
                 printf( 'background-color: %s;', esc_attr( $attributes[ 'background-color' ] ) );
             }
 
-            if ( $attributes[ 'background-type' ] == 'both' || $attributes[ 'background-type' ] == 'image' ) {
-                printf( 'background-image: %s;', sprintf( "url('%s')", esc_url( $attributes[ 'background-image' ] ) ) );
-                printf( 'background-position: %s;', esc_attr( $attributes[ 'background-position' ] ) );
-                printf( 'background-repeat: %s;', esc_attr( $attributes[ 'background-repeat' ] ) );
-                printf( 'background-attachment: %s;', esc_attr( $attributes[ 'background-attachment' ] ) );
-                printf( 'background-origin: %s;', esc_attr( $attributes[ 'background-origin' ] ) );
-                printf( 'background-size: %s;', esc_attr( $attributes[ 'background-size' ] ) );
+            if ( in_array( $attributes[ 'background-type' ], array( 'both', 'image' ) ) ) {
+
+                if ( trim( $attributes[ 'background-image' ] ) ) {
+                    printf( 'background-image: %s;', sprintf( "url('%s')", esc_url( $attributes[ 'background-image' ] ) ) );
+
+                    if ( isset( $attributes[ 'background-position' ] ) ) {
+                        printf( 'background-position: %s;', esc_attr( $attributes[ 'background-position' ] ) );
+                    }
+
+                    if ( isset( $attributes[ 'background-repeat' ] ) ) {
+                        printf( 'background-repeat: %s;', esc_attr( $attributes[ 'background-repeat' ] ) );
+                    }
+
+                    if ( isset( $attributes[ 'background-attachment' ] ) ) {
+                        printf( 'background-attachment: %s;', esc_attr( $attributes[ 'background-attachment' ] ) );
+                    }
+
+                    if ( isset( $attributes[ 'background-origin' ] ) ) {
+                        printf( 'background-origin: %s;', esc_attr( $attributes[ 'background-origin' ] ) );
+                    }
+
+                    if ( isset( $attributes[ 'background-size' ] ) ) {
+                        printf( 'background-size: %s;', esc_attr( $attributes[ 'background-size' ] ) );
+                    }
+                }
             }
 
-            if ( $attributes[ 'background-type' ] == 'gradient' ) {
-                printf( 'background-image: %s;', sprintf(
-                    "linear-gradient(%s, %s %s, %s %s, %s %s)",
-                    esc_attr( $attributes[ 'gradient-position' ] ),
-                    esc_attr( $attributes[ 'gradient-start-color' ] ),
-                    esc_attr( $attributes[ 'gradient-start-location' ] ) . '%',
-                    esc_attr( $attributes[ 'gradient-color-stop-1' ] ),
-                    esc_attr( $attributes[ 'gradient-color-stop-1-location' ] ) . '%',
-                    esc_attr( $attributes[ 'gradient-end-color' ] ),
-                    esc_attr( $attributes[ 'gradient-end-location' ] ) . '%'
-                ) );
+            if ( in_array( $attributes[ 'background-type' ], array( 'gradient' ) ) ) {
+
+                if ( isset( $attributes[ 'gradient-color-stop-1' ] ) && isset( $attributes[ 'gradient-color-stop-1-location' ] ) ) {
+                    printf( 'background-image: %s;', sprintf(
+                        "linear-gradient(%s, %s %s, %s %s, %s %s)",
+                        esc_attr( $attributes[ 'gradient-position' ] ),
+                        esc_attr( $attributes[ 'gradient-start-color' ] ),
+                        esc_attr( $attributes[ 'gradient-start-location' ] ) . '%',
+                        esc_attr( $attributes[ 'gradient-color-stop-1' ] ),
+                        esc_attr( $attributes[ 'gradient-color-stop-1-location' ] ) . '%',
+                        esc_attr( $attributes[ 'gradient-end-color' ] ),
+                        esc_attr( $attributes[ 'gradient-end-location' ] ) . '%'
+                    ) );
+                } else {
+                    printf( 'background-image: %s;', sprintf(
+                        "linear-gradient(%s, %s %s, %s %s)",
+                        esc_attr( $attributes[ 'gradient-position' ] ),
+                        esc_attr( $attributes[ 'gradient-start-color' ] ),
+                        esc_attr( $attributes[ 'gradient-start-location' ] ) . '%',
+                        esc_attr( $attributes[ 'gradient-end-color' ] ),
+                        esc_attr( $attributes[ 'gradient-end-location' ] ) . '%'
+                    ) );
+                }
             }
         }
 
@@ -1182,14 +1217,32 @@
         return 'upb-' . $id . '-template">';
     }
 
-    function upb_hex2RGB( $hex, $opacity = FALSE ) {
+    /**
+     * Convert Hex Color to RGB/RGBA Color
+     *
+     * @param       $hex
+     * @param float $opacity
+     *
+     * @return string
+     *
+     * Example:
+     *
+     * upb_hex2RGB( '#f44336' ); // rgb(244, 67, 54)
+     * upb_hex2RGB( '#f44336', 0.4 ); // rgba(244, 67, 54, 0.4)
+     *
+     */
 
+    function upb_hex2RGB( $hex, $opacity = 1 ) {
+
+        // Already RGB Color.
         if ( substr( strtolower( $hex ), 0, 3 ) == 'rgb' ) {
             return $hex;
         }
 
+        // Replace Hex Color Hash.
         $hex = str_replace( "#", "", $hex );
 
+        // If short color value like: #000
         if ( strlen( $hex ) == 3 ) {
             $r = hexdec( substr( $hex, 0, 1 ) . substr( $hex, 0, 1 ) );
             $g = hexdec( substr( $hex, 1, 1 ) . substr( $hex, 1, 1 ) );
@@ -1201,28 +1254,33 @@
         }
         $rgb = array( $r, $g, $b );
 
-        if ( $opacity ) {
-            if ( abs( $opacity ) > 1 ) {
-                $opacity = 1.0;
-            }
-            $output = 'rgba(' . implode( ",", $rgb ) . ',' . $opacity . ')';
+        if ( $opacity && abs( $opacity ) < 1 ) {
+            return sprintf( 'rgba(%s, %s)', implode( ", ", $rgb ), abs( $opacity ) );
         } else {
-            $output = 'rgb(' . implode( ",", $rgb ) . ')';
+            return sprintf( 'rgb(%s)', implode( ", ", $rgb ) );
         }
-
-        return $output;
     }
 
-    function upb_rgb2HEX( $rgb ) {
+    /**
+     * Convert RGB/RGBA Color to Hex Color Value
+     *
+     * @param $str
+     *
+     * @return string
+     *
+     * Example:
+     *
+     * upb_hex2RGB( '#f44336' ) // rgb(244, 67, 54)
+     */
+    function upb_rgb2HEX( $str ) {
 
-        if ( substr( strtolower( $rgb ), 0, 1 ) == '#' ) {
-            return $rgb;
+        if ( substr( $str, 0, 1 ) == '#' ) {
+            return $str;
         }
 
-        $hex = "#";
-        $hex .= str_pad( dechex( $rgb[ 0 ] ), 2, "0", STR_PAD_LEFT );
-        $hex .= str_pad( dechex( $rgb[ 1 ] ), 2, "0", STR_PAD_LEFT );
-        $hex .= str_pad( dechex( $rgb[ 2 ] ), 2, "0", STR_PAD_LEFT );
+        preg_match( '/\((?<rgb>.+)\)/', $str, $matches );
 
-        return $hex;
+        $rgb = explode( ",", $matches[ 'rgb' ] );
+
+        return strtoupper( sprintf( "#%02x%02x%02x", trim( $rgb[ 0 ] ), trim( $rgb[ 1 ] ), trim( $rgb[ 2 ] ) ) );
     }

@@ -154,6 +154,12 @@ export default {
             if (cloned.attributes['title']) {
                 cloned.attributes.title = sprintf(this.l10n.clone, cloned.attributes.title);
             }
+
+            // Default Active Is False
+            if (cloned.attributes['active'] && cloned.attributes.active) {
+                cloned.attributes.active = false;
+            }
+
             this.item.contents.splice(index + 1, 0, cloned);
             store.stateChanged();
         },

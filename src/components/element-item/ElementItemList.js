@@ -99,12 +99,25 @@ export default {
             return true;
         },
 
+        active(id){
+
+            if (id == 'active') {
+                return this.model.attributes.active;
+            }
+            return true;
+        },
+
         clickActions(id, tool){
+
+            if (tool.action == false) {
+                return '';
+            }
+
             if (this[`${id}Action`]) {
                 this[`${id}Action`](id, tool)
             }
             else {
-                util.warn(`You need to implement "${id}Action" method.`, this);
+                util.warn(`You need to implement "${id}Action" method. Or Make Action false on ${id}`, this);
             }
         },
 
@@ -115,9 +128,10 @@ export default {
         itemClass(){
 
             // If not enable found default class will be true
-            let isEnable = (_.isUndefined(this.model.attributes['enable']) || this.model.attributes.enable) ? true : false;
+            let isEnable        = (_.isUndefined(this.model.attributes['enable']) || this.model.attributes.enable) ? true : false;
+            let isDefaultActive = (_.isUndefined(this.model.attributes['active']) || this.model.attributes.active) ? true : false;
 
-            return [isEnable ? 'item-enabled' : 'item-disabled', this.model._upb_options.focus ? 'item-focused' : 'item-unfocused'].join(' ');
+            return [isDefaultActive ? 'item-active' : '', isEnable ? 'item-enabled' : 'item-disabled', this.model._upb_options.focus ? 'item-focused' : 'item-unfocused'].join(' ');
         }
     }
 }

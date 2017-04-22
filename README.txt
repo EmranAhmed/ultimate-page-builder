@@ -98,6 +98,13 @@ Yes.
 
 == Changelog ==
 
+= 1.0.0-beta.26 =
+
+- Fix `upb_rgb2HEX` function issue.
+- Default Active Item UI Improved for Tab / Accordion etc.
+- Function attribute to control background options.
+- Improve responsive hidden input type
+
 = 1.0.0-beta.25 =
 
 - Improve `upb_list_pluck` function.
