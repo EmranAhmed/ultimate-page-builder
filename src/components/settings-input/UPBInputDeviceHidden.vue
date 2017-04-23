@@ -5,12 +5,11 @@
                 <span class="title" v-text="attributes.title"></span>
             </div>
             <div class="device-hidden-input">
-
-                <div v-for="(symbol, suffix) in attributes.suffix">
-                    <label v-for="device in attributes.options">
-                        <input class="device-hidden-input" :disabled="device.disabled" type="checkbox" :value="`${device.id}${suffix}`" v-model="input">
+                <div v-for="option in options">
+                    <label v-for="device in option">
+                        <input class="device-hidden-input" :disabled="device.disabled" type="checkbox" :value="device.id" v-model="input">
                         <i :class="device.icon" :title="device.title"></i>
-                        <span class="device-symbol" v-if="suffix && symbol" v-html="symbol"></span>
+                        <span class="device-symbol" v-if="device.suffix && device.symbol" v-html="device.symbol"></span>
                     </label>
                 </div>
             </div>

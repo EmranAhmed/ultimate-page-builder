@@ -242,10 +242,9 @@
 
         $hidden_devices = apply_filters( 'upb_responsive_utilities', array_map( function ( $device ) {
             return array(
-                'id'       => sprintf( 'hidden-%s', $device[ 'id' ] ),
-                'title'    => $device[ 'title' ],
-                'icon'     => $device[ 'icon' ],
-                'disabled' => FALSE
+                'id'    => sprintf( 'hidden-%s', $device[ 'id' ] ),
+                'title' => $device[ 'title' ],
+                'icon'  => $device[ 'icon' ]
             );
         }, $devices ) );
 
@@ -289,14 +288,15 @@
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Hide on device', 'ultimate-page-builder' );
         $desc  = trim( $desc ) ? trim( $desc ) : esc_html__( 'Hide element on specific media device', 'ultimate-page-builder' );
 
-        return apply_filters( 'upb_responsive_utilities_input', array(
+        return apply_filters( 'upb_responsive_hidden_input', array(
             'id'      => 'device-hidden',
             'title'   => esc_html( $title ),
             'desc'    => wp_kses_post( $desc ),
             'type'    => 'device-hidden',
             'value'   => $default,
             'options' => upb_responsive_utilities(),
-            // 'suffix'  => array( '-up' => '&uarr;', '-down' => '&darr;' ),
+            // 'split'   => 4
+            //'suffix'  => array( '-up' => '&uarr;', '-down' => '&darr;' ),
             /*'disable' => array(
                 'hidden-xs-up' => array( 'hidden-xl-up', 'hidden-lg-up', 'hidden-md-up', 'hidden-sm-up' ),
                 'hidden-sm-up' => array( 'hidden-xl-up', 'hidden-lg-up', 'hidden-md-up' ),
@@ -1181,14 +1181,23 @@
 
                 if ( has_shortcode( $shortcodes, $element[ 'tag' ] ) ) {
 
-                    $handle = sprintf( 'upb-element-%s', $element[ 'tag' ] );
+                    $assets = $element[ '_upb_options' ][ 'assets' ];
 
-                    if ( ! empty( $element[ '_upb_options' ][ 'assets' ][ 'shortcode' ][ 'js' ] ) ) {
-                        wp_enqueue_script( $handle );
+                    if ( ! empty( $assets[ 'shortcode' ][ 'css' ] ) ) {
+                        $handle = sprintf( 'upb-element-%s', $element[ 'tag' ] );
+                        if ( wp_style_is( esc_html( $assets[ 'shortcode' ][ 'css' ] ), 'registered' ) ) {
+                            $handle = esc_html( $assets[ 'shortcode' ][ 'css' ] );
+                        }
+                        wp_enqueue_style( $handle );
                     }
 
-                    if ( ! empty( $element[ '_upb_options' ][ 'assets' ][ 'shortcode' ][ 'css' ] ) ) {
-                        wp_enqueue_style( $handle );
+
+                    if ( ! empty( $assets[ 'shortcode' ][ 'js' ] ) ) {
+                        $handle = sprintf( 'upb-element-%s', $element[ 'tag' ] );
+                        if ( wp_script_is( esc_html( $assets[ 'shortcode' ][ 'js' ] ), 'registered' ) ) {
+                            $handle = esc_html( $assets[ 'shortcode' ][ 'js' ] );
+                        }
+                        wp_enqueue_script( $handle );
                     }
 
                     do_action( 'upb_enqueue_shortcode_scripts', $element[ 'tag' ] );

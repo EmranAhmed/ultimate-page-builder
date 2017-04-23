@@ -1,27 +1,53 @@
 import common from './common'
+import extend from 'extend'
 import userInputMixin from './user-mixins'
 export default {
     name   : 'upb-input-device-hidden',
     mixins : [common, userInputMixin('device-hidden')],
 
-    watch : {
-        input(value){
-            this.disabled();
+    /*   data(){
+     return {
+     options : []
+     }
+     },*/
+
+    computed : {
+        options(){
+            let newOptions        = [];
+            let attributesOptions = extend(true, [], this.attributes.options);
+            while (attributesOptions.length > 0) {
+                newOptions.push(attributesOptions.splice(0, this.attributes.split));
+            }
+
+            return newOptions;
         }
+    },
+
+    created(){
+
+        this.$watch(`input`, (value) => {
+            this.disabled();
+        }, {immediate : true});
     },
 
     methods : {
 
         disabled(){
-            this.attributes.options.map((option)=> {
-                option.disabled = false;
+
+            this.attributes.options.map((device)=> {
+
+                device.disabled = false;
+
                 this.input.map((selected)=> {
+
                     if (this.attributes.disable[selected]) {
                         let disable     = this.attributes.disable[selected];
-                        option.disabled = disable.includes(option.id);
+                        // console.log('id', device.id, 'selected', selected, 'disabled', disable);
+                        device.disabled = disable.includes(device.id);
                     }
                 });
-            });
+
+            })
         }
     }
 }

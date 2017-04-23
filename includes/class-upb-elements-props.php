@@ -216,6 +216,19 @@
 
                     case 'checkbox':
                     case 'checkbox-icon':
+
+                        $options[ 'delimiter' ] = isset( $options[ 'delimiter' ] ) ? $options[ 'delimiter' ] : ',';
+
+                        if ( is_null( $options[ 'value' ] ) ) {
+                            $options[ 'value' ] = $options[ 'default' ];
+                        }
+
+                        if ( ! is_array( $options[ 'value' ] ) ) {
+                            $options[ 'value' ] = explode( $options[ 'delimiter' ], $options[ 'value' ] );
+                        }
+
+                        break;
+
                     case 'device-hidden':
 
                         $options[ 'delimiter' ] = isset( $options[ 'delimiter' ] ) ? $options[ 'delimiter' ] : ',';
@@ -224,13 +237,34 @@
                             $options[ 'value' ] = $options[ 'default' ];
                         }
 
-                        if ( ! isset( $options[ 'suffix' ] ) ) {
+                        if ( ! isset( $options[ 'suffix' ] ) || ! is_array( $options[ 'suffix' ] ) ) {
                             $options[ 'suffix' ] = array( '' => '&equals;' );
                         }
 
                         if ( ! isset( $options[ 'disable' ] ) ) {
                             $options[ 'disable' ] = array();
                         }
+
+                        if ( ! isset( $options[ 'split' ] ) ) {
+                            $options[ 'split' ] = 5;
+                        }
+
+                        $option = array();
+
+                        foreach ( $options[ 'suffix' ] as $k => $v ) {
+                            foreach ( $options[ 'options' ] as $val ) {
+                                array_push( $option, array(
+                                    'id'       => $val[ 'id' ] . $k,
+                                    'title'    => $val[ 'title' ],
+                                    'icon'     => $val[ 'icon' ],
+                                    'suffix'   => $k,
+                                    'symbol'   => $v,
+                                    'disabled' => FALSE
+                                ) );
+                            }
+                        }
+
+                        $options[ 'options' ] = $option;
 
                         if ( ! is_array( $options[ 'value' ] ) ) {
                             $options[ 'value' ] = explode( $options[ 'delimiter' ], $options[ 'value' ] );
