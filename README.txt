@@ -98,6 +98,10 @@ Yes.
 
 == Changelog ==
 
+= 1.0.0-beta.28 =
+
+- Fix Device Hidden Input Issue
+
 = 1.0.0-beta.27 =
 
 - Improve Shortcode JS and Inline Js Loading

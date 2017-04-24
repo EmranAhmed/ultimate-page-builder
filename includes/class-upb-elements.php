@@ -397,7 +397,7 @@
                     if ( ! isset( $settings[ $key ][ 'use' ] ) ) {
                         $settings[ $key ][ 'use' ] = FALSE;
                     }
-                    
+
                     $settings[ $key ] = $this->props->modifyOptions( $setting, $tag );
                     $settings[ $key ] = $this->props->filterOptions( $settings[ $key ], $tag );
 
