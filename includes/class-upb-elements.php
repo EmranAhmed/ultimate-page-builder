@@ -195,13 +195,12 @@
                     $_upb_options[ 'third_party_path' ] = FALSE;
                 }
 
-                // Toolbar List
+                // List Toolbar
 
                 if ( ! isset( $_upb_options[ 'tools' ] ) ) {
                     $_upb_options[ 'tools' ] = array();
                 }
 
-                // List Toolbar
                 if ( ! isset( $_upb_options[ 'tools' ][ 'list' ] ) ) {
                     $list_toolbar = array();
 
@@ -220,7 +219,6 @@
                             'title'  => esc_html__( 'Default Active', 'ultimate-page-builder' ),
                         );
                     }
-
 
                     $list_toolbar[ 'delete' ] = array(
                         'id'    => 'delete',
@@ -309,9 +307,11 @@
                 if ( ! isset( $_upb_options[ 'meta' ][ 'contents' ] ) ) {
                     $_upb_options[ 'meta' ][ 'contents' ] = array();
                 }
+
                 if ( ! isset( $_upb_options[ 'meta' ][ 'settings' ] ) ) {
                     $_upb_options[ 'meta' ][ 'settings' ] = array();
                 }
+
                 if ( ! isset( $_upb_options[ 'meta' ][ 'messages' ] ) ) {
                     $_upb_options[ 'meta' ][ 'messages' ] = array();
                 }
@@ -405,9 +405,7 @@
 
                 // Override functionality
                 if ( ! shortcode_exists( $tag ) && is_callable( $shortcode_fn ) ) {
-
                     $this->register_assets( $tag, $_upb_options[ 'assets' ] );
-
                     // To override short code functions :)
                     add_shortcode( $tag, $shortcode_fn );
                 } else {
@@ -469,41 +467,38 @@
             }
 
             public function register_assets( $tag, $assets ) {
-
-
                 // CSS
-
+                $handle = apply_filters( 'upb_assets_handle', sprintf( 'upb-element-%s', $tag ), $tag );
                 if ( ! empty( $assets[ 'shortcode' ][ 'css' ] ) ) {
-                    $handle = sprintf( 'upb-element-%s', $tag );
-                    if ( wp_style_is( esc_html( $assets[ 'shortcode' ][ 'css' ] ), 'registered' ) ) {
-                        // $handle = esc_html( $assets[ 'shortcode' ][ 'css' ] );
-                    } else {
+                    if ( upb_is_valid_url( $assets[ 'shortcode' ][ 'css' ] ) ) {
                         wp_register_style( $handle, esc_url( $assets[ 'shortcode' ][ 'css' ] ), array(), FALSE );
+                    } else {
+                        $handle = esc_html( $assets[ 'shortcode' ][ 'css' ] );
                     }
                 }
 
                 // JS
                 $js_registered = FALSE;
+                $handle        = apply_filters( 'upb_assets_handle', sprintf( 'upb-element-%s', $tag ), $tag );
 
                 if ( ! empty( $assets[ 'shortcode' ][ 'js' ] ) ) {
-                    $handle        = sprintf( 'upb-element-%s', $tag );
-                    $js_registered = TRUE;
-
-                    if ( wp_script_is( esc_html( $assets[ 'shortcode' ][ 'js' ] ), 'registered' ) ) {
-                        // JS Already registered. So change handle
-                        $handle = esc_html( $assets[ 'shortcode' ][ 'js' ] );
-                    } else {
+                    if ( upb_is_valid_url( $assets[ 'shortcode' ][ 'js' ] ) ) {
                         wp_register_script( $handle, esc_url( $assets[ 'shortcode' ][ 'js' ] ), array(), FALSE, TRUE );
+                    } else {
+                        $handle = esc_html( $assets[ 'shortcode' ][ 'js' ] );
                     }
+
+                    $js_registered = TRUE;
                 }
 
                 // Inline JS
                 if ( ! empty( $assets[ 'shortcode' ][ 'inline_js' ] ) ) {
 
                     if ( $js_registered ) {
-                        wp_add_inline_script( $handle, sprintf( 'try{ %s }catch(error){ console.error(error.message, "On \"%s\" Shortcode Inline JS."); }', $assets[ 'shortcode' ][ 'inline_js' ], $tag ) );
+                        wp_add_inline_script( $handle, sprintf( 'try{ %1$s }catch(error){ console.error(error.message, "On \"%2$s\" Shortcode Inline JS."); }', $assets[ 'shortcode' ][ 'inline_js' ], $tag ) );
                     } else {
                         add_action( 'wp_footer', function () use ( $tag, $assets ) {
+                            printf( "<!--  Shortcode Inline JS of Element %s  -->", $tag );
                             echo "<script type='text/javascript'>";
                             printf( 'try{ %s }catch(error){ console.error(error.message, "On \"%s\" Shortcode Inline JS."); }', $assets[ 'shortcode' ][ 'inline_js' ], $tag );
                             echo "</script>";

@@ -97,7 +97,6 @@
 
         return $contents;
 
-
     }, 20 );
 
     // Body Class
@@ -124,8 +123,8 @@
 
             wp_enqueue_script( 'upb-scoped-css-polyfill' );
 
-            // Load ShortCodes Assets
-            upb_enqueue_shortcode_scripts();
+            // Load Element Assets
+            upb_enqueue_element_scripts();
 
         endif;
     }, 20 ); // 20 Priority.

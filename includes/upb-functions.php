@@ -103,7 +103,12 @@
     }
 
     function upb_is_valid_url( $url ) {
-        return filter_var( $url, FILTER_VALIDATE_URL ) !== FALSE;
+
+        // Support Protocol-less URL
+        $expression = '@^(?:(?:https?|ftps?):)?[//]{2}(?:[^/]+)@i';
+
+        // `preg_match` Return 0 if the pattern does not matches given subject, or FALSE if an error occurred.
+        return (bool) preg_match( $expression, $url );
     }
 
     // Check valid ajax request
@@ -236,11 +241,11 @@
         ) );
     }
 
-    function upb_responsive_utilities() {
+    function upb_responsive_hidden_options() {
 
         $devices = upb_devices();
 
-        $hidden_devices = apply_filters( 'upb_responsive_utilities', array_map( function ( $device ) {
+        $hidden_devices = apply_filters( 'upb_responsive_hidden_options', array_map( function ( $device ) {
             return array(
                 'id'    => sprintf( 'hidden-%s', $device[ 'id' ] ),
                 'title' => $device[ 'title' ],
@@ -248,7 +253,7 @@
             );
         }, $devices ) );
 
-        return apply_filters( 'upb_responsive_utilities_output', array_values( $hidden_devices ) );
+        return apply_filters( 'upb_responsive_hidden_options_output', array_values( $hidden_devices ) );
     }
 
     function upb_make_column_class( $attributes, $extra = FALSE ) {
@@ -294,7 +299,7 @@
             'desc'    => wp_kses_post( $desc ),
             'type'    => 'device-hidden',
             'value'   => $default,
-            'options' => upb_responsive_utilities(),
+            'options' => upb_responsive_hidden_options(),
             // 'split'   => 4
             //'suffix'  => array( '-up' => '&uarr;', '-down' => '&darr;' ),
             /*'disable' => array(
@@ -1169,7 +1174,7 @@
         do_action( 'upb_shortcode_scoped_style_background', $attributes );
     }
 
-    function upb_enqueue_shortcode_scripts() {
+    function upb_enqueue_element_scripts() {
 
         if ( upb_is_enabled() ):
 
@@ -1182,25 +1187,28 @@
                 if ( has_shortcode( $shortcodes, $element[ 'tag' ] ) ) {
 
                     $assets = $element[ '_upb_options' ][ 'assets' ];
+                    $tag    = $element[ 'tag' ];
 
+                    // enqueue style
+                    $handle = apply_filters( 'upb_assets_handle', sprintf( 'upb-element-%s', $tag ), $tag );
                     if ( ! empty( $assets[ 'shortcode' ][ 'css' ] ) ) {
-                        $handle = sprintf( 'upb-element-%s', $element[ 'tag' ] );
                         if ( wp_style_is( esc_html( $assets[ 'shortcode' ][ 'css' ] ), 'registered' ) ) {
                             $handle = esc_html( $assets[ 'shortcode' ][ 'css' ] );
                         }
                         wp_enqueue_style( $handle );
                     }
 
+                    // enqueue script
+                    $handle = apply_filters( 'upb_assets_handle', sprintf( 'upb-element-%s', $tag ), $tag );
 
                     if ( ! empty( $assets[ 'shortcode' ][ 'js' ] ) ) {
-                        $handle = sprintf( 'upb-element-%s', $element[ 'tag' ] );
                         if ( wp_script_is( esc_html( $assets[ 'shortcode' ][ 'js' ] ), 'registered' ) ) {
                             $handle = esc_html( $assets[ 'shortcode' ][ 'js' ] );
                         }
                         wp_enqueue_script( $handle );
                     }
 
-                    do_action( 'upb_enqueue_shortcode_scripts', $element[ 'tag' ] );
+                    do_action( 'upb_enqueue_element_scripts', $tag );
                 }
             }, upb_elements()->get_all() );
         endif;

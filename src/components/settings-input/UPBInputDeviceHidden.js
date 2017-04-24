@@ -2,15 +2,8 @@ import common from './common'
 import extend from 'extend'
 import userInputMixin from './user-mixins'
 export default {
-    name   : 'upb-input-device-hidden',
-    mixins : [common, userInputMixin('device-hidden')],
-
-    /*   data(){
-     return {
-     options : []
-     }
-     },*/
-
+    name     : 'upb-input-device-hidden',
+    mixins   : [common, userInputMixin('device-hidden')],
     computed : {
         options(){
             let newOptions        = [];
@@ -18,7 +11,6 @@ export default {
             while (attributesOptions.length > 0) {
                 newOptions.push(attributesOptions.splice(0, this.attributes.split));
             }
-
             return newOptions;
         }
     },

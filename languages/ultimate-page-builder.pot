@@ -874,11 +874,11 @@ msgstr ""
 msgid "Extra Small"
 msgstr ""
 
-#: includes/upb-functions.php:289
+#: includes/upb-functions.php:288
 msgid "Hide on device"
 msgstr ""
 
-#: includes/upb-functions.php:290
+#: includes/upb-functions.php:289
 msgid "Hide element on specific media device"
 msgstr ""
 
@@ -1218,11 +1218,11 @@ msgstr ""
 msgid "DashIcons Icon"
 msgstr ""
 
-#: includes/upb-hooks.php:139, ultimate-page-builder.php:212
+#: includes/upb-hooks.php:138, ultimate-page-builder.php:212
 msgid "Edit with Ultimate Page Builder"
 msgstr ""
 
-#: includes/upb-hooks.php:146
+#: includes/upb-hooks.php:145
 msgid "Use Ultimate Page Builder"
 msgstr ""
 
