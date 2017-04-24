@@ -1,13 +1,8 @@
 import Vue, { util } from 'vue'
-
 import store from '../../store'
-
 import Sortable from '../../plugins/vue-sortable'
-
 import extend from 'extend'
-
 import {sprintf} from 'sprintf-js'
-
 // import RowList from '../row/RowList.vue';
 
 Vue.use(Sortable);
@@ -37,7 +32,7 @@ export default {
             selectedColumnLayout : {},
             showManualInput      : {},
             manualLayout         : {},
-            devices              : [],
+            devices              : []
         }
     },
 
@@ -60,14 +55,14 @@ export default {
         this.onSelectedColumnLayoutChange();
     },
 
-    watch : {
-        devices : {
-            handler : function (val, oldVal) {
-                // console.log(val, oldVal);
-            },
-            deep    : true
-        }
-    },
+    /*watch : {
+     devices : {
+     handler : function (val, oldVal) {
+     // console.log(val, oldVal);
+     },
+     deep    : true
+     }
+     },*/
 
     methods : {
 
@@ -564,25 +559,19 @@ export default {
 
                 let value = [];
                 this.model.contents.map((content)=> {
-
                     if (content.attributes[device.id].trim()) {
                         value.push(content.attributes[device.id]);
                     }
-
                 });
 
                 sorted.push({id : device.id, grid : value})
-
             });
 
             sorted.map((device)=> {
-
                 if (device.grid.length > 0) {
                     this.selectedColumnLayout[device.id] = device.grid.join(' + ').trim()
                 }
-
             })
-
         },
 
         onStart(e){

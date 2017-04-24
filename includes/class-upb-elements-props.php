@@ -246,25 +246,8 @@
                         }
 
                         if ( ! isset( $options[ 'split' ] ) ) {
-                            $options[ 'split' ] = 5;
+                            $options[ 'split' ] = 4;
                         }
-
-                        $option = array();
-
-                        foreach ( $options[ 'suffix' ] as $k => $v ) {
-                            foreach ( $options[ 'options' ] as $val ) {
-                                array_push( $option, array(
-                                    'id'       => $val[ 'id' ] . $k,
-                                    'title'    => $val[ 'title' ],
-                                    'icon'     => $val[ 'icon' ],
-                                    'suffix'   => $k,
-                                    'symbol'   => $v,
-                                    'disabled' => FALSE
-                                ) );
-                            }
-                        }
-
-                        $options[ 'options' ] = $option;
 
                         if ( ! is_array( $options[ 'value' ] ) ) {
                             $options[ 'value' ] = explode( $options[ 'delimiter' ], $options[ 'value' ] );
@@ -300,6 +283,36 @@
                 }
 
                 return apply_filters( 'upb_elements_filter_option', $options, $tag );
+            }
+
+            public function modifyOptions( $options, $tag = '' ) {
+
+                switch ( $options[ 'type' ] ) {
+                    case 'device-hidden':
+                        $option = array();
+
+                        if ( ! isset( $options[ 'suffix' ] ) || ! is_array( $options[ 'suffix' ] ) ) {
+                            $options[ 'suffix' ] = array( '' => '&equals;' );
+                        }
+
+                        foreach ( $options[ 'suffix' ] as $k => $v ) {
+                            foreach ( $options[ 'options' ] as $val ) {
+                                $option[] = array(
+                                    'id'       => $val[ 'id' ] . $k,
+                                    'title'    => $val[ 'title' ],
+                                    'icon'     => $val[ 'icon' ],
+                                    'suffix'   => $k,
+                                    'symbol'   => $v,
+                                    'disabled' => FALSE
+                                );
+                            }
+                        }
+
+                        $options[ 'options' ] = $option;
+                        break;
+                }
+
+                return $options;
             }
         }
     endif;

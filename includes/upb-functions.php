@@ -301,7 +301,7 @@
             'value'   => $default,
             'options' => upb_responsive_hidden_options(),
             // 'split'   => 4
-            //'suffix'  => array( '-up' => '&uarr;', '-down' => '&darr;' ),
+            // 'suffix'  => array( '-up' => '&uarr;', '-down' => '&darr;' ),
             /*'disable' => array(
                 'hidden-xs-up' => array( 'hidden-xl-up', 'hidden-lg-up', 'hidden-md-up', 'hidden-sm-up' ),
                 'hidden-sm-up' => array( 'hidden-xl-up', 'hidden-lg-up', 'hidden-md-up' ),

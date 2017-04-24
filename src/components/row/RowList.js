@@ -4,11 +4,8 @@ import store from '../../store'
 import {sprintf} from 'sprintf-js'
 
 export default {
-
-    name : 'row-list',
-
+    name  : 'row-list',
     props : ['index', 'model', 'selected'],
-
     data(){
         return {
             l10n : store.l10n
@@ -75,8 +72,7 @@ export default {
         },
 
         clickActions(id, tool){
-
-            console.log(`${id}Action`);
+            // console.log(`${id}Action`);
 
             if (this[`${id}Action`]) {
                 this[`${id}Action`](id, tool)
@@ -108,8 +104,8 @@ export default {
             return [
                 this.model.attributes.enable ? 'item-enabled' : 'item-disabled',
                 this.model._upb_options.focus ? 'item-focused' : 'item-unfocused',
-                (this.selected == this.index) ? 'item-selected' : '']
-                .join(' ');
+                (this.selected == this.index) ? 'item-selected' : ''
+            ].join(' ');
         },
 
         getContentPanel(id){

@@ -16,7 +16,6 @@ export default {
     },
 
     created(){
-
         this.$watch(`input`, (value) => {
             this.disabled();
         }, {immediate : true});
@@ -33,9 +32,12 @@ export default {
                 this.input.map((selected)=> {
 
                     if (this.attributes.disable[selected]) {
-                        let disable     = this.attributes.disable[selected];
+                        let disable = this.attributes.disable[selected];
                         // console.log('id', device.id, 'selected', selected, 'disabled', disable);
-                        device.disabled = disable.includes(device.id);
+                        // device.disabled = disable.includes(device.id);
+                        if (disable.includes(device.id)) {
+                            device.disabled = true;
+                        }
                     }
                 });
 
