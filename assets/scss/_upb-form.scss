@@ -571,10 +571,11 @@ button:focus {
       flex-wrap       : wrap;
 
       > div {
-        width   : 100%;
-        display : flex;
-        &:nth-child(even) {
-          border-top : 1px solid #DDDDDD;
+        width         : 100%;
+        display       : flex;
+        border-bottom : 1px solid #DDDDDD;
+        &:last-child {
+          border-bottom : none;
           }
         }
 

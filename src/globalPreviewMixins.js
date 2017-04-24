@@ -392,16 +392,20 @@ export default{
 
                 if (!store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id]) {
                     store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id] = extend(true, {}, {
-                        element    : this.$el,
-                        attributes : this.attributes,
-                        contents   : this.contents
+                        id            : this.unique_id,
+                        element       : this.$el,
+                        wrapper_class : `element-id-${this.unique_id}`,
+                        attributes    : this.attributes,
+                        contents      : this.contents
                     });
                 }
                 else {
                     store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id] = extend(true, store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id], {
-                        element    : this.$el,
-                        attributes : this.attributes,
-                        contents   : this.contents
+                        id            : this.unique_id,
+                        element       : this.$el,
+                        wrapper_class : `element-id-${this.unique_id}`,
+                        attributes    : this.attributes,
+                        contents      : this.contents
                     });
                 }
             }
@@ -414,8 +418,8 @@ export default{
         removeInlineScript(){
             if (this.model._upb_options.assets.preview.inline_js) {
 
-                //let prefixInlineJS  = `upb_preview_assets_${this.unique_id}-inline-js`;
-                let prefixInlineJS  = `upb_preview_assets_${this.model.tag}-inline-js`;
+                let prefixInlineJS = `upb_preview_assets_${this.model.tag}-inline-js`;
+
                 let previewDocument = store.previewDocument();
 
                 if (previewDocument.querySelectorAll(`#${prefixInlineJS}`).length > 0) {
@@ -437,8 +441,8 @@ export default{
 
                 let previewDocument = store.previewDocument();
                 let script          = document.createElement('script');
-                //let prefixInlineJS  = `upb_preview_assets_${this.unique_id}-inline-js`;
-                let prefixInlineJS  = `upb_preview_assets_${this.model.tag}-inline-js`;
+
+                let prefixInlineJS = `upb_preview_assets_${this.model.tag}-inline-js`;
 
                 // ;(function ($, upb) { $(".upb-accordion-item").upbAccordion()  }(jQuery, _UPB_PREVIEW_DATA[upbComponentId]));
                 script.id        = prefixInlineJS;

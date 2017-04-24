@@ -227,7 +227,7 @@
                 'settings' => apply_filters( 'upb_section_settings_panel_meta', array(
                     'help' => '<h2>Section Settings?</h2><p>section settings</p>',
                 ) ),
-            ),
+            )
         );
 
         $element->register( 'upb-section', $attributes, $contents, $_upb_options );

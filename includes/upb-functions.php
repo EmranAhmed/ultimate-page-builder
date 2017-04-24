@@ -1186,27 +1186,36 @@
 
                 if ( has_shortcode( $shortcodes, $element[ 'tag' ] ) ) {
 
-                    $assets = $element[ '_upb_options' ][ 'assets' ];
+                    $assets = $element[ '_upb_options' ][ 'assets' ][ 'shortcode' ];
                     $tag    = $element[ 'tag' ];
 
                     // enqueue style
                     $handle = apply_filters( 'upb_assets_handle', sprintf( 'upb-element-%s', $tag ), $tag );
-                    if ( ! empty( $assets[ 'shortcode' ][ 'css' ] ) ) {
-                        if ( wp_style_is( esc_html( $assets[ 'shortcode' ][ 'css' ] ), 'registered' ) ) {
-                            $handle = esc_html( $assets[ 'shortcode' ][ 'css' ] );
+                    if ( ! empty( $assets[ 'css' ] ) ) {
+                        if ( wp_style_is( esc_html( $assets[ 'css' ] ), 'registered' ) ) {
+                            $handle = esc_html( $assets[ 'css' ] );
                         }
                         wp_enqueue_style( $handle );
                     }
 
                     // enqueue script
-                    $handle = apply_filters( 'upb_assets_handle', sprintf( 'upb-element-%s', $tag ), $tag );
-
-                    if ( ! empty( $assets[ 'shortcode' ][ 'js' ] ) ) {
-                        if ( wp_script_is( esc_html( $assets[ 'shortcode' ][ 'js' ] ), 'registered' ) ) {
-                            $handle = esc_html( $assets[ 'shortcode' ][ 'js' ] );
+                    $handle        = apply_filters( 'upb_assets_handle', sprintf( 'upb-element-%s', $tag ), $tag );
+                    $js_registered = FALSE;
+                    if ( ! empty( $assets[ 'js' ] ) ) {
+                        if ( wp_script_is( esc_html( $assets[ 'js' ] ), 'registered' ) ) {
+                            $handle = esc_html( $assets[ 'js' ] );
                         }
                         wp_enqueue_script( $handle );
+                        $js_registered = TRUE;
                     }
+
+                    // Inline JS
+                    if ( ! empty( $assets[ 'inline_js' ] ) ) {
+                        if ( $js_registered ) {
+                            wp_add_inline_script( $handle, sprintf( 'try{ %s }catch(error){ console.error(error.message, "On \"%s\" Shortcode Inline JS."); }', $assets[ 'inline_js' ], $tag ) );
+                        }
+                    }
+
 
                     do_action( 'upb_enqueue_element_scripts', $tag );
                 }

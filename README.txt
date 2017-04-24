@@ -98,6 +98,11 @@ Yes.
 
 == Changelog ==
 
+= 1.0.0-beta.27 =
+
+- Improve Shortcode JS and Inline Js Loading
+- Improve Device Hidden input
+
 = 1.0.0-beta.26 =
 
 - Fix `upb_rgb2HEX` function issue.
