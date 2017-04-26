@@ -841,7 +841,6 @@
             $input[ 'deviceTitle' ] = $device[ 'title' ];
 
             return $input;
-
         }, $devices, array_keys( $devices ) );
 
         return $inputs;

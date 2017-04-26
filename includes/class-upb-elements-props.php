@@ -78,8 +78,8 @@
                     case 'spacing':
 
                         $options[ 'delimiter' ] = isset( $options[ 'delimiter' ] ) ? $options[ 'delimiter' ] : ',';
-                        $options[ 'unit' ]      = isset( $options[ 'unit' ] ) ? $options[ 'unit' ] : 'px';
-                        $options[ 'initial' ]   = isset( $options[ 'initial' ] ) ? $options[ 'initial' ] : 'initial'; // initial, auto, inherit
+                        $options[ 'unit' ]      = isset( $options[ 'unit' ] ) ? esc_attr( $options[ 'unit' ] ) : 'px';
+                        $options[ 'initial' ]   = isset( $options[ 'initial' ] ) ? esc_attr( $options[ 'initial' ] ) : 'initial'; // initial, auto, inherit
 
                         // Should maintain serial: 1. top, 2. right, 3. bottom, 4. left
                         $options[ 'options' ] = isset( $options[ 'options' ] )

@@ -399,7 +399,7 @@
                         $settings[ $key ][ 'use' ] = FALSE;
                     }
 
-                    $settings[ $key ] = $this->props->modifyOptions( $setting, $tag );
+                    $settings[ $key ] = $this->props->modifyOptions( $settings[ $key ], $tag );
                     $settings[ $key ] = $this->props->filterOptions( $settings[ $key ], $tag );
 
                     $settings[ $key ][ '_id' ] = $setting[ 'id' ];

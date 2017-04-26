@@ -150,21 +150,6 @@
                     'value'   => '',
                 ) );*/
 
-        /*array_push( $attributes, array(
-            'id'      => 'margin',
-            'title'   => esc_html__( 'Margin', 'ultimate-page-builder' ),
-            'desc'    => esc_html__( 'Margin between two section', 'ultimate-page-builder' ),
-            'type'    => 'spacing',
-            'value'   => array( '10px', 'initial', '10px', 'auto' ),
-            'unit'    => 'px',
-            'options' => array(
-                'top'    => TRUE,
-                'right'  => FALSE,
-                'bottom' => TRUE,
-                'left'   => FALSE,
-            )
-        ) );*/
-
         /*$attributes = array_merge( $attributes,
                                    upb_media_query_based_input_group( array(
                                                                           'id'      => 'margin',
@@ -180,27 +165,27 @@
                                                                           'value'   => 0,
                                                                       ) ) );*/
 
-        /*        $attributes = array_merge( $attributes,
-                                           upb_media_query_based_input_group( array(
-                                                                                  'id'           => 'margin',
-                                                                                  'title'        => esc_html__( 'Margin', 'ultimate-page-builder' ),
-                                                                                  'desc'         => esc_html__( 'Margin between two section', 'ultimate-page-builder' ),
-                                                                                  'type'         => 'spacing',
-                                                                                  'value'        => array( '10px', 'initial', '10px', 'auto' ),
-                                                                                  'device-value' => array(
-                                                                                      'lg' => array( '30px', 'initial', '20px', 'auto' ),
-                                                                                      //'md' => array( '21px', 'initial', '22px', 'auto' ),
-                                                                                      //'sm' => array( '25px', 'initial', '25px', 'auto' ),
-                                                                                      //'xs' => array( '10px', 'initial', '10px', 'auto' ),
-                                                                                  ),
-                                                                                  'unit'         => 'px',
-                                                                                  'options'      => array(
-                                                                                      'top'    => TRUE,
-                                                                                      'right'  => FALSE,
-                                                                                      'bottom' => TRUE,
-                                                                                      'left'   => FALSE,
-                                                                                  )
-                                                                              ) ) );*/
+        /*                $attributes = array_merge( $attributes,
+                                                   upb_media_query_based_input_group( array(
+                                                                                          'id'           => 'margin',
+                                                                                          'title'        => esc_html__( 'Margin', 'ultimate-page-builder' ),
+                                                                                          'desc'         => esc_html__( 'Margin between two section', 'ultimate-page-builder' ),
+                                                                                          'type'         => 'spacing',
+                                                                                          'value'        => array( '10px', 'initial', '10px', 'auto' ),
+                                                                                          'device-value' => array(
+                                                                                              'lg' => array( '30px', 'initial', '20px', 'auto' ),
+                                                                                              //'md' => array( '21px', 'initial', '22px', 'auto' ),
+                                                                                              //'sm' => array( '25px', 'initial', '25px', 'auto' ),
+                                                                                              //'xs' => array( '10px', 'initial', '10px', 'auto' ),
+                                                                                          ),
+                                                                                          'unit'         => 'px',
+                                                                                          'options'      => array(
+                                                                                              'top'    => TRUE,
+                                                                                              'right'  => FALSE,
+                                                                                              'bottom' => TRUE,
+                                                                                              'left'   => FALSE,
+                                                                                          )
+                                                                                      ) ) );*/
 
         /*array_push( $attributes, array(
             'id'    => 'extraInputExample',
