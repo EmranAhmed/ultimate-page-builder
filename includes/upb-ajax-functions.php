@@ -783,7 +783,7 @@
         wp_send_json_success( $contents );
     } );
 
-    // Ajax Shortcode Preview
+    // Ajax Shortcode Preview: $_upb_options => preview => shortcode => true
     add_action( 'wp_ajax__upb_shortcode_preview_contents', function () {
 
         upb_check_ajax_access();
@@ -841,7 +841,6 @@
         $icons = array_values( array_map( function ( $icon, $key ) {
             return array( 'id' => $key, 'name' => $icon );
         }, $all_icons, array_keys( $all_icons ) ) );
-
 
         $icons = array(
             'total' => count( $icons ),
