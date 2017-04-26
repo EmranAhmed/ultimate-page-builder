@@ -191,9 +191,16 @@ class store {
     }
 
     generateShortcode(tag, attrs, content = null) {
+
+        let attributes = extend(true, {}, attrs);
+
+        if (!_.isUndefined(attributes['_contents'])) {
+            delete attributes._contents;
+        }
+
         return wp.shortcode.string({
             tag     : tag,
-            attrs   : attrs,
+            attrs   : attributes,
             type    : this.filterBoolean(content) ? 'self-closing' : 'closed',
             content : this.getShortcodeContent(content)
         })

@@ -120,6 +120,7 @@
                 }
 
                 // Shortcode Preview
+                // Shortcode Preview Means Does Not Require Preview Template But Only Shortcode template :)
                 if ( isset( $_upb_options[ 'preview' ][ 'shortcode' ] ) && $_upb_options[ 'preview' ][ 'shortcode' ] ) {
 
                     $_upb_options[ 'preview' ][ 'ajax' ] = TRUE;

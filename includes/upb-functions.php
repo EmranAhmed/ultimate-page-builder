@@ -4,35 +4,43 @@
 
     // URI Functions
     function upb_assets_uri( $url = '' ) {
-        return UPB_PLUGIN_ASSETS_URI . untrailingslashit( $url );
+        return UPB_PLUGIN_ASSETS_URI . ltrim( untrailingslashit( $url ), '/' );
+    }
+
+    function upb_images_uri( $url = '' ) {
+        return UPB_PLUGIN_IMAGES_URI . ltrim( untrailingslashit( $url ), '/' );
+    }
+
+    function upb_fonts_uri( $url = '' ) {
+        return UPB_PLUGIN_FONTS_URI . ltrim( untrailingslashit( $url ), '/' );
     }
 
     function upb_plugin_uri( $url = '' ) {
-        return UPB_PLUGIN_URI . untrailingslashit( $url );
+        return UPB_PLUGIN_URI . ltrim( untrailingslashit( $url ), '/' );
     }
 
     function upb_plugin_path( $path = '' ) {
-        return UPB_PLUGIN_PATH . untrailingslashit( $path );
+        return UPB_PLUGIN_PATH . ltrim( untrailingslashit( $path ) );
     }
 
     function upb_elements_path( $path = '' ) {
-        return UPB_PLUGIN_ELEMENTS_PATH . untrailingslashit( $path );
+        return UPB_PLUGIN_ELEMENTS_PATH . ltrim( untrailingslashit( $path ) );
     }
 
-    function upb_elements_uri( $path = '' ) {
-        return UPB_PLUGIN_ELEMENTS_URI . untrailingslashit( $path );
+    function upb_elements_uri( $url = '' ) {
+        return UPB_PLUGIN_ELEMENTS_URI . ltrim( untrailingslashit( $url ), '/' );
     }
 
     function upb_include_path( $path = '' ) {
-        return UPB_PLUGIN_INCLUDE_PATH . untrailingslashit( $path );
+        return UPB_PLUGIN_INCLUDE_PATH . ltrim( untrailingslashit( $path ), '/' );
     }
 
     function upb_templates_path( $path = '' ) {
-        return UPB_PLUGIN_TEMPLATES_PATH . untrailingslashit( $path );
+        return UPB_PLUGIN_TEMPLATES_PATH . ltrim( untrailingslashit( $path ), '/' );
     }
 
-    function upb_templates_uri( $path = '' ) {
-        return UPB_PLUGIN_TEMPLATES_URI . untrailingslashit( $path );
+    function upb_templates_uri( $url = '' ) {
+        return UPB_PLUGIN_TEMPLATES_URI . ltrim( untrailingslashit( $url ), '/' );
     }
 
     function upb_get_edit_link( $post = 0 ) {
@@ -51,6 +59,7 @@
     }
 
     // Class instances
+
     function upb_elements() {
         return UPB_Elements::getInstance();
     }
@@ -826,7 +835,7 @@
 
             $input[ 'id' ]          = empty( $key ) ? $input[ 'id' ] : sprintf( '%s-%s', $input[ 'id' ], $key );
             $input[ 'title' ]       = empty( $key ) ? $input[ 'title' ] : sprintf( esc_html__( '%s for %s device', 'ultimate-page-builder' ), $input[ 'title' ], $device[ 'title' ] );
-            $input[ 'value' ]       = empty( $key ) ? $input[ 'value' ] : ( ( $input[ 'device-value' ] && isset( $input[ 'device-value' ][ $key ] ) ) ? $input[ 'device-value' ][ $key ] : $input[ 'value' ] );
+            $input[ 'value' ]       = empty( $key ) ? $input[ 'value' ] : ( ( isset( $input[ 'device-value' ] ) && isset( $input[ 'device-value' ][ $key ] ) ) ? $input[ 'device-value' ][ $key ] : $input[ 'value' ] );
             $input[ 'device' ]      = empty( $key ) ? '' : $key;
             $input[ 'deviceIcon' ]  = $device[ 'icon' ];
             $input[ 'deviceTitle' ] = $device[ 'title' ];
@@ -1255,6 +1264,7 @@
      *
      * upb_hex2RGB( '#f44336' ); // rgb(244, 67, 54)
      * upb_hex2RGB( '#f44336', 0.4 ); // rgba(244, 67, 54, 0.4)
+     * upb_hex2RGB( '#fff' ); // rgb(255, 255, 255)
      *
      */
 
@@ -1296,7 +1306,8 @@
      *
      * Example:
      *
-     * upb_hex2RGB( '#f44336' ) // rgb(244, 67, 54)
+     * upb_rgb2HEX( 'rgb(244, 67, 54)' ) // #f44336
+     * upb_rgb2HEX( 'rgba(244, 67, 54, 0.5)' ) // #f44336
      */
     function upb_rgb2HEX( $str ) {
 

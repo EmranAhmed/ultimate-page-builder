@@ -8,11 +8,9 @@
     "dev" : "cross-env NODE_ENV=development webpack --watch --progress --hide-modules --config=webpack.config.js",
     "hmr" : "cross-env NODE_ENV=development webpack-dev-server --inline --hot --config=webpack.config.js",
     "build" : "cross-env NODE_ENV=production webpack --progress --hide-modules --config=webpack.config.js",
-    "bundle:dev" : "cross-env NODE_ENV=development webpack --progress --hide-modules --config=webpack.config.js",
-    "bundle:build" : "cross-env NODE_ENV=production webpack --progress --hide-modules --config=webpack.config.js",
-    "bundle:pack" : "cross-env NODE_ENV=bundle webpack --progress --hide-modules --config=webpack.config.js",
-    "bundle" : "yarn bundle:dev && yarn bundle:build && yarn bundle:pack",
-    "ready" : "yarn bundle:dev && yarn bundle:build"
+    "bundle" : "yarn webpack && yarn build",
+    "package:bundle" : "cross-env NODE_ENV=package webpack --progress --hide-modules --config=webpack.config.js",
+    "package" : "yarn bundle && yarn package:bundle"
   },
   "dependencies" : {
     "copy-to-clipboard" : "^3.0.6",

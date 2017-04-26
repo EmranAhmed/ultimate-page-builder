@@ -18,9 +18,13 @@
 
         $_upb_options = array(
 
+            /*'preview' => array(
+                'shortcode' => TRUE // It Does Not Require Preview Template But Shortcode template :)
+            ),*/
+
             'element' => array(
                 'name' => 'UPB Editor',
-                'icon' => 'mdi mdi-format-text'
+                'icon' => 'mdi mdi-format-text',
             ),
 
             'meta' => array(

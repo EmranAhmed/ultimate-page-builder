@@ -297,6 +297,7 @@ export default{
         getAjaxContents(){
             if (this.model._upb_options.preview.ajax) {
                 if (this.model._upb_options.preview.shortcode) {
+
                     store.wpAjax(this.model._upb_options.preview['ajax-hook'], {
                             attributes : this.attributes,
                             shortcode  : store.generateShortcode(this.tag, this.attributes, this.contents)

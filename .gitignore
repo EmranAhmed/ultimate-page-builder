@@ -8,3 +8,6 @@ assets/js/*.js
 assets/js/*.js.map
 *.zip
 ultimate-page-builder
+mix-manifest.json
+fonts/*/
+images/*/

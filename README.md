@@ -19,7 +19,7 @@
 - Check [Yarn Usage](https://yarnpkg.com/en/docs/usage)
 - Check [Yarn Documentation](https://yarnpkg.com/en/docs/cli/)
 
-### Build
+### Production
 - `yarn build`
 
 ### Bundle
@@ -27,7 +27,12 @@
 - Remove CSS / JS from `assets/css` and `assets/js`
 - `yarn bundle`
 
-### Add package
+### Package
+
+- Remove CSS / JS from `assets/css` and `assets/js`
+- `yarn package`
+
+### Add / Update package
 
 - `yarn add [package] --dev` or `yarn add [package]`
 - `yarn upgrade` - updates all dependencies to their latest version based on the version range specified in the `package.json` file

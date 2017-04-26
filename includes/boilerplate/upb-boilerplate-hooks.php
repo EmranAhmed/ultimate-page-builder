@@ -290,7 +290,7 @@
             'ajaxUrl'              => esc_url( admin_url( 'admin-ajax.php', 'relative' ) ),
 
             // Templates
-            'layoutPlaceholder'    => upb_plugin_uri( '/images/layout-placeholder.png' ),
+            'layoutPlaceholder'    => upb_images_uri( '/layout-placeholder.png' ),
             'editorTemplate'       => upb_wp_editor_template(),
             'allowedTags'          => array_keys( wp_kses_allowed_html( 'post' ) ),
             'allowedAttributes'    => upb_allowed_attributes(),

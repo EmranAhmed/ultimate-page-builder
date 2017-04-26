@@ -19,7 +19,7 @@ const browsers = [
 ];
 const min      = mix.config.inProduction ? '.min' : '';
 
-if (process.env.NODE_ENV == 'bundle') {
+if (process.env.NODE_ENV == 'package') {
     mix.then(function () {
         let bundledir = path.basename(path.resolve(__dirname));
         let copyfrom  = path.resolve(__dirname);
