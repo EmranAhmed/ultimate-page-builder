@@ -9,7 +9,7 @@
             <!-- <span class="title" v-text="`${attributes.title} ( ${attributes.unit} )`"></span> -->
             <!-- // Should maintain serial: 1. top, 2. right, 3. bottom, 4. left -->
             <div class="spacing-input-group">
-                <label v-for="(option, key) in options">
+                <label v-for="(option, key) in options" :key="key">
                     <input :disabled="!option" v-model="property[key]" type="number" class="tiny-text">
                     <span class="spacing-title" v-text="attributes.titles[key]"></span>
                 </label>

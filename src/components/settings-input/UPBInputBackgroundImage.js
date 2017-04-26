@@ -5,8 +5,8 @@ import userInputMixin from './user-mixins'
 import ImageMedia from '../../plugins/vue-image-media'
 import BackgroundPosition from '../../plugins/vue-background-position'
 
-Vue.use(ImageMedia);
-Vue.use(BackgroundPosition);
+// Vue.use(ImageMedia);
+// Vue.use(BackgroundPosition);
 
 export default {
     name : 'upb-input-background-image',

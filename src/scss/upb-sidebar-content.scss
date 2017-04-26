@@ -1,17 +1,5 @@
-@import "../../assets/scss/variables";
-
-@mixin clearfix() {
-  &:before,
-  &:after {
-    content : " "; // 1
-    display : table; // 2
-    }
-  &:after {
-    clear : both;
-    }
-
-  clear : both;
-  }
+@import "./variables";
+@import "./mixins";
 
 // Input Reset
 

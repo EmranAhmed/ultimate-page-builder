@@ -5,7 +5,7 @@ import extend from 'extend'
 import {sprintf} from 'sprintf-js'
 // import RowList from '../row/RowList.vue';
 
-Vue.use(Sortable);
+// Vue.use(Sortable);
 
 // Row List
 //Vue.component('row-list', RowList);

@@ -50,6 +50,10 @@ export default {
             }
         },
 
+        panelMetaSearch(){
+            return false;
+        },
+
         panelMetaTools(){
             if (this.item['_upb_options']) {
                 return this.item._upb_options.tools.settings;

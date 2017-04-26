@@ -59,11 +59,13 @@ import { util } from 'vue';
         module.exports = vSortable
     }
     else if (typeof define == "function" && define.amd) {
+
         define([], function () {
             return vSortable
         })
     }
-    else if (window.Vue) {
+    else if (typeof window !== 'undefined' && window.Vue) {
+
         window.vSortable = vSortable;
         Vue.use(vSortable)
     }

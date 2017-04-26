@@ -6,7 +6,7 @@
                 <span class="title" v-text="attributes.title"></span>
             </div>
             <div class="device-hidden-input">
-                <label v-for="(option, value) in attributes.options">
+                <label v-for="(option, value) in attributes.options" :key="value">
                     <input class="device-hidden-input" type="radio" :value="value" v-model="input">
                     <i :class="option.icon" :title="option.title"></i>
                 </label>

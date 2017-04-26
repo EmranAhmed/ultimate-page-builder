@@ -48,7 +48,10 @@ export default {
             else {
                 return false;
             }
+        },
 
+        panelMetaSearch(){
+            return false;
         },
 
         panelMetaTools(){

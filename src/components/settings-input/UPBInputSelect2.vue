@@ -8,7 +8,7 @@
                     <span class="title" v-text="attributes.title"></span>
                 </div>
                 <select class="select2-multiple-input" multiple v-model="input" style="width: 100%" v-select2="attributes.settings" :id="attributes._id">
-                    <option v-for="(option, value) in attributes.options" :value="value" :title="option" v-text="option"></option>
+                    <option v-for="(option, value) in attributes.options" :key="value" :value="value" :title="option" v-text="option"></option>
                 </select>
             </label>
 
@@ -18,7 +18,7 @@
                     <span class="title" v-text="attributes.title"></span>
                 </div>
                 <select class="select2-input" v-model="input" style="width: 100%" v-select2="attributes.settings" :id="attributes._id">
-                    <option v-for="(option, value) in attributes.options" :value="value" :title="option" v-text="option"></option>
+                    <option v-for="(option, value) in attributes.options" :key="value" :value="value" :title="option" v-text="option"></option>
                 </select>
             </label>
 
@@ -34,7 +34,7 @@
 
     import Select2 from '../../plugins/vue-select2'
 
-    Vue.use(Select2);
+    // Vue.use(Select2);
 
     export default {
         name    : 'upb-input-select2',

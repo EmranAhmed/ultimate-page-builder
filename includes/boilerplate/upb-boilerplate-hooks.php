@@ -149,6 +149,7 @@
 
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
+        wp_register_script( 'upb-common', UPB_PLUGIN_ASSETS_URI . "js/upb-common.js", array(), FALSE, TRUE );
 
         wp_register_style( 'dashicon', includes_url( "/css/dashicons$suffix.css" ) );
         wp_register_style( 'select2', UPB_PLUGIN_ASSETS_URI . "css/select2$suffix.css" );
@@ -190,10 +191,8 @@
 
         wp_enqueue_style( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URI . "css/upb-boilerplate$suffix.css" );
 
-        if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
-            // In Production Mode :)
-            wp_enqueue_style( 'upb-style', UPB_PLUGIN_ASSETS_URI . "css/upb-style$suffix.css" );
-        }
+        wp_enqueue_style( 'upb-style', UPB_PLUGIN_ASSETS_URI . "css/upb-style$suffix.css" );
+
     } );
 
     add_action( 'upb_boilerplate_enqueue_scripts', function () {
@@ -201,6 +200,7 @@
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
         wp_enqueue_media();
+        wp_enqueue_script( 'upb-common' );
         wp_enqueue_script( 'wp-color-picker-alpha' );
         wp_enqueue_script( 'select2' );
         wp_enqueue_script( 'upb-vendor', UPB_PLUGIN_ASSETS_URI . "js/upb-vendor$suffix.js", array(), '', TRUE );
@@ -290,7 +290,7 @@
             'ajaxUrl'              => esc_url( admin_url( 'admin-ajax.php', 'relative' ) ),
 
             // Templates
-            'layoutPlaceholder'    => upb_assets_uri( 'images/layout-placeholder.png' ),
+            'layoutPlaceholder'    => upb_plugin_uri( '/images/layout-placeholder.png' ),
             'editorTemplate'       => upb_wp_editor_template(),
             'allowedTags'          => array_keys( wp_kses_allowed_html( 'post' ) ),
             'allowedAttributes'    => upb_allowed_attributes(),

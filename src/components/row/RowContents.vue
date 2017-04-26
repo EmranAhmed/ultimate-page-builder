@@ -7,7 +7,7 @@
 
         <li class="row-grid-screen-sizes">
             <ul>
-                <li v-for="device in devices" :class="deviceClass(device)" @click.prevent="currentDevice(device)" :title="deviceTitle(device)">
+                <li v-for="device in devices" :key="device.id" :class="deviceClass(device)" @click.prevent="currentDevice(device)" :title="deviceTitle(device)">
                     <i :class="device.icon"></i>
                     <span v-show="device.reconfig" class="re-config-icon">&excl;</span>
                     <div :title="toggleDeviceTitle(device)" @click.prevent="toggleDevice(device)" class="device-activity">
@@ -21,7 +21,7 @@
 
         <li class="row-grid-layouts-wrapper">
             <ul>
-                <li v-for="device in devices" v-if="device.current" :class="[{'active-device':device.active, current:device.current}]" :title="device.title">
+                <li v-for="device in devices" :key="device.id" v-if="device.current" :class="[{'active-device':device.active, current:device.current}]" :title="device.title">
 
                     <ul>
                         <li class="row-grid-structure-title" v-text="l10n.columnLayout + ' - ' + device.title"></li>
@@ -30,8 +30,8 @@
 
                         <li class="row-grid-structure-wrapper">
 
-                            <a v-for="layout in columnLayouts(device)" :title="layout.value" @click.prevent="changeColumnLayout(layout, device.id)" :class="columnLayoutClass(layout, device.id)" href="#">
-                                <span v-for="item in miniColumns(layout.value)" :class="miniColumnItemClass(item)"></span>
+                            <a v-for="(layout, lid) in columnLayouts(device)" :key="lid" :title="layout.value" @click.prevent="changeColumnLayout(layout, device.id)" :class="columnLayoutClass(layout, device.id)" href="#">
+                                <span v-for="(item, iid) in miniColumns(layout.value)" :key="iid" :class="miniColumnItemClass(item)"></span>
                             </a>
 
                             <a :class="manualLayoutClass(device.id)" :title="l10n.columnManual" @click.prevent="openManualInput(device.id)" href="#">
@@ -52,7 +52,7 @@
 
                         <li class="row-grid-order-wrapper">
                             <ul class="row-grid-order upb-mini-row" v-sortable="sortable">
-                                <li v-for="(content, index) in contents" @click="openColumnContents(index)" @mouseover="activeFocus(index)" @mouseout="removeFocus(index)" v-if="device.active" :class="sortOrderClass(index, content, device)">
+                                <li v-for="(content, index) in contents" :key="index" @click="openColumnContents(index)" @mouseover="activeFocus(index)" @mouseout="removeFocus(index)" v-if="device.active" :class="sortOrderClass(index, content, device)">
                                     <div :title="l10n.columnTitle" v-text="columnLayoutTitle(content, device)"></div>
                                 </li>
                             </ul>

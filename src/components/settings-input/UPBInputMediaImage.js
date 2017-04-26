@@ -4,7 +4,7 @@ import userInputMixin from './user-mixins'
 
 import ImageMedia from '../../plugins/vue-image-media'
 
-Vue.use(ImageMedia)
+// Vue.use(ImageMedia)
 
 export default {
     name : 'upb-input-media-image',

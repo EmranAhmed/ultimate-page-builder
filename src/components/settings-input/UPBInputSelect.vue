@@ -7,7 +7,7 @@
                     <span class="title" v-text="attributes.title"></span>
                 </div>
                 <select class="select-multiple-input" v-model="input" multiple>
-                    <option v-for="(option, value) in attributes.options" :value="value" v-text="option"></option>
+                    <option v-for="(option, value) in attributes.options" :key="value" :value="value" v-text="option"></option>
                 </select>
             </label>
 
@@ -17,7 +17,7 @@
                     <span class="title" v-text="attributes.title"></span>
                 </div>
                 <select class="select-input" v-model="input">
-                    <option v-for="(option, value) in attributes.options" :value="value" v-text="option"></option>
+                    <option v-for="(option, value) in attributes.options" :key="value" :value="value" v-text="option"></option>
                 </select>
             </label>
 

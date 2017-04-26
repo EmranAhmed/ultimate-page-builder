@@ -12,7 +12,7 @@
 
         <div class="sub-panel-sections-list">
             <ul>
-                <li v-for="(content, index) in contents">
+                <li v-for="(content, index) in contents" :key="index">
                     <div class="sub-panel-section-tools">
                         <a @click.prevent="addSection(index)" href=""><i class="mdi mdi-plus"></i></a>
                         <a @click.prevent="copySection(index)" href=""><i class="mdi mdi-clipboard-outline"></i></a>

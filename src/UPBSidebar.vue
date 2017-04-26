@@ -15,7 +15,7 @@
         <component :model="store.tabs" :panel="store.subpanel" is="upb-sidebar-sub-panel"></component>
     </div>
 </template>
-<style src="./scss/upb-sidebar.scss" lang="sass"></style>
+<style src="./scss/upb-sidebar.scss" lang="scss"></style>
 <script>
     import Vue from 'vue';
     import store from './store'

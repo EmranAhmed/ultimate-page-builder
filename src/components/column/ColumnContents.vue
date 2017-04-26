@@ -38,7 +38,7 @@
 
                 <li class="upb-panel-tools">
                     <ul>
-                        <li v-for="tool in panelMetaTools">
+                        <li v-for="tool in panelMetaTools" :key="tool.id">
                             <a @click.prevent="toolsAction(tool, $event)" href="#">
                                 <i :class="tool.icon"></i>
                                 <div v-text="tool.title"></div>
@@ -52,7 +52,7 @@
         <li class="upb-panel-contents">
             <ul class="upb-panel-contents-items" v-sortable="sortable">
                 <!-- Element List -->
-                <component v-for="(item, index) in contents" :model="item" :index="index" @deleteItem="deleteItem(index)" @cloneItem="cloneItem(index, item)" is="element-list"></component>
+                <component v-for="(item, index) in contents" :key="index" :model="item" :index="index" @deleteItem="deleteItem(index)" @cloneItem="cloneItem(index, item)" is="element-list"></component>
             </ul>
         </li>
     </ul>

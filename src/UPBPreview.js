@@ -5,20 +5,20 @@ import {sprintf} from 'sprintf-js';
 import globalPreviewMixins from './globalPreviewMixins';
 import componentPreviewMixins from './componentPreviewMixins';
 import Droppable from './plugins/vue-droppable'
-Vue.use(Droppable);
+//Vue.use(Droppable);
 
 import PreviewElement from './plugins/vue-preview-element'
-Vue.use(PreviewElement);
+//Vue.use(PreviewElement);
 
 import UPBPreviewMiniToolbar from './components/extra/UPBPreviewMiniToolbar.vue'
 
 Vue.component('upb-preview-mini-toolbar', UPBPreviewMiniToolbar);
 
 import UIDroppable from './plugins/vue-ui-droppable'
-Vue.use(UIDroppable);
+//Vue.use(UIDroppable);
 
 import UIDraggable from './plugins/vue-ui-draggable'
-Vue.use(UIDraggable);
+//Vue.use(UIDraggable);
 
 //import ElementSortable from './plugins/vue-element-sortable'
 //Vue.use(ElementSortable);

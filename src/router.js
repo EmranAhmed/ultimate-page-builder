@@ -1,7 +1,7 @@
 import store from './store'
 import extend from 'extend'
 import VueRouter from 'vue-router'
-Vue.use(VueRouter);
+//Vue.use(VueRouter);
 
 import SectionsPanel from './components/panels/SectionsPanel.vue'
 import SettingsPanel from './components/panels/SettingsPanel.vue'

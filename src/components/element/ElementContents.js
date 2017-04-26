@@ -10,7 +10,7 @@ import ElementItemList from '../element-item/ElementItemList.vue';
 
 Vue.component('element-item-list', ElementItemList);
 
-Vue.use(Sortable);
+// Vue.use(Sortable);
 
 // Element List
 //Vue.component('element-list', ElementList);

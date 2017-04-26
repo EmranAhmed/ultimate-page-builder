@@ -6,7 +6,7 @@
                 <i v-if="attributes.deviceIcon" :class="deviceClass" :title="attributes.deviceTitle"></i>
                 <span class="title" v-text="attributes.title"></span>
             </div>
-            <div v-for="(option, value) in attributes.options">
+            <div v-for="(option, value) in attributes.options" :key="value">
                 <input class="radio-input" type="radio" :id="value" :value="value" v-model="input">
                 <label :for="value" v-text="option"></label>
             </div>

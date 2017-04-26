@@ -10,7 +10,7 @@ import RowList from '../row/RowList.vue'
 
 import RowContents from '../row/RowContents.vue'
 
-Vue.use(Sortable);
+// Vue.use(Sortable);
 
 // Row List
 Vue.component('row-list', RowList)

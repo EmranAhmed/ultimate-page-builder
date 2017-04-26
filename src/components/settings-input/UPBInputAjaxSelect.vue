@@ -7,7 +7,7 @@
                     <span class="title" v-text="attributes.title"></span>
                 </div>
                 <select multiple class="select2-input select2-input-multiple" style="width: 100%" v-select2="settings" :id="attributes._id">
-                    <option v-for="option in options" selected="selected" :value="option.id" :title="option.title" v-text="option.text"></option>
+                    <option v-for="option in options" :key="option.id" selected="selected" :value="option.id" :title="option.title" v-text="option.text"></option>
                 </select>
             </label>
             <label v-else>

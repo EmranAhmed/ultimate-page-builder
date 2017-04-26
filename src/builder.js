@@ -5,10 +5,10 @@ import UPBSidebar from './UPBSidebar.vue'
 import UPBPreview from './UPBPreview.vue'
 import VueNProgress from './plugins/vue-nprogress'
 
-Vue.use(VueNProgress);
+//Vue.use(VueNProgress);
 
 import vToast from './plugins/vue-toastr'
-Vue.use(vToast);
+//Vue.use(vToast);
 
 store.loadTabContents();
 

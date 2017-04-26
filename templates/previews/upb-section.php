@@ -6,5 +6,5 @@
          {{ generatedAttributes }}
          {{ attributes }}
         </pre>-->
-    <component v-for="(content, index) in contents" :index="index" :parent="model" :model="content" :is="content._upb_options.preview.component"></component>
+    <component v-for="(content, index) in contents" :key="index" :index="index" :parent="model" :model="content" :is="content._upb_options.preview.component"></component>
 </div>

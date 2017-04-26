@@ -6,7 +6,7 @@
                 <span class="title" v-text="attributes.title"></span>
             </div>
             <div class="image-selects">
-                <label v-for="(option, value) in attributes.options">
+                <label v-for="(option, value) in attributes.options" :key="value">
                     <input class="image-select-input" type="radio" :value="value" v-model="input">
                     <img :src="option.url" :title="option.title" :alt="option.title" draggable="false">
                 </label>

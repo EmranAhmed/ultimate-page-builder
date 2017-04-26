@@ -37,7 +37,7 @@
 
                 <li class="upb-panel-tools">
                     <ul>
-                        <li v-for="tool in model.tools">
+                        <li v-for="tool in model.tools" :key="tool.id">
                             <a @click.prevent="toolsAction(tool, $event)" href="#">
                                 <i :class="tool.icon"></i>
                                 <div v-text="tool.title"></div>
@@ -50,7 +50,7 @@
 
         <li class="upb-panel-contents">
             <ul class="upb-panel-contents-items">
-                <component v-for="(setting, index) in model.contents" keyindexname="metaId" keyvaluename="metaValue" :items="model.contents" :index="index" :defaultValue="setting._upb_field_attrs.default" :attributes="setting._upb_field_attrs" target="metaValue" :model="model.contents[index]" :is="setting._upb_field_type"></component>
+                <component v-for="(setting, index) in model.contents" :key="index" keyindexname="metaId" keyvaluename="metaValue" :items="model.contents" :index="index" :defaultValue="setting._upb_field_attrs.default" :attributes="setting._upb_field_attrs" target="metaValue" :model="model.contents[index]" :is="setting._upb_field_type"></component>
             </ul>
         </li>
     </ul>

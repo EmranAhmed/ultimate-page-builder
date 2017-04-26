@@ -6,9 +6,9 @@
             <!--
                         <a :class="{ active: skeletonPreview }" :title="l10n.skeleton" @click.prevent="toggleSkeletonPreview()" href="#"><i class="mdi mdi-group"></i></a>
             -->
-            <a v-for="device in devices" v-show="deviceAvailable(device.id)" :class="{ active: currentDevice(device.id) }" :title="device.title" @click.prevent="toggleResponsivePreview(device.id)" href="#"><i :class="device.icon"></i></a>
+            <a v-for="device in devices" :key="device.id" v-show="deviceAvailable(device.id)" :class="{ active: currentDevice(device.id) }" :title="device.title" @click.prevent="toggleResponsivePreview(device.id)" href="#"><i :class="device.icon"></i></a>
         </div>
     </div>
 </template>
-<style src="../../scss/upb-sidebar-footer.scss" lang="sass"></style>
+<style src="../../scss/upb-sidebar-footer.scss" lang="scss"></style>
 <script src="./UPBSidebarFooter.js"></script>

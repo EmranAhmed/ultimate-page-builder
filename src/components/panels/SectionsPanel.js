@@ -7,7 +7,8 @@ import {sprintf} from 'sprintf-js';
 import copy from 'copy-to-clipboard';
 
 import Sortable from '../../plugins/vue-sortable'
-Vue.use(Sortable);
+
+// Vue.use(Sortable);
 
 // Section List
 import SectionList from '../section/SectionList.vue';

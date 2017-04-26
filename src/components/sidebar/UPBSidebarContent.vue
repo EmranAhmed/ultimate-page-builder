@@ -8,6 +8,6 @@
         <router-view :model="item"></router-view>
     </div>
 </template>
-<style src="../../scss/upb-sidebar-content.scss" lang="sass"></style>
+<style src="../../scss/upb-sidebar-content.scss" lang="scss"></style>
 <script src="./UPBSidebarContent.js"></script>
 

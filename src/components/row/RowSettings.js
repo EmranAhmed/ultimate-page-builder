@@ -48,7 +48,10 @@ export default {
             else {
                 return false;
             }
+        },
 
+        panelMetaSearch(){
+            return false;
         },
 
         panelMetaTools(){
@@ -59,7 +62,6 @@ export default {
             else {
                 return false;
             }
-
         },
 
         contents(){

@@ -26,7 +26,7 @@
     import ColorPicker from '../../plugins/vue-colorpicker'
     import userInputMixin from './user-mixins'
 
-    Vue.use(ColorPicker);
+    // Vue.use(ColorPicker);
 
     export default {
         name    : 'upb-input-color',

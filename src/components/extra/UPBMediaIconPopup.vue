@@ -6,7 +6,7 @@
                 <div :class="mediaFrameClass">
                     <div class="media-frame-menu">
                         <div class="media-menu">
-                            <a v-for="provider in iconProviders" @click.prevent="activeProvider(provider.id)" href="#" :class="{'media-menu-item':true, 'active':provider.active}" v-text="provider.title"></a>
+                            <a v-for="provider in iconProviders" :key="provider.id" @click.prevent="activeProvider(provider.id)" href="#" :class="{'media-menu-item':true, 'active':provider.active}" v-text="provider.title"></a>
                         </div>
                     </div>
                     <div class="media-frame-title">
@@ -27,7 +27,7 @@
                             </div>
 
                             <ul id="upb-attachments" tabindex="-1" class="attachments ui-sortable ui-sortable-disabled">
-                                <li v-for="icon in icons" tabindex="0" :class="selectedIconClass(icon)">
+                                <li v-for="icon in icons" :key="icon.id" tabindex="0" :class="selectedIconClass(icon)">
                                     <div class="attachment-preview" @click.prevent="chooseIcon(icon)">
                                         <div class="thumbnail">
                                             <div class="icon-holder">

@@ -528,6 +528,12 @@ export default{
                 cssClasses.push(...extra);
             }
 
+            if (extra && _.isObject(extra)) {
+                cssClasses.push(...Object.keys(extra).filter((classes)=> {
+                    return extra[classes]
+                }));
+            }
+
             if (this.model._upb_options.hasMiniToolbar) {
                 cssClasses.push(`upb-has-mini-toolbar`);
             }
@@ -573,6 +579,12 @@ export default{
 
             if (extra && _.isArray(extra)) {
                 cssClasses.push(...extra);
+            }
+
+            if (extra && _.isObject(extra)) {
+                cssClasses.push(...Object.keys(extra).filter((classes)=> {
+                    return extra[classes]
+                }));
             }
 
             if (combinePreview) {
