@@ -78,10 +78,9 @@ export default{
                         else if (_.isObject(content.attributes)) {
                             this.$router.replace(`/sections/${content._upb_options._keyIndex}/settings`);
                         }
-
                     })
                 }
             }
         }
-    },
+    }
 }

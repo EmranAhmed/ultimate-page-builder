@@ -396,7 +396,6 @@
 
     /*    add_action( 'upb_register_element', function ( $element ) {
 
-
             $attributes = array();
 
             array_push( $attributes, upb_title_input( esc_html__( 'Title', 'ultimate-page-builder' ), '', esc_html__( 'Text Title', 'ultimate-page-builder' ) ) );

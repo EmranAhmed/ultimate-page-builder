@@ -265,36 +265,39 @@
         return apply_filters( 'upb_responsive_hidden_options_output', array_values( $hidden_devices ) );
     }
 
-    function upb_make_column_class( $attributes, $extra = FALSE ) {
 
-        $grid    = upb_grid_system();
-        $devices = upb_devices( 'id' );
+    if ( ! function_exists( 'upb_make_column_class' ) ):
 
-        $classes = upb_list_pluck( upb_devices(), array( 'class' ), 'id' );
+        function upb_make_column_class( $attributes, $extra = FALSE ) {
 
-        $columns = array();
+            $grid    = upb_grid_system();
+            $devices = upb_devices( 'id' );
 
-        if ( $extra ) {
-            $columns[] = $extra;
-        }
+            $classes = upb_list_pluck( upb_devices(), array( 'class' ), 'id' );
 
-        foreach ( $attributes as $name => $value ) {
-            if ( in_array( $name, $devices ) && ! empty( $value ) ) {
-                $col = explode( ':', $value );
+            $columns = array();
 
-                $class = isset( $classes[ $name ] ) ? $classes[ $name ][ 'class' ] : FALSE;
+            if ( $extra ) {
+                $columns[] = $extra;
+            }
 
-                if ( $class ) {
-                    $columns[] = ( ( $grid[ 'allGridClass' ] ) ? $grid[ 'allGridClass' ] . ' ' : '' ) . $class . ( ( absint( $grid[ 'totalGrid' ] ) / absint( $col[ 1 ] ) ) * absint( $col[ 0 ] ) );
-                } else {
-                    $columns[] = ( ( $grid[ 'allGridClass' ] ) ? $grid[ 'allGridClass' ] . ' ' : '' ) . $grid[ 'prefixClass' ] . $grid[ 'separator' ] . $name . $grid[ 'separator' ] . ( ( absint( $grid[ 'totalGrid' ] ) / absint( $col[ 1 ] ) ) * absint( $col[ 0 ] ) );
+            foreach ( $attributes as $name => $value ) {
+                if ( in_array( $name, $devices ) && ! empty( $value ) ) {
+                    $col = explode( ':', $value );
+
+                    $class = isset( $classes[ $name ] ) ? $classes[ $name ][ 'class' ] : FALSE;
+
+                    if ( $class ) {
+                        $columns[] = ( ( $grid[ 'allGridClass' ] ) ? $grid[ 'allGridClass' ] . ' ' : '' ) . $class . ( ( absint( $grid[ 'totalGrid' ] ) / absint( $col[ 1 ] ) ) * absint( $col[ 0 ] ) );
+                    } else {
+                        $columns[] = ( ( $grid[ 'allGridClass' ] ) ? $grid[ 'allGridClass' ] . ' ' : '' ) . $grid[ 'prefixClass' ] . $grid[ 'separator' ] . $name . $grid[ 'separator' ] . ( ( absint( $grid[ 'totalGrid' ] ) / absint( $col[ 1 ] ) ) * absint( $col[ 0 ] ) );
+                    }
                 }
             }
+
+            return implode( ' ', $columns );
         }
-
-        return implode( ' ', $columns );
-    }
-
+    endif;
     // Build-In Inputs
 
     function upb_responsive_hidden_input( $title = '', $desc = '', $default = array() ) {

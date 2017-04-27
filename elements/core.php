@@ -111,7 +111,7 @@
         ) );
 
 
-        // EXAMPLES:
+        // EXAMPLE Inputs:
 
         /*        array_push( $attributes, array(
                     'id'          => 'ajaxselect',

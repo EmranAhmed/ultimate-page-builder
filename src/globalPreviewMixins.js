@@ -3,6 +3,7 @@ import extend from 'extend'
 import {sprintf} from 'sprintf-js'
 
 export default{
+
     props : {
         index  : {
             type : Number
@@ -248,8 +249,7 @@ export default{
             }
 
             return classes.join(' ');
-        },
-
+        }
     },
 
     methods : {
@@ -645,7 +645,9 @@ export default{
         },
 
         // Color Functions
-        // toRGB('ffffff'), toRGB('#ffffff'), toRGB('#ffffff', 0.3)
+        // toRGB('ffffff'),
+        // toRGB('#ffffff'),
+        // toRGB('#ffffff', 0.3)
         toRGB(hexColor, opacity) {
 
             // If It's RGB Color
@@ -666,7 +668,8 @@ export default{
             return 'rgb(' + h.join(',') + ')';
         },
 
-        // toHEX('rgb(255,255,255)'), toHEX('rgba(255,255,255, 0.2)'
+        // toHEX('rgb(255,255,255)'),
+        // toHEX('rgba(255,255,255, 0.2)'
         toHEX(rgbColor){
 
             // If It's Hex Color

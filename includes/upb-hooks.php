@@ -97,7 +97,7 @@
 
         return $contents;
 
-    }, 20 );
+    }, 20 ); // Priority 20 for Restrict Content Pro plugin support
 
     // Body Class
     add_filter( 'body_class', function ( $classes ) {
@@ -127,7 +127,7 @@
             upb_enqueue_element_scripts();
 
         endif;
-    }, 20 ); // 20 Priority.
+    }, 20 ); // 20 Priority. 1st Load themes scripts then plugins scripts.
 
     // Add Toolbar Menus
     add_action( 'wp_before_admin_bar_render', function () {

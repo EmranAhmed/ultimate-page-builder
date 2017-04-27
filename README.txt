@@ -98,6 +98,15 @@ Yes.
 
 == Changelog ==
 
+= 1.0.0-beta.29 =
+
+- Fixed Media Image Upload ajax data issue
+- Fixed Element default attribute access issue
+- Improve Performance
+- Change Directory structure
+- Add image and fonts location function.
+- JS function `addClass(...)` support string/array/object for extra class name
+
 = 1.0.0-beta.28 =
 
 - Fix Device Hidden Input Issue
