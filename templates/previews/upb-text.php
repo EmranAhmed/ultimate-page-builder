@@ -3,4 +3,5 @@
     <upb-preview-mini-toolbar :parent="parent" :model="model"></upb-preview-mini-toolbar>
     <!--  just use  preview shortcode to show parsed element -->
     <div v-html="contents"></div>
+    <div style="clear: both"></div>
 </div>

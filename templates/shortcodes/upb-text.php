@@ -14,4 +14,5 @@
             }
     </style>
     <div><?php echo do_shortcode( $contents ) ?></div>
+    <div style="clear: both"></div>
 </div>
