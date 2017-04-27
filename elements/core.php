@@ -96,18 +96,26 @@
         array_push( $attributes, upb_responsive_hidden_input() );
 
         array_push( $attributes, array(
-            'id'      => 'space',
-            'title'   => esc_html__( 'Section Gap', 'ultimate-page-builder' ),
-            'desc'    => esc_html__( 'Gap between two section', 'ultimate-page-builder' ),
+            'id'      => 'margin',
+            'title'   => esc_html__( 'Section Margin', 'ultimate-page-builder' ),
+            'desc'    => esc_html__( 'Margin between two section', 'ultimate-page-builder' ),
             'type'    => 'spacing',
             'value'   => array( '0px', 'auto', '0px', 'auto' ),
-            'unit'    => 'px',
+            'min'     => -999,
             'options' => array(
                 'top'    => TRUE,
                 'right'  => FALSE,
                 'bottom' => TRUE,
                 'left'   => FALSE,
             )
+        ) );
+
+        array_push( $attributes, array(
+            'id'    => 'padding',
+            'title' => esc_html__( 'Section Padding', 'ultimate-page-builder' ),
+            'desc'  => esc_html__( 'Padding on section', 'ultimate-page-builder' ),
+            'type'  => 'spacing',
+            'value' => array( '0px', '0px', '0px', '0px' )
         ) );
 
 

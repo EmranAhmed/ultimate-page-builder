@@ -6,6 +6,7 @@
     background-origin     : var(--background-origin);
     background-size       : var(--background-size);
     margin                : var(--section-margin);
+    padding               : var(--section-padding);
     background-image      : var(--background-image);
     }
 

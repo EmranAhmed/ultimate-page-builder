@@ -254,6 +254,12 @@ export default{
 
     methods : {
 
+        getSpacingInputValue(id){
+            let settings        = this.model._upb_settings.filter((value)=> value.id == id)[0];
+            let attributeValues = this.attributes[id] ? this.attributes[id] : settings.default;
+            return attributeValues.join(' ');
+        },
+
         hasGradientBackground(){
             return ['gradient'].includes(this.model.attributes['background-type']);
         },
@@ -267,7 +273,7 @@ export default{
         },
 
         getAttribute(attribute, defaultValue = ''){
-            return this.model.attributes[attribute] ? this.model.attributes[attribute] : defaultValue;
+            return this.attributes[attribute] ? this.attributes[attribute] : defaultValue;
         },
 
         getGeneratedAttributes(){

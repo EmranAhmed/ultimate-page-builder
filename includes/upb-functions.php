@@ -1121,6 +1121,16 @@
         echo esc_html( upb_get_shortcode_title( $attributes ) );
     }
 
+    function upb_get_spacing_input_value( $id, $attributes, $_settings ) {
+
+        $settings = array_values( array_filter( $_settings, function ( $_setting ) use ( $id ) {
+            return $_setting[ 'id' ] == $id;
+        } ) )[ 0 ];
+        $values   = isset( $attributes[ $id ] ) ? $attributes[ $id ] : $settings[ 'default' ];
+
+        return implode( ' ', $values );
+    }
+
     function upb_shortcode_scoped_style_background( $attributes ) {
 
         if ( isset( $attributes[ 'background-type' ] ) ) {

@@ -79,7 +79,10 @@
 
                         $options[ 'delimiter' ] = isset( $options[ 'delimiter' ] ) ? $options[ 'delimiter' ] : ',';
                         $options[ 'unit' ]      = isset( $options[ 'unit' ] ) ? esc_attr( $options[ 'unit' ] ) : 'px';
-                        $options[ 'initial' ]   = isset( $options[ 'initial' ] ) ? esc_attr( $options[ 'initial' ] ) : 'initial'; // initial, auto, inherit
+                        $options[ 'initial' ]   = isset( $options[ 'initial' ] ) ? esc_attr( $options[ 'initial' ] ) : '0px'; // auto
+                        $options[ 'min' ]       = isset( $options[ 'min' ] ) ? $options[ 'min' ] : 0;
+                        $options[ 'max' ]       = isset( $options[ 'max' ] ) ? $options[ 'max' ] : 999;
+                        $options[ 'step' ]      = isset( $options[ 'step' ] ) ? $options[ 'step' ] : 1;
 
                         // Should maintain serial: 1. top, 2. right, 3. bottom, 4. left
                         $options[ 'options' ] = isset( $options[ 'options' ] )

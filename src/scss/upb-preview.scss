@@ -1,4 +1,5 @@
 @import "./variables";
+@import "./mixins";
 @import "~mdi/scss/materialdesignicons";
 
 .upb-preview-element {
@@ -77,6 +78,10 @@
     border : none;
     }*/
 
+  .element-message-holder {
+    clear : both;
+    }
+
   .upb-add-element-message {
     position        : relative !important;
     padding         : 0 30px !important;
@@ -86,6 +91,7 @@
     display         : block !important;
     color           : $upb-preview-element-hover-color !important;
     text-align      : center !important;
+    clear           : both;
     }
 
   .upb-add-element-message-regular {
@@ -100,6 +106,7 @@
     display         : block !important;
     text-align      : center !important;
     border-radius   : 5px !important;
+    clear           : both;
     }
 
   &.upb-preview-element-disabled {

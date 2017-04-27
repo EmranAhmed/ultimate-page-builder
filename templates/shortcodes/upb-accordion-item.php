@@ -14,5 +14,6 @@
     <a href="#" class="upb-accordion-item <?php echo esc_attr( $active_class ) ?>"><?php upb_shortcode_title( $attributes ) ?></a>
     <div class="upb-accordion-content <?php echo esc_attr( $active_class ) ?>">
         <div><?php echo do_shortcode( $contents ) ?></div>
+        <div style="clear: both"></div>
     </div>
 </div>

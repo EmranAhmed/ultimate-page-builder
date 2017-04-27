@@ -1,32 +1,33 @@
 {
-  "name" : "ultimate-page-builder",
-  "description" : "Ultimate Page Builder for WordPress",
-  "author" : "Emran Ahmed <emran.bd.08@gmail.com>",
-  "private" : true,
-  "scripts" : {
-    "webpack" : "cross-env NODE_ENV=development webpack --progress --hide-modules --config=webpack.config.js",
-    "dev" : "cross-env NODE_ENV=development webpack --watch --progress --hide-modules --config=webpack.config.js",
-    "hmr" : "cross-env NODE_ENV=development webpack-dev-server --inline --hot --config=webpack.config.js",
-    "build" : "cross-env NODE_ENV=production webpack --progress --hide-modules --config=webpack.config.js",
-    "bundle" : "yarn webpack && yarn build",
-    "package:bundle" : "cross-env NODE_ENV=package webpack --progress --hide-modules --config=webpack.config.js",
-    "package" : "yarn bundle && yarn package:bundle"
+  "name": "ultimate-page-builder",
+  "description": "Ultimate Page Builder for WordPress",
+  "author": "Emran Ahmed <emran.bd.08@gmail.com>",
+  "private": true,
+  "scripts": {
+    "webpack": "cross-env NODE_ENV=development webpack --progress --hide-modules --config=webpack.config.js",
+    "dev": "cross-env NODE_ENV=development webpack --watch --progress --hide-modules --config=webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config=webpack.config.js",
+    "bundle": "yarn webpack && yarn build",
+    "package:bundle": "cross-env NODE_ENV=package webpack --progress --hide-modules --config=webpack.config.js",
+    "package": "yarn bundle && yarn package:bundle"
   },
-  "dependencies" : {
-    "copy-to-clipboard" : "^3.0.6",
-    "extend" : "^3.0.0",
-    "mdi" : "^1.9.33",
-    "sanitize-html" : "^1.14.1",
-    "vue" : "^2.2.6",
-    "vue-router" : "^2.5.2"
+  "dependencies": {
+    "copy-to-clipboard": "^3.0.6",
+    "extend": "^3.0.0",
+    "mdi": "^1.9.33",
+    "remove": "^0.1.5",
+    "sanitize-html": "^1.14.1",
+    "vue": "^2.2.6",
+    "vue-router": "^2.5.2"
   },
-  "devDependencies" : {
-    "babel-preset-es2015" : "^6.24.1",
-    "cli-color" : "^1.2.0",
-    "cross-env" : "^4.0.0",
-    "emojic" : "^1.1.9",
-    "laravel-mix" : "^0.11.3",
-    "smart-banner-webpack-plugin" : "^3.0.1",
-    "wp-pot" : "^1.1.5"
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "cli-color": "^1.2.0",
+    "cross-env": "^4.0.0",
+    "emojic": "^1.1.9",
+    "laravel-mix": "^0.11.3",
+    "smart-banner-webpack-plugin": "^3.0.1",
+    "webpack": "^2.4.1",
+    "wp-pot": "^1.1.5"
   }
 }

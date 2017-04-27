@@ -6,10 +6,6 @@
 
     <component v-for="(content, index) in model.contents" :key="index" v-if="isElementRegistered(content.tag)" :index="index" :parent="model" :model="content" :is="content._upb_options.preview.component"></component>
 
-    <div v-show="sidebarExpanded">
-        <a href="#" @click.prevent="openElementsPanel()" class="upb-add-element-message-regular" v-text="messages.addElement"></a>
-    </div>
+    <a v-show="sidebarExpanded" href="#" @click.prevent="openElementsPanel()" class="upb-add-element-message-regular" v-text="messages.addElement"></a>
+
 </div>
-<!--
-<div v-for="device in attributes.clear" :class="['clearfix', `visible-${device}-block`]"></div>
--->

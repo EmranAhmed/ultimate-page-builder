@@ -8,6 +8,7 @@
     color            : #222222;
     outline          : none !important;
     box-shadow       : none !important;
+    clear            : both;
     }
 
 .upb-accordion-item.active {

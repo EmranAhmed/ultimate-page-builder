@@ -102,10 +102,12 @@ Yes.
 
 - Fixed Media Image Upload ajax data issue
 - Fixed Element default attribute access issue
-- Improve Performance
-- Change Directory structure
+- Changed Directory structure
 - Add image and fonts location function.
 - JS function `addClass(...)` support string/array/object for extra class name
+- `min`, `max`, `step` option added to spacing input field.
+- `getSpacingInputValue` function on JS and `upb_get_spacing_input_value` function added.
+- Improved UPB Tab and UPB Accordion templates
 
 = 1.0.0-beta.28 =
 

@@ -13,6 +13,7 @@
     $upb_tabs[] = $attributes;
 ?>
 <div class="upb-tab-content <?php echo esc_attr( $active_class ) ?>">
-    <?php echo do_shortcode( $contents ) ?>
+    <div><?php echo do_shortcode( $contents ) ?></div>
+    <div style="clear: both"></div>
 </div>
 

@@ -10,7 +10,7 @@
             <!-- // Should maintain serial: 1. top, 2. right, 3. bottom, 4. left -->
             <div class="spacing-input-group">
                 <label v-for="(option, key) in options" :key="key">
-                    <input :disabled="!option" v-model="property[key]" type="number" class="tiny-text">
+                    <input :disabled="!option" v-model="property[key]" :min="attributes.min" :max="attributes.max" :step="attributes.step" type="number" class="tiny-text">
                     <span class="spacing-title" v-text="attributes.titles[key]"></span>
                 </label>
 

@@ -56,7 +56,6 @@ if (process.env.NODE_ENV == 'package') {
     });
 }
 else {
-
     mix.generatePot = function () {
 
         wpPot({
