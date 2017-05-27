@@ -271,6 +271,10 @@
                             $options[ 'style' ] = 'info'; // info, success, warning, error
                         }
                         break;
+                        
+                    case 'heading':
+                        $options[ 'value' ] = NULL;
+                        break;
                     
                     default:
                         if ( ! isset( $options[ 'value' ] ) ) {

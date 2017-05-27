@@ -1,10 +1,8 @@
 /* global wp, _ */
 
-
 ($ => {
 
-
-    wp.media.view.MediaFrame.UPBMedia = wp.media.view.MediaFrame.Select.extend({
+    wp.media.view.MediaFrame.UPBMedia        = wp.media.view.MediaFrame.Select.extend({
 
         initialize() {
 
@@ -151,7 +149,6 @@
         },
 
     });
-
     wp.media.view.Settings.AttachmentDisplay = wp.media.view.Settings.AttachmentDisplay.extend({
         template : function (view) {
 

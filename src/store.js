@@ -133,8 +133,12 @@ class store {
             delete content['_upb_field_attrs'];
             delete content['_upb_field_type'];
 
-            if (content['contents'] && _.isString(content['contents'])) {
+           /* if (content['contents'] && _.isString(content['contents'])) {
                 delete content.attributes._contents;
+            }*/
+
+            if (content.attributes) {
+                this.removePrivateAttributes(content.attributes);
             }
 
             if (content['contents'] && _.isArray(content['contents'])) {
@@ -190,7 +194,8 @@ class store {
         return shortcodes.map((shortcode) => {
 
             let attributes = extend(true, {}, shortcode.attributes);
-            delete attributes._contents;
+
+            attributes = this.removePrivateAttributes(attributes);
 
             return wp.shortcode.string({
                 tag     : shortcode.tag,
@@ -201,13 +206,27 @@ class store {
         }).join('');
     }
 
-    generateShortcode(tag, attrs, content = null) {
-
-        let attributes = extend(true, {}, attrs);
+    removePrivateAttributes(attributes) {
 
         if (!_.isUndefined(attributes['_contents'])) {
             delete attributes._contents;
         }
+
+        // If user use "__" as key prefix this will deleted :)
+        Object.keys(attributes).map((key) => {
+            if (key.substring(0, 2) == '__') {
+                delete attributes[key];
+            }
+        });
+
+        return attributes;
+    }
+
+    generateShortcode(tag, attrs, content = null) {
+
+        let attributes = extend(true, {}, attrs);
+
+        attributes = this.removePrivateAttributes(attributes);
 
         return wp.shortcode.string({
             tag     : tag,

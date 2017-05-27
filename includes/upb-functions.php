@@ -354,7 +354,7 @@
             'options' => $options
         ) );
     }
-
+    
     function upb_material_icon_input( $id, $title = '', $desc = '', $default = '' ) {
 
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Material Icons', 'ultimate-page-builder' );

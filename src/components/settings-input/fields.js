@@ -1,6 +1,6 @@
-import common from './common'
-import store from '../../store'
-import extend from 'extend';
+import common from "./common";
+import store from "../../store";
+import extend from "extend";
 
 const fieldsComponents = {
     'upb-input-ajax-icon-select'          : require('./UPBInputAjaxIconSelect.vue'),
@@ -18,6 +18,7 @@ const fieldsComponents = {
     'upb-input-icon-popup'                : require('./UPBInputIconPopup.vue'),
     'upb-input-media-image'               : require('./UPBInputMediaImage.vue'),
     'upb-input-message'                   : require('./UPBInputMessage.vue'),
+    'upb-input-heading'                   : require('./UPBInputHeading.vue'),
     'upb-input-number'                    : require('./UPBInputNumber.vue'),
     'upb-input-radio'                     : require('./UPBInputRadio.vue'),
     'upb-input-radio-icon'                : require('./UPBInputRadioIcon.vue'),
@@ -39,7 +40,7 @@ Object.keys(fieldsComponents).map((key) => {
 });
 
 if (_.isArray(store.fields) && !_.isEmpty(store.fields)) {
-    store.fields.map(input=> {
+    store.fields.map(input => {
 
         if (!_.isUndefined(input['component']) && !_.isUndefined(input['name'])) {
 

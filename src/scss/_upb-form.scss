@@ -677,8 +677,8 @@ button:focus {
 
       &.shorthand-toggle {
         vertical-align : top;
-        padding        : 5px 0;
-        font-size      : 20px;
+        padding        : 7px 0;
+        font-size      : 24px;
         }
       }
     .spacing-title {
@@ -713,7 +713,21 @@ button:focus {
       }
     }
 
+  &.heading-field-wrapper {
+    .upb-input-heading {
+      font-size      : 12px;
+      margin         : 0 -15px;
+      text-transform : uppercase;
+      font-weight    : bold;
+      display        : block;
+      background     : #000000;
+      color          : #FFFFFF;
+      padding        : 15px;
+      }
+    }
+
   &.message-field-wrapper {
+
     .upb-input-message {
       border     : 1px solid;
       padding    : 10px;
@@ -736,7 +750,6 @@ button:focus {
       color            : #D8000C;
       background-color : #FFBABA;
       }
-
     .validation {
       color            : #D63301;
       background-color : #FFCCBA;
