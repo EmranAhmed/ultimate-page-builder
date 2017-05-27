@@ -227,8 +227,9 @@ module.exports.module = {rules};
  */
 
 module.exports.resolve = {
-    extensions : ['*', '.js', '.jsx', '.vue'],
+    extensions : ['*', '.js', '.vue'],
     alias      : {
+        // 'src'  : path.resolve(__dirname, "src"),
         // 'vue$' : 'vue/dist/vue.js',
         'vue$' : 'vue/dist/vue.common.js',
         //'vue$'         : 'vue/dist/vue',
@@ -404,7 +405,7 @@ if (Mix.entry().hasExtractions()) {
     // Abstract a common file between apps.
     plugins.push(
         new webpack.optimize.CommonsChunkPlugin({
-            names     : Mix.entry().getExtractions().map((manifest)=> manifest.replace('manifest', 'upb-common')),
+            names     : Mix.entry().getExtractions().map((manifest) => manifest.replace('manifest', 'upb-common')),
             minChunks : Infinity,
         })
     );

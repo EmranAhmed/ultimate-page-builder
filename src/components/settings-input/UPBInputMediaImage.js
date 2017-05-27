@@ -1,10 +1,10 @@
-import store from '../../store'
-import common from './common'
-import userInputMixin from './user-mixins'
+import store from "../../store";
+import common from "./common";
+import userInputMixin from "./user-mixins";
 
-import ImageMedia from '../../plugins/vue-image-media'
+import "../../plugins/vue-upb-media";
 
-// Vue.use(ImageMedia)
+// Vue.use(UPBMedia)
 
 export default {
     name : 'upb-input-media-image',
@@ -45,7 +45,7 @@ export default {
     },
 
     methods : {
-        onSelect(e, id, src){
+        onInsert(e, id, src){
 
             if (this.attributes.attribute == 'id') {
                 this.input = id;

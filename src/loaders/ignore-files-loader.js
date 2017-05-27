@@ -4,7 +4,7 @@ module.exports     = function (content) {
     this.cacheable && this.cacheable();
     if (!this.emitFile) throw new Error("emitFile is required from module system");
 
-    var query     = loaderUtils.parseQuery(this.query);
+    var query     = loaderUtils.getOptions(this) || {};
     var configKey = query.config || "ignoreFilesLoader";
     var options   = this.options[configKey] || {};
 
@@ -34,12 +34,11 @@ module.exports     = function (content) {
     if (config.publicPath) {
         // support functions as publicPath to generate them dynamically
         publicPath = JSON.stringify(
-            typeof config.publicPath === "function"
-                ? config.publicPath(url)
-                : config.publicPath + url
+            typeof config.publicPath === "function" ? config.publicPath(url) : config.publicPath + url
         );
     }
 
     return "module.exports = " + publicPath + ";";
 }
 module.exports.raw = true;
+

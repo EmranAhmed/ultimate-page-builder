@@ -1,5 +1,6 @@
-import extend from 'extend'
-import sanitizeHtml from 'sanitize-html'
+import extend from "extend";
+import sanitizeHtml from "sanitize-html";
+import url from "url";
 
 class store {
 
@@ -21,6 +22,16 @@ class store {
         this.subpanel             = '';
         this.sidebarExpanded      = true;
         this.currentPreviewDevice = ''
+    }
+
+    isLocal(link = '') {
+
+        if (link.trim() === '') {
+            return true;
+        }
+
+        let $link = url.parse(link.trim(), true);
+        return $link.host == window.location.host;
     }
 
     isElementRegistered(tag) {
@@ -49,10 +60,10 @@ class store {
     }
 
     addContentsToTab(tabId, contents = []) {
-        this.getTabs().map((tab, index)=> {
+        this.getTabs().map((tab, index) => {
             if (tab.id == tabId) {
                 if (_.isArray(contents) && !_.isEmpty(contents)) {
-                    contents.map((content)=> {
+                    contents.map((content) => {
                         tab.contents.push(content);
                     })
                 }
@@ -61,7 +72,7 @@ class store {
     }
 
     getContentsOfTab(tabId) {
-        return this.getTabs().filter((tab)=> {
+        return this.getTabs().filter((tab) => {
             return tab.id == tabId;
         })
     }
@@ -76,7 +87,7 @@ class store {
             return null;
         }
 
-        let setting = this.getSettings().filter(setting=> {
+        let setting = this.getSettings().filter(setting => {
             return setting.metaId == id;
         }).pop();
 
@@ -89,7 +100,7 @@ class store {
     }
 
     loadTabContents() {
-        this.getTabs().map((tab)=> {
+        this.getTabs().map((tab) => {
 
             this.getPanelContents(`_get_upb_${tab.id}_panel_contents`, function (contents) {
                 tab.contents = extend(true, [], contents);
@@ -176,7 +187,7 @@ class store {
     }
 
     getShortcode(shortcodes) {
-        return shortcodes.map((shortcode)=> {
+        return shortcodes.map((shortcode) => {
 
             let attributes = extend(true, {}, shortcode.attributes);
             delete attributes._contents;

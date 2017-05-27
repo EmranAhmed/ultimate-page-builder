@@ -37,7 +37,7 @@ if (process.env.NODE_ENV == 'package') {
         fsExtra.ensureDir(copyto, function (err) {
             if (err) return console.error(err)
 
-            includes.map(include=> {
+            includes.map(include => {
 
                 fsExtra.copy(`${copyfrom}/${include}`, `${copyto}/${include}`, function (err) {
                     if (err) return console.error(err)
@@ -93,12 +93,14 @@ else {
 
     mix.js('src/builder.js', `assets/js/upb-builder${min}.js`);
 
-    ['select2', 'upb-boilerplate', 'upb-scoped-polyfill', 'wp-color-picker-alpha'].map((name)=> mix.babel(`src/js/${name}.js`, `assets/js/${name}${min}.js`));
+    // mix.js('src/js/upb-media.js', `assets/js/upb-media${min}.js`);
+
+    ['select2', 'upb-boilerplate', 'upb-scoped-polyfill', 'wp-color-picker-alpha'].map((name) => mix.babel(`src/js/${name}.js`, `assets/js/${name}${min}.js`));
 
     // Vendor, Check CommonsChunkPlugin on webpack.config.js
     mix.extract(['vue', 'vue-router', 'extend', 'sprintf-js', 'sanitize-html', 'copy-to-clipboard'], `assets/js/upb-vendor${min}.js`);
 
-    ['select2', 'upb-boilerplate', 'upb-grid', 'upb-preview', 'upb-skeleton'].map((name)=> mix.sass(`src/scss/${name}.scss`, `assets/css/${name}${min}.css`));
+    ['select2', 'upb-boilerplate', 'upb-grid', 'upb-preview', 'upb-skeleton'].map((name) => mix.sass(`src/scss/${name}.scss`, `assets/css/${name}${min}.css`));
 
 }
 

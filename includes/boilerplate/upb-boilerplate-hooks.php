@@ -1,106 +1,99 @@
 <?php
-
+    
     defined( 'ABSPATH' ) or die( 'Keep Silent' );
-
+    
     // Column
     add_filter( 'upb_upb-column_contents_panel_toolbar', function ( $toolbar ) {
-
+        
         $new = array(
             'title'  => esc_html__( 'Elements Panel', 'ultimate-page-builder' ),
             'id'     => 'elements-panel',
             'icon'   => 'mdi mdi-shape-plus',
             'action' => 'showElementsPanel'
         );
-
+        
         array_unshift( $toolbar, $new );
-
+        
         return $toolbar;
-
+        
     } );
-
+    
     // Row
     add_filter( 'upb_upb-row_contents_panel_toolbar', function ( $toolbar ) {
         $toolbar[ 'new' ]     = apply_filters( 'upb_new_column_data', upb_elements()->get_element( 'upb-column' ) );
         $toolbar[ 'layouts' ] = upb_sample_grid_layout();
-
+        
         return $toolbar;
     } );
-
+    
     // Section
     add_filter( 'upb_upb-section_contents_panel_toolbar', function ( $toolbar ) {
-
+        
         $new = array(
             'id'     => 'add-new-row',
             'title'  => esc_html__( 'Add Row', 'ultimate-page-builder' ),
             'icon'   => 'mdi mdi-table-row-plus-after',
             'action' => 'addNew',
-            'data'   => apply_filters( 'upb_new_row_data', upb_elements()->generate_element(
-                'upb-row', upb_elements()->generate_element(
-                'upb-column', array(), array(
+            'data'   => apply_filters( 'upb_new_row_data', upb_elements()->generate_element( 'upb-row', upb_elements()->generate_element( 'upb-column', array(), array(
                 'title' => esc_html__( 'Column 1', 'ultimate-page-builder' )
             ) ), array(
-                    'title' => esc_html__( 'New Row %s', 'ultimate-page-builder' )
-                ) ) )
+                                                                                                 'title' => esc_html__( 'New Row %s', 'ultimate-page-builder' )
+                                                                                             ) ) )
         );
-
+        
         $save = array(
             'id'     => 'save-section',
             'title'  => esc_html__( 'Save Section', 'ultimate-page-builder' ),
             'icon'   => 'mdi mdi-cube-send',
             'action' => 'saveSectionLayout'
         );
-
+        
         array_unshift( $toolbar, $new );
-
+        
         array_push( $toolbar, $save );
-
+        
         return $toolbar;
     } );
-
+    
     // Register Tabs
     add_action( 'upb_register_tab', function ( $tab ) {
-
+        
         $data = array(
             'title'    => esc_html__( 'Sections', 'ultimate-page-builder' ),
             'help'     => wp_kses_post( __( '<h2>Just Getting Starting?</h2><p>Add a section then click on <i class="mdi mdi-table-edit"></i> icon to manage column layouts or click on <i class="mdi mdi-settings"></i> icon to change settings or use <i class="mdi mdi-cursor-move"></i> to reorder.</p>', 'ultimate-page-builder' ) ),
             'search'   => esc_html__( 'Search Sections', 'ultimate-page-builder' ),
             'tools'    => apply_filters( 'upb_tab_sections_tools', array(
-                                                                     array(
-                                                                         'id'     => 'add-new-section',
-                                                                         'title'  => esc_html__( 'Add Section', 'ultimate-page-builder' ),
-                                                                         'icon'   => 'mdi mdi-package-variant',
-                                                                         'action' => 'addNew',
-                                                                         'data'   => apply_filters( 'upb_new_section_data',
-                                                                                                    upb_elements()->generate_element(
-                                                                                                        'upb-section', upb_elements()->generate_element(
-                                                                                                        'upb-row', upb_elements()->generate_element(
-                                                                                                        'upb-column', array(), array(
-                                                                                                        'title' => esc_html__( 'Column 1', 'ultimate-page-builder' )
-                                                                                                    ) ), array(
-                                                                                                            'title' => esc_html__( 'Row 1', 'ultimate-page-builder' )
-                                                                                                        ) ) ) )
-                                                                     ),
-                                                                     array(
-                                                                         'id'     => 'load-sections',
-                                                                         'title'  => esc_html__( 'Saved Sections', 'ultimate-page-builder' ),
-                                                                         'icon'   => 'mdi mdi-cube-outline',
-                                                                         'action' => 'openSubPanel',
-                                                                         'data'   => 'sections'
-                                                                     ),
-                                                                     array(
-                                                                         'id'     => 'copy-layouts',
-                                                                         'title'  => esc_html__( 'Copy Layout', 'ultimate-page-builder' ),
-                                                                         'icon'   => 'mdi mdi-clipboard-text',
-                                                                         'action' => 'copyLayoutToClipboard',
-                                                                     ),
-                                                                 )
-            ), // add section | load section | layouts
+                array(
+                    'id'     => 'add-new-section',
+                    'title'  => esc_html__( 'Add Section', 'ultimate-page-builder' ),
+                    'icon'   => 'mdi mdi-package-variant',
+                    'action' => 'addNew',
+                    'data'   => apply_filters( 'upb_new_section_data', upb_elements()->generate_element( 'upb-section', upb_elements()->generate_element( 'upb-row', upb_elements()->generate_element( 'upb-column', array(), array(
+                        'title' => esc_html__( 'Column 1', 'ultimate-page-builder' )
+                    ) ), array(
+                                                                                                                                                              'title' => esc_html__( 'Row 1', 'ultimate-page-builder' )
+                                                                                                                                                          ) ) ) )
+                ),
+                array(
+                    'id'     => 'load-sections',
+                    'title'  => esc_html__( 'Saved Sections', 'ultimate-page-builder' ),
+                    'icon'   => 'mdi mdi-cube-outline',
+                    'action' => 'openSubPanel',
+                    'data'   => 'sections'
+                ),
+                array(
+                    'id'     => 'copy-layouts',
+                    'title'  => esc_html__( 'Copy Layout', 'ultimate-page-builder' ),
+                    'icon'   => 'mdi mdi-clipboard-text',
+                    'action' => 'copyLayoutToClipboard',
+                ),
+            ) ), // add section | load section | layouts
             'icon'     => 'mdi mdi-package-variant',
             'contents' => apply_filters( 'upb_sections_panel_contents', array() )
         );
         $tab->register( 'sections', $data, TRUE );
-
-
+        
+        
         $data = array(
             'title'    => esc_html__( 'Elements', 'ultimate-page-builder' ),
             'search'   => esc_html__( 'Search Element', 'ultimate-page-builder' ),
@@ -110,7 +103,7 @@
             'contents' => apply_filters( 'upb_tab_elements_contents', array() ),
         );
         $tab->register( 'elements', $data, FALSE );
-
+        
         $data = array(
             'title'    => esc_html__( 'Settings', 'ultimate-page-builder' ),
             'help'     => wp_kses_post( __( '<p>Simply enable or disable page builder for the current page and select elements building position.</p>', 'ultimate-page-builder' ) ),
@@ -119,8 +112,8 @@
             'contents' => apply_filters( 'upb_tab_settings_contents', array() ),
         );
         $tab->register( 'settings', $data, FALSE );
-
-
+        
+        
         $data = array(
             'title'    => esc_html__( 'Pre-build Layouts', 'ultimate-page-builder' ),
             'search'   => esc_html__( 'Search Layouts', 'ultimate-page-builder' ),
@@ -130,8 +123,8 @@
             'contents' => apply_filters( 'upb_tab_layouts_contents', array() ),
         );
         $tab->register( 'layouts', $data, FALSE );
-
-
+        
+        
         /*$data = array(
             'title'    => esc_html__( 'Extra Panel', 'ultimate-page-builder' ),
             'search'   => esc_html__( 'Search in Extra Panel', 'ultimate-page-builder' ),
@@ -141,25 +134,25 @@
             'contents' => apply_filters( 'upb_tab_extra_panel_contents', array() ),
         );
         $tab->register( 'extra', $data, FALSE );*/
-
+        
     } );
-
+    
     // Backend Scripts
     add_action( 'upb_boilerplate_enqueue_scripts', function () {
-
+        
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
+        
         wp_register_script( 'upb-common', UPB_PLUGIN_ASSETS_URI . "js/upb-common.js", array(), FALSE, TRUE );
-
+        
         wp_register_style( 'dashicon', includes_url( "/css/dashicons$suffix.css" ) );
         wp_register_style( 'select2', UPB_PLUGIN_ASSETS_URI . "css/select2$suffix.css" );
-
+        
         if ( function_exists( 'WC' ) ):
             wp_register_style( 'woocommerce_admin_menu_styles', WC()->plugin_url() . '/assets/css/menu.css', array() );
         endif;
-
+        
         wp_register_script( 'select2', UPB_PLUGIN_ASSETS_URI . "js/select2$suffix.js", array( 'jquery' ), FALSE, TRUE );
-
+        
         // Color
         wp_register_script( 'iris', admin_url( "/js/iris.min.js" ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), FALSE, TRUE );
         wp_register_script( 'wp-color-picker', admin_url( "/js/color-picker$suffix.js" ), array( 'iris' ), FALSE, TRUE );
@@ -169,15 +162,15 @@
             'pick'          => esc_html__( 'Select Color', 'ultimate-page-builder' ),
             'current'       => esc_html__( 'Current Color', 'ultimate-page-builder' ),
         ) );
-
+        
         wp_register_script( 'wp-color-picker-alpha', UPB_PLUGIN_ASSETS_URI . "js/wp-color-picker-alpha$suffix.js", array( 'wp-color-picker' ), FALSE, TRUE );
-
+        
     } );
-
+    
     // Load Admin Styles :)
     add_action( 'upb_boilerplate_print_styles', function () {
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
+        
         // ref: /wp-includes/script-loader.php
         // to Clean Slate We did not use wp_head hook on boilerplate template
         // that's why default registered scripts / styles does not load without re-registering :)
@@ -188,17 +181,17 @@
         wp_enqueue_style( 'wp-color-picker' );
         wp_enqueue_style( 'select2' );
         wp_enqueue_style( 'woocommerce_admin_menu_styles' );
-
+        
         wp_enqueue_style( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URI . "css/upb-boilerplate$suffix.css" );
-
+        
         wp_enqueue_style( 'upb-style', UPB_PLUGIN_ASSETS_URI . "css/upb-style$suffix.css" );
-
+        
     } );
-
+    
     add_action( 'upb_boilerplate_enqueue_scripts', function () {
-
+        
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
+        
         wp_enqueue_media();
         wp_enqueue_script( 'upb-common' );
         wp_enqueue_script( 'wp-color-picker-alpha' );
@@ -206,13 +199,13 @@
         wp_enqueue_script( 'upb-vendor', UPB_PLUGIN_ASSETS_URI . "js/upb-vendor$suffix.js", array(), '', TRUE );
         wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URI . "js/upb-builder$suffix.js", array( 'upb-vendor', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable', 'wp-util', 'wp-color-picker', 'shortcode' ), '', TRUE );
         wp_enqueue_script( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URI . "js/upb-boilerplate$suffix.js", array( 'jquery', 'upb-builder' ), '', TRUE );
-
+        
         $data = sprintf( "const _upb_tabs = %s;\n", upb_tabs()->getJSON() );
-
+        
         $data .= sprintf( "const _upb_router_config = %s;\n", wp_json_encode( array(
                                                                                   'mode' => 'hash' // abstract, history, hash
                                                                               ) ) );
-
+        
         $data .= sprintf( "const _upb_routes = %s;\n", wp_json_encode( apply_filters( 'upb_routes', array(
             array(
                 //    'name'      => 'extra',
@@ -220,29 +213,29 @@
                 //    'component' => 'ExtraPanel',
             ) // you should register a tab before add routes
         ) ) ) );
-
+        
         $data .= sprintf( "const _upb_fields = %s;\n", wp_json_encode( apply_filters( 'upb_fields', array(
             array(
                 //'name'      => 'extra',
                 //'component' => 'exampleExtraInput',
             )
         ) ) ) );
-
+        
         $data .= sprintf( "const _upb_user_inputs_mixin = %s;\n", wp_json_encode( apply_filters( 'upb_user_inputs_mixin', array(// 'text' => 'textInputMixinExample',
         ) ) ) );
-
+        
         $data .= sprintf( "const _upb_status = %s;\n", wp_json_encode( array( 'dirty' => FALSE, '_nonce' => wp_create_nonce( '_upb' ), '_id' => get_the_ID() ) ) );
-
+        
         $data .= sprintf( "const _upb_preview_devices = %s;", wp_json_encode( upb_preview_devices() ) );
-
+        
         $data .= sprintf( "const _upb_responsive_hidden_devices = %s;", wp_json_encode( upb_responsive_hidden_options() ) );
-
+        
         $data .= sprintf( "const _upb_grid_system = %s;", wp_json_encode( upb_grid_system() ) );
-
+        
         $data .= sprintf( "const _upb_registered_elements = %s;", wp_json_encode( upb_elements()->getNamed() ) );
-
+        
         wp_script_add_data( 'upb-builder', 'data', $data );
-
+        
         wp_localize_script( 'upb-builder', '_upb_l10n', apply_filters( '_upb_l10n_strings', array(
             'sectionSaving'        => esc_attr__( 'Section Saving...', 'ultimate-page-builder' ),
             'sectionSaved'         => esc_attr__( 'Section Saved.', 'ultimate-page-builder' ),
@@ -288,7 +281,6 @@
             // 'closeUrl'         => esc_url( get_permalink() ),
             'closeUrl'             => esc_url( add_query_arg( 'preview', 'true', get_permalink() ) ),
             'ajaxUrl'              => esc_url( admin_url( 'admin-ajax.php', 'relative' ) ),
-
             // Templates
             'layoutPlaceholder'    => upb_images_uri( '/layout-placeholder.png' ),
             'editorTemplate'       => upb_wp_editor_template(),
@@ -298,12 +290,12 @@
             'pageTitle'            => get_the_title(),
         ) ) );
     } );
-
+    
     // Media Manager Extend
     add_action( 'upb_boilerplate_print_footer_scripts', function () {
         include upb_templates_path( 'upb_media_display_settings.php' );
     } );
-
+    
     add_action( 'upb_boilerplate_print_footer_scripts', function () {
         //$tabs = upb_tabs()->getAll();
         print( "<script type='text/javascript'>
@@ -321,7 +313,7 @@
 //  props:[]
 //}
 </script>" );
-
+        
         print( '<script type="text/x-template" id="extra-input-template">
 <li :class="typeClass()">
         <div class="form-group">
@@ -333,7 +325,7 @@
         </div>
 </li>
 </script>' );
-
+        
         print( "<script type='text/javascript'>
 //var exampleExtraInput = {
   // template: '<span> Input Extra </span>',

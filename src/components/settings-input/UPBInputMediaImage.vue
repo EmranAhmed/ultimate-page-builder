@@ -8,7 +8,7 @@
                 </div>
             </label>
 
-            <div v-image-media class="attachment-media-view">
+            <div v-upb-media class="attachment-media-view">
                 <div v-if="input" class="preview">
                     <img :src="src" alt="" draggable="false">
                 </div>

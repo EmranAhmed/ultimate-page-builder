@@ -111,38 +111,14 @@
     <?php endif; ?>
 </script>
 
-<script type="text/javascript">
-    jQuery(document).ready(function () {
-        wp.media.view.Settings.AttachmentDisplay = wp.media.view.Settings.AttachmentDisplay.extend({
-            template : function (view) {
+<script type="text/html" id="tmpl-upb-embed-link-settings">
+    <div class="embed-container" style="display: none;">
+        <div class="embed-preview"></div>
+    </div>
+</script>
 
-                let upb_state  = this.controller.state().id;
-                let templateId = 'attachment-display-settings';
-
-                // console.log(this.controller.options.upbOptions.size);
-
-                if ('upb-image-media' == upb_state) {
-                    // Set Default Size
-                    this.model.attributes.size = this.controller.options.upbOptions.size;
-                    templateId                 = 'upb-attachment-display-settings';
-                }
-
-                return wp.media.template(templateId)(view);
-            }
-        });
-
-        wp.media.view.Attachment.Details = wp.media.view.Attachment.Details.extend({
-            template : function (view) {
-
-                let upb_state  = this.controller.state().id;
-                let templateId = 'attachment-details';
-
-                if ('upb-image-media' == upb_state) {
-                    templateId = 'upb-attachment-details';
-                }
-
-                return wp.media.template(templateId)(view);
-            }
-        })
-    });
+<script type="text/html" id="tmpl-upb-embed-image-settings">
+    <div class="thumbnail">
+        <img src="{{ data.model.url }}" draggable="false" alt="" />
+    </div>
 </script>

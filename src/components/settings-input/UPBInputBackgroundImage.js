@@ -2,11 +2,8 @@ import store from '../../store'
 import common from './common'
 import userInputMixin from './user-mixins'
 
-import ImageMedia from '../../plugins/vue-image-media'
-import BackgroundPosition from '../../plugins/vue-background-position'
-
-// Vue.use(ImageMedia);
-// Vue.use(BackgroundPosition);
+import  '../../plugins/vue-upb-media'
+import '../../plugins/vue-background-position'
 
 export default {
     name : 'upb-input-background-image',
@@ -14,7 +11,7 @@ export default {
     mixins : [common, userInputMixin('background-image')],
 
     methods : {
-        onSelect(e, id, src){
+        onInsert(e, id, src){
             Vue.set(this, 'input', src);
         },
         onRemove(e){

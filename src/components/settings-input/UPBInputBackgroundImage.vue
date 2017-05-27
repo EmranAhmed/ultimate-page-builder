@@ -7,7 +7,7 @@
                     <span class="title" v-text="attributes.title"></span>
                 </div>
             </label>
-            <div v-image-media class="attachment-media-view">
+            <div v-upb-media class="attachment-media-view">
                 <div v-show="input" class="preview background-preview">
                     <div class="pointer" v-background-position="useAttributeValue"></div>
                     <img :src="input" alt="" draggable="false">
