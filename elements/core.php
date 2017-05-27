@@ -95,11 +95,7 @@
         
         array_push( $attributes, upb_responsive_hidden_input() );
         
-        /*array_push( $attributes, array(
-            'id'    => '__heading', // __ (double underscores) based id will remove from saving
-            'title' => esc_html__( 'Extras', 'ultimate-page-builder' ),
-            'type'  => 'heading'
-        ) );*/
+/*        array_push( $attributes, upb_add_heading( esc_html__( 'Extras', 'ultimate-page-builder' ) ) );*/
         
         array_push( $attributes, array(
             'id'      => 'margin',

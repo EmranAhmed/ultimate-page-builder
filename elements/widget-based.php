@@ -80,12 +80,7 @@
             ) );
         
         else:
-            array_push( $attributes, array(
-                'id'    => '__message', // __ (double underscores) based id will remove from saving
-                'title' => sprintf( esc_html__( 'No Menu available. %sCreate a menu first%s', 'ultimate-page-builder' ), '<a target="_blank" href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">', '</a>' ),
-                'type'  => 'message',
-                'style' => 'warning'
-            ) );
+            array_push( $attributes, upb_add_message( sprintf( esc_html__( 'No Nav Menu available. %sCreate a menu first%s', 'ultimate-page-builder' ), '<a target="_blank" href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">', '</a>' ), 'warning' ) );
         endif;
         
         array_push( $attributes, upb_responsive_hidden_input() );

@@ -1,141 +1,142 @@
 <?php
-
+    
     defined( 'ABSPATH' ) or die( 'Keep Silent' );
-
+    
     // URI Functions
     function upb_assets_uri( $url = '' ) {
         return UPB_PLUGIN_ASSETS_URI . ltrim( untrailingslashit( $url ), '/' );
     }
-
+    
     function upb_images_uri( $url = '' ) {
         return UPB_PLUGIN_IMAGES_URI . ltrim( untrailingslashit( $url ), '/' );
     }
-
+    
     function upb_fonts_uri( $url = '' ) {
         return UPB_PLUGIN_FONTS_URI . ltrim( untrailingslashit( $url ), '/' );
     }
-
+    
     function upb_plugin_uri( $url = '' ) {
         return UPB_PLUGIN_URI . ltrim( untrailingslashit( $url ), '/' );
     }
-
+    
     function upb_plugin_path( $path = '' ) {
         return UPB_PLUGIN_PATH . ltrim( untrailingslashit( $path ) );
     }
-
+    
     function upb_elements_path( $path = '' ) {
         return UPB_PLUGIN_ELEMENTS_PATH . ltrim( untrailingslashit( $path ) );
     }
-
+    
     function upb_elements_uri( $url = '' ) {
         return UPB_PLUGIN_ELEMENTS_URI . ltrim( untrailingslashit( $url ), '/' );
     }
-
+    
     function upb_include_path( $path = '' ) {
         return UPB_PLUGIN_INCLUDE_PATH . ltrim( untrailingslashit( $path ), '/' );
     }
-
+    
     function upb_templates_path( $path = '' ) {
         return UPB_PLUGIN_TEMPLATES_PATH . ltrim( untrailingslashit( $path ), '/' );
     }
-
+    
     function upb_templates_uri( $url = '' ) {
         return UPB_PLUGIN_TEMPLATES_URI . ltrim( untrailingslashit( $url ), '/' );
     }
-
+    
     function upb_get_edit_link( $post = 0 ) {
         if ( is_admin() ) {
             return esc_url( add_query_arg( 'upb', '1', wp_get_shortlink( $post ) ) );
-        } else {
+        }
+        else {
             return esc_url( add_query_arg( 'upb', '1', get_permalink( $post ) ) );
         }
     }
-
+    
     function upb_get_preview_link() {
         //$query = array( 'upb-preview' => TRUE, 'rand' => time() );
         $query = array( 'upb-preview' => TRUE );
-
+        
         return esc_url( add_query_arg( $query, get_preview_post_link( get_the_ID() ) ) );
     }
-
+    
     // Class instances
-
+    
     function upb_elements() {
         return UPB_Elements::getInstance();
     }
-
+    
     function upb_tabs() {
         return UPB_Tabs::getInstance();
     }
-
+    
     function upb_settings() {
         return UPB_Settings::getInstance();
     }
-
+    
     function upb_layouts() {
         return UPB_Layouts::getInstance();
     }
-
+    
     // Conditional
     function upb_is_ios() {
         return wp_is_mobile() && preg_match( '/iPad|iPod|iPhone/', $_SERVER[ 'HTTP_USER_AGENT' ] );
     }
-
+    
     function upb_is_ie() {
         global $is_IE;
-
+        
         return wp_is_mobile() && $is_IE;
     }
-
+    
     function upb_is_buildable( $post = '' ) {
         return apply_filters( 'upb_has_access', TRUE ) && UPB()->is_post_type_allowed( $post );
     }
-
+    
     function upb_is_preview() {
         return ( upb_is_buildable() && isset( $_GET[ 'upb-preview' ] ) && $_GET[ 'upb-preview' ] == '1' && is_user_logged_in() );
     }
-
+    
     function upb_is_boilerplate() {
         return ( upb_is_buildable() && isset( $_GET[ 'upb' ] ) && $_GET[ 'upb' ] == '1' && is_user_logged_in() );
     }
-
+    
     function upb_is_preview_request() {
         return ( isset( $_GET[ 'upb-preview' ] ) && $_GET[ 'upb-preview' ] == '1' && is_user_logged_in() );
     }
-
+    
     function upb_is_boilerplate_request() {
         return ( isset( $_GET[ 'upb' ] ) && $_GET[ 'upb' ] == '1' && is_user_logged_in() );
     }
-
+    
     function upb_is_enabled() {
         return UPB()->is_enabled();
     }
-
+    
     function upb_is_valid_url( $url ) {
-
+        
         // Support Protocol-less URL
         $expression = '@^(?:(?:https?|ftps?):)?[//]{2}(?:[^/]+)@i';
-
+        
         // `preg_match` Return 0 if the pattern does not matches given subject, or FALSE if an error occurred.
         return (bool) preg_match( $expression, $url );
     }
-
+    
     // Check valid ajax request
     function upb_check_ajax_access() {
         if ( ! current_user_can( 'customize' ) ) {
             wp_send_json_error( 'upb_not_allowed', 403 );
         }
-
+        
         if ( ! check_ajax_referer( '_upb', '_nonce', FALSE ) ) {
             wp_send_json_error( 'bad_nonce', 400 );
         }
-
+        
         do_action( 'upb_check_ajax_access' );
     }
-
+    
     // Grid
     function upb_grid_system( $key = FALSE ) {
-
+        
         $grid = apply_filters( 'upb_grid_system', array(
             'name'              => esc_html__( 'UPB Grid', 'ultimate-page-builder' ),
             'simplifiedRatio'   => esc_html__( 'Its recommended to use simplified form of column grid ratio like: %s', 'ultimate-page-builder' ),
@@ -157,15 +158,15 @@
             'allowedGrid'       => array( 1, 2, 3, 4, 6, 12 ),
             'nonAllowedMessage' => esc_html__( "Sorry, UPB Grid doesn't support %s grid column.", 'ultimate-page-builder' )
         ) );
-
-
+        
+        
         if ( $key ) {
             return isset( $grid[ $key ] ) ? $grid[ $key ] : NULL;
         }
-
+        
         return $grid;
     }
-
+    
     function upb_preview_devices() {
         return apply_filters( 'upb_preview_devices', array(
             array(
@@ -202,21 +203,22 @@
             )
         ) );
     }
-
+    
     function upb_devices( $key = FALSE ) {
-
+        
         // Because Preview device and grid device may not same
         $devices = upb_grid_system( 'devices' );
-
+        
         if ( ! $key ) {
             return array_values( $devices );
-        } else {
+        }
+        else {
             return array_map( function ( $device ) use ( $key ) {
                 return isset( $device[ $key ] ) ? $device[ $key ] : FALSE;
             }, array_values( $devices ) );
         }
     }
-
+    
     function upb_sample_grid_layout() {
         return apply_filters( 'upb_sample_grid_layout', array(
             array(
@@ -249,11 +251,11 @@
             )
         ) );
     }
-
+    
     function upb_responsive_hidden_options() {
-
+        
         $devices = upb_devices();
-
+        
         $hidden_devices = apply_filters( 'upb_responsive_hidden_options', array_map( function ( $device ) {
             return array(
                 'id'    => sprintf( 'hidden-%s', $device[ 'id' ] ),
@@ -261,50 +263,51 @@
                 'icon'  => $device[ 'icon' ]
             );
         }, $devices ) );
-
+        
         return apply_filters( 'upb_responsive_hidden_options_output', array_values( $hidden_devices ) );
     }
-
-
+    
+    
     if ( ! function_exists( 'upb_make_column_class' ) ):
-
+        
         function upb_make_column_class( $attributes, $extra = FALSE ) {
-
+            
             $grid    = upb_grid_system();
             $devices = upb_devices( 'id' );
-
+            
             $classes = upb_list_pluck( upb_devices(), array( 'class' ), 'id' );
-
+            
             $columns = array();
-
+            
             if ( $extra ) {
                 $columns[] = $extra;
             }
-
+            
             foreach ( $attributes as $name => $value ) {
                 if ( in_array( $name, $devices ) && ! empty( $value ) ) {
                     $col = explode( ':', $value );
-
+                    
                     $class = isset( $classes[ $name ] ) ? $classes[ $name ][ 'class' ] : FALSE;
-
+                    
                     if ( $class ) {
                         $columns[] = ( ( $grid[ 'allGridClass' ] ) ? $grid[ 'allGridClass' ] . ' ' : '' ) . $class . ( ( absint( $grid[ 'totalGrid' ] ) / absint( $col[ 1 ] ) ) * absint( $col[ 0 ] ) );
-                    } else {
+                    }
+                    else {
                         $columns[] = ( ( $grid[ 'allGridClass' ] ) ? $grid[ 'allGridClass' ] . ' ' : '' ) . $grid[ 'prefixClass' ] . $grid[ 'separator' ] . $name . $grid[ 'separator' ] . ( ( absint( $grid[ 'totalGrid' ] ) / absint( $col[ 1 ] ) ) * absint( $col[ 0 ] ) );
                     }
                 }
             }
-
+            
             return implode( ' ', $columns );
         }
     endif;
     // Build-In Inputs
-
+    
     function upb_responsive_hidden_input( $title = '', $desc = '', $default = array() ) {
-
+        
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Hide on device', 'ultimate-page-builder' );
         $desc  = trim( $desc ) ? trim( $desc ) : esc_html__( 'Hide element on specific media device', 'ultimate-page-builder' );
-
+        
         return apply_filters( 'upb_responsive_hidden_input', array(
             'id'      => 'device-hidden',
             'title'   => esc_html( $title ),
@@ -327,14 +330,14 @@
             )*/
         ) );
     }
-
+    
     function upb_column_clearfix_input( $title = '', $desc = '', $default = array() ) {
-
+        
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Clearfix', 'ultimate-page-builder' );
         $desc  = trim( $desc ) ? trim( $desc ) : esc_html__( 'Show Clearfix element between columns', 'ultimate-page-builder' );
-
+        
         $devices = upb_devices();
-
+        
         $options = array_map( function ( $device ) {
             return array(
                 'id'    => $device[ 'id' ],
@@ -342,9 +345,9 @@
                 'icon'  => $device[ 'icon' ],
             );
         }, $devices );
-
+        
         $options = upb_list_pluck( $options, array( 'title', 'icon' ), 'id' );
-
+        
         return apply_filters( 'upb_column_clearfix_input', array(
             'id'      => 'clearfix', // esc_attr( $id ),
             'title'   => esc_html( $title ),
@@ -356,10 +359,10 @@
     }
     
     function upb_material_icon_input( $id, $title = '', $desc = '', $default = '' ) {
-
+        
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Material Icons', 'ultimate-page-builder' );
         $desc  = trim( $desc ) ? trim( $desc ) : sprintf( __( 'Search material design icons. Using <a target="_blank" href="%s">%s</a>', 'ultimate-page-builder' ), 'https://cdn.materialdesignicons.com/1.8.36/', esc_html__( 'Material Design Icons - 1.8.36', 'ultimate-page-builder' ) );
-
+        
         return apply_filters( 'upb_material_icon_input', array(
             'id'          => esc_attr( $id ),
             'title'       => esc_html( $title ),
@@ -373,12 +376,12 @@
             'placeholder' => esc_html__( 'Search Material Design Icons', 'ultimate-page-builder' ),
         ) );
     }
-
+    
     function upb_font_awesome_icon_input( $id, $title = '', $desc = '', $default = '' ) {
-
+        
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'FontAwesome Icons', 'ultimate-page-builder' );
         $desc  = trim( $desc ) ? trim( $desc ) : sprintf( __( 'Search FontAwesome icons. Using <a target="_blank" href="%s">%s</a>', 'ultimate-page-builder' ), 'http://fontawesome.io/icons/', esc_html__( 'Font Awesome Icons - 4.7', 'ultimate-page-builder' ) );
-
+        
         return apply_filters( 'upb_font_awesome_icon_input', array(
             'id'          => esc_attr( $id ),
             'title'       => esc_html( $title ),
@@ -392,12 +395,12 @@
             'placeholder' => esc_html__( 'Search FontAwesome Icons', 'ultimate-page-builder' ),
         ) );
     }
-
+    
     function upb_dashicons_icon_input( $id, $title = '', $desc = '', $default = '' ) {
-
+        
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Dashicons Icon', 'ultimate-page-builder' );
         $desc  = trim( $desc ) ? trim( $desc ) : sprintf( __( 'Search Dashicons icon. Using <a target="_blank" href="%s">%s</a>', 'ultimate-page-builder' ), 'https://developer.wordpress.org/resource/dashicons/', esc_html__( 'Dashicons', 'ultimate-page-builder' ) );
-
+        
         return apply_filters( 'upb_dashicons_icon_input', array(
             'id'          => esc_attr( $id ),
             'title'       => esc_html( $title ),
@@ -411,12 +414,12 @@
             'placeholder' => esc_html__( 'Search Dashicons Icon', 'ultimate-page-builder' ),
         ) );
     }
-
+    
     function upb_title_input( $title = '', $desc = '', $default = 'New %s' ) {
-
+        
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Title', 'ultimate-page-builder' );
         $desc  = trim( $desc ) ? trim( $desc ) : FALSE;
-
+        
         return apply_filters( 'upb_title_input', array(
             'id'          => 'title',
             'title'       => esc_html( $title ),
@@ -426,12 +429,12 @@
             'value'       => esc_attr( $default ),
         ) );
     }
-
+    
     function upb_enable_input( $title = '', $desc = '', $default = TRUE ) {
-
+        
         $title = trim( $title ) ? trim( $title ) : esc_html__( 'Enable / Disable', 'ultimate-page-builder' );
         $desc  = trim( $desc ) ? trim( $desc ) : esc_html__( 'Enable or Disable Element', 'ultimate-page-builder' );
-
+        
         return apply_filters( 'upb_enable_input', array(
             'id'    => 'enable',
             'title' => esc_html( $title ),
@@ -440,42 +443,59 @@
             'value' => (bool) $default,
         ) );
     }
-
+    
+    function upb_add_message( $title, $style = 'info' ) {
+        return array(
+            'id'    => uniqid( '__' ),
+            'title' => wp_kses_post( $title ),
+            'type'  => 'message',
+            'style' => esc_html( $style )
+        );
+    }
+    
+    function upb_add_heading( $title ) {
+        return array(
+            'id'    => uniqid( '__' ),
+            'title' => esc_html( $title ),
+            'type'  => 'heading',
+        );
+    }
+    
     function upb_column_device_input( $defaults = array() ) {
-
+        
         // $defaults = array('md'=>'1:1', 'sm'=>'1:1')
-
+        
         $devices = upb_devices( 'id' );
-
+        
         if ( empty( $defaults ) ) {
             foreach ( $devices as $device ) {
                 $defaults[ $device ] = '';
             }
             $defaults[ upb_grid_system( 'defaultDeviceId' ) ] = '1:1';
         }
-
+        
         return array_map( function ( $device, $defaultDevice, $defaultValue ) {
             $value = $device == $defaultDevice ? $defaultValue : '';
-
+            
             return array( 'id' => $device, 'type' => 'hidden', 'value' => $value );
         }, $devices, array_keys( $defaults ), $defaults );
     }
-
+    
     function upb_row_wrapper_input() {
         $groups = upb_grid_system( 'groupWrapper' );
         if ( $groups ):
             $default = array_keys( $groups );
-
+            
             return apply_filters( 'upb_row_wrapper_input', array( 'id' => 'container', 'title' => esc_html__( 'Container Type', 'ultimate-page-builder' ), 'type' => 'radio', 'value' => $default[ 0 ], 'options' => $groups ) );
         endif;
-
+        
         return apply_filters( 'upb_row_wrapper_input', array() );
     }
-
+    
     function upb_background_input_group( $args = array() ) {
-
+        
         // Plan: Background Video, Youtube/Vimeo Video, Gradient Overlay over image / video
-
+        
         $defaults = array(
             'gradient'            => TRUE,
             'gradient-color-stop' => TRUE,
@@ -483,34 +503,34 @@
             'image'               => TRUE,
             'both'                => TRUE,
         );
-
+        
         $args = wp_parse_args( $args, $defaults );
-
+        
         $options           = array();
         $options[ 'none' ] = array( 'title' => esc_html__( 'No background', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-close-octagon-outline' );
-
+        
         if ( $args[ 'gradient' ] ) {
             $options[ 'gradient' ] = array( 'title' => esc_html__( 'Gradient background', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-gradient' );
         }
-
+        
         if ( $args[ 'both' ] ) {
-
+            
             $args[ 'color' ] = TRUE;
             $args[ 'image' ] = TRUE;
-
+            
             $options[ 'both' ] = array( 'title' => esc_html__( 'Background Image and Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-folder-multiple-image' );
         }
-
+        
         if ( $args[ 'color' ] ) {
             $options[ 'color' ] = array( 'title' => esc_html__( 'Background Color', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-format-color-fill' );
         }
-
+        
         if ( $args[ 'image' ] ) {
             $options[ 'image' ] = array( 'title' => esc_html__( 'Background Image', 'ultimate-page-builder' ), 'icon' => 'mdi mdi-image' );
         }
-
+        
         $inputs = array();
-
+        
         array_push( $inputs, array(
             'id'      => 'background-type',
             'title'   => esc_html__( 'Background type', 'ultimate-page-builder' ),
@@ -519,9 +539,9 @@
             'value'   => 'none',
             'options' => $options
         ) );
-
+        
         if ( $args[ 'gradient' ] ) {
-
+            
             array_push( $inputs, array(
                 'id'       => 'gradient-position',
                 'title'    => esc_html__( 'Gradient Position', 'ultimate-page-builder' ),
@@ -566,7 +586,7 @@
                     array( 'background-type', '=', 'gradient' )
                 )
             ) );
-
+            
             array_push( $inputs, array(
                 'id'          => 'gradient-start-color',
                 'title'       => esc_html__( 'Gradient Start Color', 'ultimate-page-builder' ),
@@ -581,7 +601,7 @@
                     array( 'background-type', '=', 'gradient' )
                 )
             ) );
-
+            
             array_push( $inputs, array(
                 'id'       => 'gradient-start-location',
                 'title'    => esc_html__( 'Gradient Start Location', 'ultimate-page-builder' ),
@@ -596,7 +616,7 @@
                     array( 'background-type', '=', 'gradient' )
                 )
             ) );
-
+            
             if ( $args[ 'gradient-color-stop' ] ) {
                 array_push( $inputs, array(
                     'id'          => 'gradient-color-stop-1',
@@ -612,7 +632,7 @@
                         array( 'background-type', '=', 'gradient' )
                     )
                 ) );
-
+                
                 array_push( $inputs, array(
                     'id'       => 'gradient-color-stop-1-location',
                     'title'    => esc_html__( 'Color Stop 1 Location', 'ultimate-page-builder' ),
@@ -628,7 +648,7 @@
                     )
                 ) );
             }
-
+            
             array_push( $inputs, array(
                 'id'          => 'gradient-end-color',
                 'title'       => esc_html__( 'Gradient End Color', 'ultimate-page-builder' ),
@@ -643,7 +663,7 @@
                     array( 'background-type', '=', 'gradient' )
                 )
             ) );
-
+            
             array_push( $inputs, array(
                 'id'       => 'gradient-end-location',
                 'title'    => esc_html__( 'Gradient End Location', 'ultimate-page-builder' ),
@@ -659,7 +679,7 @@
                 )
             ) );
         }
-
+        
         if ( $args[ 'color' ] ) {
             array_push( $inputs, array(
                 'id'          => 'background-color',
@@ -676,7 +696,7 @@
                 )
             ) );
         }
-
+        
         if ( $args[ 'image' ] ) {
             array_push( $inputs, array(
                 'id'          => 'background-image',
@@ -695,7 +715,7 @@
                     array( 'background-type', '=', array( 'image', 'both' ) )
                 )
             ) );
-
+            
             array_push( $inputs, array(
                 'id'          => 'background-position',
                 'title'       => esc_html__( 'Background Image Position', 'ultimate-page-builder' ),
@@ -708,7 +728,7 @@
                     array( 'background-type', '=', array( 'image', 'both' ) )
                 )
             ) );
-
+            
             array_push( $inputs, array(
                 'id'       => 'background-repeat',
                 'title'    => esc_html__( 'Background Image repeat', 'ultimate-page-builder' ),
@@ -728,7 +748,7 @@
                     array( 'background-type', '=', array( 'image', 'both' ) )
                 )
             ) );
-
+            
             array_push( $inputs, array(
                 'id'       => 'background-attachment',
                 'title'    => esc_html__( 'Background Attachment', 'ultimate-page-builder' ),
@@ -747,7 +767,7 @@
                     array( 'background-type', '=', array( 'image', 'both' ) )
                 )
             ) );
-
+            
             array_push( $inputs, array(
                 'id'       => 'background-origin',
                 'title'    => esc_html__( 'Background origin', 'ultimate-page-builder' ),
@@ -766,7 +786,7 @@
                     array( 'background-type', '=', array( 'image', 'both' ) )
                 )
             ) );
-
+            
             array_push( $inputs, array(
                 'id'       => 'background-size',
                 'title'    => esc_html__( 'Background size', 'ultimate-page-builder' ),
@@ -786,10 +806,10 @@
                 )
             ) );
         }
-
+        
         return apply_filters( 'upb_background_input_group', $inputs );
     }
-
+    
     function upb_css_class_id_input_group( $default_class = '', $default_id = '' ) {
         return apply_filters( 'upb_css_class_id_input_group', array(
             array(
@@ -800,7 +820,7 @@
                 'type'        => 'text',
                 'value'       => esc_attr( $default_class )
             ),
-
+            
             array(
                 'id'          => 'element_id',
                 'title'       => esc_html__( 'Custom CSS ID', 'ultimate-page-builder' ),
@@ -811,11 +831,11 @@
             )
         ) );
     }
-
+    
     function upb_media_query_based_input_group( $input, $with_global = TRUE ) {
-
+        
         $get_devices = upb_devices();
-
+        
         $options = array_map( function ( $device ) {
             return array(
                 'id'    => $device[ 'id' ],
@@ -823,7 +843,7 @@
                 'icon'  => $device[ 'icon' ],
             );
         }, $get_devices );
-
+        
         if ( $with_global ) {
             array_unshift( $options, array(
                 'id'    => '',
@@ -831,24 +851,24 @@
                 'icon'  => 'mdi mdi-earth',
             ) );
         }
-
+        
         $devices = upb_list_pluck( $options, array( 'title', 'icon' ), 'id' );
-
+        
         $inputs = array_map( function ( $device, $key ) use ( $input, $options ) {
-
+            
             $input[ 'id' ]          = empty( $key ) ? $input[ 'id' ] : sprintf( '%s-%s', $input[ 'id' ], $key );
             $input[ 'title' ]       = empty( $key ) ? $input[ 'title' ] : sprintf( esc_html__( '%s for %s device', 'ultimate-page-builder' ), $input[ 'title' ], $device[ 'title' ] );
             $input[ 'value' ]       = empty( $key ) ? $input[ 'value' ] : ( ( isset( $input[ 'device-value' ] ) && isset( $input[ 'device-value' ][ $key ] ) ) ? $input[ 'device-value' ][ $key ] : $input[ 'value' ] );
             $input[ 'device' ]      = empty( $key ) ? '' : $key;
             $input[ 'deviceIcon' ]  = $device[ 'icon' ];
             $input[ 'deviceTitle' ] = $device[ 'title' ];
-
+            
             return $input;
         }, $devices, array_keys( $devices ) );
-
+        
         return $inputs;
     }
-
+    
     function upb_icon_providers() {
         return apply_filters( 'upb_icon_providers', array(
             array(
@@ -861,12 +881,12 @@
             )
         ) );
     }
-
-
+    
+    
     // End Build-In Inputs
-
+    
     // Helpers
-
+    
     /**
      * Pluck a certain field out of each object in a list.
      *
@@ -884,10 +904,10 @@
      */
     function upb_list_pluck( $list, $field, $index_key = NULL ) {
         $util = new UPB_List_Util( $list );
-
+        
         return $util->pluck( $field, $index_key );
     }
-
+    
     /**
      * Action Hook Information
      *
@@ -908,7 +928,8 @@
                         $reflFunc  = $reflClass->getMethod( $fnargs[ 'function' ][ 1 ] );
                         $class     = $reflClass->getName();
                         $function  = $reflFunc->name;
-                    } else {
+                    }
+                    else {
                         $reflFunc  = new ReflectionFunction( $fnargs[ 'function' ] );
                         $class     = FALSE;
                         $function  = $reflFunc->name;
@@ -916,7 +937,8 @@
                     }
                     if ( $class ) {
                         $functionName = sprintf( 'Class "%s::%s"', $class, $function );
-                    } else {
+                    }
+                    else {
                         $functionName = ( $isClosure ) ? "Anonymous Function $function" : "Function \"$function\"";
                     }
                     printf( $template, $functionName, $pri, str_ireplace( ABSPATH, '', $reflFunc->getFileName() ), $reflFunc->getStartLine() );
@@ -934,13 +956,13 @@
         }
         echo '</pre>';
     }
-
+    
     // Returns TRUE for "1", "true", "on" and "yes". Returns FALSE otherwise.
-
+    
     function upb_return_boolean( $data ) {
         return filter_var( $data, FILTER_VALIDATE_BOOLEAN );
     }
-
+    
     /**
      * Usages:
      *
@@ -956,28 +978,31 @@
      * return upb_remove_element_attribute(array('margin', 'padding'), $attributes);
      * });
      */
-
+    
     function upb_remove_element_attribute( $id, $attributes ) {
-
+        
         if ( empty( $attributes ) ) {
             return $attributes;
-        } else {
+        }
+        else {
             $new_attributes = array();
             foreach ( (array) $attributes as $attribute ) {
-
+                
                 if ( is_string( $id ) && $attribute[ 'id' ] == $id ) {
                     // Skip
-                } elseif ( is_array( $id ) && in_array( $attribute[ 'id' ], $id ) ) {
+                }
+                elseif ( is_array( $id ) && in_array( $attribute[ 'id' ], $id ) ) {
                     // Skip
-                } else {
+                }
+                else {
                     array_push( $new_attributes, $attribute );
                 }
             }
-
+            
             return $new_attributes;
         }
     }
-
+    
     /**
      * Usages:
      *
@@ -993,27 +1018,29 @@
      * });
      *
      */
-
+    
     function upb_replace_element_attribute( $id, $attribute, $attributes ) {
-
+        
         if ( empty( $attributes ) ) {
             return $attributes;
-        } else {
+        }
+        else {
             $new_attributes = array();
             foreach ( (array) $attributes as $attr ) {
-
+                
                 if ( is_string( $id ) && $attr[ 'id' ] == $id ) {
                     array_push( $new_attributes, $attribute );
-                } else {
+                }
+                else {
                     array_push( $new_attributes, $attr );
                 }
             }
-
+            
             return $new_attributes;
         }
     }
-
-
+    
+    
     /**
      * @param $id
      * @param $attribute
@@ -1042,18 +1069,20 @@
      * } );
      */
     function upb_add_attribute_after( $id, $attribute, $attributes ) {
-
+        
         if ( empty( $attributes ) ) {
             return $attributes;
-        } else {
+        }
+        else {
             $new_attributes = array();
             foreach ( (array) $attributes as $attr ) {
                 array_push( $new_attributes, $attr );
                 if ( is_string( $id ) && $attr[ 'id' ] == $id ) {
-
+                    
                     if ( isset( $attribute[ 'id' ] ) ) {
                         array_push( $new_attributes, $attribute );
-                    } else {
+                    }
+                    else {
                         foreach ( (array) $attribute as $attrs ) {
                             if ( is_array( $attrs ) ) {
                                 array_push( $new_attributes, $attrs );
@@ -1062,154 +1091,139 @@
                     }
                 }
             }
-
+            
             return $new_attributes;
         }
     }
-
+    
     function upb_is_shortcode_enabled( $attributes ) {
         // if not set then return true;
         return isset( $attributes[ 'enable' ] ) ? ! empty( $attributes[ 'enable' ] ) : TRUE;
     }
-
+    
     function upb_get_shortcode_class( $attributes, $extra = FALSE ) {
-
+        
         $classes = array();
         if ( isset( $attributes[ 'hidden-device' ] ) ) {
             $classes = array_merge( $classes, $attributes[ 'hidden-device' ] );
         }
-
+        
         if ( isset( $attributes[ 'element_class' ] ) ) {
             array_push( $classes, $attributes[ 'element_class' ] );
         }
-
+        
         if ( ! empty( $extra ) && is_string( $extra ) ) {
             array_push( $classes, $extra );
         }
-
+        
         if ( ! empty( $extra ) && is_array( $extra ) ) {
             $classes = array_merge( $classes, $extra );
         }
-
+        
         return implode( ' ', apply_filters( 'upb_get_shortcode_class', array_unique( $classes ) ) );
     }
-
+    
     function upb_get_shortcode_id( $attributes ) {
         return isset( $attributes[ 'element_id' ] ) ? apply_filters( 'upb_get_shortcode_id', $attributes[ 'element_id' ] ) : FALSE;
     }
-
+    
     function upb_shortcode_id( $attributes ) {
         echo esc_attr( upb_get_shortcode_id( $attributes ) );
     }
-
+    
     function upb_shortcode_attribute_id( $attributes ) {
         $id = trim( esc_attr( upb_get_shortcode_id( $attributes ) ) );
         if ( ! empty( $id ) ) {
             echo 'id="' . esc_attr( upb_get_shortcode_id( $attributes ) ) . '"';
         }
     }
-
+    
     function upb_shortcode_class( $attributes, $extra = FALSE ) {
         echo esc_attr( upb_get_shortcode_class( $attributes, $extra ) );
     }
-
+    
     function upb_get_shortcode_title( $attributes ) {
         return isset( $attributes[ 'title' ] ) ? apply_filters( 'upb_get_shortcode_title', $attributes[ 'title' ] ) : '';
     }
-
+    
     function upb_shortcode_title( $attributes ) {
         echo esc_html( upb_get_shortcode_title( $attributes ) );
     }
-
+    
     function upb_get_spacing_input_value( $id, $attributes, $_settings ) {
-
+        
         $settings = array_values( array_filter( $_settings, function ( $_setting ) use ( $id ) {
             return $_setting[ 'id' ] == $id;
         } ) )[ 0 ];
         $values   = isset( $attributes[ $id ] ) ? $attributes[ $id ] : $settings[ 'default' ];
-
+        
         return implode( ' ', $values );
     }
-
+    
     function upb_shortcode_scoped_style_background( $attributes ) {
-
+        
         if ( isset( $attributes[ 'background-type' ] ) ) {
-
+            
             if ( in_array( $attributes[ 'background-type' ], array( 'both', 'color' ) ) ) {
                 printf( 'background-color: %s;', esc_attr( $attributes[ 'background-color' ] ) );
             }
-
+            
             if ( in_array( $attributes[ 'background-type' ], array( 'both', 'image' ) ) ) {
-
+                
                 if ( trim( $attributes[ 'background-image' ] ) ) {
                     printf( 'background-image: %s;', sprintf( "url('%s')", esc_url( $attributes[ 'background-image' ] ) ) );
-
+                    
                     if ( isset( $attributes[ 'background-position' ] ) ) {
                         printf( 'background-position: %s;', esc_attr( $attributes[ 'background-position' ] ) );
                     }
-
+                    
                     if ( isset( $attributes[ 'background-repeat' ] ) ) {
                         printf( 'background-repeat: %s;', esc_attr( $attributes[ 'background-repeat' ] ) );
                     }
-
+                    
                     if ( isset( $attributes[ 'background-attachment' ] ) ) {
                         printf( 'background-attachment: %s;', esc_attr( $attributes[ 'background-attachment' ] ) );
                     }
-
+                    
                     if ( isset( $attributes[ 'background-origin' ] ) ) {
                         printf( 'background-origin: %s;', esc_attr( $attributes[ 'background-origin' ] ) );
                     }
-
+                    
                     if ( isset( $attributes[ 'background-size' ] ) ) {
                         printf( 'background-size: %s;', esc_attr( $attributes[ 'background-size' ] ) );
                     }
                 }
             }
-
+            
             if ( in_array( $attributes[ 'background-type' ], array( 'gradient' ) ) ) {
-
+                
                 if ( isset( $attributes[ 'gradient-color-stop-1' ] ) && isset( $attributes[ 'gradient-color-stop-1-location' ] ) ) {
-                    printf( 'background-image: %s;', sprintf(
-                        "linear-gradient(%s, %s %s, %s %s, %s %s)",
-                        esc_attr( $attributes[ 'gradient-position' ] ),
-                        esc_attr( $attributes[ 'gradient-start-color' ] ),
-                        esc_attr( $attributes[ 'gradient-start-location' ] ) . '%',
-                        esc_attr( $attributes[ 'gradient-color-stop-1' ] ),
-                        esc_attr( $attributes[ 'gradient-color-stop-1-location' ] ) . '%',
-                        esc_attr( $attributes[ 'gradient-end-color' ] ),
-                        esc_attr( $attributes[ 'gradient-end-location' ] ) . '%'
-                    ) );
-                } else {
-                    printf( 'background-image: %s;', sprintf(
-                        "linear-gradient(%s, %s %s, %s %s)",
-                        esc_attr( $attributes[ 'gradient-position' ] ),
-                        esc_attr( $attributes[ 'gradient-start-color' ] ),
-                        esc_attr( $attributes[ 'gradient-start-location' ] ) . '%',
-                        esc_attr( $attributes[ 'gradient-end-color' ] ),
-                        esc_attr( $attributes[ 'gradient-end-location' ] ) . '%'
-                    ) );
+                    printf( 'background-image: %s;', sprintf( "linear-gradient(%s, %s %s, %s %s, %s %s)", esc_attr( $attributes[ 'gradient-position' ] ), esc_attr( $attributes[ 'gradient-start-color' ] ), esc_attr( $attributes[ 'gradient-start-location' ] ) . '%', esc_attr( $attributes[ 'gradient-color-stop-1' ] ), esc_attr( $attributes[ 'gradient-color-stop-1-location' ] ) . '%', esc_attr( $attributes[ 'gradient-end-color' ] ), esc_attr( $attributes[ 'gradient-end-location' ] ) . '%' ) );
+                }
+                else {
+                    printf( 'background-image: %s;', sprintf( "linear-gradient(%s, %s %s, %s %s)", esc_attr( $attributes[ 'gradient-position' ] ), esc_attr( $attributes[ 'gradient-start-color' ] ), esc_attr( $attributes[ 'gradient-start-location' ] ) . '%', esc_attr( $attributes[ 'gradient-end-color' ] ), esc_attr( $attributes[ 'gradient-end-location' ] ) . '%' ) );
                 }
             }
         }
-
+        
         do_action( 'upb_shortcode_scoped_style_background', $attributes );
     }
-
+    
     function upb_enqueue_element_scripts() {
-
+        
         if ( upb_is_enabled() ):
-
+            
             $post_ID = get_queried_object_id();
-
+            
             $shortcodes = get_post_meta( $post_ID, '_upb_shortcodes', TRUE );
-
+            
             array_map( function ( $element ) use ( $shortcodes ) {
-
+                
                 if ( has_shortcode( $shortcodes, $element[ 'tag' ] ) ) {
-
+                    
                     $assets = $element[ '_upb_options' ][ 'assets' ][ 'shortcode' ];
                     $tag    = $element[ 'tag' ];
-
+                    
                     // enqueue style
                     $handle = apply_filters( 'upb_assets_handle', sprintf( 'upb-element-%s', $tag ), $tag );
                     if ( ! empty( $assets[ 'css' ] ) ) {
@@ -1218,7 +1232,7 @@
                         }
                         wp_enqueue_style( $handle );
                     }
-
+                    
                     // enqueue script
                     $handle        = apply_filters( 'upb_assets_handle', sprintf( 'upb-element-%s', $tag ), $tag );
                     $js_registered = FALSE;
@@ -1229,21 +1243,21 @@
                         wp_enqueue_script( $handle );
                         $js_registered = TRUE;
                     }
-
+                    
                     // Inline JS
                     if ( ! empty( $assets[ 'inline_js' ] ) ) {
                         if ( $js_registered ) {
                             wp_add_inline_script( $handle, sprintf( 'try{ %s }catch(error){ console.error(error.message, "On \"%s\" Shortcode Inline JS."); }', $assets[ 'inline_js' ], $tag ) );
                         }
                     }
-
-
+                    
+                    
                     do_action( 'upb_enqueue_element_scripts', $tag );
                 }
             }, upb_elements()->get_all() );
         endif;
     }
-
+    
     /**
      * Example:
      *
@@ -1259,11 +1273,11 @@
         echo $contents;
         echo '</script>';
     }
-
+    
     function upb_get_script_template_id( $id ) {
         return 'upb-' . $id . '-template">';
     }
-
+    
     /**
      * Convert Hex Color to RGB/RGBA Color
      *
@@ -1279,36 +1293,38 @@
      * upb_hex2RGB( '#fff' ); // rgb(255, 255, 255)
      *
      */
-
+    
     function upb_hex2RGB( $hex, $opacity = 1 ) {
-
+        
         // Already RGB Color.
         if ( substr( strtolower( $hex ), 0, 3 ) == 'rgb' ) {
             return $hex;
         }
-
+        
         // Replace Hex Color Hash.
         $hex = str_replace( "#", "", $hex );
-
+        
         // If short color value like: #000
         if ( strlen( $hex ) == 3 ) {
             $r = hexdec( substr( $hex, 0, 1 ) . substr( $hex, 0, 1 ) );
             $g = hexdec( substr( $hex, 1, 1 ) . substr( $hex, 1, 1 ) );
             $b = hexdec( substr( $hex, 2, 1 ) . substr( $hex, 2, 1 ) );
-        } else {
+        }
+        else {
             $r = hexdec( substr( $hex, 0, 2 ) );
             $g = hexdec( substr( $hex, 2, 2 ) );
             $b = hexdec( substr( $hex, 4, 2 ) );
         }
         $rgb = array( $r, $g, $b );
-
+        
         if ( $opacity && abs( $opacity ) < 1 ) {
             return sprintf( 'rgba(%s, %s)', implode( ", ", $rgb ), abs( $opacity ) );
-        } else {
+        }
+        else {
             return sprintf( 'rgb(%s)', implode( ", ", $rgb ) );
         }
     }
-
+    
     /**
      * Convert RGB/RGBA Color to Hex Color Value
      *
@@ -1322,14 +1338,14 @@
      * upb_rgb2HEX( 'rgba(244, 67, 54, 0.5)' ) // #f44336
      */
     function upb_rgb2HEX( $str ) {
-
+        
         if ( substr( $str, 0, 1 ) == '#' ) {
             return $str;
         }
-
+        
         preg_match( '/\((?<rgb>.+)\)/', $str, $matches );
-
+        
         $rgb = explode( ",", $matches[ 'rgb' ] );
-
+        
         return strtoupper( sprintf( "#%02x%02x%02x", trim( $rgb[ 0 ] ), trim( $rgb[ 1 ] ), trim( $rgb[ 2 ] ) ) );
     }
