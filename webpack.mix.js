@@ -1,23 +1,9 @@
-const mix      = require('laravel-mix');
-const wpPot    = require('wp-pot');
+const mix      = require('wp-mix');
 const fsExtra  = require("fs-extra");
 const path     = require("path");
 const cliColor = require("cli-color");
 const emojic   = require("emojic");
-const browsers = [
-    'last 3 versions',
-    '> 1%',
-    'ie >= 9',
-    'ie_mob >= 10',
-    'ff >= 30',
-    'chrome >= 34',
-    'safari >= 7',
-    'opera >= 23',
-    'ios >= 7',
-    'android >= 4',
-    'bb >= 10'
-];
-const min      = mix.config.inProduction ? '.min' : '';
+const min      = Mix.inProduction() ? '.min' : '';
 
 if (process.env.NODE_ENV == 'package') {
     mix.then(function () {
@@ -56,37 +42,34 @@ if (process.env.NODE_ENV == 'package') {
     });
 }
 else {
-    mix.generatePot = function () {
 
-        wpPot({
-            package        : 'ultimate-page-builder',
-            bugReport      : 'https://github.com/EmranAhmed/ultimate-page-builder/issues',
-            lastTranslator : 'Emran Ahmed <emran.bd.08@gmail.com>',
-            team           : 'ThemeHippo <themehippo@gmail.com>',
-            src            : '*.php',
-            domain         : 'ultimate-page-builder',
-            destFile       : `languages/ultimate-page-builder.pot`
+    mix.banner({
+        banner : "Ultimate Page Builder v1.0.0-beta.28 \n\nAuthor: Emran Ahmed ( https://themehippo.com/ ) \nDate: " + new Date().toLocaleString() + "\nReleased under the MIT license."
+    });
+
+    mix.notification({
+        title        : 'Ultimate Page Builder',
+        contentImage : Mix.paths.root('images/logo.png')
+    });
+
+    if (Mix.inProduction()) {
+        mix.generatePot({
+            package   : 'ultimate-page-builder',
+            bugReport : 'https://github.com/EmranAhmed/ultimate-page-builder/issues',
+            src       : '*.php',
+            domain    : 'ultimate-page-builder',
+            destFile  : `languages/ultimate-page-builder.pot`
         });
-
-        return this;
-    };
+    }
 
     mix.options({
-        // extractVueStyles : mix.config.inProduction,
         extractVueStyles : `assets/css/upb-style${min}.css`,
-        postCss          : [require('autoprefixer')({browsers})],
-        uglify           : {
-            sourceMap : false,
-            compress  : {
-                warnings : false
-            }
-        },
-        babel            : {
-            "presets"      : [
-                ["es2015", {"modules" : false}]
-            ],
-            cacheDirectory : true
-        }
+    });
+
+    mix.setCommonChunkFileName('upb-common');
+
+    mix.autoload({
+        vue : ['window.Vue', 'Vue']
     });
 
     mix.sourceMaps();
@@ -105,6 +88,11 @@ else {
 }
 
 // Full API
+// mix.generatePot({})
+// mix.banner({})
+// mix.notification({})
+// mix.postCssBrowsers({})
+// mix.setCommonChunkFileName('upb-common');
 // mix.js(src, output);
 // mix.react(src, output); <-- Identical to mix.js(), but registers React Babel compilation.
 // mix.extract(vendorLibs);
