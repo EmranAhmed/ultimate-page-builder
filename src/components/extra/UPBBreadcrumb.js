@@ -1,6 +1,5 @@
-import store from '../../store';
-import extend from 'extend';
-
+import store from "../../store";
+import extend from "extend";
 export default {
     name : 'upb-breadcrumb',
     data(){
@@ -14,7 +13,7 @@ export default {
 
     created(){
 
-        let sections = extend(true, {}, store.tabs.filter((t)=> {
+        let sections = extend(true, {}, store.tabs.filter((t) => {
             return t.id == this.$route.params.tab;
         }).pop());
 
@@ -35,11 +34,7 @@ export default {
     methods : {
 
         className(){
-            return [
-                `breadcrumb`,
-                (this.breadcrumb.length > 1) ? 'breadcrumb-arrow' : ''
-            ].join(' ')
-
+            return [`breadcrumb`, (this.breadcrumb.length > 1) ? 'breadcrumb-arrow' : ''].join(' ')
         },
 
         goTo(link){
@@ -49,7 +44,6 @@ export default {
         },
 
         generateBreadcrumb(contents, path){
-
             let index = path[0]['index'];
             let child = path[0]['child'];
             let data  = contents[index];

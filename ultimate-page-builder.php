@@ -4,7 +4,7 @@
      * Plugin URI: https://wordpress.org/plugins/ultimate-page-builder/
      * Description: An Incredibly easiest and highly customizable drag and drop page builder helps create professional websites without writing a line of code.
      * Author: Emran Ahmed
-     * Version: 1.0.0-beta.30
+     * Version: 1.0.0
      * Domain Path: /languages
      * Text Domain: ultimate-page-builder
      * Author URI: https://themehippo.com/
@@ -16,7 +16,7 @@
         
         final class Ultimate_Page_Builder {
             
-            public $version = '1.0.0-beta.30';
+            public $version = '1.0.0';
             
             protected static $_instance = NULL;
             

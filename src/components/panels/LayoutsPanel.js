@@ -1,14 +1,5 @@
-import Vue, { util } from 'vue';
-import store from '../../store'
-
-import extend from 'extend';
-import {sprintf} from 'sprintf-js';
-
-import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
-Vue.component('upb-breadcrumb', UPBBreadcrumb);
-
-import LayoutsList from './LayoutsList.vue';
-Vue.component('upb-layouts-list', LayoutsList);
+import { util } from "vue";
+import { sprintf } from "sprintf-js";
 
 export default {
     name  : 'layouts-panel',
@@ -63,7 +54,9 @@ export default {
                 }
             });
         }
-    }
+    },
 
-    // components : fieldsComponent
+    components : {
+        'upb-layouts-list' : () => import(/* webpackChunkName: "upb-layouts-list" */ './LayoutsList.vue')
+    }
 }

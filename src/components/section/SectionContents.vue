@@ -38,7 +38,7 @@
 
                 <li class="upb-panel-tools">
                     <ul>
-                        <li v-for="tool in panelMetaTools" :key="tool">
+                        <li v-for="tool in panelMetaTools" :key="tool.id">
                             <a @click.prevent="toolsAction(tool, $event)" href="#">
                                 <i :class="tool.icon"></i>
                                 <div v-text="tool.title"></div>
@@ -59,7 +59,6 @@
             <!-- Column List -->
 
             <component v-for="(item, index) in contents" :key="index" v-if="isCurrentRow(index)" :row="defaultRowId" :index="index" :model="item" :is="rowContentsComponent"></component>
-
 
         </li>
     </ul>

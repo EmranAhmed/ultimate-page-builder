@@ -1,9 +1,12 @@
-import store from '../../store'
-import common from './common'
-import userInputMixin from './user-mixins'
+import Vue from "vue";
+import common from "./common";
+import userInputMixin from "./user-mixins";
 
-import  '../../plugins/vue-upb-media'
-import '../../plugins/vue-background-position'
+import UPBMedia from "../../plugins/vue-upb-media";
+Vue.use(UPBMedia);
+
+import BackgroundPosition from "../../plugins/vue-background-position";
+Vue.use(BackgroundPosition);
 
 export default {
     name : 'upb-input-background-image',

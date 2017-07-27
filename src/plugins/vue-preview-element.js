@@ -1,54 +1,55 @@
-import { util } from 'vue';
+import { util } from "vue";
 
-($ => {
+const Directive = {
+    bind  (el, binding, vnode) {},
 
-    const vPreviewElement = {};
+    update (newValue, oldValue, vnode) {},
 
-    vPreviewElement.install = function (Vue, options) {
+    unbind  (el) {},
 
-        Vue.directive('preview-element', {
+    componentUpdated  () {},
 
-            bind  (el, binding, vnode) {},
+    inserted  (el, binding, vnode) {
 
-            update (newValue, oldValue, vnode) {},
+        // jQuery(el).addClass(`upb-preview-element`).addClass(`${vnode.context.model.tag}-preview`);
 
-            unbind  (el) {},
+        // No Contents Class
+        if (!_.isUndefined(vnode.context.model['contents']) && _.isEmpty(vnode.context.model.contents) && (_.isString(vnode.context.model.contents) || _.isArray(vnode.context.model.contents))) {
+            //    $(el).addClass(`upb-preview-element-no-contents`)
+        }
 
-            componentUpdated  () {},
-
-            inserted  (el, binding, vnode) {
-
-                // $(el).addClass(`upb-preview-element`).addClass(`${vnode.context.model.tag}-preview`);
-
-                // No Contents Class
-                if (!_.isUndefined(vnode.context.model['contents']) && _.isEmpty(vnode.context.model.contents) && (_.isString(vnode.context.model.contents) || _.isArray(vnode.context.model.contents))) {
-                    //    $(el).addClass(`upb-preview-element-no-contents`)
-                }
-
-                $(el).find('>.upb-preview-mini-toolbar').on('mouseenter', function (event) {
-                    event.stopPropagation();
-                    vnode.context.model._upb_options.focus = true;
-                });
-
-                $(el).find('>.upb-preview-mini-toolbar').on('mouseleave', function (event) {
-                    event.stopPropagation();
-                    vnode.context.model._upb_options.focus = false;
-                });
-            }
+        jQuery(el).find('>.upb-preview-mini-toolbar').on('mouseenter', function (event) {
+            event.stopPropagation();
+            vnode.context.model._upb_options.focus = true;
         });
-    };
 
-    if (typeof exports == "object") {
-        module.exports = vPreviewElement
+        jQuery(el).find('>.upb-preview-mini-toolbar').on('mouseleave', function (event) {
+            event.stopPropagation();
+            vnode.context.model._upb_options.focus = false;
+        });
     }
-    else if (typeof define == "function" && define.amd) {
-        define([], function () {
-            return vPreviewElement
-        })
-    }
-    else if (window.Vue) {
-        window.vPreviewElement = vPreviewElement;
-        Vue.use(vPreviewElement)
+};
+
+const Plugin = (Vue, options = {}) => {
+
+    // Install once example:
+    // If you plugin need to load only once :)
+    if (Plugin.installed) {
+        return;
     }
 
-})(window.jQuery);
+    // Install Multi example:
+    // If you plugin need to load multiple time :)
+    /*if (Plugin.installed) {
+     Plugin.installed = false;
+     }*/
+
+    Vue.directive('preview-element', Directive)
+
+};
+
+if (typeof window !== 'undefined' && window.Vue) {
+    window.Vue.use(Plugin);
+}
+
+export default Plugin;

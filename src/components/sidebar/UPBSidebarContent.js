@@ -1,4 +1,4 @@
-import store from '../../store'
+import store from "../../store";
 
 export default {
     name  : 'upb-sidebar-contents',
@@ -33,7 +33,6 @@ export default {
             // Close Sub Panel If opened
             store.closeSubPanel();
             this.item = this.getTabContent();
-
         }
     },
 

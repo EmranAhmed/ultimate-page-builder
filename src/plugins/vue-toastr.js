@@ -1,34 +1,48 @@
-import toastr from './toastr';
+import toastr from "./toastr";
+import extend from "extend";
 
-import extend from 'extend';
+class Helper {
 
-(($, toast) => {
+    constructor(options) {
 
-    const vToast = {};
-
-    vToast.install = function (Vue, options) {
-
-        // toastr.options
-
-        toast.options = extend(true, {
+        toastr.options = extend(true, {
             positionClass : 'toast-top-right',
             timeOut       : 3000
         }, options);
 
-        Vue.prototype.$toast = toast
+        return toastr;
+    }
+}
+
+// Usages:
+//
+// The helper globally `Vue.Helper` or in a Vue instance `this.$helper`
+// import Helper from "./Helper";
+// Vue.use(Helper, { someOption: true })
+
+const Plugin = (Vue, options = {}) => {
+
+    // Install once example:
+    // If you plugin need to load only once :)
+    if (Plugin.installed) {
+        return;
     }
 
-    if (typeof exports == "object") {
-        module.exports = vToast
-    }
-    else if (typeof define == "function" && define.amd) {
-        define([], function () {
-            return vToast
-        })
-    }
-    else if (window.Vue) {
-        window.vToast = vToast;
-        Vue.use(vToast)
-    }
+    // Install Multi example:
+    // If you plugin need to load multiple time :)
+    /*if (Plugin.installed) {
+     Plugin.installed = false;
+     }*/
 
-})(window.jQuery, toastr);
+    Vue.Toast = new Helper(options);
+
+    Object.defineProperty(Vue.prototype, '$toast', {
+        value : Vue.Toast
+    });
+};
+
+if (typeof window !== 'undefined' && window.Vue) {
+    window.Vue.use(Plugin);
+}
+
+export default Plugin;

@@ -1,6 +1,6 @@
-import Vue, { util } from 'vue';
-import store from '../../store'
-import {sprintf} from 'sprintf-js'
+import { util } from "vue";
+import store from "../../store";
+import { sprintf } from "sprintf-js";
 
 export default {
     name     : 'upb-layouts-list',
@@ -23,14 +23,14 @@ export default {
 
                 // console.log(code);
                 // Send Ajax and get UPB Options
-                store.addUPBOptions(code, data=> {
+                store.addUPBOptions(code, data => {
                     if (_.isArray(data)) {
                         store.addContentsToTab('sections', data);
                         this.$toast.success(sprintf(this.l10n.layoutAdded, this.l10n.pageTitle));
                         store.stateChanged();
                         this.$router.replace('/sections');
                     }
-                }, data=> {
+                }, data => {
                     console.log(data);
                 })
 

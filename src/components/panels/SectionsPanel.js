@@ -1,21 +1,9 @@
-import Vue, { util } from 'vue';
-import store from '../../store'
+import Vue, { util } from "vue";
+import store from "../../store";
 
-import extend from 'extend';
-import {sprintf} from 'sprintf-js';
-
-import copy from 'copy-to-clipboard';
-
-import Sortable from '../../plugins/vue-sortable'
-
-// Vue.use(Sortable);
-
-// Section List
-import SectionList from '../section/SectionList.vue';
-Vue.component('section-list', SectionList);
-
-import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
-Vue.component('upb-breadcrumb', UPBBreadcrumb);
+import extend from "extend";
+import { sprintf } from "sprintf-js";
+import copy from "copy-to-clipboard";
 
 export default {
     name  : 'sections-panel',
@@ -162,5 +150,9 @@ export default {
                 Vue.set(this.model, 'contents', extend(true, [], list));
             });
         }
+    },
+
+    components : {
+        'section-list' : () => import(/* webpackChunkName: "SectionList" */ '../section/SectionList.vue')
     }
 }

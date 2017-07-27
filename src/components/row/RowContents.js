@@ -1,14 +1,8 @@
-import Vue, { util } from 'vue'
-import store from '../../store'
-import Sortable from '../../plugins/vue-sortable'
-import extend from 'extend'
-import {sprintf} from 'sprintf-js'
-// import RowList from '../row/RowList.vue';
+import Vue, { util } from "vue";
+import store from "../../store";
 
-// Vue.use(Sortable);
-
-// Row List
-//Vue.component('row-list', RowList);
+import extend from "extend";
+import { sprintf } from "sprintf-js";
 
 export default {
     name  : 'row-contents',
@@ -54,15 +48,6 @@ export default {
         this.setSelectedColumnLayout();
         this.onSelectedColumnLayoutChange();
     },
-
-    /*watch : {
-     devices : {
-     handler : function (val, oldVal) {
-     // console.log(val, oldVal);
-     },
-     deep    : true
-     }
-     },*/
 
     methods : {
 
@@ -144,12 +129,12 @@ export default {
         },
 
         onSelectedColumnLayoutChange(){
-            this.devices.map((device)=> {
+            this.devices.map((device) => {
 
                 this.$watch(`selectedColumnLayout.${device.id}`, (value) => {
 
-                    let activeDevices    = this.devices.filter((d)=> !!d.active);
-                    let totalColumns     = _.compact(activeDevices.map((d)=> this.selectedColumnLayout[d.id])).join(' + ').split('+');
+                    let activeDevices    = this.devices.filter((d) => !!d.active);
+                    let totalColumns     = _.compact(activeDevices.map((d) => this.selectedColumnLayout[d.id])).join(' + ').split('+');
                     let currentColLength = value.split('+').length;
 
                     if (activeDevices.length == 1) {
@@ -157,7 +142,7 @@ export default {
                         // console.log('Only One Device Using')
                     }
 
-                    this.devices.map((d)=> {
+                    this.devices.map((d) => {
 
                         let colLength = this.selectedColumnLayout[d.id].split('+').length;
 
@@ -192,11 +177,11 @@ export default {
 
         selectedColumnOperation(device, value){
 
-            let runOperation  = !this.devices.some((d)=> {
+            let runOperation  = !this.devices.some((d) => {
                 return d.reconfig == true;
             });
-            let activeDevices = this.devices.filter((d)=> !!d.active);
-            let totalColumns  = _.compact(activeDevices.map((d)=> this.selectedColumnLayout[d.id])).join(' + ').split('+');
+            let activeDevices = this.devices.filter((d) => !!d.active);
+            let totalColumns  = _.compact(activeDevices.map((d) => this.selectedColumnLayout[d.id])).join(' + ').split('+');
 
             let shouldAddNewColumn = Math.round(totalColumns.length / activeDevices.length) > this.model.contents.length;
             let shouldRemoveColumn = Math.round(totalColumns.length / activeDevices.length) < this.model.contents.length;
@@ -280,9 +265,9 @@ export default {
 
             let columns = this.selectedColumnLayout[device.id].trim();
 
-            let activeDevices = this.devices.filter((d)=> !!d.active);
+            let activeDevices = this.devices.filter((d) => !!d.active);
 
-            let totalColumns = _.compact(activeDevices.map((device)=> this.selectedColumnLayout[device.id])).join(' + ').split(' + ');
+            let totalColumns = _.compact(activeDevices.map((device) => this.selectedColumnLayout[device.id])).join(' + ').split(' + ');
 
             this.selectedColumnLayout[device.id] = columns;
 
@@ -295,7 +280,7 @@ export default {
 
                 let currentColLength = columns.split('+').length;
 
-                this.devices.map((d)=> {
+                this.devices.map((d) => {
 
                     let colLength = this.selectedColumnLayout[d.id].split('+').length;
 
@@ -315,13 +300,13 @@ export default {
 
         changeDeviceColumnLayout(device){
 
-            this.devices.map((d)=> {
+            this.devices.map((d) => {
                 if (d.active) {
                     let columns = this.selectedColumnLayout[d.id].trim();
 
                     //console.log(d.id, columns);
 
-                    columns.split('+').map((col, i)=> {
+                    columns.split('+').map((col, i) => {
                         if (this.model.contents[i]) {
                             this.model.contents[i].attributes[d.id] = col.trim();
                         }
@@ -331,7 +316,7 @@ export default {
 
                     // When Deactive device remove attribute value also :)
                     let columns = this.selectedColumnLayout[d.id].trim();
-                    columns.split('+').map((col, i)=> {
+                    columns.split('+').map((col, i) => {
                         if (this.model.contents[i]) {
                             this.model.contents[i].attributes[d.id] = '';
                         }
@@ -370,7 +355,7 @@ export default {
                     return old + parseInt(col);
                 }, 0);
 
-                let totalGridValue = totalGrid.reduce((old, i)=> {
+                let totalGridValue = totalGrid.reduce((old, i) => {
                     let ratio = i.split(':')[1].trim();
                     return old + parseInt(ratio);
                 }, 0);
@@ -555,10 +540,10 @@ export default {
 
             let sorted = [];
 
-            this.devices.map((device)=> {
+            this.devices.map((device) => {
 
                 let value = [];
-                this.model.contents.map((content)=> {
+                this.model.contents.map((content) => {
                     if (content.attributes[device.id].trim()) {
                         value.push(content.attributes[device.id]);
                     }
@@ -567,7 +552,7 @@ export default {
                 sorted.push({id : device.id, grid : value})
             });
 
-            sorted.map((device)=> {
+            sorted.map((device) => {
                 if (device.grid.length > 0) {
                     this.selectedColumnLayout[device.id] = device.grid.join(' + ').trim()
                 }
@@ -607,7 +592,7 @@ export default {
         },
 
         cleanup(content) {
-            this.devices.map((d)=> {
+            this.devices.map((d) => {
                 content.attributes[d.id] = '';
             });
             return content;
@@ -626,6 +611,10 @@ export default {
 
             store.stateChanged();
         }
+    },
+
+    components : {
+        'row-list' : () => import(/* webpackChunkName: "row-list" */ '../row/RowList.vue')
     }
 }
 

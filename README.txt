@@ -1,8 +1,8 @@
 === Ultimate Page Builder ===
 Contributors: EmranAhmed, wpeshaan, webdzainer
 Tags: ultimate builder, page builder, drag and drop page builder, front-end builder, home page builder, landing page builder, layout builder, page, page builder, page builder plugin, site-builder, template builder, visual page builder, website builder, wysiwyg builder
-Requires at least: 4.5
-Tested up to: 4.7
+Requires at least: 4.6
+Tested up to: 4.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -20,7 +20,7 @@ Say goodbye the days to click back and forth between the clunky dashboard and si
 The powerful technology like Vue.JS is powering the innovating website builder for WordPress which has made it possible to compose high-end page designs and unique layouts real-time without writing a single line of code.
 
 = Useful Links =
-[Facebook User Group](https://www.facebook.com/groups/UltimatePageBuilder/) | [Website](https://themehippo.com/?utm_source=wordpress.org&utm_campaign=Ultimate+Page+Builder) | [Documentation](https://upb-guide.themehippo.com/?utm_source=wordpress.org&utm_campaign=Ultimate+Page+Builder)
+[Facebook User Group](https://www.facebook.com/groups/UltimatePageBuilder/) | [Website](https://themehippo.com/?utm_source=wordpress.org&utm_campaign=Ultimate+Page+Builder) | [Documentation](https://upb-guide.themehippo.com/?utm_source=wordpress.org&utm_campaign=Ultimate+Page+Builder) | [Github](https://github.com/EmranAhmed/ultimate-page-builder/?utm_source=wordpress.org&utm_campaign=Ultimate+Page+Builder)
 
 == Installation ==
 
@@ -97,6 +97,16 @@ Yes.
 7. Contact form 7 settings
 
 == Changelog ==
+
+= 1.0.0 =
+
+- Latest update of VueJS and VueRouter.
+- Dynamic Component Import to load faster.
+- Resource Hint added for scoped polyfill script.
+
+= 1.0.0-beta.30 =
+
+- Fixed Some Known Issues.
 
 = 1.0.0-beta.29 =
 

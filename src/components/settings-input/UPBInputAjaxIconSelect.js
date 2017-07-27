@@ -1,13 +1,13 @@
-import store from '../../store'
-import common from './common'
-import extend from 'extend'
-import {sprintf} from 'sprintf-js';
+import Vue from "vue";
+import store from "../../store";
+import common from "./common";
+import extend from "extend";
+import { sprintf } from "sprintf-js";
 
-import userInputMixin from './user-mixins'
+import userInputMixin from "./user-mixins";
 
-import Select2 from '../../plugins/vue-select2'
-
-// Vue.use(Select2);
+import Select2 from "../../plugins/vue-select2";
+Vue.use(Select2);
 
 export default {
     name   : 'upb-input-ajax-icon-select',
@@ -56,7 +56,7 @@ export default {
             ids   : this.input,
             load  : this.input,
             extra : this.attributes.extra
-        }, options=> {
+        }, options => {
             Vue.set(this.attributes, 'options', extend(true, {}, options));
         }, error => {
             if (error == 0) {

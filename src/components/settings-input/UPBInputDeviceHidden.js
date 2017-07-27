@@ -1,6 +1,6 @@
-import common from './common'
-import extend from 'extend'
-import userInputMixin from './user-mixins'
+import common from "./common";
+import extend from "extend";
+import userInputMixin from "./user-mixins";
 export default {
     name     : 'upb-input-device-hidden',
     mixins   : [common, userInputMixin('device-hidden')],
@@ -25,11 +25,11 @@ export default {
 
         disabled(){
 
-            this.attributes.options.map((device)=> {
+            this.attributes.options.map((device) => {
 
                 device.disabled = false;
 
-                this.input.map((selected)=> {
+                this.input.map((selected) => {
 
                     if (this.attributes.disable[selected]) {
                         let disable = this.attributes.disable[selected];
@@ -40,7 +40,6 @@ export default {
                         }
                     }
                 });
-
             })
         }
     }

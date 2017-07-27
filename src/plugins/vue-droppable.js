@@ -1,66 +1,71 @@
-import { util } from 'vue';
-import store from '../store';
+import { util } from "vue";
+// import store from '../store';
 
-{
-    const vDroppable = {};
+const Directive = {
 
-    vDroppable.install = function (Vue, options) {
+    bind(el, binding, vnode) {},
 
-        Vue.directive('droppable', {
+    update(newValue, oldValue, vnode) {},
 
-            bind(el, binding, vnode) {},
+    unbind (el) {},
 
-            update(newValue, oldValue, vnode) {},
+    componentUpdated () {},
 
-            unbind (el) {},
+    inserted (el, binding, vnode) {
 
-            componentUpdated () {},
+        el.addEventListener('dragover', function (event) {
+            event.preventDefault();
+        });
 
-            inserted (el, binding, vnode) {
+        el.addEventListener('drop', function (event) {
 
-                el.addEventListener('dragover', function (event) {
-                    event.preventDefault();
-                });
+            if (!vnode.context.dropAccept) {
+                util.warn('You need to implement the `dropAccept` method', vnode.context);
+            }
 
-                el.addEventListener('drop', function (event) {
+            if (!vnode.context.afterDrop) {
+                util.warn('You need to implement the `onDrop` method', vnode.context);
+            }
 
-                    if (!vnode.context.dropAccept) {
-                        util.warn('You need to implement the `dropAccept` method', vnode.context);
-                    }
+            try {
 
-                    if (!vnode.context.afterDrop) {
-                        util.warn('You need to implement the `onDrop` method', vnode.context);
-                    }
+                let content = JSON.parse(event.dataTransfer.getData("text"));
 
-                    try {
-
-                        let content = JSON.parse(event.dataTransfer.getData("text"));
-
-                        // Drop Accept should return true or false
-                        if (vnode.context.dropAccept(content)) {
-                            vnode.context.afterDrop(content, true);
-                        }
-                        else {
-                            vnode.context.afterDrop(content, false);
-                        }
-                    } catch (e) {
-                        console.info('Some thing was wrong on drop', e)
-                    }
-                });
+                // Drop Accept should return true or false
+                if (vnode.context.dropAccept(content)) {
+                    vnode.context.afterDrop(content, true);
+                }
+                else {
+                    vnode.context.afterDrop(content, false);
+                }
+            } catch (e) {
+                console.info('Some thing was wrong on drop', e)
             }
         });
-    };
+    }
 
-    if (typeof exports == "object") {
-        module.exports = vDroppable
+};
+
+const Plugin = (Vue, options = {}) => {
+
+    // Install once example:
+    // If you plugin need to load only once :)
+    if (Plugin.installed) {
+        return;
     }
-    else if (typeof define == "function" && define.amd) {
-        define([], function () {
-            return vDroppable
-        })
-    }
-    else if (window.Vue) {
-        window.vDropable = vDroppable;
-        Vue.use(vDroppable)
-    }
+
+    // Install Multi example:
+    // If you plugin need to load multiple time :)
+    /*if (Plugin.installed) {
+     Plugin.installed = false;
+     }*/
+
+    Vue.directive('droppable', Directive)
+
+};
+
+if (typeof window !== 'undefined' && window.Vue) {
+    window.Vue.use(Plugin);
 }
+
+export default Plugin;

@@ -1,9 +1,4 @@
-import Vue from 'vue';
-import store from '../../store';
-
-import UPBSidebarHeaderItem from './UPBSidebarHeaderItem.vue';
-
-Vue.component('upb-sidebar-header-item', UPBSidebarHeaderItem);
+import store from "../../store";
 
 export default {
     name  : 'upb-sidebar-header',
@@ -42,5 +37,9 @@ export default {
         isDirty(){
             return store.isDirty();
         }
+    },
+
+    components : {
+        'upb-sidebar-header-item' : () => import(/* webpackChunkName: "upb-sidebar-header-item" */ './UPBSidebarHeaderItem.vue')
     }
 }

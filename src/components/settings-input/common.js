@@ -1,4 +1,5 @@
-import store from '../../store'
+import Vue from "vue";
+import store from "../../store";
 
 export default{
 
@@ -70,10 +71,10 @@ export default{
 
                 // console.log(this.attributes.title);
 
-                this.showInput = this.attributes.required.every((request)=> {
+                this.showInput = this.attributes.required.every((request) => {
 
                     let [id, operator, desireValue] = request;
-                    let currentValue = _.isNull(this.getValueOf(id)) ? '' : this.getValueOf(id);
+                    let currentValue                = _.isNull(this.getValueOf(id)) ? '' : this.getValueOf(id);
 
                     switch (operator) {
                         case '=':
@@ -129,7 +130,7 @@ export default{
 
         setValueOf(key, value){
 
-            this.items.map((item, index)=> {
+            this.items.map((item, index) => {
 
                 if (item[this.keyindexname] == key) {
 

@@ -1,33 +1,7 @@
-import store from './store';
-import extend from 'extend';
-import VueRouter from 'vue-router';
+import store from "./store";
+import extend from "extend";
+import VueRouter from "vue-router";
 Vue.use(VueRouter);
-
-
-//const SectionsPanel = () => import(/* webpackChunkName: "SectionsPanel" */ './components/panels/SectionsPanel.vue');
-/*import SectionsPanel from './components/panels/SectionsPanel.vue'
- import SettingsPanel from './components/panels/SettingsPanel.vue'
- import ElementsPanel from './components/panels/ElementsPanel.vue'
- import LayoutsPanel from './components/panels/LayoutsPanel.vue'*/
-
-// RowsPanel
-/*import SectionContents from './components/section/SectionContents.vue'
- import SectionSettings from './components/section/SectionSettings.vue'*/
-
-// RowsPanel
-// import RowSettings from './components/row/RowSettings.vue'
-
-// ColumnPanel
-/*import ColumnContents from './components/column/ColumnContents.vue'
- import ColumnSettings from './components/column/ColumnSettings.vue'
-
- import ElementContents from './components/element/ElementContents.vue'
- import ElementSettings from './components/element/ElementSettings.vue'
-
- import ElementItemSettings from './components/element-item/ElementItemSettings.vue'*/
-
-//import Attributes from './components/tabs/Attributes.vue'
-//import List from './components/tabs/ListView.vue'
 
 let config = extend(true, {}, store.router_config);
 let routes = [
@@ -38,20 +12,18 @@ let routes = [
     {
         name      : 'sections',
         path      : '/:tab(sections)',
-        component : () => import( './components/panels/SectionsPanel.vue'),
+        component : () => import(/* webpackChunkName: "SectionsPanel" */ './components/panels/SectionsPanel.vue'),
     },
-
     {
         name      : 'section-contents',
         path      : '/:tab(sections)/:sectionId(\\d+)/:type(contents)',
-        component : () => import('./components/section/SectionContents.vue'), // row list and column list
+        component : () => import(/* webpackChunkName: "SectionContents" */ './components/section/SectionContents.vue'), // row list and column list
         meta      : {subPanel : true},
     },
     {
         name      : 'section-settings',
         path      : '/:tab(sections)/:sectionId(\\d+)/:type(settings)',
-        //component : SectionSettings, // section setting
-        component : () => import('./components/section/SectionSettings.vue'), // section setting
+        component : () => import(/* webpackChunkName: "SectionSettings" */ './components/section/SectionSettings.vue'), // section setting
         meta      : {subPanel : true}
     },
 
@@ -69,38 +41,33 @@ let routes = [
     {
         name      : 'row-settings',
         path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:type(settings)',
-        // component : RowSettings,
-        component : () =>  import('./components/row/RowSettings.vue'),
+        component : () => import(/* webpackChunkName: "RowSettings" */ './components/row/RowSettings.vue'),
         meta      : {subPanel : true}
     },
 
     {
         name      : 'column-contents',
         path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:type(contents)',
-        // component : ColumnContents,
-        component : () => import('./components/column/ColumnContents.vue'),
+        component : () => import(/* webpackChunkName: "ColumnContents" */ './components/column/ColumnContents.vue'),
         meta      : {subPanel : true}
     },
     {
         name      : 'column-settings',
         path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:type(settings)',
-        // component : ColumnSettings,
-        component : () => import('./components/column/ColumnSettings.vue'),
+        component : () => import(/* webpackChunkName: "ColumnSettings" */ './components/column/ColumnSettings.vue'),
         meta      : {subPanel : true}
     },
 
     {
         name      : 'element-contents',
         path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:elementId(\\d+)/:type(contents)',
-        // component : ElementContents,
-        component : () => import('./components/element/ElementContents.vue'),
+        component : () => import(/* webpackChunkName: "ElementContents" */ './components/element/ElementContents.vue'),
         meta      : {subPanel : true}
     },
     {
         name      : 'element-settings',
         path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:elementId(\\d+)/:type(settings)',
-        // component : ElementSettings,
-        component : () => import('./components/element/ElementSettings.vue'),
+        component : () => import(/* webpackChunkName: "ElementSettings" */ './components/element/ElementSettings.vue'),
         meta      : {subPanel : true}
     },
 
@@ -113,38 +80,29 @@ let routes = [
     {
         name      : 'element-item-settings',
         path      : '/:tab(sections)/:sectionId(\\d+)/:rowId(\\d+)/:columnId(\\d+)/:elementId(\\d+)/:elementItemId(\\d+)/:type(settings)',
-        // component : ElementItemSettings,
-        component : () => import('./components/element-item/ElementItemSettings.vue'),
+        component : () => import(/* webpackChunkName: "ElementItemSettings" */ './components/element-item/ElementItemSettings.vue'),
         meta      : {subPanel : true}
     },
-
-    // element
-    // element-item
-    // element-item-contents
-
     {
         name      : 'elements',
         path      : '/:tab(elements)',
-        // component : ElementsPanel,
-        component : () => import('./components/panels/ElementsPanel.vue'),
+        component : () => import(/* webpackChunkName: "ElementsPanel" */ './components/panels/ElementsPanel.vue'),
     },
     {
         name      : 'settings',
         path      : '/:tab(settings)',
-        // component : SettingsPanel,
-        component : () => import('./components/panels/SettingsPanel.vue'),
+        component : () => import(/* webpackChunkName: "SettingsPanel" */ './components/panels/SettingsPanel.vue'),
     },
     {
         name      : 'layouts',
         path      : '/:tab(layouts)',
-        // component : LayoutsPanel,
-        component : () => import('./components/panels/LayoutsPanel.vue'),
+        component : () => import(/* webpackChunkName: "LayoutsPanel" */ './components/panels/LayoutsPanel.vue'),
     }
 ];
 
-// New Routes from Hook
+// New Routes from WP Hook
 if (store.routes.length > 0) {
-    store.routes.map((r)=> {
+    store.routes.map((r) => {
         if (r['component']) {
             r.component = window[r.component];
             routes.push(r);
@@ -153,65 +111,3 @@ if (store.routes.length > 0) {
 }
 
 export default new VueRouter(Object.assign({}, config, {routes}));
-
-/*
- export default new VueRouter(extend(true, store.router_config, {
- routes : [
- {
- name      : 'sections',
- path      : '/:tab(sections)',
- component : PanelView,
- },
-
- {
- name      : 'section-contents',
- path      : '/:tab(sections)/(\\d+)/:type(contents)',
- component : List, // row list
- meta      : {sub : true}
- },
- {
- name      : 'section-settings',
- path      : '/:tab(sections)/(\\d+)/:type(settings)',
- component : Attributes, // section setting
- meta      : {sub : true}
- },
-
- {
- name      : 'row-contents',
- path      : '/:tab(sections)/(\\d+)/(\\d+)/:type(contents)',
- component : List, // column list
- meta      : {sub : true}
- },
- {
- name      : 'row-settings',
- path      : '/:tab(sections)/(\\d+)/(\\d+)/:type(settings)',
- component : Attributes,
- meta      : {sub : true}
- },
-
- {
- name      : 'column-contents',
- path      : '/:tab(sections)/(\\d+)/(\\d+)/(\\d+)/:type(contents)',
- component : List,
- meta      : {sub : true}
- },
- {
- name      : 'column-settings',
- path      : '/:tab(sections)/(\\d+)/(\\d+)/(\\d+)/:type(settings)',
- component : Attributes,
- meta      : {sub : true}
- },
-
- {
- name      : 'settings',
- path      : '/:tab(settings)',
- component : PanelView
- },
- {
- path     : '',
- redirect : '/sections'
- }
- ]
- }));
- */
-

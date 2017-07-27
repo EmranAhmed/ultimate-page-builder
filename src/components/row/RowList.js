@@ -1,7 +1,7 @@
-import Vue, { util } from 'vue';
-import store from '../../store'
+import { util } from "vue";
+import store from "../../store";
 
-import {sprintf} from 'sprintf-js'
+import { sprintf } from "sprintf-js";
 
 export default {
     name  : 'row-list',
@@ -100,12 +100,7 @@ export default {
         },
 
         itemClass(){
-
-            return [
-                this.model.attributes.enable ? 'item-enabled' : 'item-disabled',
-                this.model._upb_options.focus ? 'item-focused' : 'item-unfocused',
-                (this.selected == this.index) ? 'item-selected' : ''
-            ].join(' ');
+            return [this.model.attributes.enable ? 'item-enabled' : 'item-disabled', this.model._upb_options.focus ? 'item-focused' : 'item-unfocused', (this.selected == this.index) ? 'item-selected' : ''].join(' ');
         },
 
         getContentPanel(id){

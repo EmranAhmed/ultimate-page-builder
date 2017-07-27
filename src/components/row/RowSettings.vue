@@ -36,7 +36,6 @@
                     </div>-->
                 </li>
 
-
                 <li class="upb-panel-tools">
                     <ul>
                         <li v-for="tool in panelMetaTools" :key="tool.id">

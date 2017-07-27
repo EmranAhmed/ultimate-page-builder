@@ -1,22 +1,9 @@
-import Vue, { util } from 'vue';
+import Vue, { util } from "vue";
 
-import store from '../../store'
+import store from "../../store";
 
-import Sortable from '../../plugins/vue-sortable'
-import extend from 'extend';
-import {sprintf} from 'sprintf-js';
-
-import ElementItemList from '../element-item/ElementItemList.vue';
-
-Vue.component('element-item-list', ElementItemList);
-
-// Vue.use(Sortable);
-
-// Element List
-//Vue.component('element-list', ElementList);
-
-import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
-Vue.component('upb-breadcrumb', UPBBreadcrumb);
+import extend from "extend";
+import { sprintf } from "sprintf-js";
 
 export default {
     name  : 'element-contents',
@@ -246,5 +233,9 @@ export default {
                 }
             });
         },
+    },
+
+    components : {
+        'element-item-list' : () => import(/* webpackChunkName: "element-item-list" */ '../element-item/ElementItemList.vue')
     }
 }

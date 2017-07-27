@@ -1,14 +1,8 @@
-import Vue from 'vue'
-import store from './store'
-import router from './router'
-import UPBSidebar from './UPBSidebar.vue'
-import UPBPreview from './UPBPreview.vue'
-import VueNProgress from './plugins/vue-nprogress'
-
-//Vue.use(VueNProgress);
-
-import vToast from './plugins/vue-toastr'
-//Vue.use(vToast);
+import Vue from "vue";
+import store from "./store";
+import router from "./router";
+import UPBSidebar from "./UPBSidebar.vue";
+import UPBPreview from "./UPBPreview.vue";
 
 store.loadTabContents();
 
@@ -57,11 +51,11 @@ const previewWindow = {
     }
 };
 
-window.addEventListener('load', _=> {
+window.addEventListener('load', () => {
     previewWindow.setUrl();
 });
 
-document.getElementById("upb-preview-frame").addEventListener('load', _=> {
+document.getElementById("upb-preview-frame").addEventListener('load', () => {
     previewWindow.destroy();
     previewWindow.mount();
 });

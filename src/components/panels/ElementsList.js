@@ -1,13 +1,12 @@
-import Vue, { util } from 'vue';
-import store from '../../store'
+import Vue, { util } from "vue";
+import store from "../../store";
 
-import Draggable from '../../plugins/vue-draggable'
-// Vue.use(Draggable);
+import Draggable from "../../plugins/vue-draggable";
+import { sprintf } from "sprintf-js";
+Vue.use(Draggable);
 
 // import UIDraggable from '../../plugins/vue-ui-draggable'
 // Vue.use(UIDraggable);
-
-import {sprintf} from 'sprintf-js'
 
 export default {
 

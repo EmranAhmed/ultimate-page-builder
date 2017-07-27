@@ -1,23 +1,7 @@
-import Vue, { util } from 'vue'
-
-import store from '../../store'
-
-import Sortable from '../../plugins/vue-sortable'
-import extend from 'extend'
-import {sprintf} from 'sprintf-js'
-
-import RowList from '../row/RowList.vue'
-
-import RowContents from '../row/RowContents.vue'
-
-// Vue.use(Sortable);
-
-// Row List
-Vue.component('row-list', RowList)
-Vue.component('row-contents', RowContents)
-
-import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue'
-Vue.component('upb-breadcrumb', UPBBreadcrumb)
+import Vue, { util } from "vue";
+import store from "../../store";
+import extend from "extend";
+import { sprintf } from "sprintf-js";
 
 export default {
     name  : 'section-contents',
@@ -295,5 +279,10 @@ export default {
             this.item.contents.push(data);
             store.stateChanged();
         }
+    },
+
+    components : {
+        'row-list'     : () => import(/* webpackChunkName: "row-list" */ '../row/RowList.vue'),
+        'row-contents' : () => import(/* webpackChunkName: "row-contents" */ '../row/RowContents.vue'),
     }
 }

@@ -1,43 +1,36 @@
-import Vue from 'vue';
-import store from './store'
-import {sprintf} from 'sprintf-js';
+import Vue from "vue";
+import store from "./store";
+import { sprintf } from "sprintf-js";
 
-import globalPreviewMixins from './globalPreviewMixins';
-import componentPreviewMixins from './componentPreviewMixins';
-import Droppable from './plugins/vue-droppable'
-//Vue.use(Droppable);
+import globalPreviewMixins from "./globalPreviewMixins";
+import componentPreviewMixins from "./componentPreviewMixins";
+import Droppable from "./plugins/vue-droppable";
+import PreviewElement from "./plugins/vue-preview-element";
+import UIDroppable from "./plugins/vue-ui-droppable";
+import UIDraggable from "./plugins/vue-ui-draggable";
+Vue.component('upb-preview-mini-toolbar', () => import(/* webpackChunkName: "upb-preview-mini-toolbar" */ './components/extra/UPBPreviewMiniToolbar.vue'));
 
-import PreviewElement from './plugins/vue-preview-element'
-//Vue.use(PreviewElement);
+Vue.use(Droppable);
 
-import UPBPreviewMiniToolbar from './components/extra/UPBPreviewMiniToolbar.vue'
+Vue.use(PreviewElement);
 
-Vue.component('upb-preview-mini-toolbar', UPBPreviewMiniToolbar);
+Vue.use(UIDroppable);
 
-import UIDroppable from './plugins/vue-ui-droppable'
-//Vue.use(UIDroppable);
-
-import UIDraggable from './plugins/vue-ui-draggable'
-//Vue.use(UIDraggable);
-
-//import ElementSortable from './plugins/vue-element-sortable'
-//Vue.use(ElementSortable);
+Vue.use(UIDraggable);
 
 store.getAllUPBElements(elements => {
 
-    elements.map(element=> {
+    elements.map(element => {
 
         if (element._upb_options.previews && ( _.isArray(element._upb_options.previews) || _.isObject(element._upb_options.previews) )) {
 
             let previews = _.isObject(element._upb_options.previews) ? _.values(element._upb_options.previews) : element._upb_options.previews;
 
-            previews.map(el=> {
+            previews.map(el => {
 
                 let template           = el.template;
-                //let component          = `upb-${element.tag}`;
                 let component          = el.component;
                 let componentMixins    = el.mixins;
-                //let upbComponentMixins = _.isEmpty(componentPreviewMixins[element.tag]) ? false : componentPreviewMixins[element.tag];
                 let upbComponentMixins = _.isEmpty(componentPreviewMixins[template]) ? false : componentPreviewMixins[template];
 
                 Vue.component(component, function (resolve, reject) {
@@ -76,7 +69,7 @@ store.getAllUPBElements(elements => {
         //}
     });
 
-}, _=> {});
+}, () => {});
 
 export default {
     name     : 'upb-preview',

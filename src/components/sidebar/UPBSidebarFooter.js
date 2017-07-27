@@ -51,7 +51,7 @@ export default {
 
             let lastDevice = _.last(Object.keys(this.deviceWidths));
 
-            if (this.currentDevices.length == 0) {
+            if (this.currentDevices.length < 1) {
                 this.currentDevices.push(lastDevice);
             }
 

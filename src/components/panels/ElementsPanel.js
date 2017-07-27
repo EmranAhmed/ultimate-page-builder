@@ -1,15 +1,5 @@
-import Vue, { util } from 'vue';
-import store from '../../store'
-import extend from 'extend';
-import {sprintf} from 'sprintf-js';
-
-// import fieldsComponent from '../settings-input/fields';
-
-import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
-Vue.component('upb-breadcrumb', UPBBreadcrumb);
-
-import ElementsList from './ElementsList.vue';
-Vue.component('upb-elements-list', ElementsList);
+import { util } from "vue";
+import { sprintf } from "sprintf-js";
 
 export default {
     name  : 'elements-panel',
@@ -74,7 +64,9 @@ export default {
                 }
             });
         }
-    }
+    },
 
-    // components : fieldsComponent
+    components : {
+        'upb-elements-list' : () => import(/* webpackChunkName: "upb-elements-list" */ './ElementsList.vue')
+    }
 }

@@ -1,5 +1,4 @@
-import store from '../../store';
-import extend from 'extend';
+import store from "../../store";
 
 export default {
     name : 'upb-media-icon-popup',
@@ -26,6 +25,9 @@ export default {
 
     data(){
         return {
+
+            l10n : store.l10n,
+
             queuedIcons      : [],
             selected         : {},
             selectedProvider : {},
@@ -49,7 +51,7 @@ export default {
 
         mediaFrameClass(){
             let frameClass = ['media-frame', 'mode-select', 'wp-core-ui', 'hide-router'];
-            if (this.providers.length == 1) {
+            if (this.providers.length < 2) {
                 frameClass.push('hide-menu');
             }
             return frameClass.join(' ');
@@ -81,7 +83,7 @@ export default {
 
         defaultProvider(){
 
-            this.iconProviders = this.providers.map((provider, index)=> {
+            this.iconProviders = this.providers.map((provider, index) => {
                 // O index is active one
                 provider.active = index == 0;
                 return provider;
@@ -92,7 +94,7 @@ export default {
         },
 
         activeProvider(id){
-            this.iconProviders = this.providers.map(provider=> {
+            this.iconProviders = this.providers.map(provider => {
                 provider.active = provider.id == id;
                 return provider;
             });
@@ -100,7 +102,7 @@ export default {
         },
 
         setSelectedProvider(){
-            this.selectedProvider = this.iconProviders.filter(provider=> provider.active).pop();
+            this.selectedProvider = this.iconProviders.filter(provider => provider.active).pop();
 
             this.start       = 0;
             this.total       = 0;
@@ -149,7 +151,7 @@ export default {
                     total    : this.total,
                     search   : this.searchIcon.toLowerCase().trim()
                 },
-                iconObject=> {
+                iconObject => {
                     this.isLoading = false;
 
                     if (this.searchIcon.toLowerCase().trim()) {
@@ -162,7 +164,7 @@ export default {
                     this.start = this.queuedIcons.length;
                     this.total = parseInt(iconObject.total);
                 },
-                error=> {
+                error => {
                     this.isLoading = false;
 
                     console.log(error);

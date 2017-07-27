@@ -1,11 +1,7 @@
-import extend from 'extend'
-import {sprintf} from 'sprintf-js';
-import common from './common'
-import userInputMixin from './user-mixins'
-
-import UPBMediaIconPopup from '../extra/UPBMediaIconPopup.vue';
-
-Vue.component('upb-media-icon-popup', UPBMediaIconPopup);
+import Vue from "vue";
+import { sprintf } from "sprintf-js";
+import common from "./common";
+import userInputMixin from "./user-mixins";
 
 export default {
     name : 'upb-input-icon-popup',
@@ -39,5 +35,9 @@ export default {
         openPopup(){
             this.show = true;
         }
+    },
+
+    components : {
+        'upb-media-icon-popup' : () => import(/* webpackChunkName: "UPBMediaIconPopup" */ '../extra/UPBMediaIconPopup.vue')
     }
 }

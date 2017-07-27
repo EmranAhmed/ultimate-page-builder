@@ -1,11 +1,11 @@
-import extend from 'extend'
-import {sprintf} from 'sprintf-js';
-import store from '../../store'
-import common from './common'
-import Select2 from '../../plugins/vue-select2'
-import userInputMixin from './user-mixins'
-
-// Vue.use(Select2);
+import Vue from "vue";
+import extend from "extend";
+import { sprintf } from "sprintf-js";
+import store from "../../store";
+import common from "./common";
+import Select2 from "../../plugins/vue-select2";
+import userInputMixin from "./user-mixins";
+Vue.use(Select2);
 
 export default {
     name : 'upb-input-ajax-select',
@@ -61,7 +61,7 @@ export default {
             load     : this.input,
             multiple : this.multiple,
             extra    : this.attributes.extra
-        }, options=> {
+        }, options => {
 
             if (this.multiple) {
                 Vue.set(this.attributes, 'options', extend(true, [], options));
@@ -119,7 +119,7 @@ export default {
             if (this.multiple) {
 
                 // Need this hack to remove already select item for multiple select2 item
-                this.$nextTick(()=> {
+                this.$nextTick(() => {
                     jQuery(this.$el).find('select > option').each(function (el) {
                         if (jQuery(this).val() == data.id) {
                             jQuery(this).remove();

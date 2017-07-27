@@ -1,10 +1,10 @@
+import Vue from "vue";
 import store from "../../store";
 import common from "./common";
 import userInputMixin from "./user-mixins";
 
-import "../../plugins/vue-upb-media";
-
-// Vue.use(UPBMedia)
+import UPBMedia from "../../plugins/vue-upb-media";
+Vue.use(UPBMedia)
 
 export default {
     name : 'upb-input-media-image',

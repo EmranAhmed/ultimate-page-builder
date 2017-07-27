@@ -1,22 +1,8 @@
-import Vue, { util } from 'vue';
+import Vue, { util } from "vue";
 
-import store from '../../store'
-
-import Sortable from '../../plugins/vue-sortable'
-import extend from 'extend';
-import {sprintf} from 'sprintf-js';
-
-import ElementList from '../element/ElementList.vue';
-
-Vue.component('element-list', ElementList);
-
-// Vue.use(Sortable);
-
-// Element List
-//Vue.component('element-list', ElementList);
-
-import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
-Vue.component('upb-breadcrumb', UPBBreadcrumb);
+import store from "../../store";
+import extend from "extend";
+import { sprintf } from "sprintf-js";
 
 export default {
     name  : 'column-contents',
@@ -219,5 +205,9 @@ export default {
                 this[tool.action](data, event);
             }
         }
+    },
+
+    components : {
+        'element-list' : () => import(/* webpackChunkName: "element-list" */ '../element/ElementList.vue')
     }
 }

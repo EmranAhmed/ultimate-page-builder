@@ -16,26 +16,4 @@
     </div>
 </template>
 <style src="./scss/upb-sidebar.scss" lang="scss"></style>
-<script>
-    import Vue from 'vue';
-    import store from './store'
-
-    import UPBSidebarHeader from './components/sidebar/UPBSidebarHeader.vue';
-    import UPBSidebarContent from './components/sidebar/UPBSidebarContent.vue';
-    import UPBSidebarFooter from './components/sidebar/UPBSidebarFooter.vue';
-
-    import UPBSidebarSubPanel from './components/sub-panels/UPBSidebarSubPanel.vue';
-
-    Vue.component('upb-sidebar-header', UPBSidebarHeader);
-    Vue.component('upb-sidebar-content', UPBSidebarContent);
-    Vue.component('upb-sidebar-footer', UPBSidebarFooter);
-
-    Vue.component('upb-sidebar-sub-panel', UPBSidebarSubPanel);
-
-    export default {
-        name : 'upb-sidebar',
-        data(){
-            return this.$root.$data
-        }
-    }
-</script>
+<script src="./UPBSidebar.js"></script>

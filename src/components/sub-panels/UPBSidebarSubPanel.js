@@ -1,10 +1,4 @@
-import Vue from 'vue';
-
-import store from '../../store'
-
-import UPBSubPanelSections from './UPBSubPanelSections.vue'
-
-Vue.component('upb-sub-panel-sections', UPBSubPanelSections);
+import store from "../../store";
 
 export default {
     name  : 'upb-sidebar-sub-panel',
@@ -50,5 +44,9 @@ export default {
             store.subpanel = '';
             document.getElementById('upb-wrapper').classList.remove('show-subpanel');
         }
+    },
+
+    components : {
+        'upb-sub-panel-sections' : () => import(/* webpackChunkName: "upb-sub-panel-sections" */ './UPBSubPanelSections.vue')
     }
 }

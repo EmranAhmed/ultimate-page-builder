@@ -1,34 +1,56 @@
-import NProgress from './nprogress';
+import NProgress from "./nprogress";
+import extend from "extend";
 
-const VueNProgress   = {};
-VueNProgress.install = function (Vue, options) {
+class Helper {
 
-    NProgress.configure(options || {
+    constructor(options) {
+        NProgress.configure(extend(true, {
             parent      : '#progress-bar',
             showSpinner : false,
             minimum     : 0.6,
             trickleRate : 0.4
-        });
-
-    Vue.prototype.$progressbar = {
-        show() {
-            NProgress.start();
-        },
-        hide() {
-            NProgress.done();
-        }
+        }, options));
     }
+
+    show() {
+        NProgress.start();
+    }
+
+    hide() {
+        NProgress.done();
+    }
+}
+
+// Usages:
+//
+// The helper globally `Vue.Helper` or in a Vue instance `this.$helper`
+// import Helper from "./Helper";
+// Vue.use(Helper, { someOption: true })
+
+const Plugin = (Vue, options = {}) => {
+
+    // Install once example:
+    // If you plugin need to load only once :)
+    if (Plugin.installed) {
+        return;
+    }
+
+    // Install Multi example:
+    // If you plugin need to load multiple time :)
+    /*if (Plugin.installed) {
+     Plugin.installed = false;
+     }*/
+
+    Vue.ProgressBar = new Helper(options);
+
+    Object.defineProperty(Vue.prototype, '$progressbar', {
+        value : Vue.ProgressBar
+    });
+
 };
 
-if (typeof exports == "object") {
-    module.exports = VueNProgress
+if (typeof window !== 'undefined' && window.Vue) {
+    window.Vue.use(Plugin);
 }
-else if (typeof define == "function" && define.amd) {
-    define([], function () {
-        return VueNProgress
-    })
-}
-else if (window.Vue) {
-    window.VueNProgress = VueNProgress;
-    Vue.use(VueNProgress)
-}
+
+export default Plugin;

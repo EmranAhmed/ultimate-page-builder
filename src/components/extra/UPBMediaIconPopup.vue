@@ -45,9 +45,7 @@
 
                             <div class="media-sidebar">
                                 <div tabindex="0" v-if="isSelected()" class="attachment-details save-ready">
-                                    <h2>
-                                        Icon Details
-                                    </h2>
+                                    <h2 v-text="l10n.iconDetailsTitle"></h2>
                                     <div class="attachment-info">
                                         <div class="thumbnail thumbnail-icon">
                                             <i :class="selected.id" :title="selected.name"></i>

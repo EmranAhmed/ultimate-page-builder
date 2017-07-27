@@ -1,79 +1,84 @@
-import { util } from 'vue';
+import { util } from "vue";
 
-($ => {
-    const vSelect2 = {};
+const Select2 = function (el, binding, vnode, init = true) {
 
-    if (!$().select2) {
+    jQuery(el).select2(jQuery.extend(true, {}, binding.value));
+
+    if (init) {
+
+        jQuery(el).on("select2:select", (e) => {
+
+            if (!vnode.context.onChange) {
+                util.warn('You need to implement the `onChange` method', vnode.context);
+            }
+
+            vnode.context.onChange(e.params.data, e);
+
+            //$(el).trigger('change.select2');
+
+        });
+
+        jQuery(el).on("select2:unselect", (e) => {
+
+            if (!vnode.context.onRemove) {
+                util.warn('You need to implement the `onRemove` method', vnode.context);
+            }
+
+            vnode.context.onRemove(e.params.data, e);
+
+            //$(el).trigger('change.select2');
+
+        });
+    }
+};
+
+const Directive = {
+
+    unbind(el) {
+        jQuery(el).select2("destroy");
+    },
+
+    update(el, binding, vnode){
+
+        if (!_.isUndefined(binding.value['ajax'])) {
+            jQuery(el).select2("destroy");
+
+            vnode.context.$nextTick(() => {
+                Select2(el, binding, vnode, false);
+            })
+        }
+    },
+
+    inserted(el, binding, vnode) {
+        Select2(el, binding, vnode);
+    }
+
+};
+
+const Plugin = (Vue, options = {}) => {
+
+    if (!jQuery().select2) {
         util.warn('select2 is not installed or found globally to use `vue-select2` directive..', this);
     }
 
-    vSelect2.init = function (el, binding, vnode, init = true) {
-        $(el).select2($.extend(true, {}, binding.value));
-
-        if (init) {
-
-            $(el).on("select2:select", (e) => {
-
-                if (!vnode.context.onChange) {
-                    util.warn('You need to implement the `onChange` method', vnode.context);
-                }
-
-                vnode.context.onChange(e.params.data, e);
-
-                //$(el).trigger('change.select2');
-
-            });
-
-            $(el).on("select2:unselect", (e) => {
-
-                if (!vnode.context.onRemove) {
-                    util.warn('You need to implement the `onRemove` method', vnode.context);
-                }
-
-                vnode.context.onRemove(e.params.data, e);
-
-                //$(el).trigger('change.select2');
-
-            });
-        }
-    };
-
-    vSelect2.install = function (Vue, options) {
-
-        Vue.directive('select2', {
-
-            unbind(el) {
-                $(el).select2("destroy");
-            },
-
-            update(el, binding, vnode){
-
-                if (!_.isUndefined(binding.value['ajax'])) {
-                    $(el).select2("destroy");
-
-                    vnode.context.$nextTick(()=> {
-                        vSelect2.init(el, binding, vnode, false);
-                    })
-                }
-            },
-
-            inserted(el, binding, vnode) {
-                vSelect2.init(el, binding, vnode);
-            }
-        });
-    };
-
-    if (typeof exports == "object") {
-        module.exports = vSelect2
-    }
-    else if (typeof define == "function" && define.amd) {
-        define([], function () {
-            return vSelect2
-        })
-    }
-    else if (window.Vue) {
-        window.vSelect2 = vSelect2;
-        Vue.use(vSelect2)
+    // Install once example:
+    // If you plugin need to load only once :)
+    if (Plugin.installed) {
+        return;
     }
 
-})(jQuery);
+    // Install Multi example:
+    // If you plugin need to load multiple time :)
+    /*if (Plugin.installed) {
+     Plugin.installed = false;
+     }*/
+
+    Vue.directive('select2', Directive)
+
+};
+
+if (typeof window !== 'undefined' && window.Vue) {
+    window.Vue.use(Plugin);
+}
+
+export default Plugin;

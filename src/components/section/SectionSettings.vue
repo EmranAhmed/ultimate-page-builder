@@ -39,7 +39,7 @@
 
                 <li class="upb-panel-tools">
                     <ul>
-                        <li v-for="tool in panelMetaTools" :key="tool">
+                        <li v-for="tool in panelMetaTools" :key="tool.id">
                             <a @click.prevent="toolsAction(tool, $event)" href="#">
                                 <i :class="tool.icon"></i>
                                 <div v-text="tool.title"></div>

@@ -124,8 +124,8 @@
         );
         $tab->register( 'layouts', $data, FALSE );
         
-        
-        /*$data = array(
+        /*
+        $data = array(
             'title'    => esc_html__( 'Extra Panel', 'ultimate-page-builder' ),
             'search'   => esc_html__( 'Search in Extra Panel', 'ultimate-page-builder' ),
             'help'     => wp_kses_post( __( '<p>Extra Panel Help Text</p>', 'ultimate-page-builder' ) ),
@@ -207,11 +207,11 @@
                                                                               ) ) );
         
         $data .= sprintf( "const _upb_routes = %s;\n", wp_json_encode( apply_filters( 'upb_routes', array(
-            array(
-                //    'name'      => 'extra',
-                //    'path'      => '/:tab(extra)',
-                //    'component' => 'ExtraPanel',
-            ) // you should register a tab before add routes
+            /*array(
+                    'name'      => 'extra',
+                    'path'      => '/:tab(extra)',
+                    'component' => 'ExtraPanel',
+            )*/ // you should register a tab before add routes. see line#128 for example.
         ) ) ) );
         
         $data .= sprintf( "const _upb_fields = %s;\n", wp_json_encode( apply_filters( 'upb_fields', array(
@@ -278,6 +278,7 @@
             'enableDeviceColumn'   => esc_attr__( 'Click to enable %s device screen layout', 'ultimate-page-builder' ),
             'disableDeviceColumn'  => esc_attr__( 'Click to disable %s device screen layout', 'ultimate-page-builder' ),
             'reConfigDeviceColumn' => esc_attr__( '%s device column layouts should be same as other enabled device column layout', 'ultimate-page-builder' ),
+            'iconDetailsTitle'     => esc_html__( 'Icon Details', 'ultimate-page-builder' ),
             // 'closeUrl'         => esc_url( get_permalink() ),
             'closeUrl'             => esc_url( add_query_arg( 'preview', 'true', get_permalink() ) ),
             'ajaxUrl'              => esc_url( admin_url( 'admin-ajax.php', 'relative' ) ),
@@ -307,11 +308,11 @@
 //};
 
 
-//var ExtraPanel = {
-//  template: '<span> Extra Panel Template </span>',
-//  // template: '#template',
-//  props:[]
-//}
+var ExtraPanel = {
+  template: '<span> Extra Panel Template </span>',
+  // template: '#template',
+  props:[]
+}
 </script>" );
         
         print( '<script type="text/x-template" id="extra-input-template">

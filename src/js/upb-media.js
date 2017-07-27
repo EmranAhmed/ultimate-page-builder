@@ -54,7 +54,6 @@
                         url : options.url ? options.url : ''
                     }
                 })
-
             ]);
         },
 

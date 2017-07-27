@@ -1,10 +1,7 @@
-import Vue, { util } from 'vue';
-import store from '../../store'
-import {sprintf} from 'sprintf-js';
-import extend from 'extend';
-import fieldsComponent from '../settings-input/fields';
-import UPBBreadcrumb from '../extra/UPBBreadcrumb.vue';
-Vue.component('upb-breadcrumb', UPBBreadcrumb);
+import { util } from "vue";
+import store from "../../store";
+import { sprintf } from "sprintf-js";
+import fieldsComponent from "../settings-input/fields";
 
 export default {
     name  : 'element-settings',

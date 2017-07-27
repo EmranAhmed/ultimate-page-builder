@@ -1,6 +1,6 @@
-import Vue, { util } from 'vue';
-import store from '../../store'
-import {sprintf} from 'sprintf-js'
+import { util } from "vue";
+import store from "../../store";
+import { sprintf } from "sprintf-js";
 
 export default {
     name  : 'section-list',
