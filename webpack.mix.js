@@ -44,7 +44,7 @@ if (process.env.NODE_ENV == 'package') {
 else {
 
     mix.banner({
-        banner : "Ultimate Page Builder v1.0.0-beta.28 \n\nAuthor: Emran Ahmed ( https://themehippo.com/ ) \nDate: " + new Date().toLocaleString() + "\nReleased under the MIT license."
+        banner : "Ultimate Page Builder v1.0.0 \n\nAuthor: Emran Ahmed ( https://themehippo.com/ ) \nDate: " + new Date().toLocaleString() + "\nReleased under the MIT license."
     });
 
     mix.notification({
@@ -77,7 +77,7 @@ else {
     mix.js('src/builder.js', `assets/js/upb-builder${min}.js`);
 
     // mix.js('src/js/upb-media.js', `assets/js/upb-media${min}.js`);
-
+    
     ['select2', 'upb-boilerplate', 'upb-scoped-polyfill', 'wp-color-picker-alpha'].map((name) => mix.babel(`src/js/${name}.js`, `assets/js/${name}${min}.js`));
 
     // Vendor, Check CommonsChunkPlugin on webpack.config.js
