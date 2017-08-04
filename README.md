@@ -2,6 +2,12 @@
 
 An Incredibly easiest and highly customizable drag and drop page builder helps create professional websites without writing a line of code.
 
+## Versions:
+
+- `~$ npm -v` - `5.3.0`
+- `~$ node -v` - `v8.1.4`
+- `~$ yarn --version` - `0.27.5`
+
 ## Development
 
 ### Using NPM
@@ -19,12 +25,12 @@ An Incredibly easiest and highly customizable drag and drop page builder helps c
 
 #### Dev mode
 - `yarn install`
-- `yarn dev`
+- `yarn dev` or `yarn run dev`
 - Check [Yarn Usage](https://yarnpkg.com/en/docs/usage)
 - Check [Yarn Documentation](https://yarnpkg.com/en/docs/cli/)
 
 #### Production
-- `yarn build`
+- `yarn build` or `yarn run build`
 
 ### Bundle
 
