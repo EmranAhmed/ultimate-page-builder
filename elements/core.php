@@ -162,8 +162,8 @@
         
         /*$attributes = array_merge( $attributes,
                                    upb_media_query_based_input_group( array(
-                                                                          'id'      => 'margin',
-                                                                          'title'   => esc_html__( 'Margin', 'ultimate-page-builder' ),
+                                                                          'id'      => 'example-margin',
+                                                                          'title'   => esc_html__( 'Example Input', 'ultimate-page-builder' ),
                                                                           'desc'    => esc_html__( 'Space between two section', 'ultimate-page-builder' ),
                                                                           'type'    => 'range',
                                                                           'options' => array(
@@ -175,18 +175,18 @@
                                                                           'value'   => 0,
                                                                       ) ) );*/
         
-        /*                $attributes = array_merge( $attributes,
+                        /*$attributes = array_merge( $attributes,
                                                    upb_media_query_based_input_group( array(
-                                                                                          'id'           => 'margin',
+                                                                                          'id'           => 'example-margin',
                                                                                           'title'        => esc_html__( 'Margin', 'ultimate-page-builder' ),
                                                                                           'desc'         => esc_html__( 'Margin between two section', 'ultimate-page-builder' ),
                                                                                           'type'         => 'spacing',
-                                                                                          'value'        => array( '10px', 'initial', '10px', 'auto' ),
+                                                                                          'value'        => array( '10px', 'auto', '10px', 'auto' ),
                                                                                           'device-value' => array(
-                                                                                              'lg' => array( '30px', 'initial', '20px', 'auto' ),
-                                                                                              //'md' => array( '21px', 'initial', '22px', 'auto' ),
-                                                                                              //'sm' => array( '25px', 'initial', '25px', 'auto' ),
-                                                                                              //'xs' => array( '10px', 'initial', '10px', 'auto' ),
+                                                                                              'lg' => array( '30px', 'auto', '20px', 'auto' ),
+                                                                                              'md' => array( '21px', 'auto', '22px', 'auto' ),
+                                                                                              'sm' => array( '25px', 'auto', '25px', 'auto' ),
+                                                                                              'xs' => array( '10px', 'auto', '10px', 'auto' ),
                                                                                           ),
                                                                                           'unit'         => 'px',
                                                                                           'options'      => array(

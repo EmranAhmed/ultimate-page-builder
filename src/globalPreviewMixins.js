@@ -1,8 +1,8 @@
 import store from './store'
 import extend from 'extend'
-import {sprintf} from 'sprintf-js'
+import { sprintf } from 'sprintf-js'
 
-export default{
+export default {
 
     props : {
         index  : {
@@ -16,7 +16,7 @@ export default{
         }
     },
 
-    data(){
+    data() {
         return {
             l10n                    : store.l10n,
             xhrContents             : '',
@@ -25,7 +25,7 @@ export default{
         }
     },
 
-    created(){
+    created() {
 
         this.$watch('model.contents', function (contents) {
 
@@ -51,14 +51,20 @@ export default{
         });
 
         if (this.getGeneratedAttributes()) {
-            this.getGeneratedAttributes().map((attribute_id)=> {
-
+            this.getGeneratedAttributes().map((attribute_id) => {
                 let action = `_upb_generate_attribute_${this.tag}_${attribute_id}`;
-
                 this.setGeneratedAttributes(attribute_id, '');
+                this.$watch(`model.attributes.${attribute_id}`, function (attribute_value, old_value) {
 
-                this.$watch(`model.attributes.${attribute_id}`, function (value) {
-                    this.getGeneratedAttributeContents(action, attribute_id, {attribute_id : `${attribute_id}`, attribute_value : value});
+                    // On immediate load we should not use _.debounce
+                    // old_value===undefined means its immediate :)
+                    if (old_value) {
+                        this.getGeneratedAttributeContents(action, attribute_id, {attribute_id : `${attribute_id}`, attribute_value : `${attribute_value}`});
+                    }
+                    else {
+                        this.getAttributeContentsAjax(action, attribute_id, {attribute_id : `${attribute_id}`, attribute_value : `${attribute_value}`});
+                    }
+
                 }, {deep : true, immediate : true});
             });
         }
@@ -67,26 +73,26 @@ export default{
         this.getAjaxContents();
     },
 
-    beforeDestroy(){
+    beforeDestroy() {
         this.deletePreviewData();
         this.removeInlineScript();
     },
 
-    mounted(){
+    mounted() {
         this.loadScripts();
     },
 
-    updated(){
+    updated() {
         this.loadScripts();
     },
 
     computed : {
 
-        ajaxContents(){
+        ajaxContents() {
             return this.xhrContents;
         },
 
-        hasContents(){
+        hasContents() {
             if (_.isArray(this.model['contents'])) {
                 return this.model.contents.length > 0;
             }
@@ -94,31 +100,31 @@ export default{
             return true;
         },
 
-        unique_id(){
+        unique_id() {
             return `upb-${this._uid}`;
         },
 
-        uniqueId(){
+        uniqueId() {
             return `upb-${this._uid}`;
         },
 
-        generatedAttributes(){
+        generatedAttributes() {
             return this.generatedAjaxAttributes;
         },
 
-        attributes(){
+        attributes() {
             return this.model.attributes;
         },
 
-        contents(){
+        contents() {
             return this.model.contents;
         },
 
-        tag(){
+        tag() {
             return this.model.tag;
         },
 
-        enabled(){
+        enabled() {
             if (!_.isUndefined(this.model.attributes['enable'])) {
                 return this.model.attributes.enable;
             }
@@ -127,15 +133,15 @@ export default{
             }
         },
 
-        active(){
+        active() {
             return this.model.attributes.active;
         },
 
-        title(){
+        title() {
             return this.model.attributes.title;
         },
 
-        deviceHiddenClasses(){
+        deviceHiddenClasses() {
             if (!_.isUndefined(this.model.attributes['device-hidden'])) {
                 return this.model.attributes['device-hidden'].join(' ');
             }
@@ -144,7 +150,7 @@ export default{
             }
         },
 
-        backgroundVariables(){
+        backgroundVariables() {
 
             let background = {};
             if (!_.isUndefined(this.model.attributes['background-type'])) {
@@ -197,7 +203,7 @@ export default{
             return background;
         },
 
-        elementID(){
+        elementID() {
 
             if (!_.isUndefined(this.model.attributes['element_id'])) {
                 return this.model.attributes.element_id;
@@ -205,34 +211,34 @@ export default{
             return false;
         },
 
-        elementClass(){
+        elementClass() {
             if (!_.isUndefined(this.model.attributes['element_class'])) {
                 return this.model.attributes.element_class;
             }
             return false;
         },
 
-        sidebarExpanded(){
+        sidebarExpanded() {
             return store.sidebarExpanded
         },
 
-        keyIndex(){
+        keyIndex() {
             return this.model._upb_options._keyIndex
         },
 
-        messages(){
+        messages() {
             return this.model._upb_options.meta.messages;
         },
 
-        $router(){
+        $router() {
             return store.panel._router;
         },
 
-        $route(){
+        $route() {
             return store.panel._route;
         },
 
-        gradientBackgroundClass(){
+        gradientBackgroundClass() {
 
             let classes = [];
 
@@ -254,37 +260,37 @@ export default{
 
     methods : {
 
-        getSpacingInputValue(id){
-            let settings        = this.model._upb_settings.filter((value)=> value.id == id)[0];
+        getSpacingInputValue(id) {
+            let settings        = this.model._upb_settings.filter((value) => value.id == id)[0];
             let attributeValues = this.attributes[id] ? this.attributes[id] : settings.default;
             return attributeValues.join(' ');
         },
 
-        hasGradientBackground(){
+        hasGradientBackground() {
             return ['gradient'].includes(this.model.attributes['background-type']);
         },
 
-        hasGradientBackgroundWithColorStop(){
+        hasGradientBackgroundWithColorStop() {
             return ['gradient'].includes(this.model.attributes['background-type']) && (!_.isUndefined(this.model.attributes['gradient-color-stop-1']) || !_.isUndefined(this.model.attributes['gradient-color-stop-1-location']) );
         },
 
-        hasGradientBackgroundWithOutColorStop(){
+        hasGradientBackgroundWithOutColorStop() {
             return ['gradient'].includes(this.model.attributes['background-type']) && (_.isUndefined(this.model.attributes['gradient-color-stop-1']) || _.isUndefined(this.model.attributes['gradient-color-stop-1-location']) );
         },
 
-        getAttribute(attribute, defaultValue = ''){
+        getAttribute(attribute, defaultValue = '') {
             return this.attributes[attribute] ? this.attributes[attribute] : defaultValue;
         },
 
-        getGeneratedAttributes(){
-            return this.model._upb_options.element.generatedAttributes;
+        getGeneratedAttributes() {
+            return this.model._upb_options.element.generatedAttributes ? this.model._upb_options.element.generatedAttributes : [];
         },
 
-        setGeneratedAttributes(id, value){
+        setGeneratedAttributes(id, value) {
             Vue.set(this.generatedAjaxAttributes, id, value);
         },
 
-        addKeyIndex(keyindex){
+        addKeyIndex(keyindex) {
             if (_.isArray(this.contents)) {
                 this.contents.map((m, i) => {
                     if (this.isElementRegistered(m.tag)) {
@@ -300,7 +306,7 @@ export default{
             }
         },
 
-        getAjaxContents(){
+        getAjaxContents() {
             if (this.model._upb_options.preview.ajax) {
                 if (this.model._upb_options.preview.shortcode) {
 
@@ -308,7 +314,7 @@ export default{
                             attributes : this.attributes,
                             shortcode  : store.generateShortcode(this.tag, this.attributes, this.contents)
                         },
-                        contents=> {
+                        contents => {
                             //this.$nextTick(function () {
                             if (_.isEmpty(contents)) {
                                 console.info(`%c Empty content returns. Is your "${this.tag}" shortcode template available on: "shortcodes/${this.tag}.php" path?`, 'color:red; font-size:18px')
@@ -317,7 +323,7 @@ export default{
                             this.$set(this, 'xhrContents', contents)
                             //});
                         },
-                        error=> {
+                        error => {
 
                             if (error == 0) {
                                 console.info(`%c You should add "${this.model._upb_options.preview['ajax-hook']}" wp ajax hook. like: "wp_ajax_${this.model._upb_options.preview['ajax-hook']}".`, 'color:red; font-size:18px')
@@ -331,12 +337,12 @@ export default{
                 }
                 else {
                     store.wpAjax(this.model._upb_options.preview['ajax-hook'], this.attributes,
-                        contents=> {
+                        contents => {
                             //this.$nextTick(function () {
                             this.$set(this, 'xhrContents', contents)
                             //});
                         },
-                        error=> {
+                        error => {
 
                             if (error == 0) {
                                 console.info(`%c You need to implement "${this.model._upb_options.preview['ajax-hook']}" with wp ajax: "wp_ajax_${this.model._upb_options.preview['ajax-hook']}".`, 'color:red; font-size:18px')
@@ -356,9 +362,9 @@ export default{
             this.getAjaxContents();
         }, this.debounceWaitTime),
 
-        getAttributeContentsAjax(action, id, data){
-            store.wpAjax(action, data, contents=> this.setGeneratedAttributes(id, contents),
-                (error)=> {
+        getAttributeContentsAjax(action, id, data) {
+            store.wpAjax(action, data, contents => this.setGeneratedAttributes(id, contents),
+                (error) => {
                     if (error == 0) {
                         console.info(`%c You are using "generatedAttributes" on "${this.tag}" element. So you should add "${action}" wp ajax hook. like: "wp_ajax_${action}" to get generated attribute contents.`, 'color:red; font-size:18px')
                     }
@@ -366,7 +372,8 @@ export default{
                         console.info(error);
                     }
                 }, {
-                    cache : true
+                    cache : true,
+                    type  : 'GET'
                 });
         },
 
@@ -374,11 +381,11 @@ export default{
             this.getAttributeContentsAjax(action, id, data);
         }, this.debounceWaitTime),
 
-        inlineStyle(style = {}){
+        inlineStyle(style = {}) {
             return extend(false, {}, this.backgroundVariables, style);
         },
 
-        addID(){
+        addID() {
 
             if (!_.isUndefined(this.attributes['element_id'])) {
                 return this.attributes.element_id;
@@ -386,7 +393,7 @@ export default{
             return null;
         },
 
-        isElementRegistered(tag){
+        isElementRegistered(tag) {
             return store.isElementRegistered(tag);
         },
 
@@ -394,7 +401,7 @@ export default{
             this.inlineScriptInit(true);
         }, this.debounceWaitTime),
 
-        setPreviewData(){
+        setPreviewData() {
             if (this.model._upb_options.assets.preview.inline_js) {
 
                 if (!store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id]) {
@@ -418,11 +425,11 @@ export default{
             }
         },
 
-        deletePreviewData(){
+        deletePreviewData() {
             return delete store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id];
         },
 
-        removeInlineScript(){
+        removeInlineScript() {
             if (this.model._upb_options.assets.preview.inline_js) {
 
                 let prefixInlineJS = `upb_preview_assets_${this.model.tag}-inline-js`;
@@ -435,7 +442,7 @@ export default{
             }
         },
 
-        inlineScriptInit(remove = false){
+        inlineScriptInit(remove = false) {
 
             // NOTE: If inline_js wrapped with <script> tag. then appendChild cannot execute script
             // So don't add <script> tag with inline_js
@@ -466,7 +473,7 @@ export default{
             }
         },
 
-        loadScripts(){
+        loadScripts() {
 
             let previewDocument = store.previewDocument();
 
@@ -477,7 +484,7 @@ export default{
 
             // JS Already Loaded Re-Init InlineJS
             if ((this.model._upb_options.assets.preview.js && previewDocument.querySelectorAll(`#${prefixJS}`).length > 0) && this.model._upb_options.assets.preview.inline_js) {
-                _.delay(()=> {
+                _.delay(() => {
                     this.inlineScriptInit(true);
                 }, this.debounceWaitTime);
             }
@@ -519,7 +526,7 @@ export default{
             }
         },
 
-        addPreviewClass(extra = false){
+        addPreviewClass(extra = false) {
 
             let cssClasses = [];
 
@@ -536,7 +543,7 @@ export default{
             }
 
             if (extra && _.isObject(extra)) {
-                cssClasses.push(...Object.keys(extra).filter((classes)=> {
+                cssClasses.push(...Object.keys(extra).filter((classes) => {
                     return extra[classes]
                 }));
             }
@@ -576,7 +583,7 @@ export default{
             return cssClasses.join(' ');
         },
 
-        addClass(extra = false, combinePreview = true){
+        addClass(extra = false, combinePreview = true) {
 
             let cssClasses = [];
 
@@ -589,7 +596,7 @@ export default{
             }
 
             if (extra && _.isObject(extra)) {
-                cssClasses.push(...Object.keys(extra).filter((classes)=> {
+                cssClasses.push(...Object.keys(extra).filter((classes) => {
                     return extra[classes]
                 }));
             }
@@ -609,43 +616,43 @@ export default{
             return cssClasses.join(' ');
         },
 
-        openElementsPanel(){
+        openElementsPanel() {
             this.$router.replace(`/elements`);
         },
 
-        openSettingsPanel(){
+        openSettingsPanel() {
             this.$router.replace(`/settings`);
         },
 
-        openLayoutsPanel(){
+        openLayoutsPanel() {
             this.$router.replace(`/layouts`);
         },
 
         // Alias of openElementItemsPanel
-        openElementsItemPanel(path){
+        openElementsItemPanel(path) {
             this.openElementItemsPanel(path);
         },
 
-        openElementItemsPanel(path){
+        openElementItemsPanel(path) {
 
             if (path.split('/').length > 1) {
                 let previousPath = path.split('/').slice(0, -1).join('/');
                 this.$router.replace(`/sections/${previousPath}/contents`);
             }
 
-            this.$nextTick(()=> {
+            this.$nextTick(() => {
                 this.$router.replace(`/sections/${path}/contents`);
             })
         },
 
-        openElementSettingsPanel(path){
+        openElementSettingsPanel(path) {
 
             if (path.split('/').length > 1) {
                 let previousPath = path.split('/').slice(0, -1).join('/');
                 this.$router.replace(`/sections/${previousPath}/contents`);
             }
 
-            this.$nextTick(()=> {
+            this.$nextTick(() => {
                 this.$router.replace(`/sections/${path}/settings`);
             })
         },
@@ -676,7 +683,7 @@ export default{
 
         // toHEX('rgb(255,255,255)'),
         // toHEX('rgba(255,255,255, 0.2)'
-        toHEX(rgbColor){
+        toHEX(rgbColor) {
 
             // If It's Hex Color
             if (rgbColor.toLowerCase().substring(0, 1) == '#') {

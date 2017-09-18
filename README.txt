@@ -98,6 +98,11 @@ Yes.
 
 == Changelog ==
 
+= 1.0.1 =
+
+- `generatedAttribute` initial ajax request fixed
+- `select2` input type placeholder fixed
+
 = 1.0.0 =
 
 - Latest update of VueJS and VueRouter.
