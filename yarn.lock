@@ -6626,9 +6626,9 @@ wordwrap@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.2.tgz#b79669bb42ecb409f83d583cad52ca17eaa1643f"
 
-"wp-mix@github:EmranAhmed/wp-mix":
-  version "1.0.1"
-  resolved "https://codeload.github.com/EmranAhmed/wp-mix/tar.gz/fc0ed3594d60ce09bc80b6da83ba5e879e058961"
+wp-mix@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/wp-mix/-/wp-mix-1.0.2.tgz#aa4b10f623ddb2d4eb72b1d697095c6c5f31c2ea"
   dependencies:
     autoprefixer "^7.1.1"
     babel-core "^6.24.1"
