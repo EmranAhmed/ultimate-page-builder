@@ -98,6 +98,10 @@ Yes.
 
 == Changelog ==
 
+= 1.0.2 =
+
+- `ultimate-page-builder` class added on preview mode also
+
 = 1.0.1 =
 
 - `generatedAttribute` initial ajax request fixed
