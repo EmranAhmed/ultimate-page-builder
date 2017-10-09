@@ -1,13 +1,13 @@
 import store from './store'
 
-export default{
+export default {
 
     'upb-row' : {
         computed : {
-            rowGroupClass(){
+            rowGroupClass() {
                 return store.grid.groupClass;
             },
-            containerClass(){
+            containerClass() {
                 let cssClasses = [];
 
                 cssClasses.push(this.model.attributes.container);
@@ -28,9 +28,9 @@ export default{
     'upb-column' : {
 
         computed : {
-            generatedColumnClass(){
+            generatedColumnClass() {
 
-                let grid = store.grid.devices.map((device)=> {
+                let grid = store.grid.devices.map((device) => {
                     let gridValue = this.model.attributes[device.id].trim();
 
                     if (gridValue) {
@@ -58,11 +58,11 @@ export default{
 
         methods : {
 
-            dropAccept(content){
+            dropAccept(content) {
                 return true;
             },
 
-            afterDrop(content, accepted = false){
+            afterDrop(content, accepted = false) {
                 if (accepted) {
 
                     this.model.contents.push(content);

@@ -27,6 +27,13 @@ export default {
 
     created() {
 
+        this.$watch('xhrContents', function () {
+            _.delay(() => {
+                this.setPreviewData();
+                this.inlineScriptInit(true);
+            }, 100);
+        });
+
         this.$watch('model.contents', function (contents) {
 
             this.setPreviewData();
@@ -70,6 +77,7 @@ export default {
         }
 
         this.setPreviewData();
+
         this.getAjaxContents();
     },
 
@@ -146,7 +154,7 @@ export default {
                 return this.model.attributes['device-hidden'].join(' ');
             }
             else {
-                return '';
+                return null;
             }
         },
 
@@ -208,14 +216,14 @@ export default {
             if (!_.isUndefined(this.model.attributes['element_id'])) {
                 return this.model.attributes.element_id;
             }
-            return false;
+            return null;
         },
 
         elementClass() {
             if (!_.isUndefined(this.model.attributes['element_class'])) {
                 return this.model.attributes.element_class;
             }
-            return false;
+            return null;
         },
 
         sidebarExpanded() {
@@ -422,7 +430,11 @@ export default {
                         contents      : this.contents
                     });
                 }
+
+                return store.previewWindow()._UPB_PREVIEW_DATA[this.unique_id];
             }
+
+            return null;
         },
 
         deletePreviewData() {
@@ -538,12 +550,12 @@ export default {
                 cssClasses.push(extra);
             }
 
-            if (extra && _.isArray(extra)) {
+            if (extra && Array.isArray(extra)) {
                 cssClasses.push(...extra);
             }
 
-            if (extra && _.isObject(extra)) {
-                cssClasses.push(...Object.keys(extra).filter((classes) => {
+            if (extra && (_.isObject(extra) && !Array.isArray(extra))) {
+                cssClasses.push(...Object.keys(extra).map((classes) => {
                     return extra[classes]
                 }));
             }
@@ -587,16 +599,18 @@ export default {
 
             let cssClasses = [];
 
+            cssClasses.push(this.tag);
+
             if (extra && _.isString(extra)) {
                 cssClasses.push(extra);
             }
 
-            if (extra && _.isArray(extra)) {
+            if (extra && Array.isArray(extra)) {
                 cssClasses.push(...extra);
             }
 
-            if (extra && _.isObject(extra)) {
-                cssClasses.push(...Object.keys(extra).filter((classes) => {
+            if (extra && (_.isObject(extra) && !Array.isArray(extra))) {
+                cssClasses.push(...Object.keys(extra).map((classes) => {
                     return extra[classes]
                 }));
             }

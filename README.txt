@@ -99,6 +99,15 @@ Yes.
 
 == Changelog ==
 
+= 1.0.4 =
+
+- Fix object class
+- xhrContent change js setPreviewData() and inlineScriptInit() options
+
+= 1.0.3 =
+
+- Change webpack eval sourceMap
+
 = 1.0.2 =
 
 - `ultimate-page-builder` class added on preview mode also
@@ -124,7 +133,7 @@ Yes.
 - Fixed Element default attribute access issue
 - Changed Directory structure
 - Add image and fonts location function.
-- JS function `addClass(...)` support string/array/object for extra class name
+- JS function `addClass(...)` supports string or array or object for extra class name
 - `min`, `max`, `step` option added to spacing input field.
 - `getSpacingInputValue` function on JS and `upb_get_spacing_input_value` function added.
 - Improved UPB Tab and UPB Accordion templates
