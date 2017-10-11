@@ -113,7 +113,7 @@
 		
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		
-		wp_register_script( 'upb-scoped-css-polyfill', UPB_PLUGIN_ASSETS_URI . "js/upb-scoped-polyfill{$suffix}.js", array(), FALSE, TRUE );
+		//wp_register_script( 'upb-scoped-css-polyfill', UPB_PLUGIN_ASSETS_URI . "js/upb-scoped-polyfill{$suffix}.js", array(), FALSE, TRUE );
 		
 		if ( upb_is_enabled() ):
 			
@@ -121,7 +121,7 @@
 				wp_enqueue_style( 'upb-grid' );
 			}
 			
-			wp_enqueue_script( 'upb-scoped-css-polyfill' );
+			//wp_enqueue_script( 'upb-scoped-css-polyfill' );
 			
 			// Load Element Assets
 			upb_enqueue_element_scripts();
@@ -178,11 +178,11 @@
 		
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		
-		if ( wp_script_is( 'upb-scoped-css-polyfill', 'queue' ) && 'prefetch' === $relation_type ) {
+		/*if ( wp_script_is( 'upb-scoped-css-polyfill', 'queue' ) && 'prefetch' === $relation_type ) {
 			$urls[] = array(
 				'href' => esc_url( UPB_PLUGIN_ASSETS_URI . "js/upb-scoped-polyfill{$suffix}.js" ),
 			);
-		}
+		}*/
 		
 		return $urls;
 	}, 11, 2 );

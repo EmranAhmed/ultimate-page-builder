@@ -7,12 +7,7 @@
     }
 ?>
 
-<div <?php upb_shortcode_attribute_id( $attributes ) ?> class="<?php upb_shortcode_class( $attributes, $tag ) ?>">
-    <style scoped>
-        :scope {
-        <?php upb_shortcode_scoped_style_background($attributes) ?> text-align : <?php echo esc_attr( $attributes[ 'align' ] ) ?>;
-            }
-    </style>
+<div <?php upb_shortcode_attribute_id( $attributes ) ?> class="<?php upb_shortcode_class( $attributes, $tag ) ?>" <?php upb_shortcode_unique_selector( $shortcode_atts ) ?>>
     <<?php echo esc_attr( $attributes[ 'type' ] ) ?>>
     <?php echo do_shortcode( $contents ) ?>
     </<?php echo esc_attr( $attributes[ 'type' ] ) ?>>

@@ -44,7 +44,9 @@
 			
 			wp_register_style( 'upb-shortcode-preview-core', UPB_PLUGIN_ASSETS_URI . "css/upb-preview$suffix.css" );
 			wp_enqueue_style( 'upb-shortcode-preview-core' );
-			wp_enqueue_script( 'jquery' );
+			
+			wp_register_script( 'upb-preview-element-inline-scripts', UPB_PLUGIN_ASSETS_URI . "js/upb-preview-element-inline-scripts{$suffix}.js", array( 'jquery', 'wp-util' ), FALSE, TRUE );
+			wp_enqueue_script( 'upb-preview-element-inline-scripts' );
 			
 			// You can change grid system as you need :)
 			if ( ! current_theme_supports( 'upb-custom-grid-layout' ) ) {

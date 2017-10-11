@@ -77,8 +77,8 @@ else {
     mix.js('src/builder.js', `assets/js/upb-builder${min}.js`);
 
     // mix.js('src/js/upb-media.js', `assets/js/upb-media${min}.js`);
-    
-    ['select2', 'upb-boilerplate', 'upb-scoped-polyfill', 'wp-color-picker-alpha'].map((name) => mix.babel(`src/js/${name}.js`, `assets/js/${name}${min}.js`));
+
+    ['upb-preview-element-inline-scripts', 'select2', 'upb-boilerplate', 'upb-scoped-polyfill', 'wp-color-picker-alpha'].map((name) => mix.babel(`src/js/${name}.js`, `assets/js/${name}${min}.js`));
 
     // Vendor, Check CommonsChunkPlugin on webpack.config.js
     mix.extract(['vue', 'vue-router', 'extend', 'sprintf-js', 'sanitize-html', 'copy-to-clipboard'], `assets/js/upb-vendor${min}.js`);

@@ -265,7 +265,6 @@
 		return apply_filters( 'upb_responsive_hidden_options_output', array_values( $hidden_devices ) );
 	}
 	
-	
 	if ( ! function_exists( 'upb_make_column_class' ) ):
 		
 		function upb_make_column_class( $attributes, $extra = FALSE ) {
@@ -1208,7 +1207,6 @@
 		echo upb_shortcode_get_unique_selector( $attributes );
 	}
 	
-	
 	function upb_add_inline_style( $content, $wp_header = FALSE ) {
 		
 		if ( FALSE === strpos( $content, '[' ) ) {
@@ -1364,7 +1362,6 @@
 		}
 	}
 	
-	
 	function upb_print_element_inline_style() {
 		$data = upb()->get_inline_style_data();
 		array_map( function ( $handle, $output ) {
@@ -1384,7 +1381,6 @@
 			printf( "<script id='%s-inline-js-once' type='text/javascript'>\n try{ %s }catch(e){ console.error(e.message); }\n</script>\n", esc_attr( $handle ), $output );
 		}, array_keys( $data_once ), $data_once );
 	}
-	
 	
 	function upb_enqueue_element_inline_style() {
 		if ( upb_is_enabled() ):
