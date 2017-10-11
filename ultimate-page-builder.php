@@ -22,6 +22,8 @@
 			
 			private $_enabled = FALSE;
 			
+			private $_inline_styles = array();
+			
 			public static function init() {
 				if ( is_null( self::$_instance ) ) {
 					self::$_instance = new self();
@@ -31,10 +33,18 @@
 			}
 			
 			public function __construct() {
-				
 				$this->constants();
 				$this->includes();
 				$this->hooks();
+			}
+			
+			public function add_inline_style_data( $handler, $output ) {
+				$this->_inline_styles[ $handler ] = isset( $this->_inline_styles[ $handler ] ) ? $this->_inline_styles[ $handler ] : array();
+				array_push( $this->_inline_styles[ $handler ], $output );
+			}
+			
+			public function get_inline_style_data() {
+				return $this->_inline_styles;
 			}
 			
 			public function constants() {

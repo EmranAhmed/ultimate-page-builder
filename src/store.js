@@ -21,7 +21,8 @@ class store {
         this.panel                = '';
         this.subpanel             = '';
         this.sidebarExpanded      = true;
-        this.currentPreviewDevice = ''
+        this.currentPreviewDevice = '';
+        this._el_id               = 0;
     }
 
     isLocal(link = '') {
@@ -126,6 +127,12 @@ class store {
         this.status.dirty = false
     }
 
+    addElementUniqueID(attributes) {
+        attributes._upb_el_uid = this._el_id;
+        this._el_id++;
+        return attributes;
+    }
+
     cleanup(contents) {
         return contents.map((content) => {
             delete content['_upb_settings'];
@@ -133,11 +140,12 @@ class store {
             delete content['_upb_field_attrs'];
             delete content['_upb_field_type'];
 
-           /* if (content['contents'] && _.isString(content['contents'])) {
-                delete content.attributes._contents;
-            }*/
+            /* if (content['contents'] && _.isString(content['contents'])) {
+                 delete content.attributes._contents;
+             }*/
 
             if (content.attributes) {
+                content.attributes = this.addElementUniqueID(content.attributes);
                 this.removePrivateAttributes(content.attributes);
             }
 
