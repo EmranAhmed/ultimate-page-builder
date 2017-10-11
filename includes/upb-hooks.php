@@ -132,8 +132,16 @@
 	add_action( 'wp_head', function () {
 		if ( upb_is_enabled() ):
 			// Load Element Inline CSS
-			upb_enqueue_element_inline_css();
-			upb_print_element_inline_css();
+			upb_enqueue_element_inline_style();
+			upb_print_element_inline_style();
+		endif;
+	}, 20 );
+	
+	add_action( 'wp_footer', function () {
+		if ( upb_is_enabled() ):
+			// Load Element Inline Script
+			upb_enqueue_element_inline_script();
+			upb_print_element_inline_script();
 		endif;
 	}, 20 );
 	
@@ -178,22 +186,4 @@
 		
 		return $urls;
 	}, 11, 2 );
-	
-	
-	function upb_section_inline_css( $output, $selector, $attributes, $settings, $tag ) {
-		ob_start();
-		?>
-        <style>
-            [<?php echo $selector ?>] {
-                <?php upb_shortcode_scoped_style_background($attributes) ?>
-                margin : <?php echo esc_attr( upb_get_spacing_input_value('margin', $attributes, $settings) ) ?>;
-                padding: <?php echo esc_attr( upb_get_spacing_input_value('padding', $attributes, $settings) ) ?>;
-                }
-        </style>
-		<?php
-		
-		return ob_get_clean();
-	}
-	
-	
-	add_filter( 'upb_shortcode_upb-section_inline_css', 'upb_section_inline_css', 10, 5 );
+ 

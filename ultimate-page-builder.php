@@ -22,7 +22,9 @@
 			
 			private $_enabled = FALSE;
 			
-			private $_inline_styles = array();
+			private $_inline_styles       = array();
+			private $_inline_scripts      = array();
+			private $_inline_scripts_once = array();
 			
 			public static function init() {
 				if ( is_null( self::$_instance ) ) {
@@ -46,6 +48,25 @@
 			public function get_inline_style_data() {
 				return $this->_inline_styles;
 			}
+			
+			public function add_inline_script_data( $handler, $output ) {
+				$this->_inline_scripts[ $handler ] = isset( $this->_inline_scripts[ $handler ] ) ? $this->_inline_scripts[ $handler ] : array();
+				array_push( $this->_inline_scripts[ $handler ], $output );
+			}
+			
+			public function get_inline_script_data() {
+				return $this->_inline_scripts;
+			}
+			
+			public function add_inline_script_once_data( $handler, $output ) {
+				$this->_inline_scripts_once[ $handler ] = isset( $this->_inline_scripts_once[ $handler ] ) ? $this->_inline_scripts_once[ $handler ] : '';
+				$this->_inline_scripts_once[ $handler ] = $output; // inline_js_once
+			}
+			
+			public function get_inline_script_once_data() {
+				return $this->_inline_scripts_once;
+			}
+			
 			
 			public function constants() {
 				
@@ -105,6 +126,7 @@
 					require_once UPB_PLUGIN_INCLUDE_PATH . "class-upb-preview.php";
 					
 					// Load
+					require_once UPB_PLUGIN_INCLUDE_PATH . "upb-element-inline-scripts.php";
 					require_once UPB_PLUGIN_INCLUDE_PATH . "upb-hooks.php";
 					require_once UPB_PLUGIN_INCLUDE_PATH . "upb-ajax-functions.php";
 				}

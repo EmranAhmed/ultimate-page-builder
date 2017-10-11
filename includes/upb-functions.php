@@ -1198,7 +1198,7 @@
 	
 	function upb_shortcode_get_unique_selector( $attributes ) {
 		if ( isset( $attributes[ '_upb_el_uid' ] ) ) {
-			return sprintf( ' _upb_el_uid-%s', esc_attr( $attributes[ '_upb_el_uid' ] ) );
+			return sprintf( ' data-upb_el_uid="%s"', esc_attr( $attributes[ '_upb_el_uid' ] ) );
 		} else {
 			return '';
 		}
@@ -1207,6 +1207,7 @@
 	function upb_shortcode_unique_selector( $attributes ) {
 		echo upb_shortcode_get_unique_selector( $attributes );
 	}
+	
 	
 	function upb_add_inline_style( $content, $wp_header = FALSE ) {
 		
@@ -1252,7 +1253,12 @@
 					// Inline CSS
 					// Filter Name Like: upb_shortcode_[TAG_NAME]_inline_css
 					
-					$output = apply_filters( $assets[ 'inline_css_filter_name' ], '', trim( $selector ), $attributes, $settings, $tag );
+					if ( is_callable( $assets[ 'inline_css' ] ) ) {
+						$output = $assets[ 'inline_css' ]( trim( $selector ), $attributes, $settings, $tag );
+					} else {
+						$output = apply_filters( $assets[ 'inline_css' ], '', trim( $selector ), $attributes, $settings, $tag );
+					}
+					
 					if ( $output ) {
 						if ( $css_loaded ) {
 							wp_add_inline_style( $handle, $output );
@@ -1271,14 +1277,116 @@
 		}
 	}
 	
-	function upb_print_element_inline_css() {
-		$styles = upb()->get_inline_style_data();
-		array_map( function ( $handle, $output ) {
-			printf( "<style id='%s-inline-css' type='text/css'>\n%s\n</style>\n", esc_attr( $handle ), implode( "\n", $output ) );
-		}, array_keys( $styles ), $styles );
+	function upb_add_inline_script( $content, $wp_footer = FALSE ) {
+		
+		if ( FALSE === strpos( $content, '[' ) ) {
+			return FALSE;
+		}
+		
+		preg_match_all( '/' . get_shortcode_regex() . '/s', $content, $matches, PREG_SET_ORDER );
+		
+		if ( empty( $matches ) ) {
+			return FALSE;
+		}
+		
+		foreach ( $matches as $shortcode ) {
+			
+			$tag      = $shortcode[ 2 ];
+			$atts     = $shortcode[ 3 ];
+			$contents = $shortcode[ 5 ];
+			
+			if ( shortcode_exists( $tag ) && upb_elements()->has_element( $tag ) ) {
+				
+				if ( ! empty( $atts ) ) {
+					$parsed_attributes = shortcode_parse_atts( $atts );
+					$core_attributes   = upb_elements()->get_attributes( $tag, $parsed_attributes );
+					$attributes        = shortcode_atts( $parsed_attributes, $core_attributes, $tag );
+					$settings          = upb_elements()->get_element( $tag, '_upb_settings' );
+					//$selector          = upb_shortcode_get_unique_selector( $attributes );
+					$options = upb_elements()->get_element( $tag, '_upb_options' );
+					$assets  = $options[ 'assets' ][ 'shortcode' ];
+					
+					$js_registered = FALSE;
+					
+					$handle = apply_filters( 'upb_assets_handle', sprintf( 'upb-element-%s', $tag ), $tag );
+					
+					// JavaScript
+					if ( ! empty( $assets[ 'js' ] ) ) {
+						if ( wp_script_is( esc_html( $assets[ 'js' ] ), 'registered' ) ) {
+							$handle        = esc_html( $assets[ 'js' ] );
+							$js_registered = TRUE;
+						}
+					}
+					
+					// Inline JS
+					// Filter Name Like: upb_shortcode_[TAG_NAME]_inline_js
+					// Filter Name Like: upb_shortcode_[TAG_NAME]_inline_js_once
+					$output = '';
+					if ( is_callable( $assets[ 'inline_js' ] ) ) {
+						$output = $assets[ 'inline_js' ]( $attributes, $settings, $tag );
+					} else {
+						$output = apply_filters( $assets[ 'inline_js' ], '', $attributes, $settings, $tag );
+					}
+					
+					if ( $output ) {
+						if ( $js_registered ) {
+							wp_add_inline_script( $handle, $output );
+						} elseif ( $wp_footer ) {
+							$data = trim( preg_replace( '#<script[^>]*>(.*)</script>#is', '$1', $output ) );
+							upb()->add_inline_script_data( $handle, $data );
+						}
+					}
+					
+					
+					$output = '';
+					if ( is_callable( $assets[ 'inline_js_once' ] ) ) {
+						$output = $assets[ 'inline_js_once' ]( $attributes, $settings, $tag );
+					} else {
+						$output = apply_filters( $assets[ 'inline_js_once' ], '', $attributes, $settings, $tag );
+					}
+					
+					if ( $output ) {
+						if ( $js_registered ) {
+							wp_add_inline_script( $handle, $output );
+						} elseif ( $wp_footer ) {
+							$data = trim( preg_replace( '#<script[^>]*>(.*)</script>#is', '$1', $output ) );
+							upb()->add_inline_script_once_data( $handle, $data );
+						}
+					}
+					
+					
+					// Recursive
+					if ( ! empty( $contents ) ) {
+						upb_add_inline_script( $contents, $wp_footer );
+					}
+				}
+			}
+		}
 	}
 	
-	function upb_enqueue_element_inline_css() {
+	
+	function upb_print_element_inline_style() {
+		$data = upb()->get_inline_style_data();
+		array_map( function ( $handle, $output ) {
+			printf( "<style id='%s-inline-css' type='text/css'>\n%s\n</style>\n", esc_attr( $handle ), implode( "\n", $output ) );
+		}, array_keys( $data ), $data );
+	}
+	
+	function upb_print_element_inline_script() {
+		$data      = upb()->get_inline_script_data();
+		$data_once = upb()->get_inline_script_once_data();
+		
+		array_map( function ( $handle, $output ) {
+			printf( "<script id='%s-inline-js' type='text/javascript'>\n try{ %s }catch(e){ console.error(e.message); }\n</script>\n", esc_attr( $handle ), implode( "\n", $output ) );
+		}, array_keys( $data ), $data );
+		
+		array_map( function ( $handle, $output ) {
+			printf( "<script id='%s-inline-js-once' type='text/javascript'>\n try{ %s }catch(e){ console.error(e.message); }\n</script>\n", esc_attr( $handle ), $output );
+		}, array_keys( $data_once ), $data_once );
+	}
+	
+	
+	function upb_enqueue_element_inline_style() {
 		if ( upb_is_enabled() ):
 			
 			$post_ID    = get_queried_object_id();
@@ -1286,6 +1394,17 @@
 			
 			// Adding Inline CSS
 			upb_add_inline_style( $shortcodes, TRUE );
+		endif;
+	}
+	
+	function upb_enqueue_element_inline_script() {
+		if ( upb_is_enabled() ):
+			
+			$post_ID    = get_queried_object_id();
+			$shortcodes = get_post_meta( $post_ID, '_upb_shortcodes', TRUE );
+			
+			// Adding Inline CSS
+			upb_add_inline_script( $shortcodes, TRUE );
 		endif;
 	}
 	
@@ -1326,11 +1445,11 @@
 					}
 					
 					// Inline JS
-					if ( ! empty( $assets[ 'inline_js' ] ) ) {
+					/*if ( ! empty( $assets[ 'inline_js' ] ) ) {
 						if ( $js_registered ) {
 							wp_add_inline_script( $handle, sprintf( 'try{ %s }catch(error){ console.error(error.message, "On \"%s\" Shortcode Inline JS."); }', $assets[ 'inline_js' ], $tag ) );
 						}
-					}
+					}*/
 					
 					do_action( 'upb_enqueue_element_scripts', $tag );
 				}
@@ -1338,6 +1457,7 @@
 			
 			// Adding Inline CSS
 			upb_add_inline_style( $shortcodes, FALSE );
+			upb_add_inline_script( $shortcodes, FALSE );
 		endif;
 	}
 	

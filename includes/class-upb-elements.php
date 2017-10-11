@@ -193,7 +193,12 @@
 				}
 				
 				if ( ! isset( $_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_js' ] ) ) {
-					$_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_js' ] = FALSE;
+					//$_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_js' ] = FALSE;
+					$_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_js' ] = sprintf( 'upb_shortcode_%s_inline_js', $tag );
+				}
+				
+				if ( ! isset( $_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_js_once' ] ) ) {
+					$_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_js_once' ] = sprintf( 'upb_shortcode_%s_inline_js_once', $tag );
 				}
 				
 				if ( ! isset( $_upb_options[ 'assets' ][ 'shortcode' ][ 'css' ] ) ) {
@@ -201,11 +206,7 @@
 				}
 				
 				if ( ! isset( $_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_css' ] ) ) {
-					$_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_css' ] = FALSE;
-				}
-				
-				if ( ! isset( $_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_css_filter_name' ] ) ) {
-					$_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_css_filter_name' ] = sprintf( 'upb_shortcode_%s_inline_css', $tag );
+					$_upb_options[ 'assets' ][ 'shortcode' ][ 'inline_css' ] = sprintf( 'upb_shortcode_%s_inline_css', $tag );
 				}
 				
 				if ( ! isset( $_upb_options[ 'third_party_path' ] ) ) {
@@ -507,14 +508,14 @@
 				}
 				
 				// Inline JS
-				if ( ! empty( $assets[ 'inline_js' ] ) && ! $js_registered ) {
+				/*if ( ! empty( $assets[ 'inline_js' ] ) && ! $js_registered ) {
 					add_action( 'wp_footer', function () use ( $tag, $assets ) {
 						printf( "<!--  Shortcode Inline JS of Element %s  -->", $tag );
 						echo "<script type='text/javascript'>";
 						printf( 'try{ %s }catch(error){ console.error(error.message, "On \"%s\" Shortcode Inline JS."); }', $assets[ 'inline_js' ], $tag );
 						echo "</script>";
 					}, 25 );
-				}
+				}*/
 			}
 			
 			public function get_elements() {
