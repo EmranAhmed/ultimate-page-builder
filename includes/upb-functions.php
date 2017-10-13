@@ -1107,7 +1107,7 @@
 			$classes = array_merge( $classes, $extra );
 		}
 		
-		return implode( ' ', apply_filters( 'upb_get_shortcode_class', array_unique( $classes ) ) );
+		return trim( implode( ' ', apply_filters( 'upb_get_shortcode_class', array_unique( $classes ) ) ) );
 	}
 	
 	function upb_get_shortcode_id( $attributes ) {

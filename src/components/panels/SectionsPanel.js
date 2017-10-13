@@ -9,7 +9,7 @@ export default {
     name  : 'sections-panel',
     props : ['index', 'model'],
 
-    data(){
+    data() {
         return {
 
             l10n       : store.l10n,
@@ -29,7 +29,7 @@ export default {
     },
 
     computed : {
-        contents(){
+        contents() {
 
             let query = this.searchQuery.toLowerCase().trim();
             if (query) {
@@ -43,17 +43,17 @@ export default {
 
     methods : {
 
-        panelClass(){
+        panelClass() {
             //return [`upb-${this.model.id}-panel`, this.currentPanel ? 'current' : ''].join(' ');
             return [`upb-${this.model.id}-panel`, `upb-panel-wrapper`].join(' ');
         },
 
-        toggleHelp(){
+        toggleHelp() {
             this.showSearch = false;
             this.showHelp   = !this.showHelp;
         },
 
-        toggleFilter(){
+        toggleFilter() {
             this.showHelp   = false;
             this.showSearch = !this.showSearch;
 
@@ -64,15 +64,15 @@ export default {
             });
         },
 
-        openSubPanel(data, event){
+        openSubPanel(data, event) {
             store.subpanel = (store.subpanel == data) ? '' : data;
         },
 
-        copyLayoutToClipboard(){
+        copyLayoutToClipboard() {
 
             if (this.model.contents.length > 0) {
                 let item = extend(true, [], this.model.contents);
-                let json = JSON.stringify(store.cleanup(item));
+                let json = JSON.stringify(store.cleanup(item, false));
 
                 copy(json);
 
@@ -84,11 +84,11 @@ export default {
             }
         },
 
-        toolsActiveClass(tool){
+        toolsActiveClass(tool) {
             return (_.isString(tool.data) && store.subpanel == tool.data) ? 'active' : '';
         },
 
-        toolsAction(tool, event = false){
+        toolsAction(tool, event = false) {
 
             let data = _.isUndefined(tool['data']) ? false : tool.data;
 
@@ -100,7 +100,7 @@ export default {
             }
         },
 
-        addNew(content, event = false){
+        addNew(content, event = false) {
 
             let data              = extend(true, {}, content);
             data.attributes.title = sprintf(data.attributes.title, (this.model.contents.length + 1));
@@ -111,16 +111,16 @@ export default {
 
         // List Contents
 
-        listPanel(id){
+        listPanel(id) {
             return `section-list`
         },
 
-        deleteItem(index){
+        deleteItem(index) {
             this.model.contents.splice(index, 1);
             store.stateChanged();
         },
 
-        cloneItem(index, item){
+        cloneItem(index, item) {
             let cloned = extend(true, {}, item);
 
             cloned.attributes.title = sprintf(this.l10n.clone, cloned.attributes.title);
@@ -129,11 +129,11 @@ export default {
             store.stateChanged();
         },
 
-        onStart(e){
+        onStart(e) {
             this.searchQuery = ''
         },
 
-        onUpdate(e, values){
+        onUpdate(e, values) {
 
 
             //###

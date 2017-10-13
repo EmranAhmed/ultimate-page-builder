@@ -133,7 +133,7 @@ class store {
         return attributes;
     }
 
-    cleanup(contents) {
+    cleanup(contents, add_unique_id = true) {
         return contents.map((content) => {
             delete content['_upb_settings'];
             delete content['_upb_options'];
@@ -145,7 +145,10 @@ class store {
              }*/
 
             if (content.attributes) {
-                content.attributes = this.addElementUniqueID(content.attributes);
+                if (add_unique_id) {
+                    content.attributes = this.addElementUniqueID(content.attributes);
+                }
+
                 this.removePrivateAttributes(content.attributes);
             }
 

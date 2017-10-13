@@ -90,7 +90,7 @@ export default {
 
         copySection(index){
             let item = extend(true, {}, this.item[index]);
-            let json = JSON.stringify(store.cleanup([item]).pop());
+            let json = JSON.stringify(store.cleanup([item], false).pop());
             copy(json);
             this.$toast.success(sprintf(this.l10n.sectionCopied, item.attributes.title));
         },

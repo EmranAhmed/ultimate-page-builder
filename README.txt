@@ -99,14 +99,21 @@ Yes.
 
 == Changelog ==
 
+= 1.0.5 =
+
+- shortcode `inline_css` to change element based attribute, `inline_css` allow a callback function default use a filter like: `upb_shortcode_[ELEMENT_ID]_inline_css`.
+- shortcode `inline_js` to change element based attribute, `inline_js` allow a callback function default use a filter like: `upb_shortcode_[ELEMENT_ID]_inline_js`.
+- shortcode `inline_js_once` to change element based attribute and will add js declaration once on template.
+- removed style scoped
+
 = 1.0.4 =
 
-- Fix object class
-- xhrContent change js setPreviewData() and inlineScriptInit() options
+- Fix object classes
+- On `xhrContent` change js `setPreviewData()` and `inlineScriptInit()` options
 
 = 1.0.3 =
 
-- Change webpack eval sourceMap
+- Change webpack eval sourceMap on development
 
 = 1.0.2 =
 
