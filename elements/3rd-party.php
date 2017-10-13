@@ -77,12 +77,12 @@
 		$attributes   = array();
 		$attributes[] = array(
 			'id'    => 'text',
-			'title' => esc_html__( 'Description', 'fashionstore' ),
-			'desc'  => esc_html__( 'Form description', 'fashionstore' ),
+			'title' => esc_html__( 'Description', 'ultimate-page-builder' ),
+			'desc'  => esc_html__( 'Form description', 'ultimate-page-builder' ),
 			'type'  => 'textarea',
 			'value' => esc_html__( 'Subscribe to the mailing list.', 'ultimate-page-builder' ),
 		);
-		$attributes[] = upb_enable_input( esc_html__( 'Enable / Disable', 'fashionstore' ), '' );
+		$attributes[] = upb_enable_input( esc_html__( 'Enable / Disable', 'ultimate-page-builder' ), '' );
 		$attributes[] = upb_responsive_hidden_input();
 		$attributes   = array_merge( $attributes, upb_css_class_id_input_group() );
 		
