@@ -173,11 +173,11 @@
 																			  'suffix' => 'px',
 																		  ),
 																		  'value'   => 0,
-																	  ) ) );*/
+																	  ) , array('global','lg', 'md') ));*/
 		
 		/*$attributes = array_merge( $attributes,
 								   upb_media_query_based_input_group( array(
-																		  'id'           => 'example-margin',
+																		  'id'           => 'example-margin2',
 																		  'title'        => esc_html__( 'Margin', 'ultimate-page-builder' ),
 																		  'desc'         => esc_html__( 'Margin between two section', 'ultimate-page-builder' ),
 																		  'type'         => 'spacing',

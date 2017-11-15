@@ -625,7 +625,7 @@ button:focus {
   /*-----------------------
  * Device Hidden Field
  *----------------------*/
-  &.radio-icon-field-wrapper, &.checkbox-icon-field-wrapper {
+  &.radio-icon-field-wrapper, &.checkbox-icon-field-wrapper, &.media-query-radio-tab-field-wrapper {
     input[type="radio"], input[type="checkbox"] {
       visibility : hidden;
       position   : absolute;
@@ -682,7 +682,7 @@ button:focus {
         }
       }
     .spacing-title {
-      font-size : 12px;
+      font-size : 10px;
       display   : block;
       padding   : 5px 0;
       }

@@ -62,6 +62,7 @@ export default {
             });
 
             this.toggleResponsivePreviewWidth(this.actualDevice);
+            // this.toggleResponsivePreview(this.actualDevice);
 
         }, 300),
 

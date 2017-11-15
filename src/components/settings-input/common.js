@@ -156,7 +156,7 @@ export default{
         },
 
         typeClass(){
-            return `${this.attributes.type}-field-wrapper form-field-wrapper`;
+            return [`${this.attributes.type}-field-wrapper`, `form-field-wrapper`, this.attributes.device?`has-device`:''].join(' ');
         },
 
         setValue(value){

@@ -17,6 +17,7 @@ const fieldsComponents = {
     'upb-input-icon-select'               : () => import(/* webpackChunkName: "upb-input-icon-select" */ './UPBInputIconSelect.vue'),
     'upb-input-icon-popup'                : () => import(/* webpackChunkName: "upb-input-icon-popup" */ './UPBInputIconPopup.vue'),
     'upb-input-media-image'               : () => import(/* webpackChunkName: "upb-input-media-image" */ './UPBInputMediaImage.vue'),
+    'upb-input-media-query-radio-tab'     : () => import(/* webpackChunkName: "upb-input-media-query-radio-tab" */ './UPBInputMediaQueryRadioTab.vue'),
     'upb-input-message'                   : () => import(/* webpackChunkName: "upb-input-message" */ './UPBInputMessage.vue'),
     'upb-input-heading'                   : () => import(/* webpackChunkName: "upb-input-heading" */ './UPBInputHeading.vue'),
     'upb-input-number'                    : () => import(/* webpackChunkName: "upb-input-number" */ './UPBInputNumber.vue'),

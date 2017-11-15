@@ -828,7 +828,7 @@
 		) );
 	}
 	
-	function upb_media_query_based_input_group( $input, $with_global = TRUE ) {
+	function upb_media_query_based_input_group( $input, $exclude = array() ) {
 		
 		$get_devices = upb_devices();
 		
@@ -840,7 +840,7 @@
 			);
 		}, $get_devices );
 		
-		if ( $with_global ) {
+		if ( ! in_array( 'global', $exclude ) ) {
 			array_unshift( $options, array(
 				'id'    => '',
 				'title' => esc_html__( 'Global', 'ultimate-page-builder' ),
@@ -850,17 +850,42 @@
 		
 		$devices = upb_list_pluck( $options, array( 'title', 'icon' ), 'id' );
 		
-		$inputs = array_map( function ( $device, $key ) use ( $input, $options ) {
+		$inputs = array();
+		$options = array();
+		
+		foreach ( $devices as $key => $device ) {
+			if ( in_array( $key, $exclude ) ) {
+				continue;
+			}
 			
-			$input[ 'id' ]          = empty( $key ) ? $input[ 'id' ] : sprintf( '%s-%s', $input[ 'id' ], $key );
-			$input[ 'title' ]       = empty( $key ) ? $input[ 'title' ] : sprintf( esc_html__( '%s for %s device', 'ultimate-page-builder' ), $input[ 'title' ], $device[ 'title' ] );
-			$input[ 'value' ]       = empty( $key ) ? $input[ 'value' ] : ( ( isset( $input[ 'device-value' ] ) && isset( $input[ 'device-value' ][ $key ] ) ) ? $input[ 'device-value' ][ $key ] : $input[ 'value' ] );
-			$input[ 'device' ]      = empty( $key ) ? '' : $key;
-			$input[ 'deviceIcon' ]  = $device[ 'icon' ];
-			$input[ 'deviceTitle' ] = $device[ 'title' ];
+			$inputs[] = array_merge( $input, array(
+				'id'          => empty( $key ) ? $input[ 'id' ] : sprintf( '%s-%s', $input[ 'id' ], $key ),
+				'title'       => empty( $key ) ? $input[ 'title' ] : sprintf( esc_html__( '%s for %s device', 'ultimate-page-builder' ), $input[ 'title' ], $device[ 'title' ] ),
+				'value'       => empty( $key ) ? $input[ 'value' ] : ( ( isset( $input[ 'device-value' ] ) && isset( $input[ 'device-value' ][ $key ] ) ) ? $input[ 'device-value' ][ $key ] : $input[ 'value' ] ),
+				'device'      => empty( $key ) ? '' : $key,
+				//'deviceIcon'  => $device[ 'icon' ],
+				//'deviceTitle' => $device[ 'title' ],
+				'required' => array(
+					array( sprintf('__device_%s', $input[ 'id' ]), '=', $key )
+				)
+			) );
 			
-			return $input;
-		}, $devices, array_keys( $devices ) );
+			$options[$key] = array(
+				'title' => $device[ 'title' ],
+				'icon'  => $device[ 'icon' ]
+			);
+		}
+		
+		array_unshift( $inputs, array(
+			'id'    => sprintf('__device_%s', $input[ 'id' ]),
+			'title' => sprintf( esc_html__( 'Media Query based %s', 'ultimate-page-builder' ), $input[ 'title' ]),
+			'desc'   => wp_kses_post( __( 'Description', 'ultimate-page-builder' )),
+			'type'   => 'media-query-radio-tab',
+			'value' => '',
+			'options' =>$options
+		));
+		
+		// print_r( $inputs); die;
 		
 		return $inputs;
 	}
