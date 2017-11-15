@@ -22,8 +22,6 @@
                         'full'      => __( 'Full Size' ),
                     ) );
                 ?>
-                <?php $sizes = apply_filters( 'upb_media_image_size_names_choose', $sizes ); ?>
-
                 <?php foreach ( $sizes as $value => $name ) { ?>
                 <# var size = data.sizes['<?php echo esc_js( $value ); ?>'];
                     if ( size ) { #>

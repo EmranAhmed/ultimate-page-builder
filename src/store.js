@@ -32,7 +32,10 @@ class store {
         }
 
         let $link = url.parse(link.trim(), true);
-        return $link.host == window.location.host;
+
+        return this.l10n.skipHosts.includes($link.host)
+
+        // return $link.host === window.location.host;
     }
 
     isElementRegistered(tag) {

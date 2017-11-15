@@ -4,6 +4,7 @@ import common from "./common";
 import userInputMixin from "./user-mixins";
 
 import UPBMedia from "../../plugins/vue-upb-media";
+
 Vue.use(UPBMedia)
 
 export default {
@@ -11,52 +12,46 @@ export default {
 
     mixins : [common, userInputMixin('media-image')],
 
-    data(){
+    data() {
         return {
-            src : ''
+            id   : '',
+            size : '',
+            src  : ''
         }
     },
 
-    created(){
-
-        if (this.input && this.attributes.attribute == 'id') {
-
-            store.wpAjax(
-                'get-attachment', // see /wp-admin/admin-ajax.php, will converted to wp_ajax_get_attachment
-                {
-                    id : this.input,
-                },
-                image => {
-                    if (_.isUndefined(image.sizes)) {
-                        this.src = image.url;
-                    }
-                    else {
-                        this.src = image.sizes[this.attributes.size].url;
-                    }
-                },
-                error => {
-                    console.info(`Image Not Found by ID# ${this.input}`, error)
-                }
-            );
-        }
-        else {
-            this.src = this.input;
-        }
+    created() {
+        this.parseImageData()
     },
 
     methods : {
-        onInsert(e, id, src){
-
-            if (this.attributes.attribute == 'id') {
-                this.input = id;
+        parseImageData() {
+            if (this.input) {
+                let [id, size, src] = this.input.split('|')
+                if (!src) {
+                    this.src = id;
+                }
+                else {
+                    this.id   = id;
+                    this.size = size;
+                    this.src  = src;
+                }
             }
-            else {
-                this.input = src;
-            }
-            this.src = src;
         },
-        onRemove(e){
+        combineImageData(id, size, src) {
+            this.id    = id;
+            this.size  = size;
+            this.src   = src;
+            this.input = [id, size, src].join('|');
+        },
+
+        onInsert(e, id, src, size) {
+            this.combineImageData(id, size, src)
+        },
+        onRemove(e) {
             this.input = '';
+            this.id    = '';
+            this.size  = '';
             this.src   = '';
         }
     }

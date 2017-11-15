@@ -850,7 +850,7 @@
 		
 		$devices = upb_list_pluck( $options, array( 'title', 'icon' ), 'id' );
 		
-		$inputs = array();
+		$inputs  = array();
 		$options = array();
 		
 		foreach ( $devices as $key => $device ) {
@@ -859,31 +859,31 @@
 			}
 			
 			$inputs[] = array_merge( $input, array(
-				'id'          => empty( $key ) ? $input[ 'id' ] : sprintf( '%s-%s', $input[ 'id' ], $key ),
-				'title'       => empty( $key ) ? $input[ 'title' ] : sprintf( esc_html__( '%s for %s device', 'ultimate-page-builder' ), $input[ 'title' ], $device[ 'title' ] ),
-				'value'       => empty( $key ) ? $input[ 'value' ] : ( ( isset( $input[ 'device-value' ] ) && isset( $input[ 'device-value' ][ $key ] ) ) ? $input[ 'device-value' ][ $key ] : $input[ 'value' ] ),
-				'device'      => empty( $key ) ? '' : $key,
+				'id'       => empty( $key ) ? $input[ 'id' ] : sprintf( '%s-%s', $input[ 'id' ], $key ),
+				'title'    => empty( $key ) ? $input[ 'title' ] : sprintf( esc_html__( '%s for %s device', 'ultimate-page-builder' ), $input[ 'title' ], $device[ 'title' ] ),
+				'value'    => empty( $key ) ? $input[ 'value' ] : ( ( isset( $input[ 'device-value' ] ) && isset( $input[ 'device-value' ][ $key ] ) ) ? $input[ 'device-value' ][ $key ] : $input[ 'value' ] ),
+				'device'   => empty( $key ) ? '' : $key,
 				//'deviceIcon'  => $device[ 'icon' ],
 				//'deviceTitle' => $device[ 'title' ],
 				'required' => array(
-					array( sprintf('__device_%s', $input[ 'id' ]), '=', $key )
+					array( sprintf( '__device_%s', $input[ 'id' ] ), '=', $key )
 				)
 			) );
 			
-			$options[$key] = array(
+			$options[ $key ] = array(
 				'title' => $device[ 'title' ],
 				'icon'  => $device[ 'icon' ]
 			);
 		}
 		
 		array_unshift( $inputs, array(
-			'id'    => sprintf('__device_%s', $input[ 'id' ]),
-			'title' => sprintf( esc_html__( 'Media Query based %s', 'ultimate-page-builder' ), $input[ 'title' ]),
-			'desc'   => wp_kses_post( __( 'Description', 'ultimate-page-builder' )),
-			'type'   => 'media-query-radio-tab',
-			'value' => '',
-			'options' =>$options
-		));
+			'id'      => sprintf( '__device_%s', $input[ 'id' ] ),
+			'title'   => sprintf( esc_html__( 'Media Query based %s', 'ultimate-page-builder' ), $input[ 'title' ] ),
+			'desc'    => wp_kses_post( __( 'Description', 'ultimate-page-builder' ) ),
+			'type'    => 'media-query-radio-tab',
+			'value'   => '',
+			'options' => $options
+		) );
 		
 		// print_r( $inputs); die;
 		
@@ -1152,6 +1152,54 @@
 	
 	function upb_shortcode_class( $attributes, $extra = FALSE ) {
 		echo esc_attr( upb_get_shortcode_class( $attributes, $extra ) );
+	}
+	
+	function upb_get_media_image_data( $image_string ) {
+		
+		$image = explode( '|', $image_string );
+		
+		if ( empty( $image_string ) ) {
+			return array( 'id' => '', 'size' => '', 'src' => '', 'error' => TRUE );
+		}
+		
+		if ( isset( $image[ 1 ] ) ) {
+			list( $id, $size, $src ) = $image;
+			
+			return array( 'id' => $id, 'size' => $size, 'src' => $src, 'error' => FALSE );
+		} else {
+			
+			list( $id, $size, $src ) = array( FALSE, FALSE, $image[ 0 ] );
+			
+			return array( 'id' => $id, 'size' => $size, 'src' => $src, 'error' => FALSE );
+		}
+	}
+	
+	function upb_get_media_image( $image_string, $attr = array() ) {
+		
+		$image = upb_get_media_image_data( $image_string );
+		
+		$attr = wp_parse_args( $attr, array() );
+		$attr = array_map( 'esc_attr', $attr );
+		
+		if ( $image[ 'error' ] ) {
+			return '';
+		}
+		
+		if ( ! $image[ 'id' ] ) {
+			$attr = wp_parse_args( $attr, array(
+				'src' => $image[ 'src' ],
+			) );
+			
+			$html = rtrim( "<img" );
+			foreach ( $attr as $name => $value ) {
+				$html .= " $name=" . '"' . $value . '"';
+			}
+			$html .= ' />';
+			
+			return $html;
+		}
+		
+		return wp_get_attachment_image( $image[ 'id' ], $image[ 'size' ], FALSE, $attr );
 	}
 	
 	function upb_get_shortcode_title( $attributes ) {

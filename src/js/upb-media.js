@@ -126,9 +126,11 @@
 
                         if (props.type == 'image') {
                             single.set('src', props.src);
+                            single.set('size', props.size);
                         }
                         else {
                             single.set('src', props.linkUrl);
+                            single.set('size', '');
                         }
 
                     });

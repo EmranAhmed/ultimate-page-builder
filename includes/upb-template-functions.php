@@ -36,8 +36,7 @@
         // Return what we found.
         return apply_filters( 'upb_locate_template', $template, $template_name, $template_path );
     }
-
-
+	
     function upb_get_template( $template_name, $template_args = array(), $third_party_path = FALSE ) {
 
         $located = apply_filters( 'upb_get_template', upb_locate_template( $template_name, $third_party_path ) );

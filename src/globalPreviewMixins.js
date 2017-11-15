@@ -101,11 +101,7 @@ export default {
         },
 
         hasContents() {
-            if (_.isArray(this.model['contents'])) {
-                return this.model.contents.length > 0;
-            }
-
-            return true;
+            return _.isArray(this.model['contents']) ? this.model.contents.length > 0 : true;
         },
 
         unique_id() {
@@ -133,12 +129,7 @@ export default {
         },
 
         enabled() {
-            if (!_.isUndefined(this.model.attributes['enable'])) {
-                return this.model.attributes.enable;
-            }
-            else {
-                return true;
-            }
+            return !_.isUndefined(this.model.attributes['enable']) ? this.model.attributes.enable : true;
         },
 
         active() {
@@ -150,12 +141,7 @@ export default {
         },
 
         deviceHiddenClasses() {
-            if (!_.isUndefined(this.model.attributes['device-hidden'])) {
-                return this.model.attributes['device-hidden'].join(' ');
-            }
-            else {
-                return null;
-            }
+            return !_.isUndefined(this.model.attributes['device-hidden']) ? this.model.attributes['device-hidden'].join(' ') : null
         },
 
         backgroundVariables() {
@@ -212,18 +198,11 @@ export default {
         },
 
         elementID() {
-
-            if (!_.isUndefined(this.model.attributes['element_id'])) {
-                return this.model.attributes.element_id;
-            }
-            return null;
+            return !_.isUndefined(this.model.attributes['element_id']) ? this.model.attributes.element_id : null;
         },
 
         elementClass() {
-            if (!_.isUndefined(this.model.attributes['element_class'])) {
-                return this.model.attributes.element_class;
-            }
-            return null;
+            return !_.isUndefined(this.model.attributes['element_class']) ? this.model.attributes.element_class : null;
         },
 
         sidebarExpanded() {
@@ -267,6 +246,16 @@ export default {
     },
 
     methods : {
+
+        getMediaImageSrc(string) {
+            let [id, size, src] = string.split('|');
+            return src ? src : id;
+        },
+
+        getMediaImage(string) {
+            let [id, size, src] = string.split('|');
+            return {id, size, src}
+        },
 
         getSpacingInputValue(id) {
             let settings        = this.model._upb_settings.filter((value) => value.id == id)[0];
@@ -394,11 +383,7 @@ export default {
         },
 
         addID() {
-
-            if (!_.isUndefined(this.attributes['element_id'])) {
-                return this.attributes.element_id;
-            }
-            return null;
+            return !_.isUndefined(this.attributes['element_id']) ? this.attributes.element_id : null;
         },
 
         isElementRegistered(tag) {

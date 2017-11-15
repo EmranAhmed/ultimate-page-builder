@@ -34,16 +34,17 @@ const Directive = {
             });
 
             frame.on('insert', function () {
-                let state = frame.state(),
-                    url, id;
+                let state = frame.state(), url, id, size;
 
                 if (state && 'upb-embed' === state.get('id')) {
                     url = state.props.get('url');
-                    id  = null;
+                    id  = '';
+                    size  = '';
                 }
                 else {
                     url = frame.state().get('selection').first().toJSON().src;
                     id  = frame.state().get('selection').first().toJSON().id;
+                    size  = frame.state().get('selection').first().toJSON().size;
                 }
 
                 if (!vnode.context.onInsert) {
@@ -51,7 +52,7 @@ const Directive = {
                     return false;
                 }
 
-                vnode.context.onInsert(event, id, url);
+                vnode.context.onInsert(event, id, url, size);
 
             });
 
