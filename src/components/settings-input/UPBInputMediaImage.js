@@ -38,15 +38,15 @@ export default {
                 }
             }
         },
-        combineImageData(id, size, src) {
-            this.id    = id;
-            this.size  = size;
-            this.src   = src;
-            this.input = [id, size, src].join('|');
+        combineImageData(attachment) {
+            this.id    = attachment.id;
+            this.size  = attachment.size;
+            this.src   = attachment.url;
+            this.input = [this.id, this.size, this.src].join('|');
         },
 
-        onInsert(e, id, src, size) {
-            this.combineImageData(id, size, src)
+        onInsert(e, attachment) {
+            this.combineImageData(attachment)
         },
         onRemove(e) {
             this.input = '';

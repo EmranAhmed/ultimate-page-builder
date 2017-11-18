@@ -1,8 +1,8 @@
 === Ultimate Page Builder ===
 Contributors: EmranAhmed, wpeshaan, webdzainer
 Tags: ultimate builder, page builder, drag and drop page builder, front-end builder, home page builder, landing page builder, layout builder, page, page builder, page builder plugin, site-builder, template builder, visual page builder, website builder, wysiwyg builder
-Requires at least: 4.6
-Tested up to: 4.8
+Requires at least: 4.8
+Tested up to: 4.9
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2 or later

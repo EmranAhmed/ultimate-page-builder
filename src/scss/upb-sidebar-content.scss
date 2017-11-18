@@ -782,6 +782,7 @@ FORM CODE
     overflow : hidden;
     width    : 100%;
     position : relative;
+    cursor   : pointer;
     }
 
   .pointer {
@@ -911,10 +912,10 @@ FORM CODE
         }
 
       .sub-panel-section-title {
-        text-align  : center;
+        text-align  : left;
         width       : 100%;
         padding     : 10px;
-        font-size   : 16px;
+        font-size   : 15px;
         font-weight : 500;
         }
       }

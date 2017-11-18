@@ -4,7 +4,7 @@ import store from "../store";
 
 const Directive = {
 
-    inserted (el, binding, vnode) {
+    inserted(el, binding, vnode) {
 
         let frame;
 
@@ -19,32 +19,30 @@ const Directive = {
             }
 
             frame = new wp.media.view.MediaFrame.UPBMedia({
-
-                title      : vnode.context.attributes.title,
-                button     : {
+                title                   : vnode.context.attributes.title,
+                button                  : {
                     text : vnode.context.attributes.buttons.add
                 },
-                upbOptions : {
+                upbOptions              : {
                     size : vnode.context.attributes.size
                 },
-                library    : {
+                selectedDisplaySettings : {
+                    size : vnode.context.attributes.size
+                },
+                library                 : {
                     type : vnode.context.attributes.library
                 },
-                url        : store.isLocal(vnode.context.attributes.value) ? '' : vnode.context.attributes.value,
+                url                     : store.isLocal(vnode.context.attributes.value) ? '' : vnode.context.attributes.value
             });
 
             frame.on('insert', function () {
-                let state = frame.state(), url, id, size;
+                let state = frame.state(), attachment = {};
 
-                if (state && 'upb-embed' === state.get('id')) {
-                    url = state.props.get('url');
-                    id  = '';
-                    size  = '';
+                if ('upb-embed' === state.get('id')) {
+                    _.extend(attachment, {id : 0}, state.props.toJSON());
                 }
                 else {
-                    url = frame.state().get('selection').first().toJSON().src;
-                    id  = frame.state().get('selection').first().toJSON().id;
-                    size  = frame.state().get('selection').first().toJSON().size;
+                    _.extend(attachment, state.get('selection').first().toJSON(), {url : state.get('selection').first().toJSON().src});
                 }
 
                 if (!vnode.context.onInsert) {
@@ -52,8 +50,15 @@ const Directive = {
                     return false;
                 }
 
-                vnode.context.onInsert(event, id, url, size);
+                vnode.context.onInsert(event, attachment);
 
+            });
+
+            frame.on('open', function () {
+                let id        = vnode.context.id;
+                let size      = vnode.context.size;
+                let selection = frame.state().get('selection');
+                selection.reset(id ? [wp.media.attachment(id)] : []);
             });
 
             frame.open();
@@ -67,6 +72,35 @@ const Directive = {
             }
 
             vnode.context.onRemove(event);
+        });
+
+        jQuery(el).on('click', '.preview', function (event) {
+            event.preventDefault();
+            let metadata = {
+                id            : vnode.context.id || 0,
+                url           : vnode.context.src,
+                size          : vnode.context.size,
+                attachment_id : vnode.context.id || 0,
+                error         : false
+            };
+
+            frame = wp.media({
+                frame    : 'image',
+                state    : 'image-details',
+                metadata : metadata
+            });
+
+            frame.state('image-details').on('update', function () {
+                let attachment = frame.state().attributes.image.toJSON();
+                vnode.context.onInsert(event, attachment);
+                _.delay(() => { frame = null })
+            });
+
+            frame.on('close', function () {
+                _.delay(() => { frame = null })
+            });
+
+            frame.open()
         });
     }
 

@@ -370,8 +370,16 @@
 				$_upb_options = apply_filters( "upb_element_{$tag}_upb_options", $_upb_options );
 				$contents     = apply_filters( "upb_element_{$tag}_contents", $contents );
 				
-				if ( is_string( $contents ) ) {
-					$settings[] = array( 'id' => '_contents', 'title' => apply_filters( 'upb_element_content_field_title', esc_html__( 'Contents', 'ultimate-page-builder' ) ), 'type' => 'contents', 'value' => wp_kses_post( $contents ) );
+				// Check has reserved id for _contents
+				$setting_ids = wp_list_pluck( $settings, 'id' );
+				
+				if ( is_string( $contents ) && ! in_array( '_contents', $setting_ids ) ) {
+					$settings[] = array(
+						'id'    => '_contents',
+						'title' => apply_filters( 'upb_element_content_field_title', esc_html__( 'Contents', 'ultimate-page-builder' ) ),
+						'type'  => 'contents',
+						'value' => wp_kses_post( $contents )
+					);
 				}
 				
 				foreach ( $settings as $key => $setting ) {

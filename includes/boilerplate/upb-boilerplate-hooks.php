@@ -193,6 +193,7 @@
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		
 		wp_enqueue_media();
+		wp_enqueue_editor();
 		wp_enqueue_script( 'upb-common' );
 		wp_enqueue_script( 'wp-color-picker-alpha' );
 		wp_enqueue_script( 'select2' );
@@ -285,10 +286,23 @@
 			// Templates
 			'layoutPlaceholder'    => upb_images_uri( '/layout-placeholder.png' ),
 			'editorTemplate'       => upb_wp_editor_template(),
+			'editorSettings'       => array(
+				'quicktags'    => array(
+					'buttons' => 'strong,em,del,ul,ol,li,close,fullscreen'
+				),
+				'tinymce'      => array(
+					'wpautop'  => TRUE,
+					'toolbar1' => 'bold,italic,underline,bullist,numlist,wp_adv,wp_fullscreen,fullscreen',
+					'toolbar2' => 'strikethrough,forecolor,link,unlink,alignleft,aligncenter,alignright,alignjustify,outdent,indent',
+					'toolbar3' => 'formatselect,pastetext,removeformat,charmap,undo,redo'
+				),
+				'mediaButtons' => TRUE
+			),
 			'allowedTags'          => array_keys( wp_kses_allowed_html( 'post' ) ),
 			'allowedAttributes'    => upb_allowed_attributes(),
 			'allowedSchemes'       => wp_allowed_protocols(),
 			'pageTitle'            => get_the_title(),
+			'wpVersion'            => esc_attr( get_bloginfo( 'version' ) ),
 			'skipHosts'            => array( $_SERVER[ 'HTTP_HOST' ] ) // You can add your cdn host also
 		) ) );
 	} );
@@ -298,6 +312,7 @@
 		include upb_templates_path( 'upb_media_display_settings.php' );
 	} );
 	
+	// Example Input
 	add_action( 'upb_boilerplate_print_footer_scripts', function () {
 		//$tabs = upb_tabs()->getAll();
 		print( "<script type='text/javascript'>
@@ -338,3 +353,4 @@ var ExtraPanel = {
 //}
 </script>" );
 	} );
+	

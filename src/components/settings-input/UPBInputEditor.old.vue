@@ -8,7 +8,7 @@
                 </div>
             </label>
 
-            <textarea :id="id" class="wp-editor-area text" v-model="input" style="height: 200px" rows="16" cols="20"></textarea>
+            <div :id="wrapperId"></div>
 
             <p class="description" v-if="attributes.desc" v-html="attributes.desc"></p>
 

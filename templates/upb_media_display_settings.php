@@ -23,14 +23,12 @@
                     ) );
                 ?>
                 <?php foreach ( $sizes as $value => $name ) { ?>
-                <# var size = data.sizes['<?php echo esc_js( $value ); ?>'];
-                    if ( size ) { #>
-                    <option value="<?php echo esc_attr( $value ); ?>"
-                    <# if ( data.controller.options.upbOptions.size=='<?php echo esc_attr( $value ); ?>' ) { #>
-                        selected="selected"
-                    <# } #>>
-                    <?php echo esc_html( $name ); ?> &ndash; {{ size.width }} &times; {{ size.height }} </option>
-                <# } #>
+                <#
+                 var size = data.sizes['<?php echo esc_js( $value ); ?>'];
+                 if ( size ) { #>
+                    <option value="<?php echo esc_attr( $value ); ?>" <# if ( data.controller.options.upbOptions.size=='<?php echo esc_attr( $value ); ?>' ) { #> selected="selected" <# } #>>
+                          <?php echo esc_html( $name ); ?> &ndash; {{ size.width }} &times; {{ size.height }} </option>
+                 <# } #>
                 <?php } ?>
             </select>
         </label>
@@ -120,3 +118,63 @@
         <img src="{{ data.model.url }}" draggable="false" alt="" />
     </div>
 </script>
+
+<script type="text/html" id="tmpl-upb-image-details">
+    <div class="media-embed">
+        <div class="embed-media-settings">
+            <div class="column-image">
+                <div class="image">
+                    <img src="{{ data.model.url }}" draggable="false" alt="" />
+
+                    <# if ( data.attachment && window.imageEdit ) { #>
+                        <div class="actions">
+                            <input type="button" class="edit-attachment button" value="<?php esc_attr_e( 'Edit Original' ); ?>" />
+                            <input type="button" class="replace-attachment button" value="<?php esc_attr_e( 'Replace' ); ?>" />
+                        </div>
+                        <# } #>
+                </div>
+            </div>
+            <div class="column-settings">
+                <h2><?php _e( 'Display Settings' ); ?></h2>
+                <# if ( data.attachment ) { #>
+                    <# if ( 'undefined' !== typeof data.attachment.sizes ) { #>
+                        <label class="setting size">
+                            <span><?php _e('Size'); ?></span>
+                            <select class="size" name="size"
+                                    data-setting="size"
+                            <# if ( data.userSettings ) { #>
+                                data-user-setting="imgsize"
+                                <# } #>>
+									<?php
+										/** This filter is documented in wp-admin/includes/media.php */
+										$sizes = apply_filters( 'image_size_names_choose', array(
+											'thumbnail' => __('Thumbnail'),
+											'medium'    => __('Medium'),
+											'large'     => __('Large'),
+											'full'      => __('Full Size'),
+										) );
+										
+										foreach ( $sizes as $value => $name ) : ?>
+                                    <#
+                                            var size = data.sizes['<?php echo esc_js( $value ); ?>'];
+                                            if ( size ) { #>
+                                        <option value="<?php echo esc_attr( $value ); ?>">
+											<?php echo esc_html( $name ); ?> &ndash; {{ size.width }} &times; {{ size.height }}
+                                        </option>
+                                        <# } #>
+											<?php endforeach; ?>
+                                            <option value="<?php echo esc_attr( 'custom' ); ?>">
+												<?php _e( 'Custom Size' ); ?>
+                                            </option>
+                                            </select>
+                        </label>
+                        <# } #>
+                            <div class="custom-size<# if ( data.model.size !== 'custom' ) { #> hidden<# } #>">
+                                <label><span><?php _e( 'Width' ); ?> <small>(px)</small></span> <input data-setting="customWidth" type="number" step="1" value="{{ data.model.customWidth }}" /></label><span class="sep">&times;</span><label><span><?php _e( 'Height' ); ?> <small>(px)</small></span><input data-setting="customHeight" type="number" step="1" value="{{ data.model.customHeight }}" /></label>
+                            </div>
+                            <# } #>
+            </div>
+        </div>
+    </div>
+</script>
+

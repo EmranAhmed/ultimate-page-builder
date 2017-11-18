@@ -123,6 +123,14 @@
 		
 		// EXAMPLE Inputs:
 		
+		/*array_push( $attributes, array(
+			                       'id'    => 'image',
+			                       'title' => esc_html__( 'Image', 'ultimate-page-builder' ),
+			                       'desc'  => wp_kses_post( __( 'Description', 'ultimate-page-builder' ) ),
+			                       'type'  => 'media-image',
+			                       'value' => ''
+		                       ) );*/
+		
 		/*        array_push( $attributes, array(
 					'id'          => 'ajaxselect',
 					'title'       => esc_html__( 'AJAX', 'ultimate-page-builder' ),

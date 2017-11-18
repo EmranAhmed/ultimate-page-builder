@@ -7,16 +7,17 @@
         initialize() {
 
             _.defaults(this.options, {
-                className : 'media-frame upb-media-frame',
-                title     : wp.media.view.l10n.chooseImage,
-                multiple  : false,
-                editing   : false,
+                className               : 'media-frame upb-media-frame',
+                title                   : wp.media.view.l10n.chooseImage,
+                multiple                : false,
+                editing                 : false,
                 // frame     : 'upb-media',
-                state     : 'upb-media', // upb-media
-                button    : {
+                state                   : 'upb-media', // upb-media
+                button                  : {
                     text : wp.media.view.l10n.addMedia
                 },
-                metadata  : {}
+                metadata                : {},
+                selectedDisplaySettings : {}
             });
 
             // Call 'initialize' directly on the parent class.
@@ -24,26 +25,27 @@
 
         },
 
-        createStates () {
+        createStates() {
 
             let options = this.options;
 
             this.states.add([
 
                 new wp.media.controller.Library({
-                    id                  : 'upb-media',
-                    title               : options.title,
-                    priority            : 20,
-                    toolbar             : 'main-insert',
-                    filterable          : 'date',
-                    library             : wp.media.query(_.defaults(options.library, {
+                    id                      : 'upb-media',
+                    title                   : options.title,
+                    priority                : 20,
+                    toolbar                 : 'main-insert',
+                    filterable              : 'date',
+                    library                 : wp.media.query(_.defaults(options.library, {
                         type : 'image' // image, audio, video
                     })),
-                    multiple            : false,
-                    editable            : false,
-                    allowLocalEdits     : false,
-                    displaySettings     : true,
-                    displayUserSettings : false
+                    multiple                : false,
+                    editable                : false,
+                    allowLocalEdits         : false,
+                    displaySettings         : true,
+                    displayUserSettings     : false,
+                    selectedDisplaySettings : options.selectedDisplaySettings,
                 }),
 
                 // Embed states.
@@ -57,7 +59,7 @@
             ]);
         },
 
-        bindHandlers () {
+        bindHandlers() {
 
             this.on('toolbar:create:main-insert', this.createToolbar, this);
             this.on('toolbar:render:main-insert', this.mainInsertToolbar, this);
@@ -68,7 +70,7 @@
             wp.media.view.MediaFrame.Select.prototype.bindHandlers.apply(this, arguments);
         },
 
-        mainMenu (view) {
+        mainMenu(view) {
             view.set({
                 'library-separator' : new wp.media.View({
                     className : 'separator',
@@ -77,7 +79,7 @@
             });
         },
 
-        embedContent () {
+        embedContent() {
 
             let view = new wp.media.view.Embed({
                 controller : this,
@@ -102,7 +104,7 @@
             }).render());
         },
 
-        mainInsertToolbar (view) {
+        mainInsertToolbar(view) {
             let controller = this;
 
             this.selectionStatusToolbar(view);
@@ -113,7 +115,7 @@
                 text     : this.options.button.text,
                 requires : {selection : true},
 
-                click  () {
+                click() {
                     let state     = controller.state(),
                         selection = state.get('selection');
 
@@ -167,7 +169,8 @@
             return wp.media.template(templateId)(view);
         }
     });
-    wp.media.view.Attachment.Details         = wp.media.view.Attachment.Details.extend({
+
+    wp.media.view.Attachment.Details = wp.media.view.Attachment.Details.extend({
         template : function (view) {
 
             let upb_state  = this.controller.state().id;
@@ -179,8 +182,9 @@
 
             return wp.media.template(templateId)(view);
         }
-    })
-    wp.media.view.EmbedImage                 = wp.media.view.EmbedImage.extend({
+    });
+
+    wp.media.view.EmbedImage = wp.media.view.EmbedImage.extend({
         template : function (view) {
 
             let upb_state  = this.controller.state().id;
@@ -193,7 +197,7 @@
             return wp.media.template(templateId)(view);
         }
     });
-    wp.media.view.EmbedLink                  = wp.media.view.EmbedLink.extend({
+    wp.media.view.EmbedLink  = wp.media.view.EmbedLink.extend({
         template : function (view) {
 
             let upb_state  = this.controller.state().id;

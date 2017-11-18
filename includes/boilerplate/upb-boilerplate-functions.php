@@ -78,7 +78,8 @@
     }
 
     function upb_wp_editor_template() {
-        return upb_load_wp_editor();
+        // return upb_load_wp_editor();
+	    return '';
     }
 
     function upb_allowed_attributes() {

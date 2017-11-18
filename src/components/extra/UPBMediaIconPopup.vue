@@ -1,7 +1,7 @@
 <template>
     <div tabindex="0" style="position:relative; display: block">
         <div class="media-modal wp-core-ui">
-            <button type="button" @click="onCloseEvent()" class="button-link media-modal-close"><span class="media-modal-icon"><span class="screen-reader-text"></span></span></button>
+            <button type="button" @click="onCloseEvent()" class="media-modal-close"><span class="media-modal-icon"><span class="screen-reader-text"></span></span></button>
             <div class="media-modal-content">
                 <div :class="mediaFrameClass">
                     <div class="media-frame-menu">
