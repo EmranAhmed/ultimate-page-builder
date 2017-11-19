@@ -99,6 +99,13 @@ Yes.
 
 == Changelog ==
 
+= 1.0.6 =
+
+- Image input value changed with id|size|url
+- Grouped device specific inputs
+- Include wp 4.8 editor api
+- Image edit options
+
 = 1.0.5 =
 
 - shortcode `inline_css` to change element based attribute, `inline_css` allow a callback function default use a filter like: `upb_shortcode_[ELEMENT_ID]_inline_css`.

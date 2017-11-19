@@ -250,47 +250,6 @@
 		) );
 	}
 	
-	if ( ! function_exists( 'upb_responsive_hidden_options' ) ):
-		function upb_responsive_hidden_options() {
-			
-			$devices = upb_devices();
-			
-			$hidden_devices = apply_filters( 'upb_responsive_hidden_options', array_map( function ( $device ) {
-				return array(
-					'id'    => sprintf( 'hidden-%s', $device[ 'id' ] ),
-					'title' => $device[ 'title' ],
-					'icon'  => $device[ 'icon' ]
-				);
-			}, $devices ) );
-			
-			return apply_filters( 'upb_responsive_hidden_options_output', array_values( $hidden_devices ), $devices );
-		}
-	endif;
-	
-	if ( ! function_exists( 'upb_responsive_hidden_options_bs4' ) ):
-		function upb_responsive_hidden_options_bs4() {
-			
-			$devices        = upb_devices();
-			$hidden_classes = apply_filters( 'upb_responsive_hidden_options_bs4_classes', array(
-				'xs' => 'd-none d-sm-block',
-				'sm' => 'd-sm-none d-md-block',
-				'md' => 'd-md-none d-lg-block',
-				'lg' => 'd-lg-none d-xl-block',
-				'xl' => 'd-xl-none',
-			) );
-			
-			$hidden_devices = apply_filters( 'upb_responsive_hidden_options_bs4', array_map( function ( $device ) use ( $hidden_classes ) {
-				return array(
-					'id'    => $hidden_classes[ $device[ 'id' ] ],
-					'title' => $device[ 'title' ],
-					'icon'  => $device[ 'icon' ]
-				);
-			}, $devices ) );
-			
-			return apply_filters( 'upb_responsive_hidden_options_bs4_output', array_values( $hidden_devices ), $devices );
-		}
-	endif;
-	
 	if ( ! function_exists( 'upb_make_column_class' ) ):
 		
 		function upb_make_column_class( $attributes, $extra = FALSE ) {
@@ -323,8 +282,25 @@
 			return implode( ' ', $columns );
 		}
 	endif;
-	// Build-In Inputs
 	
+	if ( ! function_exists( 'upb_responsive_hidden_options' ) ):
+		function upb_responsive_hidden_options() {
+			
+			$devices = upb_devices();
+			
+			$hidden_devices = apply_filters( 'upb_responsive_hidden_options', array_map( function ( $device ) {
+				return array(
+					'id'    => sprintf( 'hidden-%s', $device[ 'id' ] ),
+					'title' => $device[ 'title' ],
+					'icon'  => $device[ 'icon' ]
+				);
+			}, $devices ), $devices );
+			
+			return apply_filters( 'upb_responsive_hidden_options_output', array_values( $hidden_devices ), $devices );
+		}
+	endif;
+	
+
 	function upb_responsive_hidden_input( $title = '', $desc = '', $default = array() ) {
 		
 		$title = trim( $title ) ? trim( $title ) : esc_html__( 'Hide on device', 'ultimate-page-builder' );
@@ -337,21 +313,25 @@
 			'type'    => 'device-hidden',
 			'value'   => $default,
 			'options' => upb_responsive_hidden_options(),
-			// 'split'   => 4
-			// 'suffix'  => array( '-up' => '&uarr;', '-down' => '&darr;' ),
-			/*'disable' => array(
-				'hidden-xs-up' => array( 'hidden-xl-up', 'hidden-lg-up', 'hidden-md-up', 'hidden-sm-up' ),
-				'hidden-sm-up' => array( 'hidden-xl-up', 'hidden-lg-up', 'hidden-md-up' ),
-				'hidden-md-up' => array( 'hidden-xl-up', 'hidden-lg-up' ),
-				'hidden-lg-up' => array( 'hidden-xl-up' ),
-
-				'hidden-xl-down' => array( 'hidden-lg-down', 'hidden-md-down', 'hidden-sm-down', 'hidden-xs-down' ),
-				'hidden-lg-down' => array( 'hidden-md-down', 'hidden-sm-down', 'hidden-xs-down' ),
-				'hidden-md-down' => array( 'hidden-sm-down', 'hidden-xs-down' ),
-				'hidden-sm-down' => array( 'hidden-xs-down' )
+			/*'split'   => 4,
+			'suffix'  => array( '-none' => '&times;', '-block' => '&#10003;' ),
+			'disable' => array(
+				'd-none'    => array( 'd-block' ),
+				'd-sm-none' => array( 'd-sm-block' ),
+				'd-md-none' => array( 'd-md-block' ),
+				'd-lg-none' => array( 'd-lg-block' ),
+				'd-xl-none' => array( 'd-xl-block' ),
+				
+				'd-block'    => array( 'd-none' ),
+				'd-sm-block' => array( 'd-sm-none' ),
+				'd-md-block' => array( 'd-md-none' ),
+				'd-lg-block' => array( 'd-lg-none' ),
+				'd-xl-block' => array( 'd-xl-none' ),
 			)*/
 		) );
 	}
+	
+	// Build-In Inputs
 	
 	function upb_column_clearfix_input( $title = '', $desc = '', $default = array() ) {
 		
@@ -1645,3 +1625,4 @@
 		
 		return strtoupper( sprintf( "#%02x%02x%02x", trim( $rgb[ 0 ] ), trim( $rgb[ 1 ] ), trim( $rgb[ 2 ] ) ) );
 	}
+	
