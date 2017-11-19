@@ -250,20 +250,39 @@
 		) );
 	}
 	
-	function upb_responsive_hidden_options() {
-		
-		$devices = upb_devices();
-		
-		$hidden_devices = apply_filters( 'upb_responsive_hidden_options', array_map( function ( $device ) {
-			return array(
-				'id'    => sprintf( 'hidden-%s', $device[ 'id' ] ),
-				'title' => $device[ 'title' ],
-				'icon'  => $device[ 'icon' ]
-			);
-		}, $devices ) );
-		
-		return apply_filters( 'upb_responsive_hidden_options_output', array_values( $hidden_devices ) );
-	}
+	if ( ! function_exists( 'upb_responsive_hidden_options' ) ):
+		function upb_responsive_hidden_options() {
+			
+			$devices = upb_devices();
+			
+			$hidden_devices = apply_filters( 'upb_responsive_hidden_options', array_map( function ( $device ) {
+				return array(
+					'id'    => sprintf( 'hidden-%s', $device[ 'id' ] ),
+					'title' => $device[ 'title' ],
+					'icon'  => $device[ 'icon' ]
+				);
+			}, $devices ) );
+			
+			return apply_filters( 'upb_responsive_hidden_options_output', array_values( $hidden_devices ), $devices );
+		}
+	endif;
+	
+	if ( ! function_exists( 'upb_responsive_hidden_options_bs4' ) ):
+		function upb_responsive_hidden_options_bs4() {
+			
+			$devices = upb_devices();
+			
+			$hidden_devices = apply_filters( 'upb_responsive_hidden_options_bs4', array_map( function ( $device ) {
+				return array(
+					'id'    => $device[ 'id' ] === 'xs' ? 'd-none' : sprintf( 'd-%s-none', $device[ 'id' ] ),
+					'title' => $device[ 'title' ],
+					'icon'  => $device[ 'icon' ]
+				);
+			}, $devices ) );
+			
+			return apply_filters( 'upb_responsive_hidden_options_bs4_output', array_values( $hidden_devices ), $devices );
+		}
+	endif;
 	
 	if ( ! function_exists( 'upb_make_column_class' ) ):
 		
@@ -310,7 +329,7 @@
 			'desc'    => wp_kses_post( $desc ),
 			'type'    => 'device-hidden',
 			'value'   => $default,
-			'options' => upb_responsive_hidden_options(),
+			'options' => upb_responsive_hidden_options_bs4(),
 			// 'split'   => 4
 			// 'suffix'  => array( '-up' => '&uarr;', '-down' => '&darr;' ),
 			/*'disable' => array(
