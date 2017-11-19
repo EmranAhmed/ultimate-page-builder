@@ -270,11 +270,18 @@
 	if ( ! function_exists( 'upb_responsive_hidden_options_bs4' ) ):
 		function upb_responsive_hidden_options_bs4() {
 			
-			$devices = upb_devices();
+			$devices        = upb_devices();
+			$hidden_classes = apply_filters( 'upb_responsive_hidden_options_bs4_classes', array(
+				'xs' => 'd-none d-sm-block',
+				'sm' => 'd-sm-none d-md-block',
+				'md' => 'd-md-none d-lg-block',
+				'lg' => 'd-lg-none d-xl-block',
+				'xl' => 'd-xl-none',
+			) );
 			
-			$hidden_devices = apply_filters( 'upb_responsive_hidden_options_bs4', array_map( function ( $device ) {
+			$hidden_devices = apply_filters( 'upb_responsive_hidden_options_bs4', array_map( function ( $device ) use ( $hidden_classes ) {
 				return array(
-					'id'    => $device[ 'id' ] === 'xs' ? 'd-none' : sprintf( 'd-%s-none', $device[ 'id' ] ),
+					'id'    => $hidden_classes[ $device[ 'id' ] ],
 					'title' => $device[ 'title' ],
 					'icon'  => $device[ 'icon' ]
 				);
@@ -329,7 +336,7 @@
 			'desc'    => wp_kses_post( $desc ),
 			'type'    => 'device-hidden',
 			'value'   => $default,
-			'options' => upb_responsive_hidden_options_bs4(),
+			'options' => upb_responsive_hidden_options(),
 			// 'split'   => 4
 			// 'suffix'  => array( '-up' => '&uarr;', '-down' => '&darr;' ),
 			/*'disable' => array(
