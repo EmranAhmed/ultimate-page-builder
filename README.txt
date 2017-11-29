@@ -99,6 +99,10 @@ Yes.
 
 == Changelog ==
 
+= 1.0.7 =
+
+- VueJs Upgraded to 2.5.9 and VueRouter Upgraded to 3.0.1
+
 = 1.0.6 =
 
 - Image input value changed with id|size|url
