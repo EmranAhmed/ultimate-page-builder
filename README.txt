@@ -102,6 +102,7 @@ Yes.
 = 1.0.7 =
 
 - VueJs Upgraded to 2.5.9 and VueRouter Upgraded to 3.0.1
+- Fix WP 4.9 Alpha Color Picker Issue
 
 = 1.0.6 =
 
