@@ -40,7 +40,7 @@
 	/**
 	 * Overwrite wpColorPicker
 	 */
-	$.widget( 'wp.wpColorPicker', $.wp.wpColorPicker, {
+	$.widget( 'wp.upbColorPicker', $.wp.upbColorPicker, {
 		_create: function() {
 			// bail early for unsupported Iris.
 			if ( ! $.support.iris )

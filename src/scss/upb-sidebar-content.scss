@@ -343,6 +343,7 @@ input[type="search"]::-webkit-search-decoration {
         border           : none;
         box-shadow       : none;
         background-color : transparent;
+        position         : relative;
         margin-bottom    : 30px;
         border-radius    : 0;
         &.media-query-radio-tab-field-wrapper ~ .has-device {

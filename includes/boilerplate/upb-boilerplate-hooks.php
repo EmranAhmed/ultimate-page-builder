@@ -155,15 +155,16 @@
 		
 		// Color
 		wp_register_script( 'iris', admin_url( "/js/iris.min.js" ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), FALSE, TRUE );
-		wp_register_script( 'wp-color-picker', admin_url( "/js/color-picker$suffix.js" ), array( 'iris' ), FALSE, TRUE );
-		wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', array(
+		// wp_register_script( 'wp-color-picker', admin_url( "/js/color-picker$suffix.js" ), array( 'iris' ), FALSE, TRUE );
+		wp_register_script( 'upb-color-picker', UPB_PLUGIN_ASSETS_URI . "/js/upb-color-picker$suffix.js", array( 'iris' ), FALSE, TRUE );
+		wp_localize_script( 'upb-color-picker', 'wpColorPickerL10n', array(
 			'clear'         => esc_html__( 'Clear', 'ultimate-page-builder' ),
 			'defaultString' => esc_html__( 'Default', 'ultimate-page-builder' ),
 			'pick'          => esc_html__( 'Select Color', 'ultimate-page-builder' ),
 			'current'       => esc_html__( 'Current Color', 'ultimate-page-builder' ),
 		) );
 		
-		wp_register_script( 'wp-color-picker-alpha', UPB_PLUGIN_ASSETS_URI . "js/wp-color-picker-alpha$suffix.js", array( 'wp-color-picker' ), FALSE, TRUE );
+		wp_register_script( 'upb-color-picker-alpha', UPB_PLUGIN_ASSETS_URI . "js/upb-color-picker-alpha$suffix.js", array( 'upb-color-picker' ), FALSE, TRUE );
 		
 	} );
 	
@@ -178,10 +179,11 @@
 		wp_enqueue_style( 'dashicon' );
 		wp_enqueue_style( 'common' );
 		wp_enqueue_style( 'buttons' );
-		wp_enqueue_style( 'wp-color-picker' );
+		// wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( 'select2' );
 		wp_enqueue_style( 'woocommerce_admin_menu_styles' );
 		
+		wp_enqueue_style( 'upb-color-picker', UPB_PLUGIN_ASSETS_URI . "css/upb-color-picker$suffix.css" );
 		wp_enqueue_style( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URI . "css/upb-boilerplate$suffix.css" );
 		
 		wp_enqueue_style( 'upb-style', UPB_PLUGIN_ASSETS_URI . "css/upb-style$suffix.css" );
@@ -195,10 +197,10 @@
 		wp_enqueue_media();
 		wp_enqueue_editor();
 		wp_enqueue_script( 'upb-common' );
-		wp_enqueue_script( 'wp-color-picker-alpha' );
+		wp_enqueue_script( 'upb-color-picker-alpha' );
 		wp_enqueue_script( 'select2' );
 		wp_enqueue_script( 'upb-vendor', UPB_PLUGIN_ASSETS_URI . "js/upb-vendor$suffix.js", array(), '', TRUE );
-		wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URI . "js/upb-builder$suffix.js", array( 'upb-vendor', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable', 'wp-util', 'wp-color-picker', 'shortcode' ), '', TRUE );
+		wp_enqueue_script( 'upb-builder', UPB_PLUGIN_ASSETS_URI . "js/upb-builder$suffix.js", array( 'upb-vendor', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable', 'wp-util', 'upb-color-picker', 'shortcode' ), '', TRUE );
 		wp_enqueue_script( 'upb-boilerplate', UPB_PLUGIN_ASSETS_URI . "js/upb-boilerplate$suffix.js", array( 'jquery', 'upb-builder' ), '', TRUE );
 		
 		$data = sprintf( "const _upb_tabs = %s;\n", upb_tabs()->getJSON() );

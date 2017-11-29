@@ -18,14 +18,14 @@ const Directive = {
 
         };
 
-        jQuery(el).wpColorPicker(jQuery.extend(true, options, binding.value || {}));
+        jQuery(el).upbColorPicker(jQuery.extend(true, options, binding.value || {}));
 
     }
 };
 
 const Plugin = (Vue, options = {}) => {
 
-    if (!jQuery().wpColorPicker) {
+    if (!jQuery().upbColorPicker) {
         util.warn('wpColorPicker is not installed or found globally to use `vue-colorpicker` directive..', this);
     }
 

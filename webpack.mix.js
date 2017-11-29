@@ -78,12 +78,12 @@ else {
 
     // mix.js('src/js/upb-media.js', `assets/js/upb-media${min}.js`);
 
-    ['upb-preview-element-inline-scripts', 'select2', 'upb-boilerplate', 'wp-color-picker-alpha'].map((name) => mix.babel(`src/js/${name}.js`, `assets/js/${name}${min}.js`));
+    ['upb-preview-element-inline-scripts', 'select2', 'upb-boilerplate', 'upb-color-picker', 'upb-color-picker-alpha'].map((name) => mix.babel(`src/js/${name}.js`, `assets/js/${name}${min}.js`));
 
     // Vendor, Check CommonsChunkPlugin on webpack.config.js
     mix.extract(['vue', 'vue-router', 'extend', 'sprintf-js', 'sanitize-html', 'copy-to-clipboard'], `assets/js/upb-vendor${min}.js`);
 
-    ['select2', 'upb-boilerplate', 'upb-grid', 'upb-preview', 'upb-skeleton'].map((name) => mix.sass(`src/scss/${name}.scss`, `assets/css/${name}${min}.css`));
+    ['upb-color-picker', 'select2', 'upb-boilerplate', 'upb-grid', 'upb-preview', 'upb-skeleton'].map((name) => mix.sass(`src/scss/${name}.scss`, `assets/css/${name}${min}.css`));
 
 }
 
