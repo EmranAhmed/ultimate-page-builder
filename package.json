@@ -7,23 +7,24 @@
     "webpack": "cross-env NODE_ENV=development node_modules/.bin/webpack --progress --hide-modules --config=node_modules/wp-mix/setup/webpack.config.js",
     "dev": "cross-env NODE_ENV=development node_modules/.bin/webpack --watch --progress --hide-modules --config=node_modules/wp-mix/setup/webpack.config.js",
     "build": "cross-env NODE_ENV=production node_modules/.bin/webpack --progress --hide-modules --config=node_modules/wp-mix/setup/webpack.config.js",
-    "bundle": "yarn run webpack && yarn run build",
+    "bundle": "npm run webpack && npm run build",
     "package:bundle": "cross-env NODE_ENV=package node_modules/.bin/webpack --progress --hide-modules --config=node_modules/wp-mix/setup/webpack.config.js",
-    "package": "yarn run bundle && yarn run package:bundle"
+    "package": "npm run bundle && npm run package:bundle",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/wp-mix/setup/webpack.config.js"
   },
   "dependencies": {
-    "copy-to-clipboard": "^3.0.6",
+    "copy-to-clipboard": "^3.0.8",
     "extend": "^3.0.0",
     "mdi": "^1.9.33",
     "remove": "^0.1.5",
-    "sanitize-html": "^1.14.1",
+    "sanitize-html": "^1.16.1",
     "sprintf-js": "^1.1.1",
-    "vue": "^2.4.4",
-    "vue-router": "^2.7.0"
+    "vue": "^2.5.9",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "cli-color": "^1.2.0",
     "emojic": "^1.1.9",
-    "wp-mix": "1.0.2"
+    "wp-mix": "^1.0.4"
   }
 }

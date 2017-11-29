@@ -4,9 +4,9 @@ An Incredibly easiest and highly customizable drag and drop page builder helps c
 
 ## Versions:
 
-- `~$ npm -v` - `5.3.0`
-- `~$ node -v` - `v8.6.0`
-- `~$ yarn --version` - `1.1.0`
+- `~$ npm -v` - `5.5.1`
+- `~$ node --version` - `v9.2.0`
+- `~$ yarn --version` - `1.2.1`
 
 ## Development
 

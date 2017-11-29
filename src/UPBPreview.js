@@ -8,6 +8,7 @@ import Droppable from "./plugins/vue-droppable";
 import PreviewElement from "./plugins/vue-preview-element";
 import UIDroppable from "./plugins/vue-ui-droppable";
 import UIDraggable from "./plugins/vue-ui-draggable";
+
 Vue.component('upb-preview-mini-toolbar', () => import(/* webpackChunkName: "upb-preview-mini-toolbar" */ './components/extra/UPBPreviewMiniToolbar.vue'));
 
 Vue.use(Droppable);
@@ -35,6 +36,7 @@ store.getAllUPBElements(elements => {
 
                 Vue.component(component, function (resolve, reject) {
                     store.getShortCodePreviewTemplate(template, function (templateData) {
+
                         resolve({
                             name     : component,
                             template : templateData,
@@ -48,9 +50,9 @@ store.getAllUPBElements(elements => {
         let template           = element._upb_options.preview.template;
         //let component          = `upb-${element.tag}`;
         let component          = element._upb_options.preview.component;
-        let componentMixins    = element._upb_options.preview.mixins;
+        let componentMixins    = JSON.parse(element._upb_options.preview.mixins);
         //let upbComponentMixins = _.isEmpty(componentPreviewMixins[element.tag]) ? false : componentPreviewMixins[element.tag];
-        let upbComponentMixins = _.isEmpty(componentPreviewMixins[template]) ? false : componentPreviewMixins[template];
+        let upbComponentMixins = (typeof componentPreviewMixins[template] === 'undefined') ? {} : componentPreviewMixins[template];
 
         Vue.component(component, function (resolve, reject) {
             store.getShortCodePreviewTemplate(template, function (templateData) {
@@ -58,7 +60,6 @@ store.getAllUPBElements(elements => {
                 if (_.isEmpty(templateData)) {
                     console.info(`%c "${element.tag}" preview file "previews/${template}.php" is not available or empty.`, 'color:red; font-size:18px')
                 }
-
                 resolve({
                     name     : component,
                     template : templateData || `<div style="color: red">"${element.tag}" preview file "previews/${template}.php" is not available or empty.</div>`,
@@ -73,20 +74,20 @@ store.getAllUPBElements(elements => {
 
 export default {
     name     : 'upb-preview',
-    data(){
+    data() {
         return {}
     },
     computed : {
-        model(){
+        model() {
             return store.getContentsOfTab('sections').pop();
         },
-        settings(){
+        settings() {
             let settings = store.getContentsOfTab('settings').pop();
             return settings['contents'] ? settings.contents : [];
         }
     },
 
-    updated(){
+    updated() {
         if (this.model.contents) {
             this.addKeyIndex();
         }
@@ -97,7 +98,7 @@ export default {
         }
     },
 
-    created(){
+    created() {
 
         this.addKeyIndex();
 
@@ -110,7 +111,7 @@ export default {
 
     methods : {
 
-        addKeyIndex(regenerate = false){
+        addKeyIndex(regenerate = false) {
             if (_.isArray(this.model.contents)) {
                 this.model.contents.map((m, i) => {
                     m._upb_options['_keyIndex'] = `${i}`;
@@ -120,7 +121,7 @@ export default {
             }
         },
 
-        addIndexAttribute(model, attrs, contents, regenerate = false){
+        addIndexAttribute(model, attrs, contents, regenerate = false) {
             if (_.isArray(contents)) {
                 contents.map((m, i) => {
                     if (store.isElementRegistered(m.tag)) {
