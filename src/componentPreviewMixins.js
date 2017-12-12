@@ -26,10 +26,8 @@ export default {
     },
 
     'upb-column' : {
-
         computed : {
             generatedColumnClass() {
-
                 let grid = store.grid.devices.map((device) => {
                     let gridValue = this.model.attributes[device.id].trim();
 
@@ -49,7 +47,6 @@ export default {
                         return '';
                     }
                 });
-
                 // added extra grid class to control gutter
                 grid.unshift(store.grid.allGridClass);
                 return _.compact(grid);
@@ -57,7 +54,6 @@ export default {
         },
 
         methods : {
-
             dropAccept(content) {
                 return true;
             },
