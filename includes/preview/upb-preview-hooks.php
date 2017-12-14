@@ -42,6 +42,9 @@
 		
 		if ( upb_is_preview() ) {
 			
+			// For Preview Conflict
+			wp_deregister_script( 'elementor-frontend' );
+			
 			wp_register_style( 'upb-shortcode-preview-core', UPB_PLUGIN_ASSETS_URI . "css/upb-preview$suffix.css" );
 			wp_enqueue_style( 'upb-shortcode-preview-core' );
 			

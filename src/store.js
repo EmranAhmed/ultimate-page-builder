@@ -52,10 +52,10 @@ class store {
 
     reloadPreview() {
         if (window.frames[this.preview].contentWindow) {
-            window.frames[this.preview].contentWindow.location.reload();
+            window.frames[this.preview].contentWindow.location.reload(true);
         }
         else {
-            window.frames[this.preview].location.reload();
+            window.frames[this.preview].location.reload(true);
         }
     }
 

@@ -4,7 +4,7 @@
 	 * Plugin URI: https://wordpress.org/plugins/ultimate-page-builder/
 	 * Description: An Incredibly easiest and highly customizable drag and drop page builder helps create professional websites without writing a line of code.
 	 * Author: Emran Ahmed
-	 * Version: 1.0.8
+	 * Version: 1.0.9
 	 * Domain Path: /languages
 	 * Text Domain: ultimate-page-builder
 	 * Author URI: https://themehippo.com/
@@ -16,7 +16,7 @@
 		
 		final class Ultimate_Page_Builder {
 			
-			public $version = '1.0.8';
+			public $version = '1.0.9';
 			
 			protected static $_instance = NULL;
 			
@@ -145,8 +145,6 @@
 					// Show UPB Button
 					add_action( 'media_buttons', array( $this, 'action_media_buttons' ) );
 					add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
-					
-					// add_action( 'template_redirect', function(){ die('REDIRECT'); } );
 				}
 				
 				add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
@@ -178,6 +176,7 @@
 				if ( upb_is_preview_request() ) {
 					do_action( 'after_setup_theme_preview' );
 				}
+				
 				if ( upb_is_boilerplate_request() ) {
 					do_action( 'after_setup_theme_boilerplate' );
 				}
@@ -295,25 +294,39 @@
 					if ( ! defined( 'DONOTCACHEPAGE' ) ) {
 						define( 'DONOTCACHEPAGE', TRUE );
 					}
+					
+					if ( ! defined( 'DONOTCACHEDB' ) ) {
+						define( 'DONOTCACHEDB', TRUE );
+					}
+					
+					if ( ! defined( 'DONOTCDN' ) ) {
+						define( 'DONOTCDN', TRUE );
+					}
+					
+					if ( ! defined( 'DONOTCACHCEOBJECT' ) ) {
+						define( 'DONOTCACHCEOBJECT', TRUE );
+					}
+					
 					// Tell Autoptimize not to minify while the builder is active.
 					add_filter( 'autoptimize_filter_noptimize', '__return_true' );
+					
 					// Disable JETPack Image Issue
 					add_filter( 'jetpack_photon_skip_image', '__return_true' );
 					
 					if ( class_exists( 'WPSEO_Frontend' ) ) {
 						$seo = WPSEO_Frontend::get_instance();
 						remove_action( 'wp_head', array( $seo, 'head' ), 1 );
+						remove_action( 'template_redirect', array( $seo, 'clean_permalink' ), 1 );
 					}
-				
 				endif;
 			}
 			
 			public function no_cache_headers() {
 				if ( upb_is_preview() or upb_is_boilerplate() ):
-					if ( function_exists( 'nocache_headers' ) ) {
-						nocache_headers();
-					}
-					header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s' ) . ' GMT' );
+					
+					nocache_headers();
+					
+					// header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s' ) . ' GMT' );
 					// header( 'Cache-Control: no-store, no-cache, must-revalidate' );
 					// header( 'Cache-Control: post-check=0, pre-check=0', FALSE );
 					// header( 'Pragma: no-cache' );

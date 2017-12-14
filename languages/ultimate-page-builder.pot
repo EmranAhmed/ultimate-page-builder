@@ -16,30 +16,30 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../ultimate-page-builder.php:191
+#: ../ultimate-page-builder.php:190
 msgid "Edit with <strong>Ultimate Page Builder</strong>"
 msgstr ""
 
-#: ../ultimate-page-builder.php:202
+#: ../ultimate-page-builder.php:201
 msgid "Please check PHP version requirement."
 msgstr ""
 
-#: ../ultimate-page-builder.php:204
+#: ../ultimate-page-builder.php:203
 msgid "<strong>Ultimate Page Builder</strong> require PHP 5.4 or above."
 msgstr ""
 
-#: ../ultimate-page-builder.php:241
+#: ../ultimate-page-builder.php:240
 msgid "Edit with Ultimate Page Builder"
 msgstr ""
 
-#: ../ultimate-page-builder.php:368
+#: ../ultimate-page-builder.php:381
 msgid "View Documentation"
 msgstr ""
 
-#: ../ultimate-page-builder.php:368
+#: ../ultimate-page-builder.php:381
 msgid "Documentation"
 msgstr ""
 
-#: ../ultimate-page-builder.php:369, ../ultimate-page-builder.php:369
+#: ../ultimate-page-builder.php:382, ../ultimate-page-builder.php:382
 msgid "Support"
 msgstr ""

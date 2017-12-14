@@ -283,7 +283,7 @@
 			'reConfigDeviceColumn' => esc_attr__( '%s device column layouts should be same as other enabled device column layout', 'ultimate-page-builder' ),
 			'iconDetailsTitle'     => esc_html__( 'Icon Details', 'ultimate-page-builder' ),
 			// 'closeUrl'         => esc_url( get_permalink() ),
-			'closeUrl'             => esc_url( add_query_arg( 'preview', 'true', get_permalink() ) ),
+			'closeUrl'             => esc_url( set_url_scheme( add_query_arg( 'preview', 'true', get_permalink() ) ) ),
 			'ajaxUrl'              => esc_url( admin_url( 'admin-ajax.php', 'relative' ) ),
 			// Templates
 			'layoutPlaceholder'    => upb_images_uri( '/layout-placeholder.png' ),

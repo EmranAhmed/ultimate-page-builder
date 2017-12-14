@@ -99,6 +99,10 @@ Yes.
 
 == Changelog ==
 
+= 1.0.9 =
+
+- the_content hook added too far
+
 = 1.0.8 =
 
 - Fix WP Seo Conflict Issue and disable cache on jetpack

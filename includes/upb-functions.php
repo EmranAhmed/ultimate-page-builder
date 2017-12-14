@@ -45,17 +45,18 @@
 	
 	function upb_get_edit_link( $post = 0 ) {
 		if ( is_admin() ) {
-			return esc_url( add_query_arg( 'upb', '1', wp_get_shortlink( $post ) ) );
+			return esc_url( set_url_scheme( add_query_arg( 'upb', '1', wp_get_shortlink( $post ) ) ) );
 		} else {
-			return esc_url( add_query_arg( 'upb', '1', get_permalink( $post ) ) );
+			return esc_url( set_url_scheme( add_query_arg( 'upb', '1', get_permalink( $post ) ) ) );
 		}
 	}
 	
 	function upb_get_preview_link() {
-		//$query = array( 'upb-preview' => TRUE, 'rand' => time() );
-		$query = array( 'upb-preview' => TRUE );
+		$query = array( 'upb-preview' => TRUE, 'rand' => time() );
 		
-		return esc_url( add_query_arg( $query, get_preview_post_link( get_the_ID() ) ) );
+		//$query = array( 'upb-preview' => TRUE );
+		
+		return esc_url( set_url_scheme( add_query_arg( $query, get_preview_post_link( get_the_ID() ) ) ) );
 	}
 	
 	// Class instances
@@ -300,7 +301,7 @@
 		}
 	endif;
 	
-
+	
 	function upb_responsive_hidden_input( $title = '', $desc = '', $default = array() ) {
 		
 		$title = trim( $title ) ? trim( $title ) : esc_html__( 'Hide on device', 'ultimate-page-builder' );

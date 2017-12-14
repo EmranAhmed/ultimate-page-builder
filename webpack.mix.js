@@ -44,7 +44,7 @@ if (process.env.NODE_ENV == 'package') {
 else {
 
     mix.banner({
-        banner : "Ultimate Page Builder v1.0.8 \n\nAuthor: Emran Ahmed ( https://themehippo.com/ ) \nDate: " + new Date().toLocaleString() + "\nReleased under the MIT license."
+        banner : "Ultimate Page Builder v1.0.9 \n\nAuthor: Emran Ahmed ( https://themehippo.com/ ) \nDate: " + new Date().toLocaleString() + "\nReleased under the MIT license."
     });
 
     mix.notification({

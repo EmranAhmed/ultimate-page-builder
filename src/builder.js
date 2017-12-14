@@ -26,13 +26,16 @@ const previewWindow = {
 
     upbBuilderPreview : null,
 
-    destroy(){
+    frame         : document.getElementById('upb-preview-frame'),
+    frameDocument : document.getElementById('upb-preview-frame').contentDocument || document.getElementById('upb-preview-frame').contentWindow.document,
+
+    destroy() {
         if (this.upbBuilderPreview) {
             this.upbBuilderPreview.$destroy();
         }
     },
 
-    mount(){
+    mount() {
 
         store.panel = upbBuilder
 
@@ -46,8 +49,9 @@ const previewWindow = {
         }
     },
 
-    setUrl(){
-        document.getElementById('upb-preview-frame').src = document.getElementById('upb-preview-frame').dataset.url;
+    setUrl() {
+        // document.getElementById('upb-preview-frame').src = document.getElementById('upb-preview-frame').dataset.url;
+        this.frame.src = this.frame.dataset.url;
     }
 };
 
@@ -55,7 +59,7 @@ window.addEventListener('load', () => {
     previewWindow.setUrl();
 });
 
-document.getElementById("upb-preview-frame").addEventListener('load', () => {
+previewWindow.frame.addEventListener('load', () => {
     previewWindow.destroy();
     previewWindow.mount();
 });
