@@ -89,6 +89,11 @@
 					}
 				}
 				
+				// Generated Attributes Ajax Action
+				if ( ! isset( $_upb_options[ 'element' ][ 'generatedAttributesAction' ] ) ) {
+					$_upb_options[ 'element' ][ 'generatedAttributesAction' ] = FALSE;
+				}
+				
 				if ( ! isset( $_upb_options[ 'preview' ] ) ) {
 					$_upb_options[ 'preview' ] = array(
 						'component' => 'upb-preview-' . $tag,

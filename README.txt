@@ -99,9 +99,14 @@ Yes.
 
 == Changelog ==
 
+= 1.0.10 =
+
+- properly check image for external source or internal source.
+- `generatedAttributesAction` ajax action added.
+
 = 1.0.9 =
 
-- the_content hook added too far
+- `the_content` hook added too far
 
 = 1.0.8 =
 

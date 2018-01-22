@@ -144,7 +144,8 @@
 		
 		wp_register_script( 'upb-common', UPB_PLUGIN_ASSETS_URI . "js/upb-common.js", array(), FALSE, TRUE );
 		
-		wp_register_style( 'dashicon', includes_url( "/css/dashicons$suffix.css" ) );
+		// wp_register_style( 'dashicons', includes_url( "/css/dashicons$suffix.css" ) );
+		wp_deregister_style( 'select2');
 		wp_register_style( 'select2', UPB_PLUGIN_ASSETS_URI . "css/select2$suffix.css" );
 		
 		if ( function_exists( 'WC' ) ):
@@ -176,7 +177,7 @@
 		// to Clean Slate We did not use wp_head hook on boilerplate template
 		// that's why default registered scripts / styles does not load without re-registering :)
 		// Only Admin CSS will load
-		wp_enqueue_style( 'dashicon' );
+		// wp_enqueue_style( 'dashicons' );
 		wp_enqueue_style( 'common' );
 		wp_enqueue_style( 'buttons' );
 		// wp_enqueue_style( 'wp-color-picker' );

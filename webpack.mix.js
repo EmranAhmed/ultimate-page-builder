@@ -44,7 +44,7 @@ if (process.env.NODE_ENV == 'package') {
 else {
 
     mix.banner({
-        banner : "Ultimate Page Builder v1.0.9 \n\nAuthor: Emran Ahmed ( https://themehippo.com/ ) \nDate: " + new Date().toLocaleString() + "\nReleased under the MIT license."
+        banner : "Ultimate Page Builder v1.0.10 \n\nAuthor: Emran Ahmed ( https://themehippo.com/ ) \nDate: " + new Date().toLocaleString() + "\nReleased under the MIT license."
     });
 
     mix.notification({
@@ -56,7 +56,7 @@ else {
         mix.generatePot({
             package   : 'ultimate-page-builder',
             bugReport : 'https://github.com/EmranAhmed/ultimate-page-builder/issues',
-            src       : '*.php',
+            src       : '**/*.php',
             domain    : 'ultimate-page-builder',
             destFile  : `languages/ultimate-page-builder.pot`
         });
@@ -72,7 +72,9 @@ else {
         vue : ['window.Vue', 'Vue']
     });
 
-    mix.sourceMaps();
+    if (!Mix.inProduction()) {
+        mix.sourceMaps();
+    }
 
     mix.js('src/builder.js', `assets/js/upb-builder${min}.js`);
 

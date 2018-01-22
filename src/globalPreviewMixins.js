@@ -59,7 +59,7 @@ export default {
 
         if (this.getGeneratedAttributes()) {
             this.getGeneratedAttributes().map((attribute_id) => {
-                let action = `_upb_generate_attribute_${this.tag}_${attribute_id}`;
+                let action = this.getGeneratedAttributesAction(attribute_id);
                 this.setGeneratedAttributes(attribute_id, '');
                 this.$watch(`model.attributes.${attribute_id}`, function (attribute_value, old_value) {
 
@@ -281,6 +281,10 @@ export default {
 
         getGeneratedAttributes() {
             return this.model._upb_options.element.generatedAttributes ? this.model._upb_options.element.generatedAttributes : [];
+        },
+
+        getGeneratedAttributesAction(attribute_id) {
+            return this.model._upb_options.element.generatedAttributesAction ? `_upb_generate_attribute_${this.model._upb_options.element.generatedAttributesAction}` : `_upb_generate_attribute_${this.tag}_${attribute_id}`;
         },
 
         setGeneratedAttributes(id, value) {

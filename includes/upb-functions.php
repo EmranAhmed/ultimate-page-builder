@@ -1165,20 +1165,24 @@
 		
 		$image = explode( '|', $image_string );
 		
+		//$content_url  = parse_url( content_url() );
+		//$content_host = $content_url[ 'host' ];
+		
 		if ( empty( $image_string ) ) {
 			return array( 'id' => '', 'size' => '', 'src' => '', 'error' => TRUE );
 		}
 		
 		if ( isset( $image[ 1 ] ) ) {
 			list( $id, $size, $src ) = $image;
-			
-			return array( 'id' => $id, 'size' => $size, 'src' => $src, 'error' => FALSE );
 		} else {
-			
 			list( $id, $size, $src ) = array( FALSE, FALSE, $image[ 0 ] );
-			
-			return array( 'id' => $id, 'size' => $size, 'src' => $src, 'error' => FALSE );
 		}
+		
+		//$img_url  = parse_url( $src );
+		//$img_host = $img_url[ 'host' ];
+		// $relative = wp_attachment_is_image( $id );
+		
+		return array( 'id' => $id, 'size' => $size, 'src' => $src, 'error' => FALSE );
 	}
 	
 	function upb_get_media_image( $image_string, $attr = array() ) {
@@ -1192,7 +1196,7 @@
 			return '';
 		}
 		
-		if ( ! $image[ 'id' ] ) {
+		if ( ! wp_attachment_is_image( $image[ 'id' ] ) ) {
 			$attr = wp_parse_args( $attr, array(
 				'src' => $image[ 'src' ],
 			) );
