@@ -99,6 +99,10 @@ Yes.
 
 == Changelog ==
 
+= 1.0.11 =
+
+- Updated VueJS and Minify
+
 = 1.0.10 =
 
 - properly check image for external source or internal source.

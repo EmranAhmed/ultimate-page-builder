@@ -14,17 +14,17 @@
   },
   "dependencies": {
     "copy-to-clipboard": "^3.0.8",
-    "extend": "^3.0.0",
+    "extend": "^3.0.1",
     "mdi": "^1.9.33",
     "remove": "^0.1.5",
-    "sanitize-html": "^1.16.1",
+    "sanitize-html": "^1.17.0",
     "sprintf-js": "^1.1.1",
-    "vue": "^2.5.9",
+    "vue": "^2.5.13",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "cli-color": "^1.2.0",
-    "emojic": "^1.1.9",
-    "wp-mix": "^1.0.5"
+    "emojic": "^1.1.14",
+    "wp-mix": "^1.0.6"
   }
 }
